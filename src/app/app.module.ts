@@ -12,6 +12,7 @@ import { VerifyMyKadComponent } from './verify-my-kad/verify-my-kad.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from "ngx-translate-multi-http-loader";
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { RegisterAccountComponent } from './register-account/register-account.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
@@ -39,7 +40,8 @@ export function createConfig(): SignalRConfiguration {
   declarations: [
     AppComponent,
     LanguageComponent,
-    VerifyMyKadComponent
+    VerifyMyKadComponent,
+    RegisterAccountComponent,
   ],
   imports: [
     BrowserModule,

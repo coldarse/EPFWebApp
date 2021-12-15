@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SignalR } from 'ng2-signalr';
 import { signalRConnection } from '../_models/_signalRConnection';
 
 
@@ -19,14 +20,23 @@ export class VerifyMyKadComponent implements OnInit {
   Status = "MyKad";
   intervalID: any;
 
+  
+
+  page1 = true;
+  page2 = false;
+
+  arrayList: string[] = [];
+
   constructor(
     private route: Router,
     private translate: TranslateService,
+    private signalR: SignalR,
   ) { }
 
   ngOnInit(): void {
 
     this.translate.use('en');
+
     this.intervalID = setInterval(() => {
       this.DetectMyKad();
       if (signalRConnection.cardDetect == true) {
@@ -34,6 +44,11 @@ export class VerifyMyKadComponent implements OnInit {
         this.verify();
       } 
     }, 1000);
+  }
+
+  loadPage2(){
+    this.page1 = false;
+    this.page2 = true;
   }
 
   ngAfterViewInit(){

@@ -2,5 +2,16 @@
 
 <p>{{'Hello' | translate}}</p>
 
-<input  type="text" class="input-long use-keyboard-input " id="AR1">
+<input  type="text" class="input-long use-keyboard-input" id="AR1">
 
+
+<div class="col-md-12" *ngIf="page1">
+    <div class="namelist" *ngFor="let x of arrayList">
+        <p>x.Name</p>
+        <p>x.Age</p>
+    </div>
+</div>
+
+<div class="col-md-12" *ngIf="page2">
+    
+</div>

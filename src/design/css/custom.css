@@ -1,0 +1,140 @@
+
+.header {
+    padding: 70px;
+    text-align: left;
+    color: white;
+    font-size: 70px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.center{
+    text-align: center;
+    font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+    padding-top: 100px;
+}
+
+.phoneInput{
+    padding-top: 20px;
+}
+
+#phoneNo{
+    border-width: thin;
+}
+
+.keypad{
+    background-color: rgb(49, 39, 131);
+    color: white;
+    font-size: 50px;
+    font-family: filson-pro, sans-serif;
+    margin: 10px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+}
+.keypadPadan{
+    background-color: rgb(49, 39, 131);
+    color: white;
+    font-size: 50px;
+    font-family: filson-pro, sans-serif;
+    margin: 10px;
+    padding-left: 123px;
+    padding-right: 123px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+}
+
+.example{
+    font-size: 40px;
+    font-weight: 100;
+    margin-top: -77px;
+}
+
+.local{
+    text-align:center;
+    font-size: 40px;
+    font-family: filson-pro, sans-serif;
+    font-style:normal;
+    font-weight:bold;
+    color: rgb(49, 39, 131);
+    padding-top: 50px; 
+    display: inline;
+}
+
+.inter{
+    text-align:end;
+    font-size: 40px;
+    font-family: filson-pro, sans-serif;
+    font-style:normal;
+    font-weight:bold;
+    color: rgb(49, 39, 131);
+    padding-top: 50px; 
+    display: inline;
+}
+
+#chkLocal{
+    margin-top: 30px; 
+    margin-right:20px
+}
+
+#chkInter{
+    margin-top: 30px; 
+    margin-right:20px
+}
+
+.choice{
+    display: inline;
+    font-size: 40px;
+}
+
+.note{
+    font-size:30px;
+    font-weight: 200;
+}
+
+.btnCancel{
+    color: white;
+    background-color: red;
+    font-family: filson-pro, sans-serif;
+    border-radius: 1em;
+    padding-left: 180px;
+    padding-right: 180px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 50px;
+    border-color: red;
+    margin: 50px;
+    font-weight:600;
+}
+
+.btnOK{
+    color: white;
+    background-color: rgb(49, 39, 131);
+    font-family: filson-pro, sans-serif;
+    border-radius: 1em;
+    padding-left: 180px;
+    padding-right: 180px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 50px;
+    border-color: rgb(49, 39, 131);
+    margin: 50px;
+    font-weight:600;
+}
+.Cancel{
+    text-align: start;
+    display: inline;
+}
+
+.Proceed{
+    text-align: end;
+    display: inline;
+}
