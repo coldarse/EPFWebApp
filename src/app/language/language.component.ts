@@ -27,6 +27,7 @@ export class LanguageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.translate.use('bm');
   }
 
   

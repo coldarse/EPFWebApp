@@ -17,6 +17,6 @@ export class RegisterAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translate.use('en');
+    this.translate.use('bm');
   }
 }

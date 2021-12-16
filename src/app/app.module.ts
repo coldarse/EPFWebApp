@@ -13,6 +13,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from "ngx-translate-multi-http-loader";
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RegisterAccountComponent } from './register-account/register-account.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+import { RegisterMemberComponent } from './register-member/register-member.component';
+import { InsertEmailComponent } from './insert-email/insert-email.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
@@ -42,6 +45,9 @@ export function createConfig(): SignalRConfiguration {
     LanguageComponent,
     VerifyMyKadComponent,
     RegisterAccountComponent,
+    MainMenuComponent,
+    RegisterMemberComponent,
+    InsertEmailComponent,
   ],
   imports: [
     BrowserModule,
