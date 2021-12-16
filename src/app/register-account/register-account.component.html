@@ -1,108 +1,72 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Page Title</title>
-</head>
-
-<body>
-  <div class="bg-img">
-    <div class="header">
-      {{ "register" | translate }}
-    </div>
-    <div class="container">
-      <div class="center">
-        <div class="row">
-          <div class="col">{{ "phoneEntryMsg" | translate }}</div>
-        </div>
-        <div class="row">
-          <div class="phoneInput">
-            <input type="text" id="phoneNo" name="phoneNo"><br><br>
-            <!-- <textarea rows="1" cols="60" id="multiLineInput"></textarea> -->
-          </div>
-        </div>
-        <div class="row">
-          <div class="example">(Contoh: 0101234567)</div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-3"></div>
-          <div class="col-2">
-            <button class="keypad">1</button>
-          </div>
-          <div class="col-2">
-            <button class="keypad">2</button>
-          </div>
-          <div class="col-2">
-            <button class="keypad">3</button>
-          </div>
-          <div class="col-3"></div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-3"></div>
-          <div class="col-2">
-            <button class="keypad">4</button>
-          </div>
-          <div class="col-2">
-            <button class="keypad">5</button>
-          </div>
-          <div class="col-2">
-            <button class="keypad">6</button>
-          </div>
-          <div class="col-3"></div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-3"></div>
-          <div class="col-2">
-            <button class="keypad">7</button>
-          </div>
-          <div class="col-2">
-            <button class="keypad">8</button>
-          </div>
-          <div class="col-2">
-            <button class="keypad">9</button>
-          </div>
-          <div class="col-3"></div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-3"></div>
-          <div class="col-2">
-            <button class="keypad">0</button>
-          </div>
-          <div class="col-4">
-            <button class="keypadPadan">Padan</button>
-          </div>
-          <div class="col-3"></div>
-        </div>
-        <div class="row" style="display:inline-block">
-          <label class="choice">Sila Pilih:</label>
-          <div class="local">
-            <input class="form-check-input" type="checkbox" value="" id="chkLocal" >
-            <label class="form-check-label" for="flexCheckDefault">
-              Local number
-            </label>
-          </div>
-          <div class="inter">
-            <input class="form-check-input" type="checkbox" value="" id="chkInter" >
-            <label class="form-check-label" for="flexCheckChecked">
-              International number
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <div class = "note">
-            {{ "registerNotes" | translate }}
-          </div>
-        </div>
-        <div class="row" style="display:inline-block">
-          <div class="Cancel">
-            <button type="button" class="btnCancel">Batal</button>
-          </div>
-          <div class="Proceed">
-            <button type="button" class="btnOK">Hantar</button>
-          </div>
+<div class="bg-img">
+  <div class="header">
+    {{ "register" | translate }}
+  </div>
+  <div class="container">
+    <div class="center">
+      <div class="row">
+        <div class="col">{{ "phoneEntryMsg" | translate }}</div>
+      </div>
+      <div class="row">
+        <div class="phoneInput">
+          <input type="text" id="phoneNo" name="phoneNo"><br><br>
+          <!-- <textarea rows="1" cols="60" id="multiLineInput"></textarea> -->
         </div>
       </div>
-      <!-- <div class="row" style="display:inline-block">
+      <div class="row">
+        <div class="example">(Contoh: 0101234567)</div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-3"></div>
+        <div class="col-2">
+          <button class="keypad">1</button>
+        </div>
+        <div class="col-2">
+          <button class="keypad">2</button>
+        </div>
+        <div class="col-2">
+          <button class="keypad">3</button>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-3"></div>
+        <div class="col-2">
+          <button class="keypad">4</button>
+        </div>
+        <div class="col-2">
+          <button class="keypad">5</button>
+        </div>
+        <div class="col-2">
+          <button class="keypad">6</button>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-3"></div>
+        <div class="col-2">
+          <button class="keypad">7</button>
+        </div>
+        <div class="col-2">
+          <button class="keypad">8</button>
+        </div>
+        <div class="col-2">
+          <button class="keypad">9</button>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-3"></div>
+        <div class="col-2">
+          <button class="keypad">0</button>
+        </div>
+        <div class="col-4">
+          <button class="keypadPadan">Padan</button>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row" style="display:inline-block">
+        <label class="choice">Sila Pilih:</label>
         <div class="local">
           <input class="form-check-input" type="checkbox" value="" id="chkLocal" >
           <label class="form-check-label" for="flexCheckDefault">
@@ -115,9 +79,34 @@
             International number
           </label>
         </div>
-      </div> -->
+      </div>
+      <div class="row">
+        <div class = "note">
+          {{ "registerNotes" | translate }}
+        </div>
+      </div>
+      <div class="row" style="display:inline-block">
+        <div class="Cancel">
+          <button type="button" class="btnCancel">Batal</button>
+        </div>
+        <div class="Proceed">
+          <button type="button" class="btnOK">Hantar</button>
+        </div>
+      </div>
     </div>
+    <!-- <div class="row" style="display:inline-block">
+      <div class="local">
+        <input class="form-check-input" type="checkbox" value="" id="chkLocal" >
+        <label class="form-check-label" for="flexCheckDefault">
+          Local number
+        </label>
+      </div>
+      <div class="inter">
+        <input class="form-check-input" type="checkbox" value="" id="chkInter" >
+        <label class="form-check-label" for="flexCheckChecked">
+          International number
+        </label>
+      </div>
+    </div> -->
   </div>
-</body>
-
-</html>
+</div>
