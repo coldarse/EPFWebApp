@@ -1,12 +1,12 @@
 
 .bg-img{
     min-height: 100vh;
-   width: 100%;
-   background: url('/assets/images/BG.png') no-repeat scroll right center;
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
+    width: 100%;
+    background: url('/assets/images/BG.png') no-repeat scroll right center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .header {
@@ -29,10 +29,6 @@
     padding-top: 100px;
 }
 
-.phoneInput{
-    padding-top: 20px;
-}
-
 .padTop3rem{
     padding-top: 3rem;
 }
@@ -45,39 +41,52 @@
     padding-top: 10rem;
 }
 
+.padTop20rem{
+    padding-top: 20rem;
+}
+
 #phoneNo{
     border-width: thin;
+    width: 39rem;
+    height: 6rem;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-left:1rem;
 }
 
 .keypad{
-    background-color: rgb(49, 39, 131);
+    background-color: rgb(90, 82, 157);
     color: white;
     font-size: 50px;
     font-family: filson-pro, sans-serif;
     margin: 10px;
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 80px;
+    padding-right: 80px;
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 20px;
+    font-weight: 800;
 }
 .keypadPadan{
-    background-color: rgb(49, 39, 131);
+    background-color: rgb(90, 82, 157);
     color: white;
     font-size: 50px;
     font-family: filson-pro, sans-serif;
     margin: 10px;
-    padding-left: 123px;
-    padding-right: 123px;
+    padding-left: 115px;
+    padding-right: 115px;
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 20px;
+    font-weight: 800;
 }
 
 .example{
     font-size: 40px;
-    font-weight: 100;
-    margin-top: -77px;
+    font-weight: 400;
+    text-align: left;
+    padding-left: 2rem;
+    color: rgb(49, 39, 131);
 }
 
 .local{
@@ -90,7 +99,6 @@
     padding-top: 50px; 
     display: inline;
 }
-
 .inter{
     text-align:end;
     font-size: 40px;
@@ -118,39 +126,12 @@
 }
 
 .note{
-    font-size:30px;
+    font-size:37px;
     font-weight: 200;
+    background-color: rgb(214, 212, 230);
+    font-family: filson-pro, sans-serif;
 }
 
-.btnCancel{
-    color: white;
-    background-color: red;
-    font-family: filson-pro, sans-serif;
-    border-radius: 1em;
-    padding-left: 180px;
-    padding-right: 180px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 50px;
-    border-color: red;
-    margin: 50px;
-    font-weight:600;
-}
-
-.btnOK{
-    color: white;
-    background-color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
-    border-radius: 1em;
-    padding-left: 180px;
-    padding-right: 180px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 50px;
-    border-color: rgb(49, 39, 131);
-    margin: 50px;
-    font-weight:600;
-}
 .Cancel{
     text-align: start;
     display: inline;
@@ -170,7 +151,6 @@
     font-size:60px;
     min-width: 1000px;
     min-height: 180px;
-    /* padding: 40px 200px 40px; */
 }
 
 .lblChoose{
@@ -196,6 +176,15 @@
     font-weight: 700;
     color: rgb(49, 39, 131);
     width: max-content;
+}
+
+.lblHeader
+{
+    font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
 }
 
 .lblReg{
@@ -244,4 +233,37 @@
     min-height: 150px;
 }
 
+#emailDDL{
+    border-width: thin;
+    width: 41rem;
+    height: 6rem;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-left: -4rem;
+}
 
+.lblSymbol{
+    font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+}
+
+.lblKWSP{
+    color: black;
+    font-size: 125px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.lblMsg{
+    font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+    width: 95rem;
+    margin-left: -5rem;
+}
