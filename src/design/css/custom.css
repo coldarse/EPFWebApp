@@ -45,6 +45,23 @@
     padding-top: 20rem;
 }
 
+.padTop30rem{
+    padding-top: 30rem;
+}
+
+
+.padTop60rem{
+    padding-top: 60rem;
+}
+
+.padLeft8rem{
+    padding-left: 8rem;
+}
+
+.marginTop2rem{
+    margin-top:2rem;
+}
+
 #phoneNo{
     border-width: thin;
     width: 39rem;
@@ -129,6 +146,14 @@
     font-size:37px;
     font-weight: 200;
     background-color: rgb(214, 212, 230);
+    color: rgb(49, 39, 131);
+    font-family: filson-pro, sans-serif;
+}
+
+.note2{
+    font-size:37px;
+    font-weight: 200;
+    color: rgb(49, 39, 131);
     font-family: filson-pro, sans-serif;
 }
 
@@ -176,6 +201,18 @@
     font-weight: 700;
     color: rgb(49, 39, 131);
     width: max-content;
+    /* margin-left: -6rem; */
+}
+
+.lblQuestionCenter
+{
+    font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+    width: max-content;
+    margin-left: -7rem;
 }
 
 .lblHeader
@@ -242,6 +279,14 @@
     margin-left: -4rem;
 }
 
+.jobDDL{
+    border-width: thin;
+    width: 57rem;
+    height: 6rem;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
 .lblSymbol{
     font-size: 60px;
     font-family: filson-pro, sans-serif;
@@ -267,3 +312,149 @@
     width: 95rem;
     margin-left: -5rem;
 }
+
+.btnShariah{
+    background-color: rgb(49, 39, 131);
+    border-color: rgb(49, 39, 131);
+    color: white;
+    font-family: filson-pro, sans-serif;
+    border-radius: 150px;
+    font-weight: 700;
+    font-size: 50px;
+    width: 60rem;
+    min-height: 180px;
+    margin-left: -25rem;
+}
+
+.btnShariah2{
+    background-color: rgb(49, 39, 131);
+    border-color: rgb(49, 39, 131);
+    color: white;
+    font-family: filson-pro, sans-serif;
+    border-radius: 150px;
+    font-weight: 700;
+    font-size: 50px;
+    width: 60rem;
+    min-height: 180px;
+    margin-left: 10rem;
+}
+
+.lblStatus{
+    font-size: 80px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+}
+
+.statusMsg{
+    font-family: filson-pro, sans-serif;
+    color: black;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+table, th {
+    border:1px solid  rgb(49, 39, 131);
+    background-color: rgb(49, 39, 131);
+    font-size:40px;
+    font-weight: 500;
+    margin-left: -40rem;
+    color: white;
+    padding: 30px 20px 30px 20px;
+}
+td{
+    background-color: white;
+    color: black;
+    border:1px solid  rgb(49, 39, 131);
+    font-size: 40px;
+}
+
+.right{
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.left{
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.ThumbprintMsg{
+    font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+    min-width: 107rem;
+    margin-left: -13rem;
+}
+
+.btnThumbprintLeft{
+    background-color: white;
+    border-color: rgb(49, 39, 131);
+    color: rgb(49, 39, 131);
+    font-family: filson-pro, sans-serif;
+    border-width: 4px;
+    border-radius: 150px;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: left;
+    height: 12rem;
+    width: 52rem;
+    padding-left: 5rem;
+    margin-left: -17rem;
+    margin-right: 3rem;
+}
+
+.btnThumbprintRight{
+    background-color: white;
+    border-color: rgb(49, 39, 131);
+    color: rgb(49, 39, 131);
+    font-family: filson-pro, sans-serif;
+    border-width: 4px;
+    border-radius: 150px;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: left;
+    height: 12rem;
+    width: 52rem;
+    padding-left: 5rem;
+}
+
+.regular-checkbox {
+    width: 1.5em;
+    height: 1.5em;
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 2px solid rgb(49, 39, 131); ;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 1em;
+	display: inline-block;
+	position: relative;
+    vertical-align: middle;
+}
+
+.regular-checkbox:active, .regular-checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.regular-checkbox:checked {
+	background-color:  rgb(49, 39, 131); 
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
+}
+
+.regular-checkbox:checked:after {
+	content: '\2714';
+	font-size: 40px;
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	color: white;
+}
+
+
+

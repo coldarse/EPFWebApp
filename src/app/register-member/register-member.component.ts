@@ -9,12 +9,19 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class RegisterMemberComponent implements OnInit {
 
+  RegKWSP = false;
+  RegShariah = false;
+  RegSaraan = true;
   page1 = false;
   page2 = false;
   page3 = false;
   page4 = false;
   page5 = false;
-  page6 = true;
+  page6 = false;
+  page7 = false;
+  page8 = false;
+  page9 = false;
+  page10 = true;
 
   constructor(
     private route: Router,

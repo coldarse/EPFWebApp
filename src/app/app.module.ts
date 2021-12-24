@@ -15,7 +15,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RegisterAccountComponent } from './register-account/register-account.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { RegisterMemberComponent } from './register-member/register-member.component';
-import { InsertEmailComponent } from './insert-email/insert-email.component';
+import { CheckBalanceComponent } from './check-balance/check-balance.component';
+import { UpdateTACComponent } from './update-tac/update-tac.component';
+import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumbprint-confirmation.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
@@ -47,7 +49,9 @@ export function createConfig(): SignalRConfiguration {
     RegisterAccountComponent,
     MainMenuComponent,
     RegisterMemberComponent,
-    InsertEmailComponent,
+    CheckBalanceComponent,
+    UpdateTACComponent,
+    ThumbprintConfirmationComponent,
   ],
   imports: [
     BrowserModule,

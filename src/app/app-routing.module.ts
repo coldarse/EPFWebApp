@@ -5,7 +5,9 @@ import { RegisterAccountComponent } from './register-account/register-account.co
 import { VerifyMyKadComponent } from './verify-my-kad/verify-my-kad.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { RegisterMemberComponent } from './register-member/register-member.component';
-import { InsertEmailComponent } from './insert-email/insert-email.component';
+import { CheckBalanceComponent } from './check-balance/check-balance.component';
+import { UpdateTACComponent } from './update-tac/update-tac.component';
+import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumbprint-confirmation.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/language', pathMatch: 'full'},
@@ -14,7 +16,9 @@ const routes: Routes = [
   {path: 'registerAccount', component: RegisterAccountComponent},
   {path: 'mainMenu', component: MainMenuComponent},
   {path: 'registerMember', component: RegisterMemberComponent},
-  {path: 'insertEmail', component: InsertEmailComponent}
+  {path: 'checkBalance', component: CheckBalanceComponent},
+  {path: 'updateTAC', component: UpdateTACComponent},
+  {path: 'thumbprintConfirmation', component: ThumbprintConfirmationComponent}
 ];
 
 @NgModule({

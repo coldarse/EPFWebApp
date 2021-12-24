@@ -1,0 +1,112 @@
+<div class="bg-img">
+    <div class="header">
+        {{ "thumbprint" | translate }}
+        <div class="container">
+            <div class="row padTop30rem" *ngIf="page1">
+                <div class="text-center">
+                    <div class="ThumbprintMsg">
+                        {{"thumprintMsg"| translate}}
+                    </div>
+                    <div class="row padTop30rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"disagree"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"agree"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page2">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"thumbprintListMsg"| translate}}
+                    </div>
+                    <div class="row padTop5rem">
+                        <div class="col-6">
+                            <button type="button" class="btnThumbprintLeft">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{"ansuran"| translate}}
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="regular-checkbox big-checkbox marginTop2rem" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnThumbprintRight">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{"bina"| translate}}
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row padTop3rem">
+                        <div class="col-6">
+                            <button type="button" class="btnThumbprintLeft">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{"50yo"| translate}}
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnThumbprintRight">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{"education"| translate}}
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row padTop3rem">
+                        <div class="col-6">
+                            <button type="button" class="btnThumbprintLeft">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{"1mil"| translate}}
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnThumbprintRight">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{"55yo"| translate}}
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row padTop3rem">
+                        <div class="note">
+                            {{"thumbprintNotes"|translate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

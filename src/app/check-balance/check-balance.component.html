@@ -1,0 +1,291 @@
+<div class="bg-img">
+    <div class="header">
+        {{ "checkBalance" | translate }}
+        <div class="container">
+            <div class="row padTop10rem" *ngIf="page1">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"balance"| translate}}
+                    </div>
+                    <div class="row">
+                        <label class="lblKWSP">
+                            RM520,000.30
+                        </label>
+                    </div>
+                    <table style="width:200%">
+                        <tr>
+                            <th class="left">{{"accType"|translate}}</th>
+                            <th class="right">{{"openBalance"|translate}}</th>
+                            <th class="right">{{"in"|translate}}</th>
+                            <th class="right">{{"out"|translate}}</th>
+                            <th class="right">{{"dividend"|translate}}</th>
+                            <th class="right">{{"total"|translate}}</th>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Emas</td>
+                            <td class="right">224,931.29</td>
+                            <td class="right">1953.33</td>
+                            <td class="right">0.00</td>
+                            <td class="right">0.00</td>
+                            <td class="right" style="font-weight: 700;">226,884.23</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun 2</td>
+                            <td class="right">224,931.29</td>
+                            <td class="right">1953.33</td>
+                            <td class="right">0.00</td>
+                            <td class="right">0.00</td>
+                            <td class="right" style="font-weight: 700;">226,884.23</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun 1</td>
+                            <td class="right">224,931.29</td>
+                            <td class="right">1953.33</td>
+                            <td class="right">0.00</td>
+                            <td class="right">0.00</td>
+                            <td class="right" style="font-weight: 700;">226,884.23</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Emas</td>
+                            <td class="right">224,931.29</td>
+                            <td class="right">1953.33</td>
+                            <td class="right">0.00</td>
+                            <td class="right">0.00</td>
+                            <td class="right" style="font-weight: 700;">226,884.23</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Emas</td>
+                            <td class="right">224,931.29</td>
+                            <td class="right">1953.33</td>
+                            <td class="right">0.00</td>
+                            <td class="right">0.00</td>
+                            <td class="right" style="font-weight: 700;">226,884.23</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Pengeluaran Bayaran
+                                Bulanan</td>
+                            <td class="right">224,931.29</td>
+                            <td class="right">1953.33</td>
+                            <td class="right">0.00</td>
+                            <td class="right">0.00</td>
+                            <td class="right" style="font-weight: 700;">226,884.23</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="right">{{"total"|translate}}</th>
+                            <th class="right" style="font-weight: 700;">520,000.30</th>
+                        </tr>
+                    </table>
+                    <div class="row padTop5rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"menu"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"getStatement"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page2">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"statementMsg"| translate}}
+                    </div>
+                    <div class="row padTop10rem">
+                        <div class="col-6">
+                            <button type="button" class="btnShariah">2021</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnShariah2">2020</button>
+                        </div>
+                    </div>
+                    <div class="row padTop5rem">
+                        <div class="col-6">
+                            <button type="button" class="btnShariah">2019</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnShariah2">2018</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page3">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"carum"| translate}}
+                    </div>
+                    <div class="row">
+                        <label class="lblKWSP">
+                            RM17,280.00
+                        </label>
+                    </div>
+                    <table style="width:200%">
+                        <tr>
+                            <th class="left">{{"carumMonth"|translate}}</th>
+                            <th class="right">{{"transaction"|translate}}</th>
+                            <th class="right">{{"date"|translate}}</th>
+                            <th class="right">{{"majikan"|translate}}</th>
+                            <th class="right">{{"carumMember"|translate}}</th>
+                            <th class="right">{{"total"|translate}}</th>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Jan-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Feb-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Mac-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Apr-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Mei-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Jun-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Jul-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Ogs-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Sep-21</td>
+                            <td class="right">Caruman-IWS</td>
+                            <td class="right">14/01/2021</td>
+                            <td class="right">1040.00</td>
+                            <td class="right">880.00</td>
+                            <td class="right" style="font-weight: 700;">1920.00</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="right">{{"total"|translate}}</th>
+                            <th class="right" style="font-weight: 700;">17,280.00</th>
+                        </tr>
+                    </table>
+                    <div class="row padTop5rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"getStatement"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page4">
+                <div class="text-center">
+                    <div class="lblQuestion">
+                        {{"KWSPNoti"| translate}}
+                    </div>
+                    <div class="note2">
+                        {{"KWSPMuat"|translate}}
+                    </div>
+                    <div class="row padTop20rem">
+                        <label class="lblHeader">wahyu@aldantechnology.com</label>
+                    </div>
+                    <div class="row">
+                        <a class="note2" href="#"> {{"EditEmailMsg"|translate}}</a>
+                    </div>
+                    <div class="row padTop30rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"send"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page5">
+                <div class="text-center">
+                    <div class="lblStatus">
+                        {{"success"| translate}}
+                    </div>
+                    <div class="row padTop3rem">
+                        <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                    </div>
+                    <div class="row padTop10rem">
+                        <div class="statusMsg">{{"KWSPSent"|translate}}</div>
+                        <div class="statusMsg">wahyu@aldantechnology.com</div>
+                    </div>
+                    <div class="row padTop20rem">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page6">
+                <div class="text-center">
+                    <div class="lblStatus">
+                        {{"fail"| translate}}
+                    </div>
+                    <div class="row padTop3rem">
+                        <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                    </div>
+                    <div class="row padTop10rem">
+                        <div class="statusMsg">{{"KWSPSentFail"|translate}}</div>
+                        <div class="statusMsg">wahyu@aldantechnology.com</div>
+                    </div>
+                    <div class="row padTop20rem">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
