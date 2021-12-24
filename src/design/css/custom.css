@@ -416,8 +416,6 @@ td{
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
-    min-width: 107rem;
-    margin-left: -13rem;
 }
 
 .btnThumbprint{
@@ -448,8 +446,6 @@ td{
     height: 12rem;
     width: 52rem;
     padding-left: 5rem;
-    margin-left: -17rem;
-    margin-right: 3rem;
 }
 
 .btnThumbprintRight{

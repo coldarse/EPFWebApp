@@ -1,17 +1,23 @@
 <div class="bg-img">
     <div class="header">
         {{ "thumbprint" | translate }}
-        <div class="container">
-            <div class="row padTop30rem" *ngIf="page1">
+        <div class="container-fluid">
+            <div class="row padTop35rem" *ngIf="page1">
                 <div class="text-center">
-                    <div class="ThumbprintMsg">
-                        {{"thumprintMsg"| translate}}
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="ThumbprintMsg">
+                                {{"thumprintMsg"| translate}}
+                            </div>
+                        </div>
                     </div>
-                    <div class="row padTop30rem">
-                        <div class="col-6">
+                    <div class="row padTop35rem">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnNo">{{"disagree"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"agree"| translate}}</button>
                         </div>
                     </div>
@@ -23,7 +29,8 @@
                         {{"thumbprintListMsg"| translate}}
                     </div>
                     <div class="row padTop5rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnThumbprintLeft">
                                 <div class="row">
                                     <div class="col-10">
@@ -36,7 +43,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnThumbprintRight">
                                 <div class="row">
                                     <div class="col-10">
@@ -50,7 +57,8 @@
                         </div>
                     </div>
                     <div class="row padTop3rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnThumbprintLeft">
                                 <div class="row">
                                     <div class="col-10">
@@ -62,7 +70,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnThumbprintRight">
                                 <div class="row">
                                     <div class="col-10">
@@ -76,7 +84,8 @@
                         </div>
                     </div>
                     <div class="row padTop3rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnThumbprintLeft">
                                 <div class="row">
                                     <div class="col-10">
@@ -88,7 +97,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnThumbprintRight">
                                 <div class="row">
                                     <div class="col-10">
@@ -107,10 +116,11 @@
                         </div>
                     </div>
                     <div class="row padTop5rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnNo">{{"back"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"proceed"| translate}}</button>
                         </div>
                     </div>
@@ -146,10 +156,11 @@
                         </button>
                     </div>
                     <div class="row padTop30rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnNo">{{"endTrasaction"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"menu"| translate}}</button>
                         </div>
                     </div>

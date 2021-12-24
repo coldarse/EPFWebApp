@@ -8,9 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./personal-information.component.css']
 })
 export class PersonalInformationComponent implements OnInit {
-  page1 = true;
+  page1 = false;
   page2 = false;
-  page3 = false;
+  page3 = true;
 
   constructor(
     private route: Router,
