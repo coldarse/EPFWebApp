@@ -24,6 +24,7 @@ export class RegisterMemberComponent implements OnInit {
   page10 = true;
 
   jordan = false;
+  tehping = true;
 
   constructor(
     private route: Router,
