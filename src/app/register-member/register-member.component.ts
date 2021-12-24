@@ -14,19 +14,19 @@ declare const closeKeyboard: any;
 })
 export class RegisterMemberComponent implements OnInit {
 
-  RegKWSP = true;
+  RegKWSP = false;
   RegShariah = false;
-  RegSaraan = false;
+  RegSaraan = true;
   page1 = false;
   page2 = false;
-  page3 = true;
+  page3 = false;
   page4 = false;
   page5 = false;
   page6 = false;
   page7 = false;
   page8 = false;
   page9 = false;
-  page10 = false;
+  page10 = true;
 
 
   constructor(
