@@ -29,6 +29,15 @@
     padding-top: 100px;
 }
 
+
+.padTop1rem{
+    padding-top: 1rem;
+}
+
+.padTop2rem{
+    padding-top: 2rem;
+}
+
 .padTop3rem{
     padding-top: 3rem;
 }
@@ -84,7 +93,7 @@
     border-radius: 20px;
     font-weight: 800;
 }
-.keypadPadan{
+.keypadPadam{
     background-color: rgb(90, 82, 157);
     color: white;
     font-size: 50px;

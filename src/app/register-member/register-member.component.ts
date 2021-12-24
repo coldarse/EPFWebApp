@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
+
+declare const loadKeyboard: any;
+declare const deleteKeyboard: any;
+declare const closeKeyboard: any;
+
 @Component({
   selector: 'app-register-member',
   templateUrl: './register-member.component.html',
@@ -9,22 +14,20 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class RegisterMemberComponent implements OnInit {
 
-  RegKWSP = false;
+  RegKWSP = true;
   RegShariah = false;
-  RegSaraan = true;
+  RegSaraan = false;
   page1 = false;
   page2 = false;
-  page3 = false;
+  page3 = true;
   page4 = false;
   page5 = false;
   page6 = false;
   page7 = false;
   page8 = false;
   page9 = false;
-  page10 = true;
+  page10 = false;
 
-  jordan = false;
-  tehping = true;
 
   constructor(
     private route: Router,
@@ -33,6 +36,10 @@ export class RegisterMemberComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+  }
+
+  ngAfterViewInit(){
+    loadKeyboard();
   }
 
   loadPage2(){
