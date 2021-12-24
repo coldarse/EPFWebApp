@@ -23,6 +23,8 @@ export class RegisterMemberComponent implements OnInit {
   page9 = false;
   page10 = true;
 
+  jordan = false;
+
   constructor(
     private route: Router,
     private translate: TranslateService
