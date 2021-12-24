@@ -80,5 +80,21 @@
 "education":"Pendidikan",
 "1mil":"Simpanan Melebihi RM1 Juta",
 "55yo":"Umur 55",
-"thumbprintNotes":"*Transaksi tunggal atau berbilang. Pengguna perlu membuat pilihan dan klik lihat notis untuk membolehkan butang 'Teruskan'."
+"thumbprintNotes":"*Transaksi tunggal atau berbilang. Pengguna perlu membuat pilihan dan klik lihat notis untuk membolehkan butang 'Teruskan'.",
+"proceed":"Teruskan",
+"endTrasaction": "Tamat Transaksi",
+"reuseAddress":"Guna alamat daripada MyKad",
+"postingAddress":"Alamat surat-menyurat",
+"poscode":"Poskod",
+"city":"Bandar",
+"state":"Negeri",
+"country":"Negara",
+"housePhone":"No. Tel. Rumah",
+"officePhone":"No. Tel. Pejabat",
+"handPhone":"No. Tel. Bimbit",
+"emailAddress":"Emel",
+"keep":"Simpan",
+"verifyProfile":"Sila sahkan butiran di bawah.",
+"address":"Alamat",
+"profileSuccessMsg":"Maklumat profil anda telah berjaya dikemas kini."
 }

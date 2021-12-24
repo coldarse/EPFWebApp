@@ -1,0 +1,88 @@
+<div class="bg-img">
+    <div class="header">
+        {{ "i-Akaun" | translate }}
+        <div class="container">
+            <div class="row padTop5rem" *ngIf="page1">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"phoneEntryMsg"| translate}}
+                    </div>
+                    <div class="row padTop3rem">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <input type="text" id="phoneNo" name="phoneNo">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6 example">
+                            <label class="">{{"exPhone" | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-3"></div>
+                        <div class="col-2">
+                            <button class="keypad">1</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="keypad">2</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="keypad">3</button>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-3"></div>
+                        <div class="col-2">
+                            <button class="keypad">4</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="keypad">5</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="keypad">6</button>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-3"></div>
+                        <div class="col-2">
+                            <button class="keypad">7</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="keypad">8</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="keypad">9</button>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-3"></div>
+                        <div class="col-2">
+                            <button class="keypad">0</button>
+                        </div>
+                        <div class="col-4">
+                            <button class="keypadPadan">Padam</button>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                    <div class="row padTop5rem">
+                        <div class="note">
+                            {{ "phoneNotes" | translate }}
+                        </div>
+                    </div>
+                    <div class="row padTop5rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"send"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

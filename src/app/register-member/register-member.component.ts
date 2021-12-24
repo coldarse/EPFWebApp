@@ -18,8 +18,13 @@ export class RegisterMemberComponent implements OnInit {
   RegShariah = false;
   RegSaraan = false;
   page1 = false;
+<<<<<<< Updated upstream
   page2 = false;
   page3 = true;
+=======
+  page2 = true;
+  page3 = false;
+>>>>>>> Stashed changes
   page4 = false;
   page5 = false;
   page6 = false;

@@ -3,15 +3,14 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-thumbprint-confirmation',
-  templateUrl: './thumbprint-confirmation.component.html',
-  styleUrls: ['./thumbprint-confirmation.component.css']
+  selector: 'app-personal-information',
+  templateUrl: './personal-information.component.html',
+  styleUrls: ['./personal-information.component.css']
 })
-export class ThumbprintConfirmationComponent implements OnInit {
-
+export class PersonalInformationComponent implements OnInit {
   page1 = false;
-  page2 = false;
-  page3 = true;
+  page2 = true;
+  page3 = false;
 
   constructor(
     private route: Router,

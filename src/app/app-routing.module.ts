@@ -8,6 +8,8 @@ import { RegisterMemberComponent } from './register-member/register-member.compo
 import { CheckBalanceComponent } from './check-balance/check-balance.component';
 import { UpdateTACComponent } from './update-tac/update-tac.component';
 import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumbprint-confirmation.component';
+import { PersonalInformationComponent } from './personal-information/personal-information.component';
+import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-registration.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/language', pathMatch: 'full'},
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path: 'registerMember', component: RegisterMemberComponent},
   {path: 'checkBalance', component: CheckBalanceComponent},
   {path: 'updateTAC', component: UpdateTACComponent},
-  {path: 'thumbprintConfirmation', component: ThumbprintConfirmationComponent}
+  {path: 'thumbprintConfirmation', component: ThumbprintConfirmationComponent},
+  {path: 'personalInformation', component: PersonalInformationComponent},
+  {path: 'iAkaunRegistration', component: IAkaunRegistrationComponent}
 ];
 
 @NgModule({

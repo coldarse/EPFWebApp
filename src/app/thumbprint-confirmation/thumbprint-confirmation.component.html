@@ -30,7 +30,8 @@
                                         {{"ansuran"| translate}}
                                     </div>
                                     <div class="col-2">
-                                        <input class="regular-checkbox big-checkbox marginTop2rem" type="checkbox" value="">
+                                        <input class="regular-checkbox big-checkbox marginTop2rem" type="checkbox"
+                                            value="">
                                     </div>
                                 </div>
                             </button>
@@ -103,6 +104,53 @@
                     <div class="row padTop3rem">
                         <div class="note">
                             {{"thumbprintNotes"|translate}}
+                        </div>
+                    </div>
+                    <div class="row padTop5rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"proceed"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page3">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"success"| translate}}
+                    </div>
+                    <div class="padTop5rem">
+                        <button type="button" class="btnThumbprint">
+                            <div class="row">
+                                <div class="col-10">
+                                    {{"ansuran"| translate}}
+                                </div>
+                                <div class="col-2">
+                                    <input class="regular-checkbox big-checkbox marginTop2rem" type="checkbox" value="">
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="padTop3rem">
+                        <button type="button" class="btnThumbprintRight">
+                            <div class="row">
+                                <div class="col-10">
+                                    {{"bina"| translate}}
+                                </div>
+                                <div class="col-2">
+                                    <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="row padTop30rem">
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"endTrasaction"| translate}}</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnYes">{{"menu"| translate}}</button>
                         </div>
                     </div>
                 </div>

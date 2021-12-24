@@ -18,6 +18,8 @@ import { RegisterMemberComponent } from './register-member/register-member.compo
 import { CheckBalanceComponent } from './check-balance/check-balance.component';
 import { UpdateTACComponent } from './update-tac/update-tac.component';
 import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumbprint-confirmation.component';
+import { PersonalInformationComponent } from './personal-information/personal-information.component';
+import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-registration.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
@@ -52,6 +54,8 @@ export function createConfig(): SignalRConfiguration {
     CheckBalanceComponent,
     UpdateTACComponent,
     ThumbprintConfirmationComponent,
+    PersonalInformationComponent,
+    IAkaunRegistrationComponent,
   ],
   imports: [
     BrowserModule,
