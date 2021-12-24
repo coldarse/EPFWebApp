@@ -8,8 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./personal-information.component.css']
 })
 export class PersonalInformationComponent implements OnInit {
-  page1 = false;
-  page2 = true;
+  page1 = true;
+  page2 = false;
   page3 = false;
 
   constructor(
