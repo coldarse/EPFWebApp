@@ -330,9 +330,24 @@
                         <div class="col-6">
                             <button type="button" class="btnShariah">{{"newShariah"| translate}}</button>
                         </div>
+    </div>
+
+    <div>
+        <div class="row padTop35rem" *ngIf="page6">
+            <div class="text-center">
+                <div class="row lblQuestionCenter">
+                    {{"ShariahMsg"| translate}}
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-6">
+                        <button type="button" class="btnShariah">{{"remain"| translate}}</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btnShariah2">{{"newShariah"| translate}}</button>
                     </div>
                 </div>
             </div>
+        </div>
 
             <div class="row padTop15rem" *ngIf="page7">
                 <div class="text-center">
@@ -341,27 +356,93 @@
                     </div>
                     <div class="row padTop3rem">
                         <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+        <div class="row padTop5rem" *ngIf="page7">
+            <div class="row text-center">
+                <label class="lblHeader">
+                    {{"ShariahTitle"| translate}}
+                </label>
+            </div>
+            <div class="row text-center">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <label class="lblWarning">
+                        {{"ShariahWarning"| translate}}
+                    </label>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row text-center padTop3rem">
+                <div class="col-1"></div>
+                <div class="col-10 scrollBox">
+                    <div class="scroll">
+                        <p>
+                            It is a good platform to learn programming. 
+                            It is an educational website. Prepare for the Recruitment drive
+                            of product based companies like Microsoft, Amazon, Adobe etc with
+                            a free online placement preparation course. The course focuses 
+                            on various MCQ's & Coding question likely to be asked in the 
+                            interviews & make your upcoming placement season efficient and 
+                            successful. Also, any geeks can help other geeks by writing 
+                            articles on the GeeksforGeeks, publishing articles follow few 
+                            steps that are Articles that need little modification/improvement
+                            from reviewers are published first. To quickly get your articles
+                            reviewed, please refer existing articles, their formatting style,
+                            coding style, and try to make you are close to them. In case you
+                            are a beginner, you may refer Guidelines to write an Article
+                        </p>
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
-                    <div class="row padTop10rem">
-                        <div class="statusMsg">{{"successShariah"|translate}}</div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row text-center">
+                <div class="row padTop5rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnNo">{{"back"|translate}}</button>
                     </div>
                     <div class="row padTop20rem">
                         <div class="col-3"></div>
                         <div class="col-6">
                             <button type="button" class="btnYes">{{"yes"|translate}}</button>
                         </div>
+                    <div class="col-4">
+                        <button type="button" class="btnYes">{{"agree"|translate}}</button>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop20rem" *ngIf="page8">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"success"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"successShariah"|translate}}</div>
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
-
         </div>
+
     </div>
 
     <div class="header" *ngIf="RegSaraan">
         {{"registerSaraan"|translate}}
         <div class="container-fluid">
+        <div class="">
 
-            <div class="row padTop35rem" *ngIf="page8">
+            <div class="row padTop35rem" *ngIf="page9">
                 <div class="text-center">
                     <div class="lblHeader">
                         {{"saraanMsg"| translate}}
@@ -378,6 +459,7 @@
             </div>
 
             <div class="row padTop15rem" *ngIf="page9">
+            <div class="row padTop10rem" *ngIf="page10">
                 <div class="text-center">
                     <div class="lblHeader">
                         {{"jobMsg"|translate}}
@@ -420,7 +502,7 @@
                 </div>
             </div>
 
-            <div class="row padTop10rem" *ngIf="page10">
+            <div class="row padTop20rem" *ngIf="page11">
                 <div class="text-center">
                     <div class="lblStatus">
                         {{"success"| translate}}
