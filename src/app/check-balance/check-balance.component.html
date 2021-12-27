@@ -1,7 +1,7 @@
 <div class="bg-img">
     <div class="header">
         {{ "checkBalance" | translate }}
-        <div class="container">
+        <div class="container-fluid">
             <div class="row padTop10rem" *ngIf="page1">
                 <div class="text-center">
                     <div class="lblHeader">
@@ -12,7 +12,7 @@
                             RM520,000.30
                         </label>
                     </div>
-                    <table style="width:200%">
+                    <table style="width:100%">
                         <tr>
                             <th class="left">{{"accType"|translate}}</th>
                             <th class="right">{{"openBalance"|translate}}</th>
@@ -80,26 +80,27 @@
                         </tr>
                     </table>
                     <div class="row padTop5rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnNo">{{"menu"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"getStatement"| translate}}</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row padTop10rem" *ngIf="page2">
+            <div class="row padTop15rem" *ngIf="page2">
                 <div class="text-center">
                     <div class="lblHeader">
                         {{"statementMsg"| translate}}
                     </div>
-                    <div class="row padTop10rem">
+                    <div class="row padTop15rem">
                         <div class="col-6">
                             <button type="button" class="btnShariah">2021</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btnShariah2">2020</button>
+                            <button type="button" class="btnShariah">2020</button>
                         </div>
                     </div>
                     <div class="row padTop5rem">
@@ -107,7 +108,7 @@
                             <button type="button" class="btnShariah">2019</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btnShariah2">2018</button>
+                            <button type="button" class="btnShariah">2018</button>
                         </div>
                     </div>
                 </div>
@@ -122,7 +123,7 @@
                             RM17,280.00
                         </label>
                     </div>
-                    <table style="width:200%">
+                    <table style="width:100%">
                         <tr>
                             <th class="left">{{"carumMonth"|translate}}</th>
                             <th class="right">{{"transaction"|translate}}</th>
@@ -213,18 +214,19 @@
                         </tr>
                     </table>
                     <div class="row padTop5rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnNo">{{"back"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"getStatement"| translate}}</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row padTop10rem" *ngIf="page4">
+            <div class="row padTop15rem" *ngIf="page4">
                 <div class="text-center">
-                    <div class="lblQuestion">
+                    <div class="lblHeader">
                         {{"KWSPNoti"| translate}}
                     </div>
                     <div class="note2">
@@ -237,10 +239,11 @@
                         <a class="note2" href="#"> {{"EditEmailMsg"|translate}}</a>
                     </div>
                     <div class="row padTop30rem">
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-4">
                             <button type="button" class="btnNo">{{"back"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"send"| translate}}</button>
                         </div>
                     </div>

@@ -10,8 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class UpdateTACComponent implements OnInit {
 
   page1 = false;
-  page2 = false;
-  page3 = true;
+  page2 = true;
+  page3 = false;
 
   constructor(
     private route: Router,

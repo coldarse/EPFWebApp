@@ -84,6 +84,117 @@
                     </div>
                 </div>
             </div>
+            <div class="row padTop10rem" *ngIf="page2">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"emailMsg"| translate}}
+                    </div>
+                    <div class="row padTop3rem">
+                        <div class="col-5">
+                            <input type="text" class="use-keyboard-input" id="emailDDL" name="emailDDL">
+                        </div>
+                        <div class="col-2 lblSymbol padTop1rem">@</div>
+                        <div class="col-5">
+                            <select name="emailDDL" id="emailDDL">
+                                <option value="aldan">aldantechnology.com</option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row padTop10rem adjButton">
+                        <div class="col-5">
+                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-5">
+                            <button type="button" class="btnYes">{{"send"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop10rem" *ngIf="page3">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"VerifyPhone&EmailMsg"| translate}}
+                    </div>
+                    <div class="row padTop15rem">
+                        <div class="col-4">
+                            <div class="row">
+                                <label class="lblReg">{{"phone" | translate}}</label>
+                            </div>
+                            <div class="row">
+                                <label class="lblReg">{{"email" | translate}}</label>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <label class="lblInfo">0173702706</label>
+                            </div>
+                            <div class="row">
+                                <label class="lblInfo">wahyu@aldantechnology.com</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row padTop30rem adjButton">
+                        <div class="col-5">
+                            <button type="button" class="btnNo">{{"back"|translate}}</button>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-5">
+                            <button type="button" class="btnYes">{{"approve"|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row padTop10rem" *ngIf="page4">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"iAkaunSucessReg"| translate}}
+                    </div>
+                    <div class="row padTop25rem">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <div class="ThumbprintMsg">
+                                {{"activateAkaun"| translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row padTop35rem">
+                        <div class="col-2"></div>
+                        <div class="col-4">
+                            <button type="button" class="btnNo">{{"menu"| translate}}</button>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btnYes">{{"yes"| translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row padTop10rem" *ngIf="page5">
+        <div class="text-center">
+            <div class="row padTop25rem">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="ThumbprintMsg">
+                        {{"saraanMsg"| translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="row padTop35rem">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <button type="button" class="btnNo">{{"no"| translate}}</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btnYes">{{"yes"| translate}}</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

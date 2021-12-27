@@ -3,7 +3,7 @@
         {{ "registerKWSP" | translate }}
         <div class="container">
 
-            <div class="row padTop20rem" *ngIf="page1">
+            <div class="row padTop15rem" *ngIf="page1">
                 <div class="text-center">
                     <div class="lblQuestion">
                         {{"question"| translate}}
@@ -56,11 +56,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row padTop10rem">
-                        <div class="col-6">
+                    <div class="row padTop20rem adjButton">
+                        <div class="col-5">
                             <button type="button" class="btnNo">{{"no"|translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-5">
                             <button type="button" class="btnYes">{{"yes"|translate}}</button>
                         </div>
                     </div>
@@ -153,12 +154,12 @@
                             {{ "phoneNotes" | translate }}
                         </div>
                     </div>
-                    <div class="row padTop5rem">
-                        <div class="col-2"></div>
-                        <div class="col-4">
+                    <div class="row padTop5rem adjButton">
+                        <div class="col-5">
                             <button type="button" class="btnNo">{{"no"| translate}}</button>
                         </div>
-                        <div class="col-4">
+                        <div class="col-2"></div>
+                        <div class="col-5">
                             <button type="button" class="btnYes">{{"yes"| translate}}</button>
                         </div>
                     </div>
@@ -184,11 +185,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row padTop10rem">
-                        <div class="col-6">
+                    <div class="row padTop10rem adjButton">
+                        <div class="col-5">
                             <button type="button" class="btnNo">{{"back"| translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-5">
                             <button type="button" class="btnYes">{{"send"| translate}}</button>
                         </div>
                     </div>
@@ -260,18 +262,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row padTop10rem">
-                        <div class="col-6">
+                    <div class="row padTop20rem adjButton">
+                        <div class="col-5">
                             <button type="button" class="btnNo">{{"back"|translate}}</button>
                         </div>
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-5">
                             <button type="button" class="btnYes">{{"approve"|translate}}</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row padTop10rem" *ngIf="page5">
+            <div class="row padTop15rem" *ngIf="page5">
                 <div class="text-center">
                     <div class="lblHeader">
                         {{"KWSPNo"| translate}}
@@ -299,7 +302,7 @@
                             {{ "emailNote" | translate }}
                         </div>
                     </div>
-                    <div class="row padTop5rem">
+                    <div class="row padTop15rem">
                         <div class="col-3"></div>
                         <div class="col-6">
                             <button type="button" class="btnYes">{{"continue"|translate}}</button>
@@ -313,11 +316,11 @@
 
     <div class="header" *ngIf="RegShariah">
         {{"registerShariah" | translate}}
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="row padTop35rem" *ngIf="page6">
                 <div class="text-center">
-                    <div class="row lblQuestionCenter">
+                    <div class="lblHeader">
                         {{"ShariahMsg"| translate}}
                     </div>
                     <div class="row padTop10rem">
@@ -325,13 +328,13 @@
                             <button type="button" class="btnShariah">{{"remain"| translate}}</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btnShariah2">{{"newShariah"| translate}}</button>
+                            <button type="button" class="btnShariah">{{"newShariah"| translate}}</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row padTop20rem" *ngIf="page7">
+            <div class="row padTop15rem" *ngIf="page7">
                 <div class="text-center">
                     <div class="lblStatus">
                         {{"success"| translate}}
@@ -342,7 +345,7 @@
                     <div class="row padTop10rem">
                         <div class="statusMsg">{{"successShariah"|translate}}</div>
                     </div>
-                    <div class="row padTop10rem">
+                    <div class="row padTop20rem">
                         <div class="col-3"></div>
                         <div class="col-6">
                             <button type="button" class="btnYes">{{"yes"|translate}}</button>
@@ -356,11 +359,11 @@
 
     <div class="header" *ngIf="RegSaraan">
         {{"registerSaraan"|translate}}
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="row padTop35rem" *ngIf="page8">
                 <div class="text-center">
-                    <div class="row lblQuestion padLeft8rem">
+                    <div class="lblHeader">
                         {{"saraanMsg"| translate}}
                     </div>
                     <div class="row padTop10rem">
@@ -368,57 +371,67 @@
                             <button type="button" class="btnShariah">{{"yes"| translate}}</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btnShariah2">{{"no"| translate}}</button>
+                            <button type="button" class="btnShariah">{{"no"| translate}}</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row padTop10rem" *ngIf="page9">
+            <div class="row padTop15rem" *ngIf="page9">
                 <div class="text-center">
                     <div class="lblHeader">
                         {{"jobMsg"|translate}}
                     </div>
-                    <div class="row padTop5rem">
-                        <select class="form-select form-select-lg mb-3" aria-label="Default select example" id="jobDDL">
-                            <option value="default">{{"default"|translate}}</option>
-                            <option value="agriculture">Pertanian</option>
-                            <option value="retired">Pekerjaan berpencen</option>
-                            <option value="business">Perniagaan</option>
-                            <option value="aqua">Akuakultur/Penangkapan ikan</option>
-                            <option value="transport">Transportasi</option>
-                            <option value="sales">Agen jualan</option>
-                            <option value="art">Seniman/Kreatif</option>
-                            <option value="house">Suri rumah</option>
-                            <option value="prof">Profesional</option>
-                            <option value="service">Perkhidmatan</option>
-                            <option value="gig">Pekerjaan gig</option>
-                            <option value="other">Yang lain</option>
-                        </select>
-                    </div>
-                    <div class="row padTop60rem">
-                        <div class="col-6">
-                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                    <div class="row padTop3rem">
+                        <div class="col-3">
                         </div>
                         <div class="col-6">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{"default"|translate}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">{{"agriculture"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"retired"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"business"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"aquaculture"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"transport"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"sales"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"artist"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"housewife"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"prof"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"service"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"gig"|translate}}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{"other"|translate}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row padTop50rem">
+                        <div class="col-2"></div>
+                        <div class="col-4">
+                            <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        </div>
+                        <div class="col-4">
                             <button type="button" class="btnYes">{{"send"| translate}}</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row padTop20rem" *ngIf="page10">
+            <div class="row padTop10rem" *ngIf="page10">
                 <div class="text-center">
                     <div class="lblStatus">
                         {{"success"| translate}}
                     </div>
-                    <div class="row padTop3rem">
+                    <div class="row padTop5rem">
                         <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
                     </div>
                     <div class="row padTop10rem">
                         <div class="statusMsg">{{"successSaraan"|translate}}</div>
                     </div>
-                    <div class="row padTop10rem">
+                    <div class="row padTop20rem">
                         <div class="col-3"></div>
                         <div class="col-6">
                             <button type="button" class="btnYes">{{"yes"|translate}}</button>

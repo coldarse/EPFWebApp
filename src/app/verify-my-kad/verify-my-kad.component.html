@@ -1,17 +1,84 @@
-<p>{{Status}}</p>
-
-<p>{{'Hello' | translate}}</p>
-
-<input  type="text" class="input-long use-keyboard-input" id="AR1">
-
-
-<div class="col-md-12" *ngIf="page1">
-    <div class="namelist" *ngFor="let x of arrayList">
-        <p>x.Name</p>
-        <p>x.Age</p>
+<div class="bg-img">
+    <div class="header" *ngIf="page1">
+        Pengesahan MyKad/Read MyKad
+        <div class="container-fluid">
+            <div class="row padTop15rem">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        Sila masukkan MyKad anda<br>
+                        Please insert your MyKad
+                    </div>
+                    <div class="row padTop3rem">
+                        <img src="assets/images/insert-mykad.svg" width="800px" height="800px">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="col-md-12" *ngIf="page2">
-    
+    <div class="header" *ngIf="page2">
+        {{ "language" | translate }}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="text-center">
+                    <div class="row">
+                        <div class="lblChoose">
+                            Sila pilih:<br>
+                            Please select
+                        </div>
+                    </div>
+                    <!-- justify-content-between -->
+                    <div class="row padTop10rem">
+                        <div class="col-6">
+                            <button type="button" class="btnLang">Bahasa Malaysia</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btnLang">English</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header" *ngIf="page3">
+        {{"fingerprint"|translate}}
+        <div class="container-fluid">
+            <div class="row padTop15rem">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"placeThumbprint"|translate}}
+                    </div>
+                    <div class="row padTop3rem">
+                        <img src="assets/images/thumbprint.svg" width="800px" height="800px">
+                    </div>
+                    <div class="row padTop3rem">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <button type="button" class="btnNo">{{"cancel"|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header" *ngIf="page4">
+        {{"removeCard"|translate}}
+        <div class="container-fluid">
+            <div class="row padTop15rem">
+                <div class="text-center">
+                    <div class="lblHeader">
+                        {{"removeCardMsg"|translate}}
+                    </div>
+                    <div class="row padTop5rem">
+                        <div class="col-2"></div>
+                        <div class="col-8 lblRemove">
+                            {{"removeMsg"|translate}}
+                        </div>
+                    </div>
+                    <div class="row padTop3rem">
+                        <img src="assets/images/remove-mykad.svg" width="800px" height="800px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

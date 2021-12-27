@@ -22,8 +22,10 @@ export class VerifyMyKadComponent implements OnInit {
 
   
 
-  page1 = true;
+  page1 = false;
   page2 = false;
+  page3 = false;
+  page4 = true;
 
   arrayList: string[] = [];
 
@@ -35,7 +37,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.translate.use('en');
+    this.translate.use('bm');
 
     this.intervalID = setInterval(() => {
       this.DetectMyKad();
