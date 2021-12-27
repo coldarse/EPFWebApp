@@ -96,5 +96,8 @@
 "keep":"Simpan",
 "verifyProfile":"Sila sahkan butiran di bawah.",
 "address":"Alamat",
-"profileSuccessMsg":"Maklumat profil anda telah berjaya dikemas kini."
+"profileSuccessMsg":"Maklumat profil anda telah berjaya dikemas kini.",
+"ShariahTitle": "Simpanan Shariah e-akad",
+"ShariahWarning": "PIlihan ini hanya akan mula berkuat kuasa pada tarikh yang ditentukan (traikh kuat kuasa). Sila baca e-Akad sehingga habis dan tandakan kotak untuk proses seterusnya.",
+"TNC": "Saya dengan ini mengesahkan telah membaca, memahami dan bersetuju dengan terma dan syarat."
 }
