@@ -88,8 +88,14 @@
     margin-left:-9rem
 }
 
+.marginTop1rem{
+    margin-top:1rem;
+}
 .marginTop2rem{
     margin-top:2rem;
+}
+.marginTop3rem{
+    margin-top:3rem;
 }
 
 #phoneNo{
@@ -251,6 +257,16 @@
     color: rgb(49, 39, 131);
     text-align: left;
     margin-top: 1rem;
+}
+
+
+.lblDate{
+    font-size: 30px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    color: rgb(49, 39, 131);
+    text-align: left;
 }
 
 .lblProfile{
@@ -428,26 +444,26 @@ td{
     font-family: filson-pro, sans-serif;
     border-width: 4px;
     border-radius: 150px;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 600;
-    height: 12rem;
-    width: 52rem;
-    padding-left: 5rem;
     text-align: left;
+    height: 15rem;
+    width: 55rem;
+    padding-left: 5rem;
 }
 
-.btnThumbprintLeft{
+/* .btnThumbprintLeft{
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);
     font-family: filson-pro, sans-serif;
     border-width: 4px;
     border-radius: 150px;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 600;
     text-align: left;
-    height: 12rem;
-    width: 52rem;
+    height: 15rem;
+    width: 55rem;
     padding-left: 5rem;
 }
 
@@ -461,10 +477,10 @@ td{
     font-size: 40px;
     font-weight: 600;
     text-align: left;
-    height: 12rem;
-    width: 52rem;
+    height: 15rem;
+    width: 55rem;
     padding-left: 5rem;
-}
+} */
 
 .regular-checkbox {
     width: 1.5em;
@@ -493,10 +509,10 @@ td{
 
 .regular-checkbox:checked:after {
 	content: '\2714';
-	font-size: 40px;
+	font-size: 50px;
 	position: absolute;
 	top: 0px;
-	left: 10px;
+	left: 15px;
 	color: white;
 }
 
