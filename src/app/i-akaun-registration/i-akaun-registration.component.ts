@@ -10,7 +10,6 @@ declare const loadKeyboard: any;
   styleUrls: ['./i-akaun-registration.component.css']
 })
 export class IAkaunRegistrationComponent implements OnInit {
-
   page1 = false;
   page2 = false;
   page3 = false;

@@ -85,7 +85,7 @@
 }
 
 .adjButton{
-    margin-left:-7rem
+    margin-left:-9rem
 }
 
 .marginTop2rem{
@@ -514,23 +514,24 @@ td{
 }
 .scrollBox{
     border: solid 1px;
-    border-radius: 1.25rem;
+    width: fit-content;
+    border-color: grey;
 }
 
 .scroll {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    margin-right: 3rem;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-family: filson-pro, sans-serif;
     font-style: normal;
     font-weight: 700;
     background-color: rgb(255, 255, 255);
-    width: 2250px;
+    width: 2150px;
     height: 800px;
     overflow-x: hidden;
     overflow-y: auto;
     text-align: left;
+    color: black;
 }
 
 .lblTNC{
