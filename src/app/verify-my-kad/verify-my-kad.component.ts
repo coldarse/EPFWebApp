@@ -22,10 +22,10 @@ export class VerifyMyKadComponent implements OnInit {
 
   
 
-  page1 = false;
+  page1 = true;
   page2 = false;
   page3 = false;
-  page4 = true;
+  page4 = false;
 
   arrayList: string[] = [];
 

@@ -269,6 +269,14 @@
     text-align: left;
 }
 
+.lblPopup{
+    font-size: 55px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    color: rgb(49, 39, 131);
+}
+
 .lblProfile{
     font-size: 55px;
     font-family: filson-pro, sans-serif;
@@ -328,6 +336,19 @@
     border-radius: 150px;
     font-size: 55px;
     min-width: 700px;
+    font-weight: 600;
+    min-height: 150px;
+}
+
+.btnPopUp{
+    background-color: rgb(49, 39, 131);;
+    border-color: rgb(49, 39, 131);
+    color: white;
+    font-family: filson-pro, sans-serif;
+    border-width: 4px;
+    border-radius: 150px;
+    font-size: 55px;
+    width: 700px;
     font-weight: 600;
     min-height: 150px;
 }
@@ -583,4 +604,31 @@ background: rgb(49, 39, 131);
 
 ul.dropdown-menu a.dropdown-item:hover{
     color: rgb(90, 82, 157);
+}
+
+.bg-popup {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    background-color: rgba(179, 179, 179, 0.5);
+}
+
+
+.pop-up {
+    border-radius: 2rem;
+    border: 1px solid;
+    border-color: lightgray;
+    width: 2400px;
+    min-height: 1500px;
+    height: auto;
+    background-color: white;
+    margin: auto;
+    margin-top: 9.5rem;
+    margin-bottom: 9.5rem;
+}
+
+.row-centered {
+    text-align:center;
 }

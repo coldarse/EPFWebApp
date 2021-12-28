@@ -1,129 +1,128 @@
 <div class="bg-img">
-    <div class="header">
-        {{ "UpdateTAC" | translate }}
-        <div class="container">
-            <div class="row padTop10rem" *ngIf="page1">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"phoneEntryMsg"| translate}}
+    <div class="header">{{ "UpdateTAC" | translate }}</div>
+
+    <div class="container-fluid">
+        <div class="row padTop10rem" *ngIf="page1">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"phoneEntryMsg"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <input type="text" id="phoneNo" name="phoneNo">
                     </div>
-                    <div class="row padTop3rem">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <input type="text" id="phoneNo" name="phoneNo">
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6 example">
+                        <label class="">{{"exPhone" | translate}}</label>
                     </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6 example">
-                            <label class="">{{"exPhone" | translate}}</label>
-                        </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">1</button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">1</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">2</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">3</button>
-                        </div>
-                        <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">2</button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">4</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">5</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">6</button>
-                        </div>
-                        <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">3</button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">7</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">8</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">9</button>
-                        </div>
-                        <div class="col-3"></div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">4</button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">0</button>
-                        </div>
-                        <div class="col-4">
-                            <button class="keypadPadam">Padam</button>
-                        </div>
-                        <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">5</button>
                     </div>
-                    <div class="row padTop5rem">
-                        <div class="note">
-                            {{ "phoneNotes" | translate }}
-                        </div>
+                    <div class="col-2">
+                        <button class="keypad">6</button>
                     </div>
-                    <div class="row padTop5rem adjButton">
-                        <div class="col-5">
-                            <button type="button" class="btnNo">{{"back"| translate}}</button>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" class="btnYes">{{"send"| translate}}</button>
-                        </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">7</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">8</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">9</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">0</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="keypadPadam">Padam</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row padTop5rem">
+                    <div class="note">
+                        {{ "phoneNotes" | translate }}
+                    </div>
+                </div>
+                <div class="row padTop5rem adjButton">
+                    <div class="col-5">
+                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnYes">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
-            <div class="row padTop10rem" *ngIf="page2">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"VerifyPhoneMsg"| translate}}
+        </div>
+        <div class="row padTop10rem" *ngIf="page2">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"VerifyPhoneMsg"| translate}}
+                </div>
+                <div class="row padTop20rem">
+                    <div class="col-6">
+                        <label class="lblReg">{{"phone"|translate}}</label>
                     </div>
-                    <div class="row padTop20rem">
-                        <div class="col-6">
-                            <label class="lblReg">{{"phone"|translate}}</label>
-                        </div>
-                        <div class="col-6">
-                            <label class="lblInfo">0173702706</label>
-                        </div>
+                    <div class="col-6">
+                        <label class="lblInfo">0173702706</label>
                     </div>
-                    <div class="row padTop30rem adjButton">
-                        <div class="col-5">
-                            <button type="button" class="btnNo">{{"back"| translate}}</button>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" class="btnYes">{{"approve"| translate}}</button>
-                        </div>
+                </div>
+                <div class="row padTop30rem adjButton">
+                    <div class="col-5">
+                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnYes">{{"approve"| translate}}</button>
                     </div>
                 </div>
             </div>
-            <div class="row padTop10rem" *ngIf="page3">
-                <div class="text-center">
-                    <div class="lblStatus">
-                        {{"success"| translate}}
-                    </div>
-                    <div class="row padTop3rem">
-                        <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
-                    </div>
-                    <div class="row padTop10rem">
-                        <div class="statusMsg">{{"updateTACSuccessMsg"|translate}}</div>
-                    </div>
-                    <div class="row padTop20rem">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
-                        </div>
+        </div>
+        <div class="row padTop10rem" *ngIf="page3">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"success"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"updateTACSuccessMsg"|translate}}</div>
+                </div>
+                <div class="row padTop20rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

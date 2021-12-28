@@ -119,5 +119,15 @@
 "ShariahTitle": "Simpanan Shariah e-akad",
 "ShariahWarning": "PIlihan ini hanya akan mula berkuat kuasa pada tarikh yang ditentukan (traikh kuat kuasa). Sila baca e-Akad sehingga habis dan tandakan kotak untuk proses seterusnya.",
 "TNC": "Saya dengan ini mengesahkan telah membaca, memahami dan bersetuju dengan terma dan syarat.",
-"ActivateiAkaunHeader":"Pengaktifan i-Akaun"
+"ActivateiAkaunHeader":"Pengaktifan i-Akaun",
+"didNotSelectPopUp1": "Anda tidak memilih membuat pengesahan Cap Ibu Jari bagi permohonan ",
+"didNotSelectPopUp2": " di atas. Bagi megelakkan permohonan ini dibatalkan, sila buat pengesahan Cap Ibu jari sebelum ",
+"didNotSelectPopUp3": " di SST atau Pejabat KWSP berhampiran",
+"SavingsMoreThanMillion": "<Simpanan Melebihi RM1 Juta>",
+"MonthlyHousingLoan": "<Ansuran Bulanan Pinjaman Perumahan>",
+"HouseBuilding": "<Bina Rumah>",
+"50YearsOld": "<Umur 50>",
+"Enducation": "<Pendidikan>",
+"55YearsOld": "<Umur 55>",
+"MyKadVerification": "Pengesahan MyKad/Read MyKad"
 }

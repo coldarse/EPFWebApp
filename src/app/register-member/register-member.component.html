@@ -1,524 +1,512 @@
 <div class="bg-img">
-    <div class="header" *ngIf="RegKWSP">
-        {{ "registerKWSP" | translate }}
-        <div class="container">
+    <div class="header" *ngIf="RegKWSP">{{ "registerKWSP" | translate }}</div>
+    <div class="header" *ngIf="RegShariah">{{"registerShariah" | translate}}</div>
+    <div class="header" *ngIf="RegSaraan">{{"registerSaraan"|translate}}</div>
 
-            <div class="row padTop15rem" *ngIf="page1">
-                <div class="text-center">
-                    <div class="lblQuestion">
-                        {{"question"| translate}}
-                    </div>
-                    <div class="row padTop5rem">
-                        <div class="col-4">
-                            <div class="row">
-                                <label class="lblReg">Nama</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">No. MyKad / MyPR</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">Tarikh Lahir</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">Kewarganegaraan</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">Jantina</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">Bangsa</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">Agama</label>
-                            </div>
+    <div class="container-fluid">
+
+        <div class="row padTop15rem" *ngIf="page1">
+            <div class="text-center">
+                <div class="lblQuestion">
+                    {{"question"| translate}}
+                </div>
+                <div class="row padTop5rem">
+                    <div class="col-4">
+                        <div class="row">
+                            <label class="lblReg">Nama</label>
                         </div>
-                        <div class="col-8">
-                            <div class="row">
-                                <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">921130105537</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">20/12/1992</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">WARGANEGARA</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">LELAKI</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">MALAY</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">ISLAM</label>
-                            </div>
+                        <div class="row">
+                            <label class="lblReg">No. MyKad / MyPR</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">Tarikh Lahir</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">Kewarganegaraan</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">Jantina</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">Bangsa</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">Agama</label>
                         </div>
                     </div>
-                    <div class="row padTop20rem adjButton">
-                        <div class="col-5">
-                            <button type="button" class="btnNo">{{"no"|translate}}</button>
+                    <div class="col-8">
+                        <div class="row">
+                            <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
                         </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <div class="row">
+                            <label class="lblInfo">921130105537</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">20/12/1992</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">WARGANEGARA</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">LELAKI</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">MALAY</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">ISLAM</label>
                         </div>
                     </div>
                 </div>
+                <div class="row padTop20rem adjButton">
+                    <div class="col-5">
+                        <button type="button" class="btnNo">{{"no"|translate}}</button>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="row padTop10rem" *ngIf="page2">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"phoneEntryMsg"| translate}}
+        <div class="row padTop10rem" *ngIf="page2">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"phoneEntryMsg"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <input type="text" id="phoneNo" name="phoneNo">
                     </div>
-                    <div class="row padTop3rem">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <input type="text" id="phoneNo" name="phoneNo">
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6 example">
+                        <label class="">{{"exPhone" | translate}}</label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">1</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">2</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">3</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">4</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">5</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">6</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">7</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">8</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="keypad">9</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="keypad">0</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="keypadPadam">Padam</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <!-- <div class="row" style="display:inline-block">
+            <label class="choice">Sila Pilih:</label>
+            <div class="local">
+                <input class="form-check-input" type="checkbox" value="" id="chkLocal">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Local number
+                </label>
+            </div>
+            <div class="inter">
+                <input class="form-check-input" type="checkbox" value="" id="chkInter">
+                <label class="form-check-label" for="flexCheckChecked">
+                    International number
+                </label>
+            </div>
+        </div> -->
+                <div class="row padTop5rem">
+                    <div class="note">
+                        {{ "phoneNotes" | translate }}
+                    </div>
+                </div>
+                <div class="row padTop5rem adjButton">
+                    <div class="col-5">
+                        <button type="button" class="btnNo">{{"no"| translate}}</button>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnYes">{{"yes"| translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop10rem" *ngIf="page3">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"emailMsg"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <div class="col-5">
+                        <input type="text" class="use-keyboard-input" id="emailDDL" name="emailDDL">
+                    </div>
+                    <div class="col-2 lblSymbol padTop1rem">@</div>
+                    <div class="col-5">
+                        <select name="emailDDL" id="emailDDL">
+                            <option value="aldan">aldantechnology.com</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row padTop10rem adjButton">
+                    <div class="col-5">
+                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnYes">{{"send"| translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop10rem" *ngIf="page4">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"ProfileMsg"| translate}}
+                </div>
+                <div class="row padTop5rem">
+                    <div class="col-4">
+                        <div class="row">
+                            <label class="lblReg">{{"name" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"ic" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"born" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"nation" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"gender" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"race" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"religion" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"phone" | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblReg">{{"email" | translate}}</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6 example">
-                            <label class="">{{"exPhone" | translate}}</label>
+                    <div class="col-8">
+                        <div class="row">
+                            <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">921130105537</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">20/12/1992</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">WARGANEGARA</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">LELAKI</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">MALAY</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">ISLAM</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">0173702706</label>
+                        </div>
+                        <div class="row">
+                            <label class="lblInfo">wahyu@aldantechnology.com</label>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">1</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">2</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">3</button>
-                        </div>
-                        <div class="col-3"></div>
+                </div>
+                <div class="row padTop20rem adjButton">
+                    <div class="col-5">
+                        <button type="button" class="btnNo">{{"back"|translate}}</button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">4</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">5</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">6</button>
-                        </div>
-                        <div class="col-3"></div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnYes">{{"approve"|translate}}</button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">7</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">8</button>
-                        </div>
-                        <div class="col-2">
-                            <button class="keypad">9</button>
-                        </div>
-                        <div class="col-3"></div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"></div>
-                        <div class="col-2">
-                            <button class="keypad">0</button>
-                        </div>
-                        <div class="col-4">
-                            <button class="keypadPadam">Padam</button>
-                        </div>
-                        <div class="col-3"></div>
-                    </div>
-                    <!-- <div class="row" style="display:inline-block">
-                <label class="choice">Sila Pilih:</label>
-                <div class="local">
-                    <input class="form-check-input" type="checkbox" value="" id="chkLocal">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Local number
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop15rem" *ngIf="page5">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"KWSPNo"| translate}}
+                </div>
+                <div class="row">
+                    <label class="lblKWSP">
+                        22232909
                     </label>
                 </div>
-                <div class="inter">
-                    <input class="form-check-input" type="checkbox" value="" id="chkInter">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        International number
-                    </label>
-                </div>
-            </div> -->
-                    <div class="row padTop5rem">
-                        <div class="note">
-                            {{ "phoneNotes" | translate }}
-                        </div>
-                    </div>
-                    <div class="row padTop5rem adjButton">
-                        <div class="col-5">
-                            <button type="button" class="btnNo">{{"no"| translate}}</button>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" class="btnYes">{{"yes"| translate}}</button>
-                        </div>
+                <div class="row padTop5rem">
+                    <div class="col-2"></div>
+                    <div class="col-8 lblHeader">
+                        {{"SuccessReg"|translate}}
                     </div>
                 </div>
-            </div>
-
-            <div class="row padTop10rem" *ngIf="page3">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"emailMsg"| translate}}
-                    </div>
-                    <div class="row padTop3rem">
-                        <div class="col-5">
-                            <input type="text" class="use-keyboard-input" id="emailDDL" name="emailDDL">
-                        </div>
-                        <div class="col-2 lblSymbol padTop1rem">@</div>
-                        <div class="col-5">
-                            <select name="emailDDL" id="emailDDL">
-                                <option value="aldan">aldantechnology.com</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row padTop10rem adjButton">
-                        <div class="col-5">
-                            <button type="button" class="btnNo">{{"back"| translate}}</button>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" class="btnYes">{{"send"| translate}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row padTop10rem" *ngIf="page4">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"ProfileMsg"| translate}}
-                    </div>
-                    <div class="row padTop5rem">
-                        <div class="col-4">
-                            <div class="row">
-                                <label class="lblReg">{{"name" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"ic" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"born" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"nation" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"gender" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"race" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"religion" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"phone" | translate}}</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblReg">{{"email" | translate}}</label>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="row">
-                                <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">921130105537</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">20/12/1992</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">WARGANEGARA</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">LELAKI</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">MALAY</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">ISLAM</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">0173702706</label>
-                            </div>
-                            <div class="row">
-                                <label class="lblInfo">wahyu@aldantechnology.com</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row padTop20rem adjButton">
-                        <div class="col-5">
-                            <button type="button" class="btnNo">{{"back"|translate}}</button>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" class="btnYes">{{"approve"|translate}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row padTop15rem" *ngIf="page5">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"KWSPNo"| translate}}
-                    </div>
-                    <div class="row">
-                        <label class="lblKWSP">
-                            22232909
+                <div class="row">
+                    <div class="col-8">
+                        <label class="lblMsg">
+                            {{"DirectMsg"|translate}}
                         </label>
                     </div>
-                    <div class="row padTop5rem">
-                        <div class="col-2"></div>
-                        <div class="col-8 lblHeader">
-                            {{"SuccessReg"|translate}}
-                        </div>
+                </div>
+                <div class="row padTop20rem">
+                    <div class="note">
+                        {{ "emailNote" | translate }}
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <label class="lblMsg">
-                                {{"DirectMsg"|translate}}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row padTop20rem">
-                        <div class="note">
-                            {{ "emailNote" | translate }}
-                        </div>
-                    </div>
-                    <div class="row padTop15rem">
-                        <div class="col-2"></div>
-                        <div class="col-8">
-                            <button type="button" class="btnYes">{{"continue"|translate}}</button>
-                        </div>
+                </div>
+                <div class="row padTop15rem">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <button type="button" class="btnYes">{{"continue"|translate}}</button>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <div class="header" *ngIf="RegShariah">
-        {{"registerShariah" | translate}}
-        <div class="container-fluid">
-
-            <div class="row padTop35rem" *ngIf="page6">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"ShariahMsg"| translate}}
+        <div class="row padTop35rem" *ngIf="page6">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"ShariahMsg"| translate}}
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-6">
+                        <button type="button" class="btnShariah">{{"remain"| translate}}</button>
                     </div>
-                    <div class="row padTop10rem">
-                        <div class="col-6">
-                            <button type="button" class="btnShariah">{{"remain"| translate}}</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btnShariah">{{"newShariah"| translate}}</button>
-                        </div>
+                    <div class="col-6">
+                        <button type="button" class="btnShariah">{{"newShariah"| translate}}</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row padTop10rem" *ngIf="page7">
-                <div class="row text-center">
-                    <label class="lblHeader">
-                        {{"ShariahTitle"| translate}}
+        <div class="row padTop10rem" *ngIf="page7">
+            <div class="row text-center">
+                <label class="lblHeader">
+                    {{"ShariahTitle"| translate}}
+                </label>
+            </div>
+            <div class="row text-center">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <label class="lblWarning">
+                        {{"ShariahWarning"| translate}}
                     </label>
                 </div>
-                <div class="row text-center">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <label class="lblWarning">
-                            {{"ShariahWarning"| translate}}
-                        </label>
+                <div class="col-1"></div>
+            </div>
+            <div class="row text-center padTop3rem">
+                <div class="col-1"></div>
+                <div class="col-10 scrollBox">
+                    <div class="scroll">
+                        <p>
+                            It is a good platform to learn programming.
+                            It is an educational website. Prepare for the Recruitment drive
+                            of product based companies like Microsoft, Amazon, Adobe etc with
+                            a free online placement preparation course. The course focuses
+                            on various MCQ's & Coding question likely to be asked in the
+                            interviews & make your upcoming placement season efficient and
+                            successful. Also, any geeks can help other geeks by writing
+                            articles on the GeeksforGeeks, publishing articles follow few
+                            steps that are Articles that need little modification/improvement
+                            from reviewers are published first. To quickly get your articles
+                            reviewed, please refer existing articles, their formatting style,
+                            coding style, and try to make you are close to them. In case you
+                            are a beginner, you may refer Guidelines to write an Article
+                            It is a good platform to learn programming.
+                            It is an educational website. Prepare for the Recruitment drive
+                            of product based companies like Microsoft, Amazon, Adobe etc with
+                            a free online placement preparation course. The course focuses
+                            on various MCQ's & Coding question likely to be asked in the
+                            interviews & make your upcoming placement season efficient and
+                            successful. Also, any geeks can help other geeks by writing
+                            articles on the GeeksforGeeks, publishing articles follow few
+                            steps that are Articles that need little modification/improvement
+                            from reviewers are published first. To quickly get your articles
+                            reviewed, please refer existing articles, their formatting style,
+                            coding style, and try to make you are close to them. In case you
+                            are a beginner, you may refer Guidelines to write an Article
+                            It is a good platform to learn programming.
+                            It is an educational website. Prepare for the Recruitment drive
+                            of product based companies like Microsoft, Amazon, Adobe etc with
+                            a free online placement preparation course. The course focuses
+                            on various MCQ's & Coding question likely to be asked in the
+                            interviews & make your upcoming placement season efficient and
+                            successful. Also, any geeks can help other geeks by writing
+                            articles on the GeeksforGeeks, publishing articles follow few
+                            steps that are Articles that need little modification/improvement
+                            from reviewers are published first. To quickly get your articles
+                            reviewed, please refer existing articles, their formatting style,
+                            coding style, and try to make you are close to them. In case you
+                            are a beginner, you may refer Guidelines to write an Article
+                        </p>
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
-                    <div class="col-1"></div>
                 </div>
-                <div class="row text-center padTop3rem">
-                    <div class="col-1"></div>
-                    <div class="col-10 scrollBox">
-                        <div class="scroll">
-                            <p>
-                                It is a good platform to learn programming.
-                                It is an educational website. Prepare for the Recruitment drive
-                                of product based companies like Microsoft, Amazon, Adobe etc with
-                                a free online placement preparation course. The course focuses
-                                on various MCQ's & Coding question likely to be asked in the
-                                interviews & make your upcoming placement season efficient and
-                                successful. Also, any geeks can help other geeks by writing
-                                articles on the GeeksforGeeks, publishing articles follow few
-                                steps that are Articles that need little modification/improvement
-                                from reviewers are published first. To quickly get your articles
-                                reviewed, please refer existing articles, their formatting style,
-                                coding style, and try to make you are close to them. In case you
-                                are a beginner, you may refer Guidelines to write an Article
-                                It is a good platform to learn programming.
-                                It is an educational website. Prepare for the Recruitment drive
-                                of product based companies like Microsoft, Amazon, Adobe etc with
-                                a free online placement preparation course. The course focuses
-                                on various MCQ's & Coding question likely to be asked in the
-                                interviews & make your upcoming placement season efficient and
-                                successful. Also, any geeks can help other geeks by writing
-                                articles on the GeeksforGeeks, publishing articles follow few
-                                steps that are Articles that need little modification/improvement
-                                from reviewers are published first. To quickly get your articles
-                                reviewed, please refer existing articles, their formatting style,
-                                coding style, and try to make you are close to them. In case you
-                                are a beginner, you may refer Guidelines to write an Article
-                                It is a good platform to learn programming.
-                                It is an educational website. Prepare for the Recruitment drive
-                                of product based companies like Microsoft, Amazon, Adobe etc with
-                                a free online placement preparation course. The course focuses
-                                on various MCQ's & Coding question likely to be asked in the
-                                interviews & make your upcoming placement season efficient and
-                                successful. Also, any geeks can help other geeks by writing
-                                articles on the GeeksforGeeks, publishing articles follow few
-                                steps that are Articles that need little modification/improvement
-                                from reviewers are published first. To quickly get your articles
-                                reviewed, please refer existing articles, their formatting style,
-                                coding style, and try to make you are close to them. In case you
-                                are a beginner, you may refer Guidelines to write an Article
-                            </p>
-                            <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
-                            <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
-                        </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row text-center">
+                <div class="row padTop5rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnNo">{{"back"|translate}}</button>
                     </div>
-                    <div class="col-1"></div>
-                </div>
-                <div class="row text-center">
-                    <div class="row padTop5rem">
-                        <div class="col-2"></div>
-                        <div class="col-4">
-                            <button type="button" class="btnNo">{{"back"|translate}}</button>
-                        </div>
-                        <div class="col-4">
-                            <button type="button" class="btnYes">{{"agree"|translate}}</button>
-                        </div>
-                        <div class="col-2"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnYes">{{"agree"|translate}}</button>
                     </div>
+                    <div class="col-2"></div>
                 </div>
             </div>
-
-            <div class="row padTop15rem" *ngIf="page8">
-                <div class="text-center">
-                    <div class="lblStatus">
-                        {{"success"| translate}}
-                    </div>
-                    <div class="row padTop3rem">
-                        <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
-                    </div>
-                    <div class="row padTop10rem">
-                        <div class="statusMsg">{{"successShariah"|translate}}</div>
-                    </div>
-                    <div class="row padTop20rem">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
 
-    <div class="header" *ngIf="RegSaraan">
-        {{"registerSaraan"|translate}}
-        <div class="container-fluid">
-            <div class="row padTop35rem" *ngIf="page9">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"saraanMsg"| translate}}
-                    </div>
-                    <div class="row padTop10rem">
-                        <div class="col-6">
-                            <button type="button" class="btnShariah">{{"yes"| translate}}</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btnShariah">{{"no"| translate}}</button>
-                        </div>
+        <div class="row padTop15rem" *ngIf="page8">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"success"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"successShariah"|translate}}</div>
+                </div>
+                <div class="row padTop20rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
-
-            <div class="row padTop10rem" *ngIf="page10">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"jobMsg"|translate}}
-                    </div>
-                    <div class="row padTop3rem">
-                        <div class="col-3">
-                        </div>
-                        <div class="col-6">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{"default"|translate}}
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">{{"agriculture"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"retired"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"business"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"aquaculture"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"transport"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"sales"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"artist"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"housewife"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"prof"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"service"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"gig"|translate}}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{"other"|translate}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row padTop50rem">
-                        <div class="col-2"></div>
-                        <div class="col-4">
-                            <button type="button" class="btnNo">{{"back"| translate}}</button>
-                        </div>
-                        <div class="col-4">
-                            <button type="button" class="btnYes">{{"send"| translate}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row padTop15rem" *ngIf="page11">
-                <div class="text-center">
-                    <div class="lblStatus">
-                        {{"success"| translate}}
-                    </div>
-                    <div class="row padTop5rem">
-                        <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
-                    </div>
-                    <div class="row padTop10rem">
-                        <div class="statusMsg">{{"successSaraan"|translate}}</div>
-                    </div>
-                    <div class="row padTop20rem">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <div class="row padTop35rem" *ngIf="page9">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"saraanMsg"| translate}}
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-6">
+                        <button type="button" class="btnShariah">{{"yes"| translate}}</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btnShariah">{{"no"| translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop10rem" *ngIf="page10">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"jobMsg"|translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-6">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{"default"|translate}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">{{"agriculture"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"retired"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"business"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"aquaculture"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"transport"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"sales"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"artist"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"housewife"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"prof"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"service"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"gig"|translate}}</a></li>
+                                <li><a class="dropdown-item" href="#">{{"other"|translate}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row padTop50rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btnYes">{{"send"| translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop15rem" *ngIf="page11">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"success"| translate}}
+                </div>
+                <div class="row padTop5rem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"successSaraan"|translate}}</div>
+                </div>
+                <div class="row padTop20rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

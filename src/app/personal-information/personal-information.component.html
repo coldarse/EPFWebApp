@@ -1,152 +1,150 @@
 <div class="bg-img">
-    <div class="header">
-        {{ "personalInfo" | translate }}
-        <div class="container-fluid">
-            <div class="row padTop10rem" *ngIf="page1">
-                <div class="row" style="display:inline-block">
-                    <div class="local">
-                        <input class="form-check-input" type="checkbox" value="" id="chkLocal">
-                        <label class="form-check-label " for="flexCheckDefault">
-                            {{"reuseAddress"|translate}}
-                        </label>
+    <div class="header">{{ "personalInfo" | translate }}</div>
+    <div class="container-fluid">
+        <div class="row padTop10rem" *ngIf="page1">
+            <div class="row" style="display:inline-block">
+                <div class="local">
+                    <input class="form-check-input" type="checkbox" value="" id="chkLocal">
+                    <label class="form-check-label " for="flexCheckDefault">
+                        {{"reuseAddress"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="row padTop5rem">
+                <div class="col-4">
+                    <div class="row">
+                        <label class="lblProfile">{{"postingAddress"|translate}} </label>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <label class="lblProfile">{{"poscode"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"city"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"state"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"country"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"housePhone"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"officePhone"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"handPhone"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblProfile">{{"emailAddress"|translate}}</label>
                     </div>
                 </div>
-                <div class="row padTop5rem">
-                    <div class="col-4">
-                        <div class="row">
-                            <label class="lblProfile">{{"postingAddress"|translate}} </label>
-                        </div>
-                        <br><br>
-                        <div class="row">
-                            <label class="lblProfile">{{"poscode"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"city"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"state"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"country"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"housePhone"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"officePhone"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"handPhone"|translate}}</label>
-                        </div>
-                        <div class="row">
-                            <label class="lblProfile">{{"emailAddress"|translate}}</label>
-                        </div>
+                <div class="col-8">
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="NO 46">
                     </div>
-                    <div class="col-8">
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="NO 46">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="JALAN BP 10/1">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="BANDAR BUKIT PUCHONG 2">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="47170">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="PUCHONG">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="SELANGOR DARUL EHSAN">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="MALAYSIA">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="0173702706">
-                        </div>
-                        <div class="row">
-                            <input type="text" id="txtProfile" name="txtProfile" value="wahyu@aldantechnology.com">
-                        </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="JALAN BP 10/1">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="BANDAR BUKIT PUCHONG 2">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="47170">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="PUCHONG">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="SELANGOR DARUL EHSAN">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="MALAYSIA">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="0173702706">
+                    </div>
+                    <div class="row">
+                        <input type="text" id="txtProfile" name="txtProfile" value="wahyu@aldantechnology.com">
                     </div>
                 </div>
-                <div class="row padTop5rem">
+            </div>
+            <div class="row padTop5rem">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <button type="button" class="btnNo">{{"back"| translate}}</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btnYes">{{"keep"| translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="row padTop10rem" *ngIf="page2">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"verifyProfile"| translate}}
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-3"></div>
+                    <div class="col-3 left">
+                        <label class="lblReg">{{"address"|translate}}</label>
+                    </div>
+                    <div class="col-6 left">
+                        <label class="lblInfo">46, Jalan BP 10/2, Bandar Bukit Puchong 2</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3 left">
+                        <label class="lblReg">{{"phone"|translate}}</label>
+                    </div>
+                    <div class="col-6 left">
+                        <label class="lblInfo">0173703706</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3 left">
+                        <label class="lblReg">{{"email"|translate}}</label>
+                    </div>
+                    <div class="col-6 left">
+                        <label class="lblInfo">wahyu@aldantechnology.com</label>
+                    </div>
+                </div>
+                <div class="row padTop30rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"keep"| translate}}</button>
+                        <button type="button" class="btnYes">{{"approve"| translate}}</button>
                     </div>
                 </div>
             </div>
-            <div class="row padTop10rem" *ngIf="page2">
-                <div class="text-center">
-                    <div class="lblHeader">
-                        {{"verifyProfile"| translate}}
-                    </div>
-                    <div class="row padTop10rem">
-                        <div class="col-3"></div>
-                        <div class="col-3 left">
-                            <label class="lblReg">{{"address"|translate}}</label>
-                        </div>
-                        <div class="col-6 left">
-                            <label class="lblInfo">46, Jalan BP 10/2, Bandar Bukit Puchong 2</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-3 left">
-                            <label class="lblReg">{{"phone"|translate}}</label>
-                        </div>
-                        <div class="col-6 left">
-                            <label class="lblInfo">0173703706</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-3 left">
-                            <label class="lblReg">{{"email"|translate}}</label>
-                        </div>
-                        <div class="col-6 left">
-                            <label class="lblInfo">wahyu@aldantechnology.com</label>
-                        </div>
-                    </div>
-                    <div class="row padTop30rem">
-                        <div class="col-2"></div>
-                        <div class="col-4">
-                            <button type="button" class="btnNo">{{"back"| translate}}</button>
-                        </div>
-                        <div class="col-4">
-                            <button type="button" class="btnYes">{{"approve"| translate}}</button>
-                        </div>
-                    </div>
+        </div>
+        <div class="row padTop10rem" *ngIf="page3">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"success"| translate}}
                 </div>
-            </div>
-            <div class="row padTop10rem" *ngIf="page3">
-                <div class="text-center">
-                    <div class="lblStatus">
-                        {{"success"| translate}}
-                    </div>
-                    <div class="row padTop3rem">
-                        <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
-                    </div>
-                    <div class="row padTop10rem">
-                        <div class="statusMsg">{{"profileSuccessMsg"|translate}}</div>
-                    </div>
-                    <div class="row padTop20rem">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <button type="button" class="btnYes">{{"yes"|translate}}</button>
-                        </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"profileSuccessMsg"|translate}}</div>
+                </div>
+                <div class="row padTop20rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
