@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop3rem" type="checkbox" value="">
+                                    <input class="regular-checkbox big-checkbox marginTop3rem" type="checkbox" value="" (click)="checkAnsuran()">
                                 </div>
                             </div>
                             <div class="row">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="">
+                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="checkBina()">
                                 </div>
                             </div>
                             <div class="row">
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="">
+                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="check50yo()">
                                 </div>
                             </div>
                             <div class="row">
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="">
+                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="checkEducation()">
                                 </div>
                             </div>
                             <div class="row">
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop3rem" type="checkbox" value="">
+                                    <input class="regular-checkbox big-checkbox marginTop3rem" type="checkbox" value="" (click)="check1mil()">
                                 </div>
                             </div>
                             <div class="row">
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="">
+                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="check55yo()">
                                 </div>
                             </div>
                             <div class="row">
@@ -149,7 +149,7 @@
                         <button type="button" class="btnNo">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"proceed"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page2Next()">{{"proceed"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -198,32 +198,32 @@
             </div>
         </div>
 
-        <div class="row bg-popup" *ngIf="false">
+        <div class="row bg-popup" *ngIf="popup">
             <div class="pop-up">
-                <div class="row text-center">
+                <div class="row text-center padTop10rem">
                     <div class="col-12">
-
+                        <img src="assets/images/Icon-Attention.svg" width="500" height="450">
                     </div>
                 </div>
-                <div class="row text-center padTop40rem">
+                <div class="row text-center padTop5rem">
                     <div class="col-1"></div>
                     <div class="col-10">
                         <label class="lblPopup">{{"didNotSelectPopUp1"| translate}}</label>
-                        <label class="lblPopup">{{"MonthlyHousingLoan"| translate}},</label>
-                        <label class="lblPopup">{{"HouseBuilding"| translate}},</label>
-                        <label class="lblPopup">{{"50YearsOld"| translate}},</label>
-                        <label class="lblPopup">{{"Enducation"| translate}},</label>
-                        <label class="lblPopup">{{"55YearsOld"| translate}},</label>
-                        <label class="lblPopup">{{"SavingsMoreThanMillion"| translate}}</label>
+                        <label class="lblPopup" *ngIf="!checkedAnsuran">{{"MonthlyHousingLoan"| translate}},</label>
+                        <label class="lblPopup" *ngIf="!checkedBina">{{"HouseBuilding"| translate}},</label>
+                        <label class="lblPopup" *ngIf="!checked50yo">{{"50YearsOld"| translate}},</label>
+                        <label class="lblPopup" *ngIf="!checkedEducation">{{"Enducation"| translate}},</label>
+                        <label class="lblPopup" *ngIf="!checked55yo">{{"55YearsOld"| translate}},</label>
+                        <label class="lblPopup" *ngIf="!checked1mil">{{"SavingsMoreThanMillion"| translate}}</label>
                         <label class="lblPopup">{{"didNotSelectPopUp2"| translate}}</label>
                         <label class="lblPopup">31 Dec 2021</label>
                         <label class="lblPopup">{{"didNotSelectPopUp3"| translate}}</label>
                     </div>
                     <div class="col-1"></div>
                 </div>
-                <div class="row text-center padTop10rem">
+                <div class="row text-center padTop10rem padBottom5rem">
                     <div class="col-12">
-                        <button type="button" class="btnPopUp text-center">{{"yes"| translate}}</button>
+                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"| translate}}</button>
                     </div>
                 </div>
             </div>

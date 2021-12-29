@@ -84,6 +84,15 @@
     padding-left: 8rem;
 }
 
+
+.padBottom5rem{
+    padding-bottom: 5rem;
+}
+
+.padBottom10rem{
+    padding-bottom: 10rem;
+}
+
 .adjButton{
     margin-left:-9rem
 }
