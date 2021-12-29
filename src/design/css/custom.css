@@ -50,6 +50,11 @@
 .padTop10rem{
     padding-top: 10rem;
 }
+
+.padTop14rem{
+    padding-top: 14rem;
+}
+
 .padTop15rem{
     padding-top: 15rem;
 }
@@ -219,6 +224,21 @@
     font-family: filson-pro, sans-serif;
 }
 
+.akaunNote{
+    font-size:26px;
+    font-weight: 200;
+    background-color: rgb(214, 212, 230);
+    color: rgb(49, 39, 131);
+    font-family: filson-pro, sans-serif;
+}
+
+.akaunNoteSmall{
+    font-size:26px;
+    font-weight: 200;
+    color: rgb(49, 39, 131);
+    font-family: filson-pro, sans-serif;
+}
+
 .note2{
     font-size:37px;
     font-weight: 200;
@@ -320,6 +340,17 @@
     margin-bottom: 11px;
 }
 
+.lblAccount{
+    font-size: 40px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    color: rgb(49, 39, 131);
+    text-align: left;
+    margin-bottom: 10px;
+    height: 100px;
+}
+
 .lblInfo{
     font-size: 40px;
     font-family: filson-pro, sans-serif;
@@ -329,6 +360,18 @@
     text-align: left;
     margin-top: 1rem;
 }
+
+.lblAccount2{
+    font-size: 40px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    color: black;
+    text-align: left;
+    margin-bottom: 10px;
+    height: 100px;
+}
+
 
 .lblRemove{
     font-size: 40px;
@@ -587,6 +630,14 @@ td{
     margin-bottom: 5px;
 }
 
+#txtAccount{
+    border-width: 2px;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    height: 100px;
+}
+
 .dropdown-menu.show {
     display: block;
     width: 1000px;
@@ -674,4 +725,10 @@ ul.dropdown-menu a.dropdown-item:hover{
 
 .row-centered {
     text-align:center;
+}
+
+.imgOnline{
+    border: 2px solid black;
+    width: 280px;
+    height: 280px;
 }

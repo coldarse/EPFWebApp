@@ -14,7 +14,9 @@ export class IAkaunRegistrationComponent implements OnInit {
   page2 = false;
   page3 = false;
   page4 = false;
-  page5 = true;
+  page5 = false;
+  page6 = true;
+  page7 = false;
 
   constructor(
     private route: Router,
