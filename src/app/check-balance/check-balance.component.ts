@@ -9,12 +9,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CheckBalanceComponent implements OnInit {
 
-  page1 = true;
+  page1 = false;
   page2 = false;
   page3 = false;
   page4 = false;
   page5 = false;
-  page6 = false;
+  page6 = true;
 
   constructor(
     private route: Router,

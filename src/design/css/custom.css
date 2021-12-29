@@ -46,6 +46,7 @@
     padding-top: 5rem;
 }
 
+
 .padTop10rem{
     padding-top: 10rem;
 }
@@ -93,6 +94,10 @@
     padding-bottom: 10rem;
 }
 
+.padBottomProfile{
+    padding-bottom: 11.8rem;
+}
+
 .adjButton{
     margin-left:-9rem
 }
@@ -111,6 +116,13 @@
     margin-right: 2.5rem;
 }
 
+.marginRight10rem{
+    margin-right: -10rem;
+}
+
+.marginLeft5rem{
+    margin-left: -5rem;
+}
 .marginRight{
     margin-left:-2rem;
     margin-right: 2rem;
@@ -173,8 +185,6 @@
     font-style: normal;
     font-weight: 500;
     color: rgb(49, 39, 131);
-    position: fixed;
-    display: inline;
 }
 .inter{
     text-align:end;
@@ -188,8 +198,7 @@
 }
 
 #chkLocal{
-    margin-right:20px;
-    margin-left:140px;
+    margin-right: 20px;
 }
 
 #chkInter{
@@ -308,7 +317,7 @@
     font-weight: 600;
     color: rgb(49, 39, 131);
     text-align: left;
-    margin-left: 140px;
+    margin-bottom: 11px;
 }
 
 .lblInfo{
@@ -574,7 +583,8 @@ td{
     border-width: 2px;
     width: -webkit-fill-available;
     font-size: 55px;
-    font-weight: 700;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .dropdown-menu.show {
