@@ -5,36 +5,37 @@
 
     <div class="container-fluid">
 
-        <div class="row padTop15rem" *ngIf="page1">
+        <div class="row padTop10rem" *ngIf="page1">
             <div class="text-center">
-                <div class="lblQuestion">
+                <div class="lblHeader">
                     {{"question"| translate}}
                 </div>
                 <div class="row padTop5rem">
-                    <div class="col-4">
+                    <div class="col-3"></div>
+                    <div class="col-3">
                         <div class="row">
-                            <label class="lblReg">Nama</label>
+                            <label class="lblReg">{{"name" | translate}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblReg">No. MyKad / MyPR</label>
+                            <label class="lblReg">{{"ic" | translate}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblReg">Tarikh Lahir</label>
+                            <label class="lblReg">{{"born" | translate}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblReg">Kewarganegaraan</label>
+                            <label class="lblReg">{{"nation" | translate}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblReg">Jantina</label>
+                            <label class="lblReg">{{"gender" | translate}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblReg">Bangsa</label>
+                            <label class="lblReg">{{"race" | translate}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblReg">Agama</label>
+                            <label class="lblReg">{{"religion" | translate}}</label>
                         </div>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="row">
                             <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
                         </div>
@@ -58,12 +59,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop20rem adjButton">
-                    <div class="col-5">
+                <div class="row padTop20rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
                         <button type="button" class="btnNo">{{"no"|translate}}</button>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-5">
+                    <div class="col-4">
                         <button type="button" class="btnYes">{{"yes"|translate}}</button>
                     </div>
                 </div>
@@ -88,80 +89,68 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-3"></div>
-                    <div class="col-2">
+                    <div class="col-4"></div>
+                    <div class="col marginLeft">
                         <button class="keypad">1</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col">
                         <button class="keypad">2</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col marginRight">
                         <button class="keypad">3</button>
                     </div>
-                    <div class="col-3"></div>
+                    <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-3"></div>
-                    <div class="col-2">
+                    <div class="col-4"></div>
+                    <div class="col marginLeft">
                         <button class="keypad">4</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col">
                         <button class="keypad">5</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col marginRight">
                         <button class="keypad">6</button>
                     </div>
-                    <div class="col-3"></div>
+                    <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-3"></div>
-                    <div class="col-2">
+                    <div class="col-4"></div>
+                    <div class="col marginLeft">
                         <button class="keypad">7</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col">
                         <button class="keypad">8</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col marginRight">
                         <button class="keypad">9</button>
                     </div>
-                    <div class="col-3"></div>
+                    <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-3"></div>
-                    <div class="col-2">
+                    <div class="col-4"></div>
+                    <div class="col marginZero">
                         <button class="keypad">0</button>
                     </div>
-                    <div class="col-4">
+                    <div class="col marginPadam">
                         <button class="keypadPadam">Padam</button>
                     </div>
-                    <div class="col-3"></div>
+                    <div class="col-4"></div>
                 </div>
-                <!-- <div class="row" style="display:inline-block">
-            <label class="choice">Sila Pilih:</label>
-            <div class="local">
-                <input class="form-check-input" type="checkbox" value="" id="chkLocal">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Local number
-                </label>
-            </div>
-            <div class="inter">
-                <input class="form-check-input" type="checkbox" value="" id="chkInter">
-                <label class="form-check-label" for="flexCheckChecked">
-                    International number
-                </label>
-            </div>
-        </div> -->
                 <div class="row padTop5rem">
-                    <div class="note">
-                        {{ "phoneNotes" | translate }}
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="note">
+                            {{ "phoneNotes" | translate }}
+                        </div>
                     </div>
                 </div>
-                <div class="row padTop5rem adjButton">
-                    <div class="col-5">
+                <div class="row padTop5rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
                         <button type="button" class="btnNo">{{"no"| translate}}</button>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-5">
+                    <div class="col-4">
                         <button type="button" class="btnYes">{{"yes"| translate}}</button>
                     </div>
                 </div>
@@ -174,11 +163,12 @@
                     {{"emailMsg"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <div class="col-5">
-                        <input type="text" class="use-keyboard-input" id="emailDDL" name="emailDDL">
+                    <div class="col-2"></div>
+                    <div class="col-3">
+                        <input type="text" class="use-keyboard-input" id="txtEmail" name="txtEmail">
                     </div>
-                    <div class="col-2 lblSymbol padTop1rem">@</div>
-                    <div class="col-5">
+                    <div class="col-1 lblSymbol padTop1rem">@</div>
+                    <div class="col-4">
                         <select name="emailDDL" id="emailDDL">
                             <option value="aldan">aldantechnology.com</option>
                             <option value="saab">Saab</option>
@@ -186,13 +176,14 @@
                             <option value="audi">Audi</option>
                         </select>
                     </div>
+                    <div class="col-2"></div>
                 </div>
-                <div class="row padTop10rem adjButton">
-                    <div class="col-5">
+                <div class="row padTop10rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
                         <button type="button" class="btnNo">{{"back"| translate}}</button>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-5">
+                    <div class="col-4">
                         <button type="button" class="btnYes">{{"send"| translate}}</button>
                     </div>
                 </div>
@@ -205,7 +196,8 @@
                     {{"ProfileMsg"| translate}}
                 </div>
                 <div class="row padTop5rem">
-                    <div class="col-4">
+                    <div class="col-3"></div>
+                    <div class="col-3">
                         <div class="row">
                             <label class="lblReg">{{"name" | translate}}</label>
                         </div>
@@ -234,7 +226,7 @@
                             <label class="lblReg">{{"email" | translate}}</label>
                         </div>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="row">
                             <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
                         </div>
@@ -264,19 +256,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop20rem adjButton">
-                    <div class="col-5">
+                <div class="row padTop20rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
                         <button type="button" class="btnNo">{{"back"|translate}}</button>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-5">
+                    <div class="col-4">
                         <button type="button" class="btnYes">{{"approve"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop15rem" *ngIf="page5">
+        <div class="row padTop10rem" *ngIf="page5">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"KWSPNo"| translate}}
@@ -293,18 +285,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-2"></div>
                     <div class="col-8">
                         <label class="lblMsg">
                             {{"DirectMsg"|translate}}
                         </label>
                     </div>
                 </div>
-                <div class="row padTop20rem">
-                    <div class="note">
-                        {{ "emailNote" | translate }}
+                <div class="row padTop30rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="note">
+                            {{ "emailNote" | translate }}
+                        </div>
                     </div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-8">
                         <button type="button" class="btnYes">{{"continue"|translate}}</button>
@@ -313,7 +309,7 @@
             </div>
         </div>
 
-        <div class="row padTop35rem" *ngIf="page6">
+        <div class="row padTop30rem" *ngIf="page6">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"ShariahMsg"| translate}}
@@ -329,7 +325,7 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page7">
+        <div class="row padTop5rem" *ngIf="page7">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"ShariahTitle"| translate}}
@@ -404,12 +400,11 @@
                     <div class="col-4">
                         <button type="button" class="btnYes">{{"agree"|translate}}</button>
                     </div>
-                    <div class="col-2"></div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop15rem" *ngIf="page8">
+        <div class="row padTop10rem" *ngIf="page8">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
@@ -429,7 +424,7 @@
             </div>
         </div>
 
-        <div class="row padTop35rem" *ngIf="page9">
+        <div class="row padTop30rem" *ngIf="page9">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"saraanMsg"| translate}}
@@ -488,7 +483,7 @@
             </div>
         </div>
 
-        <div class="row padTop15rem" *ngIf="page11">
+        <div class="row padTop10rem" *ngIf="page11">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}

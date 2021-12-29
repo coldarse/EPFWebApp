@@ -14,8 +14,8 @@ declare const closeKeyboard: any;
 })
 export class RegisterMemberComponent implements OnInit {
 
-  RegKWSP = false;
-  RegShariah = true;
+  RegKWSP = true;
+  RegShariah = false;
   RegSaraan = false;
   page1 = false;
   page2 = false;
@@ -23,11 +23,11 @@ export class RegisterMemberComponent implements OnInit {
   page4 = false;
   page5 = false;
   page6 = false;
-  page7 = true;
+  page7 = false;
   page8 = false;
   page9 = false;
   page10 = false;
-  page11 = false;
+  page11 = true;
 
   constructor(
     private route: Router,
