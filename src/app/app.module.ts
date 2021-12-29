@@ -12,7 +12,6 @@ import { VerifyMyKadComponent } from './verify-my-kad/verify-my-kad.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from "ngx-translate-multi-http-loader";
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { RegisterAccountComponent } from './register-account/register-account.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { RegisterMemberComponent } from './register-member/register-member.component';
 import { CheckBalanceComponent } from './check-balance/check-balance.component';
@@ -48,7 +47,6 @@ export function createConfig(): SignalRConfiguration {
     AppComponent,
     LanguageComponent,
     VerifyMyKadComponent,
-    RegisterAccountComponent,
     MainMenuComponent,
     RegisterMemberComponent,
     CheckBalanceComponent,
