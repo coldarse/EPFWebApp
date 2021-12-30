@@ -18,7 +18,7 @@ export class RegisterMemberComponent implements OnInit {
   RegShariah = false;
   RegSaraan = false;
   RegIAkaun = false;
-  page1 = false;
+  page1 = true;
   page2 = false;
   page3 = false;
   page4 = false;
@@ -31,7 +31,7 @@ export class RegisterMemberComponent implements OnInit {
   page11 = false;
   page12 = false;
   page13 = false;
-  page14 = true;
+  page14 = false;
 
   constructor(
     private route: Router,
@@ -90,14 +90,24 @@ export class RegisterMemberComponent implements OnInit {
     this.page6 = true;
   }
 
-  page5no(){
-    this.page5 = false;
-    this.page4 = true;
-  }
-
   page6yes(){
     this.page6 = false;
     this.page7 = true;
+  }
+
+  page6no(){
+    this.page6 = false;
+    this.page5 = true;
+  }
+
+  page7yes(){
+    this.page7 = false;
+    this.page8 = true;
+  }
+
+  page7no(){
+    this.page7 = false;
+    this.page6 = true;
   }
 
   
