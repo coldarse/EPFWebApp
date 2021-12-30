@@ -20,11 +20,13 @@ export class VerifyMyKadComponent implements OnInit {
   Status = "MyKad";
   intervalID: any;
 
-  
-
-  page1 = true;
+  insertCard = false;
+  Language = false;
+  Thumbprint = true;
+  removeCard = false;
+  page1 = false;
   page2 = false;
-  page3 = false;
+  page3 = true;
   page4 = false;
 
   arrayList: string[] = [];

@@ -256,27 +256,6 @@
     display: inline;
 }
 
-.btnLang{
-    background-color: rgb(49, 39, 131);
-    border-color: rgb(49, 39, 131);
-    color: white;
-    font-family: filson-pro, sans-serif;
-    border-radius: 150px;
-    font-size:60px;
-    min-width: 1000px;
-    min-height: 180px;
-}
-
-.lblChoose{
-    text-align: center;
-    font-size: 60px;
-    font-family: filson-pro, sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    color: rgb(49, 39, 131);
-    padding-top: 100px;
-    margin-top:300px;
-}
 
 .testBorder{
     border: 1px solid;
@@ -296,6 +275,13 @@
 .lblHeader
 {
     font-size: 60px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+}
+.lblCongrats{
+    font-size: 90px;
     font-family: filson-pro, sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -731,4 +717,10 @@ ul.dropdown-menu a.dropdown-item:hover{
     border: 2px solid black;
     width: 280px;
     height: 280px;
+}
+
+.imgGratz{
+    width:130px;
+    height: 150px;
+    vertical-align: text-bottom;
 }

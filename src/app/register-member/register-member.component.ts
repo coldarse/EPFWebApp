@@ -17,7 +17,8 @@ export class RegisterMemberComponent implements OnInit {
   RegKWSP = true;
   RegShariah = false;
   RegSaraan = false;
-  page1 = true;
+  RegIAkaun = false;
+  page1 = false;
   page2 = false;
   page3 = false;
   page4 = false;
@@ -28,6 +29,9 @@ export class RegisterMemberComponent implements OnInit {
   page9 = false;
   page10 = false;
   page11 = false;
+  page12 = false;
+  page13 = false;
+  page14 = true;
 
   constructor(
     private route: Router,
