@@ -42,10 +42,62 @@ export class RegisterMemberComponent implements OnInit {
     loadKeyboard();
   }
 
-  loadPage2(){
+  page1yes(){
     this.page1 = false;
     this.page2 = true;
-
   }
+
+  page1no(){
+    this.route.navigate(['mainMenu']);
+  }
+
+  page2yes(){
+    this.page2 = false;
+    this.page3 = true;
+  }
+
+  page2no(){
+    this.page2 = false;
+    this.page1 = true;
+  }
+
+  page3yes(){
+    this.page3 = false;
+    this.page4 = true;
+  }
+
+  page3no(){
+    this.page3 = false;
+    this.page2 = true;
+  }
+
+  page4yes(){
+    this.page4 = false;
+    this.page5 = true;
+  }
+
+  page4no(){
+    this.page4 = false;
+    this.page3 = true;
+  }
+
+  page5yes(){
+    this.page5 = false;
+    this.page6 = true;
+  }
+
+  page5no(){
+    this.page5 = false;
+    this.page4 = true;
+  }
+
+  page6yes(){
+    this.page6 = false;
+    this.page7 = true;
+  }
+
+  
+
+ 
 
 }
