@@ -145,5 +145,12 @@
 "PWNotice":"* Gabungan alphanumeric 8-20 digit",
 "PWSample":"(Contoh: AbuAli12345",
 "phraseNotice":"Maksumum 10 aksara",
-"phraseSample":"(Contoh: iakaunsaya)"
+"phraseSample":"(Contoh: iakaunsaya)",
+"congrats":"TAHNIAH",
+"saraan":"i-Saraan",
+"shariah":"Simpanan Shariah",
+"select":"Sila pilih",
+"selectEN":"Please select",
+"iAkaunSuccess":"Pendaftaran i-Akaun anda telah berjaya.",
+"scanQR":"Scan QR Code untuk muat turun aplikasi i-Akaun"
 }

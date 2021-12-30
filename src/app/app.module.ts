@@ -5,7 +5,6 @@ import { SignalRConfiguration, SignalRModule } from 'ng2-signalr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { currentMyKadDetails } from './_models/_currentMyKadDetails';
-import { LanguageComponent } from './language/language.component';
 import { signalRConnection } from './_models/_signalRConnection';
 import { VerifyMyKadComponent } from './verify-my-kad/verify-my-kad.component';
 
@@ -19,6 +18,7 @@ import { UpdateTACComponent } from './update-tac/update-tac.component';
 import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumbprint-confirmation.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-registration.component';
+import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-savings-registration/i-saraan-shariah-savings-registration.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
@@ -45,7 +45,6 @@ export function createConfig(): SignalRConfiguration {
 @NgModule({
   declarations: [
     AppComponent,
-    LanguageComponent,
     VerifyMyKadComponent,
     MainMenuComponent,
     RegisterMemberComponent,
@@ -54,6 +53,7 @@ export function createConfig(): SignalRConfiguration {
     ThumbprintConfirmationComponent,
     PersonalInformationComponent,
     IAkaunRegistrationComponent,
+    ISaraanShariahSavingsRegistrationComponent,
   ],
   imports: [
     BrowserModule,
