@@ -33,6 +33,7 @@ export class RegisterMemberComponent implements OnInit {
   page13 = false;
   page14 = false;
 
+
   constructor(
     private route: Router,
     private translate: TranslateService

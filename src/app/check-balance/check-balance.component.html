@@ -82,10 +82,10 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"menu"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page1no()">{{"menu"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"getStatement"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page1yes()">{{"getStatement"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -97,18 +97,18 @@
                 </div>
                 <div class="row padTop15rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah">2021</button>
+                        <button type="button" class="btnShariah" (click)="select2021()">2021</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah">2020</button>
+                        <button type="button" class="btnShariah" (click)="select2020()">2020</button>
                     </div>
                 </div>
                 <div class="row padTop5rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah">2019</button>
+                        <button type="button" class="btnShariah" (click)="select2019()">2019</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah">2018</button>
+                        <button type="button" class="btnShariah" (click)="select2018()">2018</button>
                     </div>
                 </div>
             </div>
@@ -216,10 +216,10 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page3no()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"getStatement"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page3yes()">{{"getStatement"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -241,10 +241,10 @@
                 <div class="row padTop30rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page4no()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page4yes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
                 <div class="row padTop10rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page5yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -284,7 +284,7 @@
                 <div class="row padTop10rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page6yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

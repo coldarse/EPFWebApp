@@ -17,4 +17,29 @@ export class MainMenuComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('bm');
   }
+
+  checkBalance(){
+    this.route.navigate(['checkBalance']);
+  }
+
+  personalInformation(){
+    this.route.navigate(['personalInformation']);
+  }
+
+  updateTAC(){
+    this.route.navigate(['updateTAC']);
+  }
+
+  iSaraanRegistrationShariahSavings(){
+    this.route.navigate(['iSaraanShariahSavingsRegistration']);
+  }
+
+  thumbprintConfirmation(){
+    this.route.navigate(['thumbprintConfirmation']);
+  }
+
+  iAkaunRegistration(){
+    this.route.navigate(['iAkaunRegistration']);
+  }
+
 }
