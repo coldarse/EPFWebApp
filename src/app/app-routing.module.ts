@@ -12,10 +12,6 @@ import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-s
 
 const routes: Routes = [
   {path: '', redirectTo: '/verifyMyKad', pathMatch: 'full'},
-<<<<<<< Updated upstream
-=======
-  {path: 'language', component: LanguageComponent},
->>>>>>> Stashed changes
   {path: 'verifyMyKad', component: VerifyMyKadComponent},
   {path: 'mainMenu', component: MainMenuComponent},
   {path: 'registerMember', component: RegisterMemberComponent},
