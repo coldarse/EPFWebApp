@@ -110,6 +110,60 @@ export class RegisterMemberComponent implements OnInit {
     this.page6 = true;
   }
 
+  page8yes(){
+    this.page8 = false;
+    this.page9 = true;
+  }
+
+  selectiSaraan(){
+    this.page9 = false;
+    this.page12 = true;
+  }
+
+  selectShariah(){
+    this.page9 = false;
+    this.page10 = true;
+  }
+
+  page10yes(){
+    this.page10 = false;
+    this.page11 = true;
+  }
+
+  page10no(){
+    this.page10 = false;
+    this.page9 = true;
+  }
+
+  page11yes(){
+    this.page11 = false;
+    this.page12 = true;
+  }
+
+  page12yes(){
+    this.page12 = false;
+    this.page13 = true;
+  }
+
+  page12no(){
+    this.route.navigate(['mainMenu']);
+  }
+
+  page13yes(){
+    this.page13 = false;
+    this.page14 = true;
+  }
+
+  page13no(){
+    this.page13 = false;
+    this.page12 = true;
+  }
+
+  page14yes(){
+    this.route.navigate(['mainMenu']);
+  }
+
+
   
 
  

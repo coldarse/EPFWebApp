@@ -152,5 +152,6 @@
 "select":"Sila pilih",
 "selectEN":"Please select",
 "iAkaunSuccess":"Pendaftaran i-Akaun anda telah berjaya.",
-"scanQR":"Scan QR Code untuk muat turun aplikasi i-Akaun"
+"scanQR":"Scan QR Code untuk muat turun aplikasi i-Akaun",
+"next": "Seterusnya"
 }

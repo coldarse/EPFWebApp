@@ -304,7 +304,7 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <button type="button" class="btnYes" (click)="page5yes()">{"continue"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page5yes()">{{"continue"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -370,8 +370,8 @@
                             coding style, and try to make you are close to them. In case you
                             are a beginner, you may refer Guidelines to write an Article
                         </p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc1" name="tnc1" type="checkbox">
-                        <label class="lblTNC" for="tnc1">{{"TNC"|translate}}</label>
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <label class="lblTNC" for="tnc1">{{"TNC"| translate}}</label>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -548,7 +548,7 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"menu"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page8yes()">{{"next"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -561,10 +561,10 @@
                 </div>
                 <div class="row padTop10rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah">{{"remain"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="selectiSaraan()">{{"remain"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah">{{"newShariah"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="selectShariah()">{{"newShariah"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -630,8 +630,8 @@
                             coding style, and try to make you are close to them. In case you
                             are a beginner, you may refer Guidelines to write an Article
                         </p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc2" name="tnc2" type="checkbox">
-                        <label class="lblTNC" for="tnc2">{{"TNC"| translate}}</label>
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -640,10 +640,10 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="page10no()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page10yes()">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -663,7 +663,7 @@
                 <div class="row padTop15rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page11yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -676,10 +676,10 @@
                 </div>
                 <div class="row padTop10rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah">{{"yes"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="page12no()">{{"no"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah">{{"no"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="page12yes()">{{"yes"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -700,18 +700,18 @@
                                 {{"default"|translate}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">{{"agriculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"retired"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"business"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"aquaculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"transport"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"sales"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"artist"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"housewife"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"prof"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"service"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"gig"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"other"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"agriculture"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"retired"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"business"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"aquaculture"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"transport"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"sales"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"artist"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"housewife"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"prof"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"service"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"gig"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"other"|translate}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -719,10 +719,10 @@
                 <div class="row padTop50rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page13no()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page13yes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -742,7 +742,7 @@
                 <div class="row padTop15rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page14yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
