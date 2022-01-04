@@ -16,10 +16,10 @@
                 <div class="row padTop35rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"disagree"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page1no()">{{"disagree"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"agree"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page1yes()">{{"agree"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -146,10 +146,10 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page2Next()">{{"proceed"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page2yes()">{{"proceed"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -161,12 +161,12 @@
                     {{"placeThumbprint"|translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/thumbprint.svg" width="800px" height="800px">
+                    <img src="assets/images/thumbprint.svg" width="800px" height="800px" (click)="skip()">
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnNo">{{"cancel"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="page3no()">{{"cancel"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -203,13 +203,65 @@
                         </div>
                     </button>
                 </div>
+                <!-- <div class="padTop3rem">
+                    <button type="button" class="btnThumbprint">
+                        <div class="row">
+                            <div class="col-8">
+                                {{"bina"| translate}}
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="padTop3rem">
+                    <button type="button" class="btnThumbprint">
+                        <div class="row">
+                            <div class="col-8">
+                                {{"bina"| translate}}
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="padTop3rem">
+                    <button type="button" class="btnThumbprint">
+                        <div class="row">
+                            <div class="col-8">
+                                {{"bina"| translate}}
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="padTop3rem">
+                    <button type="button" class="btnThumbprint">
+                        <div class="row">
+                            <div class="col-8">
+                                {{"bina"| translate}}
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
+                            </div>
+                        </div>
+                    </button>
+                </div> -->
                 <div class="row padTop30rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"endTrasaction"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page4no()">{{"endTrasaction"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"menu"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page4yes()">{{"menu"| translate}}</button>
                     </div>
                 </div>
             </div>

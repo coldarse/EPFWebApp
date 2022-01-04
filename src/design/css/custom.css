@@ -530,6 +530,7 @@ td{
 }
 
 .btnThumbprint{
+    border: solid 1px;
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);

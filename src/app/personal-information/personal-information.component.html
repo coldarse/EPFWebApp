@@ -81,13 +81,13 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row padTop5rem">
+            <div class="row text-center padTop5rem">
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <button type="button" class="btnNo">{{"back"| translate}}</button>
+                    <button type="button" class="btnNo" (click)="page1no()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btnYes">{{"keep"| translate}}</button>
+                    <button type="button" class="btnYes" (click)="page1yes()">{{"keep"| translate}}</button>
                 </div>
             </div>
         </div>
@@ -129,10 +129,10 @@
                 <div class="row padTop35rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"approve"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page2yes()">{{"approve"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                 <div class="row padTop15rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

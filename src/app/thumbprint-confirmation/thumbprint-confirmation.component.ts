@@ -9,10 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ThumbprintConfirmationComponent implements OnInit {
 
-  page1 = false;
+  page1 = true;
   page2 = false;
   page3 = false;
-  page4 = true;
+  page4 = false;
   popup = false;
 
   checkedAnsuran = false;
@@ -30,6 +30,11 @@ export class ThumbprintConfirmationComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('bm');
   }
+
+  
+
+
+
 
   checkAnsuran(){
     this.checkedAnsuran = !this.checkedAnsuran;
@@ -55,7 +60,21 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.checked55yo = !this.checked55yo;
   }
 
-  page2Next(){
+  page1yes(){
+    this.page1 = false;
+    this.page2 = true;
+  }
+
+  page1no(){
+    this.route.navigate(['mainMenu']);
+  }
+
+  page2no(){
+    this.page2 = false;
+    this.page1 = true;
+  }
+
+  page2yes(){
     let x = 0;
     if(this.checkedAnsuran == false) x++;
     if(this.checkedBina == false) x++;
@@ -65,10 +84,39 @@ export class ThumbprintConfirmationComponent implements OnInit {
     if(this.checked55yo == false) x++;
 
     if(x > 0) this.popup= true;
+    else {
+      this.page2 = false;
+      this.page3 = true;
+    }
+  }
+
+  page3no(){
+    this.page3 = false;
+    this.page2 = true;
+  }
+
+  page4no(){
+    this.route.navigate(['mainMenu']);
+  }
+
+  page4yes(){
+    this.route.navigate(['mainMenu']);
   }
 
   popupYes(){
     this.popup = false;
+    this.page2 = false;
+    this.page3 = true;
+  }
+
+  skip(){
+    this.page3 = false;
+    this.page4 = true;
+
+    console.log("page1: " + this.page1);
+    console.log("page2: " + this.page2);
+    console.log("page3: " + this.page3);
+    console.log("page4: " + this.page4);
   }
 
 }

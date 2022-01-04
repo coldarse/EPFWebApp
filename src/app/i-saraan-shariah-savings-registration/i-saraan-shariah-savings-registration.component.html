@@ -12,10 +12,10 @@
                 </div>
                 <div class="row padTop10rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah">{{"saraan"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="clickSaraan()">{{"saraan"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah">{{"shariah"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="clickShariah()">{{"shariah"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -36,18 +36,18 @@
                                 {{"default"|translate}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">{{"agriculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"retired"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"business"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"aquaculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"transport"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"sales"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"artist"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"housewife"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"prof"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"service"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"gig"|translate}}</a></li>
-                                <li><a class="dropdown-item" href="#">{{"other"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"agriculture"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"retired"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"business"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"aquaculture"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"transport"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"sales"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"artist"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"housewife"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"prof"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"service"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"gig"|translate}}</a></li>
+                                <li><a class="dropdown-item" >{{"other"|translate}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -55,10 +55,10 @@
                 <div class="row padTop50rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="page2yes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="row padTop15rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -154,10 +154,10 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="page4no()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page4yes()">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                 <div class="row padTop15rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page5yes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
