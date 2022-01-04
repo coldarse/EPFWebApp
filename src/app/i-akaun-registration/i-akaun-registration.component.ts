@@ -18,6 +18,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   page6 = false;
   page7 = false;
   page8 = false;
+  phoneNo = "";
 
   constructor(
     private route: Router,
@@ -106,6 +107,50 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   page8no(){
     this.route.navigate(['mainMenu']);
+  }
+
+  click1(){
+    if(this.phoneNo.length < 10) this.phoneNo += "1";
+  }
+
+  click2(){
+    if(this.phoneNo.length < 10) this.phoneNo += "2";
+  }
+
+  click3(){
+    if(this.phoneNo.length < 10) this.phoneNo += "3";
+  }
+
+  click4(){
+    if(this.phoneNo.length < 10) this.phoneNo += "4";
+  }
+
+  click5(){
+    if(this.phoneNo.length < 10) this.phoneNo += "5";
+  }
+
+  click6(){
+    if(this.phoneNo.length < 10) this.phoneNo += "6";
+  }
+
+  click7(){
+    if(this.phoneNo.length < 10) this.phoneNo += "7";
+  }
+
+  click8(){
+    if(this.phoneNo.length < 10) this.phoneNo += "8";
+  }
+
+  click9(){
+    if(this.phoneNo.length < 10) this.phoneNo += "9";
+  }
+
+  click0(){
+    if(this.phoneNo.length < 10) this.phoneNo += "0";
+  }
+
+  clickDel(){
+    this.phoneNo = this.phoneNo.substring(0, this.phoneNo.length - 1);
   }
 
 }

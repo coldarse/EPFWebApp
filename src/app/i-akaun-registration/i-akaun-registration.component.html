@@ -9,7 +9,7 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <input type="text" id="phoneNo" name="phoneNo">
+                        <input type="text" id="phoneNo" name="phoneNo" value="{{phoneNo}}">
                     </div>
                 </div>
                 <div class="row">
@@ -21,49 +21,49 @@
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
                     <div class="col marginLeft">
-                        <button class="keypad">1</button>
+                        <button class="keypad" (click)="click1()">1</button>
                     </div>
                     <div class="col">
-                        <button class="keypad">2</button>
+                        <button class="keypad" (click)="click2()">2</button>
                     </div>
                     <div class="col marginRight">
-                        <button class="keypad">3</button>
+                        <button class="keypad" (click)="click3()">3</button>
                     </div>
                     <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
                     <div class="col marginLeft">
-                        <button class="keypad">4</button>
+                        <button class="keypad" (click)="click4()">4</button>
                     </div>
                     <div class="col">
-                        <button class="keypad">5</button>
+                        <button class="keypad" (click)="click5()">5</button>
                     </div>
                     <div class="col marginRight">
-                        <button class="keypad">6</button>
+                        <button class="keypad" (click)="click6()">6</button>
                     </div>
                     <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
                     <div class="col marginLeft">
-                        <button class="keypad">7</button>
+                        <button class="keypad" (click)="click7()">7</button>
                     </div>
                     <div class="col">
-                        <button class="keypad">8</button>
+                        <button class="keypad" (click)="click8()">8</button>
                     </div>
                     <div class="col marginRight">
-                        <button class="keypad">9</button>
+                        <button class="keypad" (click)="click9()">9</button>
                     </div>
                     <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
                     <div class="col marginZero">
-                        <button class="keypad">0</button>
+                        <button class="keypad" (click)="click0()">0</button>
                     </div>
                     <div class="col marginPadam">
-                        <button class="keypadPadam">Padam</button>
+                        <button class="keypadPadam" (click)="clickDel()">Padam</button>
                     </div>
                     <div class="col-4"></div>
                 </div>
