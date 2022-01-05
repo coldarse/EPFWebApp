@@ -19,6 +19,26 @@
     font-weight: 700;
 }
 
+.btnHeader{
+    margin-top: 70px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    background-color: rgb(49, 39, 131);
+    border-color: white;
+    color: white;
+    border-width: 4px;
+    border-radius: 150px;
+    font-size: 55px;
+    font-weight: 600;
+    min-width: 200px;
+    margin-left: 25px;
+}
+
+.btnHeader:focus{
+    background-color: white;
+    color: rgb(49, 39, 131);
+}
+
 .center{
     text-align: center;
     font-size: 60px;
@@ -88,6 +108,14 @@
 
 .padLeft8rem{
     padding-left: 8rem;
+}
+
+.mainMenuLeft{
+    text-align: left;
+}
+
+.mainMenuRight{
+    text-align: right;
 }
 
 
@@ -306,6 +334,26 @@
     font-weight: 500;
     color: rgb(49, 39, 131);
     text-align: left;
+}
+
+.lblDate2{
+    font-size: 40px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+    padding-left: 1rem;
+    vertical-align: bottom;
+}
+
+.lblLogout{
+    font-size: 50px;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(49, 39, 131);
+    padding-right: 1rem;
+    vertical-align: bottom;
 }
 
 .lblPopup{
@@ -725,3 +773,4 @@ ul.dropdown-menu a.dropdown-item:hover{
     height: 150px;
     vertical-align: text-bottom;
 }
+

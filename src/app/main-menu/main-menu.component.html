@@ -1,37 +1,58 @@
 <div class="bg-img">
-  <div class="header">{{ "menu" | translate }}</div>
+  <div class="row">
+    <div class="col-8">
+      <div class="header">{{ "menu" | translate }}</div>
+    </div>
+    <div class="col-3">
+      <button type="button" class="btnHeader">{{"bm"|translate}}</button>
+      <button type="button" class="btnHeader">{{"en"|translate}}</button>
+    </div>
+  </div>
   <div class="container-fluid">
     <div class="row padTop15rem">
-        <div class="text-center">
-            <div class="lblHeader">
-                Hi Muhammad Wahyu Nizam Bin Omir,<br>
-                sila pilih menu:
-            </div>
-            <div class="row padTop5rem">
-              <div class="col-6">
-              <img src="assets/images/Semak-Baki-Simpanan.svg" width="800px" height="200" (click)="checkBalance()">
-            </div>
-            <div class="col-6">
-              <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="personalInformation()">
-            </div>
-          </div>
-          <div class="row padTop5rem">
-            <div class="col-6">
-            <img src="assets/images/Kemaskinian-Mobile-TAC.svg" width="800px" height="200" (click)="updateTAC()">
+      <div class="text-center">
+        <div class="lblHeader">
+          Hi Muhammad Wahyu Nizam Bin Omir,<br>
+          sila pilih menu:
+        </div>
+        <div class="row padTop5rem">
+          <div class="col-6">
+            <img src="assets/images/Semak-Baki-Simpanan.svg" width="800px" height="200" (click)="checkBalance()">
           </div>
           <div class="col-6">
-            <img src="assets/images/Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="800px" height="200" (click)="iSaraanRegistrationShariahSavings()">
+            <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="personalInformation()">
           </div>
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-          <img src="assets/images/Pengesahan-Cap-Ibu-Jari.svg" width="800px" height="200" (click)="thumbprintConfirmation()">
+            <img src="assets/images/Kemaskinian-Mobile-TAC.svg" width="800px" height="200" (click)="updateTAC()">
+          </div>
+          <div class="col-6">
+            <img src="assets/images/Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="800px" height="200"
+              (click)="iSaraanRegistrationShariahSavings()">
+          </div>
         </div>
-        <div class="col-6">
-          <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="iAkaunRegistration()">
+        <div class="row padTop5rem">
+          <div class="col-6">
+            <img src="assets/images/Pengesahan-Cap-Ibu-Jari.svg" width="800px" height="200"
+              (click)="thumbprintConfirmation()">
+          </div>
+          <div class="col-6">
+            <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="iAkaunRegistration()">
+          </div>
+        </div>
+        <div class="row padTop10rem">
+          <div class="col-1"></div>
+          <div class="col-5 mainMenuLeft">
+            <img src="assets/images/Icon-Date-Time.svg" width="70px" height="70px">
+            <label class="lblDate2">3:58 PM 27/10/2021</label>
+          </div>
+          <div class="col-5 mainMenuRight">
+            <label class="lblLogout">{{"logout"|translate}}</label>
+            <img src="assets/images/Icon-Logout.svg" width="80px" height="80px">
+          </div>
         </div>
       </div>
-        </div>
     </div>
   </div>
 </div>
