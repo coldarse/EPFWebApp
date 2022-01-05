@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MainMenuComponent implements OnInit {
 
+  date : any;
+
   constructor(
     private route: Router,
     private translate: TranslateService
@@ -16,6 +19,7 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+    this.date = formatDate(new Date(), 'h:mm a dd/MM/yyyy', 'en');
   }
 
   checkBalance(){
