@@ -153,5 +153,8 @@
 "selectEN":"Please select",
 "iAkaunSuccess":"Pendaftaran i-Akaun anda telah berjaya.",
 "scanQR":"Scan QR Code untuk muat turun aplikasi i-Akaun",
-"next": "Seterusnya"
+"next": "Seterusnya",
+"logout":"Log Keluar",
+"bm": "BM",
+"en":"EN"
 }

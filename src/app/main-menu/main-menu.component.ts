@@ -42,4 +42,5 @@ export class MainMenuComponent implements OnInit {
     this.route.navigate(['iAkaunRegistration']);
   }
 
+
 }
