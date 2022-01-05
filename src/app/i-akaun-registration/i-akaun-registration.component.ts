@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 declare const loadKeyboard: any;
+declare const deleteKeyboard: any;
+declare const closeKeyboard: any;
 
 @Component({
   selector: 'app-i-akaun-registration',
@@ -10,6 +12,10 @@ declare const loadKeyboard: any;
   styleUrls: ['./i-akaun-registration.component.css']
 })
 export class IAkaunRegistrationComponent implements OnInit {
+
+  @ViewChild('email') email : ElementRef | undefined;
+  @ViewChild('emailDDL') emailDDL : ElementRef | undefined;
+
   page1 = true;
   page2 = false;
   page3 = false;
@@ -19,6 +25,9 @@ export class IAkaunRegistrationComponent implements OnInit {
   page7 = false;
   page8 = false;
   phoneNo = "";
+  emailAddress = "";
+
+  emailList: string[] = ["aldantechnology.com", "gmail.com", "hotmail.com", "yahoo.com"];
 
   constructor(
     private route: Router,
@@ -36,6 +45,10 @@ export class IAkaunRegistrationComponent implements OnInit {
   page1yes(){
     this.page1 = false;
     this.page2 = true;
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   page1no(){
@@ -43,8 +56,14 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   page2yes(){
-    this.page2 = false;
-    this.page3 = true;
+
+    if(this.email?.nativeElement.value != ""){
+      this.page2 = false;
+      this.page3 = true;
+      this.emailAddress = this.email?.nativeElement.value + "@" + this.emailDDL?.nativeElement.value;
+      deleteKeyboard();
+    }
+    
   }
 
   page2no(){
@@ -60,6 +79,10 @@ export class IAkaunRegistrationComponent implements OnInit {
   page3no(){
     this.page3 = false;
     this.page2 = true;
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   page4yes(){

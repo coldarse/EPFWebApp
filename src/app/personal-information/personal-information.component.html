@@ -46,37 +46,37 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="NO 46">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{address1}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="JALAN BP 10/1">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{address2}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="BANDAR BUKIT PUCHONG 2">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{address3}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="47170">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{postcode}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="PUCHONG">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{city}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="SELANGOR DARUL EHSAN">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{country}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="MALAYSIA">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{state}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{homeNo}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{officeNo}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="0173702706">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{phoneNo}}">
                     </div>
                     <div class="row">
-                        <input type="text" id="txtProfile" name="txtProfile" value="wahyu@aldantechnology.com">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{email}}">
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-1 lblSymbol">:</div>
                     <div class="col-6 left">
-                        <label class="lblInfo">46, Jalan BP 10/2, Bandar Bukit Puchong 2</label>
+                        <label class="lblInfo">{{address1 + comma + address2 + comma + address3}}</label>
                     </div>
                 </div>
                 <div class="row">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-1 lblSymbol">:</div>
                     <div class="col-6 left">
-                        <label class="lblInfo">0173703706</label>
+                        <label class="lblInfo">{{phoneNo}}</label>
                     </div>
                 </div>
                 <div class="row">
@@ -123,7 +123,7 @@
                     </div>
                     <div class="col-1 lblSymbol">:</div>
                     <div class="col-6 left">
-                        <label class="lblInfo">wahyu@aldantechnology.com</label>
+                        <label class="lblInfo">{{email}}</label>
                     </div>
                 </div>
                 <div class="row padTop35rem">

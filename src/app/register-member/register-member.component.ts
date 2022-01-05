@@ -61,16 +61,24 @@ export class RegisterMemberComponent implements OnInit {
   page2yes(){
     this.page2 = false;
     this.page3 = true;
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   page2no(){
     this.page2 = false;
     this.page1 = true;
+
+    deleteKeyboard();
   }
 
   page3yes(){
     this.page3 = false;
     this.page4 = true;
+
+    deleteKeyboard()
   }
 
   page3no(){
@@ -86,6 +94,10 @@ export class RegisterMemberComponent implements OnInit {
   page4no(){
     this.page4 = false;
     this.page3 = true;
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   page5yes(){
@@ -96,6 +108,10 @@ export class RegisterMemberComponent implements OnInit {
   page6yes(){
     this.page6 = false;
     this.page7 = true;
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   page6no(){
@@ -106,6 +122,8 @@ export class RegisterMemberComponent implements OnInit {
   page7yes(){
     this.page7 = false;
     this.page8 = true;
+
+    deleteKeyboard()
   }
 
   page7no(){

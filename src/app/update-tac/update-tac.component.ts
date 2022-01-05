@@ -24,8 +24,14 @@ export class UpdateTACComponent implements OnInit {
   }
 
   page1yes(){
-    this.page1 = false;
-    this.page2 = true;
+    if(this.phoneNo.length == 10){
+      this.page1 = false;
+      this.page2 = true;
+    }
+    else{
+      
+    }
+    
   }
 
   page1no(){

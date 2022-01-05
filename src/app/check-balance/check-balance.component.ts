@@ -16,6 +16,8 @@ export class CheckBalanceComponent implements OnInit {
   page5 = false;
   page6 = false;
 
+  totalSavings = "520000.30";
+
   constructor(
     private route: Router,
     private translate: TranslateService

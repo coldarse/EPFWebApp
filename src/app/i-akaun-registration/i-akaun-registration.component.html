@@ -94,15 +94,14 @@
                 <div class="row padTop3rem">
                     <div class="col-2"></div>
                     <div class="col-3">
-                        <input type="text" class="use-keyboard-input" id="txtEmail" name="txtEmail">
+                        <input type="text" class="use-keyboard-input" id="txtEmail" name="txtEmail" #email>
                     </div>
                     <div class="col-1 lblSymbol padTop1rem">@</div>
                     <div class="col-4">
-                        <select name="emailDDL" id="emailDDL">
-                            <option value="aldan">aldantechnology.com</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                        <select name="emailDDL" id="emailDDL" #emailDDL>
+                            <option *ngFor="let elist of emailList" value={{elist}}>
+                                {{elist}}
+                            </option>
                         </select>
                     </div>
                     <div class="col-2"></div>
@@ -143,10 +142,10 @@
                     </div>
                     <div class="col-5">
                         <div class="row">
-                            <label class="lblInfo">0173702706</label>
+                            <label class="lblInfo">{{phoneNo}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">wahyu@aldantechnology.com</label>
+                            <label class="lblInfo">{{emailAddress}}</label>
                         </div>
                     </div>
                 </div>
