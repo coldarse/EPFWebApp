@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,6 +13,9 @@ declare const closeKeyboard: any;
   styleUrls: ['./register-member.component.css']
 })
 export class RegisterMemberComponent implements OnInit {
+  
+  @ViewChild('email') email : ElementRef | undefined;
+  @ViewChild('emailDDL') emailDDL : ElementRef | undefined;
 
   RegKWSP = true;
   RegShariah = false;
@@ -34,7 +37,17 @@ export class RegisterMemberComponent implements OnInit {
   page14 = false;
 
   phoneNo = "";
+  emailAddress = "";
+  emailList: string[] = ["aldantechnology.com", "gmail.com", "hotmail.com", "yahoo.com"];
 
+  name = "MUHAMMAD WAHYU NIZAM BIN OMIR";
+  ic = "921130105537";
+  dob = "20/12/1992";
+  nationality = "WARGANEGARA";
+  gender = "LELAKI";
+  race = "MALAY";
+  religion = "ISLAM";
+  
 
   constructor(
     private route: Router,
@@ -75,10 +88,12 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   page3yes(){
-    this.page3 = false;
-    this.page4 = true;
-
-    deleteKeyboard()
+    if(this.email?.nativeElement.value != ""){
+      this.page3 = false;
+      this.page4 = true;
+      this.emailAddress = this.email?.nativeElement.value + "@" + this.emailDDL?.nativeElement.value;
+      deleteKeyboard();
+    }
   }
 
   page3no(){

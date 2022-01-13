@@ -16,7 +16,14 @@ export class CheckBalanceComponent implements OnInit {
   page5 = false;
   page6 = false;
 
-  totalSavings = "520000.30";
+  totalSavings = 520000.30;
+  grandTotal = 0;
+  contributionsTotal = 0;
+
+  currentContributions = 17280.00;
+
+  sDetails: any[] = [];
+  cDetails: any[] = [];
 
   constructor(
     private route: Router,
@@ -25,6 +32,208 @@ export class CheckBalanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+
+    this.sDetails.push(
+      {
+        accountType: "Akaun Emas",
+        openingBalance: 224931.29,
+        in: 1953.33,
+        out: 0.00,
+        yearlyDividend: 0.00,
+        totalAmount: 226884.23
+      }
+    );
+    this.sDetails.push(
+      {
+        accountType: "Akaun 2",
+        openingBalance: 224931.29,
+        in: 1953.33,
+        out: 0.00,
+        yearlyDividend: 0.00,
+        totalAmount: 226884.23
+      }
+    );
+    this.sDetails.push(
+      {
+        accountType: "Akaun 1",
+        openingBalance: 224931.29,
+        in: 1953.33,
+        out: 0.00,
+        yearlyDividend: 0.00,
+        totalAmount: 226884.23
+      }
+    );
+    this.sDetails.push(
+      {
+        accountType: "Akaun Emas",
+        openingBalance: 224931.29,
+        in: 1953.33,
+        out: 0.00,
+        yearlyDividend: 0.00,
+        totalAmount: 226884.23
+      }
+    );
+    this.sDetails.push(
+      {
+        accountType: "Akaun Emas",
+        openingBalance: 224931.29,
+        in: 1953.33,
+        out: 0.00,
+        yearlyDividend: 0.00,
+        totalAmount: 226884.23
+      }
+    );
+    this.sDetails.push(
+      {
+        accountType: "Akaun Pengeluaran Bayaran Bulanan",
+        openingBalance: 224931.29,
+        in: 1953.33,
+        out: 0.00,
+        yearlyDividend: 0.00,
+        totalAmount: 226884.23
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Jan-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Feb-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Mar-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Apr-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Mei-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Jun-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+
+    this.cDetails.push(
+      {
+        month: "Jul-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Ogs-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Sep-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Oct-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Nov-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.cDetails.push(
+      {
+        month: "Dec-21",
+        transaction: "Caruman-IWS",
+        date: "14/01/2021",
+        employerContributions: 1040.00,
+        memberContributions: 880.00,
+        totalAmount: 1920.00
+      }
+    );
+
+    this.sDetails.forEach((details: any) => {
+      this.grandTotal += details.totalAmount;
+    });
+
+    this.cDetails.forEach((details: any) => {
+      this.contributionsTotal += details.totalAmount;
+    });
   }
 
   page1yes(){

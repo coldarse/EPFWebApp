@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { selectLang } from '../_models/language';
 
 @Component({
   selector: 'app-main-menu',
@@ -15,7 +16,17 @@ export class MainMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
+  }
+
+  selectBM(){
+    selectLang.selectedLang = 'bm'
+    this.translate.use(selectLang.selectedLang);
+  }
+
+  selectEN(){
+    selectLang.selectedLang = 'en'
+    this.translate.use(selectLang.selectedLang);
   }
 
   checkBalance(){

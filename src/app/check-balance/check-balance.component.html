@@ -21,54 +21,13 @@
                         <th class="right">{{"dividend"|translate}}</th>
                         <th class="right">{{"total"|translate}}</th>
                     </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Emas</td>
-                        <td class="right">224,931.29</td>
-                        <td class="right">1953.33</td>
-                        <td class="right">0.00</td>
-                        <td class="right">0.00</td>
-                        <td class="right" style="font-weight: 700;">226,884.23</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun 2</td>
-                        <td class="right">224,931.29</td>
-                        <td class="right">1953.33</td>
-                        <td class="right">0.00</td>
-                        <td class="right">0.00</td>
-                        <td class="right" style="font-weight: 700;">226,884.23</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun 1</td>
-                        <td class="right">224,931.29</td>
-                        <td class="right">1953.33</td>
-                        <td class="right">0.00</td>
-                        <td class="right">0.00</td>
-                        <td class="right" style="font-weight: 700;">226,884.23</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Emas</td>
-                        <td class="right">224,931.29</td>
-                        <td class="right">1953.33</td>
-                        <td class="right">0.00</td>
-                        <td class="right">0.00</td>
-                        <td class="right" style="font-weight: 700;">226,884.23</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Emas</td>
-                        <td class="right">224,931.29</td>
-                        <td class="right">1953.33</td>
-                        <td class="right">0.00</td>
-                        <td class="right">0.00</td>
-                        <td class="right" style="font-weight: 700;">226,884.23</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun Pengeluaran Bayaran
-                            Bulanan</td>
-                        <td class="right">224,931.29</td>
-                        <td class="right">1953.33</td>
-                        <td class="right">0.00</td>
-                        <td class="right">0.00</td>
-                        <td class="right" style="font-weight: 700;">226,884.23</td>
+                    <tr *ngFor="let s of sDetails">
+                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{s.accountType}}</td>
+                        <td class="right">{{s.openingBalance | number : '1.2-2'}}</td>
+                        <td class="right">{{s.in | number : '1.2-2'}}</td>
+                        <td class="right">{{s.out | number : '1.2-2'}}</td>
+                        <td class="right">{{s.yearlyDividend | number : '1.2-2'}}</td>
+                        <td class="right" style="font-weight: 700;">{{s.totalAmount | number : '1.2-2'}}</td>
                     </tr>
                     <tr>
                         <th></th>
@@ -76,7 +35,7 @@
                         <th></th>
                         <th></th>
                         <th class="right">{{"total"|translate}}</th>
-                        <th class="right" style="font-weight: 700;">520,000.30</th>
+                        <th class="right" style="font-weight: 700;">{{grandTotal | number : '1.2-2'}}</th>
                     </tr>
                 </table>
                 <div class="row padTop5rem">
@@ -113,14 +72,14 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem" *ngIf="page3">
+        <div class="row padTop3rem" *ngIf="page3">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"carum"| translate}}
                 </div>
                 <div class="row">
                     <label class="lblKWSP">
-                        RM17,280.00
+                        RM{{currentContributions | number : '1.2-2'}}
                     </label>
                 </div>
                 <table style="width:100%">
@@ -132,77 +91,13 @@
                         <th class="right">{{"carumMember"|translate}}</th>
                         <th class="right">{{"total"|translate}}</th>
                     </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Jan-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Feb-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Mac-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Apr-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Mei-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Jun-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Jul-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Ogs-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
-                    </tr>
-                    <tr>
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Sep-21</td>
-                        <td class="right">Caruman-IWS</td>
-                        <td class="right">14/01/2021</td>
-                        <td class="right">1040.00</td>
-                        <td class="right">880.00</td>
-                        <td class="right" style="font-weight: 700;">1920.00</td>
+                    <tr *ngFor="let c of cDetails">
+                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.month}}</td>
+                        <td class="right">{{c.transaction}}</td>
+                        <td class="right">{{c.date}}</td>
+                        <td class="right">{{c.employerContributions | number : '1.2-2'}}</td>
+                        <td class="right">{{c.memberContributions | number : '1.2-2'}}</td>
+                        <td class="right" style="font-weight: 700;">{{c.totalAmount | number : '1.2-2'}}</td>
                     </tr>
                     <tr>
                         <th></th>
@@ -210,7 +105,7 @@
                         <th></th>
                         <th></th>
                         <th class="right">{{"total"|translate}}</th>
-                        <th class="right" style="font-weight: 700;">17,280.00</th>
+                        <th class="right" style="font-weight: 700;">{{contributionsTotal | number : '1.2-2'}}</th>
                     </tr>
                 </table>
                 <div class="row padTop5rem">

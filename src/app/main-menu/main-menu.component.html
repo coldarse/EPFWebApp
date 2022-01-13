@@ -4,8 +4,8 @@
       <div class="header">{{ "menu" | translate }}</div>
     </div>
     <div class="col-3">
-      <button type="button" class="btnHeader">{{"bm"|translate}}</button>
-      <button type="button" class="btnHeader">{{"en"|translate}}</button>
+      <button type="button" class="btnHeader" (click)="selectBM()">{{"bm"|translate}}</button>
+      <button type="button" class="btnHeader" (click)="selectEN()">{{"en"|translate}}</button>
     </div>
   </div>
   <div class="container-fluid">
@@ -13,32 +13,116 @@
       <div class="text-center">
         <div class="lblHeader">
           Hi Muhammad Wahyu Nizam Bin Omir,<br>
-          sila pilih menu:
+          {{"pleaseChoose"|translate}}
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-            <img src="assets/images/Semak-Baki-Simpanan.svg" width="800px" height="200" (click)="checkBalance()">
+            <button class="mainMenuBtn" (click)="checkBalance()">
+              <div class="row">
+                <div class="col-3 menuItemBorder">
+                  <div class="centerItem">
+                    <img src="assets/images/Icon-Semak-Baki-Simpanan.svg" width="90px" height="90px">
+                  </div>
+                </div>
+                <div class="col-8 menuItemBorder">
+                  <div class="centerItem">
+                    {{"checkBalance"|translate}}
+                  </div>
+                </div>
+                <div class="col-1 menuItemBorder"></div>
+              </div>
+            </button>
           </div>
           <div class="col-6">
-            <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="personalInformation()">
+            <!-- <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="personalInformation()"> -->
+            <button class="mainMenuBtn" (click)="personalInformation()">
+              <div class="row">
+                <div class="col-1 menuItemBorder"></div>
+                <div class="col-8 menuItemBorder">
+                  <div class="centerItem">
+                    {{"personalInfo"|translate}}
+                  </div>
+                </div>
+                <div class="col-3 menuItemBorder">
+                  <div class="centerItem">
+                    <img src="assets/images/Icon-Maklumat-Peribadi.svg" width="90px" height="90px">
+                  </div>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-            <img src="assets/images/Kemaskinian-Mobile-TAC.svg" width="800px" height="200" (click)="updateTAC()">
+            <button class="mainMenuBtn" (click)="updateTAC()">
+              <div class="row">
+                <div class="col-3 menuItemBorder">
+                  <div class="centerItem">
+                    <img src="assets/images/Icon-Kemaskinian-Mobile-TAC.svg" width="90px" height="90px">
+                  </div>
+                </div>
+                <div class="col-8 menuItemBorder">
+                  <div class="centerItem">
+                    {{"UpdateTAC"|translate}}
+                  </div>
+                </div>
+                <div class="col-1 menuItemBorder"></div>
+              </div>
+            </button>
           </div>
           <div class="col-6">
-            <img src="assets/images/Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="800px" height="200"
-              (click)="iSaraanRegistrationShariahSavings()">
+            <button class="mainMenuBtn" (click)="iSaraanRegistrationShariahSavings()">
+              <div class="row">
+                <div class="col-1 menuItemBorder"></div>
+                <div class="col-8 menuItemBorder">
+                  <div class="centerItem">
+                    {{"sariah"|translate}}
+                  </div>
+                </div>
+                <div class="col-3 menuItemBorder">
+                  <div class="centerItem">
+                    <img src="assets/images/Icon-Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="90px" height="90px">
+                  </div>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-            <img src="assets/images/Pengesahan-Cap-Ibu-Jari.svg" width="800px" height="200"
-              (click)="thumbprintConfirmation()">
+            <button class="mainMenuBtn" (click)="thumbprintConfirmation()">
+              <div class="row">
+                <div class="col-3 menuItemBorder">
+                  <div class="centerItem">
+                    <img src="assets/images/Icon-Pengesahan-Cap-Ibu-Jari.svg" width="90px" height="90px">
+                  </div>
+                </div>
+                <div class="col-8 menuItemBorder">
+                  <div class="centerItem">
+                    {{"thumbprint"|translate}}
+                  </div>
+                </div>
+                <div class="col-1 menuItemBorder"></div>
+              </div>
+            </button>
           </div>
           <div class="col-6">
-            <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="iAkaunRegistration()">
+            <!-- (click)="iAkaunRegistration()" -->
+            <button class="mainMenuBtnDisabled"> 
+              <div class="row">
+                <div class="col-1 menuItemBorder"></div>
+                <div class="col-8 menuItemBorder">
+                  <div class="centerItem">
+                    {{"comingSoon"|translate}}
+                  </div>
+                </div>
+                <div class="col-3 menuItemBorder">
+                  <div class="centerItem">
+                    <img src="assets/images/Icon-Akan-Datang.svg" width="90px" height="90px">
+                  </div>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
         <div class="row padTop10rem">

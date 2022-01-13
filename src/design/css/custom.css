@@ -23,13 +23,13 @@
     margin-top: 70px;
     font-family: filson-pro, sans-serif;
     font-style: normal;
+    font-weight: 600;
     background-color: rgb(49, 39, 131);
     border-color: white;
     color: white;
     border-width: 4px;
     border-radius: 150px;
     font-size: 55px;
-    font-weight: 600;
     min-width: 200px;
     margin-left: 25px;
 }
@@ -285,9 +285,7 @@
 }
 
 
-.testBorder{
-    border: 1px solid;
-}
+
 
 .lblQuestion
 {
@@ -773,4 +771,46 @@ ul.dropdown-menu a.dropdown-item:hover{
     height: 150px;
     vertical-align: text-bottom;
 }
+
+
+.mainMenuBtn{
+    width: 800px;
+    height: 150px;
+    border-radius: 10rem;
+    font-size: 2.5rem;
+    background-color:  rgb(49, 39, 131);
+    color: #fafafa;
+    border: 0rem;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.mainMenuBtnDisabled{
+    width: 800px;
+    height: 150px;
+    border-radius: 10rem;
+    font-size: 2.5rem;
+    background-color:  rgb(88, 89, 91);
+    color: rgb(35, 31, 32);;
+    border: 0rem;
+    font-family: filson-pro, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.testBorder{
+    border: 1px solid;
+}
+
+.menuItemBorder{
+    height: 110px;
+    display:flex;
+    align-items:center;
+}
+
+.centerItem{
+    margin: auto;
+}
+
 
