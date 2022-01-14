@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SignalR } from 'ng2-signalr';
+import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { signalRConnection } from '../_models/_signalRConnection';
 
@@ -36,8 +37,16 @@ export class VerifyMyKadComponent implements OnInit {
     private route: Router,
     private translate: TranslateService,
     private _signalR: SignalR,
+    private _aldanService: AldanService,
   ) { 
     this.startConnection();
+  }
+
+
+  testCallAPI(){
+    this._aldanService.getExample("code").subscribe((result: any) => {
+      //Do what you want with the json body (result)
+    });
   }
 
   startConnection() : void {
@@ -323,5 +332,6 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
 
+  
 
 }
