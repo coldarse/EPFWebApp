@@ -66,6 +66,8 @@ export class VerifyMyKadComponent implements OnInit {
         })
       };
 
+      
+
     }).catch((err: any) => {
       // errorCodes.code = "0167";
       // errorCodes.message = "Unauthorized";

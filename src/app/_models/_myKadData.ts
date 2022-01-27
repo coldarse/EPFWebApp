@@ -55,14 +55,14 @@ export class MyKadDetails implements IMyKadDetails {
 
 
     constructor(data?: IMyKadDetails){
-        if (data)
-         {
-             for (var property in data){
-                 if (data.hasOwnProperty(property)){
-                     (<any>this)[property] = (<any>data)[property];
-                 }
-             }
-         }
+    if (data)
+        {
+            for (var property in data){
+                if (data.hasOwnProperty(property)){
+                    (<any>this)[property] = (<any>data)[property];
+                }
+            }
+        }
     }
 
     static fromJS(data: any): MyKadDetails {
@@ -73,9 +73,9 @@ export class MyKadDetails implements IMyKadDetails {
     }
 
     toJSON(data?: any) {
-       data = typeof data === 'object' ? data : {};
-       data["Name"] = this.Name;
-       return data;
+        data = typeof data === 'object' ? data : {};
+        data["Name"] = this.Name;
+        return data;
     }
 
     clone(): MyKadDetails {

@@ -85,6 +85,8 @@ export class AldanService {
     )
   }
 
+
+
   //GetTranslations
   getTranslations(){
     return this.http.get(
@@ -96,10 +98,132 @@ export class AldanService {
     )
   }
 
+
+  
   //Member CIF Details
   MemberCIFDetailsCheck(body: any){
     return this.http.post(
       this.url + 'MemberDetailInquiry/CIF',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Member Registration
+  MemberRegistration(body: any){
+    return this.http.post(
+      this.url + 'Registration/MemberRegistration',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //i-Shariah Registration
+  iShariahRegistration(body: any){
+    return this.http.post(
+      this.url + 'Registration/IShariahRegistratione',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //i-Saraan Registration
+  iSaraanRegistration(body: any){
+    return this.http.post(
+      this.url + 'Registration/ISaraanRegistration',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //i-Akaun Registration
+  iAkaunRegistration(body: any){
+    return this.http.post(
+      this.url + 'Registration/IAkaunRegistration',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Member Statement
+  MemberStatement(body: any){
+    return this.http.post(
+      this.url + 'MemberAccount/MemberStatement',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Member Summary Statement
+  MemberSummaryStatement(body: any){
+    return this.http.post(
+      this.url + 'MemberAccount/MemberSummaryStatement',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Member Profile Info
+  MemberProfileInfo(body: any){
+    return this.http.post(
+      this.url + 'MemberProfile/MemberProfileInfo',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Member Profile Contact Maintenance
+  MemberProfileContactMaintenance(body: any){
+    return this.http.post(
+      this.url + 'MemberProfile/MemberProfileContactMaintenance',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Add TAC
+  AddTAC(body: any){
+    return this.http.post(
+      this.url + 'TAC/AddTAC',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Update TAC
+  UpdateTAC(body: any){
+    return this.http.post(
+      this.url + 'TAC/UpdateTAC',
       body,
       accessToken.httpOptions
     ).pipe(
