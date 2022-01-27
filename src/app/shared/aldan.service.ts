@@ -23,7 +23,7 @@ export class AldanService {
     private router: Router,
     private appConfig: AppConfiguration
     ) {
-        this.url = appConfig.AldanDevURL;
+        this.url = appConfig.AldanDevURL; 
         this.receipturl = appConfig.AldanReceiptURL;
     }
 
@@ -77,6 +77,29 @@ export class AldanService {
   {
     return this.http.put(
       this.url + "services/app/Example/ExamplePut",
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //GetTranslations
+  getTranslations(){
+    return this.http.get(
+      this.url + 'app/application-translations?FilterText=%20&Key=%20&Translation1=%20&Translation2=%20&Sorting=%20&SkipCount=0&MaxResultCount=1000',
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Member CIF Details
+  MemberCIFDetailsCheck(body: any){
+    return this.http.post(
+      this.url + 'MemberDetailInquiry/CIF',
       body,
       accessToken.httpOptions
     ).pipe(

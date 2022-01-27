@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SignalRConfiguration, SignalRModule } from 'ng2-signalr';
 
@@ -19,6 +19,10 @@ import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumb
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-registration.component';
 import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-savings-registration/i-saraan-shariah-savings-registration.component';
+
+import { AppConfiguration } from './config/app-configuration';
+import { JsonAppConfigService } from './config/json-app-config.service';
+import { accessToken } from './_models/token';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
@@ -36,12 +40,11 @@ export function createConfig(): SignalRConfiguration {
   return c;
 }
 
-// export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
-//   return () => {
-//     return jsonAppConfigService.load();
-//   };
-// }
-
+export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
+  return () => {
+    return jsonAppConfigService.load();
+  };
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +74,18 @@ export function createConfig(): SignalRConfiguration {
   providers: [
     currentMyKadDetails,
     signalRConnection,
+    accessToken,
+    {
+      provide: AppConfiguration,
+      deps: [HttpClient],
+      useExisting: JsonAppConfigService
+    },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [JsonAppConfigService],
+      useFactory: initializerFn
+    }
   ],
   bootstrap: [AppComponent]
 })

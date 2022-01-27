@@ -1,11 +1,17 @@
 import { formatDate } from '@angular/common';
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SignalR } from 'ng2-signalr';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
+import { accessToken } from '../_models/token';
 import { signalRConnection } from '../_models/_signalRConnection';
+import { writeJSON, writeJSONSync, Options, JSONObject } from "write-json-safe";
+import { AppConfiguration } from '../config/app-configuration';
+import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
+import { MyKadDetails } from '../_models/_myKadData';
 
 
 declare const loadKeyboard: any;
@@ -21,7 +27,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   Status = "MyKad";
   intervalID: any;
-
+  myKadData: any;
   insertCard = true;
   Language = false;
   Thumbprint = false;
@@ -38,6 +44,7 @@ export class VerifyMyKadComponent implements OnInit {
     private translate: TranslateService,
     private _signalR: SignalR,
     private _aldanService: AldanService,
+    private appConfig: AppConfiguration
   ) { 
     this.startConnection();
   }
@@ -53,120 +60,12 @@ export class VerifyMyKadComponent implements OnInit {
     this._signalR.connect().then((c) => {
       console.log("API King is now Connected on " + formatDate(new Date(), 'HH:MM:ss', 'en'));
       signalRConnection.connection = c;
-      // signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {
-      //   signalRConnection.kioskCode = data;
-      // });
-      // signalRConnection.connection.invoke('GetKioskID').then((data: string) => {
-      //   signalRConnection.kioskID = data;
-      // });
-      // signalRConnection.connection.invoke('isHardcodedIC').then((data: boolean) => {
-      //   signalRConnection.isHardcodedIC = data;
-      // });
-      // signalRConnection.connection.invoke('KioskType').then((data: string) => {
-      //   signalRConnection.kioskType = data;
-      // });
-      // signalRConnection.connection.invoke('BranchName').then((data: string) => {
-      //   signalRConnection.branchName = data;
-      // });
-      // signalRConnection.connection.invoke('CheckPrinterStatus').then((data: boolean) => {
-      //   if(data == false){
-      //     signalRConnection.kioskType = 'Mobile';
-      //   }
-      // });
-      // signalRConnection.connection.invoke('GetLoginToken').then((data: string) => {
-      //   accessToken.token = data;
-      //   accessToken.httpOptions = {
-      //     headers: new HttpHeaders({
-      //       Authorization: 'Bearer ' + accessToken.token
-      //     })
-      //   };
-      //   this.serviceService.genTrxNo(signalRConnection.kioskCode, "AK").subscribe((res: any) => {
-      //     signalRConnection.trxno = res.result.toString();
-      //   }, error => {
-      //     errorCodes.code = error.status;
-      //     errorCodes.message = "Harap Maaf, Kiosk tidak berfungsi buat sementara waktu" + '\n' + "Sorry, Kiosk is temporarily out of service";
-      //     this.route.navigate(['outofservice']);
-      //   });
-      //   this.serviceService.getScreenSaver(signalRConnection.kioskCode).subscribe((res : any) => {
-      //     appFunc.screenSaver = res.result[0].agentDownloadPath;
-      //     appFunc.screenSaverList = res.result[0].fileList;
-      //   });
-      //   this.serviceService.getKioskModules(signalRConnection.kioskCode).subscribe((res: any) => {
-      //     var areDisabled = 0
-      //     this.loadingDisable = false;
-      //     appFunc.modules = res.result.map((em: any) => new eModules(em));
+      accessToken.httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + accessToken.token
+        })
+      };
 
-          
-      //     for (var val of appFunc.modules){
-      //       if(val.enable == false){
-      //         areDisabled += 1;
-      //       }
-      //     }
-
-      //     console.log(signalRConnection.kioskCode);
-
-      //     if(areDisabled == appFunc.modules.length){
-      //       errorCodes.code = "0168";
-      //       errorCodes.message = "Under Maintenance";
-      //       this.route.navigate(['outofservice']);
-      //     }
-
-      //     setTimeout(() => {
-      //       this.id = setInterval(() => {
-      //         let count = 0;
-      //         for (var val of appFunc.modules){
-      //           if(val.moduleID == 3){//Update CIF
-      //             if(val.enable == true){
-      //               if(this.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-      //                 count += 1;
-      //               }
-      //             }
-      //           }
-      //           else if(val.moduleID == 6){//Balance Inquiry
-      //             if(val.enable == true){
-      //               if(this.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-      //                 count += 1;
-      //               }
-      //             }
-      //           }
-      //           else if(val.moduleID == 5){//Financial
-      //             if(val.enable == true){
-      //               if(this.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-      //                 count += 1;
-      //               }
-      //             }
-      //           }
-      //           else if(val.moduleID == 2){//Bijak Registration
-      //             if(val.enable == true){
-      //               if(this.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-      //                 count += 1;
-      //               }
-      //             }
-      //           }
-      //           else if(val.moduleID == 4){//Portal Registration
-      //             if(val.enable == true){
-      //               if(this.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-      //                 count += 1;
-      //               }
-      //             }
-      //           }
-      //         }
-        
-      //         if(count == 0){
-      //           errorCodes.code = "0168";
-      //           errorCodes.message = "Under Maintenance";
-      //           this.route.navigate(['outofservice']);
-      //         }
-      //       }, 1000);
-      //     } , 60000);
-      //   }, error => {
-      //     errorCodes.code = error.status;
-      //     errorCodes.message = "Harap Maaf, Kiosk tidak berfungsi buat sementara waktu" + '\n' + "Sorry, Kiosk is temporarily out of service";
-      //     this.route.navigate(['outofservice']);
-      //   });
-      // });
-      
-      
     }).catch((err: any) => {
       // errorCodes.code = "0167";
       // errorCodes.message = "Unauthorized";
@@ -208,8 +107,8 @@ export class VerifyMyKadComponent implements OnInit {
               console.log(data);
             }
             else if(data.toUpperCase().includes("MATCH")){
-              console.log(data);
-              this.route.navigate(['mainMenu']);
+              this.myKadData = Object.assign(new MyKadDetails(), JSON.parse(data));
+              this.bindMyKadData();
             }
             else if(data.toUpperCase().includes("TIMEOUT")){
               console.log(data);
@@ -257,17 +156,15 @@ export class VerifyMyKadComponent implements OnInit {
           signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
             this.Status = data;
             if (this.Status.toUpperCase().includes("MISMATCH")){
-              console.log(data);
             }
             else if(data.toUpperCase().includes("MATCH")){
-              console.log(data);
-              this.route.navigate(['mainMenu']);
+              this.myKadData = Object.assign(new MyKadDetails(), JSON.parse(data));
+              this.bindMyKadData();
             }
             else if(data.toUpperCase().includes("TIMEOUT")){
-              console.log(data);
             }
             else{
-              console.log(data);
+              this.route.navigate(['']);
             }
           }); 
         }
@@ -299,6 +196,103 @@ export class VerifyMyKadComponent implements OnInit {
       //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Account Registration]" + ": " + "After form is loaded, initialized keyboard");
     }catch(e: any){
       //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Account Registration]" + ": " + "Error initializing keyboard." + e.toString());
+    }
+  }
+
+  calculateAge(birthdate: Date) {
+    let age = 0;
+    var timeDiff = Math.abs(Date.now() - new Date(birthdate).getTime());
+    age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+    return age;
+  }
+
+  bindMyKadData(): void{
+    try {
+
+      let age = this.calculateAge(new Date(this.myKadData['DOB']));
+
+      if (age > 18){
+        currentMyKadDetails.Name = this.myKadData['Name'];
+        currentMyKadDetails.ICNo = this.myKadData['ICNo'].toString().replace("*", "");
+        currentMyKadDetails.OldICNo = this.myKadData['OldICNo'];
+        currentMyKadDetails.DOB = this.myKadData['DOB'];
+        currentMyKadDetails.POB =  this.myKadData['POB'];
+        currentMyKadDetails.Gender = this.myKadData['Gender'];
+        currentMyKadDetails.Citizenship = this.myKadData['Citizenship'];
+        currentMyKadDetails.IssueDate = this.myKadData['IssueDate'];
+        currentMyKadDetails.Race = this.myKadData['Race'];
+        currentMyKadDetails.Religion = this.myKadData['Religion'];
+        currentMyKadDetails.Address1 = this.myKadData['Address1'];
+        currentMyKadDetails.Address2 = this.myKadData['Address2'];
+        currentMyKadDetails.Address3 = this.myKadData['Address3'];
+        currentMyKadDetails.PostCode = this.myKadData['PostCode'];
+        currentMyKadDetails.City = this.myKadData['City'];
+        currentMyKadDetails.State = this.myKadData['State'];
+        currentMyKadDetails.Country = this.myKadData['Country'];
+        currentMyKadDetails.Address = this.myKadData['Address'];
+        currentMyKadDetails.RJ = this.myKadData['RJ'];
+        currentMyKadDetails.KT = this.myKadData['KT'];
+        currentMyKadDetails.GreenCardNationality = this.myKadData['GreenCardNationality'];
+        currentMyKadDetails.GreenCardExpiryDate = this.myKadData['GreenCardExpiryDate'];
+        currentMyKadDetails.CardVersion = this.myKadData['CardVersion'];
+        currentMyKadDetails.OtherID = this.myKadData['OtherID'];
+        currentMyKadDetails.CategoryType = this.myKadData['CategoryType'];
+  
+        //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Mapped ${currentMyKadDetails.Name}'s MyKad details to Web App Object Class`);
+    
+        this.getAccountInquiry();
+      }
+      else{
+        //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `MyKad Returned Age is between 12 years old and 17 years old`);
+        // this.VMKADError_Visible = true;
+        // this.loadingVisible = false;
+      }
+      
+    }
+    catch(e: any) {
+      // errorCodes.code = "0166";
+      // errorCodes.message = e;
+
+    }
+  }
+
+  getAccountInquiry(): void{
+    try{
+
+      let idtype = "";
+      switch(currentMyKadDetails.CategoryType){
+        case "PO":
+          idtype = "IP";
+          break;
+        case "W": 
+          idtype = "IN";
+          break;
+        case "A":
+          idtype = "IT";
+          break;
+      }
+
+      const body = {
+        "regType": "M",
+        "accNum": "",
+        "accType": "",
+        "searchType": "I",
+        "idNum": "620501086559", //currentMyKadDetails.ICNo,
+        "idType": idtype,
+        "reqTypeCode": ""   
+    }
+      this._aldanService.MemberCIFDetailsCheck(body).subscribe((result: any) => {
+        if(result.responseCode = "0"){
+          this.route.navigate(['mainMenu']);
+        }
+        else{
+          this.route.navigate(['']);
+        }
+      });
+    }
+    catch(e: any){
+      this.route.navigate(['']);
+      //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Redirect to Out Of Service Screen due to ${e}.`);
     }
   }
 

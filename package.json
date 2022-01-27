@@ -29,6 +29,7 @@
     "rxjs": "~6.6.0",
     "signalr": "^2.4.2",
     "tslib": "^2.0.0",
+    "write-json-safe": "^2.1.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "@angular/cli": "^11.2.15",
     "@angular/compiler-cli": "~11.2.4",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
