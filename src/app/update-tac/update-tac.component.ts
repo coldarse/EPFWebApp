@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AldanService } from '../shared/aldan.service';
+import { appFunc } from '../_models/_appFunc';
+import { signalRConnection } from '../_models/_signalRConnection';
 
 @Component({
   selector: 'app-update-tac',
@@ -12,11 +15,16 @@ export class UpdateTACComponent implements OnInit {
   page1 = true;
   page2 = false;
   page3 = false;
+  Failed = false;
   phoneNo = "";
+
+  phoneError = false;
+
 
   constructor(
     private route: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _aldanService: AldanService
   ) { }
 
   ngOnInit(): void {
@@ -24,14 +32,14 @@ export class UpdateTACComponent implements OnInit {
   }
 
   page1yes(){
-    if(this.phoneNo.length == 10){
+    this.phoneError = false;
+    if(this.phoneNo.length < 10){
+      this.phoneError = true;
+    }
+    else{
       this.page1 = false;
       this.page2 = true;
     }
-    else{
-      
-    }
-    
   }
 
   page1no(){
@@ -39,8 +47,32 @@ export class UpdateTACComponent implements OnInit {
   }
 
   page2yes(){
-    this.page2 = false;
-    this.page3 = true;
+    if(appFunc.bypassAPI != true){
+      const updateTACBody = {
+        "custNum": appFunc.currMemberDetail.cifNum,
+        "tacMobilePhoneCode": "TA",
+        "tacMobilePhone": this.phoneNo,
+        "amendmentChannel": "SAO",
+        "status": "P",
+        "checkForDuplicate": "N",
+        "generateRequestNum": "N",
+        "requestNum": ""
+      }
+
+      this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {
+        if(result.responseCode == "0"){
+          this.page2 = false;
+          this.page3 = true;
+        }
+        else{
+          this.Failed = true;
+        }
+      });
+    }
+    else{
+      this.page2 = false;
+      this.page3 = true;
+    }
   }
 
   page2no(){
@@ -94,6 +126,10 @@ export class UpdateTACComponent implements OnInit {
 
   clickDel(){
     this.phoneNo = this.phoneNo.substring(0, this.phoneNo.length - 1);
+  }
+
+  failedYes(){
+    this.route.navigate(['mainMenu']);
   }
 
 }

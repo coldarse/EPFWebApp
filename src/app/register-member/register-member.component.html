@@ -38,25 +38,25 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <label class="lblInfo">MUHAMMAD WAHYU NIZAM BIN OMIR</label>
+                            <label class="lblInfo">{{ name }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">921130105537</label>
+                            <label class="lblInfo">{{ ic }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">20/12/1992</label>
+                            <label class="lblInfo">{{ dob | date : 'shortDate' }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">WARGANEGARA</label>
+                            <label class="lblInfo">{{ nationality }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">LELAKI</label>
+                            <label class="lblInfo">{{ gender }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">MALAY</label>
+                            <label class="lblInfo">{{ race }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">ISLAM</label>
+                            <label class="lblInfo">{{ religion }}</label>
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,12 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <input type="text" id="phoneNo" name="phoneNo" value="{{phoneNo}}">
+                    </div>
+                </div>
+                <div class="row" *ngIf="phoneError">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <h2 class="errorMsg">{{"emptyPhoneError"| translate}}</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -178,6 +184,15 @@
                     </div>
                     <div class="col-2"></div>
                 </div>
+                <div class="row" *ngIf="emailError">
+                    <div class="col-2"></div>
+                    <div class="col-3">
+                        <h2 class="errorMsg">{{"emptyEmailError"| translate}}</h2>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-4"></div>
+                    <div class="col-2"></div>
+                </div>
                 <div class="row padTop10rem">
                     <div class="col-2"></div>
                     <div class="col-4">
@@ -234,7 +249,7 @@
                             <label class="lblInfo">{{ic}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">{{20/12/1992}}</label>
+                            <label class="lblInfo">{{dob | date : 'shortDate'}}</label>
                         </div>
                         <div class="row">
                             <label class="lblInfo">{{nationality}}</label>
@@ -275,7 +290,7 @@
                 </div>
                 <div class="row">
                     <label class="lblKWSP">
-                        22232909
+                        {{ KWSPMemberNo }}
                     </label>
                 </div>
                 <div class="row padTop5rem">
@@ -368,8 +383,12 @@
                             reviewed, please refer existing articles, their formatting style,
                             coding style, and try to make you are close to them. In case you
                             are a beginner, you may refer Guidelines to write an Article
+
+
+
+
                         </p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC1()"/>
                         <label class="lblTNC" for="tnc1">{{"TNC"| translate}}</label>
                     </div>
                 </div>
@@ -382,7 +401,7 @@
                         <button type="button" class="btnNo" (click)="page6no()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page6yes()">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page6yes()" [disabled]="xagreedTnc1">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -410,19 +429,19 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <label class="lblAccount2">921130105537</label>
+                        <label class="lblAccount2">{{ ic }}</label>
                     </div>
                     <div class="row">
-                        <label class="lblAccount2">MUHAMMAD WAHYU NIZAM BIN OMAR</label>
+                        <label class="lblAccount2">{{name}}</label>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtAccount" name="txtAccount" value="921130105537">
+                        <input target="needed" type="text" class="use-keyboard-input" id="txtAccount" name="acctNum" value="{{ acctNo }}" required #account_number>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtAccount" name="txtAccount" value="AbuAli12345">
+                        <input target="needed" type="password" class="use-keyboard-input" id="txtAccount" name="password" value="{{ password1 }}" required #password_1>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtAccount" name="txtAccount" value="">
+                        <input target="needed" type="password" class="use-keyboard-input" id="txtAccount" name="password" value="{{ password2 }}" required #password_2>
                     </div>
                 </div>
                 <div class="col-3">
@@ -450,21 +469,36 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <div class="col">
-                            <img class="imgOnline" src="assets/images/fish.svg">
+                        <div class="col" *ngFor="let ci of checkboxImages">
+                            <input type="radio" id="{{ci.name}}" [checked]="ci.checked" [hidden]="true"/>
+                            <label class="selectLabel" for="{{ci.name}}" (click)="clickImage(ci.name)">
+                                <img class="imgOnline" src="{{ci.src}}">
+                            </label>
+                        </div>
+                        <!-- <div class="col">
+                            <input type="checkbox" id="myCheckbox2" />
+                            <label class="selectLabel" for="myCheckbox2">
+                                <img class="imgOnline" src="assets/images/frog.svg">
+                            </label>
                         </div>
                         <div class="col">
-                            <img class="imgOnline" src="assets/images/frog.svg">
+                            <input type="checkbox" id="myCheckbox3" />
+                            <label class="selectLabel" for="myCheckbox3">
+                                <img class="imgOnline" src="assets/images/snail.svg">
+                            </label>
                         </div>
                         <div class="col">
-                            <img class="imgOnline" src="assets/images/snail.svg">
+                            <input type="checkbox" id="myCheckbox4" />
+                            <label class="selectLabel" for="myCheckbox4">
+                                <img class="imgOnline" src="assets/images/lamb.svg">
+                            </label>
                         </div>
                         <div class="col">
-                            <img class="imgOnline" src="assets/images/lamb.svg">
-                        </div>
-                        <div class="col">
-                            <img class="imgOnline" src="assets/images/penguin.svg">
-                        </div>
+                            <input type="checkbox" id="myCheckbox5" />
+                            <label class="selectLabel" for="myCheckbox5">
+                                <img class="imgOnline" src="assets/images/penguin.svg">
+                            </label>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -495,7 +529,7 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtAccount" name="txtAccount" value="">
+                        <input type="text" target="needed" required class="use-keyboard-input" id="txtAccount" name="securePhrase" value="{{ securePhrase }}" #secure_phrase>
                     </div>
                 </div>
                 <div class="col-3">
@@ -505,6 +539,21 @@
                     </div>
                 </div>
                 <div class="col-1"></div>
+            </div>
+            <div class="row padTop5rem">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h2 class="errorMsg" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="accountMin">{{"accountMin"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="accountMax">{{"accountMax"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordMin">{{"passwordMin"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordMax">{{"passwordMax"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="imageSelect">{{"imageSelect"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h2>
+                </div>
+                <div class="col-4"></div>
             </div>
             <div class="row padTop5rem text-center">
                 <div class="col-2"></div>
@@ -629,7 +678,7 @@
                             coding style, and try to make you are close to them. In case you
                             are a beginner, you may refer Guidelines to write an Article
                         </p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC2()">
                         <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
                 </div>
@@ -642,7 +691,7 @@
                         <button type="button" class="btnNo" (click)="page10no()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page10yes()">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page10yes()" [disabled]="xagreedTnc2">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -694,23 +743,15 @@
                     </div>
                     <div class="col-6">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{"default" | translate}}
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{defaultDDL}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" >{{"agriculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"retired"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"business"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"aquaculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"transport"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"sales"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"artist"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"housewife"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"prof"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"service"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"gig"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"other"|translate}}</a></li>
+                                <li *ngFor="let js of jobSectors">
+                                    <a class="dropdown-item" (click)="selectJob(js)">
+                                        {{ currentLang == "bm" ? js.malay : js.english }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -742,6 +783,26 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page14yes()">{{"yes"|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop10rem" *ngIf="Failed">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"fail"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

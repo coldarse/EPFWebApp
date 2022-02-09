@@ -479,6 +479,7 @@
 }
 
 #jobDDL{
+    position: relative;
     border-width: thin;
     width: 1000px;
     height: 6rem;
@@ -487,6 +488,17 @@
     font-weight: 700;
     background-color:  rgb(90, 82, 157);
 }
+
+.select-items {
+    position: absolute;
+    background-color: rgb(90, 82, 157);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+
 
 .lblSymbol{
     font-size: 60px;
@@ -812,5 +824,13 @@ ul.dropdown-menu a.dropdown-item:hover{
 .centerItem{
     margin: auto;
 }
+
+.errorMsg{
+    color: red;
+    font-style: italic;
+    font-weight: 500;
+}
+
+
 
 

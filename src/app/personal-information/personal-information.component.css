@@ -1,0 +1,19 @@
+input[target]:valid {
+    background-color: #ffffff;
+}
+
+input[target]:required {
+    border-width: 3px;
+}
+
+input[target]:required:invalid {
+    border-color: #ff0000;
+}
+
+input[target]{
+    border-radius: 0.5rem;
+}
+
+input[type=checkbox]{
+    border: 1px solid;
+}

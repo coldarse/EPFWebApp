@@ -23,14 +23,17 @@ import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-s
 import { AppConfiguration } from './config/app-configuration';
 import { JsonAppConfigService } from './config/json-app-config.service';
 import { accessToken } from './_models/token';
+import { ScreensaverComponent } from './screensaver/screensaver.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
   const c = new SignalRConfiguration();
   c.hubName = 'MyMessageHub';
   c.qs = { user: 'aldan' }
+  //c.url = 'http://localhost:44373';
   c.url = 'http://localhost:8081/';
   c.logging = true;
+  
 
   
   // >= v5.0.0
@@ -57,6 +60,7 @@ export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
     PersonalInformationComponent,
     IAkaunRegistrationComponent,
     ISaraanShariahSavingsRegistrationComponent,
+    ScreensaverComponent,
   ],
   imports: [
     BrowserModule,

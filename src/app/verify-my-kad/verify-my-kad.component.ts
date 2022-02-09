@@ -12,6 +12,10 @@ import { writeJSON, writeJSONSync, Options, JSONObject } from "write-json-safe";
 import { AppConfiguration } from '../config/app-configuration';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { MyKadDetails } from '../_models/_myKadData';
+import { removeSummaryDuplicates } from '@angular/compiler';
+import * as signalR from '@aspnet/signalr';
+import { currMemberDetails } from '../_models/_currentMemberDetails';
+import { appFunc } from '../_models/_appFunc';
 
 
 declare const loadKeyboard: any;
@@ -37,7 +41,11 @@ export class VerifyMyKadComponent implements OnInit {
   page3 = false;
   page4 = false;
 
+  insertedMyKad = false;
+
   arrayList: string[] = [];
+
+  hubConnection: signalR.HubConnection | undefined;
 
   constructor(
     private route: Router,
@@ -49,12 +57,36 @@ export class VerifyMyKadComponent implements OnInit {
     this.startConnection();
   }
 
+  
 
-  testCallAPI(){
-    this._aldanService.getExample("code").subscribe((result: any) => {
-      //Do what you want with the json body (result)
-    });
-  }
+  // startConnection = () => {
+  //   this.hubConnection = new signalR.HubConnectionBuilder()
+  //   .withUrl('https://localhost:44373/signalrkms', {
+  //       skipNegotiation: true,
+  //       transport: signalR.HttpTransportType.WebSockets
+  //   })
+  //   .build();
+
+  //   this.hubConnection
+  //   .start()
+  //   .then(() => {
+  //       console.log('Hub Connection Started!');
+  //   })
+  //   .catch(err => console.log('Error while starting connection: ' + err))
+  //   signalRConnection.connection = this.hubConnection;
+  //   this.askServer();
+  // }
+
+  // askServer() {
+  //     signalRConnection.connection.invoke("askServer", "hey")
+  //     .catch((err: any) => console.error(err));
+  // }
+
+  // askServerListener() {
+  //   signalRConnection.connection.on("askServerResponse", (someText: any) => {
+  //       console.log(someText);
+  //   })
+  // }
 
   startConnection() : void {
     this._signalR.connect().then((c) => {
@@ -65,9 +97,15 @@ export class VerifyMyKadComponent implements OnInit {
           Authorization: 'Bearer ' + accessToken.token
         })
       };
-
-      
-
+      // this._aldanService.getTranslations().subscribe((res: any) => {
+      //   console.log(res);
+      // });
+      // this._aldanService.GetOperationTime('Kiosk001').subscribe((res: any) => {
+      //   console.log(res);
+      // });
+      // this._aldanService.GetServiceOperation('Kiosk001').subscribe((res: any) => {
+      //   console.log(res);
+      // });
     }).catch((err: any) => {
       // errorCodes.code = "0167";
       // errorCodes.message = "Unauthorized";
@@ -75,17 +113,44 @@ export class VerifyMyKadComponent implements OnInit {
     });
   }
 
+  getServiceOperation(){
+    this._aldanService.GetOperationTime('Kiosk001').subscribe((res: any) => {
+      console.log(res);
+    });
+  }
+
+  getOperationTime(){
+    this._aldanService.GetServiceOperation('Kiosk001').subscribe((res: any) => {
+      console.log(res);
+    });
+  }
+
   ngOnInit(): void {
 
     this.translate.use('bm');
 
+    // setTimeout(() => {
+    //   this.askServerListener();
+    //   this.askServer();
+    // }, 2000);
+
     this.intervalID = setInterval(() => {
       this.DetectMyKad();
-      if (signalRConnection.cardDetect == true) {
-        clearInterval(this.intervalID);
-        this.verify();
-      } 
+      if(signalRConnection.cardDetect == true) {
+        if(this.insertedMyKad == false){
+          this.insertedMyKad = true;
+          this.verify();
+        }
+      }
+      else{
+        if(this.insertedMyKad == true){
+          clearInterval(this.intervalID);
+          this.route.navigate(['']);
+        }
+      }
+
     }, 1000);
+
   }
 
   selectBM(){
@@ -192,9 +257,12 @@ export class VerifyMyKadComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.intervalID);
+  }
+
   ngAfterViewInit(){
     try{
-      loadKeyboard();
       //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Account Registration]" + ": " + "After form is loaded, initialized keyboard");
     }catch(e: any){
       //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Account Registration]" + ": " + "Error initializing keyboard." + e.toString());
@@ -232,6 +300,9 @@ export class VerifyMyKadComponent implements OnInit {
         currentMyKadDetails.State = this.myKadData['State'];
         currentMyKadDetails.Country = this.myKadData['Country'];
         currentMyKadDetails.Address = this.myKadData['Address'];
+        currentMyKadDetails.Address1 = this.myKadData['Address1'];
+        currentMyKadDetails.Address2 = this.myKadData['Address2'];
+        currentMyKadDetails.Address3 = this.myKadData['Address3'];
         currentMyKadDetails.RJ = this.myKadData['RJ'];
         currentMyKadDetails.KT = this.myKadData['KT'];
         currentMyKadDetails.GreenCardNationality = this.myKadData['GreenCardNationality'];
@@ -239,56 +310,62 @@ export class VerifyMyKadComponent implements OnInit {
         currentMyKadDetails.CardVersion = this.myKadData['CardVersion'];
         currentMyKadDetails.OtherID = this.myKadData['OtherID'];
         currentMyKadDetails.CategoryType = this.myKadData['CategoryType'];
-  
-        //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Mapped ${currentMyKadDetails.Name}'s MyKad details to Web App Object Class`);
-    
+
         this.getAccountInquiry();
       }
       else{
-        //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `MyKad Returned Age is between 12 years old and 17 years old`);
-        // this.VMKADError_Visible = true;
-        // this.loadingVisible = false;
+
       }
       
     }
     catch(e: any) {
       // errorCodes.code = "0166";
       // errorCodes.message = e;
-
     }
   }
 
   getAccountInquiry(): void{
     try{
 
-      let idtype = "";
-      switch(currentMyKadDetails.CategoryType){
-        case "PO":
-          idtype = "IP";
-          break;
-        case "W": 
-          idtype = "IN";
-          break;
-        case "A":
-          idtype = "IT";
-          break;
-      }
-
+      
       const body = {
         "regType": "M",
         "accNum": "",
         "accType": "",
         "searchType": "I",
-        "idNum": "620501086559", //currentMyKadDetails.ICNo,
-        "idType": idtype,
+        "idNum": currentMyKadDetails.ICNo,
+        "idType": currentMyKadDetails.CategoryType,
         "reqTypeCode": ""   
-    }
+      }
       this._aldanService.MemberCIFDetailsCheck(body).subscribe((result: any) => {
-        if(result.responseCode = "0"){
-          this.route.navigate(['mainMenu']);
+        if(result.responseCode == "0"){
+
+          const memberProfileBody = {
+            "regType": "M",
+            "accNum": result.detail.accNum,
+            "accType": "S",
+            "searchType": "A",
+            "idNum": currentMyKadDetails.ICNo,
+            "idType": currentMyKadDetails.CategoryType,
+            "reqTypeCode": ""
+          }
+          this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
+            if(result.responseCode == "0"){
+              appFunc.currMemberDetail = result1.detail.map((cmd: any) => new currMemberDetails(cmd));
+              this.route.navigate(['mainMenu']);
+            }
+            else{
+              this.route.navigate(['']);
+            }
+          });
         }
         else{
-          this.route.navigate(['']);
+          if(result.error[0].code == "MBM2001"){
+            this.route.navigate(['registerMember']);
+          }
+          else{
+            this.route.navigate(['']);
+          }
         }
       });
     }
@@ -325,6 +402,11 @@ export class VerifyMyKadComponent implements OnInit {
     catch (e: any){
       
     }
+  }
+
+  cancelMyKadVerification(){
+    clearInterval(this.intervalID);
+    this.route.navigate(['']);
   }
 
 

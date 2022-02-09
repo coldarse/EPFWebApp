@@ -1,5 +1,5 @@
 <div class="bg-img">
-  <div class="row">
+  <div class="row container-fluid">
     <div class="col-8">
       <div class="header">{{ "menu" | translate }}</div>
     </div>
@@ -12,7 +12,7 @@
     <div class="row padTop10rem">
       <div class="text-center">
         <div class="lblHeader">
-          Hi Muhammad Wahyu Nizam Bin Omir,<br>
+          Hi {{name}},<br>
           {{"pleaseChoose"|translate}}
         </div>
         <div class="row padTop5rem">
@@ -90,7 +90,7 @@
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-            <button class="mainMenuBtn" (click)="thumbprintConfirmation()">
+            <button class="mainMenuBtnDisabled" (click)="thumbprintConfirmation()" [disabled]="true">
               <div class="row">
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
@@ -108,17 +108,17 @@
           </div>
           <div class="col-6">
             <!-- (click)="iAkaunRegistration()" -->
-            <button class="mainMenuBtnDisabled"> 
+            <button class="mainMenuBtn" (click)="iAkaunRegistration()"> 
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
                   <div class="centerItem">
-                    {{"comingSoon"|translate}}
+                    {{"i-Akaun"|translate}}
                   </div>
                 </div>
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Akan-Datang.svg" width="90px" height="90px">
+                    <img src="assets/images/Icon-Pendaftaran-IAkaun.svg" width="90px" height="90px">
                   </div>
                 </div>
               </div>
@@ -131,7 +131,7 @@
             <img src="assets/images/Icon-Date-Time.svg" width="70px" height="70px">
             <label class="lblDate2">{{date}}</label>
           </div>
-          <div class="col-5 mainMenuRight">
+          <div class="col-5 mainMenuRight" (click)="logOut()">
             <label class="lblLogout">{{"logout"|translate}}</label>
             <img src="assets/images/Icon-Logout.svg" width="80px" height="80px">
           </div>

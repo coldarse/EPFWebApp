@@ -6,7 +6,7 @@
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="local">
-                        <input class="form-check-input" type="checkbox" value="" id="chkLocal">
+                        <input class="form-check-input" type="checkbox" id="chkLocal" (change)="reuseMykadAddress($event)">
                         <label class="form-check-label " for="flexCheckDefault">
                             {{"reuseAddress"|translate}}
                         </label>
@@ -46,40 +46,47 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{address1}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{address1}}" #address_1>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{address2}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{address2}}" #address_2>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{address3}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{address3}}" #address_3>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{postcode}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{postcode}}" #post_code>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{city}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{city}}" #city_>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{country}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{state}}" #state_>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{state}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{country}}" #country_>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{homeNo}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{homeNo}}" #home_no>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{officeNo}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{officeNo}}" #office_no>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{phoneNo}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{phoneNo}}" #phone_no>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" value="{{email}}">
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{email}}" #email_>
                     </div>
                 </div>
                 <div class="col-1"></div>
+            </div>
+            <div class="row padTop5rem">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h2 class="errorMsg" *ngIf="emptyFields">{{"emptyFields"| translate}}</h2>
+                </div>
+                <div class="col-4"></div>
             </div>
             <div class="row text-center padTop5rem">
                 <div class="col-2"></div>
@@ -156,5 +163,26 @@
                 </div>
             </div>
         </div>
+
+        <div class="row padTop10rem" *ngIf="Failed">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"fail"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>

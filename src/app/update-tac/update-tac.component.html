@@ -13,6 +13,12 @@
                         <input type="text" id="phoneNo" name="phoneNo" value="{{phoneNo}}">
                     </div>
                 </div>
+                <div class="row" *ngIf="phoneError">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <h2 class="errorMsg">{{"emptyPhoneError"| translate}}</h2>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-3"></div>
                     <div class="col-6 example">
@@ -128,6 +134,26 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop10rem" *ngIf="Failed">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"fail"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

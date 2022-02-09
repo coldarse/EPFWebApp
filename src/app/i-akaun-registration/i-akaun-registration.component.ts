@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { appFunc } from '../_models/_appFunc';
+import { currentMemberDetails } from '../_models/_currentMemberDetails';
+import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -16,6 +19,11 @@ export class IAkaunRegistrationComponent implements OnInit {
   @ViewChild('email') email : ElementRef | undefined;
   @ViewChild('emailDDL') emailDDL : ElementRef | undefined;
 
+  @ViewChild('account_number') account_number : ElementRef | undefined;
+  @ViewChild('password_1') password_1 : ElementRef | undefined;
+  @ViewChild('password_2') password_2 : ElementRef | undefined;
+  @ViewChild('secure_phrase') secure_phrase : ElementRef | undefined;
+
   page1 = true;
   page2 = false;
   page3 = false;
@@ -24,10 +32,39 @@ export class IAkaunRegistrationComponent implements OnInit {
   page6 = false;
   page7 = false;
   page8 = false;
+  Failed = false;
   phoneNo = "";
   emailAddress = "";
 
+  phoneError = false;
+  xagreedTnc = true;
+
+  accountAlpha = false;
+  passwordAlpha = false;
+  accountMin = false;
+  accountMax = false;
+  passwordMin = false;
+  passwordMax = false;
+  imageSelect = false;
+  securePhraseMax = false;
+  passwordMatch = false;
+
+  ic = "";
+  name = "";
+  acctNo = "";
+  password1 = "";
+  password2 = "";
+  securePhrase = "";
+
   emailList: string[] = ["aldantechnology.com", "gmail.com", "hotmail.com", "yahoo.com"];
+
+  checkboxImages = [
+    { name: "checkbox1", id: 1, checked: false, src: "assets/images/fish.svg" },
+    { name: "checkbox2", id: 2, checked: false, src: "assets/images/frog.svg" },
+    { name: "checkbox3", id: 3, checked: false, src: "assets/images/snail.svg" },
+    { name: "checkbox4", id: 4, checked: false, src: "assets/images/lamb.svg" },
+    { name: "checkbox5", id: 5, checked: false, src: "assets/images/penguin.svg" },
+  ];
 
   constructor(
     private route: Router,
@@ -36,19 +73,68 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+
+    let hardcode = true;
+    if(hardcode){
+      this.hardcodedIC();
+    }
+
+    this.ic = currentMyKadDetails.ICNo;
+    this.name = currentMyKadDetails.Name;
+
+    this.acctNo = this.ic;
+  }
+
+  hardcodedIC(){
+    let harcodedic = "111111007894"
+    currentMyKadDetails.Name = "John Smith";
+    currentMyKadDetails.ICNo = harcodedic.toString().replace("*", "");
+    currentMyKadDetails.OldICNo = "";
+    currentMyKadDetails.DOB = new Date("1957-08-31");
+    currentMyKadDetails.POB =  "SELANGOR";
+    currentMyKadDetails.Gender = "Male";
+    currentMyKadDetails.Citizenship = "WARGANEGARA";
+    currentMyKadDetails.IssueDate = new Date("2020-01-01");
+    currentMyKadDetails.Race = "CINA";
+    currentMyKadDetails.Religion = "ISLAM";
+    currentMyKadDetails.Address1 = "6 Jln 14/70A";
+    currentMyKadDetails.Address2 = "";
+    currentMyKadDetails.Address3 = "Sri Hartamas";
+    currentMyKadDetails.PostCode = "50480";
+    currentMyKadDetails.City = "Kuala Lumpur";
+    currentMyKadDetails.State = "W. PERSEKUTUAN(KL)";
+    currentMyKadDetails.Country = "Malaysia";
+    currentMyKadDetails.Address = "";
+    currentMyKadDetails.RJ = "";
+    currentMyKadDetails.KT = "";
+    currentMyKadDetails.GreenCardNationality = "";
+    currentMyKadDetails.GreenCardExpiryDate = new Date("0000-00-00");
+    currentMyKadDetails.CardVersion = "";
+    currentMyKadDetails.OtherID = "";
+    currentMyKadDetails.CategoryType = "W";
   }
 
   ngAfterViewInit(){
     loadKeyboard();
   }
 
-  page1yes(){
-    this.page1 = false;
-    this.page2 = true;
+  clickTNC(){
+    this.xagreedTnc = !this.xagreedTnc;
+  }
 
-    setTimeout(() => {
-      loadKeyboard();
-    }, 500);
+  page1yes(){
+    this.phoneError = false;
+    if(this.phoneNo.length < 10){
+      this.phoneError = true;
+    }
+    else{
+      this.page1 = false;
+      this.page2 = true;
+  
+      setTimeout(() => {
+        loadKeyboard();
+      }, 500);
+    }
   }
 
   page1no(){
@@ -57,12 +143,12 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   page2yes(){
 
-    if(this.email?.nativeElement.value != ""){
-      this.page2 = false;
-      this.page3 = true;
-      this.emailAddress = this.email?.nativeElement.value + "@" + this.emailDDL?.nativeElement.value;
-      deleteKeyboard();
-    }
+    //if(this.email?.nativeElement.value != ""){
+    this.page2 = false;
+    this.page3 = true;
+    this.emailAddress = this.email?.nativeElement.value == 0 ? "" : this.email?.nativeElement.value + "@" + this.emailDDL?.nativeElement.value;
+    deleteKeyboard();
+    //}
     
   }
 
@@ -97,6 +183,10 @@ export class IAkaunRegistrationComponent implements OnInit {
   page5yes(){
     this.page5 = false;
     this.page6 = true;
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   page5no(){
@@ -105,13 +195,139 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   page6yes(){
-    this.page6 = false;
-    this.page7 = true;
+    this.accountAlpha = false;
+    this.accountAlpha = false;
+    this.passwordAlpha = false;
+    this.accountMin = false;
+    this.accountMax = false;
+    this.passwordMin = false;
+    this.passwordMax = false;
+    this.imageSelect = false;
+    this.securePhraseMax = false;
+    this.passwordMatch = false;
+
+    this.acctNo = this.account_number?.nativeElement.value
+    this.password1 = this.password_1?.nativeElement.value
+    this.password2 = this.password_2?.nativeElement.value
+    this.securePhrase = this.secure_phrase?.nativeElement.value
+
+    let FilledIn = 0;
+    if (this.acctNo.length != 0) FilledIn += 1;
+    if (this.password1.length != 0) FilledIn += 1;
+    if (this.password2.length != 0) FilledIn += 1;
+    if (this.securePhrase.length != 0) FilledIn += 1;
+
+    if(FilledIn == 4){
+      let errorCount = 0;
+      //Check Alphanumeric
+      if (!this.acctNo.match(/^[0-9a-z]+$/)){
+        errorCount += 1;
+        this.accountAlpha = true;
+      } 
+      if (!this.password1.match(/^[0-9a-z]+$/)){
+        errorCount += 1;
+        this.passwordAlpha = true;
+      } 
+      if (!this.password2.match(/^[0-9a-z]+$/)){
+        errorCount += 1;
+        this.passwordAlpha = true;
+      } 
+      //Check Min Length
+      if (this.acctNo.length < 8){
+        errorCount += 1;
+        this.accountMin = true;
+      } 
+      if (this.password1.length < 8){
+        errorCount += 1;
+        this.passwordMin = true;
+      } 
+      if (this.password2.length < 8){
+        errorCount += 1;
+        this.passwordMin = true;
+      } 
+      //Check Max Length
+      if (this.acctNo.length > 16){
+        errorCount += 1;
+        this.accountMax = true;
+      } 
+      if (this.password1.length > 20){
+        errorCount += 1;
+        this.passwordMax = true;
+      } 
+      if (this.password2.length > 20){
+        errorCount += 1;
+        this.passwordMax = true;
+      } 
+      if (this.securePhrase.length > 10 || this.securePhrase.length == 0){
+        errorCount += 1;
+        this.securePhraseMax = true;
+      } 
+      //Check Password Match
+      if (this.password1 != this.password2){
+        errorCount += 1;
+        this.passwordMatch = true;
+      } 
+      //Check Selected Image
+      let selectedCount = 0;
+      this.checkboxImages.forEach((elem: any) => {
+        if(elem.checked == true){
+          selectedCount += 1;
+        }
+      });
+      if (selectedCount == 0){
+        errorCount += 1;
+        this.imageSelect = true;
+      } 
+      
+      if (errorCount == 0){
+        if(appFunc.bypassAPI != true){ //Waiting for I-Akaun Activation API
+          // const iAkaunbody = {
+          //   "epfNum": this.KWSPMemberNo,
+          //   "tacMobileNum": this.phoneNo,
+          //   "branchCode": "",
+          //   "migrationFlag": "",
+          //   "clientChannel": "SST",
+          //   "source": "",
+          //   "subSource": "",
+          //   "ipAddress": "",
+          //   "validity": ""
+          // }
+    
+          // this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => {
+          //   if(result.responseCode == "0"){
+      
+          //     this.page7 = false;
+          //     this.page8 = true;
+        
+          //     deleteKeyboard()
+          //   }
+          //   else{
+          //     this.Failed = true;
+          //   }
+          // });
+          this.page6 = false;
+          this.page7 = true;
+    
+          deleteKeyboard()
+        }
+        else{
+          this.page6 = false;
+          this.page7 = true;
+    
+          deleteKeyboard()
+        }
+      }
+      else{
+        //If Error
+      }
+    }
   }
 
   page6no(){
     this.page6 = false;
     this.page5 = true;
+
+    deleteKeyboard();
   }
 
   page7yes(){
@@ -174,6 +390,21 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   clickDel(){
     this.phoneNo = this.phoneNo.substring(0, this.phoneNo.length - 1);
+  }
+
+  clickImage(name: string){
+    this.checkboxImages.forEach((elem: any) => {
+      if(name == elem.name){
+        elem.checked = true;
+      }
+      else{
+        elem.checked = false;
+      }
+    });
+  }
+
+  failedYes(){
+    this.route.navigate(['mainMenu']);
   }
 
 }

@@ -232,4 +232,26 @@ export class AldanService {
     )
   }
 
+  //Get Operation Time
+  GetOperationTime(kioskCode: string){
+    return this.http.post(
+      this.url + `app/operation-settings/GetOperation?KioskCode=${kioskCode}`,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  //Get Service Operation
+  GetServiceOperation(kioskCode: string){
+    return this.http.post(
+      this.url + `app/services/GetServiceOperation?KioskCode=${kioskCode}`,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
 }

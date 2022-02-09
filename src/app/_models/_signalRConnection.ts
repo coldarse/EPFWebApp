@@ -14,5 +14,4 @@ export class signalRConnection {
     static isHardcodedIC : boolean;
     static kioskType: string;
     static branchName: string;
-    static isVerifyMyKad = false;
 }

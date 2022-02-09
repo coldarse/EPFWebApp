@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { selectLang } from '../_models/language';
+import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 
 @Component({
   selector: 'app-main-menu',
@@ -12,6 +13,7 @@ import { selectLang } from '../_models/language';
 export class MainMenuComponent implements OnInit {
 
   date : any;
+  name = "Chen Jiunn Haw";
 
   constructor(
     private route: Router,
@@ -20,6 +22,11 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
+    //this.name = currentMyKadDetails.Name
+
+    setInterval(() => {
+      this.date = formatDate(new Date(), 'h:MM a d/M/yyyy', 'en');
+    }, 1000);
   }
 
   selectBM(){
@@ -54,6 +61,10 @@ export class MainMenuComponent implements OnInit {
 
   iAkaunRegistration(){
     this.route.navigate(['iAkaunRegistration']);
+  }
+
+  logOut(){
+    this.route.navigate(['']);
   }
 
 

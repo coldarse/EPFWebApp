@@ -9,9 +9,10 @@ import { ThumbprintConfirmationComponent } from './thumbprint-confirmation/thumb
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-registration.component';
 import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-savings-registration/i-saraan-shariah-savings-registration.component';
+import { ScreensaverComponent } from './screensaver/screensaver.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/verifyMyKad', pathMatch: 'full'},
+  {path: '', redirectTo: '/screenSaver', pathMatch: 'full'},
   {path: 'verifyMyKad', component: VerifyMyKadComponent},
   {path: 'mainMenu', component: MainMenuComponent},
   {path: 'registerMember', component: RegisterMemberComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'thumbprintConfirmation', component: ThumbprintConfirmationComponent},
   {path: 'personalInformation', component: PersonalInformationComponent},
   {path: 'iAkaunRegistration', component: IAkaunRegistrationComponent},
-  {path: 'iSaraanShariahSavingsRegistration', component: ISaraanShariahSavingsRegistrationComponent}
+  {path: 'iSaraanShariahSavingsRegistration', component: ISaraanShariahSavingsRegistrationComponent},
+  {path: 'screenSaver', component: ScreensaverComponent}
 ];
 
 @NgModule({

@@ -31,23 +31,15 @@
                     </div>
                     <div class="col-6">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{"default"|translate}}
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{defaultDDL}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" >{{"agriculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"retired"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"business"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"aquaculture"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"transport"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"sales"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"artist"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"housewife"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"prof"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"service"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"gig"|translate}}</a></li>
-                                <li><a class="dropdown-item" >{{"other"|translate}}</a></li>
+                                <li *ngFor="let js of jobSectors">
+                                    <a class="dropdown-item" (click)="selectJob(js)">
+                                        {{ currentLang == "bm" ? js.malay : js.english }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -144,7 +136,7 @@
                             coding style, and try to make you are close to them. In case you
                             are a beginner, you may refer Guidelines to write an Article
                         </p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox">
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC()">
                         <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
                 </div>
@@ -157,7 +149,7 @@
                         <button type="button" class="btnNo" (click)="page4no()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page4yes()">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="page4yes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -178,6 +170,26 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page5yes()">{{"yes"|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padTop10rem" *ngIf="Failed">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"fail"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                </div>
+                <div class="row padTop10rem">
+                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                </div>
+                <div class="row padTop10rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

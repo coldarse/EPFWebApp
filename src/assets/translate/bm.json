@@ -144,7 +144,7 @@
 "IDSample":"(Contoh: ahmad1234)",
 "PWNotice":"* Gabungan alphanumeric 8-20 digit",
 "PWSample":"(Contoh: AbuAli12345",
-"phraseNotice":"Maksumum 10 aksara",
+"phraseNotice":"Maksimum 10 aksara",
 "phraseSample":"(Contoh: iakaunsaya)",
 "congrats":"TAHNIAH",
 "saraan":"i-Saraan",
@@ -158,5 +158,18 @@
 "bm": "BM",
 "en":"EN",
 "pleaseChoose": "sila pilih menu",
-"comingSoon": "Akan Datang"
+"comingSoon": "Akan Datang",
+"emptyPhoneError": "Sila isikan format yang betul.",
+"emptyEmailError": "Sila isikan format yang betul.",
+"accountAlpha":"ID Pengguna mesti mengandungi gabungan alphanumeric",
+"passwordAlpha":"Kata Laluan mesti mengandungi gabungan alphanumeric",
+"accountMin":"ID Pengguna mesti melebihi 8 aksara",
+"accountMax":"ID Pengguna tidak boleh melebihi 16 askara",
+"passwordMin":"Kata Laluan mesti melebihi 8 askara",
+"passwordMax":"Kata Laluan tidak boleh melebihi 20 askara",
+"imageSelect":"Sila pilih SATU gambar",
+"securePhraseMax":"Frasa Rahsia tidak boleh melebihi 10 askara",
+"passwordMatch":"Kata Laluan tidak sepadan",
+"emptyFields": "Sila isikan ruangan yang diperlukan",
+"ActionFailed": "Transaksi gagal"
 }
