@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { appFunc } from '../_models/_appFunc';
 
 @Component({
   selector: 'app-check-balance',
@@ -32,6 +33,10 @@ export class CheckBalanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+
+    //Call API
+
+    //Assign into arrays
 
     this.sDetails.push(
       {
@@ -93,6 +98,10 @@ export class CheckBalanceComponent implements OnInit {
         totalAmount: 226884.23
       }
     );
+
+
+
+
 
     this.cDetails.push(
       {

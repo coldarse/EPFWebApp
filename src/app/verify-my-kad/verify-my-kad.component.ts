@@ -106,6 +106,7 @@ export class VerifyMyKadComponent implements OnInit {
       // this._aldanService.GetServiceOperation('Kiosk001').subscribe((res: any) => {
       //   console.log(res);
       // });
+
     }).catch((err: any) => {
       // errorCodes.code = "0167";
       // errorCodes.message = "Unauthorized";
