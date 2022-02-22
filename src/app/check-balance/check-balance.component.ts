@@ -160,6 +160,11 @@ export class CheckBalanceComponent implements OnInit {
         this.cDetails.forEach((details: any) => {
           // this.transactionAmtForAcc1 += details.totalAmount;
           details.transaction = 'Caruman-IWS';
+          const datepipe: DatePipe = new DatePipe('en-US')
+          let formattedDate = datepipe.transform(details.transactionDate, 'dd/MM/YYYY')
+          let formattedMonth = datepipe.transform(details.transactionDate, 'MMM-YY')
+          details.transactionDate = formattedDate;
+          details.contributionMth = formattedMonth;
           this.transactionAmtForAcc1 = details.transactionAmtForAcc1;
         });
       }
