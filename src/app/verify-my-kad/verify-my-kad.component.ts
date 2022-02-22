@@ -8,12 +8,12 @@ import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { accessToken } from '../_models/token';
 import { signalRConnection } from '../_models/_signalRConnection';
-import { writeJSON, writeJSONSync, Options, JSONObject } from "write-json-safe";
+// import { writeJSON, writeJSONSync, Options, JSONObject } from "write-json-safe";
 import { AppConfiguration } from '../config/app-configuration';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { MyKadDetails } from '../_models/_myKadData';
 import { removeSummaryDuplicates } from '@angular/compiler';
-import * as signalR from '@aspnet/signalr';
+// import * as signalR from '@aspnet/signalr';
 import { currMemberDetails } from '../_models/_currentMemberDetails';
 import { appFunc } from '../_models/_appFunc';
 
@@ -45,7 +45,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   arrayList: string[] = [];
 
-  hubConnection: signalR.HubConnection | undefined;
+  // hubConnection: signalR.HubConnection | undefined;
 
   constructor(
     private route: Router,
