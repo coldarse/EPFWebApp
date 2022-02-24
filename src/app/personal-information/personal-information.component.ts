@@ -186,7 +186,7 @@ export class PersonalInformationComponent implements OnInit {
       const personalInformationBody = {
         "cifNum": appFunc.currMemberDetail.cifNum,
         "electAddGrpSeq": appFunc.currMemberDetail.electAddGrpSeq,//"1",
-      "cifCategory": appFunc.currMemberDetail.cifCategory,
+        "cifCategory": appFunc.currMemberDetail.cifCategory,
         "accNum": appFunc.currMemberDetail.accNum,
         "accType": "S",
         "homePhone": this.homeNo,

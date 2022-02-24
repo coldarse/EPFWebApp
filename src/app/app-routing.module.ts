@@ -10,6 +10,7 @@ import { PersonalInformationComponent } from './personal-information/personal-in
 import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-registration.component';
 import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-savings-registration/i-saraan-shariah-savings-registration.component';
 import { ScreensaverComponent } from './screensaver/screensaver.component';
+import { OutOfServiceComponent } from './out-of-service/out-of-service.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/screenSaver', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'personalInformation', component: PersonalInformationComponent},
   {path: 'iAkaunRegistration', component: IAkaunRegistrationComponent},
   {path: 'iSaraanShariahSavingsRegistration', component: ISaraanShariahSavingsRegistrationComponent},
-  {path: 'screenSaver', component: ScreensaverComponent}
+  {path: 'screenSaver', component: ScreensaverComponent},
+  {path: 'outofservice', component: OutOfServiceComponent}
 ];
 
 @NgModule({

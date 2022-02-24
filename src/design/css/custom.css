@@ -831,6 +831,41 @@ ul.dropdown-menu a.dropdown-item:hover{
     font-weight: 500;
 }
 
+.titleNLogo {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-top: 1.5rem;
+}
+
+.icon_margin{
+    padding-bottom: 0rem;
+}
+
+.upStyle {
+    padding-left: 1rem;
+    font-size:70px; 
+    white-space: nowrap; 
+    font-weight:bold;
+    font-family: filson-pro, sans-serif;
+    color: white;
+    height: 0.5rem;
+}
+
+.downStyle {
+    padding-left: 1rem;
+    font-size:70px; 
+    white-space: nowrap; 
+    font-weight:bold;
+    font-family: filson-pro, sans-serif;
+    color: white;
+}
+
+.outofservice_ErrorMsg{
+    font-size: 90px;
+    font-family: filson-pro, sans-serif;
+}
+
 
 
 

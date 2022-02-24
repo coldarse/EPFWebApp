@@ -22,7 +22,7 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
-    //this.name = currentMyKadDetails.Name
+    this.name = currentMyKadDetails.Name
 
     setInterval(() => {
       this.date = formatDate(new Date(), 'h:MM a d/M/yyyy', 'en');

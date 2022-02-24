@@ -8,14 +8,12 @@ import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { accessToken } from '../_models/token';
 import { signalRConnection } from '../_models/_signalRConnection';
-// import { writeJSON, writeJSONSync, Options, JSONObject } from "write-json-safe";
 import { AppConfiguration } from '../config/app-configuration';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { MyKadDetails } from '../_models/_myKadData';
-import { removeSummaryDuplicates } from '@angular/compiler';
-// import * as signalR from '@aspnet/signalr';
 import { currMemberDetails } from '../_models/_currentMemberDetails';
 import { appFunc } from '../_models/_appFunc';
+import { businessTypes, eModules } from '../_models/modelClass';
 
 
 declare const loadKeyboard: any;
@@ -30,7 +28,7 @@ declare const closeKeyboard: any;
 export class VerifyMyKadComponent implements OnInit {
 
   Status = "MyKad";
-  intervalID: any;
+  
   myKadData: any;
   insertCard = true;
   Language = false;
@@ -45,7 +43,9 @@ export class VerifyMyKadComponent implements OnInit {
 
   arrayList: string[] = [];
 
-  // hubConnection: signalR.HubConnection | undefined;
+  readerIntervalId: any;
+  moduleIntervelId: any;
+
 
   constructor(
     private route: Router,
@@ -57,60 +57,61 @@ export class VerifyMyKadComponent implements OnInit {
     this.startConnection();
   }
 
-  
-
-  // startConnection = () => {
-  //   this.hubConnection = new signalR.HubConnectionBuilder()
-  //   .withUrl('https://localhost:44373/signalrkms', {
-  //       skipNegotiation: true,
-  //       transport: signalR.HttpTransportType.WebSockets
-  //   })
-  //   .build();
-
-  //   this.hubConnection
-  //   .start()
-  //   .then(() => {
-  //       console.log('Hub Connection Started!');
-  //   })
-  //   .catch(err => console.log('Error while starting connection: ' + err))
-  //   signalRConnection.connection = this.hubConnection;
-  //   this.askServer();
-  // }
-
-  // askServer() {
-  //     signalRConnection.connection.invoke("askServer", "hey")
-  //     .catch((err: any) => console.error(err));
-  // }
-
-  // askServerListener() {
-  //   signalRConnection.connection.on("askServerResponse", (someText: any) => {
-  //       console.log(someText);
-  //   })
-  // }
-
   startConnection() : void {
     this._signalR.connect().then((c) => {
       console.log("API King is now Connected on " + formatDate(new Date(), 'HH:MM:ss', 'en'));
       signalRConnection.connection = c;
-      accessToken.httpOptions = {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + accessToken.token
-        })
-      };
-      // this._aldanService.getTranslations().subscribe((res: any) => {
-      //   console.log(res);
-      // });
-      // this._aldanService.GetOperationTime('Kiosk001').subscribe((res: any) => {
-      //   console.log(res);
-      // });
-      // this._aldanService.GetServiceOperation('Kiosk001').subscribe((res: any) => {
-      //   console.log(res);
-      // });
 
+      signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {
+        signalRConnection.kioskCode = data;
+      });
+      signalRConnection.connection.invoke('GetKioskID').then((data: string) => {
+        signalRConnection.kioskID = data;
+      });
+      signalRConnection.connection.invoke('isHardcodedIC').then((data: boolean) => {
+        signalRConnection.isHardcodedIC = data;
+      });
+
+      signalRConnection.connection.invoke('GetLoginToken').then((data: string) => {
+        accessToken.token = data;
+        accessToken.httpOptions = {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + accessToken.token
+          })
+        };
+        this._aldanService.GetBusinessTypes().subscribe((res: any) => {
+          appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
+        });
+        this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
+          appFunc.modules = res.map((em: any) => new eModules(em));
+
+
+          let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+          if(areDisabled == appFunc.modules.length){
+            // errorCodes.code = "0168";
+            appFunc.message = "Under Maintenance";
+            this.route.navigate(['outofservice']);
+          }
+
+          setTimeout(() => {
+            this.moduleIntervelId = setInterval(() => {
+              let count = appFunc.checkModuleAvailability(appFunc.modules);
+
+              if(count == 0){
+                // errorCodes.code = "0168";
+                appFunc.message = "Under Maintenance";
+                this.route.navigate(['outofservice']);
+              }
+            }, 1000);
+          } , 60000);
+
+
+        });
+      });
     }).catch((err: any) => {
       // errorCodes.code = "0167";
-      // errorCodes.message = "Unauthorized";
-      // this.route.navigate(['outofservice']);
+      appFunc.message = "Unauthorized";
+      this.route.navigate(['outofservice']);
     });
   }
 
@@ -130,13 +131,8 @@ export class VerifyMyKadComponent implements OnInit {
 
     this.translate.use('bm');
 
-    // setTimeout(() => {
-    //   this.askServerListener();
-    //   this.askServer();
-    // }, 2000);
-
-    this.intervalID = setInterval(() => {
-      this.DetectMyKad();
+    this.readerIntervalId = setInterval(() => {
+      appFunc.DetectMyKad();
       if(signalRConnection.cardDetect == true) {
         if(this.insertedMyKad == false){
           this.insertedMyKad = true;
@@ -145,11 +141,10 @@ export class VerifyMyKadComponent implements OnInit {
       }
       else{
         if(this.insertedMyKad == true){
-          clearInterval(this.intervalID);
+          clearInterval(this.readerIntervalId);
           this.route.navigate(['']);
         }
       }
-
     }, 1000);
 
   }
@@ -168,7 +163,7 @@ export class VerifyMyKadComponent implements OnInit {
     signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
       if (data.toUpperCase().includes("SCANTHUMB")){
         this.Status = data;
-        if(this.DetectMyKad()){
+        if(appFunc.DetectMyKad()){
           signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
             this.Status = data;
             if (this.Status.toUpperCase().includes("MISMATCH")){
@@ -182,7 +177,8 @@ export class VerifyMyKadComponent implements OnInit {
               console.log(data);
             }
             else{
-              console.log(data);
+              appFunc.message = data;
+              this.route.navigate(['outofservice']);
             }
           }); 
         }
@@ -202,7 +198,8 @@ export class VerifyMyKadComponent implements OnInit {
           // }
           console.log(data);
         }else{
-          console.log(data);
+          appFunc.message = data;
+          this.route.navigate(['outofservice']);
         }
       }    
     });
@@ -220,7 +217,7 @@ export class VerifyMyKadComponent implements OnInit {
     signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
       if (data.toUpperCase().includes("SCANTHUMB")){
         this.Status = data;
-        if(this.DetectMyKad()){
+        if(appFunc.DetectMyKad()){
           signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
             this.Status = data;
             if (this.Status.toUpperCase().includes("MISMATCH")){
@@ -232,7 +229,8 @@ export class VerifyMyKadComponent implements OnInit {
             else if(data.toUpperCase().includes("TIMEOUT")){
             }
             else{
-              this.route.navigate(['']);
+              appFunc.message = data;
+              this.route.navigate(['outofservice']);
             }
           }); 
         }
@@ -252,14 +250,16 @@ export class VerifyMyKadComponent implements OnInit {
           // }
           console.log(data);
         }else{
-          console.log(data);
+          appFunc.message = data;
+          this.route.navigate(['outofservice']);
         }
       }    
     });
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalID);
+    clearInterval(this.readerIntervalId);
+    clearInterval(this.moduleIntervelId);
   }
 
   ngAfterViewInit(){
@@ -270,17 +270,10 @@ export class VerifyMyKadComponent implements OnInit {
     }
   }
 
-  calculateAge(birthdate: Date) {
-    let age = 0;
-    var timeDiff = Math.abs(Date.now() - new Date(birthdate).getTime());
-    age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-    return age;
-  }
 
   bindMyKadData(): void{
     try {
-
-      let age = this.calculateAge(new Date(this.myKadData['DOB']));
+      let age = appFunc.calculateAge(new Date(this.myKadData['DOB']));
 
       if (age > 18){
         currentMyKadDetails.Name = this.myKadData['Name'];
@@ -315,20 +308,24 @@ export class VerifyMyKadComponent implements OnInit {
         this.getAccountInquiry();
       }
       else{
-
+        // errorCodes.code = "0166";
+        appFunc.message = "Binding MyKad Error";
+        // Error
+        this.route.navigate(['outofservice']);
       }
       
     }
     catch(e: any) {
       // errorCodes.code = "0166";
-      // errorCodes.message = e;
+      appFunc.message = e.toString();
+      // Error
+      this.route.navigate(['outofservice']);
     }
   }
 
   getAccountInquiry(): void{
     try{
 
-      
       const body = {
         "regType": "M",
         "accNum": "",
@@ -356,7 +353,9 @@ export class VerifyMyKadComponent implements OnInit {
               this.route.navigate(['mainMenu']);
             }
             else{
-              this.route.navigate(['']);
+              // Error
+              appFunc.message = result.error[0].description;
+              this.route.navigate(['outofservice']);
             }
           });
         }
@@ -365,22 +364,19 @@ export class VerifyMyKadComponent implements OnInit {
             this.route.navigate(['registerMember']);
           }
           else{
-            this.route.navigate(['']);
+            // Error
+            appFunc.message = result.error[0].description;
+            this.route.navigate(['outofservice']);
           }
         }
       });
     }
     catch(e: any){
-      this.route.navigate(['']);
+      // Error
+      appFunc.message = e.toString();
+      this.route.navigate(['outofservice']);
       //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Redirect to Out Of Service Screen due to ${e}.`);
     }
-  }
-
-
-  DetectMyKad(): boolean {
-    return signalRConnection.connection.invoke('IsCardDetected').then((data: boolean) => {
-      signalRConnection.cardDetect = data;
-    });
   }
 
   verify() : void {
@@ -392,7 +388,7 @@ export class VerifyMyKadComponent implements OnInit {
         if(data.toLowerCase().includes("error")){
           console.log(data);
         }
-        if(this.DetectMyKad()){
+        if(appFunc.DetectMyKad()){
           this.insertCard = false;
           this.page1 = false;
           this.Language = true;
@@ -401,12 +397,14 @@ export class VerifyMyKadComponent implements OnInit {
       });
     }
     catch (e: any){
-      
+      // Error
+      appFunc.message = e.toString();
+      this.route.navigate(['outofservice']);
     }
   }
 
   cancelMyKadVerification(){
-    clearInterval(this.intervalID);
+    clearInterval(this.readerIntervalId);
     this.route.navigate(['']);
   }
 

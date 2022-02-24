@@ -254,4 +254,16 @@ export class AldanService {
     )
   }
 
+  //Get Business Types List
+  GetBusinessTypes(){
+    return this.http.get(
+      this.url + 'app/business-types/GetAllList',
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+
 }

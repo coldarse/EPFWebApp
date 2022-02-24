@@ -37,7 +37,8 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li *ngFor="let js of jobSectors">
                                     <a class="dropdown-item" (click)="selectJob(js)">
-                                        {{ currentLang == "bm" ? js.malay : js.english }}
+                                        {{ js.description }}
+                                        <!-- {{ currentLang == "bm" ? js.malay : js.english }} -->
                                     </a>
                                 </li>
                             </ul>

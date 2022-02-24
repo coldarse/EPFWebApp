@@ -24,13 +24,14 @@ import { AppConfiguration } from './config/app-configuration';
 import { JsonAppConfigService } from './config/json-app-config.service';
 import { accessToken } from './_models/token';
 import { ScreensaverComponent } from './screensaver/screensaver.component';
+import { appFunc } from './_models/_appFunc';
+import { OutOfServiceComponent } from './out-of-service/out-of-service.component';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
   const c = new SignalRConfiguration();
   c.hubName = 'MyMessageHub';
   c.qs = { user: 'aldan' }
-  //c.url = 'http://localhost:44373';
   c.url = 'http://localhost:8081/';
   c.logging = true;
   
@@ -61,6 +62,7 @@ export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
     IAkaunRegistrationComponent,
     ISaraanShariahSavingsRegistrationComponent,
     ScreensaverComponent,
+    OutOfServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,7 @@ export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
   providers: [
     currentMyKadDetails,
     signalRConnection,
+    appFunc,
     accessToken,
     {
       provide: AppConfiguration,

@@ -25,8 +25,6 @@ export class CheckBalanceComponent implements OnInit {
   selectedYear = 0;
   transaction = '';
 
-  // currentContributions = 17280.0;
-
   sDetails: any[] = [];
   cDetails: any[] = [];
   arrYears: any[] = [];
@@ -60,6 +58,10 @@ export class CheckBalanceComponent implements OnInit {
             this.totalSavings = this.grandTotal;
           });
         }
+        else{
+          // Error
+          this.route.navigate(['']);
+        }
       });
   }
 
@@ -90,13 +92,6 @@ export class CheckBalanceComponent implements OnInit {
     this.page3 = true;
   }
 
-  selectYear(year: number) {
-    this.selectedYear = year;
-    this.page2 = false;
-    this.page3 = true;
-    this.DisplaySelectedYearStatement(year);
-  }
-
   page3no() {
     this.page3 = false;
     this.page2 = true;
@@ -123,6 +118,13 @@ export class CheckBalanceComponent implements OnInit {
 
   page6yes() {
     this.route.navigate(['mainMenu']);
+  }
+
+  selectYear(year: number) {
+    this.selectedYear = year;
+    this.page2 = false;
+    this.page3 = true;
+    this.DisplaySelectedYearStatement(year);
   }
 
   CalculateYears(): number[] {
@@ -165,15 +167,17 @@ export class CheckBalanceComponent implements OnInit {
           let formattedMonth = datepipe.transform(details.transactionDate, 'MMM-YY')
           details.transactionDate = formattedDate;
           details.contributionMth = formattedMonth;
-          this.transactionAmtForAcc1 = details.transactionAmtForAcc1;
+          this.transactionAmtForAcc1 += details.transactionAmtForAcc1;
         });
+      }
+      else{
+        // Error
+        this.route.navigate(['']);
       }
     });
 
   
   }
 }
-function FormatTransactionDate() {
-  throw new Error('Function not implemented.');
-}
+
 
