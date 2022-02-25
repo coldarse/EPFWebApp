@@ -11,10 +11,7 @@ import { signalRConnection } from '../_models/_signalRConnection';
 export class ScreensaverComponent implements OnInit {
 
   imgArray = [
-    "ss1.png",
-    "ss2.png",
-    "ss3.png",
-    "ss4.png"
+    "ss1.jpg",
   ];
 
   counter = 0;

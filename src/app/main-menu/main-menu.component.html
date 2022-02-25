@@ -17,7 +17,7 @@
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-            <button class="mainMenuBtn" (click)="checkBalance()">
+            <button [ngClass]="checkBalanceEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="checkBalance()">
               <div class="row">
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
@@ -35,7 +35,7 @@
           </div>
           <div class="col-6">
             <!-- <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="personalInformation()"> -->
-            <button class="mainMenuBtn" (click)="personalInformation()">
+            <button [ngClass]="personalInformationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="personalInformation()">
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
@@ -54,7 +54,7 @@
         </div>
         <div class="row padTop5rem">
           <div class="col-6">
-            <button class="mainMenuBtn" (click)="updateTAC()">
+            <button [ngClass]="updateTACEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="updateTAC()">
               <div class="row">
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
@@ -71,7 +71,7 @@
             </button>
           </div>
           <div class="col-6">
-            <button class="mainMenuBtn" (click)="iSaraanRegistrationShariahSavings()">
+            <button [ngClass]="iShariahiSaraanEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iSaraanRegistrationShariahSavings()">
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
@@ -108,7 +108,7 @@
           </div>
           <div class="col-6">
             <!-- (click)="iAkaunRegistration()" -->
-            <button class="mainMenuBtn" (click)="iAkaunRegistration()"> 
+            <button [ngClass]="iAkaunEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iAkaunRegistration()"> 
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
