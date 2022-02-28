@@ -85,25 +85,30 @@ export class VerifyMyKadComponent implements OnInit {
         this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
           appFunc.modules = res.map((em: any) => new eModules(em));
 
-
-          let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-          if(areDisabled == appFunc.modules.length){
-            // errorCodes.code = "0168";
+          if(appFunc.modules.length != 0){
+            let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+            if(areDisabled == appFunc.modules.length){
+              // errorCodes.code = "0168";
+              appFunc.message = "Under Maintenance";
+              this.route.navigate(['outofservice']);
+            }
+  
+            setTimeout(() => {
+              this.moduleIntervelId = setInterval(() => {
+                let count = appFunc.checkModuleAvailability(appFunc.modules);
+                if(count == 0){
+                  // errorCodes.code = "0168";
+                  appFunc.message = "Under Maintenance";
+                  this.route.navigate(['outofservice']);
+                }
+              }, 1000);
+            } , 60000);
+          }
+          else{
             appFunc.message = "Under Maintenance";
             this.route.navigate(['outofservice']);
           }
-
-          setTimeout(() => {
-            this.moduleIntervelId = setInterval(() => {
-              let count = appFunc.checkModuleAvailability(appFunc.modules);
-
-              if(count == 0){
-                // errorCodes.code = "0168";
-                appFunc.message = "Under Maintenance";
-                this.route.navigate(['outofservice']);
-              }
-            }, 1000);
-          } , 60000);
+          
 
 
         });
@@ -112,18 +117,6 @@ export class VerifyMyKadComponent implements OnInit {
       // errorCodes.code = "0167";
       appFunc.message = "Unauthorized";
       this.route.navigate(['outofservice']);
-    });
-  }
-
-  getServiceOperation(){
-    this._aldanService.GetOperationTime('Kiosk001').subscribe((res: any) => {
-      console.log(res);
-    });
-  }
-
-  getOperationTime(){
-    this._aldanService.GetServiceOperation('Kiosk001').subscribe((res: any) => {
-      console.log(res);
     });
   }
 

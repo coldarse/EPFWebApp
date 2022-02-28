@@ -3222,7 +3222,6 @@
         //document.body.childNodes[1]..appendChild(this.elements.main);
         document.body.appendChild(this.elements.main);
         document.body.appendChild(this.elements.keyboardspace);
-        console.log(document.body.firstChild.nextSibling);
         // Automatically use keyboard for elements with .use-keyboard-input
         document.querySelectorAll(".use-keyboard-input").forEach(element => {
             element.addEventListener("focus", () => {
@@ -3358,7 +3357,6 @@
                                 break;
                             }
                         }
-                       
                         
                     });
 
@@ -3399,7 +3397,6 @@
                             this.elements.startpos += 1;
                             this.elements.currElemLength = this.properties.value.length;
                         }
-                        console.log(this.properties.value);
                         this._limit(this.properties);
                         this._isSymbol(this.properties);
                         this._isNumeric(this.properties);
@@ -3466,6 +3463,12 @@
         else if(element.tagname.toLowerCase().includes('thirdicno')){
             element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
         }
+        else if(element.tagname.toLowerCase().includes('acctnum')){
+            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
+        }
+        else if(element.tagname.toLowerCase().includes('password')){
+            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
+        }
     },
 
     _limit(element){
@@ -3498,17 +3501,17 @@
         else if(element.tagname.toLowerCase().includes('postc')){
             max_chars = 10;
         }
-        else if(element.tagname.toLowerCase().includes('acctno')){
+        else if(element.tagname.toLowerCase().includes('acctnum')){
             max_chars = 17;
         }
         else if(element.tagname.toLowerCase().includes('uid')){
             max_chars = 17;
         }
         else if(element.tagname.toLowerCase().includes('securephrase')){
-            max_chars = 17;
+            max_chars = 11;
         }
-        else if(element.tagname.toLowerCase().includes('newpass1')){
-            max_chars = 20;
+        else if(element.tagname.toLowerCase().includes('password')){
+            max_chars = 21;
         }
         else if(element.tagname.toLowerCase().includes('newpass2')){
             max_chars = 20;
@@ -3545,7 +3548,7 @@
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
         this.elements.main.classList.remove("keyboard--hidden");
-        this.elements.keyboardspace.style.height = "500px";
+        this.elements.keyboardspace.style.height = "700px";
     },
 
     close() {
