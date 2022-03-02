@@ -1,8 +1,8 @@
-<div class="bg-img" style="background: url('assets/images/BG.png') no-repeat scroll right center;">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header">{{ "thumbprint" | translate }}</div>
 
     <div class="container-fluid">
-        <div class="row padTop35rem" *ngIf="page1">
+        <div class="row padTop10rem content-container" *ngIf="page1">
 
             <div class="text-center">
                 <div class="row">
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop35rem">
+                <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page1no()">{{"disagree"| translate}}</button>
@@ -25,26 +25,28 @@
             </div>
         </div>
 
-        <div class="row padTop5rem" *ngIf="page2">
+        <div class="row padTop2rem" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"thumbprintListMsg"| translate}}
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-1"></div>
                     <div class="col-5">
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
-                                    {{"ansuran"| translate}}
+                                    <div class="row">
+                                        {{"ansuran"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop3rem" type="checkbox" value="" (click)="checkAnsuran()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="checkAnsuran()">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label class="lblDate">08 Jan 2022</label>
                             </div>
                         </button>
                     </div>
@@ -52,34 +54,38 @@
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
-                                    {{"bina"| translate}}
+                                    <div class="row">
+                                        {{"bina"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="checkBina()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="checkBina()">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label class="lblDate">08 Jan 2022</label>
                             </div>
                         </button>
                     </div>
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-1"></div>
                     <div class="col-5">
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
-                                    {{"50yo"| translate}}
+                                    <div class="row">
+                                        {{"50yo"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="check50yo()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="check50yo()">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label class="lblDate">08 Jan 2022</label>
                             </div>
                         </button>
                     </div>
@@ -87,34 +93,38 @@
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
-                                    {{"education"| translate}}
+                                    <div class="row">
+                                        {{"education"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="checkEducation()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="checkEducation()">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label class="lblDate">08 Jan 2022</label>
                             </div>
                         </button>
                     </div>
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-1"></div>
                     <div class="col-5">
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
-                                    {{"1mil"| translate}}
+                                    <div class="row">
+                                        {{"1mil"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop3rem" type="checkbox" value="" (click)="check1mil()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="check1mil()">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label class="lblDate">08 Jan 2022</label>
                             </div>
                         </button>
                     </div>
@@ -122,20 +132,22 @@
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
-                                    {{"55yo"| translate}}
+                                    <div class="row">
+                                        {{"55yo"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTop1rem" type="checkbox" value="" (click)="check55yo()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="check55yo()">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label class="lblDate">08 Jan 2022</label>
                             </div>
                         </button>
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-1"></div>
                     <div class="col-10">
                         <div class="note">
@@ -143,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
@@ -155,15 +167,15 @@
             </div>
         </div>
 
-        <div class="row padTop15rem" *ngIf="page3">
+        <div class="row padTop7rem" *ngIf="page3">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"placeThumbprint"|translate}}
                 </div>
-                <div class="row padTop3rem">
-                    <img src="assets/images/thumbprint.svg" width="800px" height="800px" (click)="skip()">
+                <div class="row padTopHalfrem">
+                    <img src="assets/images/thumbprint.svg" width="400px" height="400px" (click)="skip()">
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnNo" (click)="page3no()">{{"cancel"|translate}}</button>
@@ -177,7 +189,7 @@
                 <div class="lblHeader">
                     {{"success"| translate}}
                 </div>
-                <div class="padTop5rem">
+                <div class="padTop2rem">
                     <button type="button" class="btnThumbprint">
                         <div class="row">
                             <div class="col-8">
@@ -190,7 +202,7 @@
                         </div>
                     </button>
                 </div>
-                <div class="padTop3rem">
+                <div class="padTopHalfrem">
                     <button type="button" class="btnThumbprint">
                         <div class="row">
                             <div class="col-8">
@@ -203,59 +215,7 @@
                         </div>
                     </button>
                 </div>
-                <!-- <div class="padTop3rem">
-                    <button type="button" class="btnThumbprint">
-                        <div class="row">
-                            <div class="col-8">
-                                {{"bina"| translate}}
-                            </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
-                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="padTop3rem">
-                    <button type="button" class="btnThumbprint">
-                        <div class="row">
-                            <div class="col-8">
-                                {{"bina"| translate}}
-                            </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
-                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="padTop3rem">
-                    <button type="button" class="btnThumbprint">
-                        <div class="row">
-                            <div class="col-8">
-                                {{"bina"| translate}}
-                            </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
-                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="padTop3rem">
-                    <button type="button" class="btnThumbprint">
-                        <div class="row">
-                            <div class="col-8">
-                                {{"bina"| translate}}
-                            </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
-                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
-                            </div>
-                        </div>
-                    </button>
-                </div> -->
-                <div class="row padTop30rem">
+                <div class="row padTop7rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page4no()">{{"endTrasaction"| translate}}</button>

@@ -1,8 +1,8 @@
-<div class="bg-img" style="background: url('assets/images/BG.png') no-repeat scroll right center;">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header">{{ "checkBalance" | translate }}</div>
 
     <div class="container-fluid">
-        <div class="row padTop5rem" *ngIf="page1">
+        <div class="row padTop2rem content-container" *ngIf="page1">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"balance"| translate}}
@@ -49,35 +49,19 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"statementMsg"| translate}}
                 </div>
-                <div class="row padTop10rem" >
-                    <div class="col-6 padTop5rem" *ngFor="let year of arrYears">
+                <div class="row padTop5rem" >
+                    <div class="col-6 padTop2rem" *ngFor="let year of arrYears">
                     <button type="button" class="btnShariah" (click)="selectYear(year)">{{year}}</button>
                     </div>
                 </div>
-                <!-- <div class="row padTop15rem">
-                    <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="select2021()">2021</button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="select2020()">2020</button>
-                    </div>
-                </div>
-                <div class="row padTop5rem">
-                    <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="select2019()">2019</button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="select2018()">2018</button>
-                    </div>
-                </div> -->
             </div>
         </div>
-        <div class="row padTop3rem" *ngIf="page3">
+        <div class="row padTopHalfrem content-container" *ngIf="page3">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"carum"| translate}}
@@ -124,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page4">
+        <div class="row padTop5rem content-container" *ngIf="page4">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"KWSPNoti"| translate}}
@@ -132,11 +116,11 @@
                 <div class="note2">
                     {{"KWSPMuat"|translate}}
                 </div>
-                <div class="row padTop20rem">
+                <div class="row padTop10rem">
                     <label class="lblHeader">wahyu@aldantechnology.com</label>
                 </div>
                 <div class="row">
-                    <a class="note2" href="#"> {{"EditEmailMsg"|translate}}</a>
+                    <label class="note2" style="text-decoration: underline;">{{"EditEmailMsg"|translate}}</label>
                 </div>
                 <div class="row padTop30rem">
                     <div class="col-2"></div>
@@ -149,19 +133,19 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page5">
+        <div class="row padTop5rem content-container" *ngIf="page5">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
-                <div class="row padTop3rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                <div class="row padTopHalfrem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"KWSPSent"|translate}}</div>
                     <div class="statusMsg">wahyu@aldantechnology.com</div>
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page5yes()">{{"yes"|translate}}</button>
@@ -169,19 +153,19 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page6">
+        <div class="row padTop5rem content-container" *ngIf="page6">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"fail"| translate}}
                 </div>
-                <div class="row padTop3rem">
-                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                <div class="row padTopHalfrem">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"KWSPSentFail"|translate}}</div>
                     <div class="statusMsg">wahyu@aldantechnology.com</div>
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page6yes()">{{"yes"|translate}}</button>

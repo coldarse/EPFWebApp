@@ -1,7 +1,7 @@
-<div class="bg-img" style="background: url('assets/images/BG.png') no-repeat scroll right center;">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header">{{ "personalInfo" | translate }}</div>
     <div class="container-fluid">
-        <div class="row padTop5rem" *ngIf="page1">
+        <div class="row padTop2rem content-container" *ngIf="page1">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -13,35 +13,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row padTop5rem">
+            <div class="row padTop2rem">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
                         <label class="lblProfile padBottomProfile">{{"postingAddress"|translate}} </label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"poscode"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"city"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"state"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"country"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"housePhone"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"officePhone"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"handPhone"|translate}}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblProfile">{{"emailAddress"|translate}}</label>
                     </div>
                 </div>
                 <div class="col-7">
@@ -54,41 +30,139 @@
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{address3}}" #address_3>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"poscode"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{postcode}}" #post_code>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"city"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{city}}" #city_>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"state"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{state}}" #state_>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"country"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{country}}" #country_>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"housePhone"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{homeNo}}" #home_no>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"officePhone"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{officeNo}}" #office_no>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"handPhone"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{phoneNo}}" #phone_no>
                     </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"emailAddress"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{email}}" #email_>
                     </div>
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row padTop5rem">
+
+
+
+            <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
                     <h2 class="errorMsg" *ngIf="emptyFields">{{"emptyFields"| translate}}</h2>
                 </div>
                 <div class="col-4"></div>
             </div>
-            <div class="row text-center padTop5rem">
+            <div class="row text-center padTop2rem">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="page1no()">{{"back"| translate}}</button>
@@ -98,19 +172,19 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"verifyProfile"| translate}}
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-2 left">
                         <label class="lblReg">{{"address"|translate}}</label>
                     </div>
-                    <div class="col-1 lblSymbol">:</div>
+                    <div class="col-1 lblSymbol" style="margin-top: 0.75rem;">:</div>
                     <div class="col-6 left">
-                        <label class="lblInfo">{{address1 + comma + address2 + comma + address3}}</label>
+                        <label class="lblInfo" style="padding-left: 2rem;">{{address1 + comma + address2 + comma + address3}}</label>
                     </div>
                 </div>
                 <div class="row">
@@ -118,9 +192,9 @@
                     <div class="col-2 left">
                         <label class="lblReg">{{"phone"|translate}}</label>
                     </div>
-                    <div class="col-1 lblSymbol">:</div>
+                    <div class="col-1 lblSymbol" style="margin-top: 0.75rem;">:</div>
                     <div class="col-6 left">
-                        <label class="lblInfo">{{phoneNo}}</label>
+                        <label class="lblInfo" style="padding-left: 2rem;">{{phoneNo}}</label>
                     </div>
                 </div>
                 <div class="row">
@@ -128,12 +202,12 @@
                     <div class="col-2 left">
                         <label class="lblReg">{{"email"|translate}}</label>
                     </div>
-                    <div class="col-1 lblSymbol">:</div>
+                    <div class="col-1 lblSymbol" style="margin-top: 0.75rem;">:</div>
                     <div class="col-6 left">
-                        <label class="lblInfo">{{email}}</label>
+                        <label class="lblInfo" style="padding-left: 2rem;">{{email}}</label>
                     </div>
                 </div>
-                <div class="row padTop35rem">
+                <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
@@ -144,18 +218,18 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="page3">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"profileSuccessMsg"|translate}}</div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
@@ -164,18 +238,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="Failed">
+        <div class="row padTop5rem content-container" *ngIf="Failed">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"fail"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"ActionFailed"|translate}}</div>
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>

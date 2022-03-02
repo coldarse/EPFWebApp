@@ -1,4 +1,4 @@
-<div class="bg-img" style="background: url('assets/images/BG.png') no-repeat scroll right center;">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header" *ngIf="RegKWSP">{{ "registerKWSP" | translate }}</div>
     <div class="header" *ngIf="RegIAkaun">{{"ActivateiAkaunHeader" | translate}}</div>
     <div class="header" *ngIf="RegShariah">{{"registerShariah" | translate}}</div>
@@ -6,12 +6,12 @@
 
     <div class="container-fluid">
 
-        <div class="row padTop10rem" *ngIf="page1">
+        <div class="row padTop5rem content-container" *ngIf="page1">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"question"| translate}}
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-3"></div>
                     <div class="col-3">
                         <div class="row">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop20rem">
+                <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page1no()">{{"no"|translate}}</button>
@@ -72,12 +72,12 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"phoneEntryMsg"| translate}}
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <input type="text" id="phoneNo" name="phoneNo" value="{{phoneNo}}">
@@ -97,40 +97,52 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
-                    <div class="col marginLeft">
-                        <button class="keypad" (click)="click1()">1</button>
-                    </div>
-                    <div class="col">
-                        <button class="keypad" (click)="click2()">2</button>
-                    </div>
-                    <div class="col marginRight">
-                        <button class="keypad" (click)="click3()">3</button>
-                    </div>
-                    <div class="col-4"></div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-4"></div>
-                    <div class="col marginLeft">
-                        <button class="keypad" (click)="click4()">4</button>
-                    </div>
-                    <div class="col">
-                        <button class="keypad" (click)="click5()">5</button>
-                    </div>
-                    <div class="col marginRight">
-                        <button class="keypad" (click)="click6()">6</button>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click1()">1</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="keypad" (click)="click2()">2</button>
+                            </div>
+                            <div class="col-4 marginRight">
+                                <button class="keypad" (click)="click3()">3</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
-                    <div class="col marginLeft">
-                        <button class="keypad" (click)="click7()">7</button>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click4()">4</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="keypad" (click)="click5()">5</button>
+                            </div>
+                            <div class="col-4 marginRight">
+                                <button class="keypad" (click)="click6()">6</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <button class="keypad" (click)="click8()">8</button>
-                    </div>
-                    <div class="col marginRight">
-                        <button class="keypad" (click)="click9()">9</button>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click7()">7</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="keypad" (click)="click8()">8</button>
+                            </div>
+                            <div class="col-4 marginRight">
+                                <button class="keypad" (click)="click9()">9</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-4"></div>
                 </div>
@@ -144,7 +156,7 @@
                     </div>
                     <div class="col-4"></div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <div class="note">
@@ -152,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
@@ -164,7 +176,7 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="page3">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"emailMsg"| translate}}
@@ -174,7 +186,7 @@
                     <div class="col-3">
                         <input type="text" class="use-keyboard-input" id="txtEmail" name="txtEmail" value="{{emailAddress}}" #email>
                     </div>
-                    <div class="col-1 lblSymbol padTop1rem">@</div>
+                    <div class="col-1 lblSymbol">@</div>
                     <div class="col-4">
                         <select name="emailDDL" id="emailDDL" #emailDDL>
                             <option *ngFor="let elist of emailList" value={{elist}}>
@@ -187,7 +199,7 @@
                 <div class="row" *ngIf="emailError">
                     <div class="col-2"></div>
                     <div class="col-3">
-                        <h2 class="errorMsg">{{"emptyEmailError"| translate}}</h2>
+                        <h5 class="errorMsg">{{"emptyEmailError"| translate}}</h5>
                     </div>
                     <div class="col-1"></div>
                     <div class="col-4"></div>
@@ -205,12 +217,12 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page4">
+        <div class="row padTop2rem content-container" *ngIf="page4">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"ProfileMsg"| translate}}
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-3"></div>
                     <div class="col-3">
                         <div class="row">
@@ -271,7 +283,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop20rem">
+                <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page4no()">{{"back"|translate}}</button>
@@ -283,7 +295,7 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page5">
+        <div class="row padTop5rem content-container" *ngIf="page5">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"KWSPNo"| translate}}
@@ -307,7 +319,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="row padTop30rem">
+                <div class="row padTop5rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <div class="note">
@@ -324,7 +336,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem" *ngIf="page6">
+        <div class="row padTop2rem content-container" *ngIf="page6">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"iAkaunTitle"| translate}}
@@ -395,7 +407,7 @@
                 <div class="col-1"></div>
             </div>
             <div class="row text-center">
-                <div class="row padTop5rem">
+                <div class="row padTop3rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page6no()">{{"back"|translate}}</button>
@@ -407,60 +419,86 @@
             </div>
         </div>
 
-        <div class="row padTop3rem" *ngIf="page7">
+        <div class="row padTopHalfrem content-container" *ngIf="page7">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
                         <label class="lblAccount">{{"id"|translate}} </label>
                     </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <label class="lblAccount2">{{ ic }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-1"></div>
+                <div class="col-3">
                     <div class="row">
                         <label class="lblAccount">{{"name"|translate}}</label>
                     </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <label class="lblAccount2">{{name}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
                     <div class="row">
                         <label class="lblAccount">{{"UserId"|translate}}</label>
                     </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <input target="needed" type="text" class="use-keyboard-input" id="txtAccount" name="acctNum" value="{{ acctNo }}" required #account_number>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="akaunNoteSmall">
+                        {{"IDNotice"|translate}}<br>
+                        {{"IDSample"|translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
                     <div class="row">
                         <label class="lblAccount">{{"password"|translate}}</label>
                     </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <input target="needed" type="password" class="use-keyboard-input" id="txtAccount" name="password" value="{{ password1 }}" required #password_1>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="akaunNoteSmall">
+                        {{"PWNotice"|translate}}<br>
+                        {{"PWSample"|translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
                     <div class="row">
                         <label class="lblAccount">{{"newPassword"|translate}}</label>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <label class="lblAccount2">{{ ic }}</label>
-                    </div>
-                    <div class="row">
-                        <label class="lblAccount2">{{name}}</label>
-                    </div>
-                    <div class="row">
-                        <input target="needed" type="text" class="use-keyboard-input" id="txtAccount" name="acctNum" value="{{ acctNo }}" required #account_number>
-                    </div>
-                    <div class="row">
-                        <input target="needed" type="password" class="use-keyboard-input" id="txtAccount" name="password" value="{{ password1 }}" required #password_1>
-                    </div>
-                    <div class="row">
                         <input target="needed" type="password" class="use-keyboard-input" id="txtAccount" name="password" value="{{ password2 }}" required #password_2>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="row padTop14rem">
-                        <div class="akaunNoteSmall">
-                            {{"IDNotice"|translate}}<br>
-                            {{"IDSample"|translate}}
-                        </div>
-                    </div>
-                    <div class="row padTop2rem">
-                        <div class="akaunNoteSmall">
-                            {{"PWNotice"|translate}}<br>
-                            {{"PWSample"|translate}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1"></div>
             </div>
-            <div class="row padTop3rem">
+
+            <div class="row padTop1rem">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
@@ -475,35 +513,11 @@
                                 <img class="imgOnline" src="{{ci.src}}">
                             </label>
                         </div>
-                        <!-- <div class="col">
-                            <input type="checkbox" id="myCheckbox2" />
-                            <label class="selectLabel" for="myCheckbox2">
-                                <img class="imgOnline" src="assets/images/frog.svg">
-                            </label>
-                        </div>
-                        <div class="col">
-                            <input type="checkbox" id="myCheckbox3" />
-                            <label class="selectLabel" for="myCheckbox3">
-                                <img class="imgOnline" src="assets/images/snail.svg">
-                            </label>
-                        </div>
-                        <div class="col">
-                            <input type="checkbox" id="myCheckbox4" />
-                            <label class="selectLabel" for="myCheckbox4">
-                                <img class="imgOnline" src="assets/images/lamb.svg">
-                            </label>
-                        </div>
-                        <div class="col">
-                            <input type="checkbox" id="myCheckbox5" />
-                            <label class="selectLabel" for="myCheckbox5">
-                                <img class="imgOnline" src="assets/images/penguin.svg">
-                            </label>
-                        </div> -->
                     </div>
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row padTop3rem">
+            <div class="row padTop1rem">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
@@ -520,7 +534,7 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row padTop3rem">
+            <div class="row padTop1rem">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
@@ -540,7 +554,7 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row padTop5rem">
+            <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
                     <h2 class="errorMsg" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h2>
@@ -555,7 +569,7 @@
                 </div>
                 <div class="col-4"></div>
             </div>
-            <div class="row padTop5rem text-center">
+            <div class="row padTop1rem text-center">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="page7no()">{{"back"| translate}}</button>
@@ -566,7 +580,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem" *ngIf="page8">
+        <div class="row padTop2rem content-container" *ngIf="page8">
             <div class="text-center">
                 <div class="row">
                     <div class="lblCongrats">
@@ -574,7 +588,7 @@
                         <img src="assets/images/Icon-Berjaya.svg" class="imgGratz">
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-1"></div>
                     <div class="col-10">
                         <div class="ThumbprintMsg">
@@ -582,7 +596,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-1"></div>
                     <div class="col-10">
                         <div class="ThumbprintMsg">
@@ -590,8 +604,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop3rem">
-                    <img src="assets/images/qr-code.svg" width="600" height="600">
+                <div class="row padTopHalfrem">
+                    <img src="assets/images/qr-code.svg" width="300" height="300">
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
@@ -602,12 +616,12 @@
             </div>
         </div>
 
-        <div class="row padTop30rem" *ngIf="page9">
+        <div class="row padTop15rem content-container" *ngIf="page9">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"ShariahMsg"| translate}}
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop5rem">
                     <div class="col-6">
                         <button type="button" class="btnShariah" (click)="selectiSaraan()">{{"remain"| translate}}</button>
                     </div>
@@ -618,7 +632,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem" *ngIf="page10">
+        <div class="row padTop2rem content-container" *ngIf="page10">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"ShariahTitle"| translate}}
@@ -633,7 +647,7 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row text-center padTop3rem">
+            <div class="row text-center padTopHalfrem">
                 <div class="col-1"></div>
                 <div class="col-10 scrollBox">
                     <div class="scroll">
@@ -685,7 +699,7 @@
                 <div class="col-1"></div>
             </div>
             <div class="row text-center">
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page10no()">{{"back"|translate}}</button>
@@ -697,18 +711,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page11">
+        <div class="row padTop5rem content-container" *ngIf="page11">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"successShariah"|translate}}</div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page11yes()">{{"yes"|translate}}</button>
@@ -717,12 +731,12 @@
             </div>
         </div>
 
-        <div class="row padTop30rem" *ngIf="page12">
+        <div class="row padTop15rem content-container" *ngIf="page12">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"saraanMsg"| translate}}
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop5rem">
                     <div class="col-6">
                         <button type="button" class="btnShariah" (click)="page12no()">{{"no"| translate}}</button>
                     </div>
@@ -733,12 +747,12 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page13">
+        <div class="row padTop5rem content-container" *ngIf="page13">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"jobMsg"|translate}}
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-3">
                     </div>
                     <div class="col-6">
@@ -756,7 +770,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop50rem">
+                <div class="row padTop25rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page13no()">{{"back"| translate}}</button>
@@ -768,18 +782,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page14">
+        <div class="row padTop5rem content-container" *ngIf="page14">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
                 <div class="row padTop5rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"successSaraan"|translate}}</div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page14yes()">{{"yes"|translate}}</button>
@@ -788,18 +802,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="Failed">
+        <div class="row padTop5rem content-container" *ngIf="Failed">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"fail"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"ActionFailed"|translate}}</div>
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>

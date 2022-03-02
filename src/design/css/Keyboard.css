@@ -2,7 +2,7 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 2736px;
+    width: 1368px;
     padding: 10px 0;
     background: rgba(49, 39, 131);
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
@@ -19,15 +19,15 @@
 }
 
 .keyboard__key {
-    height: 110px;
+    height: 55px;
     width: 15%;
-    max-width: 200px;
-    margin: 20px 0 0 20px;
-    border-radius: 20px;
+    max-width: 100px;
+    margin: 10px 0 0 10px;
+    border-radius: 10px;
     border: none;
     background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    font-size: 4.1rem;
+    font-size: 2.05rem;
     outline: none;
     cursor: pointer;
     display: inline-flex;

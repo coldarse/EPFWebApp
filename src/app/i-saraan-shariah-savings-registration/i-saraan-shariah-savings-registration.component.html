@@ -1,16 +1,16 @@
-<div class="bg-img" style="background: url('assets/images/BG.png') no-repeat scroll right center;">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header" *ngIf="RegSaraanShariah">{{ "sariah" | translate }}</div>
     <div class="header" *ngIf="RegShariah">{{"registerShariah" | translate}}</div>
     <div class="header" *ngIf="RegSaraan">{{"registerSaraan"|translate}}</div>
 
     <div class="container-fluid">
 
-        <div class="row padTop30rem" *ngIf="page1">
+        <div class="row padTop15rem content-container" *ngIf="page1">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"select"| translate}}
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop5rem">
                     <div class="col-6">
                         <button type="button" class="btnShariah" (click)="clickSaraan()">{{"saraan"| translate}}</button>
                     </div>
@@ -21,12 +21,12 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"jobMsg"|translate}}
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-3">
                     </div>
                     <div class="col-6">
@@ -38,7 +38,6 @@
                                 <li *ngFor="let js of jobSectors">
                                     <a class="dropdown-item" (click)="selectJob(js)">
                                         {{ js.description }}
-                                        <!-- {{ currentLang == "bm" ? js.malay : js.english }} -->
                                     </a>
                                 </li>
                             </ul>
@@ -57,18 +56,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="page3">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
-                <div class="row padTop5rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                <div class="row padTop2rem">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"successSaraan"|translate}}</div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
@@ -77,7 +76,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem" *ngIf="page4">
+        <div class="row padTop2rem content-container" *ngIf="page4">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"ShariahTitle"| translate}}
@@ -92,7 +91,7 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row text-center padTop3rem">
+            <div class="row text-center padTopHalfrem">
                 <div class="col-1"></div>
                 <div class="col-10 scrollBox">
                     <div class="scroll">
@@ -144,7 +143,7 @@
                 <div class="col-1"></div>
             </div>
             <div class="row text-center">
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page4no()">{{"back"|translate}}</button>
@@ -156,18 +155,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page5">
+        <div class="row padTop5rem content-container" *ngIf="page5">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"successShariah"|translate}}</div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page5yes()">{{"yes"|translate}}</button>
@@ -176,18 +175,18 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="Failed">
+        <div class="row padTop5rem content-container" *ngIf="Failed">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"fail"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"ActionFailed"|translate}}</div>
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>
