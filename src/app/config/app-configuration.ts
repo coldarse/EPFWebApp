@@ -1,7 +1,5 @@
 export class AppConfiguration {
-    baseUrl!: string;
-    AldanDevURL!: string;
-    AldanReceiptURL!: string;
+    AldanAPIURL!: string;
     AESCrpytKey!: string;
     idletime! : number;
     popuptime! : number;

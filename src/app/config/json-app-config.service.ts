@@ -16,9 +16,7 @@ export class JsonAppConfigService extends AppConfiguration {
     return this.http.get<AppConfiguration>('app.config.json')
       .toPromise()
       .then(data => {
-        this.baseUrl = data.baseUrl;
-        this.AldanDevURL = data.AldanDevURL;
-        this.AldanReceiptURL = data.AldanReceiptURL;
+        this.AldanAPIURL = data.AldanAPIURL;
         this.AESCrpytKey = data.AESCrpytKey;
         this.idletime = Number(data.idletime);
         this.popuptime = Number(data.popuptime);
@@ -28,3 +26,4 @@ export class JsonAppConfigService extends AppConfiguration {
       });
   }
 }
+
