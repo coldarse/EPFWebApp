@@ -6,6 +6,8 @@ import { currentMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
+import { accessToken } from '../_models/token';
+import { HttpHeaders } from '@angular/common/http';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -61,13 +63,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   emailList: string[] = ["aldantechnology.com", "gmail.com", "hotmail.com", "yahoo.com"];
 
-  checkboxImages = [
-    { name: "checkbox1", id: 1, checked: false, src: "assets/images/fish.svg" },
-    { name: "checkbox2", id: 2, checked: false, src: "assets/images/frog.svg" },
-    { name: "checkbox3", id: 3, checked: false, src: "assets/images/snail.svg" },
-    { name: "checkbox4", id: 4, checked: false, src: "assets/images/lamb.svg" },
-    { name: "checkbox5", id: 5, checked: false, src: "assets/images/penguin.svg" },
-  ];
+  checkboxImages: any[] = [];
 
   constructor(
     private route: Router,
@@ -77,6 +73,11 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+    accessToken.httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + accessToken.token
+      })
+    };
 
     let hardcode = true;
     if(hardcode){
@@ -176,8 +177,22 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   page4yes(){
-    this.page4 = false;
-    this.page5 = true;
+
+    if(appFunc.bypassAPI != false){
+
+      this._aldanService.GetTnC(selectLang.selectedLang).subscribe((result:any)=>{
+        if(result.content !="")
+        {
+          this.TnC = result.content.toString();
+          console.log(this.TnC);
+          this.page4 = false;
+          this.page5 = true;
+        }
+        else{
+          this.Failed = true;
+        }
+      });
+    }
   }
 
   page4no(){
@@ -185,19 +200,28 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   page5yes(){
+    
+    if(appFunc.bypassAPI != false){
 
-    if(appFunc.bypassAPI != true){
-
-      this._aldanService.GetTnC(selectLang.selectedLang).subscribe((result:any)=>{
-        if(result.responseCode ="0")
+      this._aldanService.GetSecureImage().subscribe((result:any)=>{
+        if(result.imgId !="")
         {
-          this.TnC = result.content;
+          result.forEach((element: any) => {
+            this.checkboxImages.push({
+              'imgId': element.imgId,
+              'imgPath': element.imgPath,
+              'checked': false
+            })
+          });
+          this.page5 = false;
+          this.page6 = true;
+        }
+        else{
+          this.Failed = true;
         }
       });
     }
-    this.page5 = false;
-    this.page6 = true;
-
+  
     setTimeout(() => {
       loadKeyboard();
     }, 500);
@@ -406,9 +430,9 @@ export class IAkaunRegistrationComponent implements OnInit {
     this.phoneNo = this.phoneNo.substring(0, this.phoneNo.length - 1);
   }
 
-  clickImage(name: string){
+  clickImage(imgId: string){
     this.checkboxImages.forEach((elem: any) => {
-      if(name == elem.name){
+      if(imgId == elem.imgId){
         elem.checked = true;
       }
       else{

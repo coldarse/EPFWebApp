@@ -290,7 +290,7 @@ export class AldanService {
 
   GetSecureImage(){
     return this.http.get(
-      this.url + 'IAkaunActivation/iAkaunAct/GetSecureImage',
+      this.url + 'IAkaunActivation/iAkaunAct/GetSecureImage?SessionId=1',
       accessToken.httpOptions
       ).pipe(
         retry(1),
@@ -300,7 +300,7 @@ export class AldanService {
 
   GetTnC(locale: string){
     return this.http.get(
-      this.url + 'IAkaunActivation/iAkaunAct/GetTnC' + selectLang.selectedLang,
+      this.url + 'IAkaunActivation/iAkaunAct/GetTnC?SessionId=1&locale=' + selectLang.selectedLang,
       accessToken.httpOptions
       ).pipe(
         retry(1),
