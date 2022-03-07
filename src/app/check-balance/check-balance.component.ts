@@ -19,7 +19,7 @@ export class CheckBalanceComponent implements OnInit {
   page5 = false;
   page6 = false;
 
-  totalSavings = 520000.3;
+  totalSavings = 0;
   grandTotal = 0;
   transactionAmtForAcc1 = 0;
   selectedYear = 0;

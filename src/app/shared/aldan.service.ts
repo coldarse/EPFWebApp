@@ -2,11 +2,12 @@ import { formatDate } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { forkJoin, throwError } from 'rxjs';
 import { catchError, map, retry, mergeMap as _observableMergeMap, delay, timeout} from 'rxjs/operators';
 import { AppConfiguration } from '../config/app-configuration';
 import { accessToken } from '../_models/token';
 import { signalRConnection } from '../_models/_signalRConnection';
+import { selectLang } from '../_models/language';
 
 @Injectable({ 
   providedIn: 'root'
@@ -206,6 +207,18 @@ export class AldanService {
     )
   }
 
+  //Member Profile Address Maintenance
+  MemberProfileAddressMaintenance(body: any){
+    return this.http.post(
+      this.url + 'MemberProfile/MemberProfileAddressMaintenance',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
   //Add TAC
   AddTAC(body: any){
     return this.http.post(
@@ -263,5 +276,44 @@ export class AldanService {
     )
   }
 
+  UpdateFullProfile(body1: any, body2: any){
+    const response1 = this.http.post(this.url + 'MemberProfile/MemberProfileContactMaintenance', body1, accessToken.httpOptions);
+    const response2 = this.http.post(this.url + 'MemberProfile/MemberProfileAddressMaintenance', body2, accessToken.httpOptions);
 
+    return forkJoin([
+      response1.pipe(retry(1), catchError(this.handleError)),
+      response2.pipe(delay(3000),retry(1), catchError(this.handleError)),
+    ]);
+  }
+
+  GetSecureImage(){
+    return this.http.get(
+      this.url + 'IAkaunActivation/iAkaunAct/GetSecureImage?SessionId=1',
+      accessToken.httpOptions
+      ).pipe(
+        retry(1),
+        catchError(this.handleError),
+      )
+  }
+
+  GetTnC(locale: string){
+    return this.http.get(
+      this.url + 'IAkaunActivation/iAkaunAct/GetTnC?SessionId=1&locale=' + selectLang.selectedLang,
+      accessToken.httpOptions
+      ).pipe(
+        retry(1),
+        catchError(this.handleError),
+      )
+  }
+
+  ActivateIAkaun(body: any){
+    return this.http.put(
+      this.url + "IAkaunActivation/iAkaunAct/",
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
 }
