@@ -4,6 +4,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { appFunc } from '../_models/_appFunc';
 import { currentMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
+import { AldanService } from '../shared/aldan.service';
+import { selectLang } from '../_models/language';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -35,6 +37,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   Failed = false;
   phoneNo = "";
   emailAddress = "";
+  TnC ="";
 
   phoneError = false;
   xagreedTnc = true;
@@ -68,7 +71,8 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _aldanService : AldanService
   ) { }
 
   ngOnInit(): void {
@@ -181,6 +185,16 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   page5yes(){
+
+    if(appFunc.bypassAPI != true){
+
+      this._aldanService.GetTnC(selectLang.selectedLang).subscribe((result:any)=>{
+        if(result.responseCode ="0")
+        {
+          this.TnC = result.content;
+        }
+      });
+    }
     this.page5 = false;
     this.page6 = true;
 

@@ -201,8 +201,26 @@ export class PersonalInformationComponent implements OnInit {
         "prefComChannel":""
       }
 
-      this._aldanService.MemberProfileContactMaintenance(personalInformationBody).subscribe((result: any) =>{
-        if(result.responseCode == "0"){
+      const addressBody = {
+        "custNum": appFunc.currMemberDetail.cifNum,
+        "electAddSeqNum": appFunc.currMemberDetail.electAddGrpSeq,
+        "addType": "1",
+        "addLine1": "NO 5, LORONG GOODWOOD ",
+        "addLine2": "",
+        "addLine3": "",
+        "addLine4": "",
+        "addLine5": "",
+        "cityStateZip": "",
+        "postalCode": this.postcode,
+        "stateCode": "15",
+        "countryCode": "MAL",
+        "remark": "",
+        "enforcementCOde": "",
+        "employersAddressee": ""
+      }
+
+      this._aldanService.UpdateFullProfile(personalInformationBody,addressBody).subscribe((result: any) =>{
+        if(result[0].responseCode == "0" && result[1].responseCode== "0"){
 
           const body = {
             "regType": "M",
@@ -234,6 +252,9 @@ export class PersonalInformationComponent implements OnInit {
       this.page2 = false;
       this.page3 = true;
     }
+            
+          
+  
   }
 
   page2no(){
