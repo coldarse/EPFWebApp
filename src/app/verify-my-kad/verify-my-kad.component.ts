@@ -189,6 +189,8 @@ export class VerifyMyKadComponent implements OnInit {
           //   this.insertMykadVisible = true;
           //   this.InvalidCardVisible = true;
           // }
+          appFunc.message = data;
+          this.route.navigate(['outofservice']);
           console.log(data);
         }else{
           appFunc.message = data;
@@ -241,6 +243,8 @@ export class VerifyMyKadComponent implements OnInit {
           //   this.insertMykadVisible = true;
           //   this.InvalidCardVisible = true;
           // }
+          appFunc.message = data;
+          this.route.navigate(['outofservice']);
           console.log(data);
         }else{
           appFunc.message = data;

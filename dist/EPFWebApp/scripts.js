@@ -3548,7 +3548,7 @@
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
         this.elements.main.classList.remove("keyboard--hidden");
-        this.elements.keyboardspace.style.height = "700px";
+        this.elements.keyboardspace.style.height = "350px";
     },
 
     close() {

@@ -1,13 +1,13 @@
-<div class="bg-img">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header">{{ "UpdateTAC" | translate }}</div>
 
     <div class="container-fluid">
-        <div class="row padTop10rem" *ngIf="page1">
+        <div class="row padTop2rem content-container" *ngIf="page1">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"phoneEntryMsg"| translate}}
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <input type="text" id="phoneNo" name="phoneNo" value="{{phoneNo}}">
@@ -16,7 +16,7 @@
                 <div class="row" *ngIf="phoneError">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <h2 class="errorMsg">{{"emptyPhoneError"| translate}}</h2>
+                        <h5 class="errorMsg">{{"emptyPhoneError"| translate}}</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -27,40 +27,52 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
-                    <div class="col marginLeft">
-                        <button class="keypad" (click)="click1()">1</button>
-                    </div>
-                    <div class="col">
-                        <button class="keypad" (click)="click2()">2</button>
-                    </div>
-                    <div class="col marginRight">
-                        <button class="keypad" (click)="click3()">3</button>
-                    </div>
-                    <div class="col-4"></div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-4"></div>
-                    <div class="col marginLeft">
-                        <button class="keypad" (click)="click4()">4</button>
-                    </div>
-                    <div class="col">
-                        <button class="keypad" (click)="click5()">5</button>
-                    </div>
-                    <div class="col marginRight">
-                        <button class="keypad" (click)="click6()">6</button>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click1()">1</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="keypad" (click)="click2()">2</button>
+                            </div>
+                            <div class="col-4 marginRight">
+                                <button class="keypad" (click)="click3()">3</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-4"></div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
-                    <div class="col marginLeft">
-                        <button class="keypad" (click)="click7()">7</button>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click4()">4</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="keypad" (click)="click5()">5</button>
+                            </div>
+                            <div class="col-4 marginRight">
+                                <button class="keypad" (click)="click6()">6</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <button class="keypad" (click)="click8()">8</button>
-                    </div>
-                    <div class="col marginRight">
-                        <button class="keypad" (click)="click9()">9</button>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click7()">7</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="keypad" (click)="click8()">8</button>
+                            </div>
+                            <div class="col-4 marginRight">
+                                <button class="keypad" (click)="click9()">9</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-4"></div>
                 </div>
@@ -74,7 +86,7 @@
                     </div>
                     <div class="col-4"></div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <div class="note">
@@ -82,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="page1no()">{{"back"| translate}}</button>
@@ -93,19 +105,19 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"VerifyPhoneMsg"| translate}}
                 </div>
-                <div class="row padTop20rem">
+                <div class="row padTop10rem">
                     <div class="col-3"></div>
                     <div class="col-2 right">
-                        <label class="lblReg marginRight10rem">{{"phone"|translate}}</label>
+                        <label class="lblReg" style="margin-right: -7rem;">{{"phone"|translate}}</label>
                     </div>
-                    <div class="col-2 lblSymbol">:</div>
+                    <div class="col-2 lblSymbol" style="margin-top: 0.7rem;">:</div>
                     <div class="col-5 left">
-                        <label class="lblInfo marginLeft5rem">{{phoneNo}}</label>
+                        <label class="lblInfo" style="margin-left: -1rem;">{{phoneNo}}</label>
                     </div>
                 </div>
                 <div class="row padTop30rem">
@@ -119,18 +131,18 @@
                 </div>
             </div>
         </div>
-        <div class="row padTop10rem" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="page3">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-Berjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"updateTACSuccessMsg"|translate}}</div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
@@ -138,19 +150,18 @@
                 </div>
             </div>
         </div>
-
-        <div class="row padTop10rem" *ngIf="Failed">
+        <div class="row padTop5rem content-container" *ngIf="Failed">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"fail"| translate}}
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/Icon-TidakBerjaya.svg" width="500" height="450">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="statusMsg">{{"ActionFailed"|translate}}</div>
                 </div>
-                <div class="row padTop10rem">
+                <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>

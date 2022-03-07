@@ -1,23 +1,23 @@
-<div class="bg-img">
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 860px;">
     <div class="header" *ngIf="insertCard">{{"MyKadVerification" | translate}}</div>
     <div class="header" *ngIf="Language">{{"language" | translate}}</div>
     <div class="header" *ngIf="Thumbprint">{{"fingerprint" | translate}}</div>
     <div class="header" *ngIf="removeCard">{{"removeCard" | translate}}</div>
 
     <div class="container-fluid">
-        <div class="row padTop10rem" *ngIf="page1">
+        <div class="row padTop5rem content-container" *ngIf="page1">
             <div class="text-center">
                 <div class="lblHeader">
                     Sila masukkan MyKad anda<br>
                     Please insert your MyKad
                 </div>
                 <div class="row padTop3rem">
-                    <img src="assets/images/insert-mykad.svg" width="800px" height="800px">
+                    <img src="assets/images/insert-mykad.svg" width="400px" height="400px">
                 </div>
             </div>
         </div>
 
-        <div class="row padTop25rem" *ngIf="page2">
+        <div class="row padTop10rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="row">
                     <div class="lblHeader">
@@ -37,15 +37,15 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="page3">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"placeThumbprint"|translate}}
                 </div>
-                <div class="row padTop3rem">
-                    <img src="assets/images/thumbprint.svg" width="800px" height="800px">
+                <div class="row padTopHalfrem">
+                    <img src="assets/images/thumbprint.svg" width="400px" height="400px">
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnNo" (click)="cancelMyKadVerification()">{{"cancel"|translate}}</button>
@@ -54,29 +54,21 @@
             </div>
         </div>
 
-        <div class="row padTop10rem" *ngIf="page4">
+        <div class="row padTop5rem content-container" *ngIf="page4">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"removeCardMsg"|translate}}
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-8 lblRemove">
                         {{"removeMsg"|translate}}
                     </div>
                 </div>
-                <div class="row padTop3rem">
-                    <img src="assets/images/remove-mykad.svg" width="800px" height="800px">
+                <div class="row padTopHalfrem">
+                    <img src="assets/images/remove-mykad.svg" width="400px" height="400px">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <button (click)="loadPage2()">Page2</button>
-<div class="col-12" *ngIf="page1">
-    <p>Page1</p>
-</div>
-
-<div class="col-md-12" *ngIf="page2">
-    <p>Page2</p>
-</div> -->
