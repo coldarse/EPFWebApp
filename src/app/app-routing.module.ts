@@ -11,9 +11,10 @@ import { IAkaunRegistrationComponent } from './i-akaun-registration/i-akaun-regi
 import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-savings-registration/i-saraan-shariah-savings-registration.component';
 import { ScreensaverComponent } from './screensaver/screensaver.component';
 import { OutOfServiceComponent } from './out-of-service/out-of-service.component';
+import { StartupComponent } from './startup/startup.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/screenSaver', pathMatch: 'full'},
+  {path: '', redirectTo: '/startup', pathMatch: 'full'},
   {path: 'verifyMyKad', component: VerifyMyKadComponent},
   {path: 'mainMenu', component: MainMenuComponent},
   {path: 'registerMember', component: RegisterMemberComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'iAkaunRegistration', component: IAkaunRegistrationComponent},
   {path: 'iSaraanShariahSavingsRegistration', component: ISaraanShariahSavingsRegistrationComponent},
   {path: 'screenSaver', component: ScreensaverComponent},
-  {path: 'outofservice', component: OutOfServiceComponent}
+  {path: 'outofservice', component: OutOfServiceComponent},
+  {path: 'startup', component: StartupComponent}
 ];
 
 @NgModule({

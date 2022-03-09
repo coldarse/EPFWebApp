@@ -1,8 +1,11 @@
 {
-    "AldanAPIURL": "https://10.0.58.81/api/",
+    "AldanAPIURL": "https://10.0.58.81/KMSAPI/api/",
     "AESCrpytKey": "gsKxGZ012HLL3MI5",
     "idletime": "100",
-    "popuptime": "30"
+    "popuptime": "30",
+    "Client_Id": "KMS_App",
+    "Client_Secret": "1q2w3E*",
+    "Grant_Type": "password"
 }
 
 
