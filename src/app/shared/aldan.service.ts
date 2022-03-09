@@ -16,7 +16,6 @@ export class AldanService {
 
   protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
   url: any; // Using Alibaba Development Swagger
-  receipturl: any;
 
 
   constructor(
@@ -24,8 +23,7 @@ export class AldanService {
     private router: Router,
     private appConfig: AppConfiguration
     ) {
-        this.url = appConfig.AldanDevURL; 
-        this.receipturl = appConfig.AldanReceiptURL;
+        this.url = appConfig.AldanAPIURL;
     }
 
   private handleError(error: HttpErrorResponse) {
