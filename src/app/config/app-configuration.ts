@@ -6,4 +6,6 @@ export class AppConfiguration {
     Client_Id!: string;
     Client_Secret!: string;
     Grant_Type!: string;
+    UserName!: string;
+    Password!: string;
   }

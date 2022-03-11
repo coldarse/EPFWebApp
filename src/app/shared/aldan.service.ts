@@ -1,5 +1,5 @@
-import { formatDate } from '@angular/common';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { formatDate, getLocaleDayNames } from '@angular/common';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin, throwError } from 'rxjs';
@@ -102,18 +102,20 @@ export class AldanService {
   //--------------* FOR KIOSK INITIALIZATION *--------------//
 
   getToken(computerName: string, adapterName: string){
-    const header = new Headers();
-    header.append('Content-Type', 'application/x-www-form-urlencoded');
+    // const header = new Headers();
+    // header.append('Content-Type', 'application/x-www-form-urlencoded');
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
 
     let body = `client_id=${this.clientid}&client_secret=${this.clientsecret}&grant_type=${this.granttype}&username=${computerName}&password=${adapterName}`;
 
     let Options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
     };
+    
 
     return this.http.post(
-      'https://10.0.58.81/KMSAPI/connect/authorize', 
-      body, 
+      'https://10.0.58.81/connect/token', 
+      body.replace("+", "%2B"),
       Options
     ).pipe(
       retry(1),
@@ -143,13 +145,21 @@ export class AldanService {
   }
 
   changePassword(body: any){
+
+    const Options = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + accessToken.token
+      }),
+      observe: 'response' as 'body'
+    };
     return this.http.post(
       this.url + 'identity/my-profile/change-password',
       body,
-      accessToken.httpOptions
+      Options
     ).pipe(
-      retry(1),
-      catchError(this.handleError),
+      map(data => {
+        return data
+      })
     )
   }
 
