@@ -47,9 +47,11 @@ export class StartupComponent implements OnInit {
     private route: Router,
     private appConfig: AppConfiguration,
   ) {
-    this.UserName = appConfig.UserName;
-    this.Password = appConfig.Password;
-    this.Secret = appConfig.Client_Secret;
+    this.UserName = appConfig.UserName.trim();
+    this.Password = appConfig.Password.trim();
+    this.Secret = appConfig.Client_Secret.trim();
+    
+    console.log(this.Password);
     this.startConnection();
   }
 
