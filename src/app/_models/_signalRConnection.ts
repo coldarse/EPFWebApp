@@ -8,7 +8,7 @@ import { adapter, kioskInformation } from './modelClass';
 
 export class signalRConnection {
     static connection: any;
-    static cardDetect: boolean;
+    static isCardInserted: boolean;
     static logsaves: string[];
     static kioskCode: string;
     static adapter: adapter[];

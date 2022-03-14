@@ -140,7 +140,7 @@ class appFunc {
     // Return true or false.
     static DetectMyKad() {
         return _signalRConnection__WEBPACK_IMPORTED_MODULE_0__["signalRConnection"].connection.invoke('IsCardDetected').then((data) => {
-            _signalRConnection__WEBPACK_IMPORTED_MODULE_0__["signalRConnection"].cardDetect = data;
+            _signalRConnection__WEBPACK_IMPORTED_MODULE_0__["signalRConnection"].isCardInserted = data;
         });
     }
     // Calculates the age based on the given Birth Date.
@@ -4760,7 +4760,7 @@ class VerifyMyKadComponent {
         this.translate.use('bm');
         this.readerIntervalId = setInterval(() => {
             _models_appFunc__WEBPACK_IMPORTED_MODULE_8__["appFunc"].DetectMyKad();
-            if (_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].cardDetect == true) {
+            if (_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].isCardInserted == true) {
                 if (this.insertedMyKad == false) {
                     this.insertedMyKad = true;
                     this.verify();

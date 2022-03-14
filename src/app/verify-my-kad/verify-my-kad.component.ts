@@ -29,7 +29,6 @@ export class VerifyMyKadComponent implements OnInit {
 
   Status = "MyKad";
   
-  myKadData: any;
   insertCard = true;
   Language = false;
   Thumbprint = false;
@@ -98,10 +97,10 @@ export class VerifyMyKadComponent implements OnInit {
 
     this.readerIntervalId = setInterval(() => {
       appFunc.DetectMyKad();
-      if(signalRConnection.cardDetect == true) {
+      if(signalRConnection.isCardInserted) {
         if(this.insertedMyKad == false){
           this.insertedMyKad = true;
-          this.verify();
+          this.readMyKad();
         }
       }
       else{
@@ -114,6 +113,21 @@ export class VerifyMyKadComponent implements OnInit {
 
   }
 
+  verifyThumbprint(data:any) : any{
+    signalRConnection.connection.invoke('VerifyThumbprint').then((isVerifySuccess: boolean) => {
+      if(isVerifySuccess){
+        this.bindMyKadData(data);
+      }
+    });
+  }
+
+  readMyKad(){
+    signalRConnection.connection.invoke('ReadMyKad').then((data: any) => {
+      this.verifyThumbprint(data)
+    });
+  }
+  
+
   selectBM(){
     selectLang.selectedLang = 'bm';
     this.translate.use(selectLang.selectedLang);
@@ -122,54 +136,53 @@ export class VerifyMyKadComponent implements OnInit {
     this.page2 = false;
     this.Thumbprint = true;
     this.page3 = true;
+    this.readMyKad();
 
-    
-
-    signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
-      if (data.toUpperCase().includes("SCANTHUMB")){
-        this.Status = data;
-        if(appFunc.DetectMyKad()){
-          signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
-            this.Status = data;
-            if (this.Status.toUpperCase().includes("MISMATCH")){
-              console.log(data);
-            }
-            else if(data.toUpperCase().includes("MATCH")){
-              this.myKadData = Object.assign(new MyKadDetails(), JSON.parse(data));
-              this.bindMyKadData();
-            }
-            else if(data.toUpperCase().includes("TIMEOUT")){
-              console.log(data);
-            }
-            else{
-              appFunc.message = data;
-              this.route.navigate(['outofservice']);
-            }
-          }); 
-        }
-      }
-      else{
-        if (data.toLowerCase().includes("invalid")){
-          //retry
-          // if(this.tryCountCard == 0){
-          //   this.loadingVisible = false;
-          //   this.insertMykadVisible = true;
-          //   this.InvalidCardVisibleFinal = true;
-          // }
-          // else{
-          //   this.loadingVisible = false;
-          //   this.insertMykadVisible = true;
-          //   this.InvalidCardVisible = true;
-          // }
-          appFunc.message = data;
-          this.route.navigate(['outofservice']);
-          console.log(data);
-        }else{
-          appFunc.message = data;
-          this.route.navigate(['outofservice']);
-        }
-      }    
-    });
+    // signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
+    //   if (data.toUpperCase().includes("SCANTHUMB")){
+    //     this.Status = data;
+    //     if(appFunc.DetectMyKad()){
+    //       signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
+    //         this.Status = data;
+    //         if (this.Status.toUpperCase().includes("MISMATCH")){
+    //           console.log(data);
+    //         }
+    //         else if(data.toUpperCase().includes("MATCH")){
+    //           this.myKadData = Object.assign(new MyKadDetails(), JSON.parse(data));
+    //           this.bindMyKadData();
+    //         }
+    //         else if(data.toUpperCase().includes("TIMEOUT")){
+    //           console.log(data);
+    //         }
+    //         else{
+    //           appFunc.message = data;
+    //           this.route.navigate(['outofservice']);
+    //         }
+    //       }); 
+    //     }
+    //   }
+    //   else{
+    //     if (data.toLowerCase().includes("invalid")){
+    //       //retry
+    //       // if(this.tryCountCard == 0){
+    //       //   this.loadingVisible = false;
+    //       //   this.insertMykadVisible = true;
+    //       //   this.InvalidCardVisibleFinal = true;
+    //       // }
+    //       // else{
+    //       //   this.loadingVisible = false;
+    //       //   this.insertMykadVisible = true;
+    //       //   this.InvalidCardVisible = true;
+    //       // }
+    //       appFunc.message = data;
+    //       this.route.navigate(['outofservice']);
+    //       console.log(data);
+    //     }else{
+    //       appFunc.message = data;
+    //       this.route.navigate(['outofservice']);
+    //     }
+    //   }    
+    // });
   }
 
   selectEN(){
@@ -181,49 +194,50 @@ export class VerifyMyKadComponent implements OnInit {
     this.Thumbprint = true;
     this.page3 = true;
 
-    signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
-      if (data.toUpperCase().includes("SCANTHUMB")){
-        this.Status = data;
-        if(appFunc.DetectMyKad()){
-          signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
-            this.Status = data;
-            if (this.Status.toUpperCase().includes("MISMATCH")){
-            }
-            else if(data.toUpperCase().includes("MATCH")){
-              this.myKadData = Object.assign(new MyKadDetails(), JSON.parse(data));
-              this.bindMyKadData();
-            }
-            else if(data.toUpperCase().includes("TIMEOUT")){
-            }
-            else{
-              appFunc.message = data;
-              this.route.navigate(['outofservice']);
-            }
-          }); 
-        }
-      }
-      else{
-        if (data.toLowerCase().includes("invalid")){
-          //retry
-          // if(this.tryCountCard == 0){
-          //   this.loadingVisible = false;
-          //   this.insertMykadVisible = true;
-          //   this.InvalidCardVisibleFinal = true;
-          // }
-          // else{
-          //   this.loadingVisible = false;
-          //   this.insertMykadVisible = true;
-          //   this.InvalidCardVisible = true;
-          // }
-          appFunc.message = data;
-          this.route.navigate(['outofservice']);
-          console.log(data);
-        }else{
-          appFunc.message = data;
-          this.route.navigate(['outofservice']);
-        }
-      }    
-    });
+    this.readMyKad();
+    // signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
+    //   if (data.toUpperCase().includes("SCANTHUMB")){
+    //     this.Status = data;
+    //     if(appFunc.DetectMyKad()){
+    //       signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
+    //         this.Status = data;
+    //         if (this.Status.toUpperCase().includes("MISMATCH")){
+    //         }
+    //         else if(data.toUpperCase().includes("MATCH")){
+    //           this.myKadData = Object.assign(new MyKadDetails(), JSON.parse(data));
+    //           this.bindMyKadData();
+    //         }
+    //         else if(data.toUpperCase().includes("TIMEOUT")){
+    //         }
+    //         else{
+    //           appFunc.message = data;
+    //           this.route.navigate(['outofservice']);
+    //         }
+    //       }); 
+    //     }
+    //   }
+    //   else{
+    //     if (data.toLowerCase().includes("invalid")){
+    //       //retry
+    //       // if(this.tryCountCard == 0){
+    //       //   this.loadingVisible = false;
+    //       //   this.insertMykadVisible = true;
+    //       //   this.InvalidCardVisibleFinal = true;
+    //       // }
+    //       // else{
+    //       //   this.loadingVisible = false;
+    //       //   this.insertMykadVisible = true;
+    //       //   this.InvalidCardVisible = true;
+    //       // }
+    //       appFunc.message = data;
+    //       this.route.navigate(['outofservice']);
+    //       console.log(data);
+    //     }else{
+    //       appFunc.message = data;
+    //       this.route.navigate(['outofservice']);
+    //     }
+    //   }    
+    // });
   }
 
   ngOnDestroy(): void {
@@ -231,48 +245,40 @@ export class VerifyMyKadComponent implements OnInit {
     clearInterval(this.moduleIntervelId);
   }
 
-  ngAfterViewInit(){
-    try{
-      //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Account Registration]" + ": " + "After form is loaded, initialized keyboard");
-    }catch(e: any){
-      //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Account Registration]" + ": " + "Error initializing keyboard." + e.toString());
-    }
-  }
-
-
-  bindMyKadData(): void{
+  bindMyKadData(data:any): void{
     try {
-      let age = appFunc.calculateAge(new Date(this.myKadData['DOB']));
+      let age = appFunc.calculateAge(new Date(data['DOB']));
 
       if (age > 18){
-        currentMyKadDetails.Name = this.myKadData['Name'];
-        currentMyKadDetails.ICNo = this.myKadData['ICNo'].toString().replace("*", "");
-        currentMyKadDetails.OldICNo = this.myKadData['OldICNo'];
-        currentMyKadDetails.DOB = this.myKadData['DOB'];
-        currentMyKadDetails.POB =  this.myKadData['POB'];
-        currentMyKadDetails.Gender = this.myKadData['Gender'];
-        currentMyKadDetails.Citizenship = this.myKadData['Citizenship'];
-        currentMyKadDetails.IssueDate = this.myKadData['IssueDate'];
-        currentMyKadDetails.Race = this.myKadData['Race'];
-        currentMyKadDetails.Religion = this.myKadData['Religion'];
-        currentMyKadDetails.Address1 = this.myKadData['Address1'];
-        currentMyKadDetails.Address2 = this.myKadData['Address2'];
-        currentMyKadDetails.Address3 = this.myKadData['Address3'];
-        currentMyKadDetails.PostCode = this.myKadData['PostCode'];
-        currentMyKadDetails.City = this.myKadData['City'];
-        currentMyKadDetails.State = this.myKadData['State'];
-        currentMyKadDetails.Country = this.myKadData['Country'];
-        currentMyKadDetails.Address = this.myKadData['Address'];
-        currentMyKadDetails.Address1 = this.myKadData['Address1'];
-        currentMyKadDetails.Address2 = this.myKadData['Address2'];
-        currentMyKadDetails.Address3 = this.myKadData['Address3'];
-        currentMyKadDetails.RJ = this.myKadData['RJ'];
-        currentMyKadDetails.KT = this.myKadData['KT'];
-        currentMyKadDetails.GreenCardNationality = this.myKadData['GreenCardNationality'];
-        currentMyKadDetails.GreenCardExpiryDate = this.myKadData['GreenCardExpiryDate'];
-        currentMyKadDetails.CardVersion = this.myKadData['CardVersion'];
-        currentMyKadDetails.OtherID = this.myKadData['OtherID'];
-        currentMyKadDetails.CategoryType = this.myKadData['CategoryType'];
+        currentMyKadDetails.Name = data['Name'];
+        currentMyKadDetails.ICNo = data['ICNo'].toString().replace("*", "");
+        currentMyKadDetails.OldICNo = data['OldICNo'];
+        currentMyKadDetails.DOB = data['DOB'];
+        currentMyKadDetails.DOBString = data['DOBString'];
+        currentMyKadDetails.POB =  data['POB'];
+        currentMyKadDetails.Gender = data['Gender'];
+        currentMyKadDetails.Citizenship = data['Citizenship'];
+        currentMyKadDetails.IssueDate = data['IssueDate'];
+        currentMyKadDetails.Race = data['Race'];
+        currentMyKadDetails.Religion = data['Religion'];
+        currentMyKadDetails.Address1 = data['Address1'];
+        currentMyKadDetails.Address2 = data['Address2'];
+        currentMyKadDetails.Address3 = data['Address3'];
+        currentMyKadDetails.PostCode = data['PostCode'];
+        currentMyKadDetails.City = data['City'];
+        currentMyKadDetails.State = data['State'];
+        currentMyKadDetails.Country = data['Country'];
+        currentMyKadDetails.Address = data['Address'];
+        currentMyKadDetails.Address1 = data['Address1'];
+        currentMyKadDetails.Address2 = data['Address2'];
+        currentMyKadDetails.Address3 = data['Address3'];
+        currentMyKadDetails.RJ = data['RJ'];
+        currentMyKadDetails.KT = data['KT'];
+        currentMyKadDetails.GreenCardNationality = data['GreenCardNationality'];
+        currentMyKadDetails.GreenCardExpiryDate = data['GreenCardExpiryDate'];
+        currentMyKadDetails.CardVersion = data['CardVersion'];
+        currentMyKadDetails.OtherID = data['OtherID'];
+        currentMyKadDetails.CategoryType = data['CategoryType'];
 
         this.getAccountInquiry();
       }
@@ -348,29 +354,29 @@ export class VerifyMyKadComponent implements OnInit {
     }
   }
 
-  verify() : void {
-    try {
-      // First Invoke
-      signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
-        this.Status = data;
-        // Not ScanThumb
-        if(data.toLowerCase().includes("error")){
-          console.log(data);
-        }
-        if(appFunc.DetectMyKad()){
-          this.insertCard = false;
-          this.page1 = false;
-          this.Language = true;
-          this.page2 = true;
-        }
-      });
-    }
-    catch (e: any){
-      // Error
-      appFunc.message = e.toString();
-      this.route.navigate(['outofservice']);
-    }
-  }
+  // verify() : void {
+  //   try {
+  //     // First Invoke
+  //     signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
+  //       this.Status = data;
+  //       // Not ScanThumb
+  //       if(data.toLowerCase().includes("error")){
+  //         console.log(data);
+  //       }
+  //       if(appFunc.DetectMyKad()){
+  //         this.insertCard = false;
+  //         this.page1 = false;
+  //         this.Language = true;
+  //         this.page2 = true;
+  //       }
+  //     });
+  //   }
+  //   catch (e: any){
+  //     // Error
+  //     appFunc.message = e.toString();
+  //     this.route.navigate(['outofservice']);
+  //   }
+  // }
 
   cancelMyKadVerification(){
     clearInterval(this.readerIntervalId);
