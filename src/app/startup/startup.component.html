@@ -1,0 +1,70 @@
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
+    <div class="container-fluid">
+        <div class="row content-container padTop20rem text-center" *ngIf="page1">
+            <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+            <h1 class="padTop2rem">Checking Kiosk Credentials</h1>
+            <h2>Please Wait</h2>
+            <h2>{{dots}}</h2>
+        </div>
+
+        <div class="row content-container padTop20rem text-center" *ngIf="page2">
+            <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+            <h1 class="padTop5rem">Kiosk is Not Found in KMS</h1>
+            <h2>Please contact KMS Administrator.</h2>
+        </div>
+
+        <div class="row content-container padTop15rem text-center" *ngIf="page3">
+            <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+            <h1 class="padTop5rem">Kiosk is Not Registered.</h1>
+            <h2>Please select the Adapter to register this Kiosk Below.</h2>
+            <select (change)="selectedAdapter($event)" style="width: 1000px; margin: auto; height: 50px; margin-top: 20px; font-size: 2rem; text-align: center; border-radius: 0.75rem;">
+                <option value=""></option>
+                <option *ngFor="let a of adapters" value="{{a.adapterNameEncrypted}}">
+                    {{a.adapterName}}
+                </option>
+            </select>
+            <button class="btnShariah" style="margin: auto; margin-top: 40px;" (click)="page3Click()" *ngIf="isSelectedAdapter">
+                Register Kiosk
+            </button>
+        </div>
+
+        <div class="row content-container padTop15rem text-center" *ngIf="page4">
+            <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+            <h1>Login to Register Kiosk</h1>
+            <h2 class="padTop1rem">Username</h2>
+            <input type="text" 
+                style="
+                    width: 600px; 
+                    margin: auto; 
+                    height: 50px; 
+                    margin-top: 10px; 
+                    font-size: 2rem; 
+                    text-align: center; 
+                    border-radius: 0.75rem;"
+                #username
+            >
+            <h2 class="padTop1rem">Password</h2>
+            <input type="password" 
+                style="
+                    width: 600px; 
+                    margin: auto; 
+                    height: 50px; 
+                    margin-top: 10px; 
+                    font-size: 2rem; 
+                    text-align: center; 
+                    border-radius: 0.75rem;"
+                #password
+            >
+            <h2></h2>
+            <button class="btnShariah" style="margin: auto; margin-top: 40px;" (click)="page4Click()">
+                Login
+            </button>
+        </div>
+
+        <div class="row content-container padTop20rem text-center" *ngIf="page5">
+            <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+            <h1 class="padTop5rem">Kiosk Successfully Registered!</h1>
+            <h2>Redirecting to Application in {{seconds}} seconds...</h2>
+        </div>
+    </div>
+</div>

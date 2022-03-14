@@ -54,75 +54,47 @@ export class VerifyMyKadComponent implements OnInit {
     private _aldanService: AldanService,
     private appConfig: AppConfiguration
   ) { 
-    this.startConnection();
   }
 
-  startConnection() : void {
-    this._signalR.connect().then((c) => {
-      console.log("API King is now Connected on " + formatDate(new Date(), 'HH:MM:ss', 'en'));
-      signalRConnection.connection = c;
-
-      signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {
-        signalRConnection.kioskCode = data;
-      });
-      signalRConnection.connection.invoke('GetKioskID').then((data: string) => {
-        signalRConnection.kioskID = data;
-      });
-      signalRConnection.connection.invoke('isHardcodedIC').then((data: boolean) => {
-        signalRConnection.isHardcodedIC = data;
-      });
-
-      signalRConnection.connection.invoke('GetLoginToken').then((data: string) => {
-        accessToken.token = data;
-        accessToken.httpOptions = {
-          headers: new HttpHeaders({
-            Authorization: 'Bearer ' + accessToken.token
-          })
-        };
-        this._aldanService.GetBusinessTypes().subscribe((res: any) => {
-          appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
-        });
-        this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
-          appFunc.modules = res.map((em: any) => new eModules(em));
-
-          if(appFunc.modules.length != 0){
-            let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-            if(areDisabled == appFunc.modules.length){
-              // errorCodes.code = "0168";
-              appFunc.message = "Under Maintenance";
-              this.route.navigate(['outofservice']);
-            }
   
-            setTimeout(() => {
-              this.moduleIntervelId = setInterval(() => {
-                let count = appFunc.checkModuleAvailability(appFunc.modules);
-                if(count == 0){
-                  // errorCodes.code = "0168";
-                  appFunc.message = "Under Maintenance";
-                  this.route.navigate(['outofservice']);
-                }
-              }, 1000);
-            } , 60000);
-          }
-          else{
-            appFunc.message = "Under Maintenance";
-            this.route.navigate(['outofservice']);
-          }
-          
-
-
-        });
-      });
-    }).catch((err: any) => {
-      // errorCodes.code = "0167";
-      appFunc.message = "Unauthorized";
-      this.route.navigate(['outofservice']);
-    });
-  }
 
   ngOnInit(): void {
 
     this.translate.use('bm');
+
+    this._aldanService.GetBusinessTypes().subscribe((res: any) => {
+      appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
+    });
+    this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
+      appFunc.modules = res.map((em: any) => new eModules(em));
+
+      if(appFunc.modules.length != 0){
+        let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+        if(areDisabled == appFunc.modules.length){
+          // errorCodes.code = "0168";
+          appFunc.message = "Under Maintenance";
+          this.route.navigate(['outofservice']);
+        }
+
+        setTimeout(() => {
+          this.moduleIntervelId = setInterval(() => {
+            let count = appFunc.checkModuleAvailability(appFunc.modules);
+            if(count == 0){
+              // errorCodes.code = "0168";
+              appFunc.message = "Under Maintenance";
+              this.route.navigate(['outofservice']);
+            }
+          }, 1000);
+        } , 60000);
+      }
+      else{
+        appFunc.message = "Under Maintenance";
+        this.route.navigate(['outofservice']);
+      }
+      
+
+
+    });
 
     this.readerIntervalId = setInterval(() => {
       appFunc.DetectMyKad();
@@ -350,7 +322,7 @@ export class VerifyMyKadComponent implements OnInit {
               this.route.navigate(['mainMenu']);
             }
             else{
-              // Error
+              // Error  
               appFunc.message = result.error[0].description;
               this.route.navigate(['outofservice']);
             }

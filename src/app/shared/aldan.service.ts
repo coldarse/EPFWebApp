@@ -1,5 +1,5 @@
-import { formatDate } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { formatDate, getLocaleDayNames } from '@angular/common';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin, throwError } from 'rxjs';
@@ -15,8 +15,14 @@ import { selectLang } from '../_models/language';
 export class AldanService {
 
   protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-  url: any; // Using Alibaba Development Swagger
 
+  // KMS API Url
+  url: any; 
+  // For getting token
+  clientid: any;
+  clientsecret: any;
+  granttype: any;
+  
 
   constructor(
     private http: HttpClient,
@@ -24,6 +30,9 @@ export class AldanService {
     private appConfig: AppConfiguration
     ) {
         this.url = appConfig.AldanAPIURL;
+        this.clientid = appConfig.Client_Id;
+        this.clientsecret = appConfig.Client_Secret;
+        this.granttype = appConfig.Grant_Type;
     }
 
   private handleError(error: HttpErrorResponse) {
@@ -47,6 +56,9 @@ export class AldanService {
     return throwError(
       error);
   }
+
+
+  //--------------* FOR EXAMPLE PURPOSES *--------------//
 
   //POST Example
   postExample(body: any){
@@ -84,7 +96,78 @@ export class AldanService {
     )
   }
 
+  //--------------* EXAMPLE ENDS *--------------//
 
+
+  //--------------* FOR KIOSK INITIALIZATION *--------------//
+
+  getToken(computerName: string, adapterName: string){
+    // const header = new Headers();
+    // header.append('Content-Type', 'application/x-www-form-urlencoded');
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
+
+    let body = `client_id=${this.clientid}&client_secret=${this.clientsecret}&grant_type=${this.granttype}&username=${computerName}&password=${adapterName}`;
+
+    let Options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
+    };
+    
+
+    return this.http.post(
+      'https://10.0.58.81/connect/token', 
+      body.replace("+", "%2B"),
+      Options
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  verifyKiosk(kioskCode: string){
+    return this.http.get(
+      this.url + `/app/kiosks/Verify/${kioskCode}`,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  registerKiosk(kioskid: string, body: any){
+    return this.http.post(
+      this.url + `app/kiosks/Register/${kioskid}`,
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+  changePassword(body: any){
+
+    const Options = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + accessToken.token
+      }),
+      observe: 'response' as 'body'
+    };
+    return this.http.post(
+      this.url + 'identity/my-profile/change-password',
+      body,
+      Options
+    ).pipe(
+      map(data => {
+        return data
+      })
+    )
+  }
+
+  //--------------* KIOSK INITIALIZATION END *--------------//
+
+
+
+  //--------------* API FUNCTIONS *--------------//
 
   //GetTranslations
   getTranslations(){
@@ -316,4 +399,7 @@ export class AldanService {
       catchError(this.handleError),
     )
   }
+
+
+  //--------------* API FUNCTIONS END *--------------//
 }
