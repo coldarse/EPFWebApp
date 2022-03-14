@@ -298,7 +298,7 @@ export class AldanService {
 
   GetTnC(locale: string){
     return this.http.get(
-      this.url + 'IAkaunActivation/iAkaunAct/GetTnC?SessionId=1&locale=' + selectLang.selectedLang,
+      this.url + `IAkaunActivation/iAkaunAct/GetTnC?SessionId=1&locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
         retry(1),
