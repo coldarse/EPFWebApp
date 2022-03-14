@@ -155,7 +155,7 @@ export class StartupComponent implements OnInit {
 
   page3Click(){
     this.adapters.forEach((element: adapter) => {
-      this.selectedAdapterValue = element.adapterName;
+      if(element.adapterNameEncrypted == this.selectedAdapterValueEncrypted) this.selectedAdapterValue = element.adapterName;
     })
     const kioskRegisterBody = {
       "MacAddress": this.selectedAdapterValue
