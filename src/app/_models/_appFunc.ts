@@ -61,7 +61,7 @@ export class appFunc {
     // Return true or false.
     static DetectMyKad() : Boolean{
         return signalRConnection.connection.invoke('IsCardDetected').then((data: boolean) => {
-            signalRConnection.cardDetect = data;
+            signalRConnection.isCardInserted = data;
         });
     }
 

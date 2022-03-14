@@ -9,6 +9,7 @@ export class currentMyKadDetails {
     static ICNo : string;
     static OldICNo : string;
     static DOB : Date;
+    static DOBString : string;
     static POB : string;
     static Gender : string;
     static Citizenship : string;
