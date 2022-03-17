@@ -33,32 +33,25 @@ export class RegisterMemberComponent implements OnInit {
   RegShariah = false;
   RegSaraan = false;
   RegIAkaun = false;
-  page1 = true;
-  page2 = false;
-  page3 = false;
-  page4 = false;
-  page5 = false;
-  page6 = false;
-  page7 = false;
-  page8 = false;
-  page9 = false;
-  page10 = false;
-  page11 = false;
-  page12 = false;
-  page13 = false;
-  page14 = false;
+  RegisterMemberPage = true;
+  InsertPhonePage = false;
+  InsertEmailPage = false;
+  ValidateProfilePage = false;
+  RegisterSuccessPage = false;
+  TnCPage = false;
+  ActivateiAkaunPage = false;
+  ActivateSuccessPage = false;
+  PickShariahPage = false;
+  ShariahTnCPage = false;
+  ShariahSuccessPage = false;
+  RegisteriSaraanPage = false;
+  SelectJobPage = false;
+  SaraanSuccessPage = false;
   Failed = false;
+  TnC = '';
 
   xagreedTnc1 = true;
   xagreedTnc2 = true;
-
-  checkboxImages = [
-    { name: "checkbox1", id: 1, checked: false, src: "assets/images/fish.svg" },
-    { name: "checkbox2", id: 2, checked: false, src: "assets/images/frog.svg" },
-    { name: "checkbox3", id: 3, checked: false, src: "assets/images/snail.svg" },
-    { name: "checkbox4", id: 4, checked: false, src: "assets/images/lamb.svg" },
-    { name: "checkbox5", id: 5, checked: false, src: "assets/images/penguin.svg" },
-  ];
 
   jobSectors = [
     { name: "agriculture", id: 1, malay: "Pertanian", english: "Pertanian" },
@@ -112,8 +105,7 @@ export class RegisterMemberComponent implements OnInit {
   securePhraseMax = false;
   passwordMatch = false;
 
-  
-
+  checkboxImages: any[] = [];
 
   constructor(
     private route: Router,
@@ -181,23 +173,23 @@ export class RegisterMemberComponent implements OnInit {
     currentMyKadDetails.CategoryType = "W";
   }
 
-  page1yes(){
-    this.page1 = false;
-    this.page2 = true;
+  RegisterMemberYes(){
+    this.RegisterMemberPage = false;
+    this.InsertPhonePage = true;
   }
 
-  page1no(){
+  RegisterMemberNo(){
     this.route.navigate(['mainMenu']);
   }
 
-  page2yes(){
+  InsertPhoneYes(){
     this.phoneError = false;
     if(this.phoneNo.length < 10){
       this.phoneError = true;
     }
     else{
-      this.page2 = false;
-      this.page3 = true;
+      this.InsertPhonePage = false;
+      this.InsertEmailPage = true;
   
       setTimeout(() => {
         loadKeyboard();
@@ -205,18 +197,18 @@ export class RegisterMemberComponent implements OnInit {
     }
   }
 
-  page2no(){
-    this.page2 = false;
-    this.page1 = true;
+  InsertPhoneNo(){
+    this.InsertPhonePage = false;
+    this.RegisterMemberPage = true;
 
     deleteKeyboard();
   }
 
-  page3yes(){
+  InsertEmailYes(){
     this.emailError = false;
     if(this.email?.nativeElement.value != ""){
-      this.page3 = false;
-      this.page4 = true;
+      this.InsertEmailPage = false;
+      this.ValidateProfilePage = true;
       this.emailAddress = this.email?.nativeElement.value + "@" + this.emailDDL?.nativeElement.value;
       deleteKeyboard();
     }
@@ -225,12 +217,12 @@ export class RegisterMemberComponent implements OnInit {
     }
   }
 
-  page3no(){
-    this.page3 = false;
-    this.page2 = true;
+  InsertEmailNo(){
+    this.InsertEmailPage = false;
+    this.InsertPhonePage = true;
   }
 
-  page4yes(){
+  ValidateProfileYes(){
     
     if(appFunc.bypassAPI != true){
       let residentStat = "";
@@ -497,8 +489,8 @@ export class RegisterMemberComponent implements OnInit {
               this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
                 if(result.responseCode == "0"){
           
-                  this.page4 = false;
-                  this.page5 = true;
+                  this.ValidateProfilePage = false;
+                  this.RegisterSuccessPage = true;
             
                   deleteKeyboard()
                 }
@@ -518,23 +510,35 @@ export class RegisterMemberComponent implements OnInit {
       });
     }
     else{
-      this.page4 = false;
-      this.page5 = true;
+      this.ValidateProfilePage = false;
+      this.RegisterSuccessPage = true;
     }
   }
 
-  page4no(){
-    this.page4 = false;
-    this.page3 = true;
+  ValidateProfileNo(){
+    this.ValidateProfilePage = false;
+    this.InsertEmailPage = true;
 
     setTimeout(() => {
       loadKeyboard();
     }, 500);
   }
 
-  page5yes(){
-    this.page5 = false;
-    this.page6 = true;
+  RegisterSuccessYes(){
+    if (appFunc.bypassAPI != false) {
+      this._aldanService
+        .GetTnC(selectLang.selectedLang)
+        .subscribe((result: any) => {
+          if (result.content != '') {
+            this.TnC = result.content.toString();
+            console.log(this.TnC);
+            this.RegisterSuccessPage = false;
+            this.TnCPage = true;
+          } else {
+            this.Failed = true;
+          }
+        });
+    }
   }
 
   clickTNC1(){
@@ -544,23 +548,36 @@ export class RegisterMemberComponent implements OnInit {
     this.xagreedTnc2 = !this.xagreedTnc2;
   }
 
-  page6yes(){
-    this.page6 = false;
-    this.page7 = true;
+  TnCYes(){
+    if (appFunc.bypassAPI != false) {
+      this._aldanService.GetSecureImage().subscribe((result: any) => {
+        if (result.imgId != '') {
+          result.forEach((element: any) => {
+            this.checkboxImages.push({
+              imgId: element.imgId,
+              imgPath: element.imgPath,
+              checked: false,
+            });
+          });
+          this.TnCPage = false;
+          this.ActivateiAkaunPage = true;
+        } else {
+          this.Failed = true;
+        }
+      });
+    }
 
     setTimeout(() => {
       loadKeyboard();
     }, 500);
   }
 
-  page6no(){
-    this.page6 = false;
-    this.page5 = true;
+  TnCNo(){
+    this.TnCPage = false;
+    this.RegisterSuccessPage = true;
   }
 
-  
-
-  page7yes(){
+  ActivateYes(){
 
     this.accountAlpha = false;
     this.accountAlpha = false;
@@ -672,14 +689,14 @@ export class RegisterMemberComponent implements OnInit {
           //     this.Failed = true;
           //   }
           // });
-          this.page7 = false;
-          this.page8 = true;
+          this.ActivateiAkaunPage = false;
+          this.ActivateSuccessPage = true;
     
           deleteKeyboard()
         }
         else{
-          this.page7 = false;
-          this.page8 = true;
+          this.ActivateiAkaunPage = false;
+          this.ActivateSuccessPage = true;
     
           deleteKeyboard()
         }
@@ -692,29 +709,29 @@ export class RegisterMemberComponent implements OnInit {
     
   }
 
-  page7no(){
-    this.page7 = false;
-    this.page6 = true;
+  ActivateNo(){
+    this.ActivateiAkaunPage = false;
+    this.TnCPage = true;
 
     deleteKeyboard()
   }
 
-  page8yes(){
-    this.page8 = false;
-    this.page9 = true;
+  ActivateSuccessYes(){
+    this.ActivateSuccessPage = false;
+    this.PickShariahPage = true;
   }
 
-  selectiSaraan(){
-    this.page9 = false;
-    this.page12 = true;
+  IShariahNo(){
+    this.PickShariahPage = false;
+    this.RegisteriSaraanPage = true;
   }
 
-  selectShariah(){
-    this.page9 = false;
-    this.page10 = true;
+  IShariahYes(){
+    this.PickShariahPage = false;
+    this.ShariahTnCPage = true;
   }
 
-  page10yes(){
+  ShariahTnCYes(){
 
     if(appFunc.bypassAPI != true){
       const iShariahBody = {
@@ -738,8 +755,8 @@ export class RegisterMemberComponent implements OnInit {
 
           
 
-          this.page10 = false;
-          this.page11 = true;
+          this.ShariahTnCPage = false;
+          this.ShariahSuccessPage = true;
 
         }
         else{
@@ -748,31 +765,31 @@ export class RegisterMemberComponent implements OnInit {
       });
     }
     else{
-      this.page10 = false;
-      this.page11 = true;
+      this.ShariahTnCPage = false;
+      this.ShariahSuccessPage = true;
     }
   }
 
-  page10no(){
-    this.page10 = false;
-    this.page9 = true;
+  ShariahTnCNo(){
+    this.ShariahTnCPage = false;
+    this.PickShariahPage = true;
   }
 
-  page11yes(){
-    this.page11 = false;
-    this.page12 = true;
+  ShariahSuccessYes(){
+    this.ShariahSuccessPage = false;
+    this.RegisteriSaraanPage = true;
   }
 
-  page12yes(){
-    this.page12 = false;
-    this.page13 = true;
+  RegisteriSaraanYes(){
+    this.RegisteriSaraanPage = false;
+    this.SelectJobPage = true;
   }
 
-  page12no(){
+  RegisteriSaraanNo(){
     this.route.navigate(['mainMenu']);
   }
 
-  page13yes(){
+  SelectJobYes(){
 
     if(this.selectedJobSector == undefined){
 
@@ -794,8 +811,8 @@ export class RegisterMemberComponent implements OnInit {
         this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {
           if(result.responseCode == "0"){
   
-            this.page13 = false;
-            this.page14 = true;
+            this.SelectJobPage = false;
+            this.SaraanSuccessPage = true;
   
           }
           else{
@@ -804,8 +821,8 @@ export class RegisterMemberComponent implements OnInit {
         });
       }
       else{
-        this.page14 = true;
-        this.page13 = false;
+        this.SaraanSuccessPage = true;
+        this.SelectJobPage = false;
       }
     }
 
@@ -813,12 +830,12 @@ export class RegisterMemberComponent implements OnInit {
     
   }
 
-  page13no(){
-    this.page13 = false;
-    this.page12 = true;
+  SelectJobNo(){
+    this.SelectJobPage = false;
+    this.RegisteriSaraanPage = true;
   }
 
-  page14yes(){
+  SaraanSuccessYes(){
     this.route.navigate(['mainMenu']);
   }
 
@@ -867,12 +884,11 @@ export class RegisterMemberComponent implements OnInit {
     this.phoneNo = this.phoneNo.substring(0, this.phoneNo.length - 1);
   }
 
-  clickImage(name: string){
+  clickImage(imgId: string) {
     this.checkboxImages.forEach((elem: any) => {
-      if(name == elem.name){
+      if (imgId == elem.imgId) {
         elem.checked = true;
-      }
-      else{
+      } else {
         elem.checked = false;
       }
     });

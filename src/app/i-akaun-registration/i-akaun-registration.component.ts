@@ -356,7 +356,7 @@ export class IAkaunRegistrationComponent implements OnInit {
           }
 
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
-            if(result.responseCode == "0"){
+            if(result.epfNum != null){
 
               this.page6 = false;
               this.page7 = true;
