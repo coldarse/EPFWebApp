@@ -12,9 +12,9 @@ import { signalRConnection } from '../_models/_signalRConnection';
 })
 export class UpdateTACComponent implements OnInit {
 
-  page1 = true;
-  page2 = false;
-  page3 = false;
+  EnterPhoneNo = true;
+  PhoneNoConfirmation = false;
+  Success = false;
   Failed = false;
   phoneNo = "";
 
@@ -31,22 +31,22 @@ export class UpdateTACComponent implements OnInit {
     this.translate.use('bm');
   }
 
-  page1yes(){
+  EnterPhoneNoYes(){
     this.phoneError = false;
     if(this.phoneNo.length < 10){
       this.phoneError = true;
     }
     else{
-      this.page1 = false;
-      this.page2 = true;
+      this.EnterPhoneNo = false;
+      this.PhoneNoConfirmation = true;
     }
   }
 
-  page1no(){
+  EnterPhoneNoNo(){
     this.route.navigate(['mainMenu']);
   }
 
-  page2yes(){
+  PhoneNoConfirmationYes(){
     if(appFunc.bypassAPI != true){
       const updateTACBody = {
         "custNum": appFunc.currMemberDetail.cifNum,
@@ -61,8 +61,8 @@ export class UpdateTACComponent implements OnInit {
 
       this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {
         if(result.responseCode == "0"){
-          this.page2 = false;
-          this.page3 = true;
+          this.PhoneNoConfirmation = false;
+          this.Success = true;
         }
         else{
           this.Failed = true;
@@ -70,17 +70,17 @@ export class UpdateTACComponent implements OnInit {
       });
     }
     else{
-      this.page2 = false;
-      this.page3 = true;
+      this.PhoneNoConfirmation = false;
+      this.Success = true;
     }
   }
 
-  page2no(){
-    this.page2 = false;
-    this.page1 = true;
+  PhoneNoConfirmationNo(){
+    this.PhoneNoConfirmation = false;
+    this.EnterPhoneNo = true;
   }
 
-  page3yes(){
+  SuccessYes(){
     this.route.navigate(['mainMenu']);
   }
 

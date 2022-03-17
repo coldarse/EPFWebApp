@@ -5,7 +5,7 @@
     <div class="header" *ngIf="removeCard">{{"removeCard" | translate}}</div>
 
     <div class="container-fluid">
-        <div class="row padTop5rem content-container" *ngIf="page1">
+        <div class="row padTop5rem content-container" *ngIf="InsertMyKad">
             <div class="text-center">
                 <div class="lblHeader">
                     Sila masukkan MyKad anda<br>
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="row padTop10rem content-container" *ngIf="page2">
+        <div class="row padTop10rem content-container" *ngIf="SelectLanguage">
             <div class="text-center">
                 <div class="row">
                     <div class="lblHeader">
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="ReadThumbprint">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"placeThumbprint"|translate}}
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page4">
+        <div class="row padTop5rem content-container" *ngIf="RemoveMyKad">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"removeCardMsg"|translate}}

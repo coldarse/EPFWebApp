@@ -33,10 +33,10 @@ export class VerifyMyKadComponent implements OnInit {
   Language = false;
   Thumbprint = false;
   removeCard = false;
-  page1 = true;
-  page2 = false;
-  page3 = false;
-  page4 = false;
+  InsertMyKad = true;
+  SelectLanguage = false;
+  ReadThumbprint = false;
+  RemoveMyKad = false;
 
   insertedMyKad = false;
 
@@ -133,9 +133,9 @@ export class VerifyMyKadComponent implements OnInit {
     this.translate.use(selectLang.selectedLang);
 
     this.Language = false;
-    this.page2 = false;
+    this.SelectLanguage = false;
     this.Thumbprint = true;
-    this.page3 = true;
+    this.ReadThumbprint = true;
     this.readMyKad();
 
     // signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
@@ -190,9 +190,9 @@ export class VerifyMyKadComponent implements OnInit {
     this.translate.use(selectLang.selectedLang);
 
     this.Language = false;
-    this.page2 = false;
+    this.SelectLanguage = false;
     this.Thumbprint = true;
-    this.page3 = true;
+    this.ReadThumbprint = true;
 
     this.readMyKad();
     // signalRConnection.connection.invoke('myKadRequest', this.Status).then((data: any) => {
@@ -365,9 +365,9 @@ export class VerifyMyKadComponent implements OnInit {
   //       }
   //       if(appFunc.DetectMyKad()){
   //         this.insertCard = false;
-  //         this.page1 = false;
+  //         this.InsertMyKad = false;
   //         this.Language = true;
-  //         this.page2 = true;
+  //         this.SelectLanguage = true;
   //       }
   //     });
   //   }
