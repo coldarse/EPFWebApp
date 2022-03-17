@@ -19,11 +19,11 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   RegSaraanShariah = true;
   RegShariah = false;
   RegSaraan = false;
-  page1 = true;
-  page2 = false;
-  page3 = false;
-  page4 = false;
-  page5 = false;
+  SelectIShariahISaraan = true;
+  ISaraan = false;
+  ISaraanSuccess = false;
+  IShariah = false;
+  IShariahSuccess = false;
   Failed = false;
 
   xagreedTnc = true;
@@ -79,18 +79,18 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   clickSaraan(){
     this.RegSaraanShariah = false;
     this.RegSaraan = true;
-    this.page1 = false;
-    this.page2 = true;
+    this.SelectIShariahISaraan = false;
+    this.ISaraan = true;
   }
 
   clickShariah(){
     this.RegSaraanShariah = false;
     this.RegShariah = true;
-    this.page1 = false;
-    this.page4 = true;
+    this.SelectIShariahISaraan = false;
+    this.IShariah = true;
   }
 
-  page2yes(){
+  ISaraanYes(){
     if(this.selectedJobSector == undefined){
 
     }
@@ -111,8 +111,8 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {
           if(result.responseCode == "0"){
 
-            this.page2 = false;
-            this.page3 = true;
+            this.ISaraan = false;
+            this.ISaraanSuccess = true;
 
           }
           else{
@@ -121,21 +121,21 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         });
       }
       else{
-        this.page2 = false;
-        this.page3 = true;
+        this.ISaraan = false;
+        this.ISaraanSuccess = true;
       }
     }
     
   }
 
-  page2no(){
+  ISaraanNo(){
     this.RegSaraanShariah = true;
     this.RegSaraan = false;
-    this.page2 = false;
-    this.page1 = true;
+    this.ISaraan = false;
+    this.SelectIShariahISaraan = true;
   }
 
-  page4yes(){
+  IShariahYes(){
 
     if(appFunc.bypassAPI != true){
       const iShariahBody = {
@@ -157,8 +157,8 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this._aldanService.iShariahRegistration(iShariahBody).subscribe((result:any) => {
         if(result.responseCode == "0"){
 
-          this.page4 = false;
-          this.page5 = true;
+          this.IShariah = false;
+          this.IShariahSuccess = true;
 
         }
         else{
@@ -167,23 +167,23 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       });
     }
     else{
-      this.page4 = false;
-      this.page5 = true;
+      this.IShariah = false;
+      this.IShariahSuccess = true;
     }
   }
 
-  page4no(){
+  IShariahNo(){
     this.RegSaraanShariah = true;
     this.RegShariah = false;
-    this.page4 = false;
-    this.page1 = true;
+    this.IShariah = false;
+    this.SelectIShariahISaraan = true;
   }
 
-  page3yes(){
+  ISaraanSuccessYes(){
     this.route.navigate(['mainMenu']);
   }
 
-  page5yes(){
+  IShariahSuccessYes(){
     this.route.navigate(['mainMenu']);
   }
 
