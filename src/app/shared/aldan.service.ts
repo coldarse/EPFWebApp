@@ -115,7 +115,7 @@ export class AldanService {
 
     return this.http.post(
       'https://10.0.58.81/connect/token', 
-      body.replace("+", "%2B"),
+      body,
       Options
     ).pipe(
       retry(1),
@@ -339,7 +339,7 @@ export class AldanService {
 
   //Get Service Operation
   GetServiceOperation(kioskCode: string){
-    return this.http.post(
+    return this.http.get(
       this.url + `app/services/GetServiceOperation?KioskCode=${kioskCode}`,
       accessToken.httpOptions
     ).pipe(

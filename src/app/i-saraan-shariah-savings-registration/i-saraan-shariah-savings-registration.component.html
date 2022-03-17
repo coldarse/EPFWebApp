@@ -5,7 +5,7 @@
 
     <div class="container-fluid">
 
-        <div class="row padTop15rem content-container" *ngIf="page1">
+        <div class="row padTop15rem content-container" *ngIf="SelectIShariahISaraan">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"select"| translate}}
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="ISaraan">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"jobMsg"|translate}}
@@ -47,16 +47,16 @@
                 <div class="row padTop50rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="ISaraanNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page2yes()">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="ISaraanYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="ISaraanSuccess">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
@@ -70,13 +70,13 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="ISaraanSuccessYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop2rem content-container" *ngIf="page4">
+        <div class="row padTop2rem content-container" *ngIf="IShariah">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"ShariahTitle"| translate}}
@@ -146,16 +146,16 @@
                 <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page4no()">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="IShariahNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page4yes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="IShariahYes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page5">
+        <div class="row padTop5rem content-container" *ngIf="IShariahSuccess">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
@@ -169,7 +169,7 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page5yes()">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="IShariahSuccessYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

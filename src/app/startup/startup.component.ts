@@ -21,11 +21,11 @@ export class StartupComponent implements OnInit {
   @ViewChild('username') username : ElementRef | undefined;
   @ViewChild('password') password : ElementRef | undefined;
 
-  page1 = true;
-  page2 = false;
-  page3 = false;
-  page4 = false;
-  page5 = false;
+  CheckKioskCredentials = true;
+  KioskNotFound = false;
+  SelectAdapter = false;
+  AdminLogin = false;
+  SuccessRegister = false;
   seconds = 5;
   dots = "."
   dotInterval : any;
@@ -65,8 +65,8 @@ export class StartupComponent implements OnInit {
       clearInterval(this.dotInterval);
       if(!isNaN(result)){ //Number
         // Say that Kiosk Is Not Found in KMS
-        this.page1 = false;
-        this.page2 = true;
+        this.CheckKioskCredentials = false;
+        this.KioskNotFound = true;
       }
       else{ //Not Number
         accessToken.token = result.access_token;
@@ -87,8 +87,8 @@ export class StartupComponent implements OnInit {
             // Not Registered
             if(signalRConnection.kioskInformation.macAddress == ""){
               // Ask to Register Kiosk
-              this.page1 = false;
-              this.page4 = true;
+              this.CheckKioskCredentials = false;
+              this.AdminLogin = true;
             }
             // Registered
             else{
@@ -127,6 +127,7 @@ export class StartupComponent implements OnInit {
           signalRConnection.connection.invoke('GetAdapterName').then((data: any[]) => {
             signalRConnection.adapter = data;
             this.adapters = data;
+            console.log(this.adapters[0]);
             if(this.isAdapterEmpty){
               this.login(this.Secret)
             }
@@ -155,7 +156,7 @@ export class StartupComponent implements OnInit {
     }
   }
 
-  page3Click(){
+  SelectAdapterNext(){
     this.adapters.forEach((element: adapter) => {
       if(element.adapterNameEncrypted == this.selectedAdapterValueEncrypted) this.selectedAdapterValue = element.adapterName;
     })
@@ -174,8 +175,8 @@ export class StartupComponent implements OnInit {
             this._aldanService.changePassword(changepasswordBody)
             .subscribe((response: any) => {
               if(response.status.toString() == "204"){
-                this.page3 = false;
-                this.page5 = true;
+                this.SelectAdapter = false;
+                this.SuccessRegister = true;
   
                 let secondInterval = setInterval(() => {
                   this.seconds -= 1;
@@ -204,10 +205,10 @@ export class StartupComponent implements OnInit {
     })
   }
 
-  page4Click(){
+  AdminLoginClick(){
     if(this.username?.nativeElement.value == this.UserName && this.password?.nativeElement.value == this.Password){
-      this.page4 = false;
-      this.page3 = true;
+      this.AdminLogin = false;
+      this.SelectAdapter = true;
     }
   }
 
