@@ -1,7 +1,7 @@
 <div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header">{{ "i-Akaun" | translate }}</div>
     <div class="container-fluid">
-        <div class="row padTop5rem content-container" *ngIf="page1">
+        <div class="row padTop5rem content-container" *ngIf="EnterPhoneNumber">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"phoneEntryMsg"| translate}}
@@ -96,15 +96,15 @@
                 <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page1no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="EnterPhoneNumberNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page1yes()">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="EnterPhoneNumberYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem content-container" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="EnterEmailAddress">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"emailMsg"| translate}}
@@ -127,15 +127,15 @@
                 <div class="row padTop10rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="EnterEmailAddressNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page2yes()">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="EnterEmailAddressYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem content-container" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="PhoneEmailConfirmation">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"VerifyPhone&EmailMsg"| translate}}
@@ -181,15 +181,15 @@
                 <div class="row padTop14rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page3no()">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="PhoneEmailConfirmationNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page3yes()">{{"approve"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="PhoneEmailConfirmationYes()">{{"approve"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop7rem content-container" *ngIf="page4">
+        <div class="row padTop7rem content-container" *ngIf="AskActivate">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"iAkaunSucessReg"| translate}}
@@ -205,15 +205,15 @@
                 <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page4no()">{{"menu"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="AskActivateNo()">{{"menu"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page4yes()">{{"yes"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="AskActivateYes()">{{"yes"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop2rem content-container" *ngIf="page5">
+        <div class="row padTop2rem content-container" *ngIf="IAkaunTNC">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"iAkaunTitle"| translate}}
@@ -243,15 +243,15 @@
                 <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page5no()">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="IAkaunTNCno()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page5yes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="IAkaunTNCyes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTopHalfrem content-container" *ngIf="page6">
+        <div class="row padTopHalfrem content-container" *ngIf="ActivateInformation">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -404,14 +404,14 @@
             <div class="row padTop1rem text-center">
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <button type="button" class="btnNo" (click)="page6no()">{{"back"| translate}}</button>
+                    <button type="button" class="btnNo" (click)="ActivateInformationNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btnYes" (click)="page6yes()">{{"continue"| translate}}</button>
+                    <button type="button" class="btnYes" (click)="ActivateInformationYes()">{{"continue"| translate}}</button>
                 </div>
             </div>
         </div>
-        <div class="row padTop2rem content-container" *ngIf="page7">
+        <div class="row padTop2rem content-container" *ngIf="SuccessActivation">
             <div class="text-center">
                 <div class="row">
                     <div class="lblCongrats">
@@ -441,12 +441,12 @@
                 <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page7yes()">{{"menu"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="SuccessActivationYes()">{{"menu"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem content-container" *ngIf="page8">
+        <div class="row padTop5rem content-container" *ngIf="PromptRegisterISaraan">
             <div class="text-center">
                 <div class="row padTop5rem">
                     <div class="col-1"></div>
@@ -459,10 +459,10 @@
                 <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page8no()">{{"no"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="PromptRegisterISaraanNo()">{{"no"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page8yes()">{{"yes"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="PromptRegisterISaraanYes()">{{"yes"| translate}}</button>
                     </div>
                 </div>
             </div>

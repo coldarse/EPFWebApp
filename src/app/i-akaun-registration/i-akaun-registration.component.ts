@@ -27,14 +27,14 @@ export class IAkaunRegistrationComponent implements OnInit {
   @ViewChild('password_2') password_2: ElementRef | undefined;
   @ViewChild('secure_phrase') secure_phrase: ElementRef | undefined;
 
-  page1 = true;
-  page2 = false;
-  page3 = false;
-  page4 = false;
-  page5 = false;
-  page6 = false;
-  page7 = false;
-  page8 = false;
+  EnterPhoneNumber = true;
+  EnterEmailAddress = false;
+  PhoneEmailConfirmation = false;
+  AskActivate = false;
+  IAkaunTNC = false;
+  ActivateInformation = false;
+  SuccessActivation = false;
+  PromptRegisterISaraan = false;
   Failed = false;
   phoneNo = '';
   emailAddress = '';
@@ -131,13 +131,13 @@ export class IAkaunRegistrationComponent implements OnInit {
     this.xagreedTnc = !this.xagreedTnc;
   }
 
-  page1yes() {
+  EnterPhoneNumberYes() {
     this.phoneError = false;
     if (this.phoneNo.length < 10) {
       this.phoneError = true;
     } else {
-      this.page1 = false;
-      this.page2 = true;
+      this.EnterPhoneNumber = false;
+      this.EnterEmailAddress = true;
 
       setTimeout(() => {
         loadKeyboard();
@@ -145,14 +145,14 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
   }
 
-  page1no() {
+  EnterPhoneNumberNo() {
     this.route.navigate(['mainMenu']);
   }
 
-  page2yes() {
+  EnterEmailAddressYes() {
     //if(this.email?.nativeElement.value != ""){
-    this.page2 = false;
-    this.page3 = true;
+    this.EnterEmailAddress = false;
+    this.PhoneEmailConfirmation = true;
     this.emailAddress =
       this.email?.nativeElement.value == 0
         ? ''
@@ -163,12 +163,12 @@ export class IAkaunRegistrationComponent implements OnInit {
     //}
   }
 
-  page2no() {
-    this.page2 = false;
-    this.page1 = true;
+  EnterEmailAddressNo() {
+    this.EnterEmailAddress = false;
+    this.EnterPhoneNumber = true;
   }
 
-  page3yes() {
+  PhoneEmailConfirmationYes() {
     if (appFunc.bypassAPI != true) {
       const iAkaunbody = {
         epfNum: appFunc.currMemberDetail.accNum,
@@ -186,8 +186,8 @@ export class IAkaunRegistrationComponent implements OnInit {
         .iAkaunRegistration(iAkaunbody)
         .subscribe((result: any) => {
           if (result.responseCode == '0') {
-            this.page3 = false;
-            this.page4 = true;
+            this.PhoneEmailConfirmation = false;
+            this.AskActivate = true;
 
             deleteKeyboard();
           } else {
@@ -197,16 +197,16 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
   }
 
-  page3no() {
-    this.page3 = false;
-    this.page2 = true;
+  PhoneEmailConfirmationNo() {
+    this.PhoneEmailConfirmation = false;
+    this.EnterEmailAddress = true;
 
     setTimeout(() => {
       loadKeyboard();
     }, 500);
   }
 
-  page4yes() {
+  AskActivateYes() {
     if (appFunc.bypassAPI != false) {
       this._aldanService
         .GetTnC(selectLang.selectedLang)
@@ -214,8 +214,8 @@ export class IAkaunRegistrationComponent implements OnInit {
           if (result.content != '') {
             this.TnC = result.content.toString();
             console.log(this.TnC);
-            this.page4 = false;
-            this.page5 = true;
+            this.AskActivate = false;
+            this.IAkaunTNC = true;
           } else {
             this.Failed = true;
           }
@@ -223,11 +223,11 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
   }
 
-  page4no() {
+  AskActivateNo() {
     this.route.navigate(['mainMenu']);
   }
 
-  page5yes() {
+  IAkaunTNCyes() {
     if (appFunc.bypassAPI != false) {
       this._aldanService.GetSecureImage().subscribe((result: any) => {
         if (result.imgId != '') {
@@ -238,8 +238,8 @@ export class IAkaunRegistrationComponent implements OnInit {
               checked: false,
             });
           });
-          this.page5 = false;
-          this.page6 = true;
+          this.IAkaunTNC = false;
+          this.ActivateInformation = true;
         } else {
           this.Failed = true;
         }
@@ -251,12 +251,12 @@ export class IAkaunRegistrationComponent implements OnInit {
     }, 500);
   }
 
-  page5no() {
-    this.page5 = false;
-    this.page4 = true;
+  IAkaunTNCno() {
+    this.IAkaunTNC = false;
+    this.AskActivate = true;
   }
 
-  page6yes() {
+  ActivateInformationYes() {
     this.accountAlpha = false;
     this.accountAlpha = false;
     this.passwordAlpha = false;
@@ -358,8 +358,8 @@ export class IAkaunRegistrationComponent implements OnInit {
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
             if(result.responseCode == "0"){
 
-              this.page6 = false;
-              this.page7 = true;
+              this.ActivateInformation = false;
+              this.SuccessActivation = true;
 
               deleteKeyboard()
             }
@@ -369,8 +369,8 @@ export class IAkaunRegistrationComponent implements OnInit {
           });
         }
         else{
-          this.page6 = false;
-          this.page7 = true;
+          this.ActivateInformation = false;
+          this.SuccessActivation = true;
         }
       }
       else
@@ -380,28 +380,28 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
   }
 
-  page6no() {
-    this.page6 = false;
-    this.page5 = true;
+  ActivateInformationNo() {
+    this.ActivateInformation = false;
+    this.IAkaunTNC = true;
 
     deleteKeyboard();
   }
 
-  page7yes() {
-    this.page7 = false;
-    this.page8 = true;
+  SuccessActivationYes() {
+    this.SuccessActivation = false;
+    this.PromptRegisterISaraan = true;
   }
 
-  page7no() {
-    this.page7 = false;
-    this.page6 = true;
+  SuccessActivationNo() {
+    this.SuccessActivation = false;
+    this.ActivateInformation = true;
   }
 
-  page8yes() {
+  PromptRegisterISaraanYes() {
     this.route.navigate(['iSaraanShariahSavingsRegistration']);
   }
 
-  page8no() {
+  PromptRegisterISaraanNo() {
     this.route.navigate(['mainMenu']);
   }
 
