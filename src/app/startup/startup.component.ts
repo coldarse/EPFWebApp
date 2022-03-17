@@ -127,6 +127,7 @@ export class StartupComponent implements OnInit {
           signalRConnection.connection.invoke('GetAdapterName').then((data: any[]) => {
             signalRConnection.adapter = data;
             this.adapters = data;
+            console.log(this.adapters[0]);
             if(this.isAdapterEmpty){
               this.login(this.Secret)
             }
