@@ -2,7 +2,7 @@
     <div class="header">{{ "thumbprint" | translate }}</div>
 
     <div class="container-fluid">
-        <div class="row padTop10rem content-container" *ngIf="page1">
+        <div class="row padTop10rem content-container" *ngIf="ThumbprintAgreeDisagree">
 
             <div class="text-center">
                 <div class="row">
@@ -16,16 +16,16 @@
                 <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page1no()">{{"disagree"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="ThumbprintAgreeDisagreeNo()">{{"disagree"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page1yes()">{{"agree"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="ThumbprintAgreeDisagreeYes()">{{"agree"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop2rem" *ngIf="page2">
+        <div class="row padTop2rem" *ngIf="Selections">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"thumbprintListMsg"| translate}}
@@ -158,16 +158,16 @@
                 <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="SelectionsNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page2yes()">{{"proceed"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="SelectionsYes()">{{"proceed"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop7rem" *ngIf="page3">
+        <div class="row padTop7rem" *ngIf="ThumbprintVerification">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"placeThumbprint"|translate}}
@@ -178,13 +178,13 @@
                 <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnNo" (click)="page3no()">{{"cancel"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="ThumbprintVerificationNo()">{{"cancel"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="row padTop5rem" *ngIf="page4">
+        <div class="row padTop5rem" *ngIf="Selected">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"success"| translate}}
@@ -218,10 +218,10 @@
                 <div class="row padTop7rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page4no()">{{"endTrasaction"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="SelectedNo()">{{"endTrasaction"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page4yes()">{{"menu"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="SelectedYes()">{{"menu"| translate}}</button>
                     </div>
                 </div>
             </div>

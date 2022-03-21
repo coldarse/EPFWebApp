@@ -9,10 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ThumbprintConfirmationComponent implements OnInit {
 
-  page1 = false;
-  page2 = false;
-  page3 = false;
-  page4 = true;
+  ThumbprintAgreeDisagree = false;
+  Selections = false;
+  ThumbprintVerification = false;
+  Selected = true;
   popup = false;
 
   checkedAnsuran = false;
@@ -60,21 +60,21 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.checked55yo = !this.checked55yo;
   }
 
-  page1yes(){
-    this.page1 = false;
-    this.page2 = true;
+  ThumbprintAgreeDisagreeYes(){
+    this.ThumbprintAgreeDisagree = false;
+    this.Selections = true;
   }
 
-  page1no(){
+  ThumbprintAgreeDisagreeNo(){
     this.route.navigate(['mainMenu']);
   }
 
-  page2no(){
-    this.page2 = false;
-    this.page1 = true;
+  SelectionsNo(){
+    this.Selections = false;
+    this.ThumbprintAgreeDisagree = true;
   }
 
-  page2yes(){
+  SelectionsYes(){
     let x = 0;
     if(this.checkedAnsuran == false) x++;
     if(this.checkedBina == false) x++;
@@ -85,38 +85,38 @@ export class ThumbprintConfirmationComponent implements OnInit {
 
     if(x > 0) this.popup= true;
     else {
-      this.page2 = false;
-      this.page3 = true;
+      this.Selections = false;
+      this.ThumbprintVerification = true;
     }
   }
 
-  page3no(){
-    this.page3 = false;
-    this.page2 = true;
+  ThumbprintVerificationNo(){
+    this.ThumbprintVerification = false;
+    this.Selections = true;
   }
 
-  page4no(){
+  SelectedNo(){
     this.route.navigate(['mainMenu']);
   }
 
-  page4yes(){
+  SelectedYes(){
     this.route.navigate(['mainMenu']);
   }
 
   popupYes(){
     this.popup = false;
-    this.page2 = false;
-    this.page3 = true;
+    this.Selections = false;
+    this.ThumbprintVerification = true;
   }
 
   skip(){
-    this.page3 = false;
-    this.page4 = true;
+    this.ThumbprintVerification = false;
+    this.Selected = true;
 
-    console.log("page1: " + this.page1);
-    console.log("page2: " + this.page2);
-    console.log("page3: " + this.page3);
-    console.log("page4: " + this.page4);
+    console.log("ThumbprintAgreeDisagree: " + this.ThumbprintAgreeDisagree);
+    console.log("Selections: " + this.Selections);
+    console.log("ThumbprintVerification: " + this.ThumbprintVerification);
+    console.log("Selected: " + this.Selected);
   }
 
 }

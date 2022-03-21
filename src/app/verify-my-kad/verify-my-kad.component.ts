@@ -100,7 +100,9 @@ export class VerifyMyKadComponent implements OnInit {
       if(signalRConnection.isCardInserted) {
         if(this.insertedMyKad == false){
           this.insertedMyKad = true;
-          this.readMyKad();
+          this.InsertMyKad = false;
+          this.SelectLanguage = true;
+          //this.readMyKad();
         }
       }
       else{
@@ -301,13 +303,21 @@ export class VerifyMyKadComponent implements OnInit {
   getAccountInquiry(): void{
     try{
 
+      let catType = "";
+
+      switch(currentMyKadDetails.CategoryType){
+        case "W":
+          catType = "IN"
+          break;
+      }
+
       const body = {
         "regType": "M",
         "accNum": "",
         "accType": "",
         "searchType": "I",
         "idNum": currentMyKadDetails.ICNo,
-        "idType": currentMyKadDetails.CategoryType,
+        "idType": catType,
         "reqTypeCode": ""   
       }
       this._aldanService.MemberCIFDetailsCheck(body).subscribe((result: any) => {
@@ -319,7 +329,7 @@ export class VerifyMyKadComponent implements OnInit {
             "accType": "S",
             "searchType": "A",
             "idNum": currentMyKadDetails.ICNo,
-            "idType": currentMyKadDetails.CategoryType,
+            "idType": catType,
             "reqTypeCode": ""
           }
           this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
