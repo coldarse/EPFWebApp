@@ -32,84 +32,89 @@ export class MainMenuComponent implements OnInit {
     this.translate.use(selectLang.selectedLang);
     this.name = currentMyKadDetails.Name
 
-    if(appFunc.checkModuleAvailability(appFunc.modules) == 0){
-      appFunc.message = "Under Maintenance";
-      this.route.navigate(['outofservice']);
-    }
+    
 
     let isaraanishariahcount = 0;
     let iakauncount = 0;
 
-    for (var val of appFunc.modules){
-      if(val.moduleID == 1){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            this.checkBalanceEnabled = true;
+    if(appFunc.modules != undefined){
+
+      if(appFunc.checkModuleAvailability(appFunc.modules) == 0){
+        appFunc.message = "Under Maintenance";
+        this.route.navigate(['outofservice']);
+      }
+
+      for (var val of appFunc.modules){
+        if(val.moduleID == 1){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              this.checkBalanceEnabled = true;
+            }
+            else{
+              this.checkBalanceEnabled = false;
+            }
           }
           else{
             this.checkBalanceEnabled = false;
           }
         }
-        else{
-          this.checkBalanceEnabled = false;
-        }
-      }
-      else if(val.moduleID == 2){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            this.updateTACEnabled = true;
+        else if(val.moduleID == 2){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              this.updateTACEnabled = true;
+            }
+            else{
+              this.updateTACEnabled = false;
+            }
           }
           else{
             this.updateTACEnabled = false;
           }
         }
-        else{
-          this.updateTACEnabled = false;
-        }
-      }
-      else if(val.moduleID == 3){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            this.personalInformationEnabled = true;
+        else if(val.moduleID == 3){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              this.personalInformationEnabled = true;
+            }
+            else{
+              this.personalInformationEnabled = false;
+            }
           }
           else{
             this.personalInformationEnabled = false;
           }
         }
-        else{
-          this.personalInformationEnabled = false;
-        }
-      }
-      else if(val.moduleID == 5){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            isaraanishariahcount += 1;
+        else if(val.moduleID == 5){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              isaraanishariahcount += 1;
+            }
           }
         }
-      }
-      else if(val.moduleID == 6){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            isaraanishariahcount += 1;
+        else if(val.moduleID == 6){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              isaraanishariahcount += 1;
+            }
           }
         }
-      }
-      else if(val.moduleID == 7){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            iakauncount += 1;
+        else if(val.moduleID == 7){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              iakauncount += 1;
+            }
           }
         }
-      }
-      else if(val.moduleID == 8){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
-            iakauncount += 1;
+        else if(val.moduleID == 8){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+              iakauncount += 1;
+            }
           }
         }
       }
     }
-
+    
     if(iakauncount > 0) this.iAkaunEnabled = true;
     if(isaraanishariahcount > 0) this.iShariahiSaraanEnabled = true;
 

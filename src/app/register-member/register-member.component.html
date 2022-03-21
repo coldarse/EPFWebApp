@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
 
-        <div class="row padTop5rem content-container" *ngIf="page1">
+        <div class="row padTop5rem content-container" *ngIf="RegisterMemberPage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"question"| translate}}
@@ -63,16 +63,16 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page1no()">{{"no"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="RegisterMemberNo()">{{"no"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page1yes()">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="RegisterMemberYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="InsertPhonePage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"phoneEntryMsg"| translate}}
@@ -167,16 +167,16 @@
                 <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="InsertPhoneNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page2yes()">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="InsertPhoneYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="InsertEmailPage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"emailMsg"| translate}}
@@ -208,16 +208,16 @@
                 <div class="row padTop10rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page3no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="InsertEmailNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page3yes()">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="InsertEmailYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop2rem content-container" *ngIf="page4">
+        <div class="row padTop2rem content-container" *ngIf="ValidateProfilePage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"ProfileMsg"| translate}}
@@ -286,16 +286,16 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page4no()">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="ValidateProfileNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page4yes()">{{"approve"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="ValidateProfileYes()">{{"approve"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page5">
+        <div class="row padTop5rem content-container" *ngIf="RegisterSuccessPage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"KWSPNo"| translate}}
@@ -330,13 +330,13 @@
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <button type="button" class="btnYes" (click)="page5yes()">{{"continue"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="RegisterSuccessYes()">{{"continue"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop2rem content-container" *ngIf="page6">
+        <div class="row padTop2rem content-container" *ngIf="TnCPage">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"iAkaunTitle"| translate}}
@@ -355,51 +355,7 @@
                 <div class="col-1"></div>
                 <div class="col-10 scrollBox">
                     <div class="scroll">
-                        <p>
-                            It is a good platform to learn programming.
-                            It is an educational website. Prepare for the Recruitment drive
-                            of product based companies like Microsoft, Amazon, Adobe etc with
-                            a free online placement preparation course. The course focuses
-                            on various MCQ's & Coding question likely to be asked in the
-                            interviews & make your upcoming placement season efficient and
-                            successful. Also, any geeks can help other geeks by writing
-                            articles on the GeeksforGeeks, publishing articles follow few
-                            steps that are Articles that need little modification/improvement
-                            from reviewers are published first. To quickly get your articles
-                            reviewed, please refer existing articles, their formatting style,
-                            coding style, and try to make you are close to them. In case you
-                            are a beginner, you may refer Guidelines to write an Article
-                            It is a good platform to learn programming.
-                            It is an educational website. Prepare for the Recruitment drive
-                            of product based companies like Microsoft, Amazon, Adobe etc with
-                            a free online placement preparation course. The course focuses
-                            on various MCQ's & Coding question likely to be asked in the
-                            interviews & make your upcoming placement season efficient and
-                            successful. Also, any geeks can help other geeks by writing
-                            articles on the GeeksforGeeks, publishing articles follow few
-                            steps that are Articles that need little modification/improvement
-                            from reviewers are published first. To quickly get your articles
-                            reviewed, please refer existing articles, their formatting style,
-                            coding style, and try to make you are close to them. In case you
-                            are a beginner, you may refer Guidelines to write an Article
-                            It is a good platform to learn programming.
-                            It is an educational website. Prepare for the Recruitment drive
-                            of product based companies like Microsoft, Amazon, Adobe etc with
-                            a free online placement preparation course. The course focuses
-                            on various MCQ's & Coding question likely to be asked in the
-                            interviews & make your upcoming placement season efficient and
-                            successful. Also, any geeks can help other geeks by writing
-                            articles on the GeeksforGeeks, publishing articles follow few
-                            steps that are Articles that need little modification/improvement
-                            from reviewers are published first. To quickly get your articles
-                            reviewed, please refer existing articles, their formatting style,
-                            coding style, and try to make you are close to them. In case you
-                            are a beginner, you may refer Guidelines to write an Article
-
-
-
-
-                        </p>
+                        <p style="white-space: pre;">{{TnC}}</p>
                         <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC1()"/>
                         <label class="lblTNC" for="tnc1">{{"TNC"| translate}}</label>
                     </div>
@@ -410,16 +366,16 @@
                 <div class="row padTop3rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page6no()">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="TnCNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page6yes()" [disabled]="xagreedTnc1">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="TnCYes()" [disabled]="xagreedTnc1">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTopHalfrem content-container" *ngIf="page7">
+        <div class="row padTopHalfrem content-container" *ngIf="ActivateiAkaunPage">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -508,9 +464,9 @@
                 <div class="col-7">
                     <div class="row">
                         <div class="col" *ngFor="let ci of checkboxImages">
-                            <input type="radio" id="{{ci.name}}" [checked]="ci.checked" [hidden]="true"/>
-                            <label class="selectLabel" for="{{ci.name}}" (click)="clickImage(ci.name)">
-                                <img class="imgOnline" src="{{ci.src}}">
+                            <input type="radio" id="{{ci.imgId}}" [checked]="ci.checked" [hidden]="true"/>
+                            <label class="selectLabel" for="{{ci.imgId}}" (click)="clickImage(ci.imgId)">
+                                <img class="imgOnline" src="{{ci.imgPath}}">
                             </label>
                         </div>
                     </div>
@@ -572,15 +528,15 @@
             <div class="row padTop1rem text-center">
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <button type="button" class="btnNo" (click)="page7no()">{{"back"| translate}}</button>
+                    <button type="button" class="btnNo" (click)="ActivateNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btnYes" (click)="page7yes()">{{"continue"| translate}}</button>
+                    <button type="button" class="btnYes" (click)="ActivateYes()">{{"continue"| translate}}</button>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop2rem content-container" *ngIf="page8">
+        <div class="row padTop2rem content-container" *ngIf="ActivateSuccessPage">
             <div class="text-center">
                 <div class="row">
                     <div class="lblCongrats">
@@ -610,29 +566,29 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page8yes()">{{"next"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="ActivateSuccessYes()">{{"next"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop15rem content-container" *ngIf="page9">
+        <div class="row padTop15rem content-container" *ngIf="PickShariahPage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"ShariahMsg"| translate}}
                 </div>
                 <div class="row padTop5rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="selectiSaraan()">{{"remain"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="IShariahNo()">{{"remain"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="selectShariah()">{{"newShariah"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="IShariahYes()">{{"newShariah"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop2rem content-container" *ngIf="page10">
+        <div class="row padTop2rem content-container" *ngIf="ShariahTnCPage">
             <div class="row text-center">
                 <label class="lblHeader">
                     {{"ShariahTitle"| translate}}
@@ -702,16 +658,16 @@
                 <div class="row padTop2rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page10no()">{{"back"|translate}}</button>
+                        <button type="button" class="btnNo" (click)="ShariahTnCNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page10yes()" [disabled]="xagreedTnc2">{{"agree"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="ShariahTnCYes()" [disabled]="xagreedTnc2">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page11">
+        <div class="row padTop5rem content-container" *ngIf="ShariahSuccessPage">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
@@ -725,29 +681,29 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page11yes()">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="ShariahSuccessYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop15rem content-container" *ngIf="page12">
+        <div class="row padTop15rem content-container" *ngIf="RegisteriSaraanPage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"saraanMsg"| translate}}
                 </div>
                 <div class="row padTop5rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="page12no()">{{"no"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="RegisteriSaraanNo()">{{"no"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="page12yes()">{{"yes"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="RegisteriSaraanYes()">{{"yes"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page13">
+        <div class="row padTop5rem content-container" *ngIf="SelectJobPage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"jobMsg"|translate}}
@@ -773,16 +729,16 @@
                 <div class="row padTop25rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page13no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="SelectJobNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page13yes()">{{"send"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="SelectJobYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row padTop5rem content-container" *ngIf="page14">
+        <div class="row padTop5rem content-container" *ngIf="SaraanSuccessPage">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
@@ -796,7 +752,7 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page14yes()">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="SaraanSuccessYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

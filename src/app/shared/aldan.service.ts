@@ -391,8 +391,7 @@ export class AldanService {
 
   ActivateIAkaun(body: any){
     return this.http.put(
-      this.url + "IAkaunActivation/iAkaunAct/",
-      body,
+      this.url + `IAkaunActivation/iAkaunAct?SessionId=1&epfNum=${body.epfNum}&id_no=${body.id_no}&name=${body.name}&user_id=${body.user_id}&new_password=${body.new_password}&confirm_new_password=${body.confirm_new_password}&secure_image_id=${body.secure_image_id}&secret_phrase=${body.secret_phrase}&terms_condition=${body.terms_condition}`,
       accessToken.httpOptions
     ).pipe(
       retry(1),

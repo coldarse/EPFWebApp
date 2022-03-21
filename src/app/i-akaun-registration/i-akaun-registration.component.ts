@@ -351,12 +351,12 @@ export class IAkaunRegistrationComponent implements OnInit {
             "new_password": this.password1,
             "confirm_new_password": this.password2,
             "secure_image_id": this.checkboxImages,
-            "secret_phase": this.securePhrase,
+            "secret_phrase": this.securePhrase,
             "terms_condition": "46"
           }
 
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
-            if(result.responseCode == "0"){
+            if(result.epfNum != null){
 
               this.ActivateInformation = false;
               this.SuccessActivation = true;

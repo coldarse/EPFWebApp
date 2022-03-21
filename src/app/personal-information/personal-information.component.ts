@@ -51,6 +51,7 @@ export class PersonalInformationComponent implements OnInit {
 
   spacer = " ";
   comma = ", ";
+  
 
   emptyFields = false;
 
@@ -251,10 +252,7 @@ export class PersonalInformationComponent implements OnInit {
     else{
       this.page2 = false;
       this.page3 = true;
-    }
-            
-          
-  
+    } 
   }
 
   page2no(){

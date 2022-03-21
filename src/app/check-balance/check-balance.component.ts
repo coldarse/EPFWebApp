@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AldanService } from '../shared/aldan.service';
 import { appFunc } from '../_models/_appFunc';
+import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { currMemberDetails } from '../_models/_currentMemberDetails';
+import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemberDetails';
 
 @Component({
   selector: 'app-check-balance',
@@ -12,12 +14,16 @@ import { currMemberDetails } from '../_models/_currentMemberDetails';
   styleUrls: ['./check-balance.component.css'],
 })
 export class CheckBalanceComponent implements OnInit {
-  page1 = true;
-  page2 = false;
-  page3 = false;
-  page4 = false;
-  page5 = false;
-  page6 = false;
+  checkBalance = true;
+  updateProfile = false;
+  SummaryStatementPage = true;
+  SelectYearPage = false;
+  StatementPage = false;
+  ConfirmEmailPage = false;
+  UpdateEmailPage =false;
+  EmailSuccessPage = false;
+  EmailFailPage = false;
+  // Failed = false;
 
   totalSavings = 0;
   grandTotal = 0;
@@ -28,6 +34,23 @@ export class CheckBalanceComponent implements OnInit {
   sDetails: any[] = [];
   cDetails: any[] = [];
   arrYears: any[] = [];
+
+  address1 = "NO 46";
+  address2 = "JALAN BP 10/1";
+  address3 = "BANDAR BUKIT PUCHONG 2";
+  postcode = "47170";
+  city = "PUCHONG";
+  state = "SELANGOR DAHRUL EHSAN";
+  country = "MALAYSIA";
+  homeNo = "";
+  officeNo = "";
+  phoneNo = "";
+  email = "wahyu@aldantechnology.com";
+
+  spacer = " ";
+  comma = ", ";
+
+  emptyFields = false;
 
   constructor(
     private route: Router,
@@ -65,65 +88,48 @@ export class CheckBalanceComponent implements OnInit {
       });
   }
 
-  page1yes() {
-    this.page1 = false;
-    this.page2 = true;
+  SummaryStatementYes() {
+    this.SummaryStatementPage = false;
+    this.SelectYearPage = true;
     this.CalculateYears();
   }
 
-  page1no() {
+  SummaryStatementNo() {
     this.route.navigate(['mainMenu']);
   }
 
-  select2018() {
-    this.page2 = false;
-    this.page3 = true;
-  }
-  select2019() {
-    this.page2 = false;
-    this.page3 = true;
-  }
-  select2020() {
-    this.page2 = false;
-    this.page3 = true;
-  }
-  select2021() {
-    this.page2 = false;
-    this.page3 = true;
+  StatementNo() {
+    this.StatementPage = false;
+    this.SelectYearPage = true;
   }
 
-  page3no() {
-    this.page3 = false;
-    this.page2 = true;
+  StatementYes() {
+    this.StatementPage = false;
+    this.ConfirmEmailPage = true;
   }
 
-  page3yes() {
-    this.page3 = false;
-    this.page4 = true;
+  ConfirmEmailNo() {
+    this.ConfirmEmailPage = false;
+    this.StatementPage = true;
   }
 
-  page4no() {
-    this.page4 = false;
-    this.page3 = true;
+  ConfirmEmailYes() {
+    this.ConfirmEmailPage = false;
+    this.EmailSuccessPage = true;
   }
 
-  page4yes() {
-    this.page4 = false;
-    this.page5 = true;
-  }
-
-  page5yes() {
+  EmailSuccessYes() {
     this.route.navigate(['mainMenu']);
   }
 
-  page6yes() {
+  EmailFailYes() {
     this.route.navigate(['mainMenu']);
   }
 
   selectYear(year: number) {
     this.selectedYear = year;
-    this.page2 = false;
-    this.page3 = true;
+    this.SelectYearPage = false;
+    this.StatementPage = true;
     this.DisplaySelectedYearStatement(year);
   }
 
@@ -175,8 +181,18 @@ export class CheckBalanceComponent implements OnInit {
         this.route.navigate(['']);
       }
     });
+  }
 
-  
+  reuseMykadAddress(event: any){
+    if(event.target.checked){
+      this.address1 = currentMyKadDetails.Address1
+      this.address2 = currentMyKadDetails.Address2
+      this.address3 = currentMyKadDetails.Address3
+      this.postcode = currentMyKadDetails.PostCode
+      this.city = currentMyKadDetails.City
+      this.state = currentMyKadDetails.State
+      this.country = currentMyKadDetails.Country
+    }
   }
 }
 
