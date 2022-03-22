@@ -63,11 +63,10 @@ export class CheckBalanceComponent implements OnInit {
     // this.ShowTable();
 
     const summaryBody = {
-      // "accNum": appFunc.currMemberDetail.accNum,
-      accNum: '17438856',
-      accType: 'S',
-      // "stmtYear": new Date().getFullYear
-      stmtYear: '2021',
+      "accNum": '17438856',
+      "accType": 'S',
+      "stmtYear": '2021',
+      "sessionId": appFunc.sessionId
     };
     //call API
     this._aldanService
@@ -156,10 +155,11 @@ export class CheckBalanceComponent implements OnInit {
   DisplaySelectedYearStatement(year: number) {
     const mainBody = {
       // "accNum": appFunc.currMemberDetail.accNum,
-      accNum: '17438856',
-      accType: 'S',
       // "stmtYear": new Date().getFullYear
-      stmtYear: this.selectedYear.toString(),
+      "accNum": '17438856',
+      "accType": 'S',
+      "stmtYear": '2021',
+      "sessionId": appFunc.sessionId
     };
 
     this._aldanService.MemberStatement(mainBody).subscribe((result: any) => {

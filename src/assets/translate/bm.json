@@ -171,5 +171,6 @@
 "securePhraseMax":"Frasa Rahsia tidak boleh melebihi 10 askara",
 "passwordMatch":"Kata Laluan tidak sepadan",
 "emptyFields": "Sila isikan ruangan yang diperlukan",
-"ActionFailed": "Transaksi gagal"
+"ActionFailed": "Transaksi gagal",
+"AddTACFailed": "Gagal menambah TAC untuk akaun anda, sila rujukan ke kaunter."
 }

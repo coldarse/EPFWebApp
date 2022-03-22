@@ -15,9 +15,10 @@ export class appFunc {
     static screenSaver: string;
     static screenSaverList: string[];
     static isEmptySSList = false
-    static bypassAPI = true;
+    static bypassAPI = false;
     static modules: eModules[];
     static businessTypes: businessTypes[];
+    static sessionId: number;
 
     static code: string;
     static message: string;
@@ -31,13 +32,31 @@ export class appFunc {
         return false;
     }
 
+    static convertTo2Length(value: number){
+        let valueinString = value.toString();
+        if(valueinString.length != 2){
+            valueinString = "0" + valueinString;
+        }
+        return valueinString;
+    }
+
+    static getCurrentTime() {
+        var today = new Date();
+        let hours = this.convertTo2Length(today.getHours());
+        let mins = this.convertTo2Length(today.getMinutes());
+        let secs = this.convertTo2Length(today.getSeconds());
+
+        var time = hours + ":" + mins + ":" + secs;
+        return time;
+    }
+
     // Loop through all modules to they are available.
     // Returns 0 if no modules are enabled.
     static checkModuleAvailability(modules: eModules[]) : Number{
         let count = 0;
         for (var val of modules){
             if(val.enabled == true){
-                if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+                if(this.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + this.getCurrentTime()))){
                     count += 1;
                 }
             }

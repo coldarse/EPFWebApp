@@ -311,7 +311,7 @@
                         {{"SuccessReg"|translate}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="isiAkaunModuleEnabled">
                     <div class="col-2"></div>
                     <div class="col-8">
                         <label class="lblMsg">
@@ -324,6 +324,14 @@
                     <div class="col-6">
                         <div class="note">
                             {{ "emailNote" | translate }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="failedTAC">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="noteWarning">
+                            {{ "AddTACFailed" | translate }}
                         </div>
                     </div>
                 </div>
@@ -579,10 +587,10 @@
                 </div>
                 <div class="row padTop5rem">
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="IShariahNo()">{{"remain"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="IShariahNo()" *ngIf="isiSaraanModuleEnabled">{{"remain"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="IShariahYes()">{{"newShariah"| translate}}</button>
+                        <button type="button" class="btnShariah" (click)="IShariahYes()" *ngIf="isiShariahModuleEnabled">{{"newShariah"| translate}}</button>
                     </div>
                 </div>
             </div>

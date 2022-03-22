@@ -69,6 +69,8 @@ export class PersonalInformationComponent implements OnInit {
       this.hardcodedIC();
     }
 
+    console.log(appFunc.currMemberDetail);
+
     this.address1 = appFunc.currMemberDetail.addresses[0].addLine1;
     this.address2 = appFunc.currMemberDetail.addresses[0].addLine2;
     this.address3 = appFunc.currMemberDetail.addresses[0].addLine3;
@@ -154,18 +156,18 @@ export class PersonalInformationComponent implements OnInit {
     if(this.state.length == 0){
       errorCount += 1;
     }
-    if(this.homeNo.length == 0){
-      errorCount += 1;
-    }
-    if(this.officeNo.length == 0){
-      errorCount += 1;
-    }
-    if(this.phoneNo.length == 0){
-      errorCount += 1;
-    }
-    if(this.email.length == 0){
-      errorCount += 1;
-    }
+    // if(this.homeNo.length == 0){
+    //   errorCount += 1;
+    // }
+    // if(this.officeNo.length == 0){
+    //   errorCount += 1;
+    // }
+    // if(this.phoneNo.length == 0){
+    //   errorCount += 1;
+    // }
+    // if(this.email.length == 0){
+    //   errorCount += 1;
+    // }
 
     if(errorCount == 0){
       this.page1 = false;
@@ -199,16 +201,17 @@ export class PersonalInformationComponent implements OnInit {
         "contactPersonName":"",
         "contactDeptName":"",
         "jobDesignCode":"",
-        "prefComChannel":""
+        "prefComChannel":"",
+        "sessionId": appFunc.sessionId
       }
 
       const addressBody = {
         "custNum": appFunc.currMemberDetail.cifNum,
         "electAddSeqNum": appFunc.currMemberDetail.electAddGrpSeq,
         "addType": "1",
-        "addLine1": "NO 5, LORONG GOODWOOD ",
-        "addLine2": "",
-        "addLine3": "",
+        "addLine1": this.address1,
+        "addLine2": this.address2,
+        "addLine3": this.address3,
         "addLine4": "",
         "addLine5": "",
         "cityStateZip": "",
@@ -217,7 +220,8 @@ export class PersonalInformationComponent implements OnInit {
         "countryCode": "MAL",
         "remark": "",
         "enforcementCOde": "",
-        "employersAddressee": ""
+        "employersAddressee": "",
+        "sessionId": appFunc.sessionId
       }
 
       this._aldanService.UpdateFullProfile(personalInformationBody,addressBody).subscribe((result: any) =>{
@@ -230,7 +234,8 @@ export class PersonalInformationComponent implements OnInit {
             "searchType": "A",
             "idNum": currentMyKadDetails.ICNo,
             "idType": currentMyKadDetails.CategoryType,
-            "reqTypeCode": ""   
+            "reqTypeCode": "",
+            "sessionId": appFunc.sessionId
           }
           this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
             if(result.responseCode == "0"){

@@ -209,7 +209,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   AskActivateYes() {
     if (appFunc.bypassAPI != false) {
       this._aldanService
-        .GetTnC(selectLang.selectedLang)
+        .GetTnC(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
           if (result.content != '') {
             this.TnC = result.content.toString();
@@ -229,7 +229,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   IAkaunTNCyes() {
     if (appFunc.bypassAPI != false) {
-      this._aldanService.GetSecureImage().subscribe((result: any) => {
+      this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
         if (result.imgId != '') {
           result.forEach((element: any) => {
             this.checkboxImages.push({
@@ -355,7 +355,7 @@ export class IAkaunRegistrationComponent implements OnInit {
             "terms_condition": "46"
           }
 
-          this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
+          this._aldanService.ActivateIAkaun(iAkaunActBody, appFunc.sessionId).subscribe((result: any) => {
             if(result.epfNum != null){
 
               this.ActivateInformation = false;

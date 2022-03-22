@@ -39,15 +39,18 @@ export class MainMenuComponent implements OnInit {
 
     if(appFunc.modules != undefined){
 
+      
       if(appFunc.checkModuleAvailability(appFunc.modules) == 0){
         appFunc.message = "Under Maintenance";
         this.route.navigate(['outofservice']);
       }
 
+      console.log(appFunc.modules);
+
       for (var val of appFunc.modules){
         if(val.moduleID == 1){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               this.checkBalanceEnabled = true;
             }
             else{
@@ -60,7 +63,7 @@ export class MainMenuComponent implements OnInit {
         }
         else if(val.moduleID == 2){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               this.updateTACEnabled = true;
             }
             else{
@@ -73,7 +76,7 @@ export class MainMenuComponent implements OnInit {
         }
         else if(val.moduleID == 3){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               this.personalInformationEnabled = true;
             }
             else{
@@ -86,28 +89,28 @@ export class MainMenuComponent implements OnInit {
         }
         else if(val.moduleID == 5){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               isaraanishariahcount += 1;
             }
           }
         }
         else if(val.moduleID == 6){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               isaraanishariahcount += 1;
             }
           }
         }
         else if(val.moduleID == 7){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               iakauncount += 1;
             }
           }
         }
         else if(val.moduleID == 8){
           if(val.enabled == true){
-            if(appFunc.isInBetween(new Date(val.operationStart), new Date(val.operationEnd), new Date())){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
               iakauncount += 1;
             }
           }

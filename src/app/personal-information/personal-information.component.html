@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{homeNo}}" #home_no>
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" target="needed" value="{{homeNo}}" #home_no>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{officeNo}}" #office_no>
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" target="needed" value="{{officeNo}}" #office_no>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{phoneNo}}" #phone_no>
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" target="needed" value="{{phoneNo}}" #phone_no>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" required target="needed" value="{{email}}" #email_>
+                        <input type="text" class="use-keyboard-input" id="txtProfile" name="txtProfile" target="needed" value="{{email}}" #email_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -158,7 +158,7 @@
             <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h2 class="errorMsg" *ngIf="emptyFields">{{"emptyFields"| translate}}</h2>
+                    <h4 class="errorMsg" *ngIf="emptyFields">{{"emptyFields"| translate}}</h4>
                 </div>
                 <div class="col-4"></div>
             </div>
@@ -172,6 +172,11 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
         <div class="row padTop5rem content-container" *ngIf="page2">
             <div class="text-center">
                 <div class="lblHeader">

@@ -9,19 +9,19 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="row padTop5rem content-container">
+    <div class="row padTop2rem content-container">
       <div class="text-center">
         <div class="lblHeader">
           Hi {{name}},<br>
           {{"pleaseChoose"|translate}}
         </div>
-        <div class="row padTop5rem">
+        <div class="row padTop4rem">
           <div class="col-6">
-            <button [ngClass]="checkBalanceEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="checkBalance()">
+            <button [ngClass]="checkBalanceEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="checkBalance()" [disabled]="!checkBalanceEnabled">
               <div class="row">
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Semak-Baki-Simpanan.svg" width="45px" height="45px">
+                    <img src="assets/images/Icon-Semak-Baki-Simpanan.svg" width="55px" height="55px">
                   </div>
                 </div>
                 <div class="col-8 menuItemBorder">
@@ -34,8 +34,7 @@
             </button>
           </div>
           <div class="col-6">
-            <!-- <img src="assets/images/Maklumat-Peribadi.svg" width="800px" height="200" (click)="personalInformation()"> -->
-            <button [ngClass]="personalInformationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="personalInformation()">
+            <button [ngClass]="personalInformationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="personalInformation()" [disabled]="!personalInformationEnabled">
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
@@ -45,20 +44,20 @@
                 </div>
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Maklumat-Peribadi.svg" width="45px" height="45px">
+                    <img src="assets/images/Icon-Maklumat-Peribadi.svg" width="55px" height="55px">
                   </div>
                 </div>
               </div>
             </button>
           </div>
         </div>
-        <div class="row padTop5rem">
+        <div class="row padTop3rem">
           <div class="col-6">
-            <button [ngClass]="updateTACEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="updateTAC()">
+            <button [ngClass]="updateTACEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="updateTAC()" [disabled]="!updateTACEnabled">
               <div class="row">
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Kemaskinian-Mobile-TAC.svg" width="45px" height="45px">
+                    <img src="assets/images/Icon-Kemaskinian-Mobile-TAC.svg" width="55px" height="55px">
                   </div>
                 </div>
                 <div class="col-8 menuItemBorder">
@@ -71,7 +70,7 @@
             </button>
           </div>
           <div class="col-6">
-            <button [ngClass]="iShariahiSaraanEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iSaraanRegistrationShariahSavings()">
+            <button [ngClass]="iShariahiSaraanEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iSaraanRegistrationShariahSavings()" [disabled]="!iShariahiSaraanEnabled">
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
@@ -81,20 +80,20 @@
                 </div>
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="45px" height="45px">
+                    <img src="assets/images/Icon-Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="55px" height="55px">
                   </div>
                 </div>
               </div>
             </button>
           </div>
         </div>
-        <div class="row padTop5rem">
+        <div class="row padTop3rem">
           <div class="col-6">
-            <button [ngClass]="thumbprintVerificationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="thumbprintConfirmation()" [disabled]="true">
+            <button [ngClass]="thumbprintVerificationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="thumbprintConfirmation()" [disabled]="!thumbprintVerificationEnabled">
               <div class="row">
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Pengesahan-Cap-Ibu-Jari.svg" width="45px" height="45px">
+                    <img src="assets/images/Icon-Pengesahan-Cap-Ibu-Jari.svg" width="55px" height="55px">
                   </div>
                 </div>
                 <div class="col-8 menuItemBorder">
@@ -108,7 +107,7 @@
           </div>
           <div class="col-6">
             <!-- (click)="iAkaunRegistration()" -->
-            <button [ngClass]="iAkaunEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iAkaunRegistration()"> 
+            <button [ngClass]="iAkaunEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iAkaunRegistration()" [disabled]="!iAkaunEnabled"> 
               <div class="row">
                 <div class="col-1 menuItemBorder"></div>
                 <div class="col-8 menuItemBorder">
@@ -118,22 +117,22 @@
                 </div>
                 <div class="col-3 menuItemBorder">
                   <div class="centerItem">
-                    <img src="assets/images/Icon-Pendaftaran-IAkaun.svg" width="45px" height="45px">
+                    <img src="assets/images/Icon-Pendaftaran-IAkaun.svg" width="55px" height="55px">
                   </div>
                 </div>
               </div>
             </button>
           </div>
         </div>
-        <div class="row padTop15rem">
-          <div class="col-1"></div>
-          <div class="col-5 mainMenuLeft">
-            <img src="assets/images/Icon-Date-Time.svg" width="70px" height="70px">
+        <div class="row padTop5rem">
+          <!-- <div class="col-1"></div> -->
+          <div class="col-6 mainMenuLeft">
+            <img src="assets/images/Icon-Date-Time.svg" width="35px" height="35px">
             <label class="lblDate2">{{date}}</label>
           </div>
-          <div class="col-5 mainMenuRight" (click)="logOut()">
+          <div class="col-6 mainMenuRight" (click)="logOut()">
             <label class="lblLogout">{{"logout"|translate}}</label>
-            <img src="assets/images/Icon-Logout.svg" width="80px" height="80px">
+            <img src="assets/images/Icon-Logout.svg" width="40px" height="40px">
           </div>
         </div>
       </div>

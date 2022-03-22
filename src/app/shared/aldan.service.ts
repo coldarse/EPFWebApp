@@ -114,7 +114,7 @@ export class AldanService {
     
 
     return this.http.post(
-      'https://10.0.58.81/connect/token', 
+      'https://localhost:44373/connect/token', 
       body,
       Options
     ).pipe(
@@ -125,7 +125,7 @@ export class AldanService {
 
   verifyKiosk(kioskCode: string){
     return this.http.get(
-      this.url + `/app/kiosks/Verify/${kioskCode}`,
+      this.url + `app/kiosks/Verify/${kioskCode}`,
       accessToken.httpOptions
     ).pipe(
       retry(1),
@@ -180,7 +180,29 @@ export class AldanService {
     )
   }
 
+  //Create Session
+  CreateSession(body: any){
+    return this.http.post(
+      this.url + 'app/client-sessions',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
 
+  //End Session
+  EndSession(sessionid: number, body: any){
+    return this.http.put(
+      this.url + 'app/client-sessions/' + sessionid,
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
   
   //Member CIF Details
   MemberCIFDetailsCheck(body: any){
@@ -369,9 +391,9 @@ export class AldanService {
     ]);
   }
 
-  GetSecureImage(){
+  GetSecureImage(sessionid: number){
     return this.http.get(
-      this.url + 'IAkaunActivation/iAkaunAct/GetSecureImage?SessionId=1',
+      this.url + `IAkaunActivation/iAkaunAct/GetSecureImage?SessionId=${sessionid}`,
       accessToken.httpOptions
       ).pipe(
         retry(1),
@@ -379,9 +401,9 @@ export class AldanService {
       )
   }
 
-  GetTnC(locale: string){
+  GetTnC(locale: string, sessionid: number){
     return this.http.get(
-      this.url + `IAkaunActivation/iAkaunAct/GetTnC?SessionId=1&locale=${locale}`,
+      this.url + `IAkaunActivation/iAkaunAct/GetTnC?SessionId=${sessionid}&locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
         retry(1),
@@ -389,9 +411,9 @@ export class AldanService {
       )
   }
 
-  ActivateIAkaun(body: any){
+  ActivateIAkaun(body: any, sessionid: number){
     return this.http.put(
-      this.url + `IAkaunActivation/iAkaunAct?SessionId=1&epfNum=${body.epfNum}&id_no=${body.id_no}&name=${body.name}&user_id=${body.user_id}&new_password=${body.new_password}&confirm_new_password=${body.confirm_new_password}&secure_image_id=${body.secure_image_id}&secret_phrase=${body.secret_phrase}&terms_condition=${body.terms_condition}`,
+      this.url + `IAkaunActivation/iAkaunAct?SessionId=${sessionid}&epfNum=${body.epfNum}&id_no=${body.id_no}&name=${body.name}&user_id=${body.user_id}&new_password=${body.new_password}&confirm_new_password=${body.confirm_new_password}&secure_image_id=${body.secure_image_id}&secret_phrase=${body.secret_phrase}&terms_condition=${body.terms_condition}`,
       accessToken.httpOptions
     ).pipe(
       retry(1),
