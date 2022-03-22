@@ -14,7 +14,7 @@ export class eModules {
 		this.moduleName = emodule.moduleName;
 		this.operationStart = emodule.operationStart;
 		this.operationEnd = emodule.operationEnd;
-		this.enabled = emodule.enable;
+		this.enabled = emodule.enabled;
 	}
 }
 

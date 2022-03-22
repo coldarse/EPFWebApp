@@ -5,9 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { appFunc } from '../_models/_appFunc';
-import { currentMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
-import { signalRConnection } from '../_models/_signalRConnection';
 
 
 declare const loadKeyboard: any;
@@ -33,11 +31,11 @@ export class RegisterMemberComponent implements OnInit {
   RegShariah = false;
   RegSaraan = false;
   RegIAkaun = false;
-  RegisterMemberPage = true;
+  RegisterMemberPage = false;
   InsertPhonePage = false;
   InsertEmailPage = false;
   ValidateProfilePage = false;
-  RegisterSuccessPage = false;
+  RegisterSuccessPage = true;
   TnCPage = false;
   ActivateiAkaunPage = false;
   ActivateSuccessPage = false;
@@ -49,6 +47,11 @@ export class RegisterMemberComponent implements OnInit {
   SaraanSuccessPage = false;
   Failed = false;
   TnC = '';
+
+  failedTAC = false;
+  isiAkaunModuleEnabled = false;
+  isiShariahModuleEnabled = false;
+  isiSaraanModuleEnabled = false;
 
   xagreedTnc1 = true;
   xagreedTnc2 = true;
@@ -124,10 +127,10 @@ export class RegisterMemberComponent implements OnInit {
     }
 
 
-    let hardcode = true;
-    if(hardcode){
-      this.hardcodedIC();
-    }
+    // let hardcode = true;
+    // if(hardcode){
+    //   this.hardcodedIC();
+    // }
 
     this.name = currentMyKadDetails.Name;
     this.ic = currentMyKadDetails.ICNo;
@@ -292,47 +295,47 @@ export class RegisterMemberComponent implements OnInit {
       let race = "";
       switch(currentMyKadDetails.Race.toUpperCase()){
         case "MELAYU": {
-          gender = "0100";
+          race = "0100";
           break;
         }
         case "BUGIS": {
-          gender = "0101";
+          race = "0101";
           break;
         }
         case "BOYAN": {
-          gender = "0102";
+          race = "0102";
           break;
         }
         case "BANJAR": {
-          gender = "0103";
+          race = "0103";
           break;
         }
         case "JAWA": {
-          gender = "0104";
+          race = "0104";
           break;
         }
         case "JAWI PEKAN": {
-          gender = "0105";
+          race = "0105";
           break;
         }
         case "MINANGKABAU": {
-          gender = "0106";
+          race = "0106";
           break;
         }
         case "CINA": {
-          gender = "0200";
+          race = "0200";
           break;
         }
         case "CANTONESE": {
-          gender = "0201";
+          race = "0201";
           break;
         }
         case "FOOCHOW": {
-          gender = "0202";
+          race = "0202";
           break;
         }
         case "HAINANANESE": {
-          gender = "0203";
+          race = "0203";
           break;
         }
       }
@@ -405,7 +408,7 @@ export class RegisterMemberComponent implements OnInit {
         "primaryIdTypeCode": currentMyKadDetails.CategoryType,
         "primaryIdNum": currentMyKadDetails.ICNo,
         "custName": currentMyKadDetails.Name,
-        "birthDate": currentMyKadDetails.DOB,
+        "birthDate": currentMyKadDetails.DOB.toString().replace("T00:00:00", ""),
         "residentStatus": residentStat,
         "gender": gender,
         "citizenCountry": "MAL",
@@ -425,7 +428,7 @@ export class RegisterMemberComponent implements OnInit {
         "cityStateZip": currentMyKadDetails.State,
         "stateCode": "15",
         "countryCode": "MAL",
-        "addRemarks": "TEST Permanent Address Remarks",
+        "addRemarks": "",
         "addLine1A": currentMyKadDetails.Address1,
         "addLine2A": currentMyKadDetails.Address2,
         "addLine3A": currentMyKadDetails.Address3,
@@ -435,7 +438,7 @@ export class RegisterMemberComponent implements OnInit {
         "cityStateZip1": currentMyKadDetails.State,
         "stateCode1": "15",
         "countryCode1": "MAL",
-        "addRemarks1": "TEST Correspondence Address Remarks",
+        "addRemarks1": "",
         "homePhone": "",
         "officePhone": "",
         "mobilePhone": this.phoneNo,
@@ -451,7 +454,8 @@ export class RegisterMemberComponent implements OnInit {
         "lastMaintTime": "",
         "lastMaintUserID": "",
         "lastMaintTerminalID": "",
-        "lastMaintBranchNo": ""
+        "lastMaintBranchNo": "",
+        "sessionId": 1 
       }
   
       this._aldanService.MemberRegistration(body).subscribe((result: any) =>{ //Call Register Member
@@ -469,7 +473,8 @@ export class RegisterMemberComponent implements OnInit {
             "status": "P",
             "checkForDuplicate": "N",
             "generateRequestNum": "N",
-            "requestNum": ""
+            "requestNum": "",
+            "sessionId": 1 
           }
 
           this._aldanService.AddTAC(addMobileTACBody).subscribe((result: any) => { //Call Add TAC
@@ -483,7 +488,8 @@ export class RegisterMemberComponent implements OnInit {
                 "source": "",
                 "subSource": "",
                 "ipAddress": "",
-                "validity": ""
+                "validity": "",
+                "sessionId": 1 
               }
         
               this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
@@ -495,16 +501,20 @@ export class RegisterMemberComponent implements OnInit {
                   deleteKeyboard()
                 }
                 else{
-                  this.Failed = true;
+                  this.failedTAC = true;
+                  this.ValidateProfilePage = false;
+                  this.RegisterSuccessPage = true;
                 }
               });
             }
             else{
+              this.ValidateProfilePage = false;
               this.Failed = true;
             }
           });
         }
         else{
+          this.ValidateProfilePage = false;
           this.Failed = true;
         }
       });
@@ -525,20 +535,34 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   RegisterSuccessYes(){
-    if (appFunc.bypassAPI != false) {
-      this._aldanService
-        .GetTnC(selectLang.selectedLang)
-        .subscribe((result: any) => {
-          if (result.content != '') {
-            this.TnC = result.content.toString();
-            console.log(this.TnC);
-            this.RegisterSuccessPage = false;
-            this.TnCPage = true;
-          } else {
-            this.Failed = true;
-          }
-        });
+    if(this.isiAkaunModuleEnabled){
+      if (appFunc.bypassAPI != false) {
+        this._aldanService
+          .GetTnC(selectLang.selectedLang, appFunc.sessionId)
+          .subscribe((result: any) => {
+            if (result.content != '') {
+              this.TnC = result.content.toString();
+              console.log(this.TnC);
+              this.RegisterSuccessPage = false;
+              this.TnCPage = true;
+            } else {
+              this.Failed = true;
+            }
+          });
+      }
     }
+    else{
+      if(this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled)
+      {
+        this.RegisterSuccessPage = false;
+        this.PickShariahPage = true;
+      }
+      else{
+        this.route.navigate(['mainMenu']);
+      }
+      
+    }
+    
   }
 
   clickTNC1(){
@@ -550,7 +574,7 @@ export class RegisterMemberComponent implements OnInit {
 
   TnCYes(){
     if (appFunc.bypassAPI != false) {
-      this._aldanService.GetSecureImage().subscribe((result: any) => {
+      this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
         if (result.imgId != '') {
           result.forEach((element: any) => {
             this.checkboxImages.push({
@@ -719,7 +743,7 @@ export class RegisterMemberComponent implements OnInit {
   ActivateSuccessYes(){
     this.ActivateSuccessPage = false;
     this.PickShariahPage = true;
-  }
+  } 
 
   IShariahNo(){
     this.PickShariahPage = false;
@@ -747,7 +771,8 @@ export class RegisterMemberComponent implements OnInit {
         "electStatus": "A",
         "reasonCode": "",
         "akadRefNum": "",
-        "docRefNum": ""
+        "docRefNum": "",
+        "sessionId": 1 
       }
 
       this._aldanService.iShariahRegistration(iShariahBody).subscribe((result:any) => {
@@ -805,7 +830,8 @@ export class RegisterMemberComponent implements OnInit {
           "applicationReceivedDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
           "sourceCreationID": "SST",
           "sourceTerminalID": "SST",
-          "sourceBranchNo": "0"
+          "sourceBranchNo": "0",
+          "sessionId": 1 
         }
   
         this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {
