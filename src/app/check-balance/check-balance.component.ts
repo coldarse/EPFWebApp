@@ -7,6 +7,7 @@ import { appFunc } from '../_models/_appFunc';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { currMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemberDetails';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-check-balance',
@@ -14,8 +15,6 @@ import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemb
   styleUrls: ['./check-balance.component.css'],
 })
 export class CheckBalanceComponent implements OnInit {
-  checkBalance = true;
-  updateProfile = false;
   SummaryStatementPage = true;
   SelectYearPage = false;
   StatementPage = false;
@@ -23,7 +22,6 @@ export class CheckBalanceComponent implements OnInit {
   UpdateEmailPage =false;
   EmailSuccessPage = false;
   EmailFailPage = false;
-  // Failed = false;
 
   totalSavings = 0;
   grandTotal = 0;
@@ -59,7 +57,18 @@ export class CheckBalanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.translate.use('bm');
+    if (appFunc.FromCheckBalance == true) {
+      this.ConfirmEmailPage = true
+      this.SummaryStatementPage = true;
+      this.SelectYearPage = false;
+      this.StatementPage = false;
+      this.UpdateEmailPage =false;
+      this.EmailSuccessPage = false;
+      this.EmailFailPage = false;
+      
+    }
     // this.ShowTable();
 
     const summaryBody = {
@@ -116,6 +125,11 @@ export class CheckBalanceComponent implements OnInit {
   ConfirmEmailYes() {
     this.ConfirmEmailPage = false;
     this.EmailSuccessPage = true;
+  }
+
+  NavProfile() {
+    appFunc.FromCheckBalance = true;
+    this.route.navigate(['personalInformation']);
   }
 
   EmailSuccessYes() {

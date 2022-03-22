@@ -12,10 +12,9 @@ import { signalRConnection } from '../_models/_signalRConnection';
 @Component({
   selector: 'app-i-saraan-shariah-savings-registration',
   templateUrl: './i-saraan-shariah-savings-registration.component.html',
-  styleUrls: ['./i-saraan-shariah-savings-registration.component.css']
+  styleUrls: ['./i-saraan-shariah-savings-registration.component.css'],
 })
 export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
-
   RegSaraanShariah = true;
   RegShariah = false;
   RegSaraan = false;
@@ -27,10 +26,11 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   Failed = false;
 
   xagreedTnc = true;
+  Contract = '';
 
-  defaultDDL = "";
+  defaultDDL = '';
   selectedJobSector: any = undefined;
-  currentLang = "bm"
+  currentLang = 'bm';
 
   // jobSectors = [
   //   { name: "agriculture", id: 1, malay: "Pertanian", english: "Pertanian" },
@@ -46,13 +46,13 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   //   { name: "gig", id: 11, malay: "Pekerjaan gig", english: "Pekerjaan gig" },
   //   { name: "other", id: 12, malay: "Yang lain", english: "Yang lain" },
   // ]
-  jobSectors: businessTypes[] = []
+  jobSectors: businessTypes[] = [];
 
   constructor(
     private route: Router,
     private translate: TranslateService,
     private _aldanService: AldanService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.use('bm');
@@ -60,135 +60,138 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     this.jobSectors = appFunc.businessTypes;
 
     this.currentLang = selectLang.selectedLang;
-    if(selectLang.selectedLang == 'bm'){
-      this.defaultDDL = "Sila pilih daripada pilihan berikut";
-    }else{
-      this.defaultDDL = "Sila pilih daripada pilihan berikut";
+    if (selectLang.selectedLang == 'bm') {
+      this.defaultDDL = 'Sila pilih daripada pilihan berikut';
+    } else {
+      this.defaultDDL = 'Sila pilih daripada pilihan berikut';
     }
   }
 
-  selectJob(jobSector: any){
-    this.defaultDDL = jobSector.description;//(this.currentLang == "bm" ? jobSector.malay : jobSector.english);
+  selectJob(jobSector: any) {
+    this.defaultDDL = jobSector.description; //(this.currentLang == "bm" ? jobSector.malay : jobSector.english);
     this.selectedJobSector = jobSector;
   }
 
-  clickTNC(){
+  clickTNC() {
     this.xagreedTnc = !this.xagreedTnc;
   }
 
-  clickSaraan(){
+  clickSaraan() {
     this.RegSaraanShariah = false;
     this.RegSaraan = true;
     this.SelectIShariahISaraan = false;
     this.ISaraan = true;
   }
 
-  clickShariah(){
-    this.RegSaraanShariah = false;
-    this.RegShariah = true;
-    this.SelectIShariahISaraan = false;
-    this.IShariah = true;
-  }
-
-  ISaraanYes(){
-    if(this.selectedJobSector == undefined){
-
-    }
-    else{
-      if(appFunc.bypassAPI != true){
-        const iSaraanBody = {
-          "idNum": currentMyKadDetails.ICNo,
-          "idType": currentMyKadDetails.CategoryType,
-          "businessTypeCode": this.selectedJobSector.code,
-          "remark": "",
-          "sourceRegistrationChannel": "SST",
-          "applicationReceivedDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-          "sourceCreationID": "SST",
-          "sourceTerminalID": "SST",
-          "sourceBranchNo": "0"
-        }
-
-        this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {
-          if(result.responseCode == "0"){
-
-            this.ISaraan = false;
-            this.ISaraanSuccess = true;
-
-          }
-          else{
+  clickShariah() {
+    if (appFunc.bypassAPI != false) {
+      this._aldanService
+        .GetContract(selectLang.selectedLang)
+        .subscribe((result: any) => {
+          if (result.content != '') {
+            this.Contract = result.content.toString();
+            console.log(this.Contract);
+            this.RegSaraanShariah = false;
+            this.RegShariah = true;
+            this.SelectIShariahISaraan = false;
+            this.IShariah = true;
+          } else {
             this.Failed = true;
           }
         });
-      }
-      else{
+    }
+  }
+
+  ISaraanYes() {
+    if (this.selectedJobSector == undefined) {
+    } else {
+      if (appFunc.bypassAPI != true) {
+        const iSaraanBody = {
+          idNum: currentMyKadDetails.ICNo,
+          idType: currentMyKadDetails.CategoryType,
+          businessTypeCode: this.selectedJobSector.code,
+          remark: '',
+          sourceRegistrationChannel: 'SST',
+          applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+          sourceCreationID: 'SST',
+          sourceTerminalID: 'SST',
+          sourceBranchNo: '0',
+        };
+
+        this._aldanService
+          .iSaraanRegistration(iSaraanBody)
+          .subscribe((result: any) => {
+            if (result.responseCode == '0') {
+              this.ISaraan = false;
+              this.ISaraanSuccess = true;
+            } else {
+              this.Failed = true;
+            }
+          });
+      } else {
         this.ISaraan = false;
         this.ISaraanSuccess = true;
       }
     }
-    
   }
 
-  ISaraanNo(){
+  ISaraanNo() {
     this.RegSaraanShariah = true;
     this.RegSaraan = false;
     this.ISaraan = false;
     this.SelectIShariahISaraan = true;
   }
 
-  IShariahYes(){
-
-    if(appFunc.bypassAPI != true){
+  IShariahYes() {
+    if (appFunc.bypassAPI != true) {
       const iShariahBody = {
-        "custNum": appFunc.currMemberDetail.cifNum,//this.KWSPCustomerNo,
-        "accNum": appFunc.currMemberDetail.accNum,//this.KWSPMemberNo,
-        "accType": "S",
-        "electChannel": "SAO",
-        "electReceivedDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        "electReceivedTime": formatDate(new Date(), 'h:MM:ss', 'en'),
-        "electReceivedBranch": "1",
-        "electDate": "2019-10-11",
-        "electBranch": "1",
-        "electStatus": "A",
-        "reasonCode": "",
-        "akadRefNum": "",
-        "docRefNum": ""
-      }
+        custNum: appFunc.currMemberDetail.cifNum, //this.KWSPCustomerNo,
+        accNum: appFunc.currMemberDetail.accNum, //this.KWSPMemberNo,
+        accType: 'S',
+        electChannel: 'SAO',
+        electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        electReceivedTime: formatDate(new Date(), 'h:MM:ss', 'en'),
+        electReceivedBranch: '1',
+        electDate: '2019-10-11',
+        electBranch: '1',
+        electStatus: 'A',
+        reasonCode: '',
+        akadRefNum: '',
+        docRefNum: '',
+      };
 
-      this._aldanService.iShariahRegistration(iShariahBody).subscribe((result:any) => {
-        if(result.responseCode == "0"){
-
-          this.IShariah = false;
-          this.IShariahSuccess = true;
-
-        }
-        else{
-          this.Failed = true;
-        }
-      });
-    }
-    else{
+      this._aldanService
+        .iShariahRegistration(iShariahBody)
+        .subscribe((result: any) => {
+          if (result.responseCode == '0') {
+            this.IShariah = false;
+            this.IShariahSuccess = true;
+          } else {
+            this.Failed = true;
+          }
+        });
+    } else {
       this.IShariah = false;
       this.IShariahSuccess = true;
     }
   }
 
-  IShariahNo(){
+  IShariahNo() {
     this.RegSaraanShariah = true;
     this.RegShariah = false;
     this.IShariah = false;
     this.SelectIShariahISaraan = true;
   }
 
-  ISaraanSuccessYes(){
+  ISaraanSuccessYes() {
     this.route.navigate(['mainMenu']);
   }
 
-  IShariahSuccessYes(){
+  IShariahSuccessYes() {
     this.route.navigate(['mainMenu']);
   }
 
-  failedYes(){
+  failedYes() {
     this.route.navigate(['mainMenu']);
   }
-
 }

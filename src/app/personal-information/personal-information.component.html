@@ -1,7 +1,7 @@
 <div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
     <div class="header">{{ "personalInfo" | translate }}</div>
     <div class="container-fluid">
-        <div class="row padTop2rem content-container" *ngIf="page1">
+        <div class="row padTop2rem content-container" *ngIf="UpdateProfilePage">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -165,14 +165,14 @@
             <div class="row text-center padTop2rem">
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <button type="button" class="btnNo" (click)="page1no()">{{"back"| translate}}</button>
+                    <button type="button" class="btnNo" (click)="UpdateProfileNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btnYes" (click)="page1yes()">{{"keep"| translate}}</button>
+                    <button type="button" class="btnYes" (click)="UpdateProfileYes()">{{"keep"| translate}}</button>
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem content-container" *ngIf="page2">
+        <div class="row padTop5rem content-container" *ngIf="SaveProfilePage">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"verifyProfile"| translate}}
@@ -210,15 +210,15 @@
                 <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="page2no()">{{"back"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="SaveProfileNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="page2yes()">{{"approve"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="SaveProfileYes()">{{"approve"| translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem content-container" *ngIf="page3">
+        <div class="row padTop5rem content-container" *ngIf="SaveSuccessPage">
             <div class="text-center">
                 <div class="lblStatus">
                     {{"success"| translate}}
@@ -232,7 +232,7 @@
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="page3yes()">{{"yes"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="SaveSuccessYes()">{{"yes"|translate}}</button>
                     </div>
                 </div>
             </div>

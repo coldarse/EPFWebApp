@@ -53,6 +53,14 @@ export class Token{
 	}
 }
 
+export class isFromCheckBalance{
+	value: boolean;
+
+	constructor(from: any){
+		this.value = from.value;
+	}
+}
+
 
 // KioskInformation
 export class kioskInformation{

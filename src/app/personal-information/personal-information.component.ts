@@ -2,6 +2,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { AldanService } from '../shared/aldan.service';
 import { appFunc } from '../_models/_appFunc';
 import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemberDetails';
@@ -32,9 +33,9 @@ export class PersonalInformationComponent implements OnInit {
   @ViewChild('email_') email_ : ElementRef | undefined;
 
 
-  page1 = true;
-  page2 = false;
-  page3 = false;
+  UpdateProfilePage = true;
+  SaveProfilePage = false;
+  SaveSuccessPage = false;
   Failed = false;
 
   address1 = "NO 46";
@@ -51,7 +52,6 @@ export class PersonalInformationComponent implements OnInit {
 
   spacer = " ";
   comma = ", ";
-  
 
   emptyFields = false;
 
@@ -69,18 +69,18 @@ export class PersonalInformationComponent implements OnInit {
       this.hardcodedIC();
     }
 
-    this.address1 = appFunc.currMemberDetail.addresses[0].addLine1;
-    this.address2 = appFunc.currMemberDetail.addresses[0].addLine2;
-    this.address3 = appFunc.currMemberDetail.addresses[0].addLine3;
-    this.postcode = appFunc.currMemberDetail.addresses[0].postalCode;
-    this.city = appFunc.currMemberDetail.addresses[0].cityStateZip;
-    this.state = appFunc.currMemberDetail.addresses[0].stateDesc;
-    this.country = appFunc.currMemberDetail.addresses[0].countryDesc;
+    // this.address1 = appFunc.currMemberDetail.addresses[0].addLine1;
+    // this.address2 = appFunc.currMemberDetail.addresses[0].addLine2;
+    // this.address3 = appFunc.currMemberDetail.addresses[0].addLine3;
+    // this.postcode = appFunc.currMemberDetail.addresses[0].postalCode;
+    // this.city = appFunc.currMemberDetail.addresses[0].cityStateZip;
+    // this.state = appFunc.currMemberDetail.addresses[0].stateDesc;
+    // this.country = appFunc.currMemberDetail.addresses[0].countryDesc;
 
-    this.homeNo = appFunc.currMemberDetail.homePhone;
-    this.officeNo = appFunc.currMemberDetail.officePhone;
-    this.phoneNo = appFunc.currMemberDetail.mobilePhone;
-    this.email = appFunc.currMemberDetail.emailAdd;
+    // this.homeNo = appFunc.currMemberDetail.homePhone;
+    // this.officeNo = appFunc.currMemberDetail.officePhone;
+    // this.phoneNo = appFunc.currMemberDetail.mobilePhone;
+    // this.email = appFunc.currMemberDetail.emailAdd;
 
     setTimeout(() => {
       loadKeyboard();
@@ -116,7 +116,7 @@ export class PersonalInformationComponent implements OnInit {
     currentMyKadDetails.CategoryType = "W";
   }
 
-  page1yes(){
+  UpdateProfileYes(){
 
     this.emptyFields = false;
 
@@ -168,8 +168,8 @@ export class PersonalInformationComponent implements OnInit {
     }
 
     if(errorCount == 0){
-      this.page1 = false;
-      this.page2 = true;
+      this.UpdateProfilePage = false;
+      this.SaveProfilePage = true;
   
       deleteKeyboard();
     }
@@ -178,11 +178,18 @@ export class PersonalInformationComponent implements OnInit {
     }
   }
 
-  page1no(){
-    this.route.navigate(['mainMenu']);
+  UpdateProfileNo(){
+    if (appFunc.FromCheckBalance == true)
+    {
+      this.route.navigate(['checkBalance']);
+    }
+    else
+    {
+      this.route.navigate(['mainMenu']);
+    }
   }
 
-  page2yes(){
+  SaveProfileYes(){
     if(appFunc.bypassAPI != true){
       const personalInformationBody = {
         "cifNum": appFunc.currMemberDetail.cifNum,
@@ -236,8 +243,8 @@ export class PersonalInformationComponent implements OnInit {
             if(result.responseCode == "0"){
     
               appFunc.currMemberDetail = result.detail.map((cmd: any) => new currMemberAddress(cmd))
-              this.page2 = false;
-              this.page3 = true;
+              this.SaveProfilePage = false;
+              this.SaveSuccessPage = true;
             }
             else{
               this.Failed = true;
@@ -250,21 +257,21 @@ export class PersonalInformationComponent implements OnInit {
       });
     }
     else{
-      this.page2 = false;
-      this.page3 = true;
+      this.SaveProfilePage = false;
+      this.SaveSuccessPage = true;
     } 
   }
 
-  page2no(){
-    this.page2 = false;
-    this.page1 = true;
+  SaveProfileNo(){
+    this.SaveProfilePage = false;
+    this.UpdateProfilePage = true;
 
     setTimeout(() => {
       loadKeyboard();
     }, 500);
   }
 
-  page3yes(){
+  SaveSuccessYes(){
     this.route.navigate(['mainMenu']);
   }
 
@@ -283,6 +290,4 @@ export class PersonalInformationComponent implements OnInit {
   failedYes(){
     this.route.navigate(['mainMenu']);
   }
-
-
 }

@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { businessTypes, eModules } from './modelClass';
 import { currentMemberDetails, currMemberDetails } from './_currentMemberDetails';
 import { signalRConnection } from './_signalRConnection';
@@ -21,7 +22,8 @@ export class appFunc {
 
     static code: string;
     static message: string;
-
+    static FromCheckBalance = false;
+    
     // Check if current time is between Start and End time.
     // Returns true or false.
     static isInBetween(startDateTime: Date, stopDateTime: Date, current: Date): Boolean {

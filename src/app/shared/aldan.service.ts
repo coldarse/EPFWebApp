@@ -399,6 +399,16 @@ export class AldanService {
     )
   }
 
+  GetContract(locale: string){
+    return this.http.get(
+      this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=1&locale=${locale}`,
+      accessToken.httpOptions
+      ).pipe(
+        retry(1),
+        catchError(this.handleError),
+      )
+  }
+
 
   //--------------* API FUNCTIONS END *--------------//
 }
