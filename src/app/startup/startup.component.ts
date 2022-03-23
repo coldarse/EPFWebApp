@@ -117,7 +117,7 @@ export class StartupComponent implements OnInit {
     }, 400);
 
     this._signalR.connect().then((c) => {
-      console.log("API King is now Connected on " + formatDate(new Date(), 'HH:MM:ss', 'en'));
+      console.log("API King is now Connected on " + formatDate(new Date(), 'hh:mm:ss', 'en'));
       signalRConnection.connection = c;
 
       signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {

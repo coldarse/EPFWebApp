@@ -24,6 +24,7 @@ export class appFunc {
     static code: string;
     static message: string;
     static FromCheckBalance = false;
+    static endSession = false;
     
     // Check if current time is between Start and End time.
     // Returns true or false.

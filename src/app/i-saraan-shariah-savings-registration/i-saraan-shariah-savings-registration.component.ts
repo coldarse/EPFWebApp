@@ -84,18 +84,18 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   }
 
   clickShariah() {
-    if (appFunc.bypassAPI != false) {
+    if (appFunc.bypassAPI != true) {
       this._aldanService
-        .GetContract(selectLang.selectedLang)
+        .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
           if (result.content != '') {
-            this.Contract = result.content.toString();
-            console.log(this.Contract);
+            this.Contract = result.content;
             this.RegSaraanShariah = false;
-            this.RegShariah = true;
+            this.RegShariah = true; 
             this.SelectIShariahISaraan = false;
             this.IShariah = true;
           } else {
+            this.RegSaraanShariah = false;
             this.Failed = true;
           }
         });
@@ -116,6 +116,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           sourceCreationID: 'SST',
           sourceTerminalID: 'SST',
           sourceBranchNo: '0',
+          sessionId: appFunc.sessionId
         };
 
         this._aldanService
@@ -125,6 +126,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
               this.ISaraan = false;
               this.ISaraanSuccess = true;
             } else {
+              this.ISaraan = false;
               this.Failed = true;
             }
           });
@@ -150,7 +152,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         accType: 'S',
         electChannel: 'SAO',
         electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        electReceivedTime: formatDate(new Date(), 'h:MM:ss', 'en'),
+        electReceivedTime: formatDate(new Date(), 'hh.mm.ss', 'en'),
         electReceivedBranch: '1',
         electDate: '2019-10-11',
         electBranch: '1',
@@ -158,6 +160,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         reasonCode: '',
         akadRefNum: '',
         docRefNum: '',
+        sessionId: appFunc.sessionId
       };
 
       this._aldanService
@@ -167,6 +170,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             this.IShariah = false;
             this.IShariahSuccess = true;
           } else {
+            this.IShariah = false;
             this.Failed = true;
           }
         });

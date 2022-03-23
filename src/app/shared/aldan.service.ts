@@ -40,7 +40,7 @@ export class AldanService {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
-      signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Service Service]" + ": " + `An error occured: ${error.error.message}.`);
+      //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:mm:ss a', 'en') + " " + "WebApp Component [Service Service]" + ": " + `An error occured: ${error.error.message}.`);
     } 
     else {
       // The backend returned an unsuccessful response code.
@@ -48,7 +48,7 @@ export class AldanService {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
-        signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Service Service]" + ": " + `Backend returned code: ${error.status}, body was: ${error.error}.`);
+        //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Service Service]" + ": " + `Backend returned code: ${error.status}, body was: ${error.error}.`);
     }
     // Return an observable with a user-facing error message.
     // return throwError(
@@ -231,7 +231,7 @@ export class AldanService {
   //i-Shariah Registration
   iShariahRegistration(body: any){
     return this.http.post(
-      this.url + 'Registration/IShariahRegistratione',
+      this.url + 'IShariahRegistration/iShariahReg',
       body,
       accessToken.httpOptions
     ).pipe(
@@ -243,7 +243,7 @@ export class AldanService {
   //i-Saraan Registration
   iSaraanRegistration(body: any){
     return this.http.post(
-      this.url + 'Registration/ISaraanRegistration',
+      this.url + 'ISaraanRegistration/ISaraanReg',
       body,
       accessToken.httpOptions
     ).pipe(
@@ -255,7 +255,7 @@ export class AldanService {
   //i-Akaun Registration
   iAkaunRegistration(body: any){
     return this.http.post(
-      this.url + 'Registration/IAkaunRegistration',
+      this.url + 'IAkaunRegistration/IAkaunReg',
       body,
       accessToken.httpOptions
     ).pipe(
@@ -421,9 +421,9 @@ export class AldanService {
     )
   }
 
-  GetContract(locale: string){
+  GetContract(locale: string, sessionid: number){
     return this.http.get(
-      this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=1&locale=${locale}`,
+      this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=${sessionid}&locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
         retry(1),

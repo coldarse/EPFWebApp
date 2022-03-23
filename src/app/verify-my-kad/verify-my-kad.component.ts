@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SignalR } from 'ng2-signalr';
+import { SignalR, SignalRConfiguration, SignalRConnection } from 'ng2-signalr';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { accessToken } from '../_models/token';
@@ -61,60 +61,77 @@ export class VerifyMyKadComponent implements OnInit {
 
     this.translate.use('bm');
 
-    this._aldanService.GetBusinessTypes().subscribe((res: any) => {
-      appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
-    });
-    this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
-      appFunc.modules = res.map((em: any) => new eModules(em));
-
-      if(appFunc.modules.length != 0){
-        let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-        if(areDisabled == appFunc.modules.length){
-          // errorCodes.code = "0168";
+    if(appFunc.endSession){
+      this.insertCard = false;
+      this.InsertMyKad = false;
+      this.removeCard = true;
+      this.RemoveMyKad = true;
+      this.insertedMyKad = true
+    }
+    else{
+      this._aldanService.GetBusinessTypes().subscribe((res: any) => {
+        appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
+      });
+      this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
+        appFunc.modules = res.map((em: any) => new eModules(em));
+  
+        if(appFunc.modules.length != 0){
+          let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+          if(areDisabled == appFunc.modules.length){
+            // errorCodes.code = "0168";
+            appFunc.message = "Under Maintenance";
+            this.route.navigate(['outofservice']);
+          }
+  
+          setTimeout(() => {
+            this.moduleIntervelId = setInterval(() => {
+              let count = appFunc.checkModuleAvailability(appFunc.modules);
+              if(count == 0){
+                // errorCodes.code = "0168";
+                appFunc.message = "Under Maintenance";
+                this.route.navigate(['outofservice']);
+              }
+            }, 1000);
+          } , 60000);
+        }
+        else{
           appFunc.message = "Under Maintenance";
           this.route.navigate(['outofservice']);
         }
-
-        setTimeout(() => {
-          this.moduleIntervelId = setInterval(() => {
-            let count = appFunc.checkModuleAvailability(appFunc.modules);
-            if(count == 0){
-              // errorCodes.code = "0168";
-              appFunc.message = "Under Maintenance";
-              this.route.navigate(['outofservice']);
-            }
-          }, 1000);
-        } , 60000);
-      }
-      else{
-        appFunc.message = "Under Maintenance";
-        this.route.navigate(['outofservice']);
-      }
-      
-
-
-    });
+      });
+    }
 
     this.readerIntervalId = setInterval(() => {
       appFunc.DetectMyKad();
       if(signalRConnection.isCardInserted) {
         if(this.insertedMyKad == false){
-          this.insertedMyKad = true;
-          this.insertCard = false;
-          this.InsertMyKad = false;
-          this.Language = true;
-          this.SelectLanguage = true;
-          clearInterval(this.readerIntervalId);
+          if(!appFunc.endSession){
+            this.insertedMyKad = true;
+            this.insertCard = false;
+            this.InsertMyKad = false;
+            this.Language = true;
+            this.SelectLanguage = true;
+          }
         }
       }
       else{
         if(this.insertedMyKad == true){
-          clearInterval(this.readerIntervalId);
-          this.route.navigate(['']);
+          this.insertedMyKad = false;
+          this.useMainPage();
         }
       }
     }, 1000);
+  }
 
+  useMainPage(){
+    this.insertCard = true;
+    this.Language = false;
+    this.Thumbprint = false;
+    this.removeCard = false;
+    this.InsertMyKad = true;
+    this.SelectLanguage = false;
+    this.ReadThumbprint = false;
+    this.RemoveMyKad = false;
   }
 
   verifyThumbprint(data:any){

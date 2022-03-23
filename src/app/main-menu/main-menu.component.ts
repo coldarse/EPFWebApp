@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { selectLang } from '../_models/language';
 import { appFunc } from '../_models/_appFunc';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
+import { signalRConnection } from '../_models/_signalRConnection';
 
 @Component({
   selector: 'app-main-menu',
@@ -32,7 +33,9 @@ export class MainMenuComponent implements OnInit {
     this.translate.use(selectLang.selectedLang);
     this.name = currentMyKadDetails.Name
 
-    
+    setInterval(() => {
+      this.date = formatDate(new Date(), 'h:mm a d/M/yyyy', 'en');
+    }, 1000);
 
     let isaraanishariahcount = 0;
     let iakauncount = 0;
@@ -121,9 +124,7 @@ export class MainMenuComponent implements OnInit {
     if(iakauncount > 0) this.iAkaunEnabled = true;
     if(isaraanishariahcount > 0) this.iShariahiSaraanEnabled = true;
 
-    setInterval(() => {
-      this.date = formatDate(new Date(), 'h:MM a d/M/yyyy', 'en');
-    }, 1000);
+    
   }
 
   selectBM(){
@@ -161,7 +162,8 @@ export class MainMenuComponent implements OnInit {
   }
 
   logOut(){
-    this.route.navigate(['']);
+    appFunc.endSession = true;
+    this.route.navigate(['verifyMyKad']);
   }
 
 

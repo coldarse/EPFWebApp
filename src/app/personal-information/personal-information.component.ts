@@ -64,10 +64,10 @@ export class PersonalInformationComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('bm');
 
-    let hardcode = true;
-    if(hardcode){
-      this.hardcodedIC();
-    }
+    // let hardcode = true;
+    // if(hardcode){
+    //   this.hardcodedIC();
+    // }
 
     console.log(appFunc.currMemberDetail);
 
@@ -79,10 +79,10 @@ export class PersonalInformationComponent implements OnInit {
     this.state = appFunc.currMemberDetail.addresses[0].stateDesc;
     this.country = appFunc.currMemberDetail.addresses[0].countryDesc;
 
-    // this.homeNo = appFunc.currMemberDetail.homePhone;
-    // this.officeNo = appFunc.currMemberDetail.officePhone;
-    // this.phoneNo = appFunc.currMemberDetail.mobilePhone;
-    // this.email = appFunc.currMemberDetail.emailAdd;
+    this.homeNo = appFunc.currMemberDetail.homePhone;
+    this.officeNo = appFunc.currMemberDetail.officePhone;
+    this.phoneNo = appFunc.currMemberDetail.mobilePhone;
+    this.email = appFunc.currMemberDetail.emailAdd;
 
     setTimeout(() => {
       loadKeyboard();
@@ -195,7 +195,7 @@ export class PersonalInformationComponent implements OnInit {
     if(appFunc.bypassAPI != true){
       const personalInformationBody = {
         "cifNum": appFunc.currMemberDetail.cifNum,
-        "electAddGrpSeq": appFunc.currMemberDetail.electAddGrpSeq,//"1",
+        "electAddGrpSeq": appFunc.currMemberDetail.electAddGrpSeq,
         "cifCategory": appFunc.currMemberDetail.cifCategory,
         "accNum": appFunc.currMemberDetail.accNum,
         "accType": "S",
@@ -215,7 +215,7 @@ export class PersonalInformationComponent implements OnInit {
       const addressBody = {
         "custNum": appFunc.currMemberDetail.cifNum,
         "electAddSeqNum": appFunc.currMemberDetail.electAddGrpSeq,
-        "addType": "1",
+        "addType": appFunc.currMemberDetail.addresses[1].addSeq,
         "addLine1": this.address1,
         "addLine2": this.address2,
         "addLine3": this.address3,
@@ -247,16 +247,18 @@ export class PersonalInformationComponent implements OnInit {
           this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
             if(result.responseCode == "0"){
     
-              appFunc.currMemberDetail = result.detail.map((cmd: any) => new currMemberAddress(cmd))
+              appFunc.currMemberDetail = result.detail;
               this.SaveProfilePage = false;
               this.SaveSuccessPage = true;
             }
             else{
+              this.SaveProfilePage = false;
               this.Failed = true;
             }
           });
         }
         else{
+          this.SaveProfilePage = false;
           this.Failed = true;
         }
       });

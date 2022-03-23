@@ -83,10 +83,10 @@ export class IAkaunRegistrationComponent implements OnInit {
       }),
     };
 
-    let hardcode = true;
-    if (hardcode) {
-      this.hardcodedIC();
-    }
+    // let hardcode = true;
+    // if (hardcode) {
+    //   this.hardcodedIC();
+    // }
 
     this.ic = currentMyKadDetails.ICNo;
     this.name = currentMyKadDetails.Name;
@@ -180,6 +180,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         subSource: '',
         ipAddress: '',
         validity: '',
+        sessionId: appFunc.sessionId
       };
 
       this._aldanService
@@ -191,6 +192,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
             deleteKeyboard();
           } else {
+            this.PhoneEmailConfirmation = false;
             this.Failed = true;
           }
         });
@@ -217,6 +219,7 @@ export class IAkaunRegistrationComponent implements OnInit {
             this.AskActivate = false;
             this.IAkaunTNC = true;
           } else {
+            this.AskActivate = false;
             this.Failed = true;
           }
         });
@@ -364,6 +367,7 @@ export class IAkaunRegistrationComponent implements OnInit {
               deleteKeyboard()
             }
             else{
+              this.ActivateInformation = false;
               this.Failed = true;
             }
           });

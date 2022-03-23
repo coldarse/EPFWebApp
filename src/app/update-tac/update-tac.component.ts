@@ -56,7 +56,8 @@ export class UpdateTACComponent implements OnInit {
         "status": "P",
         "checkForDuplicate": "N",
         "generateRequestNum": "N",
-        "requestNum": ""
+        "requestNum": "",
+        "sessionId": appFunc.sessionId
       }
 
       this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {

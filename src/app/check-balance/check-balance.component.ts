@@ -47,6 +47,8 @@ export class CheckBalanceComponent implements OnInit {
 
   spacer = " ";
   comma = ", ";
+  Failed = false;
+  errorDesc = "";
 
   emptyFields = false;
 
@@ -71,10 +73,12 @@ export class CheckBalanceComponent implements OnInit {
     }
     // this.ShowTable();
 
+    const d = new Date();
+    let stmtYear = d.getFullYear();
     const summaryBody = {
-      "accNum": '17438856',
+      "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
-      "stmtYear": '2021',
+      "stmtYear": stmtYear.toString(),
       "sessionId": appFunc.sessionId
     };
     //call API
@@ -91,7 +95,9 @@ export class CheckBalanceComponent implements OnInit {
         }
         else{
           // Error
-          this.route.navigate(['']);
+          this.SummaryStatementPage = false;
+          this.errorDesc = result.error[0].description;
+          this.Failed = true;
         }
       });
   }
@@ -148,7 +154,7 @@ export class CheckBalanceComponent implements OnInit {
 
   CalculateYears(): number[] {
     // var RegDate = appFunc.currMemberDetail.epfRegDate
-    var RegDate = '2021-07-01';
+    var RegDate = appFunc.currMemberDetail.epfRegDate;
     var RegYear = Number(RegDate.substring(0, 4));
     var CurrYears = new Date().getFullYear();
     var TotalYears = CurrYears - RegYear;
@@ -170,9 +176,9 @@ export class CheckBalanceComponent implements OnInit {
     const mainBody = {
       // "accNum": appFunc.currMemberDetail.accNum,
       // "stmtYear": new Date().getFullYear
-      "accNum": '17438856',
+      "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
-      "stmtYear": '2021',
+      "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
 
@@ -192,7 +198,9 @@ export class CheckBalanceComponent implements OnInit {
       }
       else{
         // Error
-        this.route.navigate(['']);
+        this.SummaryStatementPage = false;
+        this.errorDesc = result.error[0].description;
+        this.Failed = true;
       }
     });
   }
@@ -207,6 +215,10 @@ export class CheckBalanceComponent implements OnInit {
       this.state = currentMyKadDetails.State
       this.country = currentMyKadDetails.Country
     }
+  }
+
+  failedYes(){
+    this.route.navigate(['mainMenu'])
   }
 }
 

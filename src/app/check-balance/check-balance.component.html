@@ -173,5 +173,25 @@
                 </div>
             </div>
         </div>
+
+        <div class="row padTop5rem content-container" *ngIf="Failed">
+            <div class="text-center">
+                <div class="lblStatus">
+                    {{"fail"| translate}}
+                </div>
+                <div class="row padTop3rem">
+                    <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
+                </div>
+                <div class="row padTop3rem">
+                    <div class="statusMsg">{{errorDesc}}</div>
+                </div>  
+                <div class="row padTop3rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnYes" (click)="failedYes()">{{"yes"|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

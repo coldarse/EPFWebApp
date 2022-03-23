@@ -49,7 +49,10 @@ export class RegisterMemberComponent implements OnInit {
   TnC = '';
 
   failedTAC = false;
-  isiAkaunModuleEnabled = false;
+
+
+  isiAkaunRegModuleEnabled = false;
+  isiAkaunActModuleEnabled = false;
   isiShariahModuleEnabled = false;
   isiSaraanModuleEnabled = false;
 
@@ -127,10 +130,36 @@ export class RegisterMemberComponent implements OnInit {
     }
 
 
-    // let hardcode = true;
-    // if(hardcode){
-    //   this.hardcodedIC();
-    // }
+    for (var val of appFunc.modules){
+      if(val.moduleID == 5){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.isiSaraanModuleEnabled = true;
+          }
+        }
+      }
+      else if(val.moduleID == 6){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.isiShariahModuleEnabled = true;
+          }
+        }
+      }
+      else if(val.moduleID == 7){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.isiAkaunRegModuleEnabled = true;
+          }
+        }
+      }
+      else if(val.moduleID == 8){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.isiAkaunActModuleEnabled = true;
+          }
+        }
+      }
+    }
 
     this.name = currentMyKadDetails.Name;
     this.ic = currentMyKadDetails.ICNo;
@@ -479,33 +508,43 @@ export class RegisterMemberComponent implements OnInit {
 
           this._aldanService.AddTAC(addMobileTACBody).subscribe((result: any) => { //Call Add TAC
             if(result.responseCode == "0"){
-              const iAkaunbody = {
-                "epfNum": this.KWSPMemberNo,
-                "tacMobileNum": this.phoneNo,
-                "branchCode": "",
-                "migrationFlag": "",
-                "clientChannel": "SST",
-                "source": "",
-                "subSource": "",
-                "ipAddress": "",
-                "validity": "",
-                "sessionId": 1 
-              }
-        
-              this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
-                if(result.responseCode == "0"){
+
+              if(this.isiAkaunRegModuleEnabled){
+                const iAkaunbody = {
+                  "epfNum": this.KWSPMemberNo,
+                  "tacMobileNum": this.phoneNo,
+                  "branchCode": "",
+                  "migrationFlag": "",
+                  "clientChannel": "SST",
+                  "source": "",
+                  "subSource": "",
+                  "ipAddress": "",
+                  "validity": "",
+                  "sessionId": 1 
+                }
           
-                  this.ValidateProfilePage = false;
-                  this.RegisterSuccessPage = true;
+                this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
+                  if(result.responseCode == "0"){
             
-                  deleteKeyboard()
-                }
-                else{
-                  this.failedTAC = true;
-                  this.ValidateProfilePage = false;
-                  this.RegisterSuccessPage = true;
-                }
-              });
+                    this.ValidateProfilePage = false;
+                    this.RegisterSuccessPage = true;
+              
+                    deleteKeyboard()
+                  }
+                  else{
+                    this.failedTAC = true;
+                    this.ValidateProfilePage = false;
+                    this.RegisterSuccessPage = true;
+                  }
+                });
+              }
+              else{
+                this.ValidateProfilePage = false;
+                this.RegisterSuccessPage = true;
+          
+                deleteKeyboard()
+              }
+              
             }
             else{
               this.ValidateProfilePage = false;
@@ -535,20 +574,32 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   RegisterSuccessYes(){
-    if(this.isiAkaunModuleEnabled){
-      if (appFunc.bypassAPI != false) {
-        this._aldanService
-          .GetTnC(selectLang.selectedLang, appFunc.sessionId)
-          .subscribe((result: any) => {
-            if (result.content != '') {
-              this.TnC = result.content.toString();
-              console.log(this.TnC);
-              this.RegisterSuccessPage = false;
-              this.TnCPage = true;
-            } else {
-              this.Failed = true;
-            }
-          });
+    if(this.isiAkaunRegModuleEnabled){
+      if(this.isiAkaunActModuleEnabled){
+        if (appFunc.bypassAPI != false) {
+          this._aldanService
+            .GetTnC(selectLang.selectedLang, appFunc.sessionId)
+            .subscribe((result: any) => {
+              if (result.content != '') {
+                this.TnC = result.content.toString();
+                console.log(this.TnC);
+                this.RegisterSuccessPage = false;
+                this.TnCPage = true;
+              } else {
+                this.Failed = true;
+              }
+            });
+        }
+      }
+      else{
+        if(this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled)
+        {
+          this.RegisterSuccessPage = false;
+          this.PickShariahPage = true;
+        }
+        else{
+          this.route.navigate(['mainMenu']);
+        }
       }
     }
     else{
@@ -764,7 +815,7 @@ export class RegisterMemberComponent implements OnInit {
         "accType": "S",
         "electChannel": "SAO",
         "electReceivedDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        "electReceivedTime": formatDate(new Date(), 'h:MM:ss', 'en'),
+        "electReceivedTime": formatDate(new Date(), 'h:mm:ss', 'en'),
         "electReceivedBranch": "1",
         "electDate": "2019-10-11",
         "electBranch": "1",
