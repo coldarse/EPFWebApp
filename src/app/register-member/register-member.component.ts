@@ -35,8 +35,9 @@ export class RegisterMemberComponent implements OnInit {
   InsertPhonePage = false;
   InsertEmailPage = false;
   ValidateProfilePage = false;
-  RegisterSuccessPage = true;
+  RegisterSuccessPage = false;
   TnCPage = false;
+  SetIdPassword = true;
   ActivateiAkaunPage = false;
   ActivateSuccessPage = false;
   PickShariahPage = false;
@@ -49,7 +50,6 @@ export class RegisterMemberComponent implements OnInit {
   TnC = '';
 
   failedTAC = false;
-
 
   isiAkaunRegModuleEnabled = false;
   isiAkaunActModuleEnabled = false;
@@ -652,8 +652,83 @@ export class RegisterMemberComponent implements OnInit {
     this.RegisterSuccessPage = true;
   }
 
-  ActivateYes(){
+  ActivateInformationYes() {
+    this.imageSelect = false;
+    this.securePhraseMax = false;
 
+    this.securePhrase = this.secure_phrase?.nativeElement.value;
+
+    let FilledIn = 0;
+    if (this.securePhrase.length != 0) FilledIn += 1;
+
+    if (FilledIn == 1) {
+      let errorCount = 0;
+  
+      if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
+        errorCount += 1;
+        this.securePhraseMax = true;
+      }
+
+      //Check Selected Image
+      let selectedCount = 0;
+      this.checkboxImages.forEach((elem: any) => {
+        if (elem.checked == true) {
+          selectedCount += 1;
+        }
+      });
+      if (selectedCount == 0) {
+        errorCount += 1;
+        this.imageSelect = true;
+      }
+
+      if (errorCount == 0) {
+        if (appFunc.bypassAPI != true) {
+          const iAkaunActBody = {
+            "epfNum": appFunc.currMemberDetail.accNum,
+            "id_no": this.ic,
+            "name": this.name,
+            "user_id": this.acctNo,
+            "new_password": this.password1,
+            "confirm_new_password": this.password2,
+            "secure_image_id": this.checkboxImages,
+            "secret_phrase": this.securePhrase,
+            "terms_condition": "46"
+          }
+
+          this._aldanService.ActivateIAkaun(iAkaunActBody, appFunc.sessionId).subscribe((result: any) => {
+            if(result.epfNum != null){
+
+              this.ActivateiAkaunPage = false;
+              this.ActivateSuccessPage = true;
+
+              deleteKeyboard()
+            }
+            else{
+              this.ActivateiAkaunPage = false;
+              this.Failed = true;
+            }
+          });
+        }
+        else{
+          this.ActivateiAkaunPage = false;
+          this.ActivateSuccessPage = true;
+        }
+      }
+      else
+      {
+        //if error
+      }
+    }
+  }
+
+  ActivateInformationNo() {
+    this.ActivateiAkaunPage = false;
+    this.SetIdPassword = true;
+
+    deleteKeyboard();
+  }
+
+  SetIdPasswordYes(){
     this.accountAlpha = false;
     this.accountAlpha = false;
     this.passwordAlpha = false;
@@ -661,134 +736,76 @@ export class RegisterMemberComponent implements OnInit {
     this.accountMax = false;
     this.passwordMin = false;
     this.passwordMax = false;
-    this.imageSelect = false;
-    this.securePhraseMax = false;
     this.passwordMatch = false;
 
-    this.acctNo = this.account_number?.nativeElement.value
-    this.password1 = this.password_1?.nativeElement.value
-    this.password2 = this.password_2?.nativeElement.value
-    this.securePhrase = this.secure_phrase?.nativeElement.value
+    this.acctNo = this.account_number?.nativeElement.value;
+    this.password1 = this.password_1?.nativeElement.value;
+    this.password2 = this.password_2?.nativeElement.value;
 
     let FilledIn = 0;
     if (this.acctNo.length != 0) FilledIn += 1;
     if (this.password1.length != 0) FilledIn += 1;
     if (this.password2.length != 0) FilledIn += 1;
-    if (this.securePhrase.length != 0) FilledIn += 1;
 
-    if(FilledIn == 4){
+    if (FilledIn == 3) {
       let errorCount = 0;
       //Check Alphanumeric
-      if (!this.acctNo.match(/^[0-9a-z]+$/)){
+      if (!this.acctNo.match(/^[0-9a-z]+$/)) {
         errorCount += 1;
         this.accountAlpha = true;
-      } 
-      if (!this.password1.match(/^[0-9a-z]+$/)){
+      }
+      if (!this.password1.match(/^[0-9a-z]+$/)) {
         errorCount += 1;
         this.passwordAlpha = true;
-      } 
-      if (!this.password2.match(/^[0-9a-z]+$/)){
+      }
+      if (!this.password2.match(/^[0-9a-z]+$/)) {
         errorCount += 1;
         this.passwordAlpha = true;
-      } 
+      }
       //Check Min Length
-      if (this.acctNo.length < 8){
+      if (this.acctNo.length < 8) {
         errorCount += 1;
         this.accountMin = true;
-      } 
-      if (this.password1.length < 8){
+      }
+      if (this.password1.length < 8) {
         errorCount += 1;
         this.passwordMin = true;
-      } 
-      if (this.password2.length < 8){
+      }
+      if (this.password2.length < 8) {
         errorCount += 1;
         this.passwordMin = true;
-      } 
+      }
       //Check Max Length
-      if (this.acctNo.length > 16){
+      if (this.acctNo.length > 16) {
         errorCount += 1;
         this.accountMax = true;
-      } 
-      if (this.password1.length > 20){
+      }
+      if (this.password1.length > 20) {
         errorCount += 1;
         this.passwordMax = true;
-      } 
-      if (this.password2.length > 20){
+      }
+      if (this.password2.length > 20) {
         errorCount += 1;
         this.passwordMax = true;
-      } 
-      if (this.securePhrase.length > 10 || this.securePhrase.length == 0){
-        errorCount += 1;
-        this.securePhraseMax = true;
-      } 
+      }
       //Check Password Match
-      if (this.password1 != this.password2){
+      if (this.password1 != this.password2) {
         errorCount += 1;
         this.passwordMatch = true;
-      } 
-      //Check Selected Image
-      let selectedCount = 0;
-      this.checkboxImages.forEach((elem: any) => {
-        if(elem.checked == true){
-          selectedCount += 1;
-        }
-      });
-      if (selectedCount == 0){
-        errorCount += 1;
-        this.imageSelect = true;
-      } 
-      
-      if (errorCount == 0){
-        if(appFunc.bypassAPI != true){ //Waiting for I-Akaun Activation API
-          // const iAkaunbody = {
-          //   "epfNum": this.KWSPMemberNo,
-          //   "tacMobileNum": this.phoneNo,
-          //   "branchCode": "",
-          //   "migrationFlag": "",
-          //   "clientChannel": "SST",
-          //   "source": "",
-          //   "subSource": "",
-          //   "ipAddress": "",
-          //   "validity": ""
-          // }
-    
-          // this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => {
-          //   if(result.responseCode == "0"){
-      
-          //     this.page7 = false;
-          //     this.page8 = true;
-        
-          //     deleteKeyboard()
-          //   }
-          //   else{
-          //     this.Failed = true;
-          //   }
-          // });
-          this.ActivateiAkaunPage = false;
-          this.ActivateSuccessPage = true;
-    
-          deleteKeyboard()
-        }
-        else{
-          this.ActivateiAkaunPage = false;
-          this.ActivateSuccessPage = true;
-    
-          deleteKeyboard()
-        }
       }
-      else{
-        //If Error
+
+      if (errorCount == 0) {
+        this.SetIdPassword = false;
+        this.ActivateiAkaunPage = true;
       }
     }
-
-    
   }
 
-  ActivateNo(){
-    this.ActivateiAkaunPage = false;
+  SetIdPasswordNo(){
+    this.SetIdPassword = false;
     this.TnCPage = true;
 
-    deleteKeyboard()
+    deleteKeyboard();
   }
 
   ActivateSuccessYes(){
