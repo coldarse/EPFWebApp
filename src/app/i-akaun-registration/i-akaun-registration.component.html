@@ -251,7 +251,7 @@
                 </div>
             </div>
         </div>
-        <div class="row padTopHalfrem content-container" *ngIf="ActivateInformation">
+        <div class="row padTopHalfrem content-container" *ngIf="SetIdPassword">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -329,7 +329,30 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row padTop2rem">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h2 class="errorMsg" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="accountMin">{{"accountMin"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="accountMax">{{"accountMax"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordMin">{{"passwordMin"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordMax">{{"passwordMax"| translate}}</h2>
+                    <h2 class="errorMsg" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h2>
+                </div>
+                <div class="col-4"></div>
+            </div> -->
+            <div class="row padTop1rem text-center">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <button type="button" class="btnNo" (click)="SetIdPasswordNo()">{{"back"| translate}}</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btnYes" (click)="SetIdPasswordYes()">{{"continue"| translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="row padTopHalfrem content-container" *ngIf="ActivateInformation">
             <div class="row padTop1rem">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -389,15 +412,8 @@
             <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h2 class="errorMsg" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h2>
-                    <h2 class="errorMsg" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h2>
-                    <h2 class="errorMsg" *ngIf="accountMin">{{"accountMin"| translate}}</h2>
-                    <h2 class="errorMsg" *ngIf="accountMax">{{"accountMax"| translate}}</h2>
-                    <h2 class="errorMsg" *ngIf="passwordMin">{{"passwordMin"| translate}}</h2>
-                    <h2 class="errorMsg" *ngIf="passwordMax">{{"passwordMax"| translate}}</h2>
                     <h2 class="errorMsg" *ngIf="imageSelect">{{"imageSelect"| translate}}</h2>
                     <h2 class="errorMsg" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h2>
-                    <h2 class="errorMsg" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h2>
                 </div>
                 <div class="col-4"></div>
             </div>

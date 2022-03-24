@@ -26,7 +26,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   Failed = false;
 
   xagreedTnc = true;
-  Contract = '';
+  Contract = "";
 
   defaultDDL = '';
   selectedJobSector: any = undefined;
@@ -84,7 +84,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   }
 
   clickShariah() {
-    if (appFunc.bypassAPI != true) {
+    if (appFunc.bypassAPI != false) {
       this._aldanService
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
