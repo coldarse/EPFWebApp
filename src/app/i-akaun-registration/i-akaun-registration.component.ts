@@ -27,7 +27,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   @ViewChild('password_2') password_2: ElementRef | undefined;
   @ViewChild('secure_phrase') secure_phrase: ElementRef | undefined;
 
-  EnterPhoneNumber = true;
+  EnterPhoneNumber = false;
   EnterEmailAddress = false;
   PhoneEmailConfirmation = false;
   AskActivate = false;
@@ -35,6 +35,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   ActivateInformation = false;
   SuccessActivation = false;
   PromptRegisterISaraan = false;
+  SetIdPassword = true;
   Failed = false;
   phoneNo = '';
   emailAddress = '';
@@ -260,78 +261,22 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   ActivateInformationYes() {
-    this.accountAlpha = false;
-    this.accountAlpha = false;
-    this.passwordAlpha = false;
-    this.accountMin = false;
-    this.accountMax = false;
-    this.passwordMin = false;
-    this.passwordMax = false;
     this.imageSelect = false;
     this.securePhraseMax = false;
-    this.passwordMatch = false;
 
-    this.acctNo = this.account_number?.nativeElement.value;
-    this.password1 = this.password_1?.nativeElement.value;
-    this.password2 = this.password_2?.nativeElement.value;
     this.securePhrase = this.secure_phrase?.nativeElement.value;
 
     let FilledIn = 0;
-    if (this.acctNo.length != 0) FilledIn += 1;
-    if (this.password1.length != 0) FilledIn += 1;
-    if (this.password2.length != 0) FilledIn += 1;
     if (this.securePhrase.length != 0) FilledIn += 1;
 
-    if (FilledIn == 4) {
+    if (FilledIn == 1) {
       let errorCount = 0;
-      //Check Alphanumeric
-      if (!this.acctNo.match(/^[0-9a-zA-Z]+$/)) {
-        errorCount += 1;
-        this.accountAlpha = true;
-      }
-      if (!this.password1.match(/^[0-9a-zA-Z]+$/)) {
-        errorCount += 1;
-        this.passwordAlpha = true;
-      }
-      if (!this.password2.match(/^[0-9a-zA-Z]+$/)) {
-        errorCount += 1;
-        this.passwordAlpha = true;
-      }
-      //Check Min Length
-      if (this.acctNo.length < 8) {
-        errorCount += 1;
-        this.accountMin = true;
-      }
-      if (this.password1.length < 8) {
-        errorCount += 1;
-        this.passwordMin = true;
-      }
-      if (this.password2.length < 8) {
-        errorCount += 1;
-        this.passwordMin = true;
-      }
-      //Check Max Length
-      if (this.acctNo.length > 16) {
-        errorCount += 1;
-        this.accountMax = true;
-      }
-      if (this.password1.length > 20) {
-        errorCount += 1;
-        this.passwordMax = true;
-      }
-      if (this.password2.length > 20) {
-        errorCount += 1;
-        this.passwordMax = true;
-      }
+  
       if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
         errorCount += 1;
         this.securePhraseMax = true;
       }
-      //Check Password Match
-      if (this.password1 != this.password2) {
-        errorCount += 1;
-        this.passwordMatch = true;
-      }
+
       //Check Selected Image
       let selectedCount = 0;
       this.checkboxImages.forEach((elem: any) => {
@@ -386,6 +331,86 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   ActivateInformationNo() {
     this.ActivateInformation = false;
+    this.SetIdPassword = true;
+
+    deleteKeyboard();
+  }
+
+  SetIdPasswordYes(){
+    this.accountAlpha = false;
+    this.accountAlpha = false;
+    this.passwordAlpha = false;
+    this.accountMin = false;
+    this.accountMax = false;
+    this.passwordMin = false;
+    this.passwordMax = false;
+    this.passwordMatch = false;
+
+    this.acctNo = this.account_number?.nativeElement.value;
+    this.password1 = this.password_1?.nativeElement.value;
+    this.password2 = this.password_2?.nativeElement.value;
+
+    let FilledIn = 0;
+    if (this.acctNo.length != 0) FilledIn += 1;
+    if (this.password1.length != 0) FilledIn += 1;
+    if (this.password2.length != 0) FilledIn += 1;
+
+    if (FilledIn == 3) {
+      let errorCount = 0;
+      //Check Alphanumeric
+      if (!this.acctNo.match(/^[0-9a-zA-Z]+$/)) {
+        errorCount += 1;
+        this.accountAlpha = true;
+      }
+      if (!this.password1.match(/^[0-9a-zA-Z]+$/)) {
+        errorCount += 1;
+        this.passwordAlpha = true;
+      }
+      if (!this.password2.match(/^[0-9a-zA-Z]+$/)) {
+        errorCount += 1;
+        this.passwordAlpha = true;
+      }
+      //Check Min Length
+      if (this.acctNo.length < 8) {
+        errorCount += 1;
+        this.accountMin = true;
+      }
+      if (this.password1.length < 8) {
+        errorCount += 1;
+        this.passwordMin = true;
+      }
+      if (this.password2.length < 8) {
+        errorCount += 1;
+        this.passwordMin = true;
+      }
+      //Check Max Length
+      if (this.acctNo.length > 16) {
+        errorCount += 1;
+        this.accountMax = true;
+      }
+      if (this.password1.length > 20) {
+        errorCount += 1;
+        this.passwordMax = true;
+      }
+      if (this.password2.length > 20) {
+        errorCount += 1;
+        this.passwordMax = true;
+      }
+      //Check Password Match
+      if (this.password1 != this.password2) {
+        errorCount += 1;
+        this.passwordMatch = true;
+      }
+
+      if (errorCount == 0) {
+        this.SetIdPassword = false;
+        this.ActivateInformation = true;
+      }
+    }
+  }
+
+  SetIdPasswordNo(){
+    this.SetIdPassword = false;
     this.IAkaunTNC = true;
 
     deleteKeyboard();
