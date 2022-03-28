@@ -7,7 +7,8 @@
     "Client_Secret": "1q2w3E*",
     "Grant_Type": "password",
     "UserName": "admin",
-    "Password": "abcd1234"
+    "Password": "abcd1234",
+    "RetryCounts": "3"
 }
 
 

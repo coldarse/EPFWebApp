@@ -99,6 +99,10 @@
     padding-top: 10rem;
 }
 
+.padTop12rem{
+    padding-top: 12rem;
+}
+
 .padTop14rem{
     padding-top: 14rem;
 }
@@ -933,6 +937,35 @@ ul.dropdown-menu a.dropdown-item:hover{
     width: 1365px;
 }
 
+.bg-popup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.rounded-2rem {
+    border-radius: 2rem !important;
+}
+
+.pop-up {
+    border-radius: 1rem;
+    border: 1px solid;
+    border-color: lightgray;
+    width: 1200px;
+    min-height: 650px;
+    height: auto;
+    background-color: white;
+    margin: auto;
+    margin-top: 9.25rem;
+}
+
+
+
+.footer{
+    width: 65%;
+}
 
 
 

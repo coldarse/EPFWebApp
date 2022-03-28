@@ -25,6 +25,7 @@ export class JsonAppConfigService extends AppConfiguration {
         this.Grant_Type = data.Grant_Type;
         this.UserName = data.UserName;
         this.Password = data.Password;
+        this.RetryCounts = Number(data.RetryCounts);
       })
       .catch(() => {
         console.error('Could not load configuration');

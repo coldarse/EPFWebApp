@@ -76,7 +76,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
     accessToken.httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + accessToken.token,
@@ -209,7 +209,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   AskActivateYes() {
-    if (appFunc.bypassAPI != false) {
+    if (appFunc.bypassAPI != true) {
       this._aldanService
         .GetTnC(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
@@ -231,7 +231,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   IAkaunTNCyes() {
-    if (appFunc.bypassAPI != false) {
+    if (appFunc.bypassAPI != true) {
       this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
         if (result.imgId != '') {
           result.forEach((element: any) => {
@@ -285,15 +285,15 @@ export class IAkaunRegistrationComponent implements OnInit {
     if (FilledIn == 4) {
       let errorCount = 0;
       //Check Alphanumeric
-      if (!this.acctNo.match(/^[0-9a-z]+$/)) {
+      if (!this.acctNo.match(/^[0-9a-zA-Z]+$/)) {
         errorCount += 1;
         this.accountAlpha = true;
       }
-      if (!this.password1.match(/^[0-9a-z]+$/)) {
+      if (!this.password1.match(/^[0-9a-zA-Z]+$/)) {
         errorCount += 1;
         this.passwordAlpha = true;
       }
-      if (!this.password2.match(/^[0-9a-z]+$/)) {
+      if (!this.password2.match(/^[0-9a-zA-Z]+$/)) {
         errorCount += 1;
         this.passwordAlpha = true;
       }

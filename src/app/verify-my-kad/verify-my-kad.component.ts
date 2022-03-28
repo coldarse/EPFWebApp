@@ -38,12 +38,20 @@ export class VerifyMyKadComponent implements OnInit {
   ReadThumbprint = false;
   RemoveMyKad = false;
 
+  BeforeRead = true;
+  AfterRead = false;
+
   insertedMyKad = false;
 
   arrayList: string[] = [];
 
   readerIntervalId: any;
   moduleIntervelId: any;
+
+  myKadData: any;
+  RetryCountInstance = 0;
+  ErrorPop = false;
+  xlastTry = true;
 
 
   constructor(
@@ -59,8 +67,8 @@ export class VerifyMyKadComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.RetryCountInstance = this.appConfig.RetryCounts;
     this.translate.use('bm');
-
     if(appFunc.endSession){
       this.insertCard = false;
       this.InsertMyKad = false;
@@ -69,36 +77,38 @@ export class VerifyMyKadComponent implements OnInit {
       this.insertedMyKad = true
     }
     else{
-      this._aldanService.GetBusinessTypes().subscribe((res: any) => {
-        appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
-      });
-      this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
-        appFunc.modules = res.map((em: any) => new eModules(em));
-  
-        if(appFunc.modules.length != 0){
-          let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-          if(areDisabled == appFunc.modules.length){
-            // errorCodes.code = "0168";
+      if(accessToken.httpOptions != undefined){
+        this._aldanService.GetBusinessTypes().subscribe((res: any) => {
+          appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
+        });
+        this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
+          appFunc.modules = res.map((em: any) => new eModules(em));
+    
+          if(appFunc.modules.length != 0){
+            let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+            if(areDisabled == appFunc.modules.length){
+              // errorCodes.code = "0168";
+              appFunc.message = "Under Maintenance";
+              this.route.navigate(['outofservice']);
+            }
+    
+            setTimeout(() => {
+              this.moduleIntervelId = setInterval(() => {
+                let count = appFunc.checkModuleAvailability(appFunc.modules);
+                if(count == 0){
+                  // errorCodes.code = "0168";
+                  appFunc.message = "Under Maintenance";
+                  this.route.navigate(['outofservice']);
+                }
+              }, 1000);
+            } , 60000);
+          }
+          else{
             appFunc.message = "Under Maintenance";
             this.route.navigate(['outofservice']);
           }
-  
-          setTimeout(() => {
-            this.moduleIntervelId = setInterval(() => {
-              let count = appFunc.checkModuleAvailability(appFunc.modules);
-              if(count == 0){
-                // errorCodes.code = "0168";
-                appFunc.message = "Under Maintenance";
-                this.route.navigate(['outofservice']);
-              }
-            }, 1000);
-          } , 60000);
-        }
-        else{
-          appFunc.message = "Under Maintenance";
-          this.route.navigate(['outofservice']);
-        }
-      });
+        });
+      }
     }
 
     this.readerIntervalId = setInterval(() => {
@@ -116,6 +126,7 @@ export class VerifyMyKadComponent implements OnInit {
       }
       else{
         if(this.insertedMyKad == true){
+          appFunc.endSession = false;
           this.insertedMyKad = false;
           this.useMainPage();
         }
@@ -124,29 +135,33 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   useMainPage(){
-    this.insertCard = true;
-    this.Language = false;
-    this.Thumbprint = false;
-    this.removeCard = false;
-    this.InsertMyKad = true;
-    this.SelectLanguage = false;
-    this.ReadThumbprint = false;
-    this.RemoveMyKad = false;
+    this.route.navigate(['']);
   }
 
-  verifyThumbprint(data:any){
-    // signalRConnection.connection.invoke('VerifyThumbprint').then((isVerifySuccess: any) => {
-    //   console.log(isVerifySuccess);
-    //   if(isVerifySuccess){
-    //     this.bindMyKadData(data);
-    //   }
-    // });
-    this.bindMyKadData(data);
+  verifyThumbprint(){
+    if(this.RetryCountInstance != 0){
+      signalRConnection.connection.invoke('VerifyThumbprint').then((isVerifySuccess: any) => {
+        if(isVerifySuccess){
+          this.BeforeRead = false;
+          this.AfterRead = true;
+          this.bindMyKadData(this.myKadData);
+        }
+        else{
+          this.RetryCountInstance -= 1;
+          if(this.RetryCountInstance == 0) this.xlastTry = false;
+          this.BeforeRead = true;
+          this.AfterRead = false;
+          this.ErrorPop = true;
+        }
+      });
+    }
+    
   }
 
   readMyKad(){
     signalRConnection.connection.invoke('ReadMyKad').then((data: any) => {
-      this.verifyThumbprint(data)
+      this.myKadData = data;
+      this.verifyThumbprint();
     });
   }
   
@@ -299,6 +314,10 @@ export class VerifyMyKadComponent implements OnInit {
           });
         }
         else{
+          if(result.error.length == 0){
+            appFunc.message = result.responseCode;
+            this.route.navigate(['outofservice']);
+          }
           if(result.error[0].code == "MBM2001"){
             this.route.navigate(['registerMember']);
           }
@@ -324,7 +343,10 @@ export class VerifyMyKadComponent implements OnInit {
     this.route.navigate(['']);
   }
 
+  TryAgain(){
+    this.ErrorPop = false;
+    this.verifyThumbprint();
+  }
 
-  
 
 }

@@ -8,4 +8,5 @@ export class AppConfiguration {
     Grant_Type!: string;
     UserName!: string;
     Password!: string;
+    RetryCounts!: number;
   }

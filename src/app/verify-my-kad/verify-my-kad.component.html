@@ -45,10 +45,16 @@
                 <div class="row padTopHalfrem">
                     <img src="assets/images/thumbprint.svg" width="400px" height="400px">
                 </div>
-                <div class="row padTopHalfrem">
+                <div class="row padTopHalfrem" *ngIf="BeforeRead">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnNo" (click)="cancelMyKadVerification()">{{"cancel"|translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop5rem" *ngIf="AfterRead">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -70,5 +76,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="bg-popup" *ngIf="ErrorPop">
+            <div class="col-12 pop-up shadow p-3 mb-5 bg-white rounded-2rem" align="center">
+                <h2 class="padTop15rem">{{'VerifyFailedMessage' | translate }}</h2>
+                <h2 *ngIf="xlastTry">{{'RetryMessage' | translate }}</h2>
+                <footer class="padTop12rem footer">
+                    <div class="col-12">
+                        <button type="button" class="btnNo" (click)="cancelMyKadVerification()">
+                            {{'End' | translate }}
+                        </button>
+                        <button type="button" class="btnYes" (click)="TryAgain()" *ngIf="xlastTry">
+                            {{'TryAgain' | translate }}
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </div> 
+        
     </div>
 </div>

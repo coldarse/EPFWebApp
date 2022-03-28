@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AldanService } from '../shared/aldan.service';
+import { selectLang } from '../_models/language';
 import { appFunc } from '../_models/_appFunc';
 import { signalRConnection } from '../_models/_signalRConnection';
 
@@ -28,7 +29,7 @@ export class UpdateTACComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
   }
 
   EnterPhoneNoYes(){

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AldanService } from '../shared/aldan.service';
+import { selectLang } from '../_models/language';
 import { appFunc } from '../_models/_appFunc';
 import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemberDetails';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
@@ -62,7 +63,7 @@ export class PersonalInformationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
 
     // let hardcode = true;
     // if(hardcode){

@@ -114,7 +114,7 @@ export class AldanService {
     
 
     return this.http.post(
-      'https://localhost:44373/connect/token', 
+      'https://10.0.58.81/connect/token', 
       body,
       Options
     ).pipe(
@@ -412,7 +412,7 @@ export class AldanService {
   }
 
   ActivateIAkaun(body: any, sessionid: number){
-    return this.http.put(
+    return this.http.post(
       this.url + `IAkaunActivation/iAkaunAct?SessionId=${sessionid}&epfNum=${body.epfNum}&id_no=${body.id_no}&name=${body.name}&user_id=${body.user_id}&new_password=${body.new_password}&confirm_new_password=${body.confirm_new_password}&secure_image_id=${body.secure_image_id}&secret_phrase=${body.secret_phrase}&terms_condition=${body.terms_condition}`,
       accessToken.httpOptions
     ).pipe(

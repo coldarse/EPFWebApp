@@ -10542,6 +10542,10 @@ textarea.form-control-lg {
     padding-top: 3rem;
 }
 
+.padTop4rem{
+    padding-top: 4rem;
+}
+
 .padTop5rem{
     padding-top: 5rem;
 }
@@ -10552,6 +10556,10 @@ textarea.form-control-lg {
 
 .padTop10rem{
     padding-top: 10rem;
+}
+
+.padTop12rem{
+    padding-top: 12rem;
 }
 
 .padTop14rem{
@@ -10596,10 +10604,12 @@ textarea.form-control-lg {
 
 .mainMenuLeft{
     text-align: left;
+    padding-left: 4rem;
 }
 
 .mainMenuRight{
     text-align: right;
+    padding-right: 4rem;
 }
 
 .padBottom5rem{
@@ -10746,6 +10756,14 @@ textarea.form-control-lg {
     font-family: filson-pro, sans-serif;
 }
 
+.noteWarning{
+    font-size:18.5px;
+    font-weight: 200;
+    background-color: rgb(230, 212, 212);
+    color: rgb(131, 39, 39);
+    font-family: filson-pro, sans-serif;
+}
+
 .akaunNote{
     font-size:13px;
     font-weight: 200;
@@ -10827,7 +10845,7 @@ textarea.form-control-lg {
 }
 
 .lblDate2{
-    font-size: 40px;
+    font-size: 20px;
     font-family: filson-pro, sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -10837,7 +10855,7 @@ textarea.form-control-lg {
 }
 
 .lblLogout{
-    font-size: 50px;
+    font-size: 25px;
     font-family: filson-pro, sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -11069,7 +11087,7 @@ td{
     background-color: white;
     color: black;
     border:1px solid  rgb(49, 39, 131);
-    font-size: 40px;
+    font-size: 20px;
 }
 
 .right{
@@ -11283,10 +11301,10 @@ ul.dropdown-menu a.dropdown-item:hover{
 }
 
 .mainMenuBtn{
-    width: 400px;
-    height: 75px;
+    width: 550px;
+    height: 95px;
     border-radius: 5rem;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     background-color:  rgb(49, 39, 131);
     color: #fafafa;
     border: 0rem;
@@ -11296,10 +11314,10 @@ ul.dropdown-menu a.dropdown-item:hover{
 }
 
 .mainMenuBtnDisabled{
-    width: 400px;
-    height: 75px;
+    width: 550px;
+    height: 95px;
     border-radius: 5rem;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     background-color:  rgb(88, 89, 91);
     color: rgb(35, 31, 32);;
     border: 0rem;
@@ -11379,6 +11397,33 @@ ul.dropdown-menu a.dropdown-item:hover{
     width: 1365px;
 }
 
+.bg-popup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.rounded-2rem {
+    border-radius: 2rem !important;
+}
+
+.pop-up {
+    border-radius: 1rem;
+    border: 1px solid;
+    border-color: lightgray;
+    width: 1200px;
+    min-height: 650px;
+    height: auto;
+    background-color: white;
+    margin: auto;
+    margin-top: 9.25rem;
+}
+
+.footer{
+    width: 65%;
+}
 
 
 

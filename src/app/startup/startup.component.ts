@@ -51,7 +51,6 @@ export class StartupComponent implements OnInit {
     this.Password = appConfig.Password.trim();
     this.Secret = appConfig.Client_Secret.trim();
     
-    console.log(this.Password);
     this.startConnection();
   }
 
@@ -127,7 +126,6 @@ export class StartupComponent implements OnInit {
           signalRConnection.connection.invoke('GetAdapterName').then((data: any[]) => {
             signalRConnection.adapter = data;
             this.adapters = data;
-            console.log(this.adapters[0]);
             if(this.isAdapterEmpty){
               this.login(this.Secret)
             }

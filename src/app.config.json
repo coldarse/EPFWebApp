@@ -1,5 +1,5 @@
 {
-    "AldanAPIURL": "https://localhost:44373/api/",
+    "AldanAPIURL": "https://10.0.58.81/api/",
     "AESCrpytKey": "gsKxGZ012HLL3MI5",
     "idletime": "100",
     "popuptime": "30",
@@ -7,7 +7,8 @@
     "Client_Secret": "1q2w3E*",
     "Grant_Type": "password",
     "UserName": "admin",
-    "Password": "abcd1234"
+    "Password": "abcd1234",
+    "RetryCounts": "3"
 }
 
 

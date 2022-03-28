@@ -31,11 +31,11 @@ export class RegisterMemberComponent implements OnInit {
   RegShariah = false;
   RegSaraan = false;
   RegIAkaun = false;
-  RegisterMemberPage = false;
+  RegisterMemberPage = true;
   InsertPhonePage = false;
   InsertEmailPage = false;
   ValidateProfilePage = false;
-  RegisterSuccessPage = true;
+  RegisterSuccessPage = false;
   TnCPage = false;
   ActivateiAkaunPage = false;
   ActivateSuccessPage = false;
@@ -457,7 +457,7 @@ export class RegisterMemberComponent implements OnInit {
         "cityStateZip": currentMyKadDetails.State,
         "stateCode": "15",
         "countryCode": "MAL",
-        "addRemarks": "",
+        "addRemarks": "Test Permenant Address",
         "addLine1A": currentMyKadDetails.Address1,
         "addLine2A": currentMyKadDetails.Address2,
         "addLine3A": currentMyKadDetails.Address3,
@@ -467,7 +467,7 @@ export class RegisterMemberComponent implements OnInit {
         "cityStateZip1": currentMyKadDetails.State,
         "stateCode1": "15",
         "countryCode1": "MAL",
-        "addRemarks1": "",
+        "addRemarks1": "Test Correspondance Address",
         "homePhone": "",
         "officePhone": "",
         "mobilePhone": this.phoneNo,
@@ -484,7 +484,7 @@ export class RegisterMemberComponent implements OnInit {
         "lastMaintUserID": "",
         "lastMaintTerminalID": "",
         "lastMaintBranchNo": "",
-        "sessionId": 1 
+        "sessionId": appFunc.sessionId
       }
   
       this._aldanService.MemberRegistration(body).subscribe((result: any) =>{ //Call Register Member
@@ -497,13 +497,13 @@ export class RegisterMemberComponent implements OnInit {
             "custNum": this.KWSPCustomerNo,
             "tacMobilePhoneCode": "TA",
             "tacMobilePhone": this.phoneNo,
-            "registrationDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+            "registrationDate": result.detail.epfRegDate,
             "registrationChannel": "SAO",
             "status": "P",
             "checkForDuplicate": "N",
             "generateRequestNum": "N",
             "requestNum": "",
-            "sessionId": 1 
+            "sessionId": appFunc.sessionId
           }
 
           this._aldanService.AddTAC(addMobileTACBody).subscribe((result: any) => { //Call Add TAC
@@ -520,7 +520,7 @@ export class RegisterMemberComponent implements OnInit {
                   "subSource": "",
                   "ipAddress": "",
                   "validity": "",
-                  "sessionId": 1 
+                  "sessionId": appFunc.sessionId
                 }
           
                 this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
@@ -576,7 +576,7 @@ export class RegisterMemberComponent implements OnInit {
   RegisterSuccessYes(){
     if(this.isiAkaunRegModuleEnabled){
       if(this.isiAkaunActModuleEnabled){
-        if (appFunc.bypassAPI != false) {
+        if (appFunc.bypassAPI != true) {
           this._aldanService
             .GetTnC(selectLang.selectedLang, appFunc.sessionId)
             .subscribe((result: any) => {
@@ -624,7 +624,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   TnCYes(){
-    if (appFunc.bypassAPI != false) {
+    if (appFunc.bypassAPI != true) {
       this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
         if (result.imgId != '') {
           result.forEach((element: any) => {
@@ -823,7 +823,7 @@ export class RegisterMemberComponent implements OnInit {
         "reasonCode": "",
         "akadRefNum": "",
         "docRefNum": "",
-        "sessionId": 1 
+        "sessionId": appFunc.sessionId
       }
 
       this._aldanService.iShariahRegistration(iShariahBody).subscribe((result:any) => {
@@ -882,7 +882,7 @@ export class RegisterMemberComponent implements OnInit {
           "sourceCreationID": "SST",
           "sourceTerminalID": "SST",
           "sourceBranchNo": "0",
-          "sessionId": 1 
+          "sessionId": appFunc.sessionId
         }
   
         this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {

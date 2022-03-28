@@ -8,6 +8,7 @@ import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { currMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemberDetails';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { selectLang } from '../_models/language';
 
 @Component({
   selector: 'app-check-balance',
@@ -60,7 +61,7 @@ export class CheckBalanceComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
     if (appFunc.FromCheckBalance == true) {
       this.ConfirmEmailPage = true
       this.SummaryStatementPage = true;

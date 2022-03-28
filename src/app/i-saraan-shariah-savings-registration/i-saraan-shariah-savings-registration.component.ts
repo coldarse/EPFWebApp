@@ -30,7 +30,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
   defaultDDL = '';
   selectedJobSector: any = undefined;
-  currentLang = 'bm';
 
   // jobSectors = [
   //   { name: "agriculture", id: 1, malay: "Pertanian", english: "Pertanian" },
@@ -55,11 +54,10 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
 
     this.jobSectors = appFunc.businessTypes;
 
-    this.currentLang = selectLang.selectedLang;
     if (selectLang.selectedLang == 'bm') {
       this.defaultDDL = 'Sila pilih daripada pilihan berikut';
     } else {
