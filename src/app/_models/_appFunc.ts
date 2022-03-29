@@ -16,7 +16,7 @@ export class appFunc {
     static screenSaver: string;
     static screenSaverList: string[];
     static isEmptySSList = false
-    static bypassAPI = true;
+    static bypassAPI = false;
     static modules: eModules[];
     static businessTypes: businessTypes[];
     static sessionId: number;

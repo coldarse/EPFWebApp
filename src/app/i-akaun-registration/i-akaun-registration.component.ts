@@ -28,7 +28,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   @ViewChild('password_2') password_2: ElementRef | undefined;
   @ViewChild('secure_phrase') secure_phrase: ElementRef | undefined;
 
-  EnterPhoneNumber = false;
+  EnterPhoneNumber = true;
   EnterEmailAddress = false;
   PhoneEmailConfirmation = false;
   AskActivate = false;
@@ -36,7 +36,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   ActivateInformation = false;
   SuccessActivation = false;
   PromptRegisterISaraan = false;
-  SetIdPassword = true;
+  SetIdPassword = false;
   Failed = false;
   phoneNo = '';
   emailAddress = '';
@@ -95,7 +95,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
     this.ic = currentMyKadDetails.ICNo;
     this.name = currentMyKadDetails.Name;
-    this.acctNo = this.ic;
+    // this.acctNo = this.ic;
   }
 
   hardcodedIC() {
@@ -251,7 +251,7 @@ export class IAkaunRegistrationComponent implements OnInit {
             });
           });
           this.IAkaunTNC = false;
-          this.ActivateInformation = true;
+          this.SetIdPassword = true;
         } else {
           this.Failed = true;
         }
@@ -287,9 +287,11 @@ export class IAkaunRegistrationComponent implements OnInit {
 
       //Check Selected Image
       let selectedCount = 0;
+      let imgageid: any;
       this.checkboxImages.forEach((elem: any) => {
         if (elem.checked == true) {
           selectedCount += 1;
+          imgageid = elem.imgId;
         }
       });
       if (selectedCount == 0) {
@@ -306,7 +308,7 @@ export class IAkaunRegistrationComponent implements OnInit {
             "user_id": this.acctNo,
             "new_password": this.password1,
             "confirm_new_password": this.password2,
-            "secure_image_id": this.checkboxImages,
+            "secure_image_id": imgageid,
             "secret_phrase": this.securePhrase,
             "terms_condition": "46"
           }

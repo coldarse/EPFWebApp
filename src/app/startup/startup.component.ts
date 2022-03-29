@@ -70,9 +70,9 @@ export class StartupComponent implements OnInit {
       else{ //Not Number
         accessToken.token = result.access_token;
         accessToken.httpOptions = {
-          headers: new HttpHeaders({
-            Authorization: 'Bearer ' + accessToken.token
-          })
+          headers: new HttpHeaders(
+            {Authorization: 'Bearer ' + accessToken.token}
+            )
         };
         this._aldanService.verifyKiosk(signalRConnection.kioskCode)
         .toPromise().then((resultKiosk: any) => {
