@@ -238,23 +238,25 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   IAkaunTNCyes() {
-    if (appFunc.bypassAPI != true) {
-      this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-        if (result.imgId != '') {
-          result.forEach((element: any) => {
-            this.checkboxImages.push({
-              imgId: element.imgId,
-              imgPath: element.imgPath,
-              checked: false,
-            });
-          });
-          this.IAkaunTNC = false;
-          this.SetIdPassword = true;
-        } else {
-          this.Failed = true;
-        }
-      });
-    }
+    // if (appFunc.bypassAPI != true) {
+    //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+    //     if (result.imgId != '') {
+    //       result.forEach((element: any) => {
+    //         this.checkboxImages.push({
+    //           imgId: element.imgId,
+    //           imgPath: element.imgPath,
+    //           checked: false,
+    //         });
+    //       });
+    //       this.IAkaunTNC = false;
+    //       this.ActivateInformation = true;
+    //     } else {
+    //       this.Failed = true;
+    //     }
+    //   });
+    // }
+    this.IAkaunTNC = false;
+    this.SetIdPassword = true;
 
     setTimeout(() => {
       loadKeyboard();
@@ -412,8 +414,25 @@ export class IAkaunRegistrationComponent implements OnInit {
       }
 
       if (errorCount == 0) {
-        this.SetIdPassword = false;
-        this.ActivateInformation = true;
+        if (appFunc.bypassAPI != true) {
+          this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+            if (result.imgId != '') {
+              result.forEach((element: any) => {
+                this.checkboxImages.push({
+                  imgId: element.imgId,
+                  imgPath: element.imgPath,
+                  checked: false,
+                });
+              });
+              this.SetIdPassword = false;
+              this.ActivateInformation = true;
+            } else {
+              this.Failed = true;
+            }
+          });
+        }
+        // this.SetIdPassword = false;
+        // this.ActivateInformation = true;
       }
     }
   }
