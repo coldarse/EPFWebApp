@@ -48,6 +48,7 @@ export class RegisterMemberComponent implements OnInit {
   SaraanSuccessPage = false;
   Failed = false;
   TnC = '';
+  content_version = "";
 
   failedTAC = false;
 
@@ -582,7 +583,7 @@ export class RegisterMemberComponent implements OnInit {
             .subscribe((result: any) => {
               if (result.content != '') {
                 this.TnC = result.content.toString();
-                console.log(this.TnC);
+                this.content_version = result.contentVersion;
                 this.RegisterSuccessPage = false;
                 this.TnCPage = true;
               } else {
@@ -671,9 +672,11 @@ export class RegisterMemberComponent implements OnInit {
 
       //Check Selected Image
       let selectedCount = 0;
+      let imageid: any;
       this.checkboxImages.forEach((elem: any) => {
         if (elem.checked == true) {
           selectedCount += 1;
+          imageid = elem.imgId;
         }
       });
       if (selectedCount == 0) {
@@ -692,10 +695,11 @@ export class RegisterMemberComponent implements OnInit {
             "confirm_new_password": this.password2,
             "secure_image_id": this.checkboxImages,
             "secret_phrase": this.securePhrase,
-            "terms_condition": "46"
+            "terms_condition": "46",
+            "sessionId": appFunc.sessionId
           }
 
-          this._aldanService.ActivateIAkaun(iAkaunActBody, appFunc.sessionId).subscribe((result: any) => {
+          this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
             if(result.epfNum != null){
 
               this.ActivateiAkaunPage = false;

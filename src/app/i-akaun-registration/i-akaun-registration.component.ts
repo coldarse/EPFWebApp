@@ -1,14 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { appFunc } from '../_models/_appFunc';
-import { currentMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
-import { accessToken } from '../_models/token';
-import { HttpHeaders } from '@angular/common/http';
-import { of } from 'rxjs';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -54,6 +50,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   imageSelect = false;
   securePhraseMax = false;
   passwordMatch = false;
+  content_version = "";
 
   ic = '';
   name = '';
@@ -225,6 +222,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         .subscribe((result: any) => {
           if (result.content != '') {
             this.TnC = result.content.toString();
+            this.content_version = result.contentVersion;
             this.AskActivate = false;
             this.IAkaunTNC = true;
           } else {
@@ -310,10 +308,11 @@ export class IAkaunRegistrationComponent implements OnInit {
             "confirm_new_password": this.password2,
             "secure_image_id": imgageid,
             "secret_phrase": this.securePhrase,
-            "terms_condition": "46"
+            "terms_condition": this.content_version,
+            "sessionId": appFunc.sessionId
           }
 
-          this._aldanService.ActivateIAkaun(iAkaunActBody, appFunc.sessionId).subscribe((result: any) => {
+          this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
             if(result.epfNum != null){
 
               this.ActivateInformation = false;
