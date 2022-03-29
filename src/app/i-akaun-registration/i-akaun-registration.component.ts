@@ -27,7 +27,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   @ViewChild('password_2') password_2: ElementRef | undefined;
   @ViewChild('secure_phrase') secure_phrase: ElementRef | undefined;
 
-  EnterPhoneNumber = false;
+  EnterPhoneNumber = true;
   EnterEmailAddress = false;
   PhoneEmailConfirmation = false;
   AskActivate = false;
@@ -35,7 +35,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   ActivateInformation = false;
   SuccessActivation = false;
   PromptRegisterISaraan = false;
-  SetIdPassword = true;
+  SetIdPassword = false;
   Failed = false;
   phoneNo = '';
   emailAddress = '';
@@ -232,23 +232,25 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   IAkaunTNCyes() {
-    if (appFunc.bypassAPI != true) {
-      this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-        if (result.imgId != '') {
-          result.forEach((element: any) => {
-            this.checkboxImages.push({
-              imgId: element.imgId,
-              imgPath: element.imgPath,
-              checked: false,
-            });
-          });
-          this.IAkaunTNC = false;
-          this.ActivateInformation = true;
-        } else {
-          this.Failed = true;
-        }
-      });
-    }
+    // if (appFunc.bypassAPI != true) {
+    //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+    //     if (result.imgId != '') {
+    //       result.forEach((element: any) => {
+    //         this.checkboxImages.push({
+    //           imgId: element.imgId,
+    //           imgPath: element.imgPath,
+    //           checked: false,
+    //         });
+    //       });
+    //       this.IAkaunTNC = false;
+    //       this.ActivateInformation = true;
+    //     } else {
+    //       this.Failed = true;
+    //     }
+    //   });
+    // }
+    this.IAkaunTNC = false;
+    this.SetIdPassword = true;
 
     setTimeout(() => {
       loadKeyboard();
@@ -403,8 +405,25 @@ export class IAkaunRegistrationComponent implements OnInit {
       }
 
       if (errorCount == 0) {
-        this.SetIdPassword = false;
-        this.ActivateInformation = true;
+        if (appFunc.bypassAPI != true) {
+          this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+            if (result.imgId != '') {
+              result.forEach((element: any) => {
+                this.checkboxImages.push({
+                  imgId: element.imgId,
+                  imgPath: element.imgPath,
+                  checked: false,
+                });
+              });
+              this.SetIdPassword = false;
+              this.ActivateInformation = true;
+            } else {
+              this.Failed = true;
+            }
+          });
+        }
+        // this.SetIdPassword = false;
+        // this.ActivateInformation = true;
       }
     }
   }
