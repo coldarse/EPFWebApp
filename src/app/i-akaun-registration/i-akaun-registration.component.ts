@@ -8,6 +8,7 @@ import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { accessToken } from '../_models/token';
 import { HttpHeaders } from '@angular/common/http';
+import { of } from 'rxjs';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -61,6 +62,8 @@ export class IAkaunRegistrationComponent implements OnInit {
   password2 = '';
   securePhrase = '';
 
+  isiAkaunActModuleEnabled = false;
+
   emailList: string[] = [
     'aldantechnology.com',
     'gmail.com',
@@ -78,20 +81,20 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
-    accessToken.httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + accessToken.token,
-      }),
-    };
 
-    // let hardcode = true;
-    // if (hardcode) {
-    //   this.hardcodedIC();
-    // }
+
+    for (var val of appFunc.modules){
+      if(val.moduleID == 8){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.isiAkaunActModuleEnabled = true;
+          }
+        }
+      }
+    }
 
     this.ic = currentMyKadDetails.ICNo;
     this.name = currentMyKadDetails.Name;
-
     this.acctNo = this.ic;
   }
 
@@ -188,8 +191,14 @@ export class IAkaunRegistrationComponent implements OnInit {
         .iAkaunRegistration(iAkaunbody)
         .subscribe((result: any) => {
           if (result.responseCode == '0') {
-            this.PhoneEmailConfirmation = false;
-            this.AskActivate = true;
+            if(this.isiAkaunActModuleEnabled){
+              this.PhoneEmailConfirmation = false;
+              this.AskActivate = true;
+            }
+            else{
+              this.PhoneEmailConfirmation = false;
+              this.SuccessActivation = true;
+            }
 
             deleteKeyboard();
           } else {
@@ -216,7 +225,6 @@ export class IAkaunRegistrationComponent implements OnInit {
         .subscribe((result: any) => {
           if (result.content != '') {
             this.TnC = result.content.toString();
-            console.log(this.TnC);
             this.AskActivate = false;
             this.IAkaunTNC = true;
           } else {
