@@ -31,7 +31,8 @@
             "styles": [
               "src/styles.css",
               "src/design/css/custom.css",
-              "src/design/css/Keyboard.css"
+              "src/design/css/Keyboard.css",
+              "node_modules/material-icons/css/material-icons.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
