@@ -31,20 +31,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   defaultDDL = '';
   selectedJobSector: any = undefined;
 
-  // jobSectors = [
-  //   { name: "agriculture", id: 1, malay: "Pertanian", english: "Pertanian" },
-  //   { name: "retired", id: 2, malay: "Pekerja berpencen", english: "Pekerja berpencen" },
-  //   { name: "business", id: 3, malay: "Perniagaan", english: "Perniagaan" },
-  //   { name: "aquaculture", id: 4, malay: "Akuakultur/Penangkapan ikan", english: "Akuakultur/Penangkapan ikan" },
-  //   { name: "transport", id: 5, malay: "Transportasi", english: "Transportasi" },
-  //   { name: "sales", id: 6, malay: "Agen jualan", english: "Agen jualan" },
-  //   { name: "artist", id: 7, malay: "Seniman/Kreatif", english: "Seniman/Kreatif" },
-  //   { name: "housewife", id: 8, malay: "Suri rumah", english: "Suri rumah" },
-  //   { name: "prof", id: 9, malay: "Profesional", english: "Profesional" },
-  //   { name: "service", id: 10, malay: "Perkhidmatan", english: "Perkhidmatan" },
-  //   { name: "gig", id: 11, malay: "Pekerjaan gig", english: "Pekerjaan gig" },
-  //   { name: "other", id: 12, malay: "Yang lain", english: "Yang lain" },
-  // ]
   jobSectors: businessTypes[] = [];
 
   constructor(
@@ -57,6 +43,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     this.translate.use(selectLang.selectedLang);
 
     this.jobSectors = appFunc.businessTypes;
+    console.log(this.jobSectors);
 
     if (selectLang.selectedLang == 'bm') {
       this.defaultDDL = 'Sila pilih daripada pilihan berikut';
@@ -82,7 +69,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   }
 
   clickShariah() {
-    if (appFunc.bypassAPI != false) {
+    if (appFunc.bypassAPI != true) {
       this._aldanService
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {

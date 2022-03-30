@@ -80,6 +80,7 @@ export class VerifyMyKadComponent implements OnInit {
       if(accessToken.httpOptions != undefined){
         this._aldanService.GetBusinessTypes().subscribe((res: any) => {
           appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
+          console.log(appFunc.businessTypes);
         });
         this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
           appFunc.modules = res.map((em: any) => new eModules(em));
@@ -135,7 +136,7 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   useMainPage(){
-    this.route.navigate(['']);
+    this.route.navigate(['startup']);
   }
 
   verifyThumbprint(){
@@ -340,7 +341,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   cancelMyKadVerification(){
     clearInterval(this.readerIntervalId);
-    this.route.navigate(['']);
+    this.route.navigate(['startup']);
   }
 
   TryAgain(){

@@ -115,33 +115,40 @@ export class StartupComponent implements OnInit {
       }
     }, 400);
 
-    this._signalR.connect().then((c) => {
-      console.log("API King is now Connected on " + formatDate(new Date(), 'hh:mm:ss', 'en'));
-      signalRConnection.connection = c;
-
-      signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {
-        signalRConnection.kioskCode = data;
-        signalRConnection.connection.invoke('isAdapterEmpty').then((data: boolean) => {
-          this.isAdapterEmpty = data;
-          signalRConnection.connection.invoke('GetAdapterName').then((data: any[]) => {
-            signalRConnection.adapter = data;
-            this.adapters = data;
-            if(this.isAdapterEmpty){
-              this.login(this.Secret)
-            }
-            else{
-              this.login(signalRConnection.adapter[0].adapterNameEncrypted)
-            }
+    if(signalRConnection.connection == undefined){
+      this._signalR.connect().then((c) => {
+        console.log("API King is now Connected on " + formatDate(new Date(), 'hh:mm:ss', 'en'));
+        signalRConnection.connection = c;
+  
+        signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {
+          signalRConnection.kioskCode = data;
+          signalRConnection.connection.invoke('isAdapterEmpty').then((data: boolean) => {
+            this.isAdapterEmpty = data;
+            signalRConnection.connection.invoke('GetAdapterName').then((data: any[]) => {
+              signalRConnection.adapter = data;
+              this.adapters = data;
+              if(this.isAdapterEmpty){
+                this.login(this.Secret)
+              }
+              else{
+                this.login(signalRConnection.adapter[0].adapterNameEncrypted)
+              }
+            });
           });
+          
         });
-        
+      }).catch((err: any) => {
+        console.log(err.toString())
+        // errorCodes.code = "0167";
+        appFunc.message = "Unauthorized";
+        this.route.navigate(['outofservice']);
       });
-    }).catch((err: any) => {
-      console.log(err.toString())
-      // errorCodes.code = "0167";
-      appFunc.message = "Unauthorized";
-      this.route.navigate(['outofservice']);
-    });
+    }
+    else{
+      this.route.navigate(['verifyMyKad']);
+    }
+
+    
   }
 
   selectedAdapter(event: any){
