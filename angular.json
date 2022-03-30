@@ -31,10 +31,12 @@
             "styles": [
               "src/styles.css",
               "src/design/css/custom.css",
-              "src/design/css/Keyboard.css"
+              "src/design/css/Keyboard.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/signalr/jquery.signalR.js",
               "src/design/javascript/custom.js",
               "src/design/javascript/Keyboard.js"
