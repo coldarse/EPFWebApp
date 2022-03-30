@@ -169,7 +169,7 @@ class appFunc {
 }
 appFunc.isVerifyMyKad = false;
 appFunc.isEmptySSList = false;
-appFunc.bypassAPI = true;
+appFunc.bypassAPI = false;
 appFunc.FromCheckBalance = false;
 appFunc.endSession = false;
 appFunc.ɵfac = function appFunc_Factory(t) { return new (t || appFunc)(); };
@@ -2985,6 +2985,7 @@ class RegisterMemberComponent {
         this.SaraanSuccessPage = false;
         this.Failed = false;
         this.TnC = '';
+        this.content_version = "";
         this.failedTAC = false;
         this.isiAkaunRegModuleEnabled = false;
         this.isiAkaunActModuleEnabled = false;
@@ -3467,7 +3468,7 @@ class RegisterMemberComponent {
                         .subscribe((result) => {
                         if (result.content != '') {
                             this.TnC = result.content.toString();
-                            console.log(this.TnC);
+                            this.content_version = result.contentVersion;
                             this.RegisterSuccessPage = false;
                             this.TnCPage = true;
                         }
@@ -3546,9 +3547,11 @@ class RegisterMemberComponent {
             }
             //Check Selected Image
             let selectedCount = 0;
+            let imageid;
             this.checkboxImages.forEach((elem) => {
                 if (elem.checked == true) {
                     selectedCount += 1;
+                    imageid = elem.imgId;
                 }
             });
             if (selectedCount == 0) {
@@ -3566,9 +3569,10 @@ class RegisterMemberComponent {
                         "confirm_new_password": this.password2,
                         "secure_image_id": this.checkboxImages,
                         "secret_phrase": this.securePhrase,
-                        "terms_condition": "46"
+                        "terms_condition": "46",
+                        "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
                     };
-                    this._aldanService.ActivateIAkaun(iAkaunActBody, _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId).subscribe((result) => {
+                    this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result) => {
                         if (result.epfNum != null) {
                             this.ActivateiAkaunPage = false;
                             this.ActivateSuccessPage = true;
@@ -4277,25 +4281,12 @@ class ISaraanShariahSavingsRegistrationComponent {
         this.Contract = "";
         this.defaultDDL = '';
         this.selectedJobSector = undefined;
-        // jobSectors = [
-        //   { name: "agriculture", id: 1, malay: "Pertanian", english: "Pertanian" },
-        //   { name: "retired", id: 2, malay: "Pekerja berpencen", english: "Pekerja berpencen" },
-        //   { name: "business", id: 3, malay: "Perniagaan", english: "Perniagaan" },
-        //   { name: "aquaculture", id: 4, malay: "Akuakultur/Penangkapan ikan", english: "Akuakultur/Penangkapan ikan" },
-        //   { name: "transport", id: 5, malay: "Transportasi", english: "Transportasi" },
-        //   { name: "sales", id: 6, malay: "Agen jualan", english: "Agen jualan" },
-        //   { name: "artist", id: 7, malay: "Seniman/Kreatif", english: "Seniman/Kreatif" },
-        //   { name: "housewife", id: 8, malay: "Suri rumah", english: "Suri rumah" },
-        //   { name: "prof", id: 9, malay: "Profesional", english: "Profesional" },
-        //   { name: "service", id: 10, malay: "Perkhidmatan", english: "Perkhidmatan" },
-        //   { name: "gig", id: 11, malay: "Pekerjaan gig", english: "Pekerjaan gig" },
-        //   { name: "other", id: 12, malay: "Yang lain", english: "Yang lain" },
-        // ]
         this.jobSectors = [];
     }
     ngOnInit() {
         this.translate.use(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang);
         this.jobSectors = _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].businessTypes;
+        console.log(this.jobSectors);
         if (_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang == 'bm') {
             this.defaultDDL = 'Sila pilih daripada pilihan berikut';
         }
@@ -4317,7 +4308,7 @@ class ISaraanShariahSavingsRegistrationComponent {
         this.ISaraan = true;
     }
     clickShariah() {
-        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != false) {
+        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
             this._aldanService
                 .GetContract(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId)
                 .subscribe((result) => {
@@ -4767,6 +4758,7 @@ class VerifyMyKadComponent {
             if (_models_token__WEBPACK_IMPORTED_MODULE_1__["accessToken"].httpOptions != undefined) {
                 this._aldanService.GetBusinessTypes().subscribe((res) => {
                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].businessTypes = res.map((bt) => new _models_modelClass__WEBPACK_IMPORTED_MODULE_5__["businessTypes"](bt));
+                    console.log(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].businessTypes);
                 });
                 this._aldanService.GetServiceOperation(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].kioskCode).subscribe((res) => {
                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].modules = res.map((em) => new _models_modelClass__WEBPACK_IMPORTED_MODULE_5__["eModules"](em));
@@ -4818,7 +4810,7 @@ class VerifyMyKadComponent {
         }, 1000);
     }
     useMainPage() {
-        this.route.navigate(['']);
+        this.route.navigate(['startup']);
     }
     verifyThumbprint() {
         if (this.RetryCountInstance != 0) {
@@ -4999,7 +4991,7 @@ class VerifyMyKadComponent {
     }
     cancelMyKadVerification() {
         clearInterval(this.readerIntervalId);
-        this.route.navigate(['']);
+        this.route.navigate(['startup']);
     }
     TryAgain() {
         this.ErrorPop = false;
@@ -5007,7 +4999,7 @@ class VerifyMyKadComponent {
     }
 }
 VerifyMyKadComponent.ɵfac = function VerifyMyKadComponent_Factory(t) { return new (t || VerifyMyKadComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_8__["TranslateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](ng2_signalr__WEBPACK_IMPORTED_MODULE_9__["SignalR"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_shared_aldan_service__WEBPACK_IMPORTED_MODULE_10__["AldanService"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_config_app_configuration__WEBPACK_IMPORTED_MODULE_11__["AppConfiguration"])); };
-VerifyMyKadComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineComponent"]({ type: VerifyMyKadComponent, selectors: [["app-verify-my-kad"]], decls: 11, vars: 9, consts: [[1, "bg-img", 2, "background", "url('assets/images/BG.png')", "background-size", "1368px 860px"], ["class", "header", 4, "ngIf"], [1, "container-fluid"], ["class", "row padTop5rem content-container", 4, "ngIf"], ["class", "row padTop10rem content-container", 4, "ngIf"], ["class", "bg-popup", 4, "ngIf"], [1, "header"], [1, "row", "padTop5rem", "content-container"], [1, "text-center"], [1, "lblHeader"], [1, "row", "padTop3rem"], ["src", "assets/images/insert-mykad.svg", "width", "400px", "height", "400px"], [1, "row", "padTop10rem", "content-container"], [1, "row"], [1, "row", "padTop10rem"], [1, "col-6"], ["type", "button", 1, "btnShariah", 3, "click"], [1, "row", "padTopHalfrem"], ["src", "assets/images/thumbprint.svg", "width", "400px", "height", "400px"], ["class", "row padTopHalfrem", 4, "ngIf"], ["class", "row padTop5rem", 4, "ngIf"], [1, "col-3"], ["type", "button", 1, "btnNo", 3, "click"], [1, "row", "padTop5rem"], ["role", "status", 1, "spinner-border", "text-primary", "spinning-addon"], [1, "row", "padTop2rem"], [1, "col-2"], [1, "col-8", "lblRemove"], ["src", "assets/images/remove-mykad.svg", "width", "400px", "height", "400px"], [1, "bg-popup"], ["align", "center", 1, "col-12", "pop-up", "shadow", "p-3", "mb-5", "bg-white", "rounded-2rem"], [1, "padTop15rem"], [4, "ngIf"], [1, "padTop12rem", "footer"], [1, "col-12"], ["type", "button", "class", "btnYes", 3, "click", 4, "ngIf"], ["type", "button", 1, "btnYes", 3, "click"]], template: function VerifyMyKadComponent_Template(rf, ctx) { if (rf & 1) {
+VerifyMyKadComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineComponent"]({ type: VerifyMyKadComponent, selectors: [["app-verify-my-kad"]], decls: 11, vars: 9, consts: [[1, "bg-img", 2, "background", "url('assets/images/BG.png')", "background-size", "1368px 860px"], ["class", "header", 4, "ngIf"], [1, "container-fluid"], ["class", "row padTop5rem content-container", 4, "ngIf"], ["class", "row padTop10rem content-container", 4, "ngIf"], ["class", "bg-popup", 4, "ngIf"], [1, "header"], [1, "row", "padTop5rem", "content-container"], [1, "text-center"], [1, "lblHeader"], [1, "row", "padTop3rem"], ["src", "assets/images/insert-mykad.svg", "width", "400px", "height", "400px"], [1, "row", "padTop10rem", "content-container"], [1, "row"], [1, "row", "padTop10rem"], [1, "col-6"], ["type", "button", 1, "btnShariah", 3, "click"], [1, "row", "padTopHalfrem"], ["src", "assets/images/thumbprint.svg", "width", "400px", "height", "400px"], ["class", "row padTopHalfrem", 4, "ngIf"], ["class", "row padTop5rem", 4, "ngIf"], [1, "col-3"], ["type", "button", 1, "btnNo", 3, "click"], [1, "row", "padTop5rem"], ["role", "status", 1, "spinner-border", "text-primary", "spinning-addon"], [1, "row", "padTop2rem"], [1, "col-2"], [1, "col-8", "lblRemove"], ["src", "assets/images/remove-mykad.svg", "width", "400px", "height", "400px"], [1, "bg-popup"], ["align", "center", 1, "pop-up", "shadow", "p-3", "mb-5", "bg-white", "rounded-2rem"], [1, "padTop15rem"], [4, "ngIf"], [1, "padTop12rem", "footer"], [1, "col-12"], ["type", "button", "class", "btnYes", 3, "click", 4, "ngIf"], ["type", "button", 1, "btnYes", 3, "click"]], template: function VerifyMyKadComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](1, VerifyMyKadComponent_div_1_Template, 3, 3, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](2, VerifyMyKadComponent_div_2_Template, 3, 3, "div", 1);
@@ -5087,7 +5079,7 @@ class AppComponent {
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
 AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 1, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["@font-face {\r\n    font-family: 'filson-pro';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('FilsonProRegular.otf'); \r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0lBQ3pCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsZ0NBQTZELEVBQUUscUJBQXFCO0FBQ3hGIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGZvbnQtZmFjZSB7XHJcbiAgICBmb250LWZhbWlseTogJ2ZpbHNvbi1wcm8nO1xyXG4gICAgZm9udC1zdHlsZTogbm9ybWFsO1xyXG4gICAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICAgIHNyYzogdXJsKCcuLi8uLi9zcmMvYXNzZXRzL2ZvbnQvRmlsc29uL0ZpbHNvblByb1JlZ3VsYXIub3RmJyk7IC8qIElFOSBDb21wYXQgTW9kZXMgKi9cclxufSJdfQ== */"] });
 
 
 /***/ }),
@@ -7791,7 +7783,7 @@ class IAkaunRegistrationComponent {
         this.route = route;
         this.translate = translate;
         this._aldanService = _aldanService;
-        this.EnterPhoneNumber = false;
+        this.EnterPhoneNumber = true;
         this.EnterEmailAddress = false;
         this.PhoneEmailConfirmation = false;
         this.AskActivate = false;
@@ -7799,7 +7791,7 @@ class IAkaunRegistrationComponent {
         this.ActivateInformation = false;
         this.SuccessActivation = false;
         this.PromptRegisterISaraan = false;
-        this.SetIdPassword = true;
+        this.SetIdPassword = false;
         this.Failed = false;
         this.phoneNo = '';
         this.emailAddress = '';
@@ -7815,6 +7807,7 @@ class IAkaunRegistrationComponent {
         this.imageSelect = false;
         this.securePhraseMax = false;
         this.passwordMatch = false;
+        this.content_version = "";
         this.ic = '';
         this.name = '';
         this.acctNo = '';
@@ -7843,7 +7836,7 @@ class IAkaunRegistrationComponent {
         }
         this.ic = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_1__["currentMyKadDetails"].ICNo;
         this.name = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_1__["currentMyKadDetails"].Name;
-        this.acctNo = this.ic;
+        // this.acctNo = this.ic;
     }
     hardcodedIC() {
         let harcodedic = '111111007894';
@@ -7961,6 +7954,7 @@ class IAkaunRegistrationComponent {
                 .subscribe((result) => {
                 if (result.content != '') {
                     this.TnC = result.content.toString();
+                    this.content_version = result.contentVersion;
                     this.AskActivate = false;
                     this.IAkaunTNC = true;
                 }
@@ -7975,24 +7969,25 @@ class IAkaunRegistrationComponent {
         this.route.navigate(['mainMenu']);
     }
     IAkaunTNCyes() {
-        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].bypassAPI != true) {
-            this._aldanService.GetSecureImage(_models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].sessionId).subscribe((result) => {
-                if (result.imgId != '') {
-                    result.forEach((element) => {
-                        this.checkboxImages.push({
-                            imgId: element.imgId,
-                            imgPath: element.imgPath,
-                            checked: false,
-                        });
-                    });
-                    this.IAkaunTNC = false;
-                    this.ActivateInformation = true;
-                }
-                else {
-                    this.Failed = true;
-                }
-            });
-        }
+        // if (appFunc.bypassAPI != true) {
+        //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+        //     if (result.imgId != '') {
+        //       result.forEach((element: any) => {
+        //         this.checkboxImages.push({
+        //           imgId: element.imgId,
+        //           imgPath: element.imgPath,
+        //           checked: false,
+        //         });
+        //       });
+        //       this.IAkaunTNC = false;
+        //       this.ActivateInformation = true;
+        //     } else {
+        //       this.Failed = true;
+        //     }
+        //   });
+        // }
+        this.IAkaunTNC = false;
+        this.SetIdPassword = true;
         setTimeout(() => {
             loadKeyboard();
         }, 500);
@@ -8017,9 +8012,11 @@ class IAkaunRegistrationComponent {
             }
             //Check Selected Image
             let selectedCount = 0;
+            let imgageid;
             this.checkboxImages.forEach((elem) => {
                 if (elem.checked == true) {
                     selectedCount += 1;
+                    imgageid = elem.imgId;
                 }
             });
             if (selectedCount == 0) {
@@ -8035,11 +8032,12 @@ class IAkaunRegistrationComponent {
                         "user_id": this.acctNo,
                         "new_password": this.password1,
                         "confirm_new_password": this.password2,
-                        "secure_image_id": this.checkboxImages,
+                        "secure_image_id": imgageid,
                         "secret_phrase": this.securePhrase,
-                        "terms_condition": "46"
+                        "terms_condition": this.content_version,
+                        "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].sessionId
                     };
-                    this._aldanService.ActivateIAkaun(iAkaunActBody, _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].sessionId).subscribe((result) => {
+                    this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result) => {
                         if (result.epfNum != null) {
                             this.ActivateInformation = false;
                             this.SuccessActivation = true;
@@ -8133,8 +8131,26 @@ class IAkaunRegistrationComponent {
                 this.passwordMatch = true;
             }
             if (errorCount == 0) {
-                this.SetIdPassword = false;
-                this.ActivateInformation = true;
+                if (_models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].bypassAPI != true) {
+                    this._aldanService.GetSecureImage(_models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].sessionId).subscribe((result) => {
+                        if (result.imgId != '') {
+                            result.forEach((element) => {
+                                this.checkboxImages.push({
+                                    imgId: element.imgId,
+                                    imgPath: element.imgPath,
+                                    checked: false,
+                                });
+                            });
+                            this.SetIdPassword = false;
+                            this.ActivateInformation = true;
+                        }
+                        else {
+                            this.Failed = true;
+                        }
+                    });
+                }
+                // this.SetIdPassword = false;
+                // this.ActivateInformation = true;
             }
         }
     }
@@ -8554,9 +8570,7 @@ class StartupComponent {
             else { //Not Number
                 _models_token__WEBPACK_IMPORTED_MODULE_2__["accessToken"].token = result.access_token;
                 _models_token__WEBPACK_IMPORTED_MODULE_2__["accessToken"].httpOptions = {
-                    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-                        Authorization: 'Bearer ' + _models_token__WEBPACK_IMPORTED_MODULE_2__["accessToken"].token
-                    })
+                    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ Authorization: 'Bearer ' + _models_token__WEBPACK_IMPORTED_MODULE_2__["accessToken"].token })
                 };
                 this._aldanService.verifyKiosk(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode)
                     .toPromise().then((resultKiosk) => {
@@ -8597,31 +8611,36 @@ class StartupComponent {
                 this.dots = ".";
             }
         }, 400);
-        this._signalR.connect().then((c) => {
-            console.log("API King is now Connected on " + Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'hh:mm:ss', 'en'));
-            _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection = c;
-            _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('GetKioskCode').then((data) => {
-                _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode = data;
-                _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('isAdapterEmpty').then((data) => {
-                    this.isAdapterEmpty = data;
-                    _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('GetAdapterName').then((data) => {
-                        _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].adapter = data;
-                        this.adapters = data;
-                        if (this.isAdapterEmpty) {
-                            this.login(this.Secret);
-                        }
-                        else {
-                            this.login(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].adapter[0].adapterNameEncrypted);
-                        }
+        if (_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection == undefined) {
+            this._signalR.connect().then((c) => {
+                console.log("API King is now Connected on " + Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'hh:mm:ss', 'en'));
+                _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection = c;
+                _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('GetKioskCode').then((data) => {
+                    _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode = data;
+                    _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('isAdapterEmpty').then((data) => {
+                        this.isAdapterEmpty = data;
+                        _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('GetAdapterName').then((data) => {
+                            _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].adapter = data;
+                            this.adapters = data;
+                            if (this.isAdapterEmpty) {
+                                this.login(this.Secret);
+                            }
+                            else {
+                                this.login(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].adapter[0].adapterNameEncrypted);
+                            }
+                        });
                     });
                 });
+            }).catch((err) => {
+                console.log(err.toString());
+                // errorCodes.code = "0167";
+                _models_appFunc__WEBPACK_IMPORTED_MODULE_3__["appFunc"].message = "Unauthorized";
+                this.route.navigate(['outofservice']);
             });
-        }).catch((err) => {
-            console.log(err.toString());
-            // errorCodes.code = "0167";
-            _models_appFunc__WEBPACK_IMPORTED_MODULE_3__["appFunc"].message = "Unauthorized";
-            this.route.navigate(['outofservice']);
-        });
+        }
+        else {
+            this.route.navigate(['verifyMyKad']);
+        }
     }
     selectedAdapter(event) {
         if (event.target.value != "") {
@@ -8819,7 +8838,7 @@ class AldanService {
         let Options = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
         };
-        return this.http.post('https://10.0.58.81/connect/token', body, Options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+        return this.http.post('https://localhost:44373/connect/token', body, Options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
     verifyKiosk(kioskCode) {
         return this.http.get(this.url + `app/kiosks/Verify/${kioskCode}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
@@ -8926,8 +8945,8 @@ class AldanService {
     GetTnC(locale, sessionid) {
         return this.http.get(this.url + `IAkaunActivation/iAkaunAct/GetTnC?SessionId=${sessionid}&locale=${locale}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
-    ActivateIAkaun(body, sessionid) {
-        return this.http.post(this.url + `IAkaunActivation/iAkaunAct?SessionId=${sessionid}&epfNum=${body.epfNum}&id_no=${body.id_no}&name=${body.name}&user_id=${body.user_id}&new_password=${body.new_password}&confirm_new_password=${body.confirm_new_password}&secure_image_id=${body.secure_image_id}&secret_phrase=${body.secret_phrase}&terms_condition=${body.terms_condition}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+    ActivateIAkaun(body) {
+        return this.http.post(this.url + `IAkaunActivation/iAkaunAct`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
     GetContract(locale, sessionid) {
         return this.http.get(this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=${sessionid}&locale=${locale}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));

@@ -30,14 +30,14 @@
     text-align: left;
     color: white;
     font-size: 35px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
 }
 
 .btnHeader{
     margin-top: 35px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     background-color: rgb(49, 39, 131);
@@ -58,7 +58,7 @@
 .center{
     text-align: center;
     font-size: 60px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -220,7 +220,7 @@
     background-color: rgb(90, 82, 157);
     color: white;
     font-size: 25px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     margin: 5px;
     padding: 10px 50px 10px 50px;
     border-radius: 10px;
@@ -230,7 +230,7 @@
     background-color: rgb(90, 82, 157);
     color: white;
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     margin: 5px;
     padding-left: 80px;
     padding-right: 80px;
@@ -253,7 +253,7 @@
 .local{
     text-align: left;
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 500;
     color: rgb(49, 39, 131);
@@ -261,7 +261,7 @@
 .inter{
     text-align:end;
     font-size: 40px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style:normal;
     font-weight:bold;
     color: rgb(49, 39, 131);
@@ -288,7 +288,7 @@
     font-weight: 200;
     background-color: rgb(214, 212, 230);
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .noteWarning{
@@ -296,7 +296,7 @@
     font-weight: 200;
     background-color: rgb(230, 212, 212);
     color: rgb(131, 39, 39);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .akaunNote{
@@ -304,21 +304,21 @@
     font-weight: 200;
     background-color: rgb(214, 212, 230);
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .akaunNoteSmall{
     font-size:13px;
     font-weight: 200;
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .note2{
     font-size:25px;
     font-weight: 200;
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .Cancel{
@@ -337,7 +337,7 @@
 .lblQuestion
 {
     font-size: 60px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -348,14 +348,14 @@
 .lblHeader
 {
     font-size: 30px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
 }
 .lblCongrats{
     font-size: 45px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -363,7 +363,7 @@
 
 .lblReg{
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     color: rgb(49, 39, 131);
@@ -374,7 +374,7 @@
 
 .lblDate{
     font-size: 15px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 500;
     color: rgb(49, 39, 131);
@@ -383,7 +383,7 @@
 
 .lblDate2{
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -393,7 +393,7 @@
 
 .lblLogout{
     font-size: 25px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -403,7 +403,7 @@
 
 .lblPopup{
     font-size: 55px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 500;
     color: rgb(49, 39, 131);
@@ -415,7 +415,7 @@
 
 .lblProfile{
     font-size: 22.5px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     color: rgb(49, 39, 131);
@@ -433,7 +433,7 @@
 
 .lblAccount{
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     color: rgb(49, 39, 131);
@@ -445,7 +445,7 @@
 
 .lblInfo{
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     color: black;
@@ -455,7 +455,7 @@
 
 .lblAccount2{
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     color: black;
@@ -467,7 +467,7 @@
 
 .lblRemove{
     font-size: 20px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
     color: black;
@@ -476,7 +476,7 @@
 
 .lblWarning{
     font-size: 1.375rem;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 500;
     color: rgb(240, 48, 48);
@@ -486,7 +486,7 @@
     background-color: rgb(49, 39, 131);;
     border-color: rgb(49, 39, 131);
     color: white;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-width: 2px;
     border-radius: 75px;
     font-size: 22.5px;
@@ -499,7 +499,7 @@
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-width: 2px;
     border-radius: 75px;
     font-size: 22.5px;
@@ -512,7 +512,7 @@
     background-color: rgb(49, 39, 131);;
     border-color: rgb(49, 39, 131);
     color: white;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-width: 4px;
     border-radius: 150px;
     font-size: 55px;
@@ -563,7 +563,7 @@
 
 .lblSymbol{
     font-size: 25px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -573,14 +573,14 @@
 .lblKWSP{
     color: black;
     font-size: 62.5px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
 }
 
 .lblMsg{
     font-size: 30px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -592,7 +592,7 @@
     background-color: rgb(49, 39, 131);
     border-color: rgb(49, 39, 131);
     color: white;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-radius: 75px;
     font-weight: 700;
     font-size: 25px;
@@ -602,14 +602,14 @@
 
 .lblStatus{
     font-size: 40px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
 }
 
 .statusMsg{
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     color: black;
     font-size: 25px;
     font-weight: 500;
@@ -642,7 +642,7 @@ td{
 
 .ThumbprintMsg{
     font-size: 30px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
@@ -653,7 +653,7 @@ td{
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-width: 2px;
     border-radius: 75px;
     font-size: 20px;
@@ -668,7 +668,7 @@ td{
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-width: 4px;
     border-radius: 150px;
     font-size: 50px;
@@ -683,7 +683,7 @@ td{
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     border-width: 4px;
     border-radius: 150px;
     font-size: 40px;
@@ -753,7 +753,7 @@ td{
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 1.25rem;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     background-color: rgb(255, 255, 255);
@@ -767,7 +767,7 @@ td{
 
 .lblTNC{
     font-size: 1.25rem;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     padding-left: 0.5rem;
@@ -814,7 +814,7 @@ ul.dropdown-menu a.dropdown-item:hover{
     border-radius: 2rem;
     border: 1px solid;
     border-color: lightgray;
-    width: 2400px;
+    width: 2000px;
     min-height: 1500px;
     height: auto;
     background-color: white;
@@ -848,7 +848,7 @@ ul.dropdown-menu a.dropdown-item:hover{
     background-color:  rgb(49, 39, 131);
     color: #fafafa;
     border: 0rem;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
 }
@@ -861,7 +861,7 @@ ul.dropdown-menu a.dropdown-item:hover{
     background-color:  rgb(88, 89, 91);
     color: rgb(35, 31, 32);;
     border: 0rem;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
 }
@@ -902,7 +902,7 @@ ul.dropdown-menu a.dropdown-item:hover{
     font-size:35px; 
     white-space: nowrap; 
     font-weight:bold;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     color: white;
     height: 0.5rem;
 }
@@ -912,13 +912,13 @@ ul.dropdown-menu a.dropdown-item:hover{
     font-size:35px; 
     white-space: nowrap; 
     font-weight:bold;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
     color: white;
 }
 
 .outofservice_ErrorMsg{
     font-size: 45px;
-    font-family: filson-pro, sans-serif;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .screensaverimg{
