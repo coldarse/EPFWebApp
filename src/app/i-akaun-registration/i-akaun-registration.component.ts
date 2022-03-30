@@ -238,23 +238,6 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   IAkaunTNCyes() {
-    // if (appFunc.bypassAPI != true) {
-    //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-    //     if (result.imgId != '') {
-    //       result.forEach((element: any) => {
-    //         this.checkboxImages.push({
-    //           imgId: element.imgId,
-    //           imgPath: element.imgPath,
-    //           checked: false,
-    //         });
-    //       });
-    //       this.IAkaunTNC = false;
-    //       this.ActivateInformation = true;
-    //     } else {
-    //       this.Failed = true;
-    //     }
-    //   });
-    // }
     this.IAkaunTNC = false;
     this.SetIdPassword = true;
 
@@ -287,11 +270,11 @@ export class IAkaunRegistrationComponent implements OnInit {
 
       //Check Selected Image
       let selectedCount = 0;
-      let imgageid: any;
+      let imageid: any;
       this.checkboxImages.forEach((elem: any) => {
         if (elem.checked == true) {
           selectedCount += 1;
-          imgageid = elem.imgId;
+          imageid = elem.imgId;
         }
       });
       if (selectedCount == 0) {
@@ -304,11 +287,9 @@ export class IAkaunRegistrationComponent implements OnInit {
           const iAkaunActBody = {
             "epfNum": appFunc.currMemberDetail.accNum,
             "id_no": this.ic,
-            "name": this.name,
             "user_id": this.acctNo,
             "new_password": this.password1,
-            "confirm_new_password": this.password2,
-            "secure_image_id": imgageid,
+            "secure_image_id": imageid,
             "secret_phrase": this.securePhrase,
             "terms_condition": this.content_version,
             "sessionId": appFunc.sessionId
@@ -431,8 +412,6 @@ export class IAkaunRegistrationComponent implements OnInit {
             }
           });
         }
-        // this.SetIdPassword = false;
-        // this.ActivateInformation = true;
       }
     }
   }

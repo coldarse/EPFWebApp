@@ -170,7 +170,7 @@ export class RegisterMemberComponent implements OnInit {
     this.race = currentMyKadDetails.Race;
     this.religion = currentMyKadDetails.Religion;
 
-    this.acctNo = this.ic;
+    // this.acctNo = this.ic;
   }
 
   ngAfterViewInit(){
@@ -625,24 +625,25 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   TnCYes(){
-    if (appFunc.bypassAPI != true) {
-      this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-        if (result.imgId != '') {
-          result.forEach((element: any) => {
-            this.checkboxImages.push({
-              imgId: element.imgId,
-              imgPath: element.imgPath,
-              checked: false,
-            });
-          });
-          this.TnCPage = false;
-          this.ActivateiAkaunPage = true;
-        } else {
-          this.Failed = true;
-        }
-      });
-    }
-
+    // if (appFunc.bypassAPI != true) {
+    //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+    //     if (result.imgId != '') {
+    //       result.forEach((element: any) => {
+    //         this.checkboxImages.push({
+    //           imgId: element.imgId,
+    //           imgPath: element.imgPath,
+    //           checked: false,
+    //         });
+    //       });
+    //       this.TnCPage = false;
+    //       this.ActivateiAkaunPage = true;
+    //     } else {
+    //       this.Failed = true;
+    //     }
+    //   });
+    // }
+    this.TnCPage = false;
+    this.SetIdPassword = true;
     setTimeout(() => {
       loadKeyboard();
     }, 500);
@@ -689,13 +690,11 @@ export class RegisterMemberComponent implements OnInit {
           const iAkaunActBody = {
             "epfNum": appFunc.currMemberDetail.accNum,
             "id_no": this.ic,
-            "name": this.name,
             "user_id": this.acctNo,
             "new_password": this.password1,
-            "confirm_new_password": this.password2,
-            "secure_image_id": this.checkboxImages,
+            "secure_image_id": imageid,
             "secret_phrase": this.securePhrase,
-            "terms_condition": "46",
+            "terms_condition": this.content_version,
             "sessionId": appFunc.sessionId
           }
 
@@ -799,8 +798,23 @@ export class RegisterMemberComponent implements OnInit {
       }
 
       if (errorCount == 0) {
-        this.SetIdPassword = false;
-        this.ActivateiAkaunPage = true;
+        if (appFunc.bypassAPI != true) {
+          this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+            if (result.imgId != '') {
+              result.forEach((element: any) => {
+                this.checkboxImages.push({
+                  imgId: element.imgId,
+                  imgPath: element.imgPath,
+                  checked: false,
+                });
+              });
+              this.SetIdPassword = false;
+              this.ActivateiAkaunPage = true;
+            } else {
+              this.Failed = true;
+            }
+          });
+        }
       }
     }
   }
