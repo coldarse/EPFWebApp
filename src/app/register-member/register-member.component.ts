@@ -37,7 +37,7 @@ export class RegisterMemberComponent implements OnInit {
   ValidateProfilePage = false;
   RegisterSuccessPage = false;
   TnCPage = false;
-  SetIdPassword = true;
+  SetIdPassword = false;
   ActivateiAkaunPage = false;
   ActivateSuccessPage = false;
   PickShariahPage = false;
@@ -49,7 +49,7 @@ export class RegisterMemberComponent implements OnInit {
   Failed = false;
   TnC = '';
   content_version = "";
-
+  Contract = "";
   failedTAC = false;
 
   isiAkaunRegModuleEnabled = false;
@@ -586,6 +586,8 @@ export class RegisterMemberComponent implements OnInit {
                 this.content_version = result.contentVersion;
                 this.RegisterSuccessPage = false;
                 this.TnCPage = true;
+                this.RegKWSP = false;
+                this.RegIAkaun = true;
               } else {
                 this.Failed = true;
               }
@@ -827,6 +829,8 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   ActivateSuccessYes(){
+    this.RegIAkaun = false;
+    this.RegShariah = true;
     this.ActivateSuccessPage = false;
     this.PickShariahPage = true;
   } 
@@ -837,8 +841,19 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   IShariahYes(){
-    this.PickShariahPage = false;
-    this.ShariahTnCPage = true;
+    if (appFunc.bypassAPI != true) {
+      this._aldanService
+        .GetContract(selectLang.selectedLang, appFunc.sessionId)
+        .subscribe((result: any) => {
+          if (result.content != '') {
+            this.Contract = result.content;
+            this.PickShariahPage = false;
+            this.ShariahTnCPage = true;
+          } else {
+            this.Failed = true;
+          }
+        });
+    }
   }
 
   ShariahTnCYes(){
@@ -889,6 +904,8 @@ export class RegisterMemberComponent implements OnInit {
   ShariahSuccessYes(){
     this.ShariahSuccessPage = false;
     this.RegisteriSaraanPage = true;
+    this.RegShariah = false;
+    this.RegSaraan = true;
   }
 
   RegisteriSaraanYes(){
