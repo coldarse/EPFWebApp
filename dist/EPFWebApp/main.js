@@ -3084,7 +3084,7 @@ class RegisterMemberComponent {
         this.gender = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender;
         this.race = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race;
         this.religion = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion;
-        this.acctNo = this.ic;
+        // this.acctNo = this.ic;
     }
     ngAfterViewInit() {
         loadKeyboard();
@@ -3505,24 +3505,25 @@ class RegisterMemberComponent {
         this.xagreedTnc2 = !this.xagreedTnc2;
     }
     TnCYes() {
-        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
-            this._aldanService.GetSecureImage(_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId).subscribe((result) => {
-                if (result.imgId != '') {
-                    result.forEach((element) => {
-                        this.checkboxImages.push({
-                            imgId: element.imgId,
-                            imgPath: element.imgPath,
-                            checked: false,
-                        });
-                    });
-                    this.TnCPage = false;
-                    this.ActivateiAkaunPage = true;
-                }
-                else {
-                    this.Failed = true;
-                }
-            });
-        }
+        // if (appFunc.bypassAPI != true) {
+        //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+        //     if (result.imgId != '') {
+        //       result.forEach((element: any) => {
+        //         this.checkboxImages.push({
+        //           imgId: element.imgId,
+        //           imgPath: element.imgPath,
+        //           checked: false,
+        //         });
+        //       });
+        //       this.TnCPage = false;
+        //       this.ActivateiAkaunPage = true;
+        //     } else {
+        //       this.Failed = true;
+        //     }
+        //   });
+        // }
+        this.TnCPage = false;
+        this.SetIdPassword = true;
         setTimeout(() => {
             loadKeyboard();
         }, 500);
@@ -3563,13 +3564,11 @@ class RegisterMemberComponent {
                     const iAkaunActBody = {
                         "epfNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.accNum,
                         "id_no": this.ic,
-                        "name": this.name,
                         "user_id": this.acctNo,
                         "new_password": this.password1,
-                        "confirm_new_password": this.password2,
-                        "secure_image_id": this.checkboxImages,
+                        "secure_image_id": imageid,
                         "secret_phrase": this.securePhrase,
-                        "terms_condition": "46",
+                        "terms_condition": this.content_version,
                         "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
                     };
                     this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result) => {
@@ -3666,8 +3665,24 @@ class RegisterMemberComponent {
                 this.passwordMatch = true;
             }
             if (errorCount == 0) {
-                this.SetIdPassword = false;
-                this.ActivateiAkaunPage = true;
+                if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
+                    this._aldanService.GetSecureImage(_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId).subscribe((result) => {
+                        if (result.imgId != '') {
+                            result.forEach((element) => {
+                                this.checkboxImages.push({
+                                    imgId: element.imgId,
+                                    imgPath: element.imgPath,
+                                    checked: false,
+                                });
+                            });
+                            this.SetIdPassword = false;
+                            this.ActivateiAkaunPage = true;
+                        }
+                        else {
+                            this.Failed = true;
+                        }
+                    });
+                }
             }
         }
     }
@@ -5079,7 +5094,7 @@ class AppComponent {
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
 AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 1, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["@font-face {\r\n    font-family: 'filson-pro';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('FilsonProRegular.otf'); \r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0lBQ3pCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsZ0NBQTZELEVBQUUscUJBQXFCO0FBQ3hGIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGZvbnQtZmFjZSB7XHJcbiAgICBmb250LWZhbWlseTogJ2ZpbHNvbi1wcm8nO1xyXG4gICAgZm9udC1zdHlsZTogbm9ybWFsO1xyXG4gICAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICAgIHNyYzogdXJsKCcuLi8uLi9zcmMvYXNzZXRzL2ZvbnQvRmlsc29uL0ZpbHNvblByb1JlZ3VsYXIub3RmJyk7IC8qIElFOSBDb21wYXQgTW9kZXMgKi9cclxufSJdfQ== */"] });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["@font-face {\r\n    font-family: 'filson-pro';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('FilsonProRegular.otf'); \r\n}\r\n\r\n@font-face {\r\n    font-family: 'Material Icons';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('MaterialIconsOutlined-Regular.otf'); \r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0lBQ3pCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsZ0NBQTZELEVBQUUscUJBQXFCO0FBQ3hGOztBQUVBO0lBQ0ksNkJBQTZCO0lBQzdCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsNkNBQWlGLEVBQUUsY0FBYztBQUNyRyIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkBmb250LWZhY2Uge1xyXG4gICAgZm9udC1mYW1pbHk6ICdmaWxzb24tcHJvJztcclxuICAgIGZvbnQtc3R5bGU6IG5vcm1hbDtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICBzcmM6IHVybCgnLi4vLi4vc3JjL2Fzc2V0cy9mb250L0ZpbHNvbi9GaWxzb25Qcm9SZWd1bGFyLm90ZicpOyAvKiBJRTkgQ29tcGF0IE1vZGVzICovXHJcbn1cclxuXHJcbkBmb250LWZhY2Uge1xyXG4gICAgZm9udC1mYW1pbHk6ICdNYXRlcmlhbCBJY29ucyc7XHJcbiAgICBmb250LXN0eWxlOiBub3JtYWw7XHJcbiAgICBmb250LXdlaWdodDogNDAwO1xyXG4gICAgc3JjOiB1cmwoJy4uLy4uL3NyYy9hc3NldHMvZm9udC9NYXRlcmlhbEljb25zL01hdGVyaWFsSWNvbnNPdXRsaW5lZC1SZWd1bGFyLm90ZicpOyAvKiBGb3IgSUU2LTggKi9cclxufVxyXG5cclxuIl19 */"] });
 
 
 /***/ }),
@@ -5479,7 +5494,7 @@ function ThumbprintConfirmationComponent_div_9_label_14_Template(rf, ctx) { if (
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, "Enducation"), ",");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, "Education"), ",");
 } }
 function ThumbprintConfirmationComponent_div_9_label_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "label", 43);
@@ -7969,23 +7984,6 @@ class IAkaunRegistrationComponent {
         this.route.navigate(['mainMenu']);
     }
     IAkaunTNCyes() {
-        // if (appFunc.bypassAPI != true) {
-        //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-        //     if (result.imgId != '') {
-        //       result.forEach((element: any) => {
-        //         this.checkboxImages.push({
-        //           imgId: element.imgId,
-        //           imgPath: element.imgPath,
-        //           checked: false,
-        //         });
-        //       });
-        //       this.IAkaunTNC = false;
-        //       this.ActivateInformation = true;
-        //     } else {
-        //       this.Failed = true;
-        //     }
-        //   });
-        // }
         this.IAkaunTNC = false;
         this.SetIdPassword = true;
         setTimeout(() => {
@@ -8012,11 +8010,11 @@ class IAkaunRegistrationComponent {
             }
             //Check Selected Image
             let selectedCount = 0;
-            let imgageid;
+            let imageid;
             this.checkboxImages.forEach((elem) => {
                 if (elem.checked == true) {
                     selectedCount += 1;
-                    imgageid = elem.imgId;
+                    imageid = elem.imgId;
                 }
             });
             if (selectedCount == 0) {
@@ -8028,11 +8026,9 @@ class IAkaunRegistrationComponent {
                     const iAkaunActBody = {
                         "epfNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].currMemberDetail.accNum,
                         "id_no": this.ic,
-                        "name": this.name,
                         "user_id": this.acctNo,
                         "new_password": this.password1,
-                        "confirm_new_password": this.password2,
-                        "secure_image_id": imgageid,
+                        "secure_image_id": imageid,
                         "secret_phrase": this.securePhrase,
                         "terms_condition": this.content_version,
                         "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].sessionId
@@ -8149,8 +8145,6 @@ class IAkaunRegistrationComponent {
                         }
                     });
                 }
-                // this.SetIdPassword = false;
-                // this.ActivateInformation = true;
             }
         }
     }
@@ -8838,7 +8832,8 @@ class AldanService {
         let Options = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
         };
-        return this.http.post('https://localhost:44373/connect/token', body, Options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+        let authUrl = this.url.replace("api/", "");
+        return this.http.post(authUrl + 'connect/token', body, Options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
     verifyKiosk(kioskCode) {
         return this.http.get(this.url + `app/kiosks/Verify/${kioskCode}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));

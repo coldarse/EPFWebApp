@@ -111,10 +111,12 @@ export class AldanService {
     let Options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
     };
+
+    let authUrl = this.url.replace("api/", "");
     
 
     return this.http.post(
-      'https://localhost:44373/connect/token', 
+      authUrl + 'connect/token', 
       body,
       Options
     ).pipe(

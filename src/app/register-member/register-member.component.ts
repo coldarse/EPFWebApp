@@ -37,7 +37,7 @@ export class RegisterMemberComponent implements OnInit {
   ValidateProfilePage = false;
   RegisterSuccessPage = false;
   TnCPage = false;
-  SetIdPassword = true;
+  SetIdPassword = false;
   ActivateiAkaunPage = false;
   ActivateSuccessPage = false;
   PickShariahPage = false;
