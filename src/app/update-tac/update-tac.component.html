@@ -129,6 +129,12 @@
                         <button type="button" class="btnYes" (click)="PhoneNoConfirmationYes()">{{"approve"| translate}}</button>
                     </div>
                 </div>
+                <div class="row padTop15rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row padTop5rem content-container" *ngIf="Success">

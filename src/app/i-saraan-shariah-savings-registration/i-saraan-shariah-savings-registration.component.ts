@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AldanService } from '../shared/aldan.service';
@@ -15,6 +15,9 @@ import { signalRConnection } from '../_models/_signalRConnection';
   styleUrls: ['./i-saraan-shariah-savings-registration.component.css'],
 })
 export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
+
+  @ViewChild('contract') contractHTML : ElementRef | undefined;
+  
   RegSaraanShariah = true;
   RegShariah = false;
   RegSaraan = false;
@@ -31,6 +34,8 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   defaultDDL = '';
   selectedJobSector: any = undefined;
 
+  isCallAPI = false;
+
   jobSectors: businessTypes[] = [];
 
   constructor(
@@ -43,7 +48,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     this.translate.use(selectLang.selectedLang);
 
     this.jobSectors = appFunc.businessTypes;
-    console.log(this.jobSectors);
 
     if (selectLang.selectedLang == 'bm') {
       this.defaultDDL = 'Sila pilih daripada pilihan berikut';
@@ -70,11 +74,14 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
   clickShariah() {
     if (appFunc.bypassAPI != true) {
+      this.isCallAPI = true;
       this._aldanService
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
+          this.isCallAPI = false;
           if (result.content != '') {
             this.Contract = result.content;
+            this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
             this.RegSaraanShariah = false;
             this.RegShariah = true; 
             this.SelectIShariahISaraan = false;
@@ -91,6 +98,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     if (this.selectedJobSector == undefined) {
     } else {
       if (appFunc.bypassAPI != true) {
+        this.isCallAPI = true;
         const iSaraanBody = {
           idNum: currentMyKadDetails.ICNo,
           idType: currentMyKadDetails.CategoryType,
@@ -107,6 +115,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         this._aldanService
           .iSaraanRegistration(iSaraanBody)
           .subscribe((result: any) => {
+            this.isCallAPI = false;
             if (result.responseCode == '0') {
               this.ISaraan = false;
               this.ISaraanSuccess = true;
@@ -131,6 +140,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
   IShariahYes() {
     if (appFunc.bypassAPI != true) {
+      this.isCallAPI = true;
       const iShariahBody = {
         custNum: appFunc.currMemberDetail.cifNum, //this.KWSPCustomerNo,
         accNum: appFunc.currMemberDetail.accNum, //this.KWSPMemberNo,
@@ -151,6 +161,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this._aldanService
         .iShariahRegistration(iShariahBody)
         .subscribe((result: any) => {
+          this.isCallAPI = false;
           if (result.responseCode == '0') {
             this.IShariah = false;
             this.IShariahSuccess = true;

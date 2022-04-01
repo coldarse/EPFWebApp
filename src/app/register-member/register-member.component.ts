@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
+import { businessTypes } from '../_models/modelClass';
 import { appFunc } from '../_models/_appFunc';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 
@@ -60,20 +61,7 @@ export class RegisterMemberComponent implements OnInit {
   xagreedTnc1 = true;
   xagreedTnc2 = true;
 
-  jobSectors = [
-    { name: "agriculture", id: 1, malay: "Pertanian", english: "Pertanian" },
-    { name: "retired", id: 2, malay: "Pekerja berpencen", english: "Pekerja berpencen" },
-    { name: "business", id: 3, malay: "Perniagaan", english: "Perniagaan" },
-    { name: "aquaculture", id: 4, malay: "Akuakultur/Penangkapan ikan", english: "Akuakultur/Penangkapan ikan" },
-    { name: "transport", id: 5, malay: "Transportasi", english: "Transportasi" },
-    { name: "sales", id: 6, malay: "Agen jualan", english: "Agen jualan" },
-    { name: "artist", id: 7, malay: "Seniman/Kreatif", english: "Seniman/Kreatif" },
-    { name: "housewife", id: 8, malay: "Suri rumah", english: "Suri rumah" },
-    { name: "prof", id: 9, malay: "Profesional", english: "Profesional" },
-    { name: "service", id: 10, malay: "Perkhidmatan", english: "Perkhidmatan" },
-    { name: "gig", id: 11, malay: "Pekerjaan gig", english: "Pekerjaan gig" },
-    { name: "other", id: 12, malay: "Yang lain", english: "Yang lain" },
-  ]
+  jobSectors: businessTypes[] = [];
 
   phoneNo = "";
   emailAddress = "";
@@ -114,6 +102,8 @@ export class RegisterMemberComponent implements OnInit {
 
   checkboxImages: any[] = [];
 
+  isCallAPI = false;
+
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -122,6 +112,8 @@ export class RegisterMemberComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('bm');
+
+    this.jobSectors = appFunc.businessTypes;
 
     this.currentLang = selectLang.selectedLang;
     if(selectLang.selectedLang == 'bm'){
@@ -212,7 +204,8 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   RegisterMemberNo(){
-    this.route.navigate(['mainMenu']);
+    appFunc.endSession = true;
+    this.route.navigate(['verifyMyKad']);
   }
 
   InsertPhoneYes(){
@@ -256,7 +249,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   ValidateProfileYes(){
-    
+    this.isCallAPI = true;
     if(appFunc.bypassAPI != true){
       let residentStat = "";
       switch(currentMyKadDetails.Citizenship){
@@ -446,7 +439,7 @@ export class RegisterMemberComponent implements OnInit {
         "religion": religion,
         "matrimAsset": "N",
         "handicapRemarks": "",
-        "regChannel": "KSK",
+        "regChannel": "SST",
         "regRcvdDate": "2001-01-01",
         "prefComChannel": "ML",
         "addLine1": currentMyKadDetails.Address1,
@@ -498,7 +491,7 @@ export class RegisterMemberComponent implements OnInit {
             "custNum": this.KWSPCustomerNo,
             "tacMobilePhoneCode": "TA",
             "tacMobilePhone": this.phoneNo,
-            "registrationDate": result.detail.epfRegDate,
+            "registrationDate": '2021-01-21',
             "registrationChannel": "SAO",
             "status": "P",
             "checkForDuplicate": "N",
@@ -525,8 +518,9 @@ export class RegisterMemberComponent implements OnInit {
                 }
           
                 this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
+                  this.isCallAPI = false;
                   if(result.responseCode == "0"){
-            
+                    
                     this.ValidateProfilePage = false;
                     this.RegisterSuccessPage = true;
               
@@ -540,6 +534,7 @@ export class RegisterMemberComponent implements OnInit {
                 });
               }
               else{
+                this.isCallAPI = false;
                 this.ValidateProfilePage = false;
                 this.RegisterSuccessPage = true;
           
@@ -548,18 +543,21 @@ export class RegisterMemberComponent implements OnInit {
               
             }
             else{
+              this.isCallAPI = false;
               this.ValidateProfilePage = false;
               this.Failed = true;
             }
           });
         }
         else{
+          this.isCallAPI = false;
           this.ValidateProfilePage = false;
           this.Failed = true;
         }
       });
     }
     else{
+      this.isCallAPI = false;
       this.ValidateProfilePage = false;
       this.RegisterSuccessPage = true;
     }
@@ -577,10 +575,12 @@ export class RegisterMemberComponent implements OnInit {
   RegisterSuccessYes(){
     if(this.isiAkaunRegModuleEnabled){
       if(this.isiAkaunActModuleEnabled){
+        this.isCallAPI = true;
         if (appFunc.bypassAPI != true) {
           this._aldanService
             .GetTnC(selectLang.selectedLang, appFunc.sessionId)
             .subscribe((result: any) => {
+              this.isCallAPI = false;
               if (result.content != '') {
                 this.TnC = result.content.toString();
                 this.content_version = result.contentVersion;
@@ -627,23 +627,6 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   TnCYes(){
-    // if (appFunc.bypassAPI != true) {
-    //   this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-    //     if (result.imgId != '') {
-    //       result.forEach((element: any) => {
-    //         this.checkboxImages.push({
-    //           imgId: element.imgId,
-    //           imgPath: element.imgPath,
-    //           checked: false,
-    //         });
-    //       });
-    //       this.TnCPage = false;
-    //       this.ActivateiAkaunPage = true;
-    //     } else {
-    //       this.Failed = true;
-    //     }
-    //   });
-    // }
     this.TnCPage = false;
     this.SetIdPassword = true;
     setTimeout(() => {
@@ -689,6 +672,7 @@ export class RegisterMemberComponent implements OnInit {
 
       if (errorCount == 0) {
         if (appFunc.bypassAPI != true) {
+          this.isCallAPI = true;
           const iAkaunActBody = {
             "epfNum": appFunc.currMemberDetail.accNum,
             "id_no": this.ic,
@@ -701,8 +685,8 @@ export class RegisterMemberComponent implements OnInit {
           }
 
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
+            this.isCallAPI = true;
             if(result.epfNum != null){
-
               this.ActivateiAkaunPage = false;
               this.ActivateSuccessPage = true;
 
@@ -715,12 +699,14 @@ export class RegisterMemberComponent implements OnInit {
           });
         }
         else{
+          this.isCallAPI = true;
           this.ActivateiAkaunPage = false;
           this.ActivateSuccessPage = true;
         }
       }
       else
       {
+        this.isCallAPI = true;
         //if error
       }
     }
@@ -801,7 +787,9 @@ export class RegisterMemberComponent implements OnInit {
 
       if (errorCount == 0) {
         if (appFunc.bypassAPI != true) {
+          this.isCallAPI = true;
           this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+            this.isCallAPI = false;
             if (result.imgId != '') {
               result.forEach((element: any) => {
                 this.checkboxImages.push({
@@ -842,9 +830,11 @@ export class RegisterMemberComponent implements OnInit {
 
   IShariahYes(){
     if (appFunc.bypassAPI != true) {
+      this.isCallAPI = true;
       this._aldanService
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
+          this.isCallAPI = false;
           if (result.content != '') {
             this.Contract = result.content;
             this.PickShariahPage = false;
@@ -859,6 +849,7 @@ export class RegisterMemberComponent implements OnInit {
   ShariahTnCYes(){
 
     if(appFunc.bypassAPI != true){
+      this.isCallAPI = true;
       const iShariahBody = {
         "custNum": this.KWSPCustomerNo,
         "accNum": this.KWSPMemberNo,
@@ -877,10 +868,8 @@ export class RegisterMemberComponent implements OnInit {
       }
 
       this._aldanService.iShariahRegistration(iShariahBody).subscribe((result:any) => {
+        this.isCallAPI = false;
         if(result.responseCode == "0"){
-
-          
-
           this.ShariahTnCPage = false;
           this.ShariahSuccessPage = true;
 
@@ -891,6 +880,7 @@ export class RegisterMemberComponent implements OnInit {
       });
     }
     else{
+      this.isCallAPI = false;
       this.ShariahTnCPage = false;
       this.ShariahSuccessPage = true;
     }
@@ -924,6 +914,7 @@ export class RegisterMemberComponent implements OnInit {
     }
     else{
       if(appFunc.bypassAPI != true){
+        this.isCallAPI = true;
         const iSaraanBody = {
           "idNum": currentMyKadDetails.ICNo,
           "idType": currentMyKadDetails.CategoryType,
@@ -938,8 +929,8 @@ export class RegisterMemberComponent implements OnInit {
         }
   
         this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {
+          this.isCallAPI = false;
           if(result.responseCode == "0"){
-  
             this.SelectJobPage = false;
             this.SaraanSuccessPage = true;
   
@@ -950,6 +941,7 @@ export class RegisterMemberComponent implements OnInit {
         });
       }
       else{
+        this.isCallAPI = false;
         this.SaraanSuccessPage = true;
         this.SelectJobPage = false;
       }

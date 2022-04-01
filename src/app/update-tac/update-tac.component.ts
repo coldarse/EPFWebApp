@@ -20,6 +20,7 @@ export class UpdateTACComponent implements OnInit {
   phoneNo = "";
 
   phoneError = false;
+  isCallAPI = false;
 
 
   constructor(
@@ -49,6 +50,7 @@ export class UpdateTACComponent implements OnInit {
 
   PhoneNoConfirmationYes(){
     if(appFunc.bypassAPI != true){
+      this.isCallAPI = true;
       const updateTACBody = {
         "custNum": appFunc.currMemberDetail.cifNum,
         "tacMobilePhoneCode": "TA",
@@ -62,6 +64,7 @@ export class UpdateTACComponent implements OnInit {
       }
 
       this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {
+        this.isCallAPI = false;
         if(result.responseCode == "0"){
           this.PhoneNoConfirmation = false;
           this.Success = true;

@@ -178,13 +178,19 @@
                 </div>
 
 
-                <div class="row padTop14rem">
+                <div class="row padTop14rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="PhoneEmailConfirmationNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="PhoneEmailConfirmationYes()">{{"approve"|translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop14rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -202,13 +208,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop15rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="AskActivateNo()">{{"menu"| translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="AskActivateYes()">{{"yes"| translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop15rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -342,13 +354,20 @@
                 </div>
                 <div class="col-4"></div>
             </div> -->
-            <div class="row padTop1rem text-center">
+            <div class="row padTop1rem text-center" *ngIf="!isCallAPI">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="SetIdPasswordNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
                     <button type="button" class="btnYes" (click)="SetIdPasswordYes()">{{"continue"| translate}}</button>
+                </div>
+            </div>
+
+            <div class="row padTop1rem" *ngIf="isCallAPI">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                 </div>
             </div>
         </div>
@@ -424,13 +443,19 @@
                 </div>
                 <div class="col-4"></div>
             </div>
-            <div class="row padTop1rem text-center">
+            <div class="row padTop1rem text-center" *ngIf="!isCallAPI">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="ActivateInformationNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
                     <button type="button" class="btnYes" (click)="ActivateInformationYes()">{{"continue"| translate}}</button>
+                </div>
+            </div>
+            <div class="row padTop1rem" *ngIf="isCallAPI">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                 </div>
             </div>
         </div>

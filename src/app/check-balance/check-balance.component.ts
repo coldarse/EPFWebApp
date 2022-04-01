@@ -53,6 +53,8 @@ export class CheckBalanceComponent implements OnInit {
 
   emptyFields = false;
 
+  isCallAPI = false;
+
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -129,8 +131,10 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   ConfirmEmailYes() {
+    this.isCallAPI = true;
     this.ConfirmEmailPage = false;
     this.EmailSuccessPage = true;
+    this.isCallAPI = false;
   }
 
   NavProfile() {
@@ -148,8 +152,6 @@ export class CheckBalanceComponent implements OnInit {
 
   selectYear(year: number) {
     this.selectedYear = year;
-    this.SelectYearPage = false;
-    this.StatementPage = true;
     this.DisplaySelectedYearStatement(year);
   }
 
@@ -174,6 +176,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   DisplaySelectedYearStatement(year: number) {
+    this.isCallAPI = true;
     const mainBody = {
       // "accNum": appFunc.currMemberDetail.accNum,
       // "stmtYear": new Date().getFullYear
@@ -185,6 +188,7 @@ export class CheckBalanceComponent implements OnInit {
 
     this._aldanService.MemberStatement(mainBody).subscribe((result: any) => {
       if (result.responseCode == '0') {
+        this.isCallAPI = false;
         this.cDetails = result.detail.mainStatement;
         this.cDetails.forEach((details: any) => {
           // this.transactionAmtForAcc1 += details.totalAmount;
@@ -195,10 +199,13 @@ export class CheckBalanceComponent implements OnInit {
           details.transactionDate = formattedDate;
           details.contributionMth = formattedMonth;
           this.transactionAmtForAcc1 += details.transactionAmtForAcc1;
+          this.SelectYearPage = false;
+          this.StatementPage = true;
         });
       }
       else{
         // Error
+        this.isCallAPI = false;
         this.SummaryStatementPage = false;
         this.errorDesc = result.error[0].description;
         this.Failed = true;

@@ -316,7 +316,7 @@ export class VerifyMyKadComponent implements OnInit {
         }
         else{
           if(result.error.length == 0){
-            appFunc.message = result.responseCode;
+            appFunc.message = "Error Connecting to Server";
             this.route.navigate(['outofservice']);
           }
           if(result.error[0].code == "MBM2001"){

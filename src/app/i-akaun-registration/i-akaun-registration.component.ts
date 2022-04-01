@@ -38,6 +38,8 @@ export class IAkaunRegistrationComponent implements OnInit {
   emailAddress = '';
   TnC = '';
 
+  isCallAPI = false;
+
   phoneError = false;
   xagreedTnc = true;
 
@@ -171,6 +173,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   PhoneEmailConfirmationYes() {
     if (appFunc.bypassAPI != true) {
+      this.isCallAPI = true;
       const iAkaunbody = {
         epfNum: appFunc.currMemberDetail.accNum,
         tacMobileNum: this.phoneNo,
@@ -187,6 +190,7 @@ export class IAkaunRegistrationComponent implements OnInit {
       this._aldanService
         .iAkaunRegistration(iAkaunbody)
         .subscribe((result: any) => {
+          this.isCallAPI = false;
           if (result.responseCode == '0') {
             if(this.isiAkaunActModuleEnabled){
               this.PhoneEmailConfirmation = false;
@@ -217,9 +221,11 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   AskActivateYes() {
     if (appFunc.bypassAPI != true) {
+      this.isCallAPI = true;
       this._aldanService
         .GetTnC(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
+          this.isCallAPI = false;
           if (result.content != '') {
             this.TnC = result.content.toString();
             this.content_version = result.contentVersion;
@@ -284,6 +290,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
       if (errorCount == 0) {
         if (appFunc.bypassAPI != true) {
+          this.isCallAPI = true;
           const iAkaunActBody = {
             "epfNum": appFunc.currMemberDetail.accNum,
             "id_no": this.ic,
@@ -296,6 +303,7 @@ export class IAkaunRegistrationComponent implements OnInit {
           }
 
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
+            this.isCallAPI = false;
             if(result.epfNum != null){
 
               this.ActivateInformation = false;
@@ -396,7 +404,9 @@ export class IAkaunRegistrationComponent implements OnInit {
 
       if (errorCount == 0) {
         if (appFunc.bypassAPI != true) {
+          this.isCallAPI = true;
           this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
+            this.isCallAPI = false;
             if (result.imgId != '') {
               result.forEach((element: any) => {
                 this.checkboxImages.push({

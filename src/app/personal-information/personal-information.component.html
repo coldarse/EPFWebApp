@@ -211,13 +211,19 @@
                         <label class="lblInfo" style="padding-left: 2rem;">{{email}}</label>
                     </div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop15rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="SaveProfileNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="SaveProfileYes()">{{"approve"| translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop15rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>

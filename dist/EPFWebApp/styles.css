@@ -10604,7 +10604,7 @@ textarea.form-control-lg {
 
 .mainMenuLeft{
     text-align: left;
-    padding-left: 4rem;
+    padding-left: 10rem;
 }
 
 .mainMenuRight{
@@ -10674,6 +10674,7 @@ textarea.form-control-lg {
 #phoneNo{
     border-width: thin;
     width: 24.5rem;
+    font-family: 'filson-pro', sans-serif;
     height: 3rem;
     font-size: 1.5rem;
     font-weight: 700;
@@ -10708,6 +10709,7 @@ textarea.form-control-lg {
 
 .example{
     font-size: 20px;
+    font-family: 'filson-pro', sans-serif;
     font-weight: 400;
     text-align: left;
     margin-left: 9rem;
@@ -11018,7 +11020,7 @@ textarea.form-control-lg {
     left: 0;
     right: 0;
     z-index: 99;
-  }
+}
 
 .lblSymbol{
     font-size: 25px;
@@ -11214,7 +11216,7 @@ td{
     font-size: 1.25rem;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     background-color: rgb(255, 255, 255);
     width: 1150px;
     height: 400px;
@@ -11222,6 +11224,7 @@ td{
     overflow-y: auto;
     text-align: left;
     color: black;
+    padding-left: 0.5rem;
 }
 
 .lblTNC{

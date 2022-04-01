@@ -283,13 +283,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop5rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="ValidateProfileNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="ValidateProfileYes()">{{"approve"|translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop5rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -335,10 +341,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop5rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-8">
                         <button type="button" class="btnYes" (click)="RegisterSuccessYes()">{{"continue"|translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop5rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -474,13 +486,19 @@
                 </div>
                 <div class="col-4"></div>
             </div> -->
-            <div class="row padTop1rem text-center">
+            <div class="row padTop1rem text-center" *ngIf="!isCallAPI">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="SetIdPasswordNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
                     <button type="button" class="btnYes" (click)="SetIdPasswordYes()">{{"continue"| translate}}</button>
+                </div>
+            </div>
+            <div class="row padTop1rem" *ngIf="isCallAPI">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                 </div>
             </div>
         </div>
@@ -549,13 +567,19 @@
                 </div>
                 <div class="col-4"></div>
             </div>
-            <div class="row padTop1rem text-center">
+            <div class="row padTop1rem text-center" *ngIf="!isCallAPI">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="ActivateInformationNo()">{{"back"| translate}}</button>
                 </div>
                 <div class="col-4">
                     <button type="button" class="btnYes" (click)="ActivateInformationYes()">{{"continue"| translate}}</button>
+                </div>
+            </div>
+            <div class="row padTop1rem" *ngIf="isCallAPI">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                 </div>
             </div>
         </div>
@@ -601,12 +625,18 @@
                 <div class="lblHeader">
                     {{"ShariahMsg"| translate}}
                 </div>
-                <div class="row padTop5rem">
+                <div class="row padTop5rem" *ngIf="!isCallAPI">
                     <div class="col-6">
                         <button type="button" class="btnShariah" (click)="IShariahNo()" *ngIf="isiSaraanModuleEnabled">{{"remain"| translate}}</button>
                     </div>
                     <div class="col-6">
                         <button type="button" class="btnShariah" (click)="IShariahYes()" *ngIf="isiShariahModuleEnabled">{{"newShariah"| translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop5rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -639,13 +669,19 @@
                 <div class="col-1"></div>
             </div>
             <div class="row text-center">
-                <div class="row padTop2rem">
+                <div class="row padTop2rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="ShariahTnCNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="ShariahTnCYes()" [disabled]="xagreedTnc2">{{"agree"|translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop5rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -703,20 +739,26 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li *ngFor="let js of jobSectors">
                                     <a class="dropdown-item" (click)="selectJob(js)">
-                                        {{ currentLang == "bm" ? js.malay : js.english }}
+                                        {{ js.description }}
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="row padTop25rem">
+                <div class="row padTop25rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="SelectJobNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="SelectJobYes()">{{"send"| translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop25rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>

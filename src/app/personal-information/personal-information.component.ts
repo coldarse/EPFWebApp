@@ -56,6 +56,8 @@ export class PersonalInformationComponent implements OnInit {
 
   emptyFields = false;
 
+  isCallAPI = false;
+
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -194,6 +196,7 @@ export class PersonalInformationComponent implements OnInit {
 
   SaveProfileYes(){
     if(appFunc.bypassAPI != true){
+      this.isCallAPI = true;
       const personalInformationBody = {
         "cifNum": appFunc.currMemberDetail.cifNum,
         "electAddGrpSeq": appFunc.currMemberDetail.electAddGrpSeq,
@@ -234,7 +237,7 @@ export class PersonalInformationComponent implements OnInit {
 
       this._aldanService.UpdateFullProfile(personalInformationBody,addressBody).subscribe((result: any) =>{
         if(result[0].responseCode == "0" && result[1].responseCode== "0"){
-
+          
           const body = {
             "regType": "M",
             "accNum": appFunc.currMemberDetail.accNum,
@@ -246,8 +249,8 @@ export class PersonalInformationComponent implements OnInit {
             "sessionId": appFunc.sessionId
           }
           this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+            this.isCallAPI = false;
             if(result.responseCode == "0"){
-    
               appFunc.currMemberDetail = result.detail;
               this.SaveProfilePage = false;
               this.SaveSuccessPage = true;
@@ -259,6 +262,7 @@ export class PersonalInformationComponent implements OnInit {
           });
         }
         else{
+          this.isCallAPI = false;
           this.SaveProfilePage = false;
           this.Failed = true;
         }

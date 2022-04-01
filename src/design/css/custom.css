@@ -144,7 +144,7 @@
 
 .mainMenuLeft{
     text-align: left;
-    padding-left: 4rem;
+    padding-left: 10rem;
 }
 
 .mainMenuRight{
@@ -211,6 +211,7 @@
 #phoneNo{
     border-width: thin;
     width: 24.5rem;
+    font-family: 'filson-pro', sans-serif;
     height: 3rem;
     font-size: 1.5rem;
     font-weight: 700;
@@ -244,6 +245,7 @@
 
 .example{
     font-size: 20px;
+    font-family: 'filson-pro', sans-serif;
     font-weight: 400;
     text-align: left;
     margin-left: 9rem;
@@ -557,8 +559,8 @@
     left: 0;
     right: 0;
     z-index: 99;
-  }
-  
+}
+
 
 
 .lblSymbol{
@@ -755,7 +757,7 @@ td{
     font-size: 1.25rem;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     background-color: rgb(255, 255, 255);
     width: 1150px;
     height: 400px;
@@ -763,6 +765,7 @@ td{
     overflow-y: auto;
     text-align: left;
     color: black;
+    padding-left: 0.5rem;
 }
 
 .lblTNC{
