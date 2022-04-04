@@ -152,13 +152,13 @@
                         <button class="keypad" (click)="click0()">0</button>
                     </div>
                     <div class="col marginPadam">
-                        <button class="keypadPadam" (click)="clickDel()">Padam</button>
+                        <button class="keypadPadam" (click)="clickDel()">{{ "delete" | translate }}</button>
                     </div>
                     <div class="col-4"></div>
                 </div>
                 <div class="row padTop2rem">
-                    <div class="col-3"></div>
-                    <div class="col-6">
+                    <div class="col-2"></div>
+                    <div class="col-8">
                         <div class="note">
                             {{ "phoneNotes" | translate }}
                         </div>
@@ -326,16 +326,16 @@
                     </div>
                 </div>
                 <div class="row padTop5rem">
-                    <div class="col-3"></div>
-                    <div class="col-6">
+                    <div class="col-2"></div>
+                    <div class="col-8">
                         <div class="note">
                             {{ "emailNote" | translate }}
                         </div>
                     </div>
                 </div>
                 <div class="row" *ngIf="failedTAC">
-                    <div class="col-3"></div>
-                    <div class="col-6">
+                    <div class="col-2"></div>
+                    <div class="col-8">
                         <div class="noteWarning">
                             {{ "AddTACFailed" | translate }}
                         </div>
@@ -734,12 +734,12 @@
                     <div class="col-6">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{defaultDDL}}
+                                {{defaultDDL | translate}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li *ngFor="let js of jobSectors">
                                     <a class="dropdown-item" (click)="selectJob(js)">
-                                        {{ js.description }}
+                                        {{ js.code | translate}}
                                     </a>
                                 </li>
                             </ul>

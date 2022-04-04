@@ -31,7 +31,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   xagreedTnc = true;
   Contract = "";
 
-  defaultDDL = '';
+  defaultDDL = 'default';
   selectedJobSector: any = undefined;
 
   isCallAPI = false;
@@ -49,15 +49,11 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
     this.jobSectors = appFunc.businessTypes;
 
-    if (selectLang.selectedLang == 'bm') {
-      this.defaultDDL = 'Sila pilih daripada pilihan berikut';
-    } else {
-      this.defaultDDL = 'Sila pilih daripada pilihan berikut';
-    }
+  
   }
 
   selectJob(jobSector: any) {
-    this.defaultDDL = jobSector.description; //(this.currentLang == "bm" ? jobSector.malay : jobSector.english);
+    this.defaultDDL = jobSector.code; //(this.currentLang == "bm" ? jobSector.malay : jobSector.english);
     this.selectedJobSector = jobSector;
   }
 

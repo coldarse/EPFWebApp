@@ -86,7 +86,7 @@ export class RegisterMemberComponent implements OnInit {
   password2 = "";
   securePhrase = "";
 
-  defaultDDL = "";
+  defaultDDL = "default";
   selectedJobSector: any = undefined;
   currentLang = "bm"
 
@@ -116,11 +116,6 @@ export class RegisterMemberComponent implements OnInit {
     this.jobSectors = appFunc.businessTypes;
 
     this.currentLang = selectLang.selectedLang;
-    if(selectLang.selectedLang == 'bm'){
-      this.defaultDDL = "Sila pilih daripada pilihan berikut";
-    }else{
-      this.defaultDDL = "Please select from the following";
-    }
 
 
     for (var val of appFunc.modules){
@@ -1016,7 +1011,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   selectJob(jobSector: any){
-    this.defaultDDL = (this.currentLang == "bm" ? jobSector.malay : jobSector.english);
+    this.defaultDDL = jobSector.code;
     this.selectedJobSector = jobSector;
   }
 

@@ -38,12 +38,12 @@
                     <div class="col-6">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="jobDDL" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{defaultDDL}}
+                                {{defaultDDL | translate}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li *ngFor="let js of jobSectors">
                                     <a class="dropdown-item" (click)="selectJob(js)">
-                                        {{ js.description }}
+                                        {{ js.code | translate }}
                                     </a>
                                 </li>
                             </ul>

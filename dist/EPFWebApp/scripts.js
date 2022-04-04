@@ -3407,6 +3407,7 @@
                         this._limit(this.properties);
                         this._isSymbol(this.properties);
                         this._isNumeric(this.properties);
+                        this._isCapitalField(this.properties);
                         this._triggerEvent("oninput");
                     });
 
@@ -3421,6 +3422,27 @@
         });
 
         return fragment;
+    },
+
+    _isCapitalField(element){
+        if(element.tagname.toLowerCase().includes('address_1')){
+            element.value = element.value.toUpperCase();
+        }
+        else if(element.tagname.toLowerCase().includes('address_2')){
+            element.value = element.value.toUpperCase();
+        }
+        else if(element.tagname.toLowerCase().includes('address_3')){
+            element.value = element.value.toUpperCase();
+        }
+        else if(element.tagname.toLowerCase().includes('city_')){
+            element.value = element.value.toUpperCase();
+        }
+        else if(element.tagname.toLowerCase().includes('state_')){
+            element.value = element.value.toUpperCase();
+        }
+        else if(element.tagname.toLowerCase().includes('country_')){
+            element.value = element.value.toUpperCase();
+        }
     },
 
     _isNumeric(element){
