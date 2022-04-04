@@ -111,7 +111,7 @@ export class RegisterMemberComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
 
     this.jobSectors = appFunc.businessTypes;
 
@@ -119,7 +119,7 @@ export class RegisterMemberComponent implements OnInit {
     if(selectLang.selectedLang == 'bm'){
       this.defaultDDL = "Sila pilih daripada pilihan berikut";
     }else{
-      this.defaultDDL = "Sila pilih daripada pilihan berikut";
+      this.defaultDDL = "Please select from the following";
     }
 
 
