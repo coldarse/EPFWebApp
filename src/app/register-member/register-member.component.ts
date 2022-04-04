@@ -8,7 +8,6 @@ import { businessTypes } from '../_models/modelClass';
 import { appFunc } from '../_models/_appFunc';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 
-
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
 declare const closeKeyboard: any;
@@ -16,17 +15,16 @@ declare const closeKeyboard: any;
 @Component({
   selector: 'app-register-member',
   templateUrl: './register-member.component.html',
-  styleUrls: ['./register-member.component.css']
+  styleUrls: ['./register-member.component.css'],
 })
 export class RegisterMemberComponent implements OnInit {
-  
-  @ViewChild('email') email : ElementRef | undefined;
-  @ViewChild('emailDDL') emailDDL : ElementRef | undefined;
+  @ViewChild('email') email: ElementRef | undefined;
+  @ViewChild('emailDDL') emailDDL: ElementRef | undefined;
 
-  @ViewChild('account_number') account_number : ElementRef | undefined;
-  @ViewChild('password_1') password_1 : ElementRef | undefined;
-  @ViewChild('password_2') password_2 : ElementRef | undefined;
-  @ViewChild('secure_phrase') secure_phrase : ElementRef | undefined;
+  @ViewChild('account_number') account_number: ElementRef | undefined;
+  @ViewChild('password_1') password_1: ElementRef | undefined;
+  @ViewChild('password_2') password_2: ElementRef | undefined;
+  @ViewChild('secure_phrase') secure_phrase: ElementRef | undefined;
 
   RegKWSP = true;
   RegShariah = false;
@@ -49,8 +47,8 @@ export class RegisterMemberComponent implements OnInit {
   SaraanSuccessPage = false;
   Failed = false;
   TnC = '';
-  content_version = "";
-  Contract = "";
+  content_version = '';
+  Contract = '';
   failedTAC = false;
 
   isiAkaunRegModuleEnabled = false;
@@ -63,32 +61,37 @@ export class RegisterMemberComponent implements OnInit {
 
   jobSectors: businessTypes[] = [];
 
-  phoneNo = "";
-  emailAddress = "";
-  emailList: string[] = ["aldantechnology.com", "gmail.com", "hotmail.com", "yahoo.com"];
+  phoneNo = '';
+  emailAddress = '';
+  emailList: string[] = [
+    'aldantechnology.com',
+    'gmail.com',
+    'hotmail.com',
+    'yahoo.com',
+  ];
 
-  name = "MUHAMMAD WAHYU NIZAM BIN OMIR";
-  ic = "921130105537";
+  name = 'MUHAMMAD WAHYU NIZAM BIN OMIR';
+  ic = '921130105537';
   dob: any;
-  nationality = "WARGANEGARA";
-  gender = "LELAKI";
-  race = "MALAY";
-  religion = "ISLAM";
+  nationality = 'WARGANEGARA';
+  gender = 'LELAKI';
+  race = 'MALAY';
+  religion = 'ISLAM';
 
   phoneError = false;
   emailError = false;
 
-  KWSPMemberNo = "22131512";
-  KWSPCustomerNo = "";
+  KWSPMemberNo = '22131512';
+  KWSPCustomerNo = '';
 
-  acctNo = "";
-  password1 = "";
-  password2 = "";
-  securePhrase = "";
+  acctNo = '';
+  password1 = '';
+  password2 = '';
+  securePhrase = '';
 
-  defaultDDL = "";
+  defaultDDL = '';
   selectedJobSector: any = undefined;
-  currentLang = "bm"
+  currentLang = 'bm';
 
   accountAlpha = false;
   passwordAlpha = false;
@@ -107,8 +110,8 @@ export class RegisterMemberComponent implements OnInit {
   constructor(
     private route: Router,
     private translate: TranslateService,
-    private _aldanService: AldanService,
-  ) { }
+    private _aldanService: AldanService
+  ) {}
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
@@ -116,38 +119,58 @@ export class RegisterMemberComponent implements OnInit {
     this.jobSectors = appFunc.businessTypes;
 
     this.currentLang = selectLang.selectedLang;
-    if(selectLang.selectedLang == 'bm'){
-      this.defaultDDL = "Sila pilih daripada pilihan berikut";
-    }else{
-      this.defaultDDL = "Please select from the following";
+    if (selectLang.selectedLang == 'bm') {
+      this.defaultDDL = 'Sila pilih daripada pilihan berikut';
+    } else {
+      this.defaultDDL = 'Please select from the following';
     }
 
-
-    for (var val of appFunc.modules){
-      if(val.moduleID == 5){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+    for (var val of appFunc.modules) {
+      if (val.moduleID == 5) {
+        if (val.enabled == true) {
+          if (
+            appFunc.isInBetween(
+              new Date('0001-01-01T' + val.operationStart + ':00'),
+              new Date('0001-01-01T' + val.operationEnd + ':00'),
+              new Date('0001-01-01T' + appFunc.getCurrentTime())
+            )
+          ) {
             this.isiSaraanModuleEnabled = true;
           }
         }
-      }
-      else if(val.moduleID == 6){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+      } else if (val.moduleID == 6) {
+        if (val.enabled == true) {
+          if (
+            appFunc.isInBetween(
+              new Date('0001-01-01T' + val.operationStart + ':00'),
+              new Date('0001-01-01T' + val.operationEnd + ':00'),
+              new Date('0001-01-01T' + appFunc.getCurrentTime())
+            )
+          ) {
             this.isiShariahModuleEnabled = true;
           }
         }
-      }
-      else if(val.moduleID == 7){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+      } else if (val.moduleID == 7) {
+        if (val.enabled == true) {
+          if (
+            appFunc.isInBetween(
+              new Date('0001-01-01T' + val.operationStart + ':00'),
+              new Date('0001-01-01T' + val.operationEnd + ':00'),
+              new Date('0001-01-01T' + appFunc.getCurrentTime())
+            )
+          ) {
             this.isiAkaunRegModuleEnabled = true;
           }
         }
-      }
-      else if(val.moduleID == 8){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+      } else if (val.moduleID == 8) {
+        if (val.enabled == true) {
+          if (
+            appFunc.isInBetween(
+              new Date('0001-01-01T' + val.operationStart + ':00'),
+              new Date('0001-01-01T' + val.operationEnd + ':00'),
+              new Date('0001-01-01T' + appFunc.getCurrentTime())
+            )
+          ) {
             this.isiAkaunActModuleEnabled = true;
           }
         }
@@ -165,405 +188,420 @@ export class RegisterMemberComponent implements OnInit {
     // this.acctNo = this.ic;
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     loadKeyboard();
   }
 
-  hardcodedIC(){
-    let harcodedic = "111111007894"
-    currentMyKadDetails.Name = "John Smith";
-    currentMyKadDetails.ICNo = harcodedic.toString().replace("*", "");
-    currentMyKadDetails.OldICNo = "";
-    currentMyKadDetails.DOB = new Date("1957-08-31");
-    currentMyKadDetails.POB =  "SELANGOR";
-    currentMyKadDetails.Gender = "Male";
-    currentMyKadDetails.Citizenship = "WARGANEGARA";
-    currentMyKadDetails.IssueDate = new Date("2020-01-01");
-    currentMyKadDetails.Race = "CINA";
-    currentMyKadDetails.Religion = "ISLAM";
-    currentMyKadDetails.Address1 = "6 Jln 14/70A";
-    currentMyKadDetails.Address2 = "";
-    currentMyKadDetails.Address3 = "Sri Hartamas";
-    currentMyKadDetails.PostCode = "50480";
-    currentMyKadDetails.City = "Kuala Lumpur";
-    currentMyKadDetails.State = "W. PERSEKUTUAN(KL)";
-    currentMyKadDetails.Country = "Malaysia";
-    currentMyKadDetails.Address = "";
-    currentMyKadDetails.RJ = "";
-    currentMyKadDetails.KT = "";
-    currentMyKadDetails.GreenCardNationality = "";
-    currentMyKadDetails.GreenCardExpiryDate = new Date("0000-00-00");
-    currentMyKadDetails.CardVersion = "";
-    currentMyKadDetails.OtherID = "";
-    currentMyKadDetails.CategoryType = "W";
+  hardcodedIC() {
+    let harcodedic = '111111007894';
+    currentMyKadDetails.Name = 'John Smith';
+    currentMyKadDetails.ICNo = harcodedic.toString().replace('*', '');
+    currentMyKadDetails.OldICNo = '';
+    currentMyKadDetails.DOB = new Date('1957-08-31');
+    currentMyKadDetails.POB = 'SELANGOR';
+    currentMyKadDetails.Gender = 'Male';
+    currentMyKadDetails.Citizenship = 'WARGANEGARA';
+    currentMyKadDetails.IssueDate = new Date('2020-01-01');
+    currentMyKadDetails.Race = 'CINA';
+    currentMyKadDetails.Religion = 'ISLAM';
+    currentMyKadDetails.Address1 = '6 Jln 14/70A';
+    currentMyKadDetails.Address2 = '';
+    currentMyKadDetails.Address3 = 'Sri Hartamas';
+    currentMyKadDetails.PostCode = '50480';
+    currentMyKadDetails.City = 'Kuala Lumpur';
+    currentMyKadDetails.State = 'W. PERSEKUTUAN(KL)';
+    currentMyKadDetails.Country = 'Malaysia';
+    currentMyKadDetails.Address = '';
+    currentMyKadDetails.RJ = '';
+    currentMyKadDetails.KT = '';
+    currentMyKadDetails.GreenCardNationality = '';
+    currentMyKadDetails.GreenCardExpiryDate = new Date('0000-00-00');
+    currentMyKadDetails.CardVersion = '';
+    currentMyKadDetails.OtherID = '';
+    currentMyKadDetails.CategoryType = 'W';
   }
 
-  RegisterMemberYes(){
+  RegisterMemberYes() {
     this.RegisterMemberPage = false;
     this.InsertPhonePage = true;
   }
 
-  RegisterMemberNo(){
+  RegisterMemberNo() {
     appFunc.endSession = true;
     this.route.navigate(['verifyMyKad']);
   }
 
-  InsertPhoneYes(){
+  InsertPhoneYes() {
     this.phoneError = false;
-    if(this.phoneNo.length < 10){
+    if (this.phoneNo.length < 10) {
       this.phoneError = true;
-    }
-    else{
+    } else {
       this.InsertPhonePage = false;
       this.InsertEmailPage = true;
-  
+
       setTimeout(() => {
         loadKeyboard();
       }, 500);
     }
   }
 
-  InsertPhoneNo(){
+  InsertPhoneNo() {
     this.InsertPhonePage = false;
     this.RegisterMemberPage = true;
 
     deleteKeyboard();
   }
 
-  InsertEmailYes(){
+  InsertEmailYes() {
     this.emailError = false;
-    if(this.email?.nativeElement.value != ""){
+    if (this.email?.nativeElement.value != '') {
       this.InsertEmailPage = false;
       this.ValidateProfilePage = true;
-      this.emailAddress = this.email?.nativeElement.value + "@" + this.emailDDL?.nativeElement.value;
+      this.emailAddress =
+        this.email?.nativeElement.value +
+        '@' +
+        this.emailDDL?.nativeElement.value;
       deleteKeyboard();
-    }
-    else{
+    } else {
       this.emailError = true;
     }
   }
 
-  InsertEmailNo(){
+  InsertEmailNo() {
     this.InsertEmailPage = false;
     this.InsertPhonePage = true;
   }
 
-  ValidateProfileYes(){
+  ValidateProfileYes() {
     this.isCallAPI = true;
-    if(appFunc.bypassAPI != true){
-      let residentStat = "";
-      switch(currentMyKadDetails.Citizenship){
-        case "WARGANEGARA":{
-          residentStat = "B";
+    if (appFunc.bypassAPI != true) {
+      let residentStat = '';
+      switch (currentMyKadDetails.Citizenship) {
+        case 'WARGANEGARA': {
+          residentStat = 'B';
           break;
         }
-        case "WARGANEGARA - AMJ":{
-          residentStat = "C";
-          break;
-        } 
-        case "PEMASTAUTIN SEMENTARA":{
-          residentStat = "H";
+        case 'WARGANEGARA - AMJ': {
+          residentStat = 'C';
           break;
         }
-        case "PEMASTAUTIN TETAP":{
-          residentStat = "M";
+        case 'PEMASTAUTIN SEMENTARA': {
+          residentStat = 'H';
           break;
         }
-        case "PEMASTAUTIN TETAP - AMJ":{
-          residentStat = "P";
+        case 'PEMASTAUTIN TETAP': {
+          residentStat = 'M';
           break;
         }
-        case "BELUM DITENTUKAN":{
-          residentStat = "Q";
+        case 'PEMASTAUTIN TETAP - AMJ': {
+          residentStat = 'P';
           break;
         }
-        case "BUKAN WARGANEGARA":{
-          residentStat = "X";
+        case 'BELUM DITENTUKAN': {
+          residentStat = 'Q';
           break;
         }
-        default:{
-          residentStat = "9";
-          break;
-        }
-      }
-  
-      let gender = "";
-      switch(currentMyKadDetails.Gender){
-        case "Male": {
-          gender = "M";
-          break;
-        }
-        case "Female": {
-          gender = "F";
-          break;
-        }
-      }
-  
-      let areaCode = "";
-      switch(currentMyKadDetails.State.toUpperCase()){
-        case "SABAH": {
-          areaCode = "E";
-          break;
-        }
-        case "SARAWAK": {
-          areaCode = "F";
+        case 'BUKAN WARGANEGARA': {
+          residentStat = 'X';
           break;
         }
         default: {
-          areaCode = "D";
+          residentStat = '9';
           break;
         }
       }
-  
-      let race = "";
-      switch(currentMyKadDetails.Race.toUpperCase()){
-        case "MELAYU": {
-          race = "0100";
+
+      let gender = '';
+      switch (currentMyKadDetails.Gender) {
+        case 'Male': {
+          gender = 'M';
           break;
         }
-        case "BUGIS": {
-          race = "0101";
-          break;
-        }
-        case "BOYAN": {
-          race = "0102";
-          break;
-        }
-        case "BANJAR": {
-          race = "0103";
-          break;
-        }
-        case "JAWA": {
-          race = "0104";
-          break;
-        }
-        case "JAWI PEKAN": {
-          race = "0105";
-          break;
-        }
-        case "MINANGKABAU": {
-          race = "0106";
-          break;
-        }
-        case "CINA": {
-          race = "0200";
-          break;
-        }
-        case "CANTONESE": {
-          race = "0201";
-          break;
-        }
-        case "FOOCHOW": {
-          race = "0202";
-          break;
-        }
-        case "HAINANANESE": {
-          race = "0203";
+        case 'Female': {
+          gender = 'F';
           break;
         }
       }
-  
-      let religion = "";
-      switch(currentMyKadDetails.Religion.toUpperCase()){
-        case "ISLAM":{
-          religion = "1";
+
+      let areaCode = '';
+      if (residentStat == 'X') {
+        switch (currentMyKadDetails.State.toUpperCase()) {
+          case 'SABAH': {
+            areaCode = 'E';
+            break;
+          }
+          case 'SARAWAK': {
+            areaCode = 'F';
+            break;
+          }
+          default: {
+            areaCode = 'D';
+            break;
+          }
+        }
+      } else {
+        switch (currentMyKadDetails.State.toUpperCase()) {
+          case 'SABAH': {
+            areaCode = 'B';
+            break;
+          }
+          case 'SARAWAK': {
+            areaCode = 'C';
+            break;
+          }
+          default: {
+            areaCode = 'A';
+            break;
+          }
+        }
+      }
+      let race = '';
+      switch (currentMyKadDetails.Race.toUpperCase()) {
+        case 'MELAYU': {
+          race = '0100';
           break;
         }
-        case "KRISTIAN":{
-          religion = "2";
+        case 'BUGIS': {
+          race = '0101';
           break;
         }
-        case "BUDDHA":{
-          religion = "3";
+        case 'BOYAN': {
+          race = '0102';
           break;
         }
-        case "HINDU":{
-          religion = "4";
+        case 'BANJAR': {
+          race = '0103';
           break;
         }
-        case "SIKHISM":{
-          religion = "5";
+        case 'JAWA': {
+          race = '0104';
           break;
         }
-        case "TIADA AGAMA":{
-          religion = "6";
+        case 'JAWI PEKAN': {
+          race = '0105';
           break;
         }
-        case "LAIN UGAMA":{
-          religion = "7";
+        case 'MINANGKABAU': {
+          race = '0106';
           break;
         }
-        case "MAKLUMAT TIADA":{
-          religion = "8";
+        case 'CINA': {
+          race = '0200';
           break;
         }
-        case "TAO":{
-          religion = "9";
+        case 'CANTONESE': {
+          race = '0201';
           break;
         }
-        case "KONFUSIANISME":{
-          religion = "A";
+        case 'FOOCHOW': {
+          race = '0202';
           break;
         }
-        case "ISLAM":{
-          religion = "B";
-          break;
-        }
-        case "BAHAI":{
-          religion = "C";
-          break;
-        }
-        case "JUDAISM":{
-          religion = "D";
-          break;
-        }
-        default:{
-          religion = "8";
+        case 'HAINANANESE': {
+          race = '0203';
           break;
         }
       }
-  
+
+      let religion = '';
+      switch (currentMyKadDetails.Religion.toUpperCase()) {
+        case 'ISLAM': {
+          religion = '1';
+          break;
+        }
+        case 'KRISTIAN': {
+          religion = '2';
+          break;
+        }
+        case 'BUDDHA': {
+          religion = '3';
+          break;
+        }
+        case 'HINDU': {
+          religion = '4';
+          break;
+        }
+        case 'SIKHISM': {
+          religion = '5';
+          break;
+        }
+        case 'TIADA AGAMA': {
+          religion = '6';
+          break;
+        }
+        case 'LAIN UGAMA': {
+          religion = '7';
+          break;
+        }
+        case 'MAKLUMAT TIADA': {
+          religion = '8';
+          break;
+        }
+        case 'TAO': {
+          religion = '9';
+          break;
+        }
+        case 'KONFUSIANISME': {
+          religion = 'A';
+          break;
+        }
+        case 'ISLAM': {
+          religion = 'B';
+          break;
+        }
+        case 'BAHAI': {
+          religion = 'C';
+          break;
+        }
+        case 'JUDAISM': {
+          religion = 'D';
+          break;
+        }
+        default: {
+          religion = '8';
+          break;
+        }
+      }
+
       const body = {
-        "cifNum": "",
-        "regType": "M",
-        "accNum": "",
-        "accType": "",
-        "primaryIdTypeCode": currentMyKadDetails.CategoryType,
-        "primaryIdNum": currentMyKadDetails.ICNo,
-        "custName": currentMyKadDetails.Name,
-        "birthDate": currentMyKadDetails.DOB.toString().replace("T00:00:00", ""),
-        "residentStatus": residentStat,
-        "gender": gender,
-        "citizenCountry": "MAL",
-        "race": race,
-        "religion": religion,
-        "matrimAsset": "N",
-        "handicapRemarks": "",
-        "regChannel": "SST",
-        "regRcvdDate": "2001-01-01",
-        "prefComChannel": "ML",
-        "addLine1": currentMyKadDetails.Address1,
-        "addLine2": currentMyKadDetails.Address2,
-        "addLine3": currentMyKadDetails.Address3,
-        "addLine4": "",
-        "addLine5": "",
-        "postalCode": currentMyKadDetails.PostCode,
-        "cityStateZip": currentMyKadDetails.State,
-        "stateCode": "15",
-        "countryCode": "MAL",
-        "addRemarks": "Test Permenant Address",
-        "addLine1A": currentMyKadDetails.Address1,
-        "addLine2A": currentMyKadDetails.Address2,
-        "addLine3A": currentMyKadDetails.Address3,
-        "addLine4A": "",
-        "addLine5A": "",
-        "postalCode1": currentMyKadDetails.PostCode,
-        "cityStateZip1": currentMyKadDetails.State,
-        "stateCode1": "15",
-        "countryCode1": "MAL",
-        "addRemarks1": "Test Correspondance Address",
-        "homePhone": "",
-        "officePhone": "",
-        "mobilePhone": this.phoneNo,
-        "faxNum": "",
-        "emailAdd": this.emailAddress,
-        "areaCode": areaCode,
-        "creationDate": "0001-01-01",
-        "creationTime": "",
-        "creationUserID": "",
-        "creationTerminalID": "",
-        "creationBranchNo": "",
-        "lastMaintDate": "0001-01-01",
-        "lastMaintTime": "",
-        "lastMaintUserID": "",
-        "lastMaintTerminalID": "",
-        "lastMaintBranchNo": "",
-        "sessionId": appFunc.sessionId
-      }
-  
-      this._aldanService.MemberRegistration(body).subscribe((result: any) =>{ //Call Register Member
-        if(result.responseCode == "0"){
-  
+        cifNum: '',
+        regType: 'M',
+        accNum: '',
+        accType: '',
+        primaryIdTypeCode: currentMyKadDetails.CategoryType,
+        primaryIdNum: currentMyKadDetails.ICNo,
+        custName: currentMyKadDetails.Name,
+        birthDate: currentMyKadDetails.DOB.toString().replace('T00:00:00', ''),
+        residentStatus: residentStat,
+        gender: gender,
+        citizenCountry: 'MAL',
+        race: race,
+        religion: religion,
+        matrimAsset: 'N',
+        handicapRemarks: '',
+        regChannel: 'SST',
+        regRcvdDate: '2001-01-01',
+        prefComChannel: 'ML',
+        addLine1: currentMyKadDetails.Address1,
+        addLine2: currentMyKadDetails.Address2,
+        addLine3: currentMyKadDetails.Address3,
+        addLine4: '',
+        addLine5: '',
+        postalCode: currentMyKadDetails.PostCode,
+        cityStateZip: currentMyKadDetails.State,
+        stateCode: '15',
+        countryCode: 'MAL',
+        addRemarks: 'Test Permenant Address',
+        addLine1A: currentMyKadDetails.Address1,
+        addLine2A: currentMyKadDetails.Address2,
+        addLine3A: currentMyKadDetails.Address3,
+        addLine4A: '',
+        addLine5A: '',
+        postalCode1: currentMyKadDetails.PostCode,
+        cityStateZip1: currentMyKadDetails.State,
+        stateCode1: '15',
+        countryCode1: 'MAL',
+        addRemarks1: 'Test Correspondance Address',
+        homePhone: '',
+        officePhone: '',
+        mobilePhone: this.phoneNo,
+        faxNum: '',
+        emailAdd: this.emailAddress,
+        areaCode: areaCode,
+        creationDate: '0001-01-01',
+        creationTime: '',
+        creationUserID: '',
+        creationTerminalID: '',
+        creationBranchNo: '',
+        lastMaintDate: '0001-01-01',
+        lastMaintTime: '',
+        lastMaintUserID: '',
+        lastMaintTerminalID: '',
+        lastMaintBranchNo: '',
+        sessionId: appFunc.sessionId,
+      };
+
+      this._aldanService.MemberRegistration(body).subscribe((result: any) => {
+        //Call Register Member
+        if (result.responseCode == '0') {
           this.KWSPMemberNo = result.detail.accNum;
           this.KWSPCustomerNo = result.detail.cifNum;
 
-          const addMobileTACBody  = {
-            "custNum": this.KWSPCustomerNo,
-            "tacMobilePhoneCode": "TA",
-            "tacMobilePhone": this.phoneNo,
-            "registrationDate": '2021-01-21',
-            "registrationChannel": "SAO",
-            "status": "P",
-            "checkForDuplicate": "N",
-            "generateRequestNum": "N",
-            "requestNum": "",
-            "sessionId": appFunc.sessionId
-          }
+          const addMobileTACBody = {
+            custNum: this.KWSPCustomerNo,
+            tacMobilePhoneCode: 'TA',
+            tacMobilePhone: this.phoneNo,
+            registrationDate: '2021-01-21',
+            registrationChannel: 'SAO',
+            status: 'P',
+            checkForDuplicate: 'N',
+            generateRequestNum: 'N',
+            requestNum: '',
+            sessionId: appFunc.sessionId,
+          };
 
-          this._aldanService.AddTAC(addMobileTACBody).subscribe((result: any) => { //Call Add TAC
-            if(result.responseCode == "0"){
+          this._aldanService
+            .AddTAC(addMobileTACBody)
+            .subscribe((result: any) => {
+              //Call Add TAC
+              if (result.responseCode == '0') {
+                if (this.isiAkaunRegModuleEnabled) {
+                  const iAkaunbody = {
+                    epfNum: this.KWSPMemberNo,
+                    tacMobileNum: this.phoneNo,
+                    branchCode: '',
+                    migrationFlag: '',
+                    clientChannel: 'SST',
+                    source: '',
+                    subSource: '',
+                    ipAddress: '',
+                    validity: '',
+                    sessionId: appFunc.sessionId,
+                  };
 
-              if(this.isiAkaunRegModuleEnabled){
-                const iAkaunbody = {
-                  "epfNum": this.KWSPMemberNo,
-                  "tacMobileNum": this.phoneNo,
-                  "branchCode": "",
-                  "migrationFlag": "",
-                  "clientChannel": "SST",
-                  "source": "",
-                  "subSource": "",
-                  "ipAddress": "",
-                  "validity": "",
-                  "sessionId": appFunc.sessionId
-                }
-          
-                this._aldanService.iAkaunRegistration(iAkaunbody).subscribe((result: any) => { //Call Register I-Akaun
+                  this._aldanService
+                    .iAkaunRegistration(iAkaunbody)
+                    .subscribe((result: any) => {
+                      //Call Register I-Akaun
+                      this.isCallAPI = false;
+                      if (result.responseCode == '0') {
+                        this.ValidateProfilePage = false;
+                        this.RegisterSuccessPage = true;
+
+                        deleteKeyboard();
+                      } else {
+                        this.failedTAC = true;
+                        this.ValidateProfilePage = false;
+                        this.RegisterSuccessPage = true;
+                      }
+                    });
+                } else {
                   this.isCallAPI = false;
-                  if(result.responseCode == "0"){
-                    
-                    this.ValidateProfilePage = false;
-                    this.RegisterSuccessPage = true;
-              
-                    deleteKeyboard()
-                  }
-                  else{
-                    this.failedTAC = true;
-                    this.ValidateProfilePage = false;
-                    this.RegisterSuccessPage = true;
-                  }
-                });
-              }
-              else{
+                  this.ValidateProfilePage = false;
+                  this.RegisterSuccessPage = true;
+
+                  deleteKeyboard();
+                }
+              } else {
                 this.isCallAPI = false;
                 this.ValidateProfilePage = false;
-                this.RegisterSuccessPage = true;
-          
-                deleteKeyboard()
+                this.Failed = true;
               }
-              
-            }
-            else{
-              this.isCallAPI = false;
-              this.ValidateProfilePage = false;
-              this.Failed = true;
-            }
-          });
-        }
-        else{
+            });
+        } else {
           this.isCallAPI = false;
           this.ValidateProfilePage = false;
           this.Failed = true;
         }
       });
-    }
-    else{
+    } else {
       this.isCallAPI = false;
       this.ValidateProfilePage = false;
       this.RegisterSuccessPage = true;
     }
   }
 
-  ValidateProfileNo(){
+  ValidateProfileNo() {
     this.ValidateProfilePage = false;
     this.InsertEmailPage = true;
 
@@ -572,9 +610,9 @@ export class RegisterMemberComponent implements OnInit {
     }, 500);
   }
 
-  RegisterSuccessYes(){
-    if(this.isiAkaunRegModuleEnabled){
-      if(this.isiAkaunActModuleEnabled){
+  RegisterSuccessYes() {
+    if (this.isiAkaunRegModuleEnabled) {
+      if (this.isiAkaunActModuleEnabled) {
         this.isCallAPI = true;
         if (appFunc.bypassAPI != true) {
           this._aldanService
@@ -593,40 +631,32 @@ export class RegisterMemberComponent implements OnInit {
               }
             });
         }
-      }
-      else{
-        if(this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled)
-        {
+      } else {
+        if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
           this.RegisterSuccessPage = false;
           this.PickShariahPage = true;
-        }
-        else{
+        } else {
           this.route.navigate(['mainMenu']);
         }
       }
-    }
-    else{
-      if(this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled)
-      {
+    } else {
+      if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
         this.RegisterSuccessPage = false;
         this.PickShariahPage = true;
-      }
-      else{
+      } else {
         this.route.navigate(['mainMenu']);
       }
-      
     }
-    
   }
 
-  clickTNC1(){
+  clickTNC1() {
     this.xagreedTnc1 = !this.xagreedTnc1;
   }
-  clickTNC2(){
+  clickTNC2() {
     this.xagreedTnc2 = !this.xagreedTnc2;
   }
 
-  TnCYes(){
+  TnCYes() {
     this.TnCPage = false;
     this.SetIdPassword = true;
     setTimeout(() => {
@@ -634,7 +664,7 @@ export class RegisterMemberComponent implements OnInit {
     }, 500);
   }
 
-  TnCNo(){
+  TnCNo() {
     this.TnCPage = false;
     this.RegisterSuccessPage = true;
   }
@@ -650,7 +680,7 @@ export class RegisterMemberComponent implements OnInit {
 
     if (FilledIn == 1) {
       let errorCount = 0;
-  
+
       if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
         errorCount += 1;
         this.securePhraseMax = true;
@@ -674,38 +704,36 @@ export class RegisterMemberComponent implements OnInit {
         if (appFunc.bypassAPI != true) {
           this.isCallAPI = true;
           const iAkaunActBody = {
-            "epfNum": appFunc.currMemberDetail.accNum,
-            "id_no": this.ic,
-            "user_id": this.acctNo,
-            "new_password": this.password1,
-            "secure_image_id": imageid,
-            "secret_phrase": this.securePhrase,
-            "terms_condition": this.content_version,
-            "sessionId": appFunc.sessionId
-          }
+            epfNum: appFunc.currMemberDetail.accNum,
+            id_no: this.ic,
+            user_id: this.acctNo,
+            new_password: this.password1,
+            secure_image_id: imageid,
+            secret_phrase: this.securePhrase,
+            terms_condition: this.content_version,
+            sessionId: appFunc.sessionId,
+          };
 
-          this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
-            this.isCallAPI = true;
-            if(result.epfNum != null){
-              this.ActivateiAkaunPage = false;
-              this.ActivateSuccessPage = true;
+          this._aldanService
+            .ActivateIAkaun(iAkaunActBody)
+            .subscribe((result: any) => {
+              this.isCallAPI = true;
+              if (result.epfNum != null) {
+                this.ActivateiAkaunPage = false;
+                this.ActivateSuccessPage = true;
 
-              deleteKeyboard()
-            }
-            else{
-              this.ActivateiAkaunPage = false;
-              this.Failed = true;
-            }
-          });
-        }
-        else{
+                deleteKeyboard();
+              } else {
+                this.ActivateiAkaunPage = false;
+                this.Failed = true;
+              }
+            });
+        } else {
           this.isCallAPI = true;
           this.ActivateiAkaunPage = false;
           this.ActivateSuccessPage = true;
         }
-      }
-      else
-      {
+      } else {
         this.isCallAPI = true;
         //if error
       }
@@ -719,7 +747,7 @@ export class RegisterMemberComponent implements OnInit {
     deleteKeyboard();
   }
 
-  SetIdPasswordYes(){
+  SetIdPasswordYes() {
     this.accountAlpha = false;
     this.accountAlpha = false;
     this.passwordAlpha = false;
@@ -788,47 +816,49 @@ export class RegisterMemberComponent implements OnInit {
       if (errorCount == 0) {
         if (appFunc.bypassAPI != true) {
           this.isCallAPI = true;
-          this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-            this.isCallAPI = false;
-            if (result.imgId != '') {
-              result.forEach((element: any) => {
-                this.checkboxImages.push({
-                  imgId: element.imgId,
-                  imgPath: element.imgPath,
-                  checked: false,
+          this._aldanService
+            .GetSecureImage(appFunc.sessionId)
+            .subscribe((result: any) => {
+              this.isCallAPI = false;
+              if (result.imgId != '') {
+                result.forEach((element: any) => {
+                  this.checkboxImages.push({
+                    imgId: element.imgId,
+                    imgPath: element.imgPath,
+                    checked: false,
+                  });
                 });
-              });
-              this.SetIdPassword = false;
-              this.ActivateiAkaunPage = true;
-            } else {
-              this.Failed = true;
-            }
-          });
+                this.SetIdPassword = false;
+                this.ActivateiAkaunPage = true;
+              } else {
+                this.Failed = true;
+              }
+            });
         }
       }
     }
   }
 
-  SetIdPasswordNo(){
+  SetIdPasswordNo() {
     this.SetIdPassword = false;
     this.TnCPage = true;
 
     deleteKeyboard();
   }
 
-  ActivateSuccessYes(){
+  ActivateSuccessYes() {
     this.RegIAkaun = false;
     this.RegShariah = true;
     this.ActivateSuccessPage = false;
     this.PickShariahPage = true;
-  } 
+  }
 
-  IShariahNo(){
+  IShariahNo() {
     this.PickShariahPage = false;
     this.RegisteriSaraanPage = true;
   }
 
-  IShariahYes(){
+  IShariahYes() {
     if (appFunc.bypassAPI != true) {
       this.isCallAPI = true;
       this._aldanService
@@ -846,162 +876,152 @@ export class RegisterMemberComponent implements OnInit {
     }
   }
 
-  ShariahTnCYes(){
-
-    if(appFunc.bypassAPI != true){
+  ShariahTnCYes() {
+    if (appFunc.bypassAPI != true) {
       this.isCallAPI = true;
       const iShariahBody = {
-        "custNum": this.KWSPCustomerNo,
-        "accNum": this.KWSPMemberNo,
-        "accType": "S",
-        "electChannel": "SAO",
-        "electReceivedDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        "electReceivedTime": formatDate(new Date(), 'h:mm:ss', 'en'),
-        "electReceivedBranch": "1",
-        "electDate": "2019-10-11",
-        "electBranch": "1",
-        "electStatus": "A",
-        "reasonCode": "",
-        "akadRefNum": "",
-        "docRefNum": "",
-        "sessionId": appFunc.sessionId
-      }
+        custNum: this.KWSPCustomerNo,
+        accNum: this.KWSPMemberNo,
+        accType: 'S',
+        electChannel: 'SAO',
+        electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        electReceivedTime: formatDate(new Date(), 'h:mm:ss', 'en'),
+        electReceivedBranch: '1',
+        electDate: '2019-10-11',
+        electBranch: '1',
+        electStatus: 'A',
+        reasonCode: '',
+        akadRefNum: '',
+        docRefNum: '',
+        sessionId: appFunc.sessionId,
+      };
 
-      this._aldanService.iShariahRegistration(iShariahBody).subscribe((result:any) => {
-        this.isCallAPI = false;
-        if(result.responseCode == "0"){
-          this.ShariahTnCPage = false;
-          this.ShariahSuccessPage = true;
-
-        }
-        else{
-          this.Failed = true;
-        }
-      });
-    }
-    else{
+      this._aldanService
+        .iShariahRegistration(iShariahBody)
+        .subscribe((result: any) => {
+          this.isCallAPI = false;
+          if (result.responseCode == '0') {
+            this.ShariahTnCPage = false;
+            this.ShariahSuccessPage = true;
+          } else {
+            this.Failed = true;
+          }
+        });
+    } else {
       this.isCallAPI = false;
       this.ShariahTnCPage = false;
       this.ShariahSuccessPage = true;
     }
   }
 
-  ShariahTnCNo(){
+  ShariahTnCNo() {
     this.ShariahTnCPage = false;
     this.PickShariahPage = true;
   }
 
-  ShariahSuccessYes(){
+  ShariahSuccessYes() {
     this.ShariahSuccessPage = false;
     this.RegisteriSaraanPage = true;
     this.RegShariah = false;
     this.RegSaraan = true;
   }
 
-  RegisteriSaraanYes(){
+  RegisteriSaraanYes() {
     this.RegisteriSaraanPage = false;
     this.SelectJobPage = true;
   }
 
-  RegisteriSaraanNo(){
+  RegisteriSaraanNo() {
     this.route.navigate(['mainMenu']);
   }
 
-  SelectJobYes(){
-
-    if(this.selectedJobSector == undefined){
-
-    }
-    else{
-      if(appFunc.bypassAPI != true){
+  SelectJobYes() {
+    if (this.selectedJobSector == undefined) {
+    } else {
+      if (appFunc.bypassAPI != true) {
         this.isCallAPI = true;
         const iSaraanBody = {
-          "idNum": currentMyKadDetails.ICNo,
-          "idType": currentMyKadDetails.CategoryType,
-          "businessTypeCode": this.selectedJobSector.id,
-          "remark": "",
-          "sourceRegistrationChannel": "SST",
-          "applicationReceivedDate": formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-          "sourceCreationID": "SST",
-          "sourceTerminalID": "SST",
-          "sourceBranchNo": "0",
-          "sessionId": appFunc.sessionId
-        }
-  
-        this._aldanService.iSaraanRegistration(iSaraanBody).subscribe((result: any) => {
-          this.isCallAPI = false;
-          if(result.responseCode == "0"){
-            this.SelectJobPage = false;
-            this.SaraanSuccessPage = true;
-  
-          }
-          else{
-            this.Failed = true;
-          }
-        });
-      }
-      else{
+          idNum: currentMyKadDetails.ICNo,
+          idType: currentMyKadDetails.CategoryType,
+          businessTypeCode: this.selectedJobSector.id,
+          remark: '',
+          sourceRegistrationChannel: 'SST',
+          applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+          sourceCreationID: 'SST',
+          sourceTerminalID: 'SST',
+          sourceBranchNo: '0',
+          sessionId: appFunc.sessionId,
+        };
+
+        this._aldanService
+          .iSaraanRegistration(iSaraanBody)
+          .subscribe((result: any) => {
+            this.isCallAPI = false;
+            if (result.responseCode == '0') {
+              this.SelectJobPage = false;
+              this.SaraanSuccessPage = true;
+            } else {
+              this.Failed = true;
+            }
+          });
+      } else {
         this.isCallAPI = false;
         this.SaraanSuccessPage = true;
         this.SelectJobPage = false;
       }
     }
-
-    
-    
   }
 
-  SelectJobNo(){
+  SelectJobNo() {
     this.SelectJobPage = false;
     this.RegisteriSaraanPage = true;
   }
 
-  SaraanSuccessYes(){
+  SaraanSuccessYes() {
     this.route.navigate(['mainMenu']);
   }
 
-
-  click1(){
-    if(this.phoneNo.length < 10) this.phoneNo += "1";
+  click1() {
+    if (this.phoneNo.length < 10) this.phoneNo += '1';
   }
 
-  click2(){
-    if(this.phoneNo.length < 10) this.phoneNo += "2";
+  click2() {
+    if (this.phoneNo.length < 10) this.phoneNo += '2';
   }
 
-  click3(){
-    if(this.phoneNo.length < 10) this.phoneNo += "3";
+  click3() {
+    if (this.phoneNo.length < 10) this.phoneNo += '3';
   }
 
-  click4(){
-    if(this.phoneNo.length < 10) this.phoneNo += "4";
+  click4() {
+    if (this.phoneNo.length < 10) this.phoneNo += '4';
   }
 
-  click5(){
-    if(this.phoneNo.length < 10) this.phoneNo += "5";
+  click5() {
+    if (this.phoneNo.length < 10) this.phoneNo += '5';
   }
 
-  click6(){
-    if(this.phoneNo.length < 10) this.phoneNo += "6";
+  click6() {
+    if (this.phoneNo.length < 10) this.phoneNo += '6';
   }
 
-  click7(){
-    if(this.phoneNo.length < 10) this.phoneNo += "7";
+  click7() {
+    if (this.phoneNo.length < 10) this.phoneNo += '7';
   }
 
-  click8(){
-    if(this.phoneNo.length < 10) this.phoneNo += "8";
+  click8() {
+    if (this.phoneNo.length < 10) this.phoneNo += '8';
   }
 
-  click9(){
-    if(this.phoneNo.length < 10) this.phoneNo += "9";
+  click9() {
+    if (this.phoneNo.length < 10) this.phoneNo += '9';
   }
 
-  click0(){
-    if(this.phoneNo.length < 10) this.phoneNo += "0";
+  click0() {
+    if (this.phoneNo.length < 10) this.phoneNo += '0';
   }
 
-  clickDel(){
+  clickDel() {
     this.phoneNo = this.phoneNo.substring(0, this.phoneNo.length - 1);
   }
 
@@ -1015,16 +1035,13 @@ export class RegisterMemberComponent implements OnInit {
     });
   }
 
-  selectJob(jobSector: any){
-    this.defaultDDL = (this.currentLang == "bm" ? jobSector.malay : jobSector.english);
+  selectJob(jobSector: any) {
+    this.defaultDDL =
+      this.currentLang == 'bm' ? jobSector.malay : jobSector.english;
     this.selectedJobSector = jobSector;
   }
 
-  failedYes(){
+  failedYes() {
     this.route.navigate(['mainMenu']);
   }
-  
-
-
-
 }
