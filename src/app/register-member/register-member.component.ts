@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { formatDate } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -402,7 +403,139 @@ export class RegisterMemberComponent implements OnInit {
           break;
         }
       }
-
+      let stateCode = '';
+      var stateName  = currentMyKadDetails.State.toUpperCase();
+      
+      if(stateName.includes("JOHOR"))
+      {
+        stateCode = "1";
+      }
+      if(stateName.includes("KEDAH"))
+      {
+        stateCode = "2";
+      }
+      if(stateName.includes("KELANTAN"))
+      {
+        stateCode = "3";
+      }
+      if(stateName.includes("MELAKA"))
+      {
+        stateCode = "4";
+      }
+      if(stateName.includes("NEGERI SEMBILAN"))
+      {
+        stateCode = "5";
+      }
+      if(stateName.includes("PAHANG"))
+      {
+        stateCode = "6";
+      }
+      if(stateName.includes("PINANG"))
+      {
+        stateCode = "7";
+      }
+      if(stateName.includes("PERAK"))
+      {
+        stateCode = "8";
+      }
+      if(stateName.includes("PERLIS"))
+      {
+        stateCode = "9";
+      }
+      if(stateName.includes("SELANGOR"))
+      {
+        stateCode = "10";
+      }
+      if(stateName.includes("TERENGGANU"))
+      {
+        stateCode = "11";
+      }
+      if(stateName.includes("SABAH"))
+      {
+        stateCode = "12";
+      }
+      if(stateName.includes("SARAWAK"))
+      {
+        stateCode = "13";
+      }
+      if(stateName.includes("KUALA LUMPUR"|| stateName.includes("KL")))
+      {
+        stateCode = "14";
+      }
+      if(stateName.includes("LABUAN"))
+      {
+        stateCode = "15";
+      }
+      if(stateName.includes("PUTRAJAYA"))
+      {
+        stateCode = "16";
+      }
+      // switch(currentMyKadDetails.State.toUpperCase()){
+      //   case 'Johor':{
+      //     stateCode = '1';
+      //     break;
+      //   }
+      //   case 'KEDAH':{
+      //     stateCode = '2';
+      //     break;
+      //   }
+      //   case 'KELANTAN':{
+      //     stateCode = '3';
+      //     break;
+      //   }
+      //   case 'MELAKA':{
+      //     stateCode = '4';
+      //     break;
+      //   }
+      //   case 'NEGERI SEMBILAN':{
+      //     stateCode = '5';
+      //     break;
+      //   }
+      //   case 'PAHANG':{
+      //     stateCode = '6';
+      //     break;
+      //   }
+      //   case 'PULAU PINANG':{
+      //     stateCode = '7';
+      //     break;
+      //   }
+      //   case 'PERAK':{
+      //     stateCode = '8';
+      //     break;
+      //   }
+      //   case 'PERLIS':{
+      //     stateCode = '9';
+      //     break;
+      //   }
+      //   case 'SELANGOR':{
+      //     stateCode = '10';
+      //     break;
+      //   }
+      //   case 'TERENGGANU':{
+      //     stateCode = '11';
+      //     break;
+      //   }
+      //   case 'SABAH':{
+      //     stateCode = '12';
+      //     break;
+      //   }
+      //   case 'SARAWAK':{
+      //     stateCode = '13';
+      //     break;
+      //   }
+      //   case 'KUALA LUMPUR':{
+      //     stateCode = '14';
+      //     break;
+      //   }
+      //   case 'LABUAN':{
+      //     stateCode = '15';
+      //     break;
+      //   }
+      //   case 'PUTRAJAYA':{
+      //     stateCode = '16';
+      //     break;
+      //   }
+      // }
       let religion = '';
       switch (currentMyKadDetails.Religion.toUpperCase()) {
         case 'ISLAM': {
@@ -489,7 +622,7 @@ export class RegisterMemberComponent implements OnInit {
         addLine5: '',
         postalCode: currentMyKadDetails.PostCode,
         cityStateZip: currentMyKadDetails.State,
-        stateCode: '15',
+        stateCode: stateCode,
         countryCode: 'MAL',
         addRemarks: 'Test Permenant Address',
         addLine1A: currentMyKadDetails.Address1,
@@ -499,7 +632,7 @@ export class RegisterMemberComponent implements OnInit {
         addLine5A: '',
         postalCode1: currentMyKadDetails.PostCode,
         cityStateZip1: currentMyKadDetails.State,
-        stateCode1: '15',
+        stateCode1: stateCode,
         countryCode1: 'MAL',
         addRemarks1: 'Test Correspondance Address',
         homePhone: '',
