@@ -67,20 +67,14 @@ export class PersonalInformationComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
 
-    // let hardcode = true;
-    // if(hardcode){
-    //   this.hardcodedIC();
-    // }
 
-    console.log(appFunc.currMemberDetail);
-
-    this.address1 = appFunc.currMemberDetail.addresses[0].addLine1;
-    this.address2 = appFunc.currMemberDetail.addresses[0].addLine2;
-    this.address3 = appFunc.currMemberDetail.addresses[0].addLine3;
+    this.address1 = appFunc.currMemberDetail.addresses[0].addLine1.toUpperCase();
+    this.address2 = appFunc.currMemberDetail.addresses[0].addLine2.toUpperCase();
+    this.address3 = appFunc.currMemberDetail.addresses[0].addLine3.toUpperCase();
     this.postcode = appFunc.currMemberDetail.addresses[0].postalCode;
-    this.city = appFunc.currMemberDetail.addresses[0].cityStateZip;
-    this.state = appFunc.currMemberDetail.addresses[0].stateDesc;
-    this.country = appFunc.currMemberDetail.addresses[0].countryDesc;
+    this.city = appFunc.currMemberDetail.addresses[0].cityStateZip.toUpperCase();
+    this.state = appFunc.currMemberDetail.addresses[0].stateDesc.toUpperCase();
+    this.country = appFunc.currMemberDetail.addresses[0].countryDesc.toUpperCase();
 
     this.homeNo = appFunc.currMemberDetail.homePhone;
     this.officeNo = appFunc.currMemberDetail.officePhone;
@@ -144,9 +138,9 @@ export class PersonalInformationComponent implements OnInit {
     if(this.address2.length == 0){
       errorCount += 1;
     }
-    if(this.address3.length == 0){
-      errorCount += 1;
-    }
+    // if(this.address3.length == 0){
+    //   errorCount += 1;
+    // }
     if(this.postcode.length == 0){
       errorCount += 1;
     }
