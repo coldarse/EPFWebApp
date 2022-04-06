@@ -77,11 +77,13 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           this.isCallAPI = false;
           if (result.content != '') {
             this.Contract = result.content;
-            this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
             this.RegSaraanShariah = false;
             this.RegShariah = true; 
             this.SelectIShariahISaraan = false;
             this.IShariah = true;
+            setTimeout(() => {
+              this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+            }, 200)
           } else {
             this.RegSaraanShariah = false;
             this.Failed = true;
@@ -142,7 +144,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         accNum: appFunc.currMemberDetail.accNum, //this.KWSPMemberNo,
         accType: 'S',
         electChannel: 'SAO',
-        electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        electReceivedDate: '2019-10-11',//formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         electReceivedTime: formatDate(new Date(), 'hh.mm.ss', 'en'),
         electReceivedBranch: '1',
         electDate: '2019-10-11',

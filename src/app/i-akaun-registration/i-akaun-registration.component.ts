@@ -304,7 +304,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
             this.isCallAPI = false;
-            if(result.epfNum != null){
+            if(result.epfNum != ""){
 
               this.ActivateInformation = false;
               this.SuccessActivation = true;

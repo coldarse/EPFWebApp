@@ -178,6 +178,14 @@ export class RegisterMemberComponent implements OnInit {
     this.dob = currentMyKadDetails.DOB;
     this.nationality = currentMyKadDetails.Citizenship;
     this.gender = currentMyKadDetails.Gender;
+    if(selectLang.selectedLang == 'bm'){
+      if(this.gender == 'Male'){
+        this.gender = 'Lelaki';
+      }
+      else{
+        this.gender = 'Perempuan';
+      }
+    }
     this.race = currentMyKadDetails.Race;
     this.religion = currentMyKadDetails.Religion;
 

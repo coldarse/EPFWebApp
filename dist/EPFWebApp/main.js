@@ -3222,6 +3222,14 @@ class RegisterMemberComponent {
         this.dob = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOB;
         this.nationality = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Citizenship;
         this.gender = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender;
+        if (_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang == 'bm') {
+            if (this.gender == 'Male') {
+                this.gender = 'Lelaki';
+            }
+            else {
+                this.gender = 'Perempuan';
+            }
+        }
         this.race = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race;
         this.religion = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion;
         // this.acctNo = this.ic;
@@ -4689,15 +4697,17 @@ class ISaraanShariahSavingsRegistrationComponent {
             this._aldanService
                 .GetContract(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId)
                 .subscribe((result) => {
-                var _a;
                 this.isCallAPI = false;
                 if (result.content != '') {
                     this.Contract = result.content;
-                    (_a = this.contractHTML) === null || _a === void 0 ? void 0 : _a.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
                     this.RegSaraanShariah = false;
                     this.RegShariah = true;
                     this.SelectIShariahISaraan = false;
                     this.IShariah = true;
+                    setTimeout(() => {
+                        var _a;
+                        (_a = this.contractHTML) === null || _a === void 0 ? void 0 : _a.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+                    }, 200);
                 }
                 else {
                     this.RegSaraanShariah = false;
@@ -4758,7 +4768,7 @@ class ISaraanShariahSavingsRegistrationComponent {
                 accNum: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.accNum,
                 accType: 'S',
                 electChannel: 'SAO',
-                electReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
+                electReceivedDate: '2019-10-11',
                 electReceivedTime: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'hh.mm.ss', 'en'),
                 electReceivedBranch: '1',
                 electDate: '2019-10-11',
@@ -8540,7 +8550,7 @@ class IAkaunRegistrationComponent {
                     };
                     this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result) => {
                         this.isCallAPI = false;
-                        if (result.epfNum != null) {
+                        if (result.epfNum != "") {
                             this.ActivateInformation = false;
                             this.SuccessActivation = true;
                             deleteKeyboard();
