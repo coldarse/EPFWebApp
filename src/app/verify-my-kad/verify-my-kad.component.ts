@@ -70,6 +70,7 @@ export class VerifyMyKadComponent implements OnInit {
     this.RetryCountInstance = this.appConfig.RetryCounts;
     this.translate.use('bm');
     if(appFunc.endSession){
+      this.translate.use(selectLang.selectedLang);
       this.insertCard = false;
       this.InsertMyKad = false;
       this.removeCard = true;
@@ -304,7 +305,6 @@ export class VerifyMyKadComponent implements OnInit {
           this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
             if(result1.responseCode == "0"){
               appFunc.currMemberDetail = result1.detail;
-              console.log(appFunc.currMemberDetail);
               this.route.navigate(['mainMenu']);
             }
             else{

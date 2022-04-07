@@ -461,7 +461,7 @@ export class RegisterMemberComponent implements OnInit {
       {
         stateCode = "13";
       }
-      if(stateName.includes("KUALA LUMPUR"|| stateName.includes("KL")))
+      if(stateName.includes("KUALA LUMPUR") || stateName.includes("KL"))
       {
         stateCode = "14";
       }
