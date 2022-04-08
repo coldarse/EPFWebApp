@@ -473,72 +473,7 @@ export class RegisterMemberComponent implements OnInit {
       {
         stateCode = "16";
       }
-      // switch(currentMyKadDetails.State.toUpperCase()){
-      //   case 'Johor':{
-      //     stateCode = '1';
-      //     break;
-      //   }
-      //   case 'KEDAH':{
-      //     stateCode = '2';
-      //     break;
-      //   }
-      //   case 'KELANTAN':{
-      //     stateCode = '3';
-      //     break;
-      //   }
-      //   case 'MELAKA':{
-      //     stateCode = '4';
-      //     break;
-      //   }
-      //   case 'NEGERI SEMBILAN':{
-      //     stateCode = '5';
-      //     break;
-      //   }
-      //   case 'PAHANG':{
-      //     stateCode = '6';
-      //     break;
-      //   }
-      //   case 'PULAU PINANG':{
-      //     stateCode = '7';
-      //     break;
-      //   }
-      //   case 'PERAK':{
-      //     stateCode = '8';
-      //     break;
-      //   }
-      //   case 'PERLIS':{
-      //     stateCode = '9';
-      //     break;
-      //   }
-      //   case 'SELANGOR':{
-      //     stateCode = '10';
-      //     break;
-      //   }
-      //   case 'TERENGGANU':{
-      //     stateCode = '11';
-      //     break;
-      //   }
-      //   case 'SABAH':{
-      //     stateCode = '12';
-      //     break;
-      //   }
-      //   case 'SARAWAK':{
-      //     stateCode = '13';
-      //     break;
-      //   }
-      //   case 'KUALA LUMPUR':{
-      //     stateCode = '14';
-      //     break;
-      //   }
-      //   case 'LABUAN':{
-      //     stateCode = '15';
-      //     break;
-      //   }
-      //   case 'PUTRAJAYA':{
-      //     stateCode = '16';
-      //     break;
-      //   }
-      // }
+    
       let religion = '';
       switch (currentMyKadDetails.Religion.toUpperCase()) {
         case 'ISLAM': {

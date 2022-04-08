@@ -92,6 +92,10 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     }
   }
 
+  SelectSaraanShariahNo() {
+    this.route.navigate(['mainMenu']);
+  }
+
   ISaraanYes() {
     if (this.selectedJobSector == undefined) {
     } else {

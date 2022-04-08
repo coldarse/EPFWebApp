@@ -16,10 +16,12 @@
                 <div class="row padTop15rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="ThumbprintAgreeDisagreeNo()">{{"disagree"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="ThumbprintAgreeDisagreeNo()">{{"disagree"|
+                            translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="ThumbprintAgreeDisagreeYes()">{{"agree"| translate}}</button>
+                        <button type="button" class="btnYes" (click)="ThumbprintAgreeDisagreeYes()">{{"agree"|
+                            translate}}</button>
                     </div>
                 </div>
             </div>
@@ -45,7 +47,8 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="checkAnsuran()">
+                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox"
+                                        value="" (click)="checkAnsuran()">
                                 </div>
                             </div>
                         </button>
@@ -63,7 +66,8 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="checkBina()">
+                                    <input class="regular-checkbox big-checkbox marginTopHalfrem" type="checkbox"
+                                        value="" (click)="checkBina()">
                                 </div>
                             </div>
                         </button>
@@ -84,7 +88,8 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="check50yo()">
+                                    <input class="regular-checkbox big-checkbox marginTopHalfrem" type="checkbox"
+                                        value="" (click)="check50yo()">
                                 </div>
                             </div>
                         </button>
@@ -102,7 +107,8 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="checkEducation()">
+                                    <input class="regular-checkbox big-checkbox marginTopHalfrem" type="checkbox"
+                                        value="" (click)="checkEducation()">
                                 </div>
                             </div>
                         </button>
@@ -123,7 +129,8 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="check1mil()">
+                                    <input class="regular-checkbox big-checkbox marginTopHalfrem" type="checkbox"
+                                        value="" (click)="check1mil()">
                                 </div>
                             </div>
                         </button>
@@ -141,7 +148,8 @@
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox" value="" (click)="check55yo()">
+                                    <input class="regular-checkbox big-checkbox marginTopHalfrem" type="checkbox"
+                                        value="" (click)="check55yo()">
                                 </div>
                             </div>
                         </button>
@@ -178,47 +186,53 @@
                 <div class="row padTopHalfrem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnNo" (click)="ThumbprintVerificationNo()">{{"cancel"|translate}}</button>
+                        <button type="button" class="btnNo"
+                            (click)="ThumbprintVerificationNo()">{{"cancel"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="row padTop5rem" *ngIf="Selected">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"success"| translate}}
                 </div>
-                <div class="padTop2rem">
-                    <button type="button" class="btnThumbprint">
-                        <div class="row">
-                            <div class="col-8">
-                                {{"ansuran"| translate}}
+                <div class="row padTop2rem">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnThumbprint">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label>{{"ansuran"| translate}}</label>
+                                </div>
+                                <div class="col-3">
+                                    <input class="green-checkbox big-checkbox marginTop1rem" type="checkbox" value="">
+                                </div>
                             </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
-                                <input class="regular-checkbox big-checkbox marginTop2rem" type="checkbox" value="">
-                            </div>
-                        </div>
-                    </button>
+                        </button>
+                    </div>
                 </div>
-                <div class="padTopHalfrem">
-                    <button type="button" class="btnThumbprint">
-                        <div class="row">
-                            <div class="col-8">
-                                {{"bina"| translate}}
+                <div class="row padTopHalfrem">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnThumbprint">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label>{{"bina"| translate}}</label>
+                                </div>
+                                <div class="col-3">
+                                    <input class="green-checkbox big-checkbox" type="checkbox" value="">
+                                </div>
                             </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
-                                <input class="regular-checkbox big-checkbox" type="checkbox" value="">
-                            </div>
-                        </div>
-                    </button>
+                        </button>
+                    </div>
                 </div>
                 <div class="row padTop7rem">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button type="button" class="btnNo" (click)="SelectedNo()">{{"endTrasaction"| translate}}</button>
+                        <button type="button" class="btnNo" (click)="SelectedNo()">{{"endTrasaction"|
+                            translate}}</button>
                     </div>
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="SelectedYes()">{{"menu"| translate}}</button>
@@ -227,11 +241,11 @@
             </div>
         </div>
 
-        <div class="row bg-popup" *ngIf="popup">
-            <div class="pop-up">
-                <div class="row text-center padTop10rem">
+        <div class="bg-popup">
+            <div class="pop-up" *ngIf="popup">
+                <div class="row text-center padTop5rem">
                     <div class="col-12">
-                        <img src="assets/images/Icon-Attention.svg" width="500" height="450">
+                        <img src="assets/images/Icon-Attention.svg" width="200" height="175">
                     </div>
                 </div>
                 <div class="row text-center padTop5rem">
@@ -250,9 +264,41 @@
                     </div>
                     <div class="col-1"></div>
                 </div>
-                <div class="row text-center padTop10rem padBottom5rem">
+                <div class="row text-center padTop5rem padBottom2rem">
                     <div class="col-12">
-                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"| translate}}</button>
+                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"|
+                            translate}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pop-up" *ngIf="popupAnsuran">
+                <div class="frame padtop10rem">
+                    <div>
+                        <label class="lblPopupBlack">KWSP 9P(AHL)</label>
+                        <label class="lblPopupBlack" style="float:right">No.KWSP Ahli: 22232909</label>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <label class="lblPopupBlack">Hi Muhammad Wahyu Nizam Bin Omir</label>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <label class="lblPopupBlack">No.KWSP Ahli: 22232909</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblPopupBlack">No.KWSP Ahli: 22232909</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblPopupBlack">No.KWSP Ahli: 22232909</label>
+                    </div>
+                    <div class="row">
+                        <label class="lblPopupBlack">No.KWSP Ahli: 22232909</label>
+                    </div>
+                </div>
+                <div class="row text-center padTop05rem padBottom2rem">
+                    <div class="col-12">
+                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"|
+                            translate}}</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-thumbprint-confirmation',
@@ -12,8 +13,9 @@ export class ThumbprintConfirmationComponent implements OnInit {
   ThumbprintAgreeDisagree = false;
   Selections = false;
   ThumbprintVerification = false;
-  Selected = true;
+  Selected = false;
   popup = false;
+  popupAnsuran = true;
 
   checkedAnsuran = false;
   checkedBina = false;
@@ -30,11 +32,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('bm');
   }
-
-  
-
-
-
 
   checkAnsuran(){
     this.checkedAnsuran = !this.checkedAnsuran;
