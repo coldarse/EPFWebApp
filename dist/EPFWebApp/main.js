@@ -3480,7 +3480,7 @@ class RegisterMemberComponent {
             if (stateName.includes("SARAWAK")) {
                 stateCode = "13";
             }
-            if (stateName.includes("KUALA LUMPUR" || false)) {
+            if (stateName.includes("KUALA LUMPUR") || stateName.includes("KL")) {
                 stateCode = "14";
             }
             if (stateName.includes("LABUAN")) {
@@ -5355,7 +5355,6 @@ class VerifyMyKadComponent {
                     this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1) => {
                         if (result1.responseCode == "0") {
                             _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].currMemberDetail = result1.detail;
-                            console.log(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].currMemberDetail);
                             this.route.navigate(['mainMenu']);
                         }
                         else {
