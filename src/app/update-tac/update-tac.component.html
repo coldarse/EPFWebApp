@@ -120,7 +120,7 @@
                         <label class="lblInfo" style="margin-left: -1rem;">{{phoneNo}}</label>
                     </div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop15rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="PhoneNoConfirmationNo()">{{"back"| translate}}</button>

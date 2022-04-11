@@ -10463,26 +10463,25 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-
-.bg-img{
+.bg-img {
     width: 1368px;
     height: 850px;
     background-size: cover;
 }
 
-.screensaverimg{
+.screensaverimg {
     width: 1368px;
     height: 850px;
 }
 
-.grid{
+.grid {
     display: grid;
     place-items: center;
     position: absolute;
     top: 0;
 }
 
-.content-container{
+.content-container {
     width: 1365px;
 }
 
@@ -10496,7 +10495,7 @@ textarea.form-control-lg {
     font-weight: 700;
 }
 
-.btnHeader{
+.btnHeader {
     margin-top: 35px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10511,12 +10510,12 @@ textarea.form-control-lg {
     margin-left: 17.5px;
 }
 
-.btnHeader:focus{
+.btnHeader:focus {
     background-color: white;
     color: rgb(49, 39, 131);
 }
 
-.center{
+.center {
     text-align: center;
     font-size: 60px;
     font-family: 'filson-pro', sans-serif;
@@ -10526,152 +10525,164 @@ textarea.form-control-lg {
     padding-top: 100px;
 }
 
-.padTop1rem{
+.padTop05rem {
+    padding-top: 0.5rem;
+}
+
+.padTop1rem {
     padding-top: 1rem;
 }
 
-.padTopHalfrem{
+.padTopHalfrem {
     padding-top: 1.5rem;
 }
 
-.padTop2rem{
+.padTop2rem {
     padding-top: 2rem;
 }
 
-.padTop3rem{
+.padTop3rem {
     padding-top: 3rem;
 }
 
-.padTop4rem{
+.padTop4rem {
     padding-top: 4rem;
 }
 
-.padTop5rem{
+.padTop5rem {
     padding-top: 5rem;
 }
 
-.padTop7rem{
+.padTop7rem {
     padding-top: 7rem;
 }
 
-.padTop10rem{
+.padTop10rem {
     padding-top: 10rem;
 }
 
-.padTop12rem{
+.padTop12rem {
     padding-top: 12rem;
 }
 
-.padTop14rem{
+.padTop14rem {
     padding-top: 14rem;
 }
 
-.padTop15rem{
+.padTop15rem {
     padding-top: 15rem;
 }
 
-.padTop20rem{
+.padTop20rem {
     padding-top: 20rem;
 }
 
-.padTop25rem{
+.padTop25rem {
     padding-top: 25rem;
 }
 
-.padTop30rem{
+.padTop30rem {
     padding-top: 30rem;
 }
 
-.padTop35rem{
+.padTop35rem {
     padding-top: 35rem;
 }
 
-.padTop40rem{
+.padTop40rem {
     padding-top: 40rem;
 }
 
-.padTop50rem{
+.padTop50rem {
     padding-top: 50rem;
 }
 
-.padTop60rem{
+.padTop60rem {
     padding-top: 60rem;
 }
 
-.padLeft8rem{
+.padLeft8rem {
     padding-left: 8rem;
 }
 
-.mainMenuLeft{
+.mainMenuLeft {
     text-align: left;
     padding-left: 10rem;
 }
 
-.mainMenuRight{
+.mainMenuRight {
     text-align: right;
     padding-right: 4rem;
 }
 
-.padBottom5rem{
+.padBottom2rem {
+    padding-bottom: 2rem;
+}
+
+.padBottom5rem {
     padding-bottom: 5rem;
 }
 
-.padBottom10rem{
+.padBottom10rem {
     padding-bottom: 10rem;
 }
 
-.padBottomProfile{
+.padBottomProfile {
     padding-bottom: 6.5rem;
 }
 
-.adjButton{
-    margin-left:-9rem
+.adjButton {
+    margin-left: -9rem
 }
 
-.marginLeft{
-    margin-left:1rem;
+.marginLeft {
+    margin-left: 1rem;
     margin-right: -1rem;
 }
 
-.marginZero{
+.marginZero {
     margin-left: 10px;
     margin-right: -15px;
 }
 
-.marginPadam{
+.marginPadam {
     margin-right: 0.7rem;
 }
 
-.marginRight10rem{
+.marginRight10rem {
     margin-right: -10rem;
 }
 
-.marginLeft5rem{
+.marginLeft5rem {
     margin-left: -5rem;
 }
 
-.marginRight{
-    margin-left:-1rem;
+.marginRight {
+    margin-left: -1rem;
     margin-right: 1rem;
 }
 
-.marginTop1rem{
-    margin-top:1rem;
+.marginTopHalfrem {
+    margin-top: 0.5rem;
 }
 
-.marginTopOneHalfrem{
-    margin-top:1.5rem;
+.marginTop1rem {
+    margin-top: 1rem;
 }
 
-.marginTop2rem{
-    margin-top:2rem;
+.marginTopOneHalfrem {
+    margin-top: 1.5rem;
 }
 
-.marginTop3rem{
-    margin-top:3rem;
+.marginTop2rem {
+    margin-top: 2rem;
 }
 
-#phoneNo{
+.marginTop3rem {
+    margin-top: 3rem;
+}
+
+#phoneNo {
     border-width: thin;
     width: 24.5rem;
     font-family: 'filson-pro', sans-serif;
@@ -10680,7 +10691,7 @@ textarea.form-control-lg {
     font-weight: 700;
 }
 
-.keypad{
+.keypad {
     background-color: rgb(90, 82, 157);
     color: white;
     font-size: 25px;
@@ -10691,7 +10702,7 @@ textarea.form-control-lg {
     font-weight: 800;
 }
 
-.keypadPadam{
+.keypadPadam {
     background-color: rgb(90, 82, 157);
     color: white;
     font-size: 20px;
@@ -10699,7 +10710,7 @@ textarea.form-control-lg {
     margin: 5px;
     padding-left: 80px;
     padding-right: 80px;
-    padding-top:11px;
+    padding-top: 11px;
     padding-bottom: 11px;
     border-radius: 10px;
     font-weight: 800;
@@ -10707,7 +10718,7 @@ textarea.form-control-lg {
     width: 250px;
 }
 
-.example{
+.example {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-weight: 400;
@@ -10716,7 +10727,7 @@ textarea.form-control-lg {
     color: rgb(49, 39, 131);
 }
 
-.local{
+.local {
     text-align: left;
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
@@ -10725,81 +10736,80 @@ textarea.form-control-lg {
     color: rgb(49, 39, 131);
 }
 
-.inter{
-    text-align:end;
+.inter {
+    text-align: end;
     font-size: 40px;
     font-family: 'filson-pro', sans-serif;
-    font-style:normal;
-    font-weight:bold;
+    font-style: normal;
+    font-weight: bold;
     color: rgb(49, 39, 131);
-    padding-top: 50px; 
+    padding-top: 50px;
     display: inline;
 }
 
-#chkLocal{
+#chkLocal {
     margin-right: 10px;
 }
 
-#chkInter{
-    margin-top: 30px; 
-    margin-right:20px
+#chkInter {
+    margin-top: 30px;
+    margin-right: 20px
 }
 
-.choice{
+.choice {
     display: inline;
     font-size: 40px;
 }
 
-.note{
-    font-size:18.5px;
+.note {
+    font-size: 18.5px;
     font-weight: 200;
     background-color: rgb(214, 212, 230);
     color: rgb(49, 39, 131);
     font-family: 'filson-pro', sans-serif;
 }
 
-.noteWarning{
-    font-size:18.5px;
+.noteWarning {
+    font-size: 18.5px;
     font-weight: 200;
     background-color: rgb(230, 212, 212);
     color: rgb(131, 39, 39);
     font-family: 'filson-pro', sans-serif;
 }
 
-.akaunNote{
-    font-size:13px;
+.akaunNote {
+    font-size: 13px;
     font-weight: 200;
     background-color: rgb(214, 212, 230);
     color: rgb(49, 39, 131);
     font-family: 'filson-pro', sans-serif;
 }
 
-.akaunNoteSmall{
-    font-size:13px;
+.akaunNoteSmall {
+    font-size: 13px;
     font-weight: 200;
     color: rgb(49, 39, 131);
     font-family: 'filson-pro', sans-serif;
 }
 
-.note2{
-    font-size:25px;
+.note2 {
+    font-size: 25px;
     font-weight: 200;
     color: rgb(49, 39, 131);
     font-family: 'filson-pro', sans-serif;
 }
 
-.Cancel{
+.Cancel {
     text-align: start;
     display: inline;
 }
 
-.Proceed{
+.Proceed {
     text-align: end;
     display: inline;
 }
 
-.lblQuestion
-{
+.lblQuestion {
     font-size: 60px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10810,8 +10820,7 @@ textarea.form-control-lg {
     /* margin-left: -6rem; */
 }
 
-.lblHeader
-{
+.lblHeader {
     font-size: 30px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10819,7 +10828,7 @@ textarea.form-control-lg {
     color: rgb(49, 39, 131);
 }
 
-.lblCongrats{
+.lblCongrats {
     font-size: 45px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10827,7 +10836,7 @@ textarea.form-control-lg {
     color: rgb(49, 39, 131);
 }
 
-.lblReg{
+.lblReg {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10837,7 +10846,7 @@ textarea.form-control-lg {
     margin-top: 1rem;
 }
 
-.lblDate{
+.lblDate {
     font-size: 15px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10846,7 +10855,7 @@ textarea.form-control-lg {
     text-align: left;
 }
 
-.lblDate2{
+.lblDate2 {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10856,7 +10865,7 @@ textarea.form-control-lg {
     vertical-align: bottom;
 }
 
-.lblLogout{
+.lblLogout {
     font-size: 25px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10866,19 +10875,27 @@ textarea.form-control-lg {
     vertical-align: bottom;
 }
 
-.lblPopup{
-    font-size: 55px;
+.lblPopup {
+    font-size: 22px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 500;
     color: rgb(49, 39, 131);
 }
 
-.padBottomProfile{
+.lblPopupBlack {
+    font-size: 22px;
+    font-family: 'filson-pro', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    color: black;
+}
+
+.padBottomProfile {
     padding-bottom: 6.1rem;
 }
 
-.lblProfile{
+.lblProfile {
     font-size: 22.5px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10888,15 +10905,16 @@ textarea.form-control-lg {
     margin-bottom: 10px;
 }
 
-#txtProfile{
+.txtProfile {
     border-width: 1px;
     width: -webkit-fill-available;
     font-size: 22.5px;
     font-weight: 600;
     margin-bottom: 10px;
+    font-family: 'filson-pro', sans-serif;
 }
 
-.lblAccount{
+.lblAccount {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10908,7 +10926,7 @@ textarea.form-control-lg {
     height: 50px;
 }
 
-.lblInfo{
+.lblInfo {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10918,7 +10936,7 @@ textarea.form-control-lg {
     margin-top: 1rem;
 }
 
-.lblAccount2{
+.lblAccount2 {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10929,7 +10947,7 @@ textarea.form-control-lg {
     height: 50px;
 }
 
-.lblRemove{
+.lblRemove {
     font-size: 20px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10938,7 +10956,7 @@ textarea.form-control-lg {
     text-align: center;
 }
 
-.lblWarning{
+.lblWarning {
     font-size: 1.375rem;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -10946,8 +10964,9 @@ textarea.form-control-lg {
     color: rgb(240, 48, 48);
 }
 
-.btnYes{
-    background-color: rgb(49, 39, 131);;
+.btnYes {
+    background-color: rgb(49, 39, 131);
+    ;
     border-color: rgb(49, 39, 131);
     color: white;
     font-family: 'filson-pro', sans-serif;
@@ -10959,7 +10978,7 @@ textarea.form-control-lg {
     min-height: 75px;
 }
 
-.btnNo{
+.btnNo {
     background-color: white;
     border-color: rgb(49, 39, 131);
     color: rgb(49, 39, 131);
@@ -10972,20 +10991,21 @@ textarea.form-control-lg {
     min-height: 75px;
 }
 
-.btnPopUp{
-    background-color: rgb(49, 39, 131);;
+.btnPopUp {
+    background-color: rgb(49, 39, 131);
+    ;
     border-color: rgb(49, 39, 131);
     color: white;
     font-family: 'filson-pro', sans-serif;
     border-width: 4px;
     border-radius: 150px;
-    font-size: 55px;
-    width: 700px;
+    font-size: 22px;
+    width: 350px;
     font-weight: 600;
-    min-height: 150px;
+    min-height: 75px;
 }
 
-#txtEmail{
+#txtEmail {
     border-width: thin;
     width: 23rem;
     height: 3rem;
@@ -10993,7 +11013,7 @@ textarea.form-control-lg {
     font-weight: 700;
 }
 
-#emailDDL{
+#emailDDL {
     border-width: thin;
     width: 30rem;
     height: 3rem;
@@ -11002,7 +11022,7 @@ textarea.form-control-lg {
     margin-left: 1rem;
 }
 
-#jobDDL{
+#jobDDL {
     position: relative;
     border-width: thin;
     width: 500px;
@@ -11010,7 +11030,7 @@ textarea.form-control-lg {
     color: white;
     font-size: 1.5rem;
     font-weight: 700;
-    background-color:  rgb(90, 82, 157);
+    background-color: rgb(90, 82, 157);
 }
 
 .select-items {
@@ -11022,7 +11042,7 @@ textarea.form-control-lg {
     z-index: 99;
 }
 
-.lblSymbol{
+.lblSymbol {
     font-size: 25px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -11031,7 +11051,7 @@ textarea.form-control-lg {
     margin-right: -65px;
 }
 
-.lblKWSP{
+.lblKWSP {
     color: black;
     font-size: 62.5px;
     font-family: 'filson-pro', sans-serif;
@@ -11039,7 +11059,7 @@ textarea.form-control-lg {
     font-weight: 700;
 }
 
-.lblMsg{
+.lblMsg {
     font-size: 30px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -11049,7 +11069,7 @@ textarea.form-control-lg {
     margin: auto;
 }
 
-.btnShariah{
+.btnShariah {
     background-color: rgb(49, 39, 131);
     border-color: rgb(49, 39, 131);
     color: white;
@@ -11061,7 +11081,7 @@ textarea.form-control-lg {
     min-height: 90px;
 }
 
-.lblStatus{
+.lblStatus {
     font-size: 40px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -11069,40 +11089,41 @@ textarea.form-control-lg {
     color: rgb(49, 39, 131);
 }
 
-.statusMsg{
+.statusMsg {
     font-family: 'filson-pro', sans-serif;
     color: black;
     font-size: 25px;
     font-weight: 500;
 }
 
-table, th {
-    border:0.5px solid  rgb(49, 39, 131);
+table,
+th {
+    border: 0.5px solid rgb(49, 39, 131);
     background-color: rgb(49, 39, 131);
-    font-size:20px;
+    font-size: 20px;
     font-weight: 500;
     color: white;
     padding: 15px 10px 15px 10px;
 }
 
-td{
+td {
     background-color: white;
     color: black;
-    border:1px solid  rgb(49, 39, 131);
+    border: 1px solid rgb(49, 39, 131);
     font-size: 20px;
 }
 
-.right{
+.right {
     text-align: right;
     padding-right: 0.5rem;
 }
 
-.left{
+.left {
     text-align: left;
     padding-left: 0.5rem;
 }
 
-.ThumbprintMsg{
+.ThumbprintMsg {
     font-size: 30px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -11110,7 +11131,7 @@ td{
     color: rgb(49, 39, 131);
 }
 
-.btnThumbprint{
+.btnThumbprint {
     border: solid 1px;
     background-color: white;
     border-color: rgb(49, 39, 131);
@@ -11125,6 +11146,10 @@ td{
     width: 100%;
     padding-left: 2.5rem;
 }
+
+/* .btnThumbprint:focus {
+    background-color: rgb(214, 212, 230);
+} */
 
 /* .btnThumbprintLeft{
     background-color: white;
@@ -11159,38 +11184,76 @@ td{
 .regular-checkbox {
     width: 1.5em;
     height: 1.5em;
-	-webkit-appearance: none;
-	background-color: #fafafa;
-	border: 1px solid rgb(49, 39, 131); ;
-	box-shadow: 0 0.5px 1px rgba(0,0,0,0.05), inset 0px -7.5px 5px -6px rgba(0,0,0,0.05);
-	padding: 4.5px;
-	border-radius: 0.5em;
-	display: inline-block;
-	position: relative;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid rgb(49, 39, 131);
+    ;
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px -7.5px 5px -6px rgba(0, 0, 0, 0.05);
+    padding: 4.5px;
+    border-radius: 0.5em;
+    display: inline-block;
+    position: relative;
     vertical-align: middle;
 }
 
-.regular-checkbox:active, .regular-checkbox:checked:active {
-	box-shadow: 0 0.5px 1px rgba(0,0,0,0.05), inset 0px 0.5px 1.5px rgba(0,0,0,0.1);
+.regular-checkbox:active,
+.regular-checkbox:checked:active {
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px 0.5px 1.5px rgba(0, 0, 0, 0.1);
 }
 
 .regular-checkbox:checked {
-	background-color:  rgb(49, 39, 131); 
-	border: 0.5px solid #adb8c0;
-	box-shadow: 0 0.5px 1px rgba(0,0,0,0.05), inset 0px -7.5px 5px -6px rgba(0,0,0,0.05), inset 7.5px 5px -6px rgba(255,255,255,0.1);
-	color: #99a1a7;
+    background-color: rgb(49, 39, 131);
+    border: 0.5px solid #adb8c0;
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px -7.5px 5px -6px rgba(0, 0, 0, 0.05), inset 7.5px 5px -6px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
 }
 
 .regular-checkbox:checked:after {
-	content: '\2714';
-	font-size: 25px;
-	position: absolute;
-	top: 0px;
-	left: 5px;
-	color: white;
+    content: '\2714';
+    font-size: 25px;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    color: white;
 }
 
-#txtAccount{
+.green-checkbox {
+    width: 2rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid rgb(42, 226, 42);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px -7.5px 5px -6px rgba(0, 0, 0, 0.05);
+    padding: 4.5px;
+    border-radius: 1rem;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+.green-checkbox:active,
+.regular-checkbox:checked:active {
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px 0.5px 1.5px rgba(0, 0, 0, 0.1);
+}
+
+.green-checkbox:checked {
+    background-color: rgb(42, 226, 42);
+    ;
+    border: 0.5px solid #adb8c0;
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px -7.5px 5px -6px rgba(0, 0, 0, 0.05), inset 7.5px 5px -6px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+.green-checkbox:checked:after {
+    content: '\2714';
+    font-size: 21px;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    color: white;
+}
+
+#txtAccount {
     border-width: 1px;
     font-size: 20px;
     font-weight: 600;
@@ -11204,9 +11267,10 @@ td{
     font-size: 17.5px;
 }
 
-.scrollBox{
+.scrollBox {
     border: solid 1px;
-    width: 1110px;;
+    width: 1110px;
+    ;
     border-color: grey;
 }
 
@@ -11220,14 +11284,15 @@ td{
     background-color: rgb(255, 255, 255);
     width: 1100px;
     height: 400px;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto;
     text-align: left;
     color: black;
     padding-left: 0.5rem;
+    word-wrap: break-word;
 }
 
-.lblTNC{
+.lblTNC {
     font-size: 1.25rem;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -11235,80 +11300,86 @@ td{
     padding-left: 0.5rem;
 }
 
-/* width */
-
-::-webkit-scrollbar {
-width: 1.75rem;
+body::-webkit-scrollbar {
+    width: 0px;
 }
 
 /* Track */
 
-::-webkit-scrollbar-track {
-box-shadow: inset 0 2.5px 5px rgba(50, 39, 131); 
-border-radius: 1.75rem;
+body::-webkit-scrollbar-track {
+    border-radius: 0px;
 }
 
 /* Handle */
 
-::-webkit-scrollbar-thumb {
-background: rgb(49, 39, 131);
-border-radius: 1.75rem;
+body::-webkit-scrollbar-thumb {
+    border-radius: 0px;
 }
 
-/* Handle on hover */
+/* width */
 
-::-webkit-scrollbar-thumb:hover {
-background: rgb(49, 39, 131);
+.scroll::-webkit-scrollbar {
+    width: 1.75rem;
 }
 
-ul.dropdown-menu a.dropdown-item:hover{
+/* Track */
+
+.scroll::-webkit-scrollbar-track {
+    box-shadow: inset 0 2.5px 5px rgba(50, 39, 131);
+    border-radius: 1.75rem;
+}
+
+/* Handle */
+
+.scroll::-webkit-scrollbar-thumb {
+    background: rgb(49, 39, 131);
+    border-radius: 1.75rem;
+}
+
+ul.dropdown-menu a.dropdown-item:hover {
     color: rgb(90, 82, 157);
 }
 
 .bg-popup {
     width: 100%;
     min-height: 100%;
-    height: auto;
     position: absolute;
     top: 0;
     background-color: rgba(179, 179, 179, 0.5);
+    left: 0;
 }
 
 .pop-up {
     border-radius: 2rem;
     border: 1px solid;
     border-color: lightgray;
-    width: 2000px;
-    min-height: 1500px;
-    height: auto;
     background-color: white;
-    margin: auto;
-    margin-top: 9.5rem;
-    margin-bottom: 9.5rem;
+    margin: 70px 90px;
+    width: 87%;
 }
 
 .row-centered {
-    text-align:center;
+    text-align: center;
 }
 
-.imgOnline{
+.imgOnline {
     border: 2px solid black;
     width: 140px;
     height: 140px;
 }
 
-.imgGratz{
-    width:65px;
+.imgGratz {
+    width: 65px;
     height: 75px;
     vertical-align: text-bottom;
 }
 
-.mainMenuBtn{
+.mainMenuBtn {
     width: 550px;
     height: 95px;
     border-radius: 5rem;
     font-size: 1.45rem;
-    background-color:  rgb(49, 39, 131);
+    background-color: rgb(49, 39, 131);
     color: #fafafa;
     border: 0rem;
     font-family: 'filson-pro', sans-serif;
@@ -11316,34 +11387,35 @@ ul.dropdown-menu a.dropdown-item:hover{
     font-weight: 600;
 }
 
-.mainMenuBtnDisabled{
+.mainMenuBtnDisabled {
     width: 550px;
     height: 95px;
     border-radius: 5rem;
     font-size: 1.45rem;
-    background-color:  rgb(88, 89, 91);
-    color: rgb(35, 31, 32);;
+    background-color: rgb(88, 89, 91);
+    color: rgb(35, 31, 32);
+    ;
     border: 0rem;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 600;
 }
 
-.testBorder{
+.testBorder {
     border: 1px solid black;
 }
 
-.menuItemBorder{
+.menuItemBorder {
     height: 55px;
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
 }
 
-.centerItem{
+.centerItem {
     margin: auto;
 }
 
-.errorMsg{
+.errorMsg {
     color: red;
     font-style: italic;
     font-weight: 400;
@@ -11356,15 +11428,15 @@ ul.dropdown-menu a.dropdown-item:hover{
     padding-top: 0.75rem;
 }
 
-.icon_margin{
+.icon_margin {
     padding-bottom: 0rem;
 }
 
 .upStyle {
     padding-left: 1rem;
-    font-size:35px; 
-    white-space: nowrap; 
-    font-weight:bold;
+    font-size: 35px;
+    white-space: nowrap;
+    font-weight: bold;
     font-family: 'filson-pro', sans-serif;
     color: white;
     height: 0.5rem;
@@ -11372,59 +11444,39 @@ ul.dropdown-menu a.dropdown-item:hover{
 
 .downStyle {
     padding-left: 1rem;
-    font-size:35px; 
-    white-space: nowrap; 
-    font-weight:bold;
+    font-size: 35px;
+    white-space: nowrap;
+    font-weight: bold;
     font-family: 'filson-pro', sans-serif;
     color: white;
 }
 
-.outofservice_ErrorMsg{
+.outofservice_ErrorMsg {
     font-size: 45px;
     font-family: 'filson-pro', sans-serif;
 }
 
-.screensaverimg{
+.screensaverimg {
     width: 1368px;
     height: 850px;
 }
 
-.grid{
+.grid {
     display: grid;
     place-items: center;
     position: absolute;
     top: 0;
 }
 
-.content-container{
+.content-container {
     width: 1365px;
-}
-
-.bg-popup {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .rounded-2rem {
     border-radius: 2rem !important;
 }
 
-.pop-up {
-    border-radius: 1rem;
-    border: 1px solid;
-    border-color: lightgray;
-    width: 1200px;
-    min-height: 650px;
-    height: auto;
-    background-color: white;
-    margin: auto;
-    margin-top: 9.25rem;
-}
-
-.footer{
+.footer {
     width: 65%;
 }
 
@@ -11432,7 +11484,8 @@ ul.dropdown-menu a.dropdown-item:hover{
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
+    font-size: 24px;
+    /* Preferred icon size */
     display: inline-block;
     line-height: 1;
     text-transform: none;
@@ -11453,18 +11506,17 @@ ul.dropdown-menu a.dropdown-item:hover{
     font-feature-settings: 'liga';
 }
 
-#txtProfile{
-    font-family: 'filson-pro', sans-serif;
+.frame{
+    padding: 10px;
+    border-color: grey;
+    border:1px solid;
+    margin:35px;
 }
-
-
-
-
 .keyboard {
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 1368px;
+    width: 1365px;
     padding: 10px 0;
     background: rgba(49, 39, 131);
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
