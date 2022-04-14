@@ -28,6 +28,11 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   IShariahSuccess = false;
   Failed = false;
 
+
+
+  iSaraanEnabled = false;
+  iShariahEnabled = false;
+
   xagreedTnc = true;
   Contract = "";
 
@@ -49,6 +54,22 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
     this.jobSectors = appFunc.businessTypes;
 
+    for (var val of appFunc.modules){
+      if(val.moduleID == 5){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.iSaraanEnabled = true;
+          }
+        }
+      }
+      else if(val.moduleID == 6){
+        if(val.enabled == true){
+          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+            this.iShariahEnabled = true;
+          }
+        }
+      }
+    }
   
   }
 
