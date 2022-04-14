@@ -15,7 +15,9 @@ export class ThumbprintConfirmationComponent implements OnInit {
   ThumbprintVerification = false;
   Selected = false;
   popup = false;
-  popupAnsuran = true;
+  popupAnsuran = false;
+  popup50Tahun = false;
+  popupMissing = true;
 
   checkedAnsuran = false;
   checkedBina = false;
