@@ -39,6 +39,8 @@ export class StartupComponent implements OnInit {
   Password = "";
   Secret = "";
 
+  format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
 
   constructor(
     // private spinner: NgxSpinnerService,
@@ -59,6 +61,11 @@ export class StartupComponent implements OnInit {
   }
 
   login(password: string){
+
+    if(!this.format.test(password)){
+      password + '=';
+    }
+
     this._aldanService.getToken(signalRConnection.kioskCode, password)
     .subscribe((result: any) => {
       clearInterval(this.dotInterval);
@@ -72,7 +79,8 @@ export class StartupComponent implements OnInit {
         accessToken.httpOptions = {
           headers: new HttpHeaders(
             {Authorization: 'Bearer ' + accessToken.token}
-            )
+            ),
+            observe: 'response' as 'body'
         };
         this._aldanService.verifyKiosk(signalRConnection.kioskCode)
         .toPromise().then((resultKiosk: any) => {
@@ -173,6 +181,11 @@ export class StartupComponent implements OnInit {
       if(result){
         signalRConnection.connection.invoke('UpdateAdapter', this.selectedAdapterValue).then((data: boolean) => {
           if(data){
+
+            if(!this.format.test(this.selectedAdapterValueEncrypted)){
+              this.selectedAdapterValueEncrypted + '=';
+            }
+
             const changepasswordBody = {
               "currentPassword": this.Secret,
               "newPassword": this.selectedAdapterValueEncrypted

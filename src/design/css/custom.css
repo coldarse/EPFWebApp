@@ -454,12 +454,13 @@
     margin-bottom: 10px;
 }
 
-#txtProfile {
+.txtProfile {
     border-width: 1px;
     width: -webkit-fill-available;
     font-size: 22.5px;
     font-weight: 600;
     margin-bottom: 10px;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .lblAccount {
@@ -625,6 +626,18 @@
     background-color: rgb(49, 39, 131);
     border-color: rgb(49, 39, 131);
     color: white;
+    font-family: 'filson-pro', sans-serif;
+    border-radius: 75px;
+    font-weight: 700;
+    font-size: 25px;
+    width: 30rem;
+    min-height: 90px;
+}
+
+.btnShariahDisabled {
+    background-color: rgb(88, 89, 91);
+    border-color: rgb(35, 31, 32);
+    color: rgb(35, 31, 32);
     font-family: 'filson-pro', sans-serif;
     border-radius: 75px;
     font-weight: 700;
@@ -857,11 +870,12 @@ td {
     background-color: rgb(255, 255, 255);
     width: 1100px;
     height: 400px;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto;
     text-align: left;
     color: black;
     padding-left: 0.5rem;
+    word-wrap: break-word;
 }
 
 .lblTNC {
@@ -872,27 +886,40 @@ td {
     padding-left: 0.5rem;
 }
 
+
+body::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+    border-radius: 0px;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+}
+
+
 /* width */
-::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
     width: 1.75rem;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.scroll::-webkit-scrollbar-track {
     box-shadow: inset 0 2.5px 5px rgba(50, 39, 131);
     border-radius: 1.75rem;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.scroll::-webkit-scrollbar-thumb {
     background: rgb(49, 39, 131);
     border-radius: 1.75rem;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: rgb(49, 39, 131);
-}
+
 
 
 ul.dropdown-menu a.dropdown-item:hover {
@@ -955,7 +982,6 @@ ul.dropdown-menu a.dropdown-item:hover {
     font-size: 1.45rem;
     background-color: rgb(88, 89, 91);
     color: rgb(35, 31, 32);
-    ;
     border: 0rem;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
@@ -1068,9 +1094,6 @@ ul.dropdown-menu a.dropdown-item:hover {
 }
 
 
-#txtProfile {
-    font-family: 'filson-pro', sans-serif;
-}
 
 .frame{
     padding: 10px;

@@ -31,7 +31,7 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
-    this.name = currentMyKadDetails.Name
+    this.name = appFunc.currMemberDetail.custName;
 
     setInterval(() => {
       this.date = formatDate(new Date(), 'h:mm a d/M/yyyy', 'en');

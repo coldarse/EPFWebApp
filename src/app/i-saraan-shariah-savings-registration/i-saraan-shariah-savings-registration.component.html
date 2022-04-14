@@ -12,10 +12,10 @@
                 </div>
                 <div class="row padTop5rem" *ngIf="!isCallAPI">
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="clickSaraan()">{{"saraan"| translate}}</button>
+                        <button [disabled]="!iSaraanEnabled" [ngClass]="iSaraanEnabled == true ? 'btnShariah' : 'btnShariahDisabled'" (click)="clickSaraan()">{{"saraan"| translate}}</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btnShariah" (click)="clickShariah()">{{"shariah"| translate}}</button>
+                        <button [disabled]="!iShariahEnabled" [ngClass]="iShariahEnabled == true ? 'btnShariah' : 'btnShariahDisabled'" (click)="clickShariah()">{{"shariah"| translate}}</button>
                     </div>
                 </div>
                 <div class="row padTop5rem" *ngIf="isCallAPI">

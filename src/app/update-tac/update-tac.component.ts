@@ -70,6 +70,7 @@ export class UpdateTACComponent implements OnInit {
           this.Success = true;
         }
         else{
+          this.PhoneNoConfirmation = false;
           this.Failed = true;
         }
       });
