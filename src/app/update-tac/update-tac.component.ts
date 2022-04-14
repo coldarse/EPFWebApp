@@ -65,7 +65,7 @@ export class UpdateTACComponent implements OnInit {
 
       this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {
         this.isCallAPI = false;
-        if(result.responseCode == "0"){
+        if(result.body.responseCode == "0"){
           this.PhoneNoConfirmation = false;
           this.Success = true;
         }

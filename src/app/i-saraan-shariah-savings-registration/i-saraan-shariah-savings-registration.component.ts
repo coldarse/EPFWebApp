@@ -96,8 +96,8 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
           this.isCallAPI = false;
-          if (result.content != '') {
-            this.Contract = result.content;
+          if (result.body.content != '') {
+            this.Contract = result.body.content;
             this.RegSaraanShariah = false;
             this.RegShariah = true; 
             this.SelectIShariahISaraan = false;
@@ -139,7 +139,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           .iSaraanRegistration(iSaraanBody)
           .subscribe((result: any) => {
             this.isCallAPI = false;
-            if (result.responseCode == '0') {
+            if (result.body.responseCode == '0') {
               this.ISaraan = false;
               this.ISaraanSuccess = true;
             } else {
@@ -185,7 +185,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         .iShariahRegistration(iShariahBody)
         .subscribe((result: any) => {
           this.isCallAPI = false;
-          if (result.responseCode == '0') {
+          if (result.body.responseCode == '0') {
             this.IShariah = false;
             this.IShariahSuccess = true;
           } else {

@@ -80,11 +80,11 @@ export class VerifyMyKadComponent implements OnInit {
     else{
       if(accessToken.httpOptions != undefined){
         this._aldanService.GetBusinessTypes().subscribe((res: any) => {
-          appFunc.businessTypes = res.map((bt: any) => new businessTypes(bt));
+          appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
           console.log(appFunc.businessTypes);
         });
         this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
-          appFunc.modules = res.map((em: any) => new eModules(em));
+          appFunc.modules = res.body.map((em: any) => new eModules(em));
     
           if(appFunc.modules.length != 0){
             let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
@@ -239,12 +239,12 @@ export class VerifyMyKadComponent implements OnInit {
         }
 
         this._aldanService.CreateSession(sessionBody).subscribe((result: any) => {
-          if (result.id != undefined){
-            appFunc.sessionId = result.id;
+          if (result.body.id != undefined){
+            appFunc.sessionId = result.body.id;
             this.getAccountInquiry();
           }
           else{
-            appFunc.message = result.error.message;
+            appFunc.message = result.body.error.message;
             this.route.navigate(['outofservice']);
           }
         });
@@ -290,11 +290,11 @@ export class VerifyMyKadComponent implements OnInit {
         "sessionId": appFunc.sessionId   
       }
       this._aldanService.MemberCIFDetailsCheck(body).subscribe((result: any) => {
-        if(result.responseCode == "0"){
+        if(result.body.responseCode == "0"){
 
           const memberProfileBody = {
             "regType": "M",
-            "accNum": result.detail.accNum,
+            "accNum": result.body.detail.accNum,
             "accType": "S",
             "searchType": "A",
             "idNum": currentMyKadDetails.ICNo,
@@ -303,28 +303,28 @@ export class VerifyMyKadComponent implements OnInit {
             "sessionId": appFunc.sessionId   
           }
           this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
-            if(result1.responseCode == "0"){
-              appFunc.currMemberDetail = result1.detail;
+            if(result1.body.responseCode == "0"){
+              appFunc.currMemberDetail = result1.body.detail;
               this.route.navigate(['mainMenu']);
             }
             else{
               // Error  
-              appFunc.message = result1.error[0].description;
+              appFunc.message = result1.body.error[0].description;
               this.route.navigate(['outofservice']);
             }
           });
         }
         else{
-          if(result.error.length == 0){
+          if(result.body.error.length == 0){
             appFunc.message = "Error Connecting to Server";
             this.route.navigate(['outofservice']);
           }
-          if(result.error[0].code == "MBM2001"){
+          if(result.body.error[0].code == "MBM2001"){
             this.route.navigate(['registerMember']);
           }
           else{
             // Error
-            appFunc.message = result.error[0].description;
+            appFunc.message = result.body.error[0].description;
             this.route.navigate(['outofservice']);
           }
         }

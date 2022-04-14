@@ -191,7 +191,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         .iAkaunRegistration(iAkaunbody)
         .subscribe((result: any) => {
           this.isCallAPI = false;
-          if (result.responseCode == '0') {
+          if (result.body.responseCode == '0') {
             if(this.isiAkaunActModuleEnabled){
               this.PhoneEmailConfirmation = false;
               this.AskActivate = true;
@@ -226,9 +226,9 @@ export class IAkaunRegistrationComponent implements OnInit {
         .GetTnC(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
           this.isCallAPI = false;
-          if (result.content != '') {
-            this.TnC = result.content.toString();
-            this.content_version = result.contentVersion;
+          if (result.body.content != '') {
+            this.TnC = result.body.content.toString();
+            this.content_version = result.body.contentVersion;
             this.AskActivate = false;
             this.IAkaunTNC = true;
           } else {
@@ -304,7 +304,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
             this.isCallAPI = false;
-            if(result.epfNum != ""){
+            if(result.body.epfNum != ""){
 
               this.ActivateInformation = false;
               this.SuccessActivation = true;
@@ -407,8 +407,8 @@ export class IAkaunRegistrationComponent implements OnInit {
           this.isCallAPI = true;
           this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
             this.isCallAPI = false;
-            if (result.imgId != '') {
-              result.forEach((element: any) => {
+            if (result.body.imgId != '') {
+              result.body.forEach((element: any) => {
                 this.checkboxImages.push({
                   imgId: element.imgId,
                   imgPath: element.imgPath,

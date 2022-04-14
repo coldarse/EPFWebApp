@@ -230,7 +230,7 @@ export class PersonalInformationComponent implements OnInit {
       }
 
       this._aldanService.UpdateFullProfile(personalInformationBody,addressBody).subscribe((result: any) =>{
-        if(result[0].responseCode == "0" && result[1].responseCode== "0"){
+        if(result[0].body.responseCode == "0" && result[1].body.responseCode== "0"){
           
           const body = {
             "regType": "M",
@@ -244,8 +244,8 @@ export class PersonalInformationComponent implements OnInit {
           }
           this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
             this.isCallAPI = false;
-            if(result.responseCode == "0"){
-              appFunc.currMemberDetail = result.detail;
+            if(result.body.responseCode == "0"){
+              appFunc.currMemberDetail = result.body.detail;
               this.SaveProfilePage = false;
               this.SaveSuccessPage = true;
             }

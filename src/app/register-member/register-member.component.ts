@@ -594,9 +594,9 @@ export class RegisterMemberComponent implements OnInit {
 
       this._aldanService.MemberRegistration(body).subscribe((result: any) => {
         //Call Register Member
-        if (result.responseCode == '0') {
-          this.KWSPMemberNo = result.detail.accNum;
-          this.KWSPCustomerNo = result.detail.cifNum;
+        if (result.body.responseCode == '0') {
+          this.KWSPMemberNo = result.body.detail.accNum;
+          this.KWSPCustomerNo = result.body.detail.cifNum;
 
           const addMobileTACBody = {
             custNum: this.KWSPCustomerNo,
@@ -615,7 +615,7 @@ export class RegisterMemberComponent implements OnInit {
             .AddTAC(addMobileTACBody)
             .subscribe((result: any) => {
               //Call Add TAC
-              if (result.responseCode == '0') {
+              if (result.body.responseCode == '0') {
                 if (this.isiAkaunRegModuleEnabled) {
                   const iAkaunbody = {
                     epfNum: this.KWSPMemberNo,
@@ -635,7 +635,7 @@ export class RegisterMemberComponent implements OnInit {
                     .subscribe((result: any) => {
                       //Call Register I-Akaun
                       this.isCallAPI = false;
-                      if (result.responseCode == '0') {
+                      if (result.body.responseCode == '0') {
                         this.ValidateProfilePage = false;
                         this.RegisterSuccessPage = true;
 
@@ -690,9 +690,9 @@ export class RegisterMemberComponent implements OnInit {
             .GetTnC(selectLang.selectedLang, appFunc.sessionId)
             .subscribe((result: any) => {
               this.isCallAPI = false;
-              if (result.content != '') {
-                this.TnC = result.content.toString();
-                this.content_version = result.contentVersion;
+              if (result.body.content != '') {
+                this.TnC = result.body.content.toString();
+                this.content_version = result.body.contentVersion;
                 this.RegisterSuccessPage = false;
                 this.TnCPage = true;
                 this.RegKWSP = false;
@@ -789,7 +789,7 @@ export class RegisterMemberComponent implements OnInit {
             .ActivateIAkaun(iAkaunActBody)
             .subscribe((result: any) => {
               this.isCallAPI = true;
-              if (result.epfNum != null) {
+              if (result.body.epfNum != null) {
                 this.ActivateiAkaunPage = false;
                 this.ActivateSuccessPage = true;
 
@@ -891,8 +891,8 @@ export class RegisterMemberComponent implements OnInit {
             .GetSecureImage(appFunc.sessionId)
             .subscribe((result: any) => {
               this.isCallAPI = false;
-              if (result.imgId != '') {
-                result.forEach((element: any) => {
+              if (result.body.imgId != '') {
+                result.body.forEach((element: any) => {
                   this.checkboxImages.push({
                     imgId: element.imgId,
                     imgPath: element.imgPath,
@@ -936,8 +936,8 @@ export class RegisterMemberComponent implements OnInit {
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
           this.isCallAPI = false;
-          if (result.content != '') {
-            this.Contract = result.content;
+          if (result.body.content != '') {
+            this.Contract = result.body.content;
             this.PickShariahPage = false;
             this.ShariahTnCPage = true;
           } else {
@@ -971,7 +971,7 @@ export class RegisterMemberComponent implements OnInit {
         .iShariahRegistration(iShariahBody)
         .subscribe((result: any) => {
           this.isCallAPI = false;
-          if (result.responseCode == '0') {
+          if (result.body.responseCode == '0') {
             this.ShariahTnCPage = false;
             this.ShariahSuccessPage = true;
           } else {
@@ -1028,7 +1028,7 @@ export class RegisterMemberComponent implements OnInit {
           .iSaraanRegistration(iSaraanBody)
           .subscribe((result: any) => {
             this.isCallAPI = false;
-            if (result.responseCode == '0') {
+            if (result.body.responseCode == '0') {
               this.SelectJobPage = false;
               this.SaraanSuccessPage = true;
             } else {

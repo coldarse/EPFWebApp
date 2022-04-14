@@ -90,7 +90,7 @@ export class StartupComponent implements OnInit {
             this.route.navigate(['outofservice']);
           }
           else{ //Not Number
-            signalRConnection.kioskInformation = resultKiosk;
+            signalRConnection.kioskInformation = resultKiosk.body;
             // Not Registered
             if(signalRConnection.kioskInformation.macAddress == ""){
               // Ask to Register Kiosk

@@ -88,8 +88,8 @@ export class CheckBalanceComponent implements OnInit {
     this._aldanService
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
-        if (result.responseCode == '0') {
-          this.sDetails = result.detail.summaryStatement;
+        if (result.body.responseCode == '0') {
+          this.sDetails = result.body.detail.summaryStatement;
 
           this.sDetails.forEach((details: any) => {
             this.grandTotal += Number(details.subAccBalance);
@@ -99,7 +99,7 @@ export class CheckBalanceComponent implements OnInit {
         else{
           // Error
           this.SummaryStatementPage = false;
-          this.errorDesc = result.error[0].description;
+          this.errorDesc = result.body.error[0].description;
           this.Failed = true;
         }
       });
@@ -187,9 +187,9 @@ export class CheckBalanceComponent implements OnInit {
     };
 
     this._aldanService.MemberStatement(mainBody).subscribe((result: any) => {
-      if (result.responseCode == '0') {
+      if (result.body.responseCode == '0') {
         this.isCallAPI = false;
-        this.cDetails = result.detail.mainStatement;
+        this.cDetails = result.body.detail.mainStatement;
         this.cDetails.forEach((details: any) => {
           // this.transactionAmtForAcc1 += details.totalAmount;
           details.transaction = 'Caruman-IWS';
@@ -207,7 +207,7 @@ export class CheckBalanceComponent implements OnInit {
         // Error
         this.isCallAPI = false;
         this.SummaryStatementPage = false;
-        this.errorDesc = result.error[0].description;
+        this.errorDesc = result.body.error[0].description;
         this.Failed = true;
       }
     });
