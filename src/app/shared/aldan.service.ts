@@ -250,6 +250,9 @@ export class AldanService {
       accessToken.httpOptions
     ).pipe(
       retry(1),
+      map(data => {
+        return data
+      }),
       catchError(this.handleError),
     )
   }

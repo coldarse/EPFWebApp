@@ -192,13 +192,17 @@
                     </div>
                     <div class="col-1 lblSymbol">@</div>
                     <div class="col-4">
-                        <select name="emailDDL" id="emailDDL" #emailDDL>
+                        <select [(ngModel)]="elist" name="emailDDappL" id="emailDDL" #emailDDL (change)="onChange($event)" [hidden]="isCustom">
                             <option *ngFor="let elist of emailList" value={{elist}}>
                                 {{elist}}
                             </option>
                         </select>
+
+                        <input type="text" class="use-keyboard-input" id="emailDDLText" name="emailDDLText" placeholder="youremail.com" value="{{emailDDLTextValue}}" #emailDDLText [hidden]="!isCustom">
                     </div>
-                    <div class="col-2"></div>
+                    <div class="col-2">
+                        <button class="btn btn-primary reset" [hidden]="!isCustom" (click)="reset()">X</button>
+                    </div>
                 </div>
                 <div class="row" *ngIf="emailError">
                     <div class="col-2"></div>
@@ -283,7 +287,7 @@
                             <label class="lblInfo">{{phoneNo}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">{{emailAddress}}</label>
+                            <label class="lblInfo">{{fullEmailAddress}}</label>
                         </div>
                     </div>
                 </div>
@@ -393,7 +397,7 @@
                         <button type="button" class="btnNo" (click)="TnCNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="TnCYes()" [disabled]="xagreedTnc1">{{"agree"|translate}}</button>
+                        <button type="button" [ngClass]="xagreedTnc1 == false ? 'btnYes' : 'btnYesDisabled'" (click)="TnCYes()" [disabled]="xagreedTnc1">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -664,8 +668,7 @@
             <div class="row text-center padTopHalfrem">
                 <div class="col-1"></div>
                 <div class="col-10 scrollBox">
-                    <div class="scroll">
-                        <p>{{Contract}}</p>
+                    <div class="scroll contract" #contract>
                         <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC2()">
                         <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
@@ -679,7 +682,7 @@
                         <button type="button" class="btnNo" (click)="ShariahTnCNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="ShariahTnCYes()" [disabled]="xagreedTnc2">{{"agree"|translate}}</button>
+                        <button type="button" [ngClass]="xagreedTnc2 == false ? 'btnYes' : 'btnYesDisabled'" (click)="ShariahTnCYes()" [disabled]="xagreedTnc2">{{"agree"|translate}}</button>
                     </div>
                 </div>
                 <div class="row padTop5rem" *ngIf="isCallAPI">
@@ -797,7 +800,7 @@
                     <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
                 <div class="row padTop3rem">
-                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                    <div class="statusMsg">{{errorDesc}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>

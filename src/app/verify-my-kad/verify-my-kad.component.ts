@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -82,6 +82,9 @@ export class VerifyMyKadComponent implements OnInit {
         this._aldanService.GetBusinessTypes().subscribe((res: any) => {
           appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
           console.log(appFunc.businessTypes);
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
         this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
           appFunc.modules = res.body.map((em: any) => new eModules(em));
@@ -109,6 +112,9 @@ export class VerifyMyKadComponent implements OnInit {
             appFunc.message = "Under Maintenance";
             this.route.navigate(['outofservice']);
           }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
       }
     }
@@ -247,6 +253,9 @@ export class VerifyMyKadComponent implements OnInit {
             appFunc.message = result.body.error.message;
             this.route.navigate(['outofservice']);
           }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
 
         
@@ -290,44 +299,61 @@ export class VerifyMyKadComponent implements OnInit {
         "sessionId": appFunc.sessionId   
       }
       this._aldanService.MemberCIFDetailsCheck(body).subscribe((result: any) => {
-        if(result.body.responseCode == "0"){
-
-          const memberProfileBody = {
-            "regType": "M",
-            "accNum": result.body.detail.accNum,
-            "accType": "S",
-            "searchType": "A",
-            "idNum": currentMyKadDetails.ICNo,
-            "idType": catType,
-            "reqTypeCode": "",
-            "sessionId": appFunc.sessionId   
-          }
-          this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
-            if(result1.body.responseCode == "0"){
-              appFunc.currMemberDetail = result1.body.detail;
-              this.route.navigate(['mainMenu']);
+        if(result.status == 200){
+          if(result.body.responseCode == "0"){
+            const memberProfileBody = {
+              "regType": "M",
+              "accNum": result.body.detail.accNum,
+              "accType": "S",
+              "searchType": "A",
+              "idNum": currentMyKadDetails.ICNo,
+              "idType": catType,
+              "reqTypeCode": "",
+              "sessionId": appFunc.sessionId   
             }
-            else{
-              // Error  
-              appFunc.message = result1.body.error[0].description;
+            this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
+              if(result.status == 200){
+                if(result1.body.responseCode == "0"){
+                  appFunc.currMemberDetail = result1.body.detail;
+                  this.route.navigate(['mainMenu']);
+                }
+                else{
+                  // Error  
+                  appFunc.message = result1.body.error[0].description;
+                  this.route.navigate(['outofservice']);
+                }
+              }
+              else{
+                appFunc.message = result.message;
+                this.route.navigate(['outofservice']);
+              }
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
               this.route.navigate(['outofservice']);
-            }
-          });
-        }
-        else{
-          if(result.body.error.length == 0){
-            appFunc.message = "Error Connecting to Server";
-            this.route.navigate(['outofservice']);
-          }
-          if(result.body.error[0].code == "MBM2001"){
-            this.route.navigate(['registerMember']);
+            });
           }
           else{
-            // Error
-            appFunc.message = result.body.error[0].description;
-            this.route.navigate(['outofservice']);
+            if(result.body.error.length == 0){
+              appFunc.message = "Error Connecting to Server";
+              this.route.navigate(['outofservice']);
+            }
+            if(result.body.error[0].code == "MBM2001"){
+              this.route.navigate(['registerMember']);
+            }
+            else{
+              // Error
+              appFunc.message = result.body.error[0].description;
+              this.route.navigate(['outofservice']);
+            }
           }
         }
+        else{
+          appFunc.message = result.message;
+          this.route.navigate(['outofservice']);
+        }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
       });
     }
     catch(e: any){

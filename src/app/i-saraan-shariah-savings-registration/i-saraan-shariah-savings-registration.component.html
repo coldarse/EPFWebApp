@@ -126,7 +126,7 @@
                         <button type="button" class="btnNo" (click)="IShariahNo()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="IShariahYes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
+                        <button type="button" [ngClass]="xagreedTnc == false ? 'btnYes' : 'btnYesDisabled'" (click)="IShariahYes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
                     </div>
                 </div>
                 <div class="row padTop2rem" *ngIf="isCallAPI">
@@ -167,7 +167,7 @@
                     <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
                 <div class="row padTop3rem">
-                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                    <div class="statusMsg">{{errorDesc}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>

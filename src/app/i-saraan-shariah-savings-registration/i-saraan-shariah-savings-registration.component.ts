@@ -1,4 +1,5 @@
 import { formatDate } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,6 +36,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
   xagreedTnc = true;
   Contract = "";
+  errorDesc = "";
 
   defaultDDL = 'default';
   selectedJobSector: any = undefined;
@@ -95,20 +97,31 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this._aldanService
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.content != '') {
-            this.Contract = result.body.content;
-            this.RegSaraanShariah = false;
-            this.RegShariah = true; 
-            this.SelectIShariahISaraan = false;
-            this.IShariah = true;
-            setTimeout(() => {
-              this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
-            }, 200)
-          } else {
-            this.RegSaraanShariah = false;
-            this.Failed = true;
+          if(result.status == 200){
+            this.isCallAPI = false;
+            if (result.body.content != '') {
+              this.xagreedTnc = true;
+              this.Contract = result.body.content;
+              this.RegSaraanShariah = false;
+              this.RegShariah = true; 
+              this.SelectIShariahISaraan = false;
+              this.IShariah = true;
+              setTimeout(() => {
+                this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+              }, 200)
+            } else {
+              this.RegSaraanShariah = false;
+              this.Failed = true;
+              this.errorDesc = result.body.error[0].description;
+            }
           }
+          else{
+            appFunc.message = result.message;
+            this.route.navigate(['outofservice']);
+          }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
     }
   }
@@ -138,14 +151,24 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         this._aldanService
           .iSaraanRegistration(iSaraanBody)
           .subscribe((result: any) => {
-            this.isCallAPI = false;
-            if (result.body.responseCode == '0') {
-              this.ISaraan = false;
-              this.ISaraanSuccess = true;
-            } else {
-              this.ISaraan = false;
-              this.Failed = true;
+            if(result.status == 200){
+              this.isCallAPI = false;
+              if (result.body.responseCode == '0') {
+                this.ISaraan = false;
+                this.ISaraanSuccess = true;
+              } else {
+                this.ISaraan = false;
+                this.Failed = true;
+                this.errorDesc = result.body.error[0].description;
+              }
             }
+            else{
+              appFunc.message = result.message;
+              this.route.navigate(['outofservice']);
+            }
+          },(err: HttpErrorResponse) => {
+            appFunc.message = "HttpError";
+            this.route.navigate(['outofservice']);
           });
       } else {
         this.ISaraan = false;
@@ -184,14 +207,24 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this._aldanService
         .iShariahRegistration(iShariahBody)
         .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.responseCode == '0') {
-            this.IShariah = false;
-            this.IShariahSuccess = true;
-          } else {
-            this.IShariah = false;
-            this.Failed = true;
+          if(result.status == 200){
+            this.isCallAPI = false;
+            if (result.body.responseCode == '0') {
+              this.IShariah = false;
+              this.IShariahSuccess = true;
+            } else {
+              this.IShariah = false;
+              this.Failed = true;
+              this.errorDesc = result.body.error[0].description;
+            }
           }
+          else{
+            appFunc.message = result.message;
+            this.route.navigate(['outofservice']);
+          }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
     } else {
       this.IShariah = false;

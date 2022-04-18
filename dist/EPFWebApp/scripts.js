@@ -3247,7 +3247,7 @@
                 this.elements.startpos = currElem.selectionStart;
                 this.elements.endpos = currElem.selectionEnd;
                 this.elements.currElemLength = currElem.value.length;
-                //console.log(currElem);
+                console.log(currElem);
             }
         }
         catch(ex){
@@ -3627,5 +3627,7 @@ window.addEventListener("click", textclick, false);
 function textclick() {
     Keyboard._setActive();
 }
+
+
 ;
 //# sourceMappingURL=scripts.js.map
