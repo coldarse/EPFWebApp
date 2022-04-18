@@ -2,7 +2,7 @@
     <div class="header">{{ "UpdateTAC" | translate }}</div>
 
     <div class="container-fluid">
-        <div class="row padTop2rem content-container" *ngIf="EnterPhoneNo">
+        <div class="row padTop5rem content-container" *ngIf="EnterPhoneNo">
             <div class="text-center">
                 <div class="lblHeader">
                     {{"phoneEntryMsg"| translate}}
@@ -78,11 +78,15 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
-                    <div class="col marginZero">
-                        <button class="keypad" (click)="click0()">0</button>
-                    </div>
-                    <div class="col marginPadam">
-                        <button class="keypadPadam" (click)="clickDel()">{{ "delete" | translate }}</button>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click0()">0</button>
+                            </div>
+                            <div class="col marginPadam">
+                                <button class="keypadPadam" (click)="clickDel()">{{ "delete" | translate }}</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-4"></div>
                 </div>

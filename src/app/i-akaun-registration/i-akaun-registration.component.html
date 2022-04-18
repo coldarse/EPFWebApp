@@ -77,11 +77,15 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4"></div>
-                    <div class="col marginZero">
-                        <button class="keypad" (click)="click0()">0</button>
-                    </div>
-                    <div class="col marginPadam">
-                        <button class="keypadPadam" (click)="clickDel()">{{ "delete" | translate }}</button>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4 marginLeft">
+                                <button class="keypad" (click)="click0()">0</button>
+                            </div>
+                            <div class="col marginPadam">
+                                <button class="keypadPadam" (click)="clickDel()">{{ "delete" | translate }}</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-4"></div>
                 </div>

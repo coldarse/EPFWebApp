@@ -63,7 +63,7 @@ export class StartupComponent implements OnInit {
   login(password: string){
 
     if(!this.format.test(password)){
-      password + '=';
+      password = password.concat('=');
     }
 
     this._aldanService.getToken(signalRConnection.kioskCode, password)
@@ -178,12 +178,12 @@ export class StartupComponent implements OnInit {
     }
     this._aldanService.registerKiosk(signalRConnection.kioskInformation.id.toString(), kioskRegisterBody)
     .toPromise().then((result: any) => {
-      if(result){
+      if(result.body){
         signalRConnection.connection.invoke('UpdateAdapter', this.selectedAdapterValue).then((data: boolean) => {
           if(data){
 
             if(!this.format.test(this.selectedAdapterValueEncrypted)){
-              this.selectedAdapterValueEncrypted + '=';
+              this.selectedAdapterValueEncrypted = this.selectedAdapterValueEncrypted.concat('=');
             }
 
             const changepasswordBody = {
