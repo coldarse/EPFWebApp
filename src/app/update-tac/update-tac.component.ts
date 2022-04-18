@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +19,7 @@ export class UpdateTACComponent implements OnInit {
   Success = false;
   Failed = false;
   phoneNo = "";
+  errorDesc = "";
 
   phoneError = false;
   isCallAPI = false;
@@ -64,15 +66,25 @@ export class UpdateTACComponent implements OnInit {
       }
 
       this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {
-        this.isCallAPI = false;
-        if(result.body.responseCode == "0"){
-          this.PhoneNoConfirmation = false;
-          this.Success = true;
+        if(result.status == 200){
+          this.isCallAPI = false;
+          if(result.body.responseCode == "0"){
+            this.PhoneNoConfirmation = false;
+            this.Success = true;
+          }
+          else{
+            this.PhoneNoConfirmation = false;
+            this.Failed = true;
+            this.errorDesc = result.body.error[0].description;
+          }
         }
         else{
-          this.PhoneNoConfirmation = false;
-          this.Failed = true;
+          appFunc.message = result.message;
+          this.route.navigate(['outofservice']);
         }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
       });
     }
     else{

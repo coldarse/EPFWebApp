@@ -9,6 +9,7 @@ import { currMemberDetails } from '../_models/_currentMemberDetails';
 import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemberDetails';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { selectLang } from '../_models/language';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-check-balance',
@@ -88,20 +89,29 @@ export class CheckBalanceComponent implements OnInit {
     this._aldanService
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
-        if (result.body.responseCode == '0') {
-          this.sDetails = result.body.detail.summaryStatement;
-
-          this.sDetails.forEach((details: any) => {
-            this.grandTotal += Number(details.subAccBalance);
-            this.totalSavings = this.grandTotal;
-          });
+        if(result.status == 200){
+          if (result.body.responseCode == '0') {
+            this.sDetails = result.body.detail.summaryStatement;
+  
+            this.sDetails.forEach((details: any) => {
+              this.grandTotal += Number(details.subAccBalance);
+              this.totalSavings = this.grandTotal;
+            });
+          }
+          else{
+            // Error
+            this.SummaryStatementPage = false;
+            this.errorDesc = result.body.error[0].description;
+            this.Failed = true;
+          }
         }
         else{
-          // Error
-          this.SummaryStatementPage = false;
-          this.errorDesc = result.body.error[0].description;
-          this.Failed = true;
+          appFunc.message = result.message;
+          this.route.navigate(['outofservice']);
         }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
       });
   }
 
@@ -187,29 +197,38 @@ export class CheckBalanceComponent implements OnInit {
     };
 
     this._aldanService.MemberStatement(mainBody).subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-        this.isCallAPI = false;
-        this.cDetails = result.body.detail.mainStatement;
-        this.cDetails.forEach((details: any) => {
-          // this.transactionAmtForAcc1 += details.totalAmount;
-          details.transaction = 'Caruman-IWS';
-          const datepipe: DatePipe = new DatePipe('en-US')
-          let formattedDate = datepipe.transform(details.transactionDate, 'dd/MM/YYYY')
-          let formattedMonth = datepipe.transform(details.transactionDate, 'MMM-YY')
-          details.transactionDate = formattedDate;
-          details.contributionMth = formattedMonth;
-          this.transactionAmtForAcc1 += details.transactionAmtForAcc1;
-          this.SelectYearPage = false;
-          this.StatementPage = true;
-        });
+      if(result.status == 200){
+        if (result.body.responseCode == '0') {
+          this.isCallAPI = false;
+          this.cDetails = result.body.detail.mainStatement;
+          this.cDetails.forEach((details: any) => {
+            // this.transactionAmtForAcc1 += details.totalAmount;
+            details.transaction = 'Caruman-IWS';
+            const datepipe: DatePipe = new DatePipe('en-US')
+            let formattedDate = datepipe.transform(details.transactionDate, 'dd/MM/YYYY')
+            let formattedMonth = datepipe.transform(details.transactionDate, 'MMM-YY')
+            details.transactionDate = formattedDate;
+            details.contributionMth = formattedMonth;
+            this.transactionAmtForAcc1 += details.transactionAmtForAcc1;
+            this.SelectYearPage = false;
+            this.StatementPage = true;
+          });
+        }
+        else{
+          // Error
+          this.isCallAPI = false;
+          this.SummaryStatementPage = false;
+          this.errorDesc = result.body.error[0].description;
+          this.Failed = true;
+        }
       }
       else{
-        // Error
-        this.isCallAPI = false;
-        this.SummaryStatementPage = false;
-        this.errorDesc = result.body.error[0].description;
-        this.Failed = true;
+        appFunc.message = result.message;
+        this.route.navigate(['outofservice']);
       }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
     });
   }
 

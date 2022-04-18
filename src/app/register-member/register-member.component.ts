@@ -1,5 +1,6 @@
 import { state } from '@angular/animations';
 import { formatDate } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,11 +22,13 @@ declare const closeKeyboard: any;
 export class RegisterMemberComponent implements OnInit {
   @ViewChild('email') email: ElementRef | undefined;
   @ViewChild('emailDDL') emailDDL: ElementRef | undefined;
+  @ViewChild('emailDDLText') emailDDLText: ElementRef | undefined;
 
   @ViewChild('account_number') account_number: ElementRef | undefined;
   @ViewChild('password_1') password_1: ElementRef | undefined;
   @ViewChild('password_2') password_2: ElementRef | undefined;
   @ViewChild('secure_phrase') secure_phrase: ElementRef | undefined;
+  @ViewChild('contract') contractHTML : ElementRef | undefined;
 
   RegKWSP = true;
   RegShariah = false;
@@ -64,12 +67,17 @@ export class RegisterMemberComponent implements OnInit {
 
   phoneNo = '';
   emailAddress = '';
+  elist: string = 'gmail.com';
   emailList: string[] = [
-    'aldantechnology.com',
     'gmail.com',
     'hotmail.com',
     'yahoo.com',
+    'custom'
   ];
+
+  isCustom = false;
+  emailDDLTextValue = "";
+  fullEmailAddress = "";
 
   name = 'MUHAMMAD WAHYU NIZAM BIN OMIR';
   ic = '921130105537';
@@ -107,6 +115,7 @@ export class RegisterMemberComponent implements OnInit {
   checkboxImages: any[] = [];
 
   isCallAPI = false;
+  errorDesc = "";
 
   constructor(
     private route: Router,
@@ -225,6 +234,17 @@ export class RegisterMemberComponent implements OnInit {
     currentMyKadDetails.CategoryType = 'W';
   }
 
+  onChange(event: any){
+    if(event.target.value == 'custom'){
+      this.isCustom = true;
+    }
+  }
+
+  reset(){
+    this.elist = this.emailList[0];
+    this.isCustom = false;
+  }
+
   RegisterMemberYes() {
     this.RegisterMemberPage = false;
     this.InsertPhonePage = true;
@@ -261,10 +281,15 @@ export class RegisterMemberComponent implements OnInit {
     if (this.email?.nativeElement.value != '') {
       this.InsertEmailPage = false;
       this.ValidateProfilePage = true;
-      this.emailAddress =
-        this.email?.nativeElement.value +
-        '@' +
-        this.emailDDL?.nativeElement.value;
+      if(this.isCustom){
+        this.emailDDLTextValue = this.emailDDLText?.nativeElement.value;
+        this.emailAddress = this.email?.nativeElement.value;
+        this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDLText?.nativeElement.value;
+      }
+      else{
+        this.emailAddress = this.email?.nativeElement.value;
+        this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDL?.nativeElement.value;
+      }
       deleteKeyboard();
     } else {
       this.emailError = true;
@@ -593,77 +618,107 @@ export class RegisterMemberComponent implements OnInit {
       };
 
       this._aldanService.MemberRegistration(body).subscribe((result: any) => {
-        //Call Register Member
-        if (result.body.responseCode == '0') {
-          this.KWSPMemberNo = result.body.detail.accNum;
-          this.KWSPCustomerNo = result.body.detail.cifNum;
-
-          const addMobileTACBody = {
-            custNum: this.KWSPCustomerNo,
-            tacMobilePhoneCode: 'TA',
-            tacMobilePhone: this.phoneNo,
-            registrationDate: '2021-01-21',
-            registrationChannel: 'SAO',
-            status: 'P',
-            checkForDuplicate: 'N',
-            generateRequestNum: 'N',
-            requestNum: '',
-            sessionId: appFunc.sessionId,
-          };
-
-          this._aldanService
-            .AddTAC(addMobileTACBody)
-            .subscribe((result: any) => {
-              //Call Add TAC
-              if (result.body.responseCode == '0') {
-                if (this.isiAkaunRegModuleEnabled) {
-                  const iAkaunbody = {
-                    epfNum: this.KWSPMemberNo,
-                    tacMobileNum: this.phoneNo,
-                    branchCode: '',
-                    migrationFlag: '',
-                    clientChannel: 'SST',
-                    source: '',
-                    subSource: '',
-                    ipAddress: '',
-                    validity: '',
-                    sessionId: appFunc.sessionId,
-                  };
-
-                  this._aldanService
-                    .iAkaunRegistration(iAkaunbody)
-                    .subscribe((result: any) => {
-                      //Call Register I-Akaun
+        if(result.status == 200){
+          if (result.body.responseCode == '0') {
+            this.KWSPMemberNo = result.body.detail.accNum;
+            this.KWSPCustomerNo = result.body.detail.cifNum;
+  
+            const addMobileTACBody = {
+              custNum: this.KWSPCustomerNo,
+              tacMobilePhoneCode: 'TA',
+              tacMobilePhone: this.phoneNo,
+              registrationDate: '2021-01-21',
+              registrationChannel: 'SAO',
+              status: 'P',
+              checkForDuplicate: 'N',
+              generateRequestNum: 'N',
+              requestNum: '',
+              sessionId: appFunc.sessionId,
+            };
+  
+            this._aldanService
+              .AddTAC(addMobileTACBody)
+              .subscribe((result: any) => {
+                if(result.status == 200){
+                  //Call Add TAC
+                  if (result.body.responseCode == '0') {
+                    if (this.isiAkaunRegModuleEnabled) {
+                      const iAkaunbody = {
+                        epfNum: this.KWSPMemberNo,
+                        tacMobileNum: this.phoneNo,
+                        branchCode: '',
+                        migrationFlag: '',
+                        clientChannel: 'SST',
+                        source: '',
+                        subSource: '',
+                        ipAddress: '',
+                        validity: '',
+                        sessionId: appFunc.sessionId,
+                      };
+    
+                      this._aldanService
+                        .iAkaunRegistration(iAkaunbody)
+                        .subscribe((result: any) => {
+                          if(result.status == 200){
+                            //Call Register I-Akaun
+                            this.isCallAPI = false;
+                            if (result.body.responseCode == '0') {
+                              this.ValidateProfilePage = false;
+                              this.RegisterSuccessPage = true;
+      
+                              deleteKeyboard();
+                            } else {
+                              this.failedTAC = true;
+                              this.ValidateProfilePage = false;
+                              this.RegisterSuccessPage = true;
+                            }
+                          }
+                          else{
+                            appFunc.message = result.message;
+                            this.route.navigate(['outofservice']);
+                          }
+                        },(err: HttpErrorResponse) => {
+                          appFunc.message = "HttpError";
+                          this.route.navigate(['outofservice']);
+                        });
+                    } else {
                       this.isCallAPI = false;
-                      if (result.body.responseCode == '0') {
-                        this.ValidateProfilePage = false;
-                        this.RegisterSuccessPage = true;
-
-                        deleteKeyboard();
-                      } else {
-                        this.failedTAC = true;
-                        this.ValidateProfilePage = false;
-                        this.RegisterSuccessPage = true;
-                      }
-                    });
-                } else {
-                  this.isCallAPI = false;
-                  this.ValidateProfilePage = false;
-                  this.RegisterSuccessPage = true;
-
-                  deleteKeyboard();
+                      this.ValidateProfilePage = false;
+                      this.RegisterSuccessPage = true;
+    
+                      deleteKeyboard();
+                    }
+                  } else {
+                    this.isCallAPI = false;
+                    this.ValidateProfilePage = false;
+                    this.errorDesc = result.body.error[0].description;
+                    this.Failed = true;
+                  }
+                  }
+                else{
+                  appFunc.message = result.message;
+                  this.route.navigate(['outofservice']);
                 }
-              } else {
-                this.isCallAPI = false;
-                this.ValidateProfilePage = false;
-                this.Failed = true;
-              }
-            });
-        } else {
-          this.isCallAPI = false;
-          this.ValidateProfilePage = false;
-          this.Failed = true;
+              },(err: HttpErrorResponse) => {
+                appFunc.message = "HttpError";
+                this.route.navigate(['outofservice']);
+              });
+          } else {
+            this.isCallAPI = false;
+            this.ValidateProfilePage = false;
+            this.errorDesc = result.body.error[0].description;
+            this.Failed = true;
+          }
         }
+        else{
+          appFunc.message = result.message;
+          this.route.navigate(['outofservice']);
+        }
+        //Call Register Member
+        
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
       });
     } else {
       this.isCallAPI = false;
@@ -675,6 +730,7 @@ export class RegisterMemberComponent implements OnInit {
   ValidateProfileNo() {
     this.ValidateProfilePage = false;
     this.InsertEmailPage = true;
+    this.fullEmailAddress = "";
 
     setTimeout(() => {
       loadKeyboard();
@@ -689,17 +745,29 @@ export class RegisterMemberComponent implements OnInit {
           this._aldanService
             .GetTnC(selectLang.selectedLang, appFunc.sessionId)
             .subscribe((result: any) => {
-              this.isCallAPI = false;
-              if (result.body.content != '') {
-                this.TnC = result.body.content.toString();
-                this.content_version = result.body.contentVersion;
-                this.RegisterSuccessPage = false;
-                this.TnCPage = true;
-                this.RegKWSP = false;
-                this.RegIAkaun = true;
-              } else {
-                this.Failed = true;
+              if(result.status == 200){
+                this.isCallAPI = false;
+                if (result.body.content != '') {
+                  this.TnC = result.body.content.toString();
+                  this.content_version = result.body.contentVersion;
+                  this.RegisterSuccessPage = false;
+                  this.TnCPage = true;
+                  this.RegKWSP = false;
+                  this.RegIAkaun = true;
+                } else {
+                  this.RegisterSuccessPage = false;
+                  this.Failed = true;
+                  this.errorDesc = result.body.error[0].description;
+                }
               }
+              else{
+                appFunc.message = result.message;
+                this.route.navigate(['outofservice']);
+              }
+              
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
+              this.route.navigate(['outofservice']);
             });
         }
       } else {
@@ -736,6 +804,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   TnCNo() {
+    this.xagreedTnc1 = true;
     this.TnCPage = false;
     this.RegisterSuccessPage = true;
   }
@@ -788,16 +857,26 @@ export class RegisterMemberComponent implements OnInit {
           this._aldanService
             .ActivateIAkaun(iAkaunActBody)
             .subscribe((result: any) => {
-              this.isCallAPI = true;
-              if (result.body.epfNum != null) {
-                this.ActivateiAkaunPage = false;
-                this.ActivateSuccessPage = true;
-
-                deleteKeyboard();
-              } else {
-                this.ActivateiAkaunPage = false;
-                this.Failed = true;
+              if(result.status == 200){
+                this.isCallAPI = true;
+                if (result.body.epfNum != null) {
+                  this.ActivateiAkaunPage = false;
+                  this.ActivateSuccessPage = true;
+  
+                  deleteKeyboard();
+                } else {
+                  this.ActivateiAkaunPage = false;
+                  this.Failed = true;
+                  this.errorDesc = result.body.error[0].description;
+                }
               }
+              else{
+                appFunc.message = result.message;
+                this.route.navigate(['outofservice']);
+              }
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
+              this.route.navigate(['outofservice']);
             });
         } else {
           this.isCallAPI = true;
@@ -840,15 +919,15 @@ export class RegisterMemberComponent implements OnInit {
     if (FilledIn == 3) {
       let errorCount = 0;
       //Check Alphanumeric
-      if (!this.acctNo.match(/^[0-9a-z]+$/)) {
+      if (!this.acctNo.match(/^[0-9a-zA-Z]+$/)) {
         errorCount += 1;
         this.accountAlpha = true;
       }
-      if (!this.password1.match(/^[0-9a-z]+$/)) {
+      if (!this.password1.match(/^[0-9a-zA-Z]+$/)) {
         errorCount += 1;
         this.passwordAlpha = true;
       }
-      if (!this.password2.match(/^[0-9a-z]+$/)) {
+      if (!this.password2.match(/^[0-9a-zA-Z]+$/)) {
         errorCount += 1;
         this.passwordAlpha = true;
       }
@@ -890,20 +969,31 @@ export class RegisterMemberComponent implements OnInit {
           this._aldanService
             .GetSecureImage(appFunc.sessionId)
             .subscribe((result: any) => {
-              this.isCallAPI = false;
-              if (result.body.imgId != '') {
-                result.body.forEach((element: any) => {
-                  this.checkboxImages.push({
-                    imgId: element.imgId,
-                    imgPath: element.imgPath,
-                    checked: false,
+              if(result.status == 200){
+                this.isCallAPI = false;
+                if (result.body.imgId != '') {
+                  result.body.forEach((element: any) => {
+                    this.checkboxImages.push({
+                      imgId: element.imgId,
+                      imgPath: element.imgPath,
+                      checked: false,
+                    });
                   });
-                });
-                this.SetIdPassword = false;
-                this.ActivateiAkaunPage = true;
-              } else {
-                this.Failed = true;
+                  this.SetIdPassword = false;
+                  this.ActivateiAkaunPage = true;
+                } else {
+                  this.SetIdPassword = false;
+                  this.Failed = true;
+                  this.errorDesc = result.body.error[0].description;
+                }
               }
+              else{
+                appFunc.message = result.message;
+                this.route.navigate(['outofservice']);
+              }
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
+              this.route.navigate(['outofservice']);
             });
         }
       }
@@ -935,14 +1025,30 @@ export class RegisterMemberComponent implements OnInit {
       this._aldanService
         .GetContract(selectLang.selectedLang, appFunc.sessionId)
         .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.content != '') {
-            this.Contract = result.body.content;
-            this.PickShariahPage = false;
-            this.ShariahTnCPage = true;
-          } else {
-            this.Failed = true;
+          if(result.status == 200){
+            this.isCallAPI = false;
+            if (result.body.content != '') {
+              this.Contract = result.body.content;
+              this.PickShariahPage = false;
+              this.ShariahTnCPage = true;
+              this.xagreedTnc2 = true;
+              this.RegShariah = true;
+              setTimeout(() => {
+                this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+              }, 200)
+            } else {
+              this.PickShariahPage = false;
+              this.Failed = true;
+              this.errorDesc = result.body.error[0].description;
+            }
           }
+          else{
+            appFunc.message = result.message;
+            this.route.navigate(['outofservice']);
+          }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
     }
   }
@@ -970,13 +1076,24 @@ export class RegisterMemberComponent implements OnInit {
       this._aldanService
         .iShariahRegistration(iShariahBody)
         .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.responseCode == '0') {
-            this.ShariahTnCPage = false;
-            this.ShariahSuccessPage = true;
-          } else {
-            this.Failed = true;
+          if(result.status == 200){
+            this.isCallAPI = false;
+            if (result.body.responseCode == '0') {
+              this.ShariahTnCPage = false;
+              this.ShariahSuccessPage = true;
+            } else {
+              this.ShariahTnCPage = false;
+              this.Failed = true;
+              this.errorDesc = result.body.error[0].description;
+            }
           }
+          else{
+            appFunc.message = result.message;
+            this.route.navigate(['outofservice']);
+          }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
         });
     } else {
       this.isCallAPI = false;
@@ -1027,13 +1144,24 @@ export class RegisterMemberComponent implements OnInit {
         this._aldanService
           .iSaraanRegistration(iSaraanBody)
           .subscribe((result: any) => {
-            this.isCallAPI = false;
-            if (result.body.responseCode == '0') {
-              this.SelectJobPage = false;
-              this.SaraanSuccessPage = true;
-            } else {
-              this.Failed = true;
+            if(result.status == 200){
+              this.isCallAPI = false;
+              if (result.body.responseCode == '0') {
+                this.SelectJobPage = false;
+                this.SaraanSuccessPage = true;
+              } else {
+                this.SelectJobPage = false;
+                this.Failed = true;
+                this.errorDesc = result.body.error[0].description;
+              }
             }
+            else{
+              appFunc.message = result.message;
+              this.route.navigate(['outofservice']);
+            }
+          },(err: HttpErrorResponse) => {
+            appFunc.message = "HttpError";
+            this.route.navigate(['outofservice']);
           });
       } else {
         this.isCallAPI = false;

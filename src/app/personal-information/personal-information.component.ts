@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -38,6 +39,7 @@ export class PersonalInformationComponent implements OnInit {
   SaveProfilePage = false;
   SaveSuccessPage = false;
   Failed = false;
+  errorDesc = "";
 
   address1 = "NO 46";
   address2 = "JALAN BP 10/1";
@@ -230,36 +232,56 @@ export class PersonalInformationComponent implements OnInit {
       }
 
       this._aldanService.UpdateFullProfile(personalInformationBody,addressBody).subscribe((result: any) =>{
-        if(result[0].body.responseCode == "0" && result[1].body.responseCode== "0"){
+        if(result[0].status == 200 && result[1].status == 200){
+          if(result[0].body.responseCode == "0" && result[1].body.responseCode== "0"){
           
-          const body = {
-            "regType": "M",
-            "accNum": appFunc.currMemberDetail.accNum,
-            "accType": "S",
-            "searchType": "A",
-            "idNum": currentMyKadDetails.ICNo,
-            "idType": currentMyKadDetails.CategoryType,
-            "reqTypeCode": "",
-            "sessionId": appFunc.sessionId
+            const body = {
+              "regType": "M",
+              "accNum": appFunc.currMemberDetail.accNum,
+              "accType": "S",
+              "searchType": "A",
+              "idNum": currentMyKadDetails.ICNo,
+              "idType": currentMyKadDetails.CategoryType,
+              "reqTypeCode": "",
+              "sessionId": appFunc.sessionId
+            }
+            this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+              if(result.status == 200){
+                this.isCallAPI = false;
+                if(result.body.responseCode == "0"){
+                  appFunc.currMemberDetail = result.body.detail;
+                  this.SaveProfilePage = false;
+                  this.SaveSuccessPage = true;
+                }
+                else{
+                  this.SaveProfilePage = false;
+                  this.Failed = true;
+                  this.errorDesc = result.body.error[0].description;
+                }
+              }
+              else{
+                appFunc.message = result.message;
+                this.route.navigate(['outofservice']);
+              }
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
+              this.route.navigate(['outofservice']);
+            });
           }
-          this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+          else{
             this.isCallAPI = false;
-            if(result.body.responseCode == "0"){
-              appFunc.currMemberDetail = result.body.detail;
-              this.SaveProfilePage = false;
-              this.SaveSuccessPage = true;
-            }
-            else{
-              this.SaveProfilePage = false;
-              this.Failed = true;
-            }
-          });
+            this.SaveProfilePage = false;
+            this.Failed = true;
+            this.errorDesc = result.body.error[0].description;
+          }
         }
         else{
-          this.isCallAPI = false;
-          this.SaveProfilePage = false;
-          this.Failed = true;
+          appFunc.message = result.message;
+          this.route.navigate(['outofservice']);
         }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
       });
     }
     else{

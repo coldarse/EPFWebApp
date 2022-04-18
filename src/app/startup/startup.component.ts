@@ -83,14 +83,14 @@ export class StartupComponent implements OnInit {
             observe: 'response' as 'body'
         };
         this._aldanService.verifyKiosk(signalRConnection.kioskCode)
-        .toPromise().then((resultKiosk: any) => {
-          if(!isNaN(resultKiosk)){ //Number
-            console.log(resultKiosk);
-            appFunc.message = resultKiosk.toString();
+        .toPromise().then((result: any) => {
+          console.log(result)
+          if(!isNaN(result.body)){
+            appFunc.message = result.body.toString();
             this.route.navigate(['outofservice']);
           }
           else{ //Not Number
-            signalRConnection.kioskInformation = resultKiosk.body;
+            signalRConnection.kioskInformation = result.body;
             // Not Registered
             if(signalRConnection.kioskInformation.macAddress == ""){
               // Ask to Register Kiosk
@@ -104,7 +104,7 @@ export class StartupComponent implements OnInit {
               }
               //Mac Address Doesn't Match
               else{
-                console.log(resultKiosk);
+                console.log(result.body);
                 appFunc.message = "Unauthorized";
                 this.route.navigate(['outofservice']);
               }

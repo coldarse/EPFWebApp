@@ -10884,10 +10884,17 @@ textarea.form-control-lg {
 }
 
 .lblPopupBlack {
-    font-size: 22px;
+    font-size: 19px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
+    color: black;
+}
+
+.lblList {
+    font-size: 19px;
+    font-family: 'filson-pro', sans-serif;
+    font-style: normal;
     color: black;
 }
 
@@ -10966,9 +10973,21 @@ textarea.form-control-lg {
 
 .btnYes {
     background-color: rgb(49, 39, 131);
-    ;
     border-color: rgb(49, 39, 131);
     color: white;
+    font-family: 'filson-pro', sans-serif;
+    border-width: 2px;
+    border-radius: 75px;
+    font-size: 22.5px;
+    min-width: 350px;
+    font-weight: 600;
+    min-height: 75px;
+}
+
+.btnYesDisabled {
+    background-color: rgb(88, 89, 91);
+    border-color: rgb(35, 31, 32);
+    color: rgb(35, 31, 32);
     font-family: 'filson-pro', sans-serif;
     border-width: 2px;
     border-radius: 75px;
@@ -11013,7 +11032,7 @@ textarea.form-control-lg {
     font-weight: 700;
 }
 
-#emailDDL {
+#emailDDL, #emailDDLText {
     border-width: thin;
     width: 30rem;
     height: 3rem;
@@ -11049,6 +11068,7 @@ textarea.form-control-lg {
     font-weight: 700;
     color: rgb(49, 39, 131);
     margin-right: -65px;
+    margin-top: 1rem;
 }
 
 .lblKWSP {
@@ -11116,6 +11136,26 @@ th {
     font-weight: 500;
     color: white;
     padding: 15px 10px 15px 10px;
+}
+
+.tblMissing{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thMissing {
+    border: 0.5px solid rgb(49, 39, 131);
+    background-color: rgb(49, 39, 131);
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    width: 50%;
+    text-align: center;
+}
+
+.tdBorder{
+    border: 1px solid;
 }
 
 td {
@@ -11522,6 +11562,15 @@ ul.dropdown-menu a.dropdown-item:hover {
     border-color: grey;
     border:1px solid;
     margin:35px;
+}
+
+.reset{
+    margin-top: 0.15rem;
+    width: 45px;
+    height: 45px;
+    margin-left: -4rem;
+    font-size: 30px;
+    font-family: 'filson-pro', sans-serif;
 }
 .keyboard {
     position: fixed;

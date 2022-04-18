@@ -27,6 +27,7 @@ import { ScreensaverComponent } from './screensaver/screensaver.component';
 import { appFunc } from './_models/_appFunc';
 import { OutOfServiceComponent } from './out-of-service/out-of-service.component';
 import { StartupComponent } from './startup/startup.component';
+import { FormsModule } from '@angular/forms';
 // import { NgxSpinnerModule } from 'ngx-spinner';
 // import { JsonAppConfigService } from './config/json-app-config.service';
 
@@ -80,6 +81,7 @@ export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
         }),
     SignalRModule.forRoot(createConfig),
     // NgxSpinnerModule,
+    FormsModule
   ],
   providers: [
     currentMyKadDetails,

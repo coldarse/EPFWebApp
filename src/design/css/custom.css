@@ -516,9 +516,21 @@
 
 .btnYes {
     background-color: rgb(49, 39, 131);
-    ;
     border-color: rgb(49, 39, 131);
     color: white;
+    font-family: 'filson-pro', sans-serif;
+    border-width: 2px;
+    border-radius: 75px;
+    font-size: 22.5px;
+    min-width: 350px;
+    font-weight: 600;
+    min-height: 75px;
+}
+
+.btnYesDisabled {
+    background-color: rgb(88, 89, 91);
+    border-color: rgb(35, 31, 32);
+    color: rgb(35, 31, 32);
     font-family: 'filson-pro', sans-serif;
     border-width: 2px;
     border-radius: 75px;
@@ -564,7 +576,7 @@
 }
 
 
-#emailDDL {
+#emailDDL, #emailDDLText {
     border-width: thin;
     width: 30rem;
     height: 3rem;
@@ -572,6 +584,7 @@
     font-weight: 700;
     margin-left: 1rem;
 }
+
 
 #jobDDL {
     position: relative;
@@ -602,6 +615,7 @@
     font-weight: 700;
     color: rgb(49, 39, 131);
     margin-right: -65px;
+    margin-top: 1rem;
 }
 
 .lblKWSP {
@@ -1100,4 +1114,13 @@ ul.dropdown-menu a.dropdown-item:hover {
     border-color: grey;
     border:1px solid;
     margin:35px;
+}
+
+.reset{
+    margin-top: 0.15rem;
+    width: 45px;
+    height: 45px;
+    margin-left: -4rem;
+    font-size: 30px;
+    font-family: 'filson-pro', sans-serif;
 }

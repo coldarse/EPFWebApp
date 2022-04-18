@@ -116,12 +116,25 @@
                     </div>
                     <div class="col-1 lblSymbol">@</div>
                     <div class="col-4">
-                        <select name="emailDDL" id="emailDDL" #emailDDL>
+                        <select [(ngModel)]="elist" name="emailDDL" id="emailDDL" #emailDDL (change)="onChange($event)" [hidden]="isCustom">
                             <option *ngFor="let elist of emailList" value={{elist}}>
                                 {{elist}}
                             </option>
                         </select>
+
+                        <input type="text" class="use-keyboard-input" id="emailDDLText" name="emailDDLText" placeholder="youremail.com" value="{{emailDDLTextValue}}" #emailDDLText [hidden]="!isCustom">
                     </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary reset" [hidden]="!isCustom" (click)="reset()">X</button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="emailError">
+                    <div class="col-2"></div>
+                    <div class="col-3">
+                        <h5 class="errorMsg">{{"emptyEmailError"| translate}}</h5>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-4"></div>
                     <div class="col-2"></div>
                 </div>
                 <div class="row padTop10rem">
@@ -149,7 +162,7 @@
                     </div>
                     <div class="col-1">
                         <div class="row">
-                            <label class="lblSymbol" style="padding-top: 0.75rem;">:</label>
+                            <label class="lblSymbol">:</label>
                         </div>
                     </div>
                     <div class="col-5">
@@ -167,12 +180,12 @@
                     </div>
                     <div class="col-1">
                         <div class="row">
-                            <label class="lblSymbol" style="padding-top: 0.75rem;">:</label>
+                            <label class="lblSymbol">:</label>
                         </div>
                     </div>
                     <div class="col-5">
                         <div class="row">
-                            <label class="lblInfo">{{emailAddress}}</label>
+                            <label class="lblInfo">{{fullEmailAddress}}</label>
                         </div>
                     </div>
                 </div>
@@ -258,7 +271,7 @@
                         <button type="button" class="btnNo" (click)="IAkaunTNCno()">{{"back"|translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="IAkaunTNCyes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
+                        <button type="button" [ngClass]="xagreedTnc == false ? 'btnYes' : 'btnYesDisabled'" (click)="IAkaunTNCyes()" [disabled]="xagreedTnc">{{"agree"|translate}}</button>
                     </div>
                 </div>
             </div>
@@ -532,7 +545,7 @@
                     <img src="assets/images/Icon-TidakBerjaya.svg" width="250" height="225">
                 </div>
                 <div class="row padTop3rem">
-                    <div class="statusMsg">{{"ActionFailed"|translate}}</div>
+                    <div class="statusMsg">{{errorDesc}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
