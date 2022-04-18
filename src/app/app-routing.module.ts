@@ -12,6 +12,7 @@ import { ISaraanShariahSavingsRegistrationComponent } from './i-saraan-shariah-s
 import { ScreensaverComponent } from './screensaver/screensaver.component';
 import { OutOfServiceComponent } from './out-of-service/out-of-service.component';
 import { StartupComponent } from './startup/startup.component';
+import { WithdrawalComponent } from './withdrawal/withdrawal.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/startup', pathMatch: 'full'},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'iSaraanShariahSavingsRegistration', component: ISaraanShariahSavingsRegistrationComponent},
   {path: 'screenSaver', component: ScreensaverComponent},
   {path: 'outofservice', component: OutOfServiceComponent},
-  {path: 'startup', component: StartupComponent}
+  {path: 'startup', component: StartupComponent},
+  {path: 'withdrawal', component: WithdrawalComponent},
 ];
 
 @NgModule({
