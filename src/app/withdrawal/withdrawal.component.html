@@ -1,0 +1,96 @@
+<div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
+    <div class="header">{{ "withdrawal" | translate }}</div>
+
+    <div class="container-fluid">
+        <div class="row padTop2rem" *ngIf="Selections">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"withdrawalListMsg"| translate}}
+                </div>
+                <div class="row padTopHalfrem">
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <button type="button" class="btnThumbprint">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="row">
+                                        {{"55yo"| translate}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="lblDate">08 Jan 2022</label>
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                                <div class="col-2">
+                                    <input class="regular-checkbox big-checkbox marginTopHalfrem" type="checkbox"
+                                        value="" (click)="check55yo()">
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="row padTop2rem">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="note">
+                            {{"thumbprintNotes"|translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row padTop2rem">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <button type="button" class="btnNo" (click)="SelectionsNo()">{{"back"| translate}}</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btnYes" (click)="SelectionsYes()">{{"proceed"| translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row padTop2rem" *ngIf="withdrawal55yo">
+            <div class="text-center">
+                <div class="lblHeader">
+                    {{"55withdrawal"| translate}}
+                </div>
+                <div class="note2">
+                    {{"fillMsg"|translate}}:
+                </div>
+            </div>
+            <div class="row padTop2rem">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"requestAmount"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="row">
+                        <input type="text" class="use-keyboard-input txtProfile">
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row padTop2rem">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <label class="lblProfile">{{"paymentOptions"|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="row">
+                        <input type="text" class="use-keyboard-input txtProfile">
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row padTop3rem">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <label>{{"bankDetails"|translate}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
