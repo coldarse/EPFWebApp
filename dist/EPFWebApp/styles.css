@@ -10646,7 +10646,7 @@ textarea.form-control-lg {
 }
 
 .marginPadam {
-    margin-right: 0.7rem;
+    margin-left: -1rem;
 }
 
 .marginRight10rem {
@@ -10700,6 +10700,7 @@ textarea.form-control-lg {
     padding: 10px 50px 10px 50px;
     border-radius: 10px;
     font-weight: 800;
+    min-width: 125px;
 }
 
 .keypadPadam {
@@ -10715,7 +10716,8 @@ textarea.form-control-lg {
     border-radius: 10px;
     font-weight: 800;
     height: 61.5px;
-    width: 250px;
+    width: 260px;
+    margin-left: 12px;
 }
 
 .example {

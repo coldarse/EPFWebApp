@@ -184,7 +184,7 @@ export class RegisterMemberComponent implements OnInit {
 
     this.name = currentMyKadDetails.Name;
     this.ic = currentMyKadDetails.ICNo;
-    this.dob = currentMyKadDetails.DOB;
+    this.dob = formatDate(currentMyKadDetails.DOB, 'dd/MM/yyyy' ,'en');
     this.nationality = currentMyKadDetails.Citizenship;
     this.gender = currentMyKadDetails.Gender;
     if(selectLang.selectedLang == 'bm'){
