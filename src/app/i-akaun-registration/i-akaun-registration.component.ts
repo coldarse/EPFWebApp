@@ -102,7 +102,6 @@ export class IAkaunRegistrationComponent implements OnInit {
 
     this.ic = currentMyKadDetails.ICNo;
     this.name = currentMyKadDetails.Name;
-    // this.acctNo = this.ic;
   }
 
   hardcodedIC() {
@@ -132,10 +131,6 @@ export class IAkaunRegistrationComponent implements OnInit {
     currentMyKadDetails.CardVersion = '';
     currentMyKadDetails.OtherID = '';
     currentMyKadDetails.CategoryType = 'W';
-  }
-
-  ngAfterViewInit() {
-    loadKeyboard();
   }
 
   clickTNC() {
@@ -394,8 +389,12 @@ export class IAkaunRegistrationComponent implements OnInit {
   ActivateInformationNo() {
     this.ActivateInformation = false;
     this.SetIdPassword = true;
-
+    this.checkboxImages = [];
     deleteKeyboard();
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   SetIdPasswordYes(){
@@ -465,10 +464,12 @@ export class IAkaunRegistrationComponent implements OnInit {
       }
 
       if (errorCount == 0) {
+        this.checkboxImages = [];
         if (appFunc.bypassAPI != true) {
           this.isCallAPI = true;
           this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
             if(result.status == 200){
+              deleteKeyboard();
               this.isCallAPI = false;
               if (result.body.imgId != '') {
                 result.body.forEach((element: any) => {
@@ -480,6 +481,9 @@ export class IAkaunRegistrationComponent implements OnInit {
                 });
                 this.SetIdPassword = false;
                 this.ActivateInformation = true;
+                setTimeout(() => {
+                  loadKeyboard();
+                }, 500);
               } else {
                 this.Failed = true;
                 this.SetIdPassword = false;
