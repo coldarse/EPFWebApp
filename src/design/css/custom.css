@@ -92,6 +92,10 @@
     padding-top: 5rem;
 }
 
+.padTop6rem {
+    padding-top: 5rem;
+}
+
 .padTop7rem {
     padding-top: 7rem;
 }
@@ -350,7 +354,10 @@
     display: inline;
 }
 
-
+.banner{
+    width: 1368px;
+    margin-left: -11px;
+}
 
 
 .lblQuestion {

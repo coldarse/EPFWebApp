@@ -629,6 +629,17 @@ export class RegisterMemberComponent implements OnInit {
         sessionId: appFunc.sessionId,
       };
 
+      const Profilebody = {
+        "regType": "M",
+        "accNum": appFunc.currMemberDetail.accNum,
+        "accType": "S",
+        "searchType": "A",
+        "idNum": currentMyKadDetails.ICNo,
+        "idType": currentMyKadDetails.CategoryType,
+        "reqTypeCode": "",
+        "sessionId": appFunc.sessionId
+      }
+
       this._aldanService.MemberRegistration(body).subscribe((result: any) => {
         if(result.status == 200){
           if (result.body.responseCode == '0') {
@@ -670,7 +681,8 @@ export class RegisterMemberComponent implements OnInit {
                         .iAkaunRegistration(iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
-                            this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+                         
+                            this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                               if(result.status == 200){
                                 this.isCallAPI = false;
                                 deleteKeyboard();
@@ -702,9 +714,11 @@ export class RegisterMemberComponent implements OnInit {
                           this.route.navigate(['outofservice']);
                         });
                     } else {
-                      this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+                      this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                         if(result.status == 200){
                           this.isCallAPI = false;
+                          if (result.body.responseCode == '0') {
+                          appFunc.currMemberDetail = result.body.detail;
                           this.ValidateProfilePage = false;
                           this.RegisterSuccessPage = true;
         
@@ -716,6 +730,7 @@ export class RegisterMemberComponent implements OnInit {
                           this.errorDesc = result.body.error[0].description;
                           this.Failed = true;
                         }
+                      }
                       });
                     }
                   } else {
