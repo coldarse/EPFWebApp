@@ -537,7 +537,7 @@ export class RegisterMemberComponent implements OnInit {
           religion = '6';
           break;
         }
-        case 'LAIN UGAMA': {
+        case 'LAIN AGAMA': {
           religion = '7';
           break;
         }
