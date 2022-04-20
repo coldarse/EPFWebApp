@@ -3497,10 +3497,21 @@ class RegisterMemberComponent {
         this.gender = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender;
         if (_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang == 'bm') {
             if (this.gender == 'Male') {
-                this.gender = 'Lelaki';
+                this.gender = 'LELAKI';
             }
             else {
-                this.gender = 'Perempuan';
+                this.gender = 'PEREMPUAN';
+            }
+        }
+        else {
+            if (this.gender == 'Male') {
+                this.gender = 'MALE';
+            }
+            else {
+                this.gender = 'FEMALE';
+            }
+            if (this.nationality == 'WARGANEGARA') {
+                this.nationality = 'CITIZEN';
             }
         }
         this.race = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race;
@@ -3903,7 +3914,7 @@ class RegisterMemberComponent {
                             tacMobilePhoneCode: 'TA',
                             tacMobilePhone: this.phoneNo,
                             registrationDate: '2021-01-21',
-                            registrationChannel: 'SAO',
+                            registrationChannel: 'KSK',
                             status: 'P',
                             checkForDuplicate: 'N',
                             generateRequestNum: 'N',
@@ -5175,7 +5186,7 @@ class ISaraanShariahSavingsRegistrationComponent {
                 custNum: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.cifNum,
                 accNum: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.accNum,
                 accType: 'S',
-                electChannel: 'SAO',
+                electChannel: 'SST',
                 electReceivedDate: '2019-10-11',
                 electReceivedTime: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'hh.mm.ss', 'en'),
                 electReceivedBranch: '1',
@@ -10393,6 +10404,9 @@ class AldanService {
     GetContract(locale, sessionid) {
         return this.http.get(this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=${sessionid}&locale=${locale}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
+    SendRegistrationSuccessEmail(body) {
+        return this.http.post(this.url + 'Registration/MemberRegistration/DataSetMemberRegistration', body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+    }
 }
 AldanService.ɵfac = function AldanService_Factory(t) { return new (t || AldanService)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_config_app_configuration__WEBPACK_IMPORTED_MODULE_6__["AppConfiguration"])); };
 AldanService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjectable"]({ token: AldanService, factory: AldanService.ɵfac, providedIn: 'root' });
@@ -10793,7 +10807,7 @@ class UpdateTACComponent {
                 "custNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.cifNum,
                 "tacMobilePhoneCode": "TA",
                 "tacMobilePhone": this.phoneNo,
-                "amendmentChannel": "SAO",
+                "amendmentChannel": "KSK",
                 "status": "P",
                 "checkForDuplicate": "N",
                 "generateRequestNum": "N",

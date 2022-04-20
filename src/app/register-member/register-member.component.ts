@@ -189,10 +189,22 @@ export class RegisterMemberComponent implements OnInit {
     this.gender = currentMyKadDetails.Gender;
     if(selectLang.selectedLang == 'bm'){
       if(this.gender == 'Male'){
-        this.gender = 'Lelaki';
+        this.gender = 'LELAKI';
       }
       else{
-        this.gender = 'Perempuan';
+        this.gender = 'PEREMPUAN';
+      }
+    }
+    else{
+      if(this.gender == 'Male'){
+        this.gender = 'MALE';
+      }
+      else{
+        this.gender = 'FEMALE';
+      }
+
+      if(this.nationality == 'WARGANEGARA'){
+        this.nationality = 'CITIZEN'
       }
     }
     this.race = currentMyKadDetails.Race;
@@ -640,7 +652,6 @@ export class RegisterMemberComponent implements OnInit {
               .AddTAC(addMobileTACBody)
               .subscribe((result: any) => {
                 if(result.status == 200){
-                  //Call Add TAC
                   if (result.body.responseCode == '0') {
                     if (this.isiAkaunRegModuleEnabled) {
                       const iAkaunbody = {
@@ -655,7 +666,6 @@ export class RegisterMemberComponent implements OnInit {
                         validity: '',
                         sessionId: appFunc.sessionId,
                       };
-    
                       this._aldanService
                         .iAkaunRegistration(iAkaunbody)
                         .subscribe((result: any) => {
@@ -673,8 +683,7 @@ export class RegisterMemberComponent implements OnInit {
                                   this.ValidateProfilePage = false;
                                   this.RegisterSuccessPage = true;
                                 }
-                              }
-                              else{
+                              }else{
                                 appFunc.message = result.message;
                                 this.route.navigate(['outofservice']);
                               }
@@ -693,11 +702,21 @@ export class RegisterMemberComponent implements OnInit {
                           this.route.navigate(['outofservice']);
                         });
                     } else {
-                      this.isCallAPI = false;
-                      this.ValidateProfilePage = false;
-                      this.RegisterSuccessPage = true;
-    
-                      deleteKeyboard();
+                      this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+                        if(result.status == 200){
+                          this.isCallAPI = false;
+                          this.ValidateProfilePage = false;
+                          this.RegisterSuccessPage = true;
+        
+                          deleteKeyboard();
+                        }
+                        else{
+                          this.isCallAPI = false;
+                          this.ValidateProfilePage = false;
+                          this.errorDesc = result.body.error[0].description;
+                          this.Failed = true;
+                        }
+                      });
                     }
                   } else {
                     this.isCallAPI = false;
