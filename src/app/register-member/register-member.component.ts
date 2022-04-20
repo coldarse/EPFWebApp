@@ -189,10 +189,22 @@ export class RegisterMemberComponent implements OnInit {
     this.gender = currentMyKadDetails.Gender;
     if(selectLang.selectedLang == 'bm'){
       if(this.gender == 'Male'){
-        this.gender = 'Lelaki';
+        this.gender = 'LELAKI';
       }
       else{
-        this.gender = 'Perempuan';
+        this.gender = 'PEREMPUAN';
+      }
+    }
+    else{
+      if(this.gender == 'Male'){
+        this.gender = 'MALE';
+      }
+      else{
+        this.gender = 'FEMALE';
+      }
+
+      if(this.nationality == 'WARGANEGARA'){
+        this.nationality = 'CITIZEN'
       }
     }
     this.race = currentMyKadDetails.Race;
@@ -640,7 +652,6 @@ export class RegisterMemberComponent implements OnInit {
               .AddTAC(addMobileTACBody)
               .subscribe((result: any) => {
                 if(result.status == 200){
-                  //Call Add TAC
                   if (result.body.responseCode == '0') {
                     if (this.isiAkaunRegModuleEnabled) {
                       const iAkaunbody = {
@@ -655,23 +666,32 @@ export class RegisterMemberComponent implements OnInit {
                         validity: '',
                         sessionId: appFunc.sessionId,
                       };
-    
                       this._aldanService
                         .iAkaunRegistration(iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
-                            //Call Register I-Akaun
-                            this.isCallAPI = false;
-                            if (result.body.responseCode == '0') {
-                              this.ValidateProfilePage = false;
-                              this.RegisterSuccessPage = true;
-      
-                              deleteKeyboard();
-                            } else {
-                              this.failedTAC = true;
-                              this.ValidateProfilePage = false;
-                              this.RegisterSuccessPage = true;
-                            }
+                            this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+                              if(result.status == 200){
+                                this.isCallAPI = false;
+                                deleteKeyboard();
+                                if (result.body.responseCode == '0') {
+                                  appFunc.currMemberDetail = result.body.detail;
+                                  this.ValidateProfilePage = false;
+                                  this.RegisterSuccessPage = true;
+                                } else {
+                                  this.failedTAC = true;
+                                  this.ValidateProfilePage = false;
+                                  this.RegisterSuccessPage = true;
+                                }
+                              }else{
+                                appFunc.message = result.message;
+                                this.route.navigate(['outofservice']);
+                              }
+                            }, 
+                            (err: HttpErrorResponse) => {
+                              appFunc.message = "HttpError";
+                              this.route.navigate(['outofservice']);
+                            });
                           }
                           else{
                             appFunc.message = result.message;
@@ -682,11 +702,21 @@ export class RegisterMemberComponent implements OnInit {
                           this.route.navigate(['outofservice']);
                         });
                     } else {
-                      this.isCallAPI = false;
-                      this.ValidateProfilePage = false;
-                      this.RegisterSuccessPage = true;
-    
-                      deleteKeyboard();
+                      this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
+                        if(result.status == 200){
+                          this.isCallAPI = false;
+                          this.ValidateProfilePage = false;
+                          this.RegisterSuccessPage = true;
+        
+                          deleteKeyboard();
+                        }
+                        else{
+                          this.isCallAPI = false;
+                          this.ValidateProfilePage = false;
+                          this.errorDesc = result.body.error[0].description;
+                          this.Failed = true;
+                        }
+                      });
                     }
                   } else {
                     this.isCallAPI = false;
@@ -844,7 +874,7 @@ export class RegisterMemberComponent implements OnInit {
         if (appFunc.bypassAPI != true) {
           this.isCallAPI = true;
           const iAkaunActBody = {
-            epfNum: appFunc.currMemberDetail.accNum,
+            epfNum: this.KWSPMemberNo,
             id_no: this.ic,
             user_id: this.acctNo,
             new_password: this.password1,
@@ -858,7 +888,7 @@ export class RegisterMemberComponent implements OnInit {
             .ActivateIAkaun(iAkaunActBody)
             .subscribe((result: any) => {
               if(result.status == 200){
-                this.isCallAPI = true;
+                this.isCallAPI = false;
                 if (result.body.epfNum != null) {
                   this.ActivateiAkaunPage = false;
                   this.ActivateSuccessPage = true;
@@ -879,12 +909,12 @@ export class RegisterMemberComponent implements OnInit {
               this.route.navigate(['outofservice']);
             });
         } else {
-          this.isCallAPI = true;
+          this.isCallAPI = false;
           this.ActivateiAkaunPage = false;
           this.ActivateSuccessPage = true;
         }
       } else {
-        this.isCallAPI = true;
+        this.isCallAPI = false;
         //if error
       }
     }
@@ -894,7 +924,12 @@ export class RegisterMemberComponent implements OnInit {
     this.ActivateiAkaunPage = false;
     this.SetIdPassword = true;
 
+    this.checkboxImages = [];
     deleteKeyboard();
+
+    setTimeout(() => {
+      loadKeyboard();
+    }, 500);
   }
 
   SetIdPasswordYes() {
@@ -970,6 +1005,7 @@ export class RegisterMemberComponent implements OnInit {
             .GetSecureImage(appFunc.sessionId)
             .subscribe((result: any) => {
               if(result.status == 200){
+                deleteKeyboard();
                 this.isCallAPI = false;
                 if (result.body.imgId != '') {
                   result.body.forEach((element: any) => {
@@ -981,6 +1017,9 @@ export class RegisterMemberComponent implements OnInit {
                   });
                   this.SetIdPassword = false;
                   this.ActivateiAkaunPage = true;
+                  setTimeout(() => {
+                    loadKeyboard();
+                  }, 500);
                 } else {
                   this.SetIdPassword = false;
                   this.Failed = true;

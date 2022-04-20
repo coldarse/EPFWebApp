@@ -38,4 +38,8 @@ export class OutOfServiceComponent implements OnInit {
     }, 1000);
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.readerIntervalId);
+  }
+
 }
