@@ -44,7 +44,7 @@
                             <label class="lblInfo">{{ ic }}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">{{ dob | date : 'shortDate' }}</label>
+                            <label class="lblInfo">{{ dob  }}</label>
                         </div>
                         <div class="row">
                             <label class="lblInfo">{{ nationality }}</label>
@@ -86,7 +86,7 @@
                 <div class="row" *ngIf="phoneError">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <h2 class="errorMsg">{{"emptyPhoneError"| translate}}</h2>
+                        <h5 class="errorMsg">{{"emptyPhoneError"| translate}}</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -269,7 +269,7 @@
                             <label class="lblInfo">{{ic}}</label>
                         </div>
                         <div class="row">
-                            <label class="lblInfo">{{dob | date : 'shortDate'}}</label>
+                            <label class="lblInfo">{{dob}}</label>
                         </div>
                         <div class="row">
                             <label class="lblInfo">{{nationality}}</label>
