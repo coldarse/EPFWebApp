@@ -191,7 +191,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         custNum: appFunc.currMemberDetail.cifNum, //this.KWSPCustomerNo,
         accNum: appFunc.currMemberDetail.accNum, //this.KWSPMemberNo,
         accType: 'S',
-        electChannel: 'SAO',
+        electChannel: 'SST',
         electReceivedDate: '2019-10-11',//formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         electReceivedTime: formatDate(new Date(), 'hh.mm.ss', 'en'),
         electReceivedBranch: '1',

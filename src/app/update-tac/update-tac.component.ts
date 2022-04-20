@@ -57,7 +57,7 @@ export class UpdateTACComponent implements OnInit {
         "custNum": appFunc.currMemberDetail.cifNum,
         "tacMobilePhoneCode": "TA",
         "tacMobilePhone": this.phoneNo,
-        "amendmentChannel": "SAO",
+        "amendmentChannel": "KSK",
         "status": "P",
         "checkForDuplicate": "N",
         "generateRequestNum": "N",
