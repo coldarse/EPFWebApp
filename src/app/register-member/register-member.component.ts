@@ -602,7 +602,7 @@ export class RegisterMemberComponent implements OnInit {
         officePhone: '',
         mobilePhone: this.phoneNo,
         faxNum: '',
-        emailAdd: this.emailAddress,
+        emailAdd: this.fullEmailAddress,
         areaCode: areaCode,
         creationDate: '0001-01-01',
         creationTime: '',
@@ -622,12 +622,12 @@ export class RegisterMemberComponent implements OnInit {
           if (result.body.responseCode == '0') {
             this.KWSPMemberNo = result.body.detail.accNum;
             this.KWSPCustomerNo = result.body.detail.cifNum;
-  
+
             const addMobileTACBody = {
               custNum: this.KWSPCustomerNo,
               tacMobilePhoneCode: 'TA',
               tacMobilePhone: this.phoneNo,
-              registrationDate: '2021-01-21',
+              registrationDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
               registrationChannel: 'KSK',
               status: 'P',
               checkForDuplicate: 'N',

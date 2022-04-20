@@ -230,6 +230,18 @@ export class AldanService {
     )
   }
 
+  //Prepare PDF Report
+  PreparePDF(body: any){
+    return this.http.post(
+      this.url + 'Registration/MemberRegistration/DataSetMemberRegistration',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
   //i-Shariah Registration
   iShariahRegistration(body: any){
     return this.http.post(
