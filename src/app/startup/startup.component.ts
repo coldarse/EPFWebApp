@@ -27,17 +27,17 @@ export class StartupComponent implements OnInit {
   AdminLogin = false;
   SuccessRegister = false;
   seconds = 5;
-  dots = "."
+  dots = '.'
   dotInterval : any;
   adapters: adapter[] = [];
-  selectedAdapterValue = "";
-  selectedAdapterValueEncrypted = "";
+  selectedAdapterValue = '';
+  selectedAdapterValueEncrypted = '';
   isSelectedAdapter = false;
   isAdapterEmpty = false;
 
-  UserName = "";
-  Password = "";
-  Secret = "";
+  UserName = '';
+  Password = '';
+  Secret = '';
 
   format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
@@ -92,7 +92,7 @@ export class StartupComponent implements OnInit {
           else{ //Not Number
             signalRConnection.kioskInformation = result.body;
             // Not Registered
-            if(signalRConnection.kioskInformation.macAddress == ""){
+            if(signalRConnection.kioskInformation.macAddress == ''){
               // Ask to Register Kiosk
               this.CheckKioskCredentials = false;
               this.AdminLogin = true;
@@ -105,7 +105,7 @@ export class StartupComponent implements OnInit {
               //Mac Address Doesn't Match
               else{
                 console.log(result.body);
-                appFunc.message = "Unauthorized";
+                appFunc.message = 'Unauthorized';
                 this.route.navigate(['outofservice']);
               }
             }
@@ -117,15 +117,15 @@ export class StartupComponent implements OnInit {
 
   startConnection() : void {
     this.dotInterval = setInterval(() => {
-      this.dots += "."
-      if(this.dots == "........"){
-        this.dots = "."
+      this.dots += '.';
+      if(this.dots == '........'){
+        this.dots = '.';
       }
     }, 400);
 
     if(signalRConnection.connection == undefined){
       this._signalR.connect().then((c) => {
-        console.log("API King is now Connected on " + formatDate(new Date(), 'hh:mm:ss', 'en'));
+        console.log('API King is now Connected on ' + formatDate(new Date(), 'hh:mm:ss', 'en'));
         signalRConnection.connection = c;
   
         signalRConnection.connection.invoke('GetKioskCode').then((data: string) => {
@@ -143,24 +143,20 @@ export class StartupComponent implements OnInit {
               }
             });
           });
-          
         });
       }).catch((err: any) => {
-        console.log(err.toString())
         // errorCodes.code = "0167";
-        appFunc.message = "Unauthorized";
+        appFunc.message = 'Unauthorized';
         this.route.navigate(['outofservice']);
       });
     }
     else{
       this.route.navigate(['verifyMyKad']);
     }
-
-    
   }
 
   selectedAdapter(event: any){
-    if(event.target.value != ""){
+    if(event.target.value != ''){
       this.selectedAdapterValueEncrypted = event.target.value;
       this.isSelectedAdapter = true;
     }
@@ -174,7 +170,7 @@ export class StartupComponent implements OnInit {
       if(element.adapterNameEncrypted == this.selectedAdapterValueEncrypted) this.selectedAdapterValue = element.adapterName;
     })
     const kioskRegisterBody = {
-      "MacAddress": this.selectedAdapterValue
+      'MacAddress': this.selectedAdapterValue
     }
     this._aldanService.registerKiosk(signalRConnection.kioskInformation.id.toString(), kioskRegisterBody)
     .toPromise().then((result: any) => {
@@ -187,12 +183,12 @@ export class StartupComponent implements OnInit {
             }
 
             const changepasswordBody = {
-              "currentPassword": this.Secret,
-              "newPassword": this.selectedAdapterValueEncrypted
+              'currentPassword': this.Secret,
+              'newPassword': this.selectedAdapterValueEncrypted
             }
             this._aldanService.changePassword(changepasswordBody)
             .subscribe((response: any) => {
-              if(response.status.toString() == "204"){
+              if(response.status.toString() == '204'){
                 this.SelectAdapter = false;
                 this.SuccessRegister = true;
   
@@ -205,19 +201,19 @@ export class StartupComponent implements OnInit {
                 }, 1000);
               }
               else{
-                appFunc.message = "Failed Change Password for Kiosk";
+                appFunc.message = 'Failed Change Password for Kiosk';
                 this.route.navigate(['outofservice']);
               }
             });
           }
           else{
-            appFunc.message = "Failed Update Adapter";
+            appFunc.message = 'Failed Update Adapter';
             this.route.navigate(['outofservice']);
           }
         });
       }
       else{
-        appFunc.message = "Failed Register Kiosk";
+        appFunc.message = 'Failed Register Kiosk';
         this.route.navigate(['outofservice']);
       }
     })

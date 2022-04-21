@@ -299,7 +299,14 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   SaveSuccessYes(){
-    this.route.navigate(['mainMenu']);
+    if (appFunc.FromCheckBalance == true)
+    {
+      this.route.navigate(['checkBalance']);
+    }
+    else
+    {
+      this.route.navigate(['mainMenu']);
+    }
   }
 
   reuseMykadAddress(event: any){
@@ -315,6 +322,13 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   failedYes(){
-    this.route.navigate(['mainMenu']);
+    if (appFunc.FromCheckBalance == true)
+    {
+      this.route.navigate(['checkBalance']);
+    }
+    else
+    {
+      this.route.navigate(['mainMenu']);
+    }
   }
 }
