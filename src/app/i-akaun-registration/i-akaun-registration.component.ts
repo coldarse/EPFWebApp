@@ -373,7 +373,7 @@ export class IAkaunRegistrationComponent implements OnInit {
           this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
             if(result.status == 200){
               this.isCallAPI = false;
-              if(result.body.epfNum != ""){
+              if(result.body.epfNum != null){
   
                 this.ActivateInformation = false;
                 this.SuccessActivation = true;
@@ -383,7 +383,7 @@ export class IAkaunRegistrationComponent implements OnInit {
               else{
                 this.ActivateInformation = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error[0].description;
+                this.errorDesc = result.body.error.description;
               }
             }
             else{

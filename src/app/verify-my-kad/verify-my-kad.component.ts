@@ -49,6 +49,9 @@ export class VerifyMyKadComponent implements OnInit {
   ErrorPop = false;
   xlastTry = true;
 
+  isOutOfService = false;
+
+
 
   constructor(
     private route: Router,
@@ -71,13 +74,13 @@ export class VerifyMyKadComponent implements OnInit {
       this.removeCard = true;
       this.RemoveMyKad = true;
       this.insertedMyKad = true;
-      this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {});
+      this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {
+      });
     }
     else{
       if (accessToken.httpOptions != undefined){
         this._aldanService.GetBusinessTypes().subscribe((res: any) => {
           appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
-          console.log(appFunc.businessTypes);
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
           this.route.navigate(['outofservice']);
@@ -90,6 +93,7 @@ export class VerifyMyKadComponent implements OnInit {
             if (areDisabled == appFunc.modules.length){
               // errorCodes.code = "0168";
               appFunc.message = 'Under Maintenance';
+              this.isOutOfService = true;
               this.route.navigate(['outofservice']);
             }
 
@@ -99,6 +103,7 @@ export class VerifyMyKadComponent implements OnInit {
                 if (count == 0){
                   // errorCodes.code = "0168";
                   appFunc.message = 'Under Maintenance';
+                  this.isOutOfService = true;
                   this.route.navigate(['outofservice']);
                 }
               }, 1000);
@@ -132,7 +137,7 @@ export class VerifyMyKadComponent implements OnInit {
         if (this.insertedMyKad == true){
           appFunc.endSession = false;
           this.insertedMyKad = false;
-          this.useMainPage();
+          if(!this.isOutOfService) this.useMainPage();
         }
       }
     }, 1000);

@@ -84,7 +84,6 @@ export class StartupComponent implements OnInit {
         };
         this._aldanService.verifyKiosk(signalRConnection.kioskCode)
         .toPromise().then((result: any) => {
-          console.log(result)
           if(!isNaN(result.body)){
             appFunc.message = result.body.toString();
             this.route.navigate(['outofservice']);
@@ -104,7 +103,6 @@ export class StartupComponent implements OnInit {
               }
               //Mac Address Doesn't Match
               else{
-                console.log(result.body);
                 appFunc.message = 'Unauthorized';
                 this.route.navigate(['outofservice']);
               }

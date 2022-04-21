@@ -247,7 +247,6 @@ class MainMenuComponent {
                 _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "Under Maintenance";
                 this.route.navigate(['outofservice']);
             }
-            console.log(_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].modules);
             for (var val of _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].modules) {
                 if (val.moduleID == 1) {
                     if (val.enabled == true) {
@@ -1252,8 +1251,8 @@ class PersonalInformationComponent {
             };
             const addressBody = {
                 "custNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.cifNum,
-                "electAddSeqNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.electAddGrpSeq,
-                "addType": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.addresses[1].addSeq,
+                "electAddSeqNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.addresses[1].addSeq,
+                "addType": "1",
                 "addLine1": this.address1,
                 "addLine2": this.address2,
                 "addLine3": this.address3,
@@ -3598,9 +3597,13 @@ class RegisterMemberComponent {
     InsertEmailYes() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         this.emailError = false;
-        if (((_a = this.email) === null || _a === void 0 ? void 0 : _a.nativeElement.value) != '') {
+        if (((_a = this.email) === null || _a === void 0 ? void 0 : _a.nativeElement.value) == '') {
+            this.fullEmailAddress = "";
             this.InsertEmailPage = false;
             this.ValidateProfilePage = true;
+            deleteKeyboard();
+        }
+        else {
             if (this.isCustom) {
                 this.emailDDLTextValue = (_b = this.emailDDLText) === null || _b === void 0 ? void 0 : _b.nativeElement.value;
                 this.emailAddress = (_c = this.email) === null || _c === void 0 ? void 0 : _c.nativeElement.value;
@@ -3610,11 +3613,25 @@ class RegisterMemberComponent {
                 this.emailAddress = (_g = this.email) === null || _g === void 0 ? void 0 : _g.nativeElement.value;
                 this.fullEmailAddress = ((_h = this.email) === null || _h === void 0 ? void 0 : _h.nativeElement.value) == 0 ? '' : ((_j = this.email) === null || _j === void 0 ? void 0 : _j.nativeElement.value) + '@' + ((_k = this.emailDDL) === null || _k === void 0 ? void 0 : _k.nativeElement.value);
             }
-            deleteKeyboard();
+            if (this.isEmail(this.fullEmailAddress)) {
+                this.InsertEmailPage = false;
+                this.ValidateProfilePage = true;
+                deleteKeyboard();
+            }
+            else {
+                this.emailError = true;
+            }
         }
-        else {
-            this.emailError = true;
-        }
+        deleteKeyboard();
+        // } else {
+        //   this.emailError = true;
+        // }
+    }
+    isEmail(search) {
+        var serchfind;
+        var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        serchfind = regexp.test(search);
+        return serchfind;
     }
     InsertEmailNo() {
         this.InsertEmailPage = false;
@@ -3825,7 +3842,7 @@ class RegisterMemberComponent {
                     religion = '6';
                     break;
                 }
-                case 'LAIN AGAMA': {
+                case 'LAIN UGAMA': {
                     religion = '7';
                     break;
                 }
@@ -3875,7 +3892,7 @@ class RegisterMemberComponent {
                 matrimAsset: 'N',
                 handicapRemarks: '',
                 regChannel: 'SST',
-                regRcvdDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
+                regRcvdDate: '2001-01-01',
                 prefComChannel: 'ML',
                 addLine1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1,
                 addLine2: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2,
@@ -3914,6 +3931,16 @@ class RegisterMemberComponent {
                 lastMaintTerminalID: '',
                 lastMaintBranchNo: '',
                 sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
+            };
+            const Profilebody = {
+                "regType": "M",
+                "accNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.accNum,
+                "accType": "S",
+                "searchType": "A",
+                "idNum": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
+                "idType": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
+                "reqTypeCode": "",
+                "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
             };
             this._aldanService.MemberRegistration(body).subscribe((result) => {
                 if (result.status == 200) {
@@ -3954,16 +3981,6 @@ class RegisterMemberComponent {
                                             .iAkaunRegistration(iAkaunbody)
                                             .subscribe((result) => {
                                             if (result.status == 200) {
-                                                const Profilebody = {
-                                                    "regType": "M",
-                                                    "accNum": this.KWSPMemberNo,
-                                                    "accType": "S",
-                                                    "searchType": "A",
-                                                    "idNum": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                                                    "idType": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
-                                                    "reqTypeCode": "",
-                                                    "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
-                                                };
                                                 this._aldanService.MemberProfileInfo(Profilebody).subscribe((result) => {
                                                     if (result.status == 200) {
                                                         this.isCallAPI = false;
@@ -3998,16 +4015,6 @@ class RegisterMemberComponent {
                                         });
                                     }
                                     else {
-                                        const Profilebody = {
-                                            "regType": "M",
-                                            "accNum": this.KWSPMemberNo,
-                                            "accType": "S",
-                                            "searchType": "A",
-                                            "idNum": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                                            "idType": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
-                                            "reqTypeCode": "",
-                                            "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
-                                        };
                                         this._aldanService.MemberProfileInfo(Profilebody).subscribe((result) => {
                                             if (result.status == 200) {
                                                 this.isCallAPI = false;
@@ -4199,7 +4206,7 @@ class RegisterMemberComponent {
                             else {
                                 this.ActivateiAkaunPage = false;
                                 this.Failed = true;
-                                this.errorDesc = result.body.error.description;
+                                this.errorDesc = result.body.error[0].description;
                             }
                         }
                         else {
@@ -4396,7 +4403,7 @@ class RegisterMemberComponent {
                 custNum: this.KWSPCustomerNo,
                 accNum: this.KWSPMemberNo,
                 accType: 'S',
-                electChannel: 'SAO',
+                electChannel: 'SST',
                 electReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
                 electReceivedTime: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'h:mm:ss', 'en'),
                 electReceivedBranch: '1',
@@ -5604,6 +5611,7 @@ class VerifyMyKadComponent {
         this.RetryCountInstance = 0;
         this.ErrorPop = false;
         this.xlastTry = true;
+        this.isOutOfService = false;
     }
     ngOnInit() {
         this.RetryCountInstance = this.appConfig.RetryCounts;
@@ -5615,13 +5623,13 @@ class VerifyMyKadComponent {
             this.removeCard = true;
             this.RemoveMyKad = true;
             this.insertedMyKad = true;
-            this._aldanService.EndSession(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId, { KioskId: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].kioskCode }).subscribe((result) => { });
+            this._aldanService.EndSession(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId, { KioskId: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].kioskCode }).subscribe((result) => {
+            });
         }
         else {
             if (_models_token__WEBPACK_IMPORTED_MODULE_1__["accessToken"].httpOptions != undefined) {
                 this._aldanService.GetBusinessTypes().subscribe((res) => {
                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].businessTypes = res.body.map((bt) => new _models_modelClass__WEBPACK_IMPORTED_MODULE_5__["businessTypes"](bt));
-                    console.log(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].businessTypes);
                 }, (err) => {
                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'HttpError';
                     this.route.navigate(['outofservice']);
@@ -5633,6 +5641,7 @@ class VerifyMyKadComponent {
                         if (areDisabled == _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].modules.length) {
                             // errorCodes.code = "0168";
                             _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Under Maintenance';
+                            this.isOutOfService = true;
                             this.route.navigate(['outofservice']);
                         }
                         setTimeout(() => {
@@ -5641,6 +5650,7 @@ class VerifyMyKadComponent {
                                 if (count == 0) {
                                     // errorCodes.code = "0168";
                                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Under Maintenance';
+                                    this.isOutOfService = true;
                                     this.route.navigate(['outofservice']);
                                 }
                             }, 1000);
@@ -5673,7 +5683,8 @@ class VerifyMyKadComponent {
                 if (this.insertedMyKad == true) {
                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].endSession = false;
                     this.insertedMyKad = false;
-                    this.useMainPage();
+                    if (!this.isOutOfService)
+                        this.useMainPage();
                 }
             }
         }, 1000);
@@ -6868,10 +6879,6 @@ class ThumbprintConfirmationComponent {
     skip() {
         this.ThumbprintVerification = false;
         this.Selected = true;
-        console.log("ThumbprintAgreeDisagree: " + this.ThumbprintAgreeDisagree);
-        console.log("Selections: " + this.Selections);
-        console.log("ThumbprintVerification: " + this.ThumbprintVerification);
-        console.log("Selected: " + this.Selected);
     }
 }
 ThumbprintConfirmationComponent.ɵfac = function ThumbprintConfirmationComponent_Factory(t) { return new (t || ThumbprintConfirmationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_2__["TranslateService"])); };
@@ -7735,9 +7742,14 @@ class CheckBalanceComponent {
     }
     failedYes() {
         if (this.errorCode == 'MBM2015') {
-            this.Failed = false;
-            this.SelectYearPage = true;
             this.CalculateYears();
+            if (this.arrYears.length == 0) {
+                this.route.navigate(['mainMenu']);
+            }
+            else {
+                this.Failed = false;
+                this.SelectYearPage = true;
+            }
         }
         else {
             this.route.navigate(['mainMenu']);
@@ -7855,14 +7867,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { NgxSpinnerModule } from 'ngx-spinner';
-// import { JsonAppConfigService } from './config/json-app-config.service';
 function createConfig() {
     const c = new ng2_signalr__WEBPACK_IMPORTED_MODULE_2__["SignalRConfiguration"]();
     c.hubName = 'MyMessageHub';
     c.qs = { user: 'aldan' };
     c.url = 'http://localhost:8081/';
-    c.logging = true;
+    c.logging = false;
     // >= v5.0.0
     c.executeEventsInZone = true; // optional, default is true
     c.executeErrorsInZone = false; // optional, default is false
@@ -7906,7 +7916,6 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector
                 }
             }),
             ng2_signalr__WEBPACK_IMPORTED_MODULE_2__["SignalRModule"].forRoot(createConfig),
-            // NgxSpinnerModule,
             _angular_forms__WEBPACK_IMPORTED_MODULE_27__["FormsModule"]
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
@@ -7924,9 +7933,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector
         _startup_startup_component__WEBPACK_IMPORTED_MODULE_25__["StartupComponent"],
         _withdrawal_withdrawal_component__WEBPACK_IMPORTED_MODULE_26__["WithdrawalComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_8__["TranslateModule"], ng2_signalr__WEBPACK_IMPORTED_MODULE_2__["SignalRModule"], 
-        // NgxSpinnerModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_27__["FormsModule"]] }); })();
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_8__["TranslateModule"], ng2_signalr__WEBPACK_IMPORTED_MODULE_2__["SignalRModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_27__["FormsModule"]] }); })();
 function HttpLoaderFactory(http) {
     return new ngx_translate_multi_http_loader__WEBPACK_IMPORTED_MODULE_9__["MultiTranslateHttpLoader"](http, [
         { prefix: "./assets/translate/", suffix: ".json" },
@@ -7969,7 +7976,6 @@ class ScreensaverComponent {
         else {
             this.path = _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].screenSaver;
             this.path = this.path.substring(this.path.indexOf("screensaver/") + 12);
-            console.log(this.path);
         }
         if (_models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].isEmptySSList) {
             this.router.navigate(['verifyMyKad']);
@@ -9376,9 +9382,13 @@ class IAkaunRegistrationComponent {
     EnterEmailAddressYes() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         this.emailError = false;
-        if (((_a = this.email) === null || _a === void 0 ? void 0 : _a.nativeElement.value) != "") {
+        if (((_a = this.email) === null || _a === void 0 ? void 0 : _a.nativeElement.value) == '') {
+            this.fullEmailAddress = "";
             this.EnterEmailAddress = false;
             this.PhoneEmailConfirmation = true;
+            deleteKeyboard();
+        }
+        else {
             if (this.isCustom) {
                 this.emailDDLTextValue = (_b = this.emailDDLText) === null || _b === void 0 ? void 0 : _b.nativeElement.value;
                 this.emailAddress = (_c = this.email) === null || _c === void 0 ? void 0 : _c.nativeElement.value;
@@ -9388,11 +9398,21 @@ class IAkaunRegistrationComponent {
                 this.emailAddress = (_g = this.email) === null || _g === void 0 ? void 0 : _g.nativeElement.value;
                 this.fullEmailAddress = ((_h = this.email) === null || _h === void 0 ? void 0 : _h.nativeElement.value) == 0 ? '' : ((_j = this.email) === null || _j === void 0 ? void 0 : _j.nativeElement.value) + '@' + ((_k = this.emailDDL) === null || _k === void 0 ? void 0 : _k.nativeElement.value);
             }
-            deleteKeyboard();
+            if (this.isEmail(this.fullEmailAddress)) {
+                this.EnterEmailAddress = false;
+                this.PhoneEmailConfirmation = true;
+                deleteKeyboard();
+            }
+            else {
+                this.emailError = true;
+            }
         }
-        else {
-            this.emailError = true;
-        }
+    }
+    isEmail(search) {
+        var serchfind;
+        var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        serchfind = regexp.test(search);
+        return serchfind;
     }
     EnterEmailAddressNo() {
         this.EnterEmailAddress = false;
@@ -9541,7 +9561,7 @@ class IAkaunRegistrationComponent {
                     this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result) => {
                         if (result.status == 200) {
                             this.isCallAPI = false;
-                            if (result.body.epfNum != "") {
+                            if (result.body.epfNum != null) {
                                 this.ActivateInformation = false;
                                 this.SuccessActivation = true;
                                 deleteKeyboard();
@@ -9549,7 +9569,7 @@ class IAkaunRegistrationComponent {
                             else {
                                 this.ActivateInformation = false;
                                 this.Failed = true;
-                                this.errorDesc = result.body.error[0].description;
+                                this.errorDesc = result.body.error.description;
                             }
                         }
                         else {
@@ -10115,7 +10135,6 @@ class StartupComponent {
                 };
                 this._aldanService.verifyKiosk(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode)
                     .toPromise().then((result) => {
-                    console.log(result);
                     if (!isNaN(result.body)) {
                         _models_appFunc__WEBPACK_IMPORTED_MODULE_3__["appFunc"].message = result.body.toString();
                         this.route.navigate(['outofservice']);
@@ -10135,7 +10154,6 @@ class StartupComponent {
                             }
                             //Mac Address Doesn't Match
                             else {
-                                console.log(result.body);
                                 _models_appFunc__WEBPACK_IMPORTED_MODULE_3__["appFunc"].message = 'Unauthorized';
                                 this.route.navigate(['outofservice']);
                             }
