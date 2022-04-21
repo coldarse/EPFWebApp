@@ -1114,7 +1114,7 @@ export class RegisterMemberComponent implements OnInit {
         custNum: this.KWSPCustomerNo,
         accNum: this.KWSPMemberNo,
         accType: 'S',
-        electChannel: 'SAO',
+        electChannel: 'SST',
         electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         electReceivedTime: formatDate(new Date(), 'h:mm:ss', 'en'),
         electReceivedBranch: '1',
