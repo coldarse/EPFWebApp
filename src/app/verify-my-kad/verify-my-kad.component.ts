@@ -75,7 +75,8 @@ export class VerifyMyKadComponent implements OnInit {
       this.InsertMyKad = false;
       this.removeCard = true;
       this.RemoveMyKad = true;
-      this.insertedMyKad = true
+      this.insertedMyKad = true;
+      this._aldanService.EndSession(appFunc.sessionId, {"KioskId": signalRConnection.kioskCode}).subscribe((result: any) => {});
     }
     else{
       if(accessToken.httpOptions != undefined){
@@ -351,7 +352,7 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.message = result.message;
           this.route.navigate(['outofservice']);
         }
-      },(err: HttpErrorResponse) => {
+      },(err: HttpErrorResponse) => { 
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
       });
@@ -366,6 +367,8 @@ export class VerifyMyKadComponent implements OnInit {
 
 
   cancelMyKadVerification(){
+    signalRConnection.connection.invoke('CancelThumbprint').then((data: boolean) => {
+    });
     clearInterval(this.readerIntervalId);
     this.route.navigate(['startup']);
   }

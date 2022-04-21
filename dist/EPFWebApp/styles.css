@@ -10553,6 +10553,10 @@ textarea.form-control-lg {
     padding-top: 5rem;
 }
 
+.padTop6rem {
+    padding-top: 5rem;
+}
+
 .padTop7rem {
     padding-top: 7rem;
 }
@@ -10809,6 +10813,11 @@ textarea.form-control-lg {
 .Proceed {
     text-align: end;
     display: inline;
+}
+
+.banner{
+    width: 1368px;
+    margin-left: -11px;
 }
 
 .lblQuestion {
