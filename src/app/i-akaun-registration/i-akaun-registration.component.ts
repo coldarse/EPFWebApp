@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { asNativeElements, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { appFunc } from '../_models/_appFunc';
@@ -171,9 +171,16 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   EnterEmailAddressYes() {
     this.emailError = false;
-    if(this.email?.nativeElement.value != ""){
+
+    if(this.email?.nativeElement.value == '')
+    {
+      this.fullEmailAddress = "";
       this.EnterEmailAddress = false;
       this.PhoneEmailConfirmation = true;
+      deleteKeyboard();
+    }
+    else
+    {
       if(this.isCustom){
         this.emailDDLTextValue = this.emailDDLText?.nativeElement.value;
         this.emailAddress = this.email?.nativeElement.value;
@@ -183,13 +190,27 @@ export class IAkaunRegistrationComponent implements OnInit {
         this.emailAddress = this.email?.nativeElement.value;
         this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDL?.nativeElement.value;
       }
-      
-      deleteKeyboard();
-    }
-    else{
-      this.emailError = true;
+
+      if(this.isEmail(this.fullEmailAddress)){
+        this.EnterEmailAddress = false;
+        this.PhoneEmailConfirmation = true;
+        deleteKeyboard();
+      }
+      else{
+        this.emailError = true;
+      }
     }
   }
+
+  isEmail(search:string):boolean
+    {
+        var  serchfind:boolean;
+
+        var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+        serchfind = regexp.test(search);
+        return serchfind
+    }
 
   EnterEmailAddressNo() {
     this.EnterEmailAddress = false;

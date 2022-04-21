@@ -290,9 +290,16 @@ export class RegisterMemberComponent implements OnInit {
 
   InsertEmailYes() {
     this.emailError = false;
-    if (this.email?.nativeElement.value != '') {
+
+    if(this.email?.nativeElement.value == '')
+    {
+      this.fullEmailAddress = "";
       this.InsertEmailPage = false;
       this.ValidateProfilePage = true;
+      deleteKeyboard();
+    }
+    else
+    {
       if(this.isCustom){
         this.emailDDLTextValue = this.emailDDLText?.nativeElement.value;
         this.emailAddress = this.email?.nativeElement.value;
@@ -302,11 +309,27 @@ export class RegisterMemberComponent implements OnInit {
         this.emailAddress = this.email?.nativeElement.value;
         this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDL?.nativeElement.value;
       }
-      deleteKeyboard();
-    } else {
-      this.emailError = true;
+
+      if(this.isEmail(this.fullEmailAddress)){
+        this.InsertEmailPage = false;
+        this.ValidateProfilePage = true;
+        deleteKeyboard();
+      }
+      else{
+        this.emailError = true;
+      }
     }
   }
+
+  isEmail(search:string):boolean
+    {
+        var  serchfind:boolean;
+
+        var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+        serchfind = regexp.test(search);
+        return serchfind
+    }
 
   InsertEmailNo() {
     this.InsertEmailPage = false;
@@ -537,7 +560,7 @@ export class RegisterMemberComponent implements OnInit {
           religion = '6';
           break;
         }
-        case 'LAIN AGAMA': {
+        case 'LAIN UGAMA': {
           religion = '7';
           break;
         }
@@ -588,7 +611,7 @@ export class RegisterMemberComponent implements OnInit {
         matrimAsset: 'N',
         handicapRemarks: '',
         regChannel: 'SST',
-        regRcvdDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        regRcvdDate: '2001-01-01',
         prefComChannel: 'ML',
         addLine1: currentMyKadDetails.Address1,
         addLine2: currentMyKadDetails.Address2,
@@ -629,7 +652,16 @@ export class RegisterMemberComponent implements OnInit {
         sessionId: appFunc.sessionId,
       };
 
-      
+      const Profilebody = {
+        "regType": "M",
+        "accNum": appFunc.currMemberDetail.accNum,
+        "accType": "S",
+        "searchType": "A",
+        "idNum": currentMyKadDetails.ICNo,
+        "idType": currentMyKadDetails.CategoryType,
+        "reqTypeCode": "",
+        "sessionId": appFunc.sessionId
+      }
 
       this._aldanService.MemberRegistration(body).subscribe((result: any) => {
         if(result.status == 200){
@@ -672,17 +704,7 @@ export class RegisterMemberComponent implements OnInit {
                         .iAkaunRegistration(iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
-                            const Profilebody = {
-                              "regType": "M",
-                              "accNum": this.KWSPMemberNo,
-                              "accType": "S",
-                              "searchType": "A",
-                              "idNum": currentMyKadDetails.ICNo,
-                              "idType": currentMyKadDetails.CategoryType,
-                              "reqTypeCode": "",
-                              "sessionId": appFunc.sessionId
-                            }
-
+                         
                             this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                               if(result.status == 200){
                                 this.isCallAPI = false;
@@ -715,16 +737,6 @@ export class RegisterMemberComponent implements OnInit {
                           this.route.navigate(['outofservice']);
                         });
                     } else {
-                      const Profilebody = {
-                        "regType": "M",
-                        "accNum": this.KWSPMemberNo,
-                        "accType": "S",
-                        "searchType": "A",
-                        "idNum": currentMyKadDetails.ICNo,
-                        "idType": currentMyKadDetails.CategoryType,
-                        "reqTypeCode": "",
-                        "sessionId": appFunc.sessionId
-                      }
                       this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                         if(result.status == 200){
                           this.isCallAPI = false;
@@ -923,7 +935,7 @@ export class RegisterMemberComponent implements OnInit {
                 } else {
                   this.ActivateiAkaunPage = false;
                   this.Failed = true;
-                  this.errorDesc = result.body.error.description;
+                  this.errorDesc = result.body.error[0].description;
                 }
               }
               else{
