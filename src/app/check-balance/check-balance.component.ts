@@ -51,6 +51,7 @@ export class CheckBalanceComponent implements OnInit {
   comma = ", ";
   Failed = false;
   errorDesc = "";
+  errorCode = "";
 
   emptyFields = false;
 
@@ -64,16 +65,19 @@ export class CheckBalanceComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.email = appFunc.currMemberDetail.emailAdd;
+
     this.translate.use(selectLang.selectedLang);
     if (appFunc.FromCheckBalance == true) {
+      appFunc.FromCheckBalance = false;
       this.ConfirmEmailPage = true
-      this.SummaryStatementPage = true;
+      this.SummaryStatementPage = false;
       this.SelectYearPage = false;
       this.StatementPage = false;
       this.UpdateEmailPage =false;
       this.EmailSuccessPage = false;
       this.EmailFailPage = false;
-      
+      this.Failed = false;
     }
     // this.ShowTable();
 
@@ -100,7 +104,42 @@ export class CheckBalanceComponent implements OnInit {
           }
           else{
             // Error
+            // stmtYear = stmtYear - 1;
+            // const summaryBody = {
+            //   "accNum": appFunc.currMemberDetail.accNum,
+            //   "accType": 'S',
+            //   "stmtYear": stmtYear.toString(),
+            //   "sessionId": appFunc.sessionId
+            // };
+            // this._aldanService
+            //   .MemberSummaryStatement(summaryBody)
+            //   .subscribe((result: any) => {
+            //     if(result.status == 200){
+            //       if (result.body.responseCode == '0') {
+            //         this.sDetails = result.body.detail.summaryStatement;
+  
+            //         this.sDetails.forEach((details: any) => {
+            //           this.grandTotal += Number(details.subAccBalance);
+            //           this.totalSavings = this.grandTotal;
+            //         });
+            //       }
+            //       else{
+            //         this.SummaryStatementPage = false;
+            //         this.errorDesc = result.body.error[0].description;
+            //         this.Failed = true;
+            //       }
+            //     }
+            //     else{
+            //       appFunc.message = result.message;
+            //       this.route.navigate(['outofservice']);
+            //     }
+            //   },(err: HttpErrorResponse) => {
+            //     appFunc.message = "HttpError";
+            //     this.route.navigate(['outofservice']);
+            //   });
+
             this.SummaryStatementPage = false;
+            this.errorCode = result.body.error[0].code;
             this.errorDesc = result.body.error[0].description;
             this.Failed = true;
           }
@@ -126,6 +165,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   StatementNo() {
+    this.transactionAmtForAcc1 = 0;
     this.StatementPage = false;
     this.SelectYearPage = true;
   }
@@ -209,7 +249,7 @@ export class CheckBalanceComponent implements OnInit {
             let formattedMonth = datepipe.transform(details.transactionDate, 'MMM-YY')
             details.transactionDate = formattedDate;
             details.contributionMth = formattedMonth;
-            this.transactionAmtForAcc1 += details.transactionAmtForAcc1;
+            this.transactionAmtForAcc1 += Number(details.transactionAmtForAcc1);
             this.SelectYearPage = false;
             this.StatementPage = true;
           });
@@ -245,7 +285,14 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   failedYes(){
-    this.route.navigate(['mainMenu'])
+    if(this.errorCode == 'MBM2015'){
+      this.Failed = false;
+      this.SelectYearPage = true;
+      this.CalculateYears();
+    }
+    else{
+      this.route.navigate(['mainMenu']);
+    }
   }
 }
 

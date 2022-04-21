@@ -104,7 +104,7 @@
                         <th class="right" style="font-weight: 700;">{{transactionAmtForAcc1 | number : '1.2-2'}}</th>
                     </tr>
                 </table>
-                <div class="row padTop5rem">
+                <div class="row padTop1rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="StatementNo()">{{"back"| translate}}</button>
@@ -165,7 +165,7 @@
                 </div>
                 <div class="row padTop3rem">
                     <div class="statusMsg">{{"KWSPSent"|translate}}</div>
-                    <div class="statusMsg">wahyu@aldantechnology.com</div>
+                    <div class="statusMsg">{{email}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="row padTop3rem">
                     <div class="statusMsg">{{"KWSPSentFail"|translate}}</div>
-                    <div class="statusMsg">wahyu@aldantechnology.com</div>
+                    <div class="statusMsg">{{email}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>

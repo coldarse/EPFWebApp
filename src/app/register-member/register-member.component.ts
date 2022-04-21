@@ -537,7 +537,7 @@ export class RegisterMemberComponent implements OnInit {
           religion = '6';
           break;
         }
-        case 'LAIN UGAMA': {
+        case 'LAIN AGAMA': {
           religion = '7';
           break;
         }
@@ -588,7 +588,7 @@ export class RegisterMemberComponent implements OnInit {
         matrimAsset: 'N',
         handicapRemarks: '',
         regChannel: 'SST',
-        regRcvdDate: '2001-01-01',
+        regRcvdDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         prefComChannel: 'ML',
         addLine1: currentMyKadDetails.Address1,
         addLine2: currentMyKadDetails.Address2,
@@ -629,16 +629,7 @@ export class RegisterMemberComponent implements OnInit {
         sessionId: appFunc.sessionId,
       };
 
-      const Profilebody = {
-        "regType": "M",
-        "accNum": appFunc.currMemberDetail.accNum,
-        "accType": "S",
-        "searchType": "A",
-        "idNum": currentMyKadDetails.ICNo,
-        "idType": currentMyKadDetails.CategoryType,
-        "reqTypeCode": "",
-        "sessionId": appFunc.sessionId
-      }
+      
 
       this._aldanService.MemberRegistration(body).subscribe((result: any) => {
         if(result.status == 200){
@@ -681,7 +672,17 @@ export class RegisterMemberComponent implements OnInit {
                         .iAkaunRegistration(iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
-                         
+                            const Profilebody = {
+                              "regType": "M",
+                              "accNum": this.KWSPMemberNo,
+                              "accType": "S",
+                              "searchType": "A",
+                              "idNum": currentMyKadDetails.ICNo,
+                              "idType": currentMyKadDetails.CategoryType,
+                              "reqTypeCode": "",
+                              "sessionId": appFunc.sessionId
+                            }
+
                             this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                               if(result.status == 200){
                                 this.isCallAPI = false;
@@ -714,6 +715,16 @@ export class RegisterMemberComponent implements OnInit {
                           this.route.navigate(['outofservice']);
                         });
                     } else {
+                      const Profilebody = {
+                        "regType": "M",
+                        "accNum": this.KWSPMemberNo,
+                        "accType": "S",
+                        "searchType": "A",
+                        "idNum": currentMyKadDetails.ICNo,
+                        "idType": currentMyKadDetails.CategoryType,
+                        "reqTypeCode": "",
+                        "sessionId": appFunc.sessionId
+                      }
                       this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                         if(result.status == 200){
                           this.isCallAPI = false;
@@ -912,7 +923,7 @@ export class RegisterMemberComponent implements OnInit {
                 } else {
                   this.ActivateiAkaunPage = false;
                   this.Failed = true;
-                  this.errorDesc = result.body.error[0].description;
+                  this.errorDesc = result.body.error.description;
                 }
               }
               else{

@@ -1,17 +1,13 @@
-import { formatDate } from '@angular/common';
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SignalR, SignalRConfiguration, SignalRConnection } from 'ng2-signalr';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { accessToken } from '../_models/token';
 import { signalRConnection } from '../_models/_signalRConnection';
 import { AppConfiguration } from '../config/app-configuration';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
-import { MyKadDetails } from '../_models/_myKadData';
-import { currMemberDetails } from '../_models/_currentMemberDetails';
 import { appFunc } from '../_models/_appFunc';
 import { businessTypes, eModules } from '../_models/modelClass';
 
@@ -27,8 +23,8 @@ declare const closeKeyboard: any;
 })
 export class VerifyMyKadComponent implements OnInit {
 
-  Status = "MyKad";
-  
+  Status = 'MyKad';
+
   insertCard = true;
   Language = false;
   Thumbprint = false;
@@ -57,63 +53,63 @@ export class VerifyMyKadComponent implements OnInit {
   constructor(
     private route: Router,
     private translate: TranslateService,
-    private _signalR: SignalR,
     private _aldanService: AldanService,
     private appConfig: AppConfiguration
-  ) { 
+  ) {
   }
 
-  
+
 
   ngOnInit(): void {
 
     this.RetryCountInstance = this.appConfig.RetryCounts;
     this.translate.use('bm');
-    if(appFunc.endSession){
+    if (appFunc.endSession){
       this.translate.use(selectLang.selectedLang);
       this.insertCard = false;
       this.InsertMyKad = false;
       this.removeCard = true;
       this.RemoveMyKad = true;
-      this.insertedMyKad = true
+      this.insertedMyKad = true;
+      this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {});
     }
     else{
-      if(accessToken.httpOptions != undefined){
+      if (accessToken.httpOptions != undefined){
         this._aldanService.GetBusinessTypes().subscribe((res: any) => {
           appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
           console.log(appFunc.businessTypes);
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
+        }, (err: HttpErrorResponse) => {
+          appFunc.message = 'HttpError';
           this.route.navigate(['outofservice']);
         });
         this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
           appFunc.modules = res.body.map((em: any) => new eModules(em));
-    
-          if(appFunc.modules.length != 0){
-            let areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-            if(areDisabled == appFunc.modules.length){
+
+          if (appFunc.modules.length != 0){
+            const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+            if (areDisabled == appFunc.modules.length){
               // errorCodes.code = "0168";
-              appFunc.message = "Under Maintenance";
+              appFunc.message = 'Under Maintenance';
               this.route.navigate(['outofservice']);
             }
-    
+
             setTimeout(() => {
               this.moduleIntervelId = setInterval(() => {
-                let count = appFunc.checkModuleAvailability(appFunc.modules);
-                if(count == 0){
+                const count = appFunc.checkModuleAvailability(appFunc.modules);
+                if (count == 0){
                   // errorCodes.code = "0168";
-                  appFunc.message = "Under Maintenance";
+                  appFunc.message = 'Under Maintenance';
                   this.route.navigate(['outofservice']);
                 }
               }, 1000);
             } , 60000);
           }
           else{
-            appFunc.message = "Under Maintenance";
+            appFunc.message = 'Under Maintenance';
             this.route.navigate(['outofservice']);
           }
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
+        }, (err: HttpErrorResponse) => {
+          appFunc.message = 'HttpError';
           this.route.navigate(['outofservice']);
         });
       }
@@ -121,9 +117,9 @@ export class VerifyMyKadComponent implements OnInit {
 
     this.readerIntervalId = setInterval(() => {
       appFunc.DetectMyKad();
-      if(signalRConnection.isCardInserted) {
-        if(this.insertedMyKad == false){
-          if(!appFunc.endSession){
+      if (signalRConnection.isCardInserted) {
+        if (this.insertedMyKad == false){
+          if (!appFunc.endSession){
             this.insertedMyKad = true;
             this.insertCard = false;
             this.InsertMyKad = false;
@@ -133,7 +129,7 @@ export class VerifyMyKadComponent implements OnInit {
         }
       }
       else{
-        if(this.insertedMyKad == true){
+        if (this.insertedMyKad == true){
           appFunc.endSession = false;
           this.insertedMyKad = false;
           this.useMainPage();
@@ -147,23 +143,23 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   verifyThumbprint(){
-    if(this.RetryCountInstance != 0){
+    if (this.RetryCountInstance != 0){
       signalRConnection.connection.invoke('VerifyThumbprint').then((isVerifySuccess: any) => {
-        if(isVerifySuccess){
+        if (isVerifySuccess){
           this.BeforeRead = false;
           this.AfterRead = true;
           this.bindMyKadData(this.myKadData);
         }
         else{
           this.RetryCountInstance -= 1;
-          if(this.RetryCountInstance == 0) this.xlastTry = false;
+          if (this.RetryCountInstance == 0) this.xlastTry = false;
           this.BeforeRead = true;
           this.AfterRead = false;
           this.ErrorPop = true;
         }
       });
     }
-    
+
   }
 
   readMyKad(){
@@ -172,7 +168,7 @@ export class VerifyMyKadComponent implements OnInit {
       this.verifyThumbprint();
     });
   }
-  
+
 
   selectBM(){
     selectLang.selectedLang = 'bm';
@@ -202,46 +198,46 @@ export class VerifyMyKadComponent implements OnInit {
     clearInterval(this.moduleIntervelId);
   }
 
-  bindMyKadData(data:any): void{
+  bindMyKadData(data: any): void{
     try {
-      let age = appFunc.calculateAge(new Date(data['DOB']));
+      const age = appFunc.calculateAge(new Date(data.DOB));
 
       if (age > 18){
-        currentMyKadDetails.Name = data['GMPCName'];
-        currentMyKadDetails.ICNo = data['ICNo'].toString().replace("*", "");
-        currentMyKadDetails.OldICNo = data['OldICNo'];
-        currentMyKadDetails.DOB = data['DOB'];
-        currentMyKadDetails.DOBString = data['DOBString'];
-        currentMyKadDetails.POB =  data['POB'];
-        currentMyKadDetails.Gender = data['Gender'];
-        currentMyKadDetails.Citizenship = data['Citizenship'];
-        currentMyKadDetails.IssueDate = data['IssueDate'];
-        currentMyKadDetails.Race = data['Race'];
-        currentMyKadDetails.Religion = data['Religion'];
-        currentMyKadDetails.Address1 = data['Address1'];
-        currentMyKadDetails.Address2 = data['Address2'];
-        currentMyKadDetails.Address3 = data['Address3'];
-        currentMyKadDetails.PostCode = data['PostCode'];
-        currentMyKadDetails.City = data['City'];
-        currentMyKadDetails.State = data['State'];
-        currentMyKadDetails.Country = data['Country'];
-        currentMyKadDetails.Address = data['Address'];
-        currentMyKadDetails.Address1 = data['Address1'];
-        currentMyKadDetails.Address2 = data['Address2'];
-        currentMyKadDetails.Address3 = data['Address3'];
-        currentMyKadDetails.RJ = data['RJ'];
-        currentMyKadDetails.KT = data['KT'];
-        currentMyKadDetails.GreenCardNationality = data['GreenCardNationality'];
-        currentMyKadDetails.GreenCardExpiryDate = data['GreenCardExpiryDate'];
-        currentMyKadDetails.CardVersion = data['CardVersion'];
-        currentMyKadDetails.OtherID = data['OtherID'];
-        currentMyKadDetails.CategoryType = data['CategoryType'];
+        currentMyKadDetails.Name = data.GMPCName;
+        currentMyKadDetails.ICNo = data.ICNo.toString().replace('*', '');
+        currentMyKadDetails.OldICNo = data.OldICNo;
+        currentMyKadDetails.DOB = data.DOB;
+        currentMyKadDetails.DOBString = data.DOBString;
+        currentMyKadDetails.POB =  data.POB;
+        currentMyKadDetails.Gender = data.Gender;
+        currentMyKadDetails.Citizenship = data.Citizenship;
+        currentMyKadDetails.IssueDate = data.IssueDate;
+        currentMyKadDetails.Race = data.Race;
+        currentMyKadDetails.Religion = data.Religion;
+        currentMyKadDetails.Address1 = data.Address1;
+        currentMyKadDetails.Address2 = data.Address2;
+        currentMyKadDetails.Address3 = data.Address3;
+        currentMyKadDetails.PostCode = data.PostCode;
+        currentMyKadDetails.City = data.City;
+        currentMyKadDetails.State = data.State;
+        currentMyKadDetails.Country = data.Country;
+        currentMyKadDetails.Address = data.Address;
+        currentMyKadDetails.Address1 = data.Address1;
+        currentMyKadDetails.Address2 = data.Address2;
+        currentMyKadDetails.Address3 = data.Address3;
+        currentMyKadDetails.RJ = data.RJ;
+        currentMyKadDetails.KT = data.KT;
+        currentMyKadDetails.GreenCardNationality = data.GreenCardNationality;
+        currentMyKadDetails.GreenCardExpiryDate = data.GreenCardExpiryDate;
+        currentMyKadDetails.CardVersion = data.CardVersion;
+        currentMyKadDetails.OtherID = data.OtherID;
+        currentMyKadDetails.CategoryType = data.CategoryType;
 
 
-        const sessionBody ={
-          "kioskId": signalRConnection.kioskCode,
-          "client": currentMyKadDetails.Name,
-          "identification": currentMyKadDetails.ICNo
+        const sessionBody = {
+          kioskId: signalRConnection.kioskCode,
+          client: currentMyKadDetails.Name,
+          identification: currentMyKadDetails.ICNo
         }
 
         this._aldanService.CreateSession(sessionBody).subscribe((result: any) => {
@@ -253,22 +249,22 @@ export class VerifyMyKadComponent implements OnInit {
             appFunc.message = result.body.error.message;
             this.route.navigate(['outofservice']);
           }
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
+        }, (err: HttpErrorResponse) => {
+          appFunc.message = 'HttpError';
           this.route.navigate(['outofservice']);
         });
 
-        
+
       }
       else{
         // errorCodes.code = "0166";
-        appFunc.message = "Binding MyKad Error";
+        appFunc.message = 'Binding MyKad Error';
         // Error
         this.route.navigate(['outofservice']);
       }
-      
+
     }
-    catch(e: any) {
+    catch (e: any) {
       // errorCodes.code = "0166";
       appFunc.message = e.toString();
       // Error
@@ -279,46 +275,46 @@ export class VerifyMyKadComponent implements OnInit {
   getAccountInquiry(): void{
     try{
 
-      let catType = "";
+      let catType = '';
 
-      switch(currentMyKadDetails.CategoryType){
-        case "W":
-          catType = "IN"
+      switch (currentMyKadDetails.CategoryType){
+        case 'W':
+          catType = 'IN'
           currentMyKadDetails.CategoryType = catType;
           break;
       }
 
       const body = {
-        "regType": "M",
-        "accNum": "",
-        "accType": "",
-        "searchType": "I",
-        "idNum": currentMyKadDetails.ICNo,
-        "idType": catType,
-        "reqTypeCode": "",
-        "sessionId": appFunc.sessionId   
+        regType: 'M',
+        accNum: '',
+        accType: '',
+        searchType: 'I',
+        idNum: currentMyKadDetails.ICNo,
+        idType: catType,
+        reqTypeCode: '',
+        sessionId: appFunc.sessionId
       }
       this._aldanService.MemberCIFDetailsCheck(body).subscribe((result: any) => {
-        if(result.status == 200){
-          if(result.body.responseCode == "0"){
+        if (result.status == 200){
+          if (result.body.responseCode == '0'){
             const memberProfileBody = {
-              "regType": "M",
-              "accNum": result.body.detail.accNum,
-              "accType": "S",
-              "searchType": "A",
-              "idNum": currentMyKadDetails.ICNo,
-              "idType": catType,
-              "reqTypeCode": "",
-              "sessionId": appFunc.sessionId   
+              regType: 'M',
+              accNum: result.body.detail.accNum,
+              accType: 'S',
+              searchType: 'A',
+              idNum: currentMyKadDetails.ICNo,
+              idType: catType,
+              reqTypeCode: '',
+              sessionId: appFunc.sessionId
             }
             this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1: any) => {
-              if(result.status == 200){
-                if(result1.body.responseCode == "0"){
+              if (result.status == 200){
+                if (result1.body.responseCode == '0'){
                   appFunc.currMemberDetail = result1.body.detail;
                   this.route.navigate(['mainMenu']);
                 }
                 else{
-                  // Error  
+                  // Error
                   appFunc.message = result1.body.error[0].description;
                   this.route.navigate(['outofservice']);
                 }
@@ -327,17 +323,17 @@ export class VerifyMyKadComponent implements OnInit {
                 appFunc.message = result.message;
                 this.route.navigate(['outofservice']);
               }
-            },(err: HttpErrorResponse) => {
-              appFunc.message = "HttpError";
+            }, (err: HttpErrorResponse) => {
+              appFunc.message = 'HttpError';
               this.route.navigate(['outofservice']);
             });
           }
           else{
-            if(result.body.error.length == 0){
-              appFunc.message = "Error Connecting to Server";
+            if (result.body.error.length == 0){
+              appFunc.message = 'Error Connecting to Server';
               this.route.navigate(['outofservice']);
             }
-            if(result.body.error[0].code == "MBM2001"){
+            if (result.body.error[0].code == 'MBM2001'){
               this.route.navigate(['registerMember']);
             }
             else{
@@ -351,21 +347,23 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.message = result.message;
           this.route.navigate(['outofservice']);
         }
-      },(err: HttpErrorResponse) => {
-        appFunc.message = "HttpError";
+      }, (err: HttpErrorResponse) => {
+        appFunc.message = 'HttpError';
         this.route.navigate(['outofservice']);
       });
     }
-    catch(e: any){
+    catch (e: any){
       // Error
       appFunc.message = e.toString();
       this.route.navigate(['outofservice']);
-      //signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Redirect to Out Of Service Screen due to ${e}.`);
+      // signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Redirect to Out Of Service Screen due to ${e}.`);
     }
   }
 
 
   cancelMyKadVerification(){
+    signalRConnection.connection.invoke('CancelThumbprint').then((data: boolean) => {
+    });
     clearInterval(this.readerIntervalId);
     this.route.navigate(['startup']);
   }
