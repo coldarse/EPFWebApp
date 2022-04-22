@@ -674,7 +674,7 @@ export class RegisterMemberComponent implements OnInit {
               tacMobilePhoneCode: 'TA',
               tacMobilePhone: this.phoneNo,
               registrationDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-              registrationChannel: 'KSK',
+              registrationChannel: 'SST',
               status: 'P',
               checkForDuplicate: 'N',
               generateRequestNum: 'N',
