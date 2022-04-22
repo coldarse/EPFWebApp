@@ -333,11 +333,14 @@ const Keyboard = {
         else if(element.tagname.toLowerCase().includes('compname')){
             max_chars = 255;
         }
-        else if(element.tagname.toLowerCase().includes('add1')){
-            max_chars = 255;
+        else if(element.tagname.toLowerCase().includes('address_1')){
+            max_chars = 40;
         }
-        else if(element.tagname.toLowerCase().includes('add2')){
-            max_chars = 255;
+        else if(element.tagname.toLowerCase().includes('address_2')){
+            max_chars = 40;
+        }
+        else if(element.tagname.toLowerCase().includes('address_3')){
+            max_chars = 40;
         }
         else if(element.tagname.toLowerCase().includes('emailadd')){
             max_chars = 60;
