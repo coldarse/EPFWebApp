@@ -213,8 +213,8 @@ export class PersonalInformationComponent implements OnInit {
 
       const addressBody = {
         "custNum": appFunc.currMemberDetail.cifNum,
-        "electAddSeqNum": appFunc.currMemberDetail.electAddGrpSeq,
-        "addType": appFunc.currMemberDetail.addresses[1].addSeq,
+        "electAddSeqNum": appFunc.currMemberDetail.addresses[1].addSeq,
+        "addType": "1",
         "addLine1": this.address1,
         "addLine2": this.address2,
         "addLine3": this.address3,

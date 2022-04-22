@@ -319,6 +319,10 @@ export class RegisterMemberComponent implements OnInit {
         this.emailError = true;
       }
     }
+    deleteKeyboard();
+    // } else {
+    //   this.emailError = true;
+    // }
   }
 
   isEmail(search:string):boolean

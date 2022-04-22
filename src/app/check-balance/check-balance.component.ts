@@ -286,9 +286,14 @@ export class CheckBalanceComponent implements OnInit {
 
   failedYes(){
     if(this.errorCode == 'MBM2015'){
-      this.Failed = false;
-      this.SelectYearPage = true;
       this.CalculateYears();
+      if(this.arrYears.length == 0){
+        this.route.navigate(['mainMenu']);
+      }
+      else{
+        this.Failed = false;
+        this.SelectYearPage = true;
+      }
     }
     else{
       this.route.navigate(['mainMenu']);

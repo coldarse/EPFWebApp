@@ -67,7 +67,6 @@ export class MyKadDetails implements IMyKadDetails {
 
     static fromJS(data: any): MyKadDetails {
         let result = new MyKadDetails();
-        console.log(data["Name"]);
         result.init(data);
         return result;
     }

@@ -3247,11 +3247,11 @@
                 this.elements.startpos = currElem.selectionStart;
                 this.elements.endpos = currElem.selectionEnd;
                 this.elements.currElemLength = currElem.value.length;
-                console.log(currElem);
+                //console.log(currElem);
             }
         }
         catch(ex){
-            console.log(ex.message);
+            //console.log(ex.message);
             this.elements.startpos = null;
             this.elements.endpos = null;
         }
