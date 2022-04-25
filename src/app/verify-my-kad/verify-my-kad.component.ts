@@ -368,7 +368,6 @@ export class VerifyMyKadComponent implements OnInit {
       // Error
       appFunc.message = e.toString();
       this.route.navigate(['outofservice']);
-      // signalRConnection.logsaves.push(formatDate(new Date(), 'M/d/yyyy h:MM:ss a', 'en') + " " + "WebApp Component [Verify MyKad]" + ": " + `Redirect to Out Of Service Screen due to ${e}.`);
     }
   }
 
