@@ -111,11 +111,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
   skip(){
     this.ThumbprintVerification = false;
     this.Selected = true;
-
-    console.log("ThumbprintAgreeDisagree: " + this.ThumbprintAgreeDisagree);
-    console.log("Selections: " + this.Selections);
-    console.log("ThumbprintVerification: " + this.ThumbprintVerification);
-    console.log("Selected: " + this.Selected);
   }
 
 }

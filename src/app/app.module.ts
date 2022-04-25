@@ -29,15 +29,13 @@ import { OutOfServiceComponent } from './out-of-service/out-of-service.component
 import { StartupComponent } from './startup/startup.component';
 import { WithdrawalComponent } from './withdrawal/withdrawal.component';
 import { FormsModule } from '@angular/forms';
-// import { NgxSpinnerModule } from 'ngx-spinner';
-// import { JsonAppConfigService } from './config/json-app-config.service';
 
 export function createConfig(): SignalRConfiguration {
   const c = new SignalRConfiguration();
   c.hubName = 'MyMessageHub';
   c.qs = { user: 'aldan' }
   c.url = 'http://localhost:8081/';
-  c.logging = true;
+  c.logging = false;
   
 
   
@@ -82,7 +80,6 @@ export function initializerFn(jsonAppConfigService: JsonAppConfigService) {
             }
         }),
     SignalRModule.forRoot(createConfig),
-    // NgxSpinnerModule,
     FormsModule
   ],
   providers: [

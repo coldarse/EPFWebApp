@@ -48,7 +48,6 @@ export class MainMenuComponent implements OnInit {
         this.route.navigate(['outofservice']);
       }
 
-      console.log(appFunc.modules);
 
       for (var val of appFunc.modules){
         if(val.moduleID == 1){
