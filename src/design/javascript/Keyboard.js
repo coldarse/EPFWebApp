@@ -21,27 +21,19 @@ const Keyboard = {
         tagname: ""
     },
 
-
-    
-
     init() {
         // Create main elements
         this.elements.main = document.createElement("div");
         this.elements.keysContainer = document.createElement("div");
         this.elements.keyboardspace = document.createElement("div");
-
-
         // Setup main elements
         this.elements.main.classList.add("keyboard", "keyboard--hidden");
         this.elements.keysContainer.classList.add("keyboard__keys");
         this.elements.keysContainer.appendChild(this._createKeys());
         this.elements.keyboardspace.classList.add("spaceHandling");
-
         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
-
         // Add to DOM
         this.elements.main.appendChild(this.elements.keysContainer);
-        //document.body.childNodes[1]..appendChild(this.elements.main);
         document.body.appendChild(this.elements.main);
         document.body.appendChild(this.elements.keyboardspace);
         // Automatically use keyboard for elements with .use-keyboard-input
@@ -66,7 +58,6 @@ const Keyboard = {
             }
         }
         catch(ex){
-            //console.log(ex.message);
             this.elements.startpos = null;
             this.elements.endpos = null;
         }
@@ -99,7 +90,6 @@ const Keyboard = {
                 case "backspace":
                     keyElement.classList.add("keyboard__key--wide");
                     keyElement.innerHTML = createIconHTML("backspace");
-
                     keyElement.addEventListener("click", () => {
                         if(this.elements.startpos.toString() == this.elements.currElemLength.toString()){
                             this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
@@ -110,29 +100,23 @@ const Keyboard = {
                         }
                         this._triggerEvent("oninput");
                     });
-
                     break;
 
                 case "caps":
                     keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
                     keyElement.innerHTML = createIconHTML("keyboard_capslock");
-
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
                         keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
                     });
-
                     break;
 
                 case "enter":
                     keyElement.classList.add("keyboard__key--wide");
                     keyElement.innerHTML = createIconHTML("keyboard_return");
-
                     keyElement.addEventListener("click", () => {
                         var x = document.forms.item(1);
                         var elements = x.elements;
-
-
                         for (var i = 0; i < elements.length; i++) {
                             if (this.elements.activeElem == elements[i].id){
                                 document.getElementById(elements[i + 1].id).focus();
@@ -141,13 +125,11 @@ const Keyboard = {
                             }
                         }
                     });
-
                     break;
 
                 case "space":
                     keyElement.classList.add("keyboard__key--extra-wide");
                     keyElement.innerHTML = createIconHTML("space_bar");
-
                     keyElement.addEventListener("click", () => {
                         if(this.elements.startpos.toString() == this.elements.currElemLength.toString()){
                             this.properties.value += " ";
@@ -159,19 +141,15 @@ const Keyboard = {
                         }
                         this._triggerEvent("oninput");
                     });
-
                     break;
 
                 case "tab":
                     keyElement.classList.add("keyboard__key--wide");
                     keyElement.innerHTML = createIconHTML("keyboard_tab");
-
                     keyElement.addEventListener("click", () => {
                         //console.log(this.elements.activeElem)
                         var x = document.forms.item(1);
                         var elements = x.elements;
-
-
                         for (var i = 0; i < elements.length; i++) {
                             if (this.elements.activeElem == elements[i].id){
                                 document.getElementById(elements[i + 1].id).focus();
@@ -181,18 +159,15 @@ const Keyboard = {
                         }
                         
                     });
-
                     break;
 
                 case "clear":
                     keyElement.classList.add("keyboard__key--wide");
                     keyElement.innerHTML = createIconHTML("clear_all");
-
                     keyElement.addEventListener("click", () => {
                         this.properties.value = "";
                         this._triggerEvent("oninput");
                     });
-
                     break;
 
 
@@ -200,12 +175,10 @@ const Keyboard = {
                 case "done":
                     keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
                     keyElement.innerHTML = createIconHTML("keyboard_hide");
-
                     keyElement.addEventListener("click", () => {
                         this.close();
                         this._triggerEvent("onclose");
                     });
-
                     break;
 
                 default:
@@ -225,17 +198,14 @@ const Keyboard = {
                         this._isCapitalField(this.properties);
                         this._triggerEvent("oninput");
                     });
-
                     break;
             }
 
             fragment.appendChild(keyElement);
-
             if (insertLineBreak) {
                 fragment.appendChild(document.createElement("br"));
             }
         });
-
         return fragment;
     },
 
@@ -259,7 +229,6 @@ const Keyboard = {
             element.value = element.value.toUpperCase();
         }
     },
-
     _isNumeric(element){
         if(element.tagname.toLowerCase().includes('phoneno')){
             element.value = element.value.replace(/[^\d.-]/g, '');
@@ -283,8 +252,6 @@ const Keyboard = {
             element.value = element.value.replace(/[^\d.-]/g, '');
         }
     },
-
-    
     _isSymbol(element){
         if(element.tagname.toLowerCase().includes('uid')){
             element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
@@ -314,7 +281,6 @@ const Keyboard = {
             element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
         }
     },
-
     _limit(element){
 
         var max_chars = 500;
@@ -323,7 +289,6 @@ const Keyboard = {
             element.tagname = "";
         }
         
-
         if(element.tagname.toLowerCase().includes('phoneno')){
             max_chars = 16;
         }
@@ -406,11 +371,6 @@ const Keyboard = {
         this.elements.keyboardspace.style.height = "0";
     },
 
-    // removeKeyboard() {
-    //     var elem = document.getElementsByClassName("keyboard");
-    //     console.log(elem.parentNode);
-    //     //elem.remove();
-    // }
 
     removeElementsByClass(className){
         var elements = document.getElementsByClassName(className);
@@ -419,10 +379,6 @@ const Keyboard = {
         }
     }
 };
-
-// window.addEventListener("DOMContentLoaded", function () {
-//     Keyboard.init();
-// });
 
 
 function loadKeyboard() {
@@ -438,8 +394,6 @@ function deleteKeyboard() {
     Keyboard.removeElementsByClass('spaceHandling');
 }
 
-
-//var myTxt = document.getElementById("AR1");
 window.addEventListener("click", textclick, false);
 
 function textclick() {
