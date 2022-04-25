@@ -30,12 +30,12 @@ export class OutOfServiceComponent implements OnInit {
     this.XXX2 = appFunc.code;
 
     this.EM1 = appFunc.message;
-    this.readerIntervalId = setInterval(() => {
-      appFunc.DetectMyKad();
-      if(!signalRConnection.isCardInserted) {
-        this.route.navigate(['verifyMyKad']);
-      }
-    }, 1000);
+    // this.readerIntervalId = setInterval(() => {
+    //   appFunc.DetectMyKad();
+    //   if(!signalRConnection.isCardInserted) {
+    //     this.route.navigate(['verifyMyKad']);
+    //   }
+    // }, 1000);
   }
 
   ngOnDestroy(): void {

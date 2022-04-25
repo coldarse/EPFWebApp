@@ -44,6 +44,8 @@ export class VerifyMyKadComponent implements OnInit {
   readerIntervalId: any;
   moduleIntervelId: any;
 
+  checkThumbprintStatusIntervalId: any;
+
   myKadData: any;
   RetryCountInstance = 0;
   ErrorPop = false;
@@ -136,6 +138,10 @@ export class VerifyMyKadComponent implements OnInit {
         }
       }
     }, 1000);
+
+   
+
+
   }
 
   useMainPage(){
@@ -145,19 +151,20 @@ export class VerifyMyKadComponent implements OnInit {
   verifyThumbprint(){
     if (this.RetryCountInstance != 0){
       signalRConnection.connection.invoke('VerifyThumbprint').then((isVerifySuccess: any) => {
-        if (isVerifySuccess){
-          this.BeforeRead = false;
-          this.AfterRead = true;
-          this.bindMyKadData(this.myKadData);
-        }
-        else{
-          this.RetryCountInstance -= 1;
-          if (this.RetryCountInstance == 0) this.xlastTry = false;
-          this.BeforeRead = true;
-          this.AfterRead = false;
-          this.ErrorPop = true;
-        }
+        // if (isVerifySuccess){
+        //   this.BeforeRead = false;
+        //   this.AfterRead = true;
+        //   this.bindMyKadData(this.myKadData);
+        // }
+        // else{
+        //   this.RetryCountInstance -= 1;
+        //   if (this.RetryCountInstance == 0) this.xlastTry = false;
+        //   this.BeforeRead = true;
+        //   this.AfterRead = false;
+        //   this.ErrorPop = true;
+        // }
       });
+      this.checkThumbprintStatus();
     }
 
   }
@@ -361,10 +368,32 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
 
+  checkThumbprintStatus(){
+    this.checkThumbprintStatusIntervalId = setInterval(() => {
+      signalRConnection.connection.invoke('CheckThumbprintStatus').then((data: number) => {
+        if(data == 2){
+          this.BeforeRead = false;
+          this.AfterRead = true;
+          this.bindMyKadData(this.myKadData);
+          clearInterval(this.checkThumbprintStatusIntervalId);
+        }else if(data == 1){
+          this.RetryCountInstance -= 1;
+          if (this.RetryCountInstance == 0) this.xlastTry = false;
+          this.BeforeRead = true;
+          this.AfterRead = false;
+          this.ErrorPop = true;
+          clearInterval(this.checkThumbprintStatusIntervalId);
+        }
+      });
+      
+    }, 1000);
+  }
+
   cancelMyKadVerification(){
     signalRConnection.connection.invoke('CancelThumbprint').then((data: boolean) => {
     });
     clearInterval(this.readerIntervalId);
+    clearInterval(this.checkThumbprintStatusIntervalId);
     this.route.navigate(['startup']);
   }
 
