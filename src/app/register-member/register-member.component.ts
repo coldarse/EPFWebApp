@@ -116,6 +116,7 @@ export class RegisterMemberComponent implements OnInit {
 
   isCallAPI = false;
   errorDesc = "";
+  noEmail = false;
 
   constructor(
     private route: Router,
@@ -304,6 +305,7 @@ export class RegisterMemberComponent implements OnInit {
 
     if(this.email?.nativeElement.value == '')
     {
+      this.noEmail = true;
       this.fullEmailAddress = "";
       this.InsertEmailPage = false;
       this.ValidateProfilePage = true;
@@ -311,6 +313,7 @@ export class RegisterMemberComponent implements OnInit {
     }
     else
     {
+      this.noEmail = false;
       if(this.isCustom){
         this.emailDDLTextValue = this.emailDDLText?.nativeElement.value;
         this.emailAddress = this.email?.nativeElement.value;
@@ -619,7 +622,7 @@ export class RegisterMemberComponent implements OnInit {
         matrimAsset: 'N',
         handicapRemarks: '',
         regChannel: 'SST',
-        regRcvdDate: '2001-01-01',
+        regRcvdDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         prefComChannel: 'ML',
         addLine1: currentMyKadDetails.Address1,
         addLine2: currentMyKadDetails.Address2,
@@ -662,9 +665,9 @@ export class RegisterMemberComponent implements OnInit {
 
       const Profilebody = {
         "regType": "M",
-        "accNum": appFunc.currMemberDetail.accNum,
+        "accNum": "",
         "accType": "S",
-        "searchType": "A",
+        "searchType": "I",
         "idNum": currentMyKadDetails.ICNo,
         "idType": currentMyKadDetails.CategoryType,
         "reqTypeCode": "",
@@ -712,7 +715,6 @@ export class RegisterMemberComponent implements OnInit {
                         .iAkaunRegistration(iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
-                         
                             this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                               if(result.status == 200){
                                 this.isCallAPI = false;
@@ -780,10 +782,8 @@ export class RegisterMemberComponent implements OnInit {
                 this.route.navigate(['outofservice']);
               });
           } else {
-            this.isCallAPI = false;
-            this.ValidateProfilePage = false;
-            this.errorDesc = result.body.error[0].description;
-            this.Failed = true;
+            appFunc.message = result.body.error[0].description;
+            this.route.navigate(['outofservice']);
           }
         }
         else{

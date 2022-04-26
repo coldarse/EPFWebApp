@@ -305,6 +305,18 @@ export class AldanService {
     )
   }
 
+  //Email for Member Statement
+  EmailForMemberStatement(emailAdd: string, sessionid: number, body: any){
+    return this.http.post(
+      this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&sessionID=${sessionid}`,
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
   //Member Profile Info
   MemberProfileInfo(body: any){
     return this.http.post(
@@ -396,6 +408,23 @@ export class AldanService {
       retry(1),
       catchError(this.handleError),
     )
+  }
+
+  //Get Client Settings from KMS
+  GetClientSettings(){
+    const response1 = this.http.get(this.url + 'app/client-settings/1', accessToken.httpOptions); //Get Thumbprint Retry
+    const response2 = this.http.get(this.url + 'app/client-settings/2', accessToken.httpOptions); //Get number of IAkaun Activation Per Day
+    const response3 = this.http.get(this.url + 'app/client-settings/9', accessToken.httpOptions); //Get min chars for password
+    const response4 = this.http.get(this.url + 'app/client-settings/24', accessToken.httpOptions); //Get number of Update TAC per month
+    const response5 = this.http.get(this.url + 'app/client-settings/57', accessToken.httpOptions); //Get number of years for statements
+
+    return forkJoin([
+      response1.pipe(retry(1), catchError(this.handleError)),
+      response2.pipe(delay(3000),retry(1), catchError(this.handleError)),
+      response3.pipe(delay(3000),retry(1), catchError(this.handleError)),
+      response4.pipe(delay(3000),retry(1), catchError(this.handleError)),
+      response5.pipe(delay(3000),retry(1), catchError(this.handleError)),
+    ])
   }
 
   UpdateFullProfile(body1: any, body2: any){
