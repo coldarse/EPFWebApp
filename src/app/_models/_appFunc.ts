@@ -25,6 +25,13 @@ export class appFunc {
     static message: string;
     static FromCheckBalance = false;
     static endSession = false;
+
+    static thumbprintRetry: number;
+    static iAkaunActivationPerDay: number;
+    static minCharForPassword: number;
+    static updateTACPerMonth: number;
+    static NumberOfYearsViewStatement: number;
+
     
     // Check if current time is between Start and End time.
     // Returns true or false.

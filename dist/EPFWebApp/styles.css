@@ -11583,6 +11583,11 @@ ul.dropdown-menu a.dropdown-item:hover {
     font-size: 30px;
     font-family: 'filson-pro', sans-serif;
 }
+
+.topBottom1rem{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 .keyboard {
     position: fixed;
     left: 0;

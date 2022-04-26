@@ -56,6 +56,7 @@ export class CheckBalanceComponent implements OnInit {
   emptyFields = false;
 
   isCallAPI = false;
+  dataForEmail: any;
 
   constructor(
     private route: Router,
@@ -147,9 +148,23 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
-    this.ConfirmEmailPage = false;
-    this.EmailSuccessPage = true;
-    this.isCallAPI = false;
+    this._aldanService.EmailForMemberStatement(appFunc.currMemberDetail.emailAdd, appFunc.sessionId, this.dataForEmail).subscribe((res: any) => {
+      if(res.body.attachmentPath != ""){
+        this.ConfirmEmailPage = false;
+        this.EmailSuccessPage = true;
+        this.isCallAPI = false;
+      }
+      else{
+        this.isCallAPI = false;
+        this.SummaryStatementPage = false;
+        this.errorDesc = res.body.error[0].description;
+        this.Failed = true;
+      }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
+    });
+    
   }
 
   NavProfile() {
@@ -176,12 +191,12 @@ export class CheckBalanceComponent implements OnInit {
     var CurrYears = new Date().getFullYear();
     var TotalYears = CurrYears - RegYear;
 
-    if (TotalYears > 4)
-      for (let i = 0; i < 4; i++) {
+    if (TotalYears >= appFunc.NumberOfYearsViewStatement)
+      for (let i = 0; i < appFunc.NumberOfYearsViewStatement; i++) {
         CurrYears -= 1;
         this.arrYears[i] = CurrYears;
       }
-    else if (TotalYears < 4)
+    else if (TotalYears < appFunc.NumberOfYearsViewStatement)
       for (let i = 0; i < TotalYears; i++) {
         CurrYears -= 1;
         this.arrYears[i] = CurrYears;
@@ -192,21 +207,18 @@ export class CheckBalanceComponent implements OnInit {
   DisplaySelectedYearStatement(year: number) {
     this.isCallAPI = true;
     const mainBody = {
-      // "accNum": appFunc.currMemberDetail.accNum,
-      // "stmtYear": new Date().getFullYear
       "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
-
     this._aldanService.MemberStatement(mainBody).subscribe((result: any) => {
       if(result.status == 200){
         if (result.body.responseCode == '0') {
           this.isCallAPI = false;
+          this.dataForEmail = result.body;
           this.cDetails = result.body.detail.mainStatement;
           this.cDetails.forEach((details: any) => {
-            // this.transactionAmtForAcc1 += details.totalAmount;
             details.transaction = 'Caruman-IWS';
             const datepipe: DatePipe = new DatePipe('en-US')
             let formattedDate = datepipe.transform(details.transactionDate, 'dd/MM/YYYY')
@@ -261,6 +273,17 @@ export class CheckBalanceComponent implements OnInit {
     }
     else{
       this.route.navigate(['mainMenu']);
+    }
+  }
+
+  BackFromSelectYearPage(){
+    this.isCallAPI = false;
+    if(this.errorCode == 'MBM2015'){
+      this.route.navigate(['mainMenu']);
+    }
+    else{
+      this.SelectYearPage = false;
+      this.SummaryStatementPage = true;
     }
   }
 }

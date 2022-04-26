@@ -67,7 +67,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.RetryCountInstance = this.appConfig.RetryCounts;
+    this.RetryCountInstance = appFunc.thumbprintRetry;
     this.translate.use('bm');
     if (appFunc.endSession){
       this.translate.use(selectLang.selectedLang);
@@ -87,6 +87,20 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.message = 'HttpError';
           this.route.navigate(['outofservice']);
         });
+
+        this._aldanService.GetClientSettings().subscribe((res: any) => {
+          
+          appFunc.thumbprintRetry = Number(res[0].body.value);
+          appFunc.iAkaunActivationPerDay = Number(res[1].body.value);
+          appFunc.minCharForPassword = Number(res[2].body.value);
+          appFunc.updateTACPerMonth = Number(res[3].body.value);
+          appFunc.NumberOfYearsViewStatement = Number(res[4].body.value);
+
+        }, (err: HttpErrorResponse) => {
+          appFunc.message = 'HttpError';
+          this.route.navigate(['outofservice']);
+        });
+
         this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
           appFunc.modules = res.body.map((em: any) => new eModules(em));
 

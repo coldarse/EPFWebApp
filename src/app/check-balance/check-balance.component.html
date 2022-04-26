@@ -65,6 +65,12 @@
                         <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
+                <div class="row topBottom1rem">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <button type="button" class="btnNo" (click)="BackFromSelectYearPage()">{{"back"| translate}}</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -104,7 +110,7 @@
                         <th class="right" style="font-weight: 700;">{{transactionAmtForAcc1 | number : '1.2-2'}}</th>
                     </tr>
                 </table>
-                <div class="row padTop1rem">
+                <div class="row topBottom1rem">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="StatementNo()">{{"back"| translate}}</button>
@@ -147,7 +153,7 @@
                         <button type="button" class="btnYes" (click)="ConfirmEmailYes()">{{"send"| translate}}</button>
                     </div>
                 </div>
-                <div class="row padTop15rem" *ngIf="isCallAPI">
+                <div class="row padTop1rem" *ngIf="isCallAPI">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <div class="spinner-border text-primary spinning-addon" role="status"> </div>
