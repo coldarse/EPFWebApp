@@ -187,11 +187,12 @@ export class RegisterMemberComponent implements OnInit {
     this.dob = formatDate(currentMyKadDetails.DOB, 'dd/MM/yyyy' ,'en');
     this.nationality = currentMyKadDetails.Citizenship;
     this.gender = currentMyKadDetails.Gender;
+    this.race = currentMyKadDetails.Race;
     if(selectLang.selectedLang == 'bm'){
       if(this.gender == 'Male'){
         this.gender = 'LELAKI';
       }
-      else{
+      else if(this.gender == "Female"){
         this.gender = 'PEREMPUAN';
       }
     }
@@ -206,8 +207,18 @@ export class RegisterMemberComponent implements OnInit {
       if(this.nationality == 'WARGANEGARA'){
         this.nationality = 'CITIZEN'
       }
+
+      if(this.race == "MELAYU"){
+        this.race = "MALAY";
+      }
+      else if (this.race == "CINA"){
+        this.race = "CHINESE";
+      }
+      else if (this.race == "INDIA"){
+        this.race = "INDIAN";
+      }
     }
-    this.race = currentMyKadDetails.Race;
+    // this.race = currentMyKadDetails.Race;
     this.religion = currentMyKadDetails.Religion;
 
     // this.acctNo = this.ic;
@@ -324,7 +335,7 @@ export class RegisterMemberComponent implements OnInit {
 
   isEmail(search:string):boolean
   {
-    const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return regexp.test(search);
   }
 
