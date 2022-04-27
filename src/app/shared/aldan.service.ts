@@ -219,7 +219,7 @@ export class AldanService {
   }
 
   //Member Registration
-  MemberRegistration(body: any){
+  MemberRegistration(body: any, language: string){
     return this.http.post(
       this.url + 'Registration/MemberRegistration',
       body,

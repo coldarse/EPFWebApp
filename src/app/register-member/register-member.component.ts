@@ -682,7 +682,7 @@ export class RegisterMemberComponent implements OnInit {
         "sessionId": appFunc.sessionId
       }
 
-      this._aldanService.MemberRegistration(body).subscribe((result: any) => {
+      this._aldanService.MemberRegistration(body, selectLang.selectedLang).subscribe((result: any) => {
         if(result.status == 200){
           if (result.body.responseCode == '0') {
             this.KWSPMemberNo = result.body.detail.accNum;
