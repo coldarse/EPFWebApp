@@ -28,7 +28,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   IShariah = false;
   IShariahSuccess = false;
   Failed = false;
-
+  isSuri = false;
 
 
   iSaraanEnabled = false;
@@ -156,6 +156,9 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
               if (result.body.responseCode == '0') {
                 this.ISaraan = false;
                 this.ISaraanSuccess = true;
+                if(result.body.detail.businessTypeCode == "S910"){
+                  this.isSuri = true;
+                }
               } else {
                 this.ISaraan = false;
                 this.Failed = true;
