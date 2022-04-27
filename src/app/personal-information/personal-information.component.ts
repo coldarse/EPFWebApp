@@ -120,6 +120,7 @@ export class PersonalInformationComponent implements OnInit {
   UpdateProfileYes(){
 
     this.emptyFields = false;
+    this.invalidEmail = false;
 
     this.address1 = this.address_1?.nativeElement.value
     this.address2 = this.address_2?.nativeElement.value

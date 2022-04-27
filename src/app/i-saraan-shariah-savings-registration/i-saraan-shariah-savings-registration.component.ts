@@ -102,7 +102,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             if (result.body.content != '') {
               this.xagreedTnc = true;
               this.Contract = result.body.content;
-              this.Contract = this.Contract.replaceAll("?","\"");
               this.RegSaraanShariah = false;
               this.RegShariah = true; 
               this.SelectIShariahISaraan = false;
