@@ -146,8 +146,11 @@
                 <div class="row padTop3rem">
                     <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop3rem">
+                <div class="row padTop3rem" *ngIf="!isSuri">
                     <div class="statusMsg">{{"successShariah"|translate}}</div>
+                </div>
+                <div class="row padTop3rem" *ngIf="isSuri">
+                    <div class="statusMsg">{{"successSuri"|translate}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>

@@ -67,7 +67,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.RetryCountInstance = appFunc.thumbprintRetry;
+    this.RetryCountInstance = this.appConfig.RetryCounts;
     this.translate.use('bm');
     if (appFunc.endSession){
       this.translate.use(selectLang.selectedLang);
@@ -95,7 +95,7 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.minCharForPassword = Number(res[2].body.value);
           appFunc.updateTACPerMonth = Number(res[3].body.value);
           appFunc.NumberOfYearsViewStatement = Number(res[4].body.value);
-
+          this.RetryCountInstance = appFunc.thumbprintRetry;
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
           this.route.navigate(['outofservice']);

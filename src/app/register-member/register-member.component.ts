@@ -842,8 +842,11 @@ export class RegisterMemberComponent implements OnInit {
               }
               
             },(err: HttpErrorResponse) => {
-              appFunc.message = "HttpError";
-              this.route.navigate(['outofservice']);
+              // appFunc.message = "HttpError";
+              // this.route.navigate(['outofservice']);
+              this.RegisterSuccessPage = false;
+              this.Failed = true;
+              this.errorDesc = "HttpError";
             });
         }
       } else {
