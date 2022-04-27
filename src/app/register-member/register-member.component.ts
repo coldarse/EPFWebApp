@@ -196,6 +196,10 @@ export class RegisterMemberComponent implements OnInit {
       else if(this.gender == "Female"){
         this.gender = 'PEREMPUAN';
       }
+
+      if(this.nationality == 'WARGANEGARA'){
+        this.nationality = 'KEWARGANEGARAAN'
+      }
     }
     else{
       if(this.gender == 'Male'){
