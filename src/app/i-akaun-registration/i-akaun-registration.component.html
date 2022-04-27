@@ -326,6 +326,13 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h4 class="errorMsgEmpty" *ngIf="emptyID">{{"emptyId"| translate}}</h4>
+                </div>
+                <div class="col-4"></div>
+            </div>
+            <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
@@ -345,6 +352,13 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h4 class="errorMsgEmpty" *ngIf="emptyPassword">{{"emptyPassword"| translate}}</h4>
+                </div>
+                <div class="col-4"></div>
+            </div>
+            <div class="row">
                 <div class="col-1"></div>
                 <div class="col-3">
                     <div class="row">
@@ -357,16 +371,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h4 class="errorMsgEmpty" *ngIf="emptyConfirmPW">{{"emptyConfirmPW"| translate}}</h4>
+                </div>
+                <div class="col-4"></div>
+            </div>
             <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsg" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="accountMin">{{"accountMin"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="accountMax">{{"accountMax"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordMin">{{"passwordMin"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordMax">{{"passwordMax"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="accountMin">{{"accountMin"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="accountMax">{{"accountMax"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="passwordMin">{{"passwordMin"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="passwordMax">{{"passwordMax"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h4>
                 </div>
                 <div class="col-4"></div>
             </div> -->
@@ -407,6 +428,13 @@
                 </div>
                 <div class="col-1"></div>
             </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
+                    <h4 class="errorMsgEmpty" *ngIf="imageSelect">{{"imageSelect"| translate}}</h4>
+                </div>
+                <div class="col-4"></div>
+            </div>
             <div class="row padTop1rem">
                 <div class="col-1"></div>
                 <div class="col-3">
@@ -430,7 +458,7 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <input type="text"     target="needed" required class="use-keyboard-input txtProfile" id="txtSecurePhrase" name="securePhrase" value="{{ securePhrase }}" #secure_phrase>
+                        <input type="text" target="needed" required class="use-keyboard-input txtProfile" id="txtSecurePhrase" name="securePhrase" value="{{ securePhrase }}" #secure_phrase>
                     </div>
                 </div>
                 <div class="col-3">
@@ -441,18 +469,11 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-            <div class="row padTop2rem">
+            <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsg" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="accountMin">{{"accountMin"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="accountMax">{{"accountMax"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordMin">{{"passwordMin"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordMax">{{"passwordMax"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="imageSelect">{{"imageSelect"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h4>
-                    <h4 class="errorMsg" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h4>
+                    <h4 class="errorMsgEmpty" *ngIf="emptySecret">{{"emptySecret"| translate}}</h4>
                 </div>
                 <div class="col-4"></div>
             </div>

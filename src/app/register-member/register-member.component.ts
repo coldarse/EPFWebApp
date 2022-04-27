@@ -102,6 +102,10 @@ export class RegisterMemberComponent implements OnInit {
   selectedJobSector: any = undefined;
   currentLang = 'bm';
 
+  emptySecret = false;
+  emptyID = false;
+  emptyPassword = false;
+  emptyConfirmPW = false;
   accountAlpha = false;
   passwordAlpha = false;
   accountMin = false;
@@ -893,6 +897,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   ActivateInformationYes() {
+    this.emptySecret = false;
     this.imageSelect = false;
     this.securePhraseMax = false;
 
@@ -900,6 +905,9 @@ export class RegisterMemberComponent implements OnInit {
 
     let FilledIn = 0;
     if (this.securePhrase.length != 0) FilledIn += 1;
+    else{
+      this.emptySecret = true;
+    }
 
     if (FilledIn == 1) {
       let errorCount = 0;
@@ -986,6 +994,9 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   SetIdPasswordYes() {
+    this.emptyID = false;
+    this.emptyPassword = false;
+    this.emptyConfirmPW = false;
     this.accountAlpha = false;
     this.accountAlpha = false;
     this.passwordAlpha = false;
@@ -1001,8 +1012,17 @@ export class RegisterMemberComponent implements OnInit {
 
     let FilledIn = 0;
     if (this.acctNo.length != 0) FilledIn += 1;
-    if (this.password1.length != 0) FilledIn += 1;
+    else{
+      this.emptyID = true;
+    }
+    if (this.password1.length != 0) FilledIn += 1; 
+    else{
+      this.emptyPassword = true;
+    }
     if (this.password2.length != 0) FilledIn += 1;
+    else{
+      this.emptyConfirmPW = true;
+    }
 
     if (FilledIn == 3) {
       let errorCount = 0;

@@ -6,6 +6,7 @@ import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { HttpErrorResponse } from '@angular/common/http';
+import { templateJitUrl } from '@angular/compiler';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -45,7 +46,10 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   phoneError = false;
   xagreedTnc = true;
-
+  emptySecret = false;
+  emptyID = false;
+  emptyPassword = false;
+  emptyConfirmPW = false;
   accountAlpha = false;
   passwordAlpha = false;
   accountMin = false;
@@ -322,6 +326,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   ActivateInformationYes() {
+    this.emptySecret = false;
     this.imageSelect = false;
     this.securePhraseMax = false;
 
@@ -329,6 +334,9 @@ export class IAkaunRegistrationComponent implements OnInit {
 
     let FilledIn = 0;
     if (this.securePhrase.length != 0) FilledIn += 1;
+    else{
+      this.emptySecret = true;
+    }
 
     if (FilledIn == 1) {
       let errorCount = 0;
@@ -415,6 +423,9 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   SetIdPasswordYes(){
+    this.emptyID = false;
+    this.emptyPassword = false;
+    this.emptyConfirmPW = false;
     this.accountAlpha = false;
     this.accountAlpha = false;
     this.passwordAlpha = false;
@@ -430,8 +441,17 @@ export class IAkaunRegistrationComponent implements OnInit {
 
     let FilledIn = 0;
     if (this.acctNo.length != 0) FilledIn += 1;
-    if (this.password1.length != 0) FilledIn += 1;
+    else{
+      this.emptyID = true;
+    }
+    if (this.password1.length != 0) FilledIn += 1; 
+    else{
+      this.emptyPassword = true;
+    }
     if (this.password2.length != 0) FilledIn += 1;
+    else{
+      this.emptyConfirmPW = true;
+    }
 
     if (FilledIn == 3) {
       let errorCount = 0;
