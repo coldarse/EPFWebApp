@@ -58,7 +58,7 @@ export class CheckBalanceComponent implements OnInit {
   isCallAPI = false;
   dataForEmail: any;
 
-  totalSavings = "0.00";
+  totalSavingsForEmail = "0.00";
 
   constructor(
     private route: Router,
@@ -100,7 +100,7 @@ export class CheckBalanceComponent implements OnInit {
           if (result.body.responseCode == '0') {
             this.sDetails = result.body.detail.summaryStatement;
 
-            this.totalSavings = result.body.detail.totalSavings;
+            this.totalSavingsForEmail = result.body.detail.totalSavings;
   
             this.sDetails.forEach((details: any) => {
               this.grandTotal += Number(details.subAccBalance);
@@ -160,7 +160,7 @@ export class CheckBalanceComponent implements OnInit {
     this.isCallAPI = true;
     
     Object.assign(this.dataForEmail, {
-      "totalSavings": this.totalSavings,
+      "totalSavings": this.totalSavingsForEmail,
       "summaryStatement": this.sDetails
     });
 

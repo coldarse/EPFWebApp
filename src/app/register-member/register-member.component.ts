@@ -941,18 +941,11 @@ export class RegisterMemberComponent implements OnInit {
     this.securePhrase = this.secure_phrase?.nativeElement.value;
 
     let FilledIn = 0;
+    let errorCount = 0;
     if (this.securePhrase.length != 0) FilledIn += 1;
     else{
       this.emptySecret = true;
     }
-
-    if (FilledIn == 1) {
-      let errorCount = 0;
-
-      if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
-        errorCount += 1;
-        this.securePhraseMax = true;
-      }
 
       //Check Selected Image
       let selectedCount = 0;
@@ -966,6 +959,13 @@ export class RegisterMemberComponent implements OnInit {
       if (selectedCount == 0) {
         errorCount += 1;
         this.imageSelect = true;
+      }
+
+    if (FilledIn == 1) {
+
+      if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
+        errorCount += 1;
+        this.securePhraseMax = true;
       }
 
       if (errorCount == 0) {
