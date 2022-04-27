@@ -58,6 +58,8 @@ export class CheckBalanceComponent implements OnInit {
   isCallAPI = false;
   dataForEmail: any;
 
+  totalSavings = "0.00";
+
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -97,6 +99,8 @@ export class CheckBalanceComponent implements OnInit {
         if(result.status == 200){
           if (result.body.responseCode == '0') {
             this.sDetails = result.body.detail.summaryStatement;
+
+            this.totalSavings = result.body.detail.totalSavings;
   
             this.sDetails.forEach((details: any) => {
               this.grandTotal += Number(details.subAccBalance);
@@ -106,7 +110,13 @@ export class CheckBalanceComponent implements OnInit {
           else{
             this.SummaryStatementPage = false;
             this.errorCode = result.body.error[0].code;
-            this.errorDesc = result.body.error[0].description;
+            if(this.errorCode == 'MBM2015'){
+              this.errorDesc = 'noOpeningBalance';
+            }
+            else{
+              this.errorDesc = 'cannotRetrieveAccountBalance'
+            }
+            //this.errorDesc = result.body.error[0].description;
             this.Failed = true;
           }
         }
@@ -148,6 +158,12 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
+    
+    Object.assign(this.dataForEmail, {
+      "totalSavings": this.totalSavings,
+      "summaryStatement": this.sDetails
+    });
+
     this._aldanService.EmailForMemberStatement(appFunc.currMemberDetail.emailAdd, appFunc.sessionId, this.dataForEmail).subscribe((res: any) => {
       if(res.body.attachmentPath != ""){
         this.ConfirmEmailPage = false;
@@ -234,7 +250,7 @@ export class CheckBalanceComponent implements OnInit {
           // Error
           this.isCallAPI = false;
           this.SummaryStatementPage = false;
-          this.errorDesc = result.body.error[0].description;
+          this.errorDesc = 'cannotRetrieveAccountBalance';
           this.Failed = true;
         }
       }

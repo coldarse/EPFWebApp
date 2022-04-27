@@ -379,7 +379,7 @@ export class IAkaunRegistrationComponent implements OnInit {
               else{
                 this.ActivateInformation = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error.description;
+                this.errorDesc = 'unsuccesfuliAkaunActivation';
               }
             }
             else{

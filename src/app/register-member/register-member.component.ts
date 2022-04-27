@@ -728,7 +728,7 @@ export class RegisterMemberComponent implements OnInit {
                                   this.ValidateProfilePage = false;
                                   this.RegisterSuccessPage = true;
                                 } else {
-                                  this.failedTAC = true;
+                                  
                                   this.ValidateProfilePage = false;
                                   this.RegisterSuccessPage = true;
                                 }
@@ -755,26 +755,63 @@ export class RegisterMemberComponent implements OnInit {
                         if(result.status == 200){
                           this.isCallAPI = false;
                           if (result.body.responseCode == '0') {
-                          appFunc.currMemberDetail = result.body.detail;
-                          this.ValidateProfilePage = false;
-                          this.RegisterSuccessPage = true;
-        
-                          deleteKeyboard();
+                            appFunc.currMemberDetail = result.body.detail;
+                            this.ValidateProfilePage = false;
+                            this.RegisterSuccessPage = true;
+                            deleteKeyboard();
+                          }
+                          else{
+                            this.isCallAPI = false;
+                            this.ValidateProfilePage = false;
+                            this.errorDesc = result.body.error[0].description;
+                            this.Failed = true;
+                          }
                         }
-                        else{
-                          this.isCallAPI = false;
-                          this.ValidateProfilePage = false;
-                          this.errorDesc = result.body.error[0].description;
-                          this.Failed = true;
-                        }
-                      }
                       });
                     }
                   } else {
-                    this.isCallAPI = false;
-                    this.ValidateProfilePage = false;
-                    this.errorDesc = result.body.error[0].description;
-                    this.Failed = true;
+                    this.failedTAC = true;
+                    const iAkaunbody = {
+                      epfNum: this.KWSPMemberNo,
+                      tacMobileNum: this.phoneNo,
+                      branchCode: '',
+                      migrationFlag: '',
+                      clientChannel: 'SST',
+                      source: '',
+                      subSource: '',
+                      ipAddress: '',
+                      validity: '',
+                      sessionId: appFunc.sessionId,
+                    };
+                    this._aldanService
+                      .iAkaunRegistration(iAkaunbody)
+                      .subscribe((result: any) => {
+                        if(result.status == 200){
+                          this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
+                            if(result.status == 200){
+                              this.isCallAPI = false;
+                              deleteKeyboard();
+                              appFunc.currMemberDetail = result.body.detail;
+                              this.ValidateProfilePage = false;
+                              this.RegisterSuccessPage = true;
+                            }else{
+                              appFunc.message = result.message;
+                              this.route.navigate(['outofservice']);
+                            }
+                          }, 
+                          (err: HttpErrorResponse) => {
+                            appFunc.message = "HttpError";
+                            this.route.navigate(['outofservice']);
+                          });
+                        }
+                        else{
+                          appFunc.message = result.message;
+                          this.route.navigate(['outofservice']);
+                        }
+                      },(err: HttpErrorResponse) => {
+                        appFunc.message = "HttpError";
+                        this.route.navigate(['outofservice']);
+                      });
                   }
                   }
                 else{
@@ -786,7 +823,7 @@ export class RegisterMemberComponent implements OnInit {
                 this.route.navigate(['outofservice']);
               });
           } else {
-            appFunc.message = result.body.error[0].description;
+            appFunc.message = 'unsuccesfulRegistration';
             this.route.navigate(['outofservice']);
           }
         }

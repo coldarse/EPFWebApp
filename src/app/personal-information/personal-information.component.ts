@@ -282,7 +282,7 @@ export class PersonalInformationComponent implements OnInit {
             this.isCallAPI = false;
             this.SaveProfilePage = false;
             this.Failed = true;
-            this.errorDesc = result.body.error[0].description;
+            this.errorDesc = 'unsuccessfulUpdateInfo';
           }
         }
         else{
