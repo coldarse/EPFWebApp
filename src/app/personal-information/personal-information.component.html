@@ -22,13 +22,13 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtAddress1" name="address_1" maxlength="40" required target="needed" value="{{address1}}" #address_1>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter maxchar" maxChar="41" id="txtAddress1" name="address_1" maxlength="40" required target="needed" value="{{address1}}" #address_1>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtAddress2" name="address_2" maxlength="40" required target="needed" value="{{address2}}" #address_2>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter maxchar" maxChar="41" id="txtAddress2" name="address_2" maxlength="40" required target="needed" value="{{address2}}" #address_2>
                     </div>
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtAddress3" name="address_3" maxlength="40" target="needed" value="{{address3}}" #address_3>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter maxchar" maxChar="41" id="txtAddress3" name="address_3" maxlength="40" target="needed" value="{{address3}}" #address_3>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtPostcode" name="txtProfile" required target="needed" value="{{postcode}}" #post_code>
+                        <input type="text" class="use-keyboard-input txtProfile numericOnly maxchar" maxChar="10" id="txtPostcode" name="txtPostcode" required target="needed" value="{{postcode}}" #post_code>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtCity" name="city_" required target="needed" value="{{city}}" #city_>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter nosymbol"  id="txtCity" name="city_" required target="needed" value="{{city}}" #city_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtState" name="state_" required target="needed" value="{{state}}" #state_>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter" id="txtState" name="state_" required target="needed" value="{{state}}" #state_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtCountry" name="country_" required target="needed" value="{{country}}" #country_>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter" id="txtCountry" name="country_" required target="needed" value="{{country}}" #country_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtHomeNo" name="homeno" target="needed" value="{{homeNo}}" #home_no>
+                        <input type="tel" class="use-keyboard-input txtProfile numericOnly" maxChar="15" id="txtHomeNo" name="homeno" target="needed" value="{{homeNo}}" #home_no>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtOfficeNo" name="homeno" target="needed" value="{{officeNo}}" #office_no>
+                        <input type="tel" class="use-keyboard-input txtProfile numericOnly" id="txtOfficeNo" name="officeno" target="needed" value="{{officeNo}}" #office_no>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtPhoneNo" name="phoneno" target="needed" value="{{phoneNo}}" #phone_no>
+                        <input type="tel" class="use-keyboard-input txtProfile numericOnly maxchar" maxChar="16" id="txtPhoneNo" name="phoneno" target="needed" value="{{phoneNo}}" #phone_no>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile" id="txtEmailAddress" name="txtProfile" target="needed" value="{{email}}" #email_>
+                        <input type="text" class="use-keyboard-input txtProfile maxchar" maxChar="60" id="txtEmailAddress" name="txtProfile" target="needed" value="{{email}}" #email_>
                     </div>
                 </div>
                 <div class="col-1"></div>

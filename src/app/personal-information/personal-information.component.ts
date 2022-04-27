@@ -40,17 +40,17 @@ export class PersonalInformationComponent implements OnInit {
   Failed = false;
   errorDesc = "";
 
-  address1 = "NO 46";
-  address2 = "JALAN BP 10/1";
-  address3 = "BANDAR BUKIT PUCHONG 2";
-  postcode = "47170";
-  city = "PUCHONG";
-  state = "SELANGOR DAHRUL EHSAN";
-  country = "MALAYSIA";
+  address1 = "";
+  address2 = "";
+  address3 = "";
+  postcode = "";
+  city = "";
+  state = "";
+  country = "";
   homeNo = "";
   officeNo = "";
   phoneNo = "";
-  email = "wahyu@aldantechnology.com";
+  email = "";
 
   spacer = " ";
   comma = ", ";
@@ -68,8 +68,6 @@ export class PersonalInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
-
-
     this.address1 = appFunc.currMemberDetail.addresses[1].addLine1.toUpperCase();
     this.address2 = appFunc.currMemberDetail.addresses[1].addLine2.toUpperCase();
     this.address3 = appFunc.currMemberDetail.addresses[1].addLine3.toUpperCase();
@@ -88,37 +86,8 @@ export class PersonalInformationComponent implements OnInit {
     }, 500);
   }
 
-  hardcodedIC(){
-    let harcodedic = "111111007894"
-    currentMyKadDetails.Name = "John Smith";
-    currentMyKadDetails.ICNo = harcodedic.toString().replace("*", "");
-    currentMyKadDetails.OldICNo = "";
-    currentMyKadDetails.DOB = new Date("1957-08-31");
-    currentMyKadDetails.POB =  "SELANGOR";
-    currentMyKadDetails.Gender = "Male";
-    currentMyKadDetails.Citizenship = "WARGANEGARA";
-    currentMyKadDetails.IssueDate = new Date("2020-01-01");
-    currentMyKadDetails.Race = "CINA";
-    currentMyKadDetails.Religion = "ISLAM";
-    currentMyKadDetails.Address1 = "6 Jln 14/70A";
-    currentMyKadDetails.Address2 = "";
-    currentMyKadDetails.Address3 = "Sri Hartamas";
-    currentMyKadDetails.PostCode = "50480";
-    currentMyKadDetails.City = "Kuala Lumpur";
-    currentMyKadDetails.State = "W. PERSEKUTUAN(KL)";
-    currentMyKadDetails.Country = "Malaysia";
-    currentMyKadDetails.Address = "";
-    currentMyKadDetails.RJ = "";
-    currentMyKadDetails.KT = "";
-    currentMyKadDetails.GreenCardNationality = "";
-    currentMyKadDetails.GreenCardExpiryDate = new Date("0000-00-00");
-    currentMyKadDetails.CardVersion = "";
-    currentMyKadDetails.OtherID = "";
-    currentMyKadDetails.CategoryType = "W";
-  }
-
   UpdateProfileYes(){
-
+    this.invalidEmail = false;
     this.emptyFields = false;
 
     this.address1 = this.address_1?.nativeElement.value
@@ -190,6 +159,7 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   UpdateProfileNo(){
+    deleteKeyboard();
     if (appFunc.FromCheckBalance == true)
     {
       this.route.navigate(['checkBalance']);
@@ -233,7 +203,7 @@ export class PersonalInformationComponent implements OnInit {
         "addLine5": "",
         "cityStateZip": "",
         "postalCode": this.postcode,
-        "stateCode": "15",
+        "stateCode": "",
         "countryCode": "MAL",
         "remark": "",
         "enforcementCOde": "",
@@ -328,7 +298,7 @@ export class PersonalInformationComponent implements OnInit {
       this.postcode = currentMyKadDetails.PostCode
       this.city = currentMyKadDetails.City
       this.state = currentMyKadDetails.State
-      this.country = currentMyKadDetails.Country
+      this.country = currentMyKadDetails.Country.toUpperCase();
     }
   }
 

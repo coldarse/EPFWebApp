@@ -35,20 +35,8 @@ export class CheckBalanceComponent implements OnInit {
   cDetails: any[] = [];
   arrYears: any[] = [];
 
-  address1 = "NO 46";
-  address2 = "JALAN BP 10/1";
-  address3 = "BANDAR BUKIT PUCHONG 2";
-  postcode = "47170";
-  city = "PUCHONG";
-  state = "SELANGOR DAHRUL EHSAN";
-  country = "MALAYSIA";
-  homeNo = "";
-  officeNo = "";
-  phoneNo = "";
-  email = "wahyu@aldantechnology.com";
+  email = "";
 
-  spacer = " ";
-  comma = ", ";
   Failed = false;
   errorDesc = "";
   errorCode = "";
@@ -57,8 +45,6 @@ export class CheckBalanceComponent implements OnInit {
 
   isCallAPI = false;
   dataForEmail: any;
-
-  totalSavings = "0.00";
 
   constructor(
     private route: Router,
@@ -262,18 +248,6 @@ export class CheckBalanceComponent implements OnInit {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
     });
-  }
-
-  reuseMykadAddress(event: any){
-    if(event.target.checked){
-      this.address1 = currentMyKadDetails.Address1
-      this.address2 = currentMyKadDetails.Address2
-      this.address3 = currentMyKadDetails.Address3
-      this.postcode = currentMyKadDetails.PostCode
-      this.city = currentMyKadDetails.City
-      this.state = currentMyKadDetails.State
-      this.country = currentMyKadDetails.Country
-    }
   }
 
   failedYes(){
