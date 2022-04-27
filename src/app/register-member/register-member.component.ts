@@ -1178,6 +1178,7 @@ export class RegisterMemberComponent implements OnInit {
             this.isCallAPI = false;
             if (result.body.content != '') {
               this.Contract = result.body.content;
+              this.Contract = this.Contract.replaceAll("?","\"");
               this.PickShariahPage = false;
               this.ShariahTnCPage = true;
               this.xagreedTnc2 = true;

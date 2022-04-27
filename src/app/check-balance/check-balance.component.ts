@@ -158,11 +158,17 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
+
+    let tempDetail = this.dataForEmail.detail;
+
     
     Object.assign(this.dataForEmail, {
       "totalSavings": this.totalSavingsForEmail,
-      "summaryStatement": this.sDetails
+      "summaryStatement": this.sDetails,
+      "memberInfo": tempDetail
     });
+
+    this.dataForEmail.detail = undefined;
 
     this._aldanService.EmailForMemberStatement(appFunc.currMemberDetail.emailAdd, appFunc.sessionId, this.dataForEmail).subscribe((res: any) => {
       if(res.body.attachmentPath != ""){
