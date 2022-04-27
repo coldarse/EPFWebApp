@@ -75,7 +75,7 @@ export class UpdateTACComponent implements OnInit {
           else{
             this.PhoneNoConfirmation = false;
             this.Failed = true;
-            this.errorDesc = result.body.error[0].description;
+            this.errorDesc = 'unsuccessfulUpdateTAC';
           }
         }
         else{

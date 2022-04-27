@@ -112,7 +112,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             } else {
               this.RegSaraanShariah = false;
               this.Failed = true;
-              this.errorDesc = result.body.error[0].description;
+              this.errorDesc = 'unsuccesfulSimpananShariah';
             }
           }
           else{
@@ -162,7 +162,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
               } else {
                 this.ISaraan = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error[0].description;
+                this.errorDesc = 'unsuccessfuliSaraan';
               }
             }
             else{
