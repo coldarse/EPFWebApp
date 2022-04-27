@@ -20,6 +20,7 @@ export class appFunc {
     static modules: eModules[];
     static businessTypes: businessTypes[];
     static sessionId: number;
+    static stateCode: string;
 
     static code: string;
     static message: string;

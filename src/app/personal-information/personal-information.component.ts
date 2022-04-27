@@ -56,6 +56,7 @@ export class PersonalInformationComponent implements OnInit {
   comma = ", ";
 
   emptyFields = false;
+  invalidEmail = false;
 
   isCallAPI = false;
 
@@ -154,6 +155,11 @@ export class PersonalInformationComponent implements OnInit {
     if(this.state.length == 0){
       errorCount += 1;
     }
+
+    if(this.email.length != 0 && this.isEmail(this.email) == false)
+    {
+      this.invalidEmail = true
+    }
     // if(this.homeNo.length == 0){
     //   errorCount += 1;
     // }
@@ -167,15 +173,20 @@ export class PersonalInformationComponent implements OnInit {
     //   errorCount += 1;
     // }
 
-    if(errorCount == 0){
+    if(errorCount == 0 && this.invalidEmail == false){
       this.UpdateProfilePage = false;
       this.SaveProfilePage = true;
   
       deleteKeyboard();
     }
-    else{
+    else if(errorCount != 0){
       this.emptyFields = true;
     }
+  }
+
+  isEmail(search: string): boolean {
+    const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return regexp.test(search);
   }
 
   UpdateProfileNo(){

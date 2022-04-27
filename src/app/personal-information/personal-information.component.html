@@ -156,11 +156,12 @@
 
 
             <div class="row padTop05rem">
-                <div class="col-4"></div>
-                <div class="col-4 text-center">
-                    <h5 class="errorMsg" *ngIf="emptyFields">{{"emptyFields"| translate}}</h5>
+                <div class="col-2"></div>
+                <div class="col-8 text-center">
+                    <h5 class="errorMsg" style="display:inline" *ngIf="emptyFields">{{"emptyFields"| translate}}. </h5>
+                    <h5 class="errorMsg" style="display:inline" *ngIf="invalidEmail">{{"invalidEmail"| translate}}. </h5>
                 </div>
-                <div class="col-4"></div>
+                <div class="col-2"></div>
             </div>
             <div class="row text-center padTop05rem">
                 <div class="col-2"></div>
