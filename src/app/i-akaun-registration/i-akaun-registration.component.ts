@@ -104,8 +104,8 @@ export class IAkaunRegistrationComponent implements OnInit {
       }
     }
 
-    this.ic = currentMyKadDetails.ICNo;
-    this.name = currentMyKadDetails.Name;
+    this.ic = appFunc.currMemberDetail.primaryIdNum;
+    this.name = appFunc.currMemberDetail.custName;
   }
 
   hardcodedIC() {
