@@ -198,7 +198,7 @@
                             </option>
                         </select>
 
-                        <input type="text" class="use-keyboard-input" id="emailDDLText" name="emailDDLText" placeholder="youremail.com" value="{{emailDDLTextValue}}" #emailDDLText [hidden]="!isCustom">
+                        <input type="text" class="use-keyboard-input maxchar" maxChar="41" id="emailDDLText" name="emailDDLText" placeholder="youremail.com" value="{{emailDDLTextValue}}" #emailDDLText [hidden]="!isCustom">
                     </div>
                     <div class="col-2">
                         <button class="btn btn-primary reset" [hidden]="!isCustom" (click)="reset()">X</button>
