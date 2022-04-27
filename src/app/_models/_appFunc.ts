@@ -26,7 +26,7 @@ export class appFunc {
     static FromCheckBalance = false;
     static endSession = false;
 
-    static thumbprintRetry: number;
+    static thumbprintRetry: number = 3;
     static iAkaunActivationPerDay: number;
     static minCharForPassword: number;
     static updateTACPerMonth: number;
