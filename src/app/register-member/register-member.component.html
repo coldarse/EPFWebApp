@@ -204,14 +204,13 @@
                         <button class="btn btn-primary reset" [hidden]="!isCustom" (click)="reset()">X</button>
                     </div>
                 </div>
-                <div class="row" *ngIf="emailError">
+                <div class="row">
                     <div class="col-2"></div>
-                    <div class="col-3">
-                        <h5 class="errorMsg">{{"emptyEmailError"| translate}}</h5>
+                    <div class="col-3"></div>
+                    <div class="col-4">
+                        <h5 class="errorMsg" *ngIf="emailError">{{"emptyEmailError"| translate}}</h5>
                     </div>
-                    <div class="col-1"></div>
-                    <div class="col-4"></div>
-                    <div class="col-2"></div>
+                    <div class="col-3"></div>
                 </div>
                 <div class="row padTop10rem">
                     <div class="col-2"></div>
