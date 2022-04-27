@@ -3475,10 +3475,13 @@
         }
         
         if(element.tagname.toLowerCase().includes('phoneno')){
-            max_chars = 16;
+            max_chars = 41;
+        }
+        else if(element.tagname.toLowerCase().includes('officeno')){
+            max_chars = 41;
         }
         else if(element.tagname.toLowerCase().includes('homeno')){
-            max_chars = 15;
+            max_chars = 41;
         }
         else if(element.tagname.toLowerCase().includes('compname')){
             max_chars = 255;
@@ -3493,7 +3496,7 @@
             max_chars = 41;
         }
         else if(element.tagname.toLowerCase().includes('emailadd')){
-            max_chars = 60;
+            max_chars = 41;
         }
         else if(element.tagname.toLowerCase().includes('postc')){
             max_chars = 10;
@@ -3515,6 +3518,22 @@
         }
         else if(element.tagname.toLowerCase().includes('thirdicno')){
             max_chars = 13;
+        }
+
+        else if(element.tagname.toLowerCase().includes('postcode')){
+            max_chars = 10;
+        }
+
+        else if(element.tagname.toLowerCase().includes('city_')){
+            max_chars = 41;
+        }
+
+        else if(element.tagname.toLowerCase().includes('state_')){
+            max_chars = 41;
+        }
+
+        else if(element.tagname.toLowerCase().includes('country_')){
+            max_chars = 41;
         }
         
         if(element.value.length >= max_chars) {

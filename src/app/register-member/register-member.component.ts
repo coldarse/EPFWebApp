@@ -641,7 +641,7 @@ export class RegisterMemberComponent implements OnInit {
         cityStateZip: currentMyKadDetails.State,
         stateCode: stateCode,
         countryCode: 'MAL',
-        addRemarks: 'Test Permenant Address',
+        addRemarks: 'Permenant Address',
         addLine1A: currentMyKadDetails.Address1,
         addLine2A: currentMyKadDetails.Address2,
         addLine3A: currentMyKadDetails.Address3,
@@ -651,7 +651,7 @@ export class RegisterMemberComponent implements OnInit {
         cityStateZip1: currentMyKadDetails.State,
         stateCode1: stateCode,
         countryCode1: 'MAL',
-        addRemarks1: 'Test Correspondance Address',
+        addRemarks1: 'Correspondance Address',
         homePhone: '',
         officePhone: '',
         mobilePhone: this.phoneNo,
@@ -754,7 +754,8 @@ export class RegisterMemberComponent implements OnInit {
                           appFunc.message = "HttpError";
                           this.route.navigate(['outofservice']);
                         });
-                    } else {
+                    } 
+                    else{
                       this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                         if(result.status == 200){
                           this.isCallAPI = false;
@@ -773,7 +774,8 @@ export class RegisterMemberComponent implements OnInit {
                         }
                       });
                     }
-                  } else {
+                  }
+                  else {
                     this.failedTAC = true;
                     const iAkaunbody = {
                       epfNum: this.KWSPMemberNo,
@@ -941,18 +943,11 @@ export class RegisterMemberComponent implements OnInit {
     this.securePhrase = this.secure_phrase?.nativeElement.value;
 
     let FilledIn = 0;
+    let errorCount = 0;
     if (this.securePhrase.length != 0) FilledIn += 1;
     else{
       this.emptySecret = true;
     }
-
-    if (FilledIn == 1) {
-      let errorCount = 0;
-
-      if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
-        errorCount += 1;
-        this.securePhraseMax = true;
-      }
 
       //Check Selected Image
       let selectedCount = 0;
@@ -966,6 +961,13 @@ export class RegisterMemberComponent implements OnInit {
       if (selectedCount == 0) {
         errorCount += 1;
         this.imageSelect = true;
+      }
+
+    if (FilledIn == 1) {
+
+      if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
+        errorCount += 1;
+        this.securePhraseMax = true;
       }
 
       if (errorCount == 0) {
@@ -1280,7 +1282,7 @@ export class RegisterMemberComponent implements OnInit {
         const iSaraanBody = {
           idNum: currentMyKadDetails.ICNo,
           idType: currentMyKadDetails.CategoryType,
-          businessTypeCode: this.selectedJobSector.id,
+          businessTypeCode: this.selectedJobSector.code,
           remark: '',
           sourceRegistrationChannel: 'SST',
           applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),

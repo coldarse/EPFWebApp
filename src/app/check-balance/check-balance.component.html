@@ -77,7 +77,7 @@
         <div class="row padTopHalfrem content-container" *ngIf="StatementPage">
             <div class="text-center">
                 <div class="lblHeader">
-                    {{"carum"| translate}}
+                    {{"balance"| translate}}
                 </div>
                 <div class="row">
                     <label class="lblKWSP">
@@ -133,8 +133,13 @@
                     <label class="lblHeader">{{email}}</label>
                 </div>
                 <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <a class="note2" (click)="NavProfile()" style="text-decoration: underline; display: inline;">{{"EditEmailMsg"|translate}}</a>
+                        <img src="assets/images/pencil-square.svg" width="30" height="30" style="display: inline;" (click)="NavProfile()">
+                    </div>
+                    <div class="col-1"></div>
                     <!-- <label class="note2" style="text-decoration: underline;">{{"EditEmailMsg"|translate}}</label> -->
-                    <a class="note2" (click)="NavProfile()" style="text-decoration: underline;">{{"EditEmailMsg"|translate}}</a>
                 </div>
                 <div class="row padTop15rem">
                     <div class="col-2"></div>

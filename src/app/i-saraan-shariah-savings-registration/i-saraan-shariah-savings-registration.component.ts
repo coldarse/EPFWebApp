@@ -102,7 +102,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             if (result.body.content != '') {
               this.xagreedTnc = true;
               this.Contract = result.body.content;
-              this.Contract = this.Contract.replace("?","\"")
               this.RegSaraanShariah = false;
               this.RegShariah = true; 
               this.SelectIShariahISaraan = false;
@@ -141,10 +140,10 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           idType: currentMyKadDetails.CategoryType,
           businessTypeCode: this.selectedJobSector.code,
           remark: '',
-          sourceRegistrationChannel: 'SST',
+          sourceRegistrationChannel: 'IWS',
           applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-          sourceCreationID: 'SST',
-          sourceTerminalID: 'SST',
+          sourceCreationID: 'SFIWS',
+          sourceTerminalID: signalRConnection.kioskCode,
           sourceBranchNo: '0',
           sessionId: appFunc.sessionId
         };

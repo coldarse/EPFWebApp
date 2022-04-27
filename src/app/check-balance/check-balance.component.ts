@@ -46,6 +46,8 @@ export class CheckBalanceComponent implements OnInit {
   isCallAPI = false;
   dataForEmail: any;
 
+  totalSavingsForEmail = "0.00";
+
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -86,7 +88,7 @@ export class CheckBalanceComponent implements OnInit {
           if (result.body.responseCode == '0') {
             this.sDetails = result.body.detail.summaryStatement;
 
-            this.totalSavings = result.body.detail.totalSavings;
+            this.totalSavingsForEmail = result.body.detail.totalSavings;
   
             this.sDetails.forEach((details: any) => {
               this.grandTotal += Number(details.subAccBalance);
@@ -144,11 +146,17 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
+
+    let tempDetail = this.dataForEmail.detail;
+
     
     Object.assign(this.dataForEmail, {
-      "totalSavings": this.totalSavings,
-      "summaryStatement": this.sDetails
+      "totalSavings": this.totalSavingsForEmail,
+      "summaryStatement": this.sDetails,
+      "memberInfo": tempDetail
     });
+
+    this.dataForEmail.detail = undefined;
 
     this._aldanService.EmailForMemberStatement(appFunc.currMemberDetail.emailAdd, appFunc.sessionId, this.dataForEmail).subscribe((res: any) => {
       if(res.body.attachmentPath != ""){
