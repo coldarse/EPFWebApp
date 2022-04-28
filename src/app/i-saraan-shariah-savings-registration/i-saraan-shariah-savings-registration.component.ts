@@ -29,14 +29,12 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   IShariahSuccess = false;
   Failed = false;
   isSuri = false;
-
-
   iSaraanEnabled = false;
   iShariahEnabled = false;
-
   xagreedTnc = true;
-  Contract = "";
-  errorDesc = "";
+
+  Contract = '';
+  errorDesc = '';
 
   defaultDDL = 'default';
   selectedJobSector: any = undefined;

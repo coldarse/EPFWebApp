@@ -332,7 +332,7 @@ export class RegisterMemberComponent implements OnInit {
         this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDL?.nativeElement.value;
       }
 
-      if(this.isEmail(this.fullEmailAddress)){
+      if(appFunc.isEmail(this.fullEmailAddress)){
         this.InsertEmailPage = false;
         this.ValidateProfilePage = true;
         deleteKeyboard();
@@ -720,10 +720,14 @@ export class RegisterMemberComponent implements OnInit {
                         validity: '',
                         sessionId: appFunc.sessionId,
                       };
+                      if (this.fullEmailAddress == "") this.fullEmailAddress = "@";
                       this._aldanService
-                        .iAkaunRegistration(iAkaunbody)
+                        .iAkaunRegistration(currentMyKadDetails.ICNo, currentMyKadDetails.Name, this.phoneNo, this.fullEmailAddress, selectLang.selectedLang, iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
+                            if(result.body.Response.epf_no == ""){
+                              
+                            }
                             this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                               if(result.status == 200){
                                 this.isCallAPI = false;
@@ -790,8 +794,9 @@ export class RegisterMemberComponent implements OnInit {
                       validity: '',
                       sessionId: appFunc.sessionId,
                     };
+                    if (this.fullEmailAddress == "") this.fullEmailAddress = "@";
                     this._aldanService
-                      .iAkaunRegistration(iAkaunbody)
+                      .iAkaunRegistration(currentMyKadDetails.ICNo, currentMyKadDetails.Name, this.phoneNo, this.fullEmailAddress, selectLang.selectedLang, iAkaunbody)
                       .subscribe((result: any) => {
                         if(result.status == 200){
                           this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {

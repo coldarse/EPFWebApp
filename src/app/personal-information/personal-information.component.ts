@@ -126,7 +126,7 @@ export class PersonalInformationComponent implements OnInit {
       errorCount += 1;
     }
 
-    if(this.email.length != 0 && this.isEmail(this.email) == false)
+    if(this.email.length != 0 && appFunc.isEmail(this.email) == false)
     {
       this.invalidEmail = true
     }
