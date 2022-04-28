@@ -60,6 +60,26 @@ export class PersonalInformationComponent implements OnInit {
 
   isCallAPI = false;
 
+  slist: string = '';
+  stateList: string[] = [
+    'JOHOR',
+    'KEDAH',
+    'KELANTAN',
+    'MELAKA',
+    'NEGERI SEMBILAN',
+    'PAHANG',
+    'PULAU PINANG',
+    'PERAK',
+    'PERLIS',
+    'SELANGOR',
+    'TERENGGANU',
+    'SABAH',
+    'SARAWAK',
+    'KUALA LUMPUR',
+    'LABUAN',
+    'PUTRAJAYA'
+  ];
+
   constructor(
     private route: Router,
     private translate: TranslateService,
