@@ -37,13 +37,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   PromptRegisterISaraan = false;
   SetIdPassword = false;
   Failed = false;
-  phoneNo = '';
-  emailAddress = '';
-  TnC = '';
-  errorDesc = "";
-
   isCallAPI = false;
-
   phoneError = false;
   xagreedTnc = true;
   emptySecret = false;
@@ -59,32 +53,33 @@ export class IAkaunRegistrationComponent implements OnInit {
   imageSelect = false;
   securePhraseMax = false;
   passwordMatch = false;
-  content_version = "";
+  isiAkaunActModuleEnabled = false;
+  isCustom = false;
+  emailError = false;
 
+  phoneNo = '';
+  emailAddress = '';
+  TnC = '';
+  errorDesc = '';
+  content_version = '';
   ic = '';
   name = '';
   acctNo = '';
   password1 = '';
   password2 = '';
   securePhrase = '';
+  emailDDLTextValue = '';
+  fullEmailAddress = '';
+  elist = 'gmail.com';
 
-  isiAkaunActModuleEnabled = false;
-
-  isCustom = false;
-  emailDDLTextValue = "";
-
-  fullEmailAddress = "";
-  elist: string = 'gmail.com';
+  checkboxImages: any[] = [];
   emailList: string[] = [
     'gmail.com',
     'hotmail.com',
     'yahoo.com',
     'custom'
   ];
-  emailError = false;
-
-  checkboxImages: any[] = [];
-
+  
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -97,7 +92,10 @@ export class IAkaunRegistrationComponent implements OnInit {
     for (var val of appFunc.modules){
       if(val.moduleID == 8){
         if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+          if(appFunc.isInBetween(
+            new Date("0001-01-01T" + val.operationStart + ":00"), 
+            new Date("0001-01-01T" + val.operationEnd + ":00"), 
+            new Date("0001-01-01T" + appFunc.getCurrentTime()))){
             this.isiAkaunActModuleEnabled = true;
           }
         }
@@ -108,35 +106,6 @@ export class IAkaunRegistrationComponent implements OnInit {
     this.name = appFunc.currMemberDetail.custName;
   }
 
-  hardcodedIC() {
-    let harcodedic = '111111007894';
-    currentMyKadDetails.Name = 'John Smith';
-    currentMyKadDetails.ICNo = harcodedic.toString().replace('*', '');
-    currentMyKadDetails.OldICNo = '';
-    currentMyKadDetails.DOB = new Date('1957-08-31');
-    currentMyKadDetails.POB = 'SELANGOR';
-    currentMyKadDetails.Gender = 'Male';
-    currentMyKadDetails.Citizenship = 'WARGANEGARA';
-    currentMyKadDetails.IssueDate = new Date('2020-01-01');
-    currentMyKadDetails.Race = 'CINA';
-    currentMyKadDetails.Religion = 'ISLAM';
-    currentMyKadDetails.Address1 = '6 Jln 14/70A';
-    currentMyKadDetails.Address2 = '';
-    currentMyKadDetails.Address3 = 'Sri Hartamas';
-    currentMyKadDetails.PostCode = '50480';
-    currentMyKadDetails.City = 'Kuala Lumpur';
-    currentMyKadDetails.State = 'W. PERSEKUTUAN(KL)';
-    currentMyKadDetails.Country = 'Malaysia';
-    currentMyKadDetails.Address = '';
-    currentMyKadDetails.RJ = '';
-    currentMyKadDetails.KT = '';
-    currentMyKadDetails.GreenCardNationality = '';
-    currentMyKadDetails.GreenCardExpiryDate = new Date('0000-00-00');
-    currentMyKadDetails.CardVersion = '';
-    currentMyKadDetails.OtherID = '';
-    currentMyKadDetails.CategoryType = 'W';
-  }
-
   clickTNC() {
     this.xagreedTnc = !this.xagreedTnc;
   }
@@ -145,13 +114,10 @@ export class IAkaunRegistrationComponent implements OnInit {
     this.phoneError = false;
     if (this.phoneNo.length < 10) {
       this.phoneError = true;
-    } else {
+    } 
+    else {
       this.EnterPhoneNumber = false;
       this.EnterEmailAddress = true;
-
-      
-
-
       setTimeout(() => { 
         loadKeyboard();
       }, 500);
@@ -176,15 +142,13 @@ export class IAkaunRegistrationComponent implements OnInit {
   EnterEmailAddressYes() {
     this.emailError = false;
 
-    if(this.email?.nativeElement.value == '')
-    {
-      this.fullEmailAddress = "";
+    if(this.email?.nativeElement.value == ''){
+      this.fullEmailAddress = '';
       this.EnterEmailAddress = false;
       this.PhoneEmailConfirmation = true;
       deleteKeyboard();
     }
-    else
-    {
+    else{
       if(this.isCustom){
         this.emailDDLTextValue = this.emailDDLText?.nativeElement.value;
         this.emailAddress = this.email?.nativeElement.value;
@@ -195,7 +159,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDL?.nativeElement.value;
       }
 
-      if(this.isEmail(this.fullEmailAddress)){
+      if(appFunc.isEmail(this.fullEmailAddress)){
         this.EnterEmailAddress = false;
         this.PhoneEmailConfirmation = true;
         deleteKeyboard();
@@ -206,70 +170,63 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
   }
 
-  isEmail(search:string):boolean
-    {
-      const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      return regexp.test(search);
-    }
-
+  
   EnterEmailAddressNo() {
+    deleteKeyboard();
     this.EnterEmailAddress = false;
     this.EnterPhoneNumber = true;
   }
 
   PhoneEmailConfirmationYes() {
-    if (appFunc.bypassAPI != true) {
-      this.isCallAPI = true;
-      const iAkaunbody = {
-        epfNum: appFunc.currMemberDetail.accNum,
-        tacMobileNum: this.phoneNo,
-        branchCode: '',
-        migrationFlag: '',
-        clientChannel: 'SST',
-        source: '',
-        subSource: '',
-        ipAddress: '',
-        validity: '',
-        sessionId: appFunc.sessionId
-      };
-
-      this._aldanService
-        .iAkaunRegistration(iAkaunbody)
-        .subscribe((result: any) => {
-          if(result.status == 200){
-            this.isCallAPI = false;
-            if (result.body.responseCode == '0') {
-              if(this.isiAkaunActModuleEnabled){
-                this.PhoneEmailConfirmation = false;
-                this.AskActivate = true;
-              }
-              else{
-                this.PhoneEmailConfirmation = false;
-                this.SuccessActivation = true;
-              }
-  
-              deleteKeyboard();
-            } else {
-              this.PhoneEmailConfirmation = false;
-              this.Failed = true;
-              this.errorDesc = result.body.error[0].description;
-            }
+    this.isCallAPI = true;
+    const iAkaunbody = {
+      epfNum: appFunc.currMemberDetail.accNum,
+      tacMobileNum: this.phoneNo,
+      branchCode: '',
+      migrationFlag: '',
+      clientChannel: 'SST',
+      source: '',
+      subSource: '',
+      ipAddress: '',
+      validity: '',
+      sessionId: appFunc.sessionId
+    };
+    if (this.fullEmailAddress == '') this.fullEmailAddress = '@'';
+    this._aldanService
+      .iAkaunRegistration(
+        appFunc.currMemberDetail.primaryIdNum, 
+        appFunc.currMemberDetail.custName, 
+        this.phoneNo, 
+        this.fullEmailAddress, 
+        selectLang.selectedLang, 
+        iAkaunbody
+      )
+      .subscribe((result: any) => {
+        this.isCallAPI = false;
+        if (result.body.responseCode == '0') {
+          if(this.isiAkaunActModuleEnabled){
+            this.AskActivate = true;
           }
           else{
-            appFunc.message = result.message;
-            this.route.navigate(['outofservice']);
+            this.SuccessActivation = true;
           }
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
-          this.route.navigate(['outofservice']);
-        });
-    }
+          this.PhoneEmailConfirmation = false;
+          deleteKeyboard();
+        } else {
+          this.PhoneEmailConfirmation = false;
+          this.Failed = true;
+          this.errorDesc = result.body.error.description;
+        }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+      });
   }
 
   PhoneEmailConfirmationNo() {
     this.PhoneEmailConfirmation = false;
     this.EnterEmailAddress = true;
-    this.fullEmailAddress = "";
+    this.fullEmailAddress = '';
 
     setTimeout(() => {
       loadKeyboard();
@@ -277,34 +234,29 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   AskActivateYes() {
-    if (appFunc.bypassAPI != true) {
-      this.isCallAPI = true;
-      this._aldanService
-        .GetTnC(selectLang.selectedLang, appFunc.sessionId)
-        .subscribe((result: any) => {
-          if(result.status == 200){
-            this.isCallAPI = false;
-            if (result.body.content != '') {
-              this.xagreedTnc = true;
-              this.TnC = result.body.content.toString();
-              this.content_version = result.body.contentVersion;
-              this.AskActivate = false;
-              this.IAkaunTNC = true;
-            } else {
-              this.AskActivate = false;
-              this.Failed = true;
-              this.errorDesc = result.body.error[0].description;
-            }
-          }
-          else{
-            appFunc.message = result.message;
-            this.route.navigate(['outofservice']);
-          }
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
-          this.route.navigate(['outofservice']);
-        });
-    }
+    this.isCallAPI = true;
+    this._aldanService
+      .GetTnC(
+        selectLang.selectedLang, 
+        appFunc.sessionId
+      )
+      .subscribe((result: any) => {
+        this.isCallAPI = false;
+        if (result.body.content != '') {
+          this.xagreedTnc = true;
+          this.TnC = result.body.content.toString();
+          this.content_version = result.body.contentVersion;
+          this.AskActivate = false;
+          this.IAkaunTNC = true;
+        } else {
+          this.AskActivate = false;
+          this.Failed = true;
+          this.errorDesc = result.body.error[0].description;
+        }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+      });
   }
 
   AskActivateNo() {
@@ -335,23 +287,22 @@ export class IAkaunRegistrationComponent implements OnInit {
     let FilledIn = 0;
     let errorCount = 0;
     if (this.securePhrase.length != 0) FilledIn += 1;
-    else{
-      this.emptySecret = true;
-    }
+    else this.emptySecret = true;
 
      //Check Selected Image
-     let selectedCount = 0;
-     let imageid: any;
-     this.checkboxImages.forEach((elem: any) => {
-       if (elem.checked == true) {
-         selectedCount += 1;
-         imageid = elem.imgId;
-       }
-     });
-     if (selectedCount == 0) {
-       errorCount += 1;
-       this.imageSelect = true;
-     }
+    let selectedCount = 0;
+    let imageid: any;
+    this.checkboxImages.forEach((elem: any) => {
+      if (elem.checked == true) {
+        selectedCount += 1;
+        imageid = elem.imgId;
+      }
+    });
+
+    if (selectedCount == 0) {
+      errorCount += 1;
+      this.imageSelect = true;
+    }
 
     if (FilledIn == 1) {
       if (this.securePhrase.length > 10 || this.securePhrase.length == 0) {
@@ -373,14 +324,15 @@ export class IAkaunRegistrationComponent implements OnInit {
             "sessionId": appFunc.sessionId
           }
 
-          this._aldanService.ActivateIAkaun(iAkaunActBody).subscribe((result: any) => {
-            if(result.status == 200){
+          this._aldanService.
+            ActivateIAkaun(iAkaunActBody).
+            subscribe((result: any) => {
               this.isCallAPI = false;
               if(result.body.epfNum != null){
-  
+
                 this.ActivateInformation = false;
                 this.SuccessActivation = true;
-  
+
                 deleteKeyboard()
               }
               else{
@@ -388,15 +340,10 @@ export class IAkaunRegistrationComponent implements OnInit {
                 this.Failed = true;
                 this.errorDesc = 'unsuccesfuliAkaunActivation';
               }
-            }
-            else{
-              appFunc.message = result.message;
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
               this.route.navigate(['outofservice']);
-            }
-          },(err: HttpErrorResponse) => {
-            appFunc.message = "HttpError";
-            this.route.navigate(['outofservice']);
-          });
+            });
         }
         else{
           this.ActivateInformation = false;
@@ -503,9 +450,9 @@ export class IAkaunRegistrationComponent implements OnInit {
         this.checkboxImages = [];
         if (appFunc.bypassAPI != true) {
           this.isCallAPI = true;
-          this._aldanService.GetSecureImage(appFunc.sessionId).subscribe((result: any) => {
-            if(result.status == 200){
-              deleteKeyboard();
+          this._aldanService.
+            GetSecureImage(appFunc.sessionId).
+            subscribe((result: any) => {
               this.isCallAPI = false;
               if (result.body.imgId != '') {
                 result.body.forEach((element: any) => {
@@ -525,11 +472,7 @@ export class IAkaunRegistrationComponent implements OnInit {
                 this.SetIdPassword = false;
                 this.errorDesc = result.body.error[0].description;
               }
-            }
-            else{
-              appFunc.message = result.message;
-              this.route.navigate(['outofservice']);
-            }
+              deleteKeyboard();
           },(err: HttpErrorResponse) => {
             appFunc.message = "HttpError";
             this.route.navigate(['outofservice']);

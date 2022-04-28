@@ -4,7 +4,7 @@ const Keyboard = {
         keysContainer: null,
         keys: [],
         activeElem: null,
-        keyboardspace : null,
+        keyboardspace: null,
         startpos: null,
         endpos: null,
         currElemLength: null,
@@ -18,7 +18,9 @@ const Keyboard = {
     properties: {
         value: "",
         capsLock: false,
-        tagname: ""
+        tagname: "",
+        className: "",
+        maxChar: -1
     },
 
     init() {
@@ -47,9 +49,9 @@ const Keyboard = {
     },
 
     _setActive() {
-        try{
+        try {
             this.elements.activeElem = document.activeElement.id;
-            if(this.elements.activeElem != ""){
+            if (this.elements.activeElem != "") {
                 var currElem = document.getElementById(this.elements.activeElem);
                 this.elements.startpos = currElem.selectionStart;
                 this.elements.endpos = currElem.selectionEnd;
@@ -57,7 +59,7 @@ const Keyboard = {
                 //console.log(currElem);
             }
         }
-        catch(ex){
+        catch (ex) {
             this.elements.startpos = null;
             this.elements.endpos = null;
         }
@@ -67,9 +69,9 @@ const Keyboard = {
         const fragment = document.createDocumentFragment();
         const keyLayout = [
             "&", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
-            "%","q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "*",
+            "%", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "*",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-            "!","_", "z", "x", "c", "v", "b", "n", "m", ",", ".", "@", 
+            "!", "_", "z", "x", "c", "v", "b", "n", "m", ",", ".", "@",
             "done", "clear", "/", "space", "tab", "-", "$"
         ];
 
@@ -91,9 +93,9 @@ const Keyboard = {
                     keyElement.classList.add("keyboard__key--wide");
                     keyElement.innerHTML = createIconHTML("backspace");
                     keyElement.addEventListener("click", () => {
-                        if(this.elements.startpos.toString() == this.elements.currElemLength.toString()){
+                        if (this.elements.startpos.toString() == this.elements.currElemLength.toString()) {
                             this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-                        }else{
+                        } else {
                             this.properties.value = this.properties.value.substring(0, this.elements.startpos - 1) + this.properties.value.substring(this.elements.startpos, this.properties.value.length);
                             this.elements.startpos -= 1;
                             this.elements.currElemLength = this.properties.value.length;
@@ -118,7 +120,7 @@ const Keyboard = {
                         var x = document.forms.item(1);
                         var elements = x.elements;
                         for (var i = 0; i < elements.length; i++) {
-                            if (this.elements.activeElem == elements[i].id){
+                            if (this.elements.activeElem == elements[i].id) {
                                 document.getElementById(elements[i + 1].id).focus();
                                 this.elements.activeElem = elements[i + 1].id;
                                 break;
@@ -131,10 +133,10 @@ const Keyboard = {
                     keyElement.classList.add("keyboard__key--extra-wide");
                     keyElement.innerHTML = createIconHTML("space_bar");
                     keyElement.addEventListener("click", () => {
-                        if(this.elements.startpos.toString() == this.elements.currElemLength.toString()){
+                        if (this.elements.startpos.toString() == this.elements.currElemLength.toString()) {
                             this.properties.value += " ";
                         }
-                        else{
+                        else {
                             this.properties.value = this.properties.capsLock ? this.properties.value.substring(0, this.elements.startpos) + " " + this.properties.value.substring(this.elements.startpos, this.properties.value.length) : this.properties.value.substring(0, this.elements.startpos) + " " + this.properties.value.substring(this.elements.startpos, this.properties.value.length);
                             this.elements.startpos += 1;
                             this.elements.currElemLength = this.properties.value.length;
@@ -151,13 +153,13 @@ const Keyboard = {
                         var x = document.forms.item(1);
                         var elements = x.elements;
                         for (var i = 0; i < elements.length; i++) {
-                            if (this.elements.activeElem == elements[i].id){
+                            if (this.elements.activeElem == elements[i].id) {
                                 document.getElementById(elements[i + 1].id).focus();
                                 this.elements.activeElem = elements[i + 1].id;
                                 break;
                             }
                         }
-                        
+
                     });
                     break;
 
@@ -184,10 +186,10 @@ const Keyboard = {
                 default:
                     keyElement.textContent = key.toLowerCase();
                     keyElement.addEventListener("click", () => {
-                        if(this.elements.startpos.toString() == this.elements.currElemLength.toString()){
+                        if (this.elements.startpos.toString() == this.elements.currElemLength.toString()) {
                             this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
                         }
-                        else{
+                        else {
                             this.properties.value = this.properties.capsLock ? this.properties.value.substring(0, this.elements.startpos) + key.toUpperCase() + this.properties.value.substring(this.elements.startpos, this.properties.value.length) : this.properties.value.substring(0, this.elements.startpos) + key.toLowerCase() + this.properties.value.substring(this.elements.startpos, this.properties.value.length);
                             this.elements.startpos += 1;
                             this.elements.currElemLength = this.properties.value.length;
@@ -209,152 +211,83 @@ const Keyboard = {
         return fragment;
     },
 
-    _isCapitalField(element){
-        if(element.tagname.toLowerCase().includes('address_1')){
-            element.value = element.value.toUpperCase();
-        }
-        else if(element.tagname.toLowerCase().includes('address_2')){
-            element.value = element.value.toUpperCase();
-        }
-        else if(element.tagname.toLowerCase().includes('address_3')){
-            element.value = element.value.toUpperCase();
-        }
-        else if(element.tagname.toLowerCase().includes('city_')){
-            element.value = element.value.toUpperCase();
-        }
-        else if(element.tagname.toLowerCase().includes('state_')){
-            element.value = element.value.toUpperCase();
-        }
-        else if(element.tagname.toLowerCase().includes('country_')){
+    _isCapitalField(element) {
+        if (element.className.toLowerCase().includes("allcapitalletter")) {
             element.value = element.value.toUpperCase();
         }
     },
-    _isNumeric(element){
-        if(element.tagname.toLowerCase().includes('phoneno')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
-        }
-        else if(element.tagname.toLowerCase().includes('homeno')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
-        }
-        else if(element.tagname.toLowerCase().includes('postc')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
-        }
-        else if(element.tagname.toLowerCase().includes('acctno')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
-        }
-        else if(element.tagname.toLowerCase().includes('amount')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
-        }
-        else if(element.tagname.toLowerCase().includes('switchamount')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
-        }
-        else if(element.tagname.toLowerCase().includes('thirdicno')){
-            element.value = element.value.replace(/[^\d.-]/g, '');
+    _isNumeric(element) {
+        if (element.className.toLowerCase().includes("numericonly")) {
+            element.value = element.value.replace(/[^\d-]/g, '');
         }
     },
-    _isSymbol(element){
-        if(element.tagname.toLowerCase().includes('uid')){
+    _isSymbol(element) {
+        if (element.className.toLowerCase().includes("nosymbol")) {
             element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
         }
-        else if(element.tagname.toLowerCase().includes('securephrase')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-        else if(element.tagname.toLowerCase().includes('city')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-        else if(element.tagname.toLowerCase().includes('phoneno')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-        else if(element.tagname.toLowerCase().includes('homeno')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-        else if(element.tagname.toLowerCase().includes('compname')){
-            element.value = element.value.replace('&', '');
-        }
-        else if(element.tagname.toLowerCase().includes('thirdicno')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-        else if(element.tagname.toLowerCase().includes('acctnum')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-        else if(element.tagname.toLowerCase().includes('password')){
-            element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
-        }
-    },
-    _limit(element){
 
+     
+        // else if (element.tagname.toLowerCase().includes('securephrase')) { done
+        //     element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
+        // }
+        // else if (element.tagname.toLowerCase().includes('city')) { done
+        //     element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
+        // }
+    
+       
+       
+        // else if (element.tagname.toLowerCase().includes('acctnum')) { done
+        //     element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
+        // }
+        // else if (element.tagname.toLowerCase().includes('password')) { done
+        //     element.value = element.value.replace(/[$-/:-?{-~!"^_`\[\]@]/, '');
+        // }
+    },
+    _limit(element) {
         var max_chars = 500;
-
-        if(element.tagname == null){
-            element.tagname = "";
-        }
-        
-        if(element.tagname.toLowerCase().includes('phoneno')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('officeno')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('homeno')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('compname')){
-            max_chars = 255;
-        }
-        else if(element.tagname.toLowerCase().includes('address_1')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('address_2')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('address_3')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('emailadd')){
-            max_chars = 41;
-        }
-        else if(element.tagname.toLowerCase().includes('postc')){
-            max_chars = 10;
-        }
-        else if(element.tagname.toLowerCase().includes('acctnum')){
-            max_chars = 17;
-        }
-        else if(element.tagname.toLowerCase().includes('uid')){
-            max_chars = 17;
-        }
-        else if(element.tagname.toLowerCase().includes('securephrase')){
-            max_chars = 11;
-        }
-        else if(element.tagname.toLowerCase().includes('password')){
-            max_chars = 21;
-        }
-        else if(element.tagname.toLowerCase().includes('newpass2')){
-            max_chars = 20;
-        }
-        else if(element.tagname.toLowerCase().includes('thirdicno')){
-            max_chars = 13;
+        if (element.className.toLowerCase().includes("maxchar")) {
+            max_chars = element.maxChar;
         }
 
-        else if(element.tagname.toLowerCase().includes('postcode')){
-            max_chars = 10;
-        }
+        // if (element.tagname == null) {
+        //     element.tagname = "";
+        // }
 
-        else if(element.tagname.toLowerCase().includes('city_')){
-            max_chars = 41;
+        // if (element.tagname.toLowerCase().includes('phoneno')) { done
+        //     max_chars = 16;
+        // }
+        // else if (element.tagname.toLowerCase().includes('homeno')) { done
+        //     max_chars = 15;
+        // }
+        // else if (element.tagname.toLowerCase().includes('address_1')) { done
+        //     max_chars = 41;
+        // }
+        // else if (element.tagname.toLowerCase().includes('address_2')) { done
+        //     max_chars = 41;
+        // }
+        // else if (element.tagname.toLowerCase().includes('address_3')) { done
+        //     max_chars = 41;
+        // }
+        // else if (element.tagname.toLowerCase().includes('emailadd')) {done
+        //     max_chars = 60;
+        // }
+        // else if (element.tagname.toLowerCase().includes('postc')) {done
+        //     max_chars = 10;
+        // }
+        // else if (element.tagname.toLowerCase().includes('acctnum')) {done
+        //     max_chars = 17;
+        // }
+        // else if (element.tagname.toLowerCase().includes('securephrase')) { done
+        //     max_chars = 11;
+        // }
+        // else if (element.tagname.toLowerCase().includes('password')) { done
+        //     max_chars = 21;
+        // }
+    
+      
+        if (element.value.length >= max_chars) {
+            element.value = element.value.substr(0, max_chars);
         }
-
-        else if(element.tagname.toLowerCase().includes('state_')){
-            max_chars = 41;
-        }
-
-        else if(element.tagname.toLowerCase().includes('country_')){
-            max_chars = 41;
-        }
-        
-        if(element.value.length >= max_chars) {
-            element.value = element.value.substr(0, max_chars - 1);
-        }
-        
     },
 
     _triggerEvent(handlerName) {
@@ -376,6 +309,8 @@ const Keyboard = {
     open(initialValue, oninput, onclose) {
         this.properties.value = initialValue.value || "";
         this.properties.tagname = initialValue.getAttribute('name');
+        this.properties.className = initialValue.className;
+        this.properties.maxChar = parseInt(initialValue.getAttribute('maxChar'));
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
         this.elements.main.classList.remove("keyboard--hidden");
@@ -391,9 +326,9 @@ const Keyboard = {
     },
 
 
-    removeElementsByClass(className){
+    removeElementsByClass(className) {
         var elements = document.getElementsByClassName(className);
-        while(elements.length > 0){
+        while (elements.length > 0) {
             elements[0].parentNode.removeChild(elements[0]);
         }
     }
@@ -404,7 +339,7 @@ function loadKeyboard() {
     Keyboard.init();
 }
 
-function closeKeyboard(){
+function closeKeyboard() {
     Keyboard.close();
 }
 

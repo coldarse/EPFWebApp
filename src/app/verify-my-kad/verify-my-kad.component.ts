@@ -157,10 +157,6 @@ export class VerifyMyKadComponent implements OnInit {
         }
       }
     }, 1000);
-
-   
-
-
   }
 
   useMainPage(){

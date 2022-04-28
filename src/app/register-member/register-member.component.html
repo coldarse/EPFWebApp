@@ -188,7 +188,7 @@
                 <div class="row padTop3rem">
                     <div class="col-2"></div>
                     <div class="col-3">
-                        <input type="text" class="use-keyboard-input" id="txtEmail" name="txtEmail" value="{{emailAddress}}" #email>
+                        <input type="text" class="use-keyboard-input maxchar" maxChar="40" id="txtEmail" name="txtEmail" value="{{emailAddress}}" #email>
                     </div>
                     <div class="col-1 lblSymbol">@</div>
                     <div class="col-4">
@@ -198,7 +198,7 @@
                             </option>
                         </select>
 
-                        <input type="text" class="use-keyboard-input" id="emailDDLText" name="emailDDLText" placeholder="youremail.com" value="{{emailDDLTextValue}}" #emailDDLText [hidden]="!isCustom">
+                        <input type="text" class="use-keyboard-input maxchar" maxChar="41" id="emailDDLText" name="emailDDLText" placeholder="youremail.com" value="{{emailDDLTextValue}}" #emailDDLText [hidden]="!isCustom">
                     </div>
                     <div class="col-2">
                         <button class="btn btn-primary reset" [hidden]="!isCustom" (click)="reset()">X</button>
@@ -391,7 +391,7 @@
                 <div class="col-10 scrollBox">
                     <div class="scroll">
                         <p style="white-space: pre;">{{TnC}}</p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC1()"/>
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc1" name="tnc" type="checkbox" (click)="clickTNC1()"/>
                         <label class="lblTNC" for="tnc1">{{"TNC"| translate}}</label>
                     </div>
                 </div>
@@ -446,7 +446,7 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <input target="needed" type="text" class="use-keyboard-input txtProfile" id="txtAccountNo" name="acctNum" value="{{ acctNo }}" required #account_number>
+                        <input target="needed" type="text" class="use-keyboard-input txtProfile nosymbol" id="txtAccountNo" name="acctNum" value="{{ acctNo }}" required #account_number>
                     </div>
                 </div>
                 <div class="col-4">
@@ -459,7 +459,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="emptyID">{{"emptyId"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="emptyID">{{"emptyId"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
@@ -472,7 +472,7 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <input target="needed" type="password" class="use-keyboard-input txtProfile" id="txtPassword1" name="password" value="{{ password1 }}" required #password_1>
+                        <input target="needed" type="password" class="use-keyboard-input txtProfile nosymbol maxchar" maxChar="21" id="txtPassword1" name="password" value="{{ password1 }}" required #password_1>
                     </div>
                 </div>
                 <div class="col-4">
@@ -485,7 +485,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="emptyPassword">{{"emptyPassword"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="emptyPassword">{{"emptyPassword"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
@@ -498,27 +498,27 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <input target="needed" type="password" class="use-keyboard-input txtProfile" id="txtPassword2" name="password" value="{{ password2 }}" required #password_2>
+                        <input target="needed" type="password" class="use-keyboard-input txtProfile nosymbol maxchar" maxChar="21" id="txtPassword2" name="password" value="{{ password2 }}" required #password_2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="emptyConfirmPW">{{"emptyConfirmPW"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="emptyConfirmPW">{{"emptyConfirmPW"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
             <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="accountMin">{{"accountMin"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="accountMax">{{"accountMax"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordMin">{{"passwordMin"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordMax">{{"passwordMax"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="accountMin">{{"accountMin"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="accountMax">{{"accountMax"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordMin">{{"passwordMin"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordMax">{{"passwordMax"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div> -->
@@ -561,7 +561,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-7 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="imageSelect">{{"imageSelect"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="imageSelect">{{"imageSelect"| translate}}</h5>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -588,7 +588,7 @@
                 </div>
                 <div class="col-4">
                     <div class="row">
-                        <input type="text" target="needed" required class="use-keyboard-input txtProfile" id="txtSecurePhrase" name="securePhrase" value="{{ securePhrase }}" #secure_phrase>
+                        <input type="text" target="needed" required class="use-keyboard-input txtProfile nosymbol maxchar" maxChar="11" id="txtSecurePhrase" name="securePhrase" value="{{ securePhrase }}" #secure_phrase>
                     </div>
                 </div>
                 <div class="col-3">
@@ -602,8 +602,8 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="emptySecret">{{"emptySecret"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="emptySecret">{{"emptySecret"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>

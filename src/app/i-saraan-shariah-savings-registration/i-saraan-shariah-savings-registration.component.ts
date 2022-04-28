@@ -29,14 +29,12 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   IShariahSuccess = false;
   Failed = false;
   isSuri = false;
-
-
   iSaraanEnabled = false;
   iShariahEnabled = false;
-
   xagreedTnc = true;
-  Contract = "";
-  errorDesc = "";
+
+  Contract = '';
+  errorDesc = '';
 
   defaultDDL = 'default';
   selectedJobSector: any = undefined;
@@ -102,7 +100,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             if (result.body.content != '') {
               this.xagreedTnc = true;
               this.Contract = result.body.content;
-              this.Contract = this.Contract.replace("?","\"")
               this.RegSaraanShariah = false;
               this.RegShariah = true; 
               this.SelectIShariahISaraan = false;

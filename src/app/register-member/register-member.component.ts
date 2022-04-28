@@ -332,7 +332,7 @@ export class RegisterMemberComponent implements OnInit {
         this.fullEmailAddress = this.email?.nativeElement.value == 0 ? '' : this.email?.nativeElement.value + '@' + this.emailDDL?.nativeElement.value;
       }
 
-      if(this.isEmail(this.fullEmailAddress)){
+      if(appFunc.isEmail(this.fullEmailAddress)){
         this.InsertEmailPage = false;
         this.ValidateProfilePage = true;
         deleteKeyboard();
@@ -351,6 +351,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   InsertEmailNo() {
+    deleteKeyboard();
     this.InsertEmailPage = false;
     this.InsertPhonePage = true;
   }
@@ -641,7 +642,7 @@ export class RegisterMemberComponent implements OnInit {
         cityStateZip: currentMyKadDetails.State,
         stateCode: stateCode,
         countryCode: 'MAL',
-        addRemarks: 'Test Permenant Address',
+        addRemarks: 'Permenant Address',
         addLine1A: currentMyKadDetails.Address1,
         addLine2A: currentMyKadDetails.Address2,
         addLine3A: currentMyKadDetails.Address3,
@@ -651,7 +652,7 @@ export class RegisterMemberComponent implements OnInit {
         cityStateZip1: currentMyKadDetails.State,
         stateCode1: stateCode,
         countryCode1: 'MAL',
-        addRemarks1: 'Test Correspondance Address',
+        addRemarks1: 'Correspondance Address',
         homePhone: '',
         officePhone: '',
         mobilePhone: this.phoneNo,
@@ -719,10 +720,14 @@ export class RegisterMemberComponent implements OnInit {
                         validity: '',
                         sessionId: appFunc.sessionId,
                       };
+                      if (this.fullEmailAddress == "") this.fullEmailAddress = "@";
                       this._aldanService
-                        .iAkaunRegistration(iAkaunbody)
+                        .iAkaunRegistration(currentMyKadDetails.ICNo, currentMyKadDetails.Name, this.phoneNo, this.fullEmailAddress, selectLang.selectedLang, iAkaunbody)
                         .subscribe((result: any) => {
                           if(result.status == 200){
+                            if(result.body.Response.epf_no == ""){
+                              
+                            }
                             this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                               if(result.status == 200){
                                 this.isCallAPI = false;
@@ -754,7 +759,8 @@ export class RegisterMemberComponent implements OnInit {
                           appFunc.message = "HttpError";
                           this.route.navigate(['outofservice']);
                         });
-                    } else {
+                    } 
+                    else{
                       this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
                         if(result.status == 200){
                           this.isCallAPI = false;
@@ -773,7 +779,8 @@ export class RegisterMemberComponent implements OnInit {
                         }
                       });
                     }
-                  } else {
+                  }
+                  else {
                     this.failedTAC = true;
                     const iAkaunbody = {
                       epfNum: this.KWSPMemberNo,
@@ -787,8 +794,9 @@ export class RegisterMemberComponent implements OnInit {
                       validity: '',
                       sessionId: appFunc.sessionId,
                     };
+                    if (this.fullEmailAddress == "") this.fullEmailAddress = "@";
                     this._aldanService
-                      .iAkaunRegistration(iAkaunbody)
+                      .iAkaunRegistration(currentMyKadDetails.ICNo, currentMyKadDetails.Name, this.phoneNo, this.fullEmailAddress, selectLang.selectedLang, iAkaunbody)
                       .subscribe((result: any) => {
                         if(result.status == 200){
                           this._aldanService.MemberProfileInfo(Profilebody).subscribe((result: any) => {
@@ -1280,7 +1288,7 @@ export class RegisterMemberComponent implements OnInit {
         const iSaraanBody = {
           idNum: currentMyKadDetails.ICNo,
           idType: currentMyKadDetails.CategoryType,
-          businessTypeCode: this.selectedJobSector.id,
+          businessTypeCode: this.selectedJobSector.code,
           remark: '',
           sourceRegistrationChannel: 'SST',
           applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),

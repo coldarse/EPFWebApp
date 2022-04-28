@@ -103,4 +103,9 @@ export class appFunc {
         age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
         return age;
     }
+
+    static isEmail(search:string):boolean{
+        const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        return regexp.test(search);
+    }
 }

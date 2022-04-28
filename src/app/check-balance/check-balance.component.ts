@@ -24,41 +24,26 @@ export class CheckBalanceComponent implements OnInit {
   UpdateEmailPage =false;
   EmailSuccessPage = false;
   EmailFailPage = false;
+  emptyFields = false;
+  isCallAPI = false;
+  Failed = false;
 
   totalSavings = 0;
   grandTotal = 0;
   transactionAmtForAcc1 = 0;
   selectedYear = 0;
-  transaction = '';
-
+  
   sDetails: any[] = [];
   cDetails: any[] = [];
   arrYears: any[] = [];
 
-  address1 = "NO 46";
-  address2 = "JALAN BP 10/1";
-  address3 = "BANDAR BUKIT PUCHONG 2";
-  postcode = "47170";
-  city = "PUCHONG";
-  state = "SELANGOR DAHRUL EHSAN";
-  country = "MALAYSIA";
-  homeNo = "";
-  officeNo = "";
-  phoneNo = "";
-  email = "wahyu@aldantechnology.com";
-
-  spacer = " ";
-  comma = ", ";
-  Failed = false;
+  totalSavingsForEmail = "0.00";
+  transaction = "";
   errorDesc = "";
   errorCode = "";
-
-  emptyFields = false;
-
-  isCallAPI = false;
+  email = "";
+  
   dataForEmail: any;
-
-  totalSavingsForEmail = "0.00";
 
   constructor(
     private route: Router,
@@ -68,9 +53,9 @@ export class CheckBalanceComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.translate.use(selectLang.selectedLang);
     this.email = appFunc.currMemberDetail.emailAdd;
 
-    this.translate.use(selectLang.selectedLang);
     if (appFunc.FromCheckBalance == true) {
       appFunc.FromCheckBalance = false;
       this.ConfirmEmailPage = true
@@ -82,7 +67,6 @@ export class CheckBalanceComponent implements OnInit {
       this.EmailFailPage = false;
       this.Failed = false;
     }
-    // this.ShowTable();
 
     const d = new Date();
     let stmtYear = d.getFullYear();
@@ -92,38 +76,27 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": stmtYear.toString(),
       "sessionId": appFunc.sessionId
     };
-    //call API
+
+    //Call Memeber Summary Statement API
     this._aldanService
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
-        if(result.status == 200){
-          if (result.body.responseCode == '0') {
-            this.sDetails = result.body.detail.summaryStatement;
-
-            this.totalSavingsForEmail = result.body.detail.totalSavings;
-  
-            this.sDetails.forEach((details: any) => {
-              this.grandTotal += Number(details.subAccBalance);
-              this.totalSavings = this.grandTotal;
-            });
-          }
-          else{
-            this.SummaryStatementPage = false;
-            this.errorCode = result.body.error[0].code;
-            if(this.errorCode == 'MBM2015'){
-              this.errorDesc = 'noOpeningBalance';
-            }
-            else{
-              this.errorDesc = 'cannotRetrieveAccountBalance'
-            }
-            //this.errorDesc = result.body.error[0].description;
-            this.Failed = true;
-          }
+        if (result.body.responseCode == '0') {
+          this.totalSavingsForEmail = result.body.detail.totalSavings;
+          this.sDetails = result.body.detail.summaryStatement;
+          this.sDetails.forEach((details: any) => {
+            this.grandTotal += Number(details.subAccBalance);
+            this.totalSavings = this.grandTotal;
+          });
         }
         else{
-          appFunc.message = result.message;
-          this.route.navigate(['outofservice']);
+          this.SummaryStatementPage = false;
+          this.errorCode = result.body.error[0].code;
+          if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
+          else this.errorDesc = 'cannotRetrieveAccountBalance';
+          this.Failed = true;
         }
+      }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
@@ -158,24 +131,32 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
-    
+    let tempDetail = this.dataForEmail.detail;
+
     Object.assign(this.dataForEmail, {
       "totalSavings": this.totalSavingsForEmail,
-      "summaryStatement": this.sDetails
+      "summaryStatement": this.sDetails,
+      "memberInfo": tempDetail
     });
+    this.dataForEmail.detail = undefined;
 
-    this._aldanService.EmailForMemberStatement(appFunc.currMemberDetail.emailAdd, appFunc.sessionId, this.dataForEmail).subscribe((res: any) => {
-      if(res.body.attachmentPath != ""){
-        this.ConfirmEmailPage = false;
-        this.EmailSuccessPage = true;
-        this.isCallAPI = false;
-      }
-      else{
-        this.isCallAPI = false;
-        this.SummaryStatementPage = false;
-        this.errorDesc = res.body.error[0].description;
-        this.Failed = true;
-      }
+    this._aldanService.
+      EmailForMemberStatement(
+        appFunc.currMemberDetail.emailAdd, 
+        appFunc.sessionId, 
+        this.dataForEmail)
+        .subscribe((res: any) => {
+          if(res.body.attachmentPath != ""){
+            this.ConfirmEmailPage = false;
+            this.EmailSuccessPage = true;
+            this.isCallAPI = false;
+          }
+          else{
+            this.isCallAPI = false;
+            this.SummaryStatementPage = false;
+            this.errorDesc = res.body.error[0].description;
+            this.Failed = true;
+          }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
@@ -202,10 +183,10 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   CalculateYears(): number[] {
-    var RegDate = appFunc.currMemberDetail.epfRegDate;
-    var RegYear = Number(RegDate.substring(0, 4));
-    var CurrYears = new Date().getFullYear();
-    var TotalYears = CurrYears - RegYear;
+    let RegDate = appFunc.currMemberDetail.epfRegDate;
+    let RegYear = Number(RegDate.substring(0, 4));
+    let CurrYears = new Date().getFullYear();
+    let TotalYears = CurrYears - RegYear;
 
     if (TotalYears >= appFunc.NumberOfYearsViewStatement)
       for (let i = 0; i < appFunc.NumberOfYearsViewStatement; i++) {
@@ -217,6 +198,7 @@ export class CheckBalanceComponent implements OnInit {
         CurrYears -= 1;
         this.arrYears[i] = CurrYears;
       }
+
     return this.arrYears;
   }
 
@@ -228,52 +210,37 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
-    this._aldanService.MemberStatement(mainBody).subscribe((result: any) => {
-      if(result.status == 200){
-        if (result.body.responseCode == '0') {
-          this.isCallAPI = false;
-          this.dataForEmail = result.body;
-          this.cDetails = result.body.detail.mainStatement;
-          this.cDetails.forEach((details: any) => {
-            details.transaction = 'Caruman-IWS';
-            const datepipe: DatePipe = new DatePipe('en-US')
-            let formattedDate = datepipe.transform(details.transactionDate, 'dd/MM/YYYY')
-            let formattedMonth = datepipe.transform(details.transactionDate, 'MMM-YY')
-            details.transactionDate = formattedDate;
-            details.contributionMth = formattedMonth;
-            this.transactionAmtForAcc1 += Number(details.transactionAmtForAcc1);
-            this.SelectYearPage = false;
-            this.StatementPage = true;
-          });
-        }
-        else{
-          // Error
-          this.isCallAPI = false;
-          this.SummaryStatementPage = false;
-          this.errorDesc = 'cannotRetrieveAccountBalance';
-          this.Failed = true;
-        }
+    this._aldanService.
+    MemberStatement(mainBody).
+    subscribe((result: any) => {
+      if (result.body.responseCode == '0') {
+        this.isCallAPI = false;
+        this.dataForEmail = result.body;
+        this.cDetails = result.body.detail.mainStatement;
+        this.cDetails.forEach((details: any) => {
+          details.transaction = 'Caruman-IWS';
+          let strin = details.transactionDate;
+          let splitted = strin.split("/", 3);
+          let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];  
+          let formattedDate = formatDate(new Date(newDateString), 'dd/MM/YYYY', 'en');
+          let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
+          details.transactionDate = formattedDate;
+          details.contributionMth = formattedMonth;
+          this.transactionAmtForAcc1 += Number(details.transactionAmtForAcc1);
+          this.SelectYearPage = false;
+          this.StatementPage = true;
+        });
       }
       else{
-        appFunc.message = result.message;
-        this.route.navigate(['outofservice']);
+        this.isCallAPI = false;
+        this.SummaryStatementPage = false;
+        this.errorDesc = 'cannotRetrieveAccountBalance';
+        this.Failed = true;
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
     });
-  }
-
-  reuseMykadAddress(event: any){
-    if(event.target.checked){
-      this.address1 = currentMyKadDetails.Address1
-      this.address2 = currentMyKadDetails.Address2
-      this.address3 = currentMyKadDetails.Address3
-      this.postcode = currentMyKadDetails.PostCode
-      this.city = currentMyKadDetails.City
-      this.state = currentMyKadDetails.State
-      this.country = currentMyKadDetails.Country
-    }
   }
 
   failedYes(){
