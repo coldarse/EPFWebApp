@@ -14,7 +14,6 @@ export class OutOfServiceComponent implements OnInit {
 
   XXX1 = "";
   XXX2 = "";
-
   EM1 = "";
 
   readerIntervalId: any;

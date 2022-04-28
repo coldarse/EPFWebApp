@@ -96,7 +96,6 @@ export class CheckBalanceComponent implements OnInit {
           else this.errorDesc = 'cannotRetrieveAccountBalance';
           this.Failed = true;
         }
-      }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);

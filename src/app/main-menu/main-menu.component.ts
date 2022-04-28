@@ -15,7 +15,7 @@ import { signalRConnection } from '../_models/_signalRConnection';
 export class MainMenuComponent implements OnInit {
 
   date : any;
-  name = "Chen Jiunn Haw";
+  name = '';
 
   checkBalanceEnabled = false;
   personalInformationEnabled = false;
@@ -41,13 +41,10 @@ export class MainMenuComponent implements OnInit {
     let iakauncount = 0;
 
     if(appFunc.modules != undefined){
-
-      
       if(appFunc.checkModuleAvailability(appFunc.modules) == 0){
         appFunc.message = "Under Maintenance";
         this.route.navigate(['outofservice']);
       }
-
 
       for (var val of appFunc.modules){
         if(val.moduleID == 1){

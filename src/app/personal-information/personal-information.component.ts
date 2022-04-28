@@ -38,8 +38,11 @@ export class PersonalInformationComponent implements OnInit {
   SaveProfilePage = false;
   SaveSuccessPage = false;
   Failed = false;
-  errorDesc = "";
+  emptyFields = false;
+  invalidEmail = false;
+  isCallAPI = false;
 
+  errorDesc = "";
   address1 = "";
   address2 = "";
   address3 = "";
@@ -51,14 +54,8 @@ export class PersonalInformationComponent implements OnInit {
   officeNo = "";
   phoneNo = "";
   email = "";
-
   spacer = " ";
   comma = ", ";
-
-  emptyFields = false;
-  invalidEmail = false;
-
-  isCallAPI = false;
 
   slist: string = '';
   stateList: string[] = [
@@ -92,13 +89,13 @@ export class PersonalInformationComponent implements OnInit {
     this.address2 = appFunc.currMemberDetail.addresses[1].addLine2.toUpperCase();
     this.address3 = appFunc.currMemberDetail.addresses[1].addLine3.toUpperCase();
     this.postcode = appFunc.currMemberDetail.addresses[1].postalCode;
-    this.city = appFunc.currMemberDetail.addresses[1].cityStateZip.toUpperCase();
-    this.state = appFunc.currMemberDetail.addresses[1].stateDesc.toUpperCase();
     this.country = appFunc.currMemberDetail.addresses[1].countryDesc.toUpperCase();
+    this.state = appFunc.currMemberDetail.addresses[1].stateDesc.toUpperCase();
+    this.city = appFunc.currMemberDetail.addresses[1].cityStateZip.toUpperCase();
 
-    this.homeNo = appFunc.currMemberDetail.homePhone;
     this.officeNo = appFunc.currMemberDetail.officePhone;
     this.phoneNo = appFunc.currMemberDetail.mobilePhone;
+    this.homeNo = appFunc.currMemberDetail.homePhone;
     this.email = appFunc.currMemberDetail.emailAdd;
 
     setTimeout(() => {
@@ -130,9 +127,6 @@ export class PersonalInformationComponent implements OnInit {
     if(this.address2.length == 0){
       errorCount += 1;
     }
-    // if(this.address3.length == 0){
-    //   errorCount += 1;
-    // }
     if(this.postcode.length == 0){
       errorCount += 1;
     }
@@ -145,24 +139,10 @@ export class PersonalInformationComponent implements OnInit {
     if(this.state.length == 0){
       errorCount += 1;
     }
-
     if(this.email.length != 0 && appFunc.isEmail(this.email) == false)
     {
       this.invalidEmail = true
     }
-    // if(this.homeNo.length == 0){
-    //   errorCount += 1;
-    // }
-    // if(this.officeNo.length == 0){
-    //   errorCount += 1;
-    // }
-    // if(this.phoneNo.length == 0){
-    //   errorCount += 1;
-    // }
-    // if(this.email.length == 0){
-    //   errorCount += 1;
-    // }
-
     if(errorCount == 0 && this.invalidEmail == false){
       this.UpdateProfilePage = false;
       this.SaveProfilePage = true;
@@ -174,10 +154,6 @@ export class PersonalInformationComponent implements OnInit {
     }
   }
 
-  isEmail(search: string): boolean {
-    const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return regexp.test(search);
-  }
 
   UpdateProfileNo(){
     deleteKeyboard();
@@ -194,6 +170,7 @@ export class PersonalInformationComponent implements OnInit {
   SaveProfileYes(){
     if(appFunc.bypassAPI != true){
       this.isCallAPI = true;
+
       const personalInformationBody = {
         "cifNum": appFunc.currMemberDetail.cifNum,
         "electAddGrpSeq": appFunc.currMemberDetail.electAddGrpSeq,
@@ -203,13 +180,13 @@ export class PersonalInformationComponent implements OnInit {
         "homePhone": this.homeNo,
         "officePhone": this.officeNo,
         "mobilePhone": this.phoneNo,
-        "faxNum": "",
+        "faxNum": '',
         "emailAdd":this.email,
-        "webPage":"",
-        "contactPersonName":"",
-        "contactDeptName":"",
-        "jobDesignCode":"",
-        "prefComChannel":"",
+        "webPage":'',
+        "contactPersonName":'',
+        "contactDeptName":'',
+        "jobDesignCode":'',
+        "prefComChannel":'',
         "sessionId": appFunc.sessionId
       }
 
@@ -220,65 +197,61 @@ export class PersonalInformationComponent implements OnInit {
         "addLine1": this.address1,
         "addLine2": this.address2,
         "addLine3": this.address3,
-        "addLine4": "",
-        "addLine5": "",
-        "cityStateZip": "",
+        "addLine4": '',
+        "addLine5": '',
+        "cityStateZip": '',
         "postalCode": this.postcode,
-        "stateCode": "",
+        "stateCode": '',
         "countryCode": "MAL",
-        "remark": "",
-        "enforcementCOde": "",
-        "employersAddressee": "",
+        "remark": '',
+        "enforcementCOde": '',
+        "employersAddressee": '',
         "sessionId": appFunc.sessionId
       }
 
-      this._aldanService.UpdateFullProfile(personalInformationBody,addressBody).subscribe((result: any) =>{
-        if(result[0].status == 200 && result[1].status == 200){
-          if(result[0].body.responseCode == "0" && result[1].body.responseCode== "0"){
-          
-            const body = {
-              "regType": "M",
-              "accNum": appFunc.currMemberDetail.accNum,
-              "accType": "S",
-              "searchType": "A",
-              "idNum": currentMyKadDetails.ICNo,
-              "idType": currentMyKadDetails.CategoryType,
-              "reqTypeCode": "",
-              "sessionId": appFunc.sessionId
-            }
-            this._aldanService.MemberProfileInfo(body).subscribe((result: any) => {
-              if(result.status == 200){
-                this.isCallAPI = false;
-                if(result.body.responseCode == "0"){
-                  appFunc.currMemberDetail = result.body.detail;
-                  this.SaveProfilePage = false;
-                  this.SaveSuccessPage = true;
-                }
-                else{
-                  this.SaveProfilePage = false;
-                  this.Failed = true;
-                  this.errorDesc = result.body.error[0].description;
-                }
+      this._aldanService.
+        UpdateFullProfile(
+          personalInformationBody,
+          addressBody
+        ).
+        subscribe((result: any) =>{
+        if(result[0].body.responseCode == "0" && result[1].body.responseCode== "0"){
+        
+          const body = {
+            "regType": "M",
+            "accNum": appFunc.currMemberDetail.accNum,
+            "accType": "S",
+            "searchType": "A",
+            "idNum": currentMyKadDetails.ICNo,
+            "idType": currentMyKadDetails.CategoryType,
+            "reqTypeCode": "",
+            "sessionId": appFunc.sessionId
+          }
+
+          this._aldanService.
+            MemberProfileInfo(body).
+            subscribe((result: any) => {
+              this.isCallAPI = false;
+              if(result.body.responseCode == "0"){
+                appFunc.currMemberDetail = result.body.detail;
+                this.SaveProfilePage = false;
+                this.SaveSuccessPage = true;
               }
               else{
-                appFunc.message = result.message;
-                this.route.navigate(['outofservice']);
+                this.SaveProfilePage = false;
+                this.Failed = true;
+                this.errorDesc = result.body.error[0].description;
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
               this.route.navigate(['outofservice']);
             });
-          }
-          else{
-            this.isCallAPI = false;
-            this.SaveProfilePage = false;
-            this.Failed = true;
-            this.errorDesc = 'unsuccessfulUpdateInfo';
-          }
         }
         else{
-          appFunc.message = result.message;
-          this.route.navigate(['outofservice']);
+          this.isCallAPI = false;
+          this.SaveProfilePage = false;
+          this.Failed = true;
+          this.errorDesc = 'unsuccessfulUpdateInfo';
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -313,12 +286,12 @@ export class PersonalInformationComponent implements OnInit {
 
   reuseMykadAddress(event: any){
     if(event.target.checked){
-      this.address1 = currentMyKadDetails.Address1
-      this.address2 = currentMyKadDetails.Address2
-      this.address3 = currentMyKadDetails.Address3
+      this.address1 = currentMyKadDetails.Address1.toUpperCase();
+      this.address2 = currentMyKadDetails.Address2.toUpperCase();
+      this.address3 = currentMyKadDetails.Address3.toUpperCase();
       this.postcode = currentMyKadDetails.PostCode
-      this.city = currentMyKadDetails.City
-      this.state = currentMyKadDetails.State
+      this.city = currentMyKadDetails.City.toUpperCase();
+      this.state = currentMyKadDetails.State.toUpperCase();
       this.country = currentMyKadDetails.Country.toUpperCase();
     }
   }

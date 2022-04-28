@@ -32,14 +32,13 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   iSaraanEnabled = false;
   iShariahEnabled = false;
   xagreedTnc = true;
+  isCallAPI = false;
 
   Contract = '';
   errorDesc = '';
-
   defaultDDL = 'default';
-  selectedJobSector: any = undefined;
 
-  isCallAPI = false;
+  selectedJobSector: any;
 
   jobSectors: businessTypes[] = [];
 
@@ -51,7 +50,6 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
-
     this.jobSectors = appFunc.businessTypes;
 
     for (var val of appFunc.modules){
@@ -74,7 +72,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   }
 
   selectJob(jobSector: any) {
-    this.defaultDDL = jobSector.code; //(this.currentLang == "bm" ? jobSector.malay : jobSector.english);
+    this.defaultDDL = jobSector.code;
     this.selectedJobSector = jobSector;
   }
 
@@ -93,29 +91,26 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     if (appFunc.bypassAPI != true) {
       this.isCallAPI = true;
       this._aldanService
-        .GetContract(selectLang.selectedLang, appFunc.sessionId)
+        .GetContract(
+          selectLang.selectedLang, 
+          appFunc.sessionId
+        )
         .subscribe((result: any) => {
-          if(result.status == 200){
-            this.isCallAPI = false;
-            if (result.body.content != '') {
-              this.xagreedTnc = true;
-              this.Contract = result.body.content;
-              this.RegSaraanShariah = false;
-              this.RegShariah = true; 
-              this.SelectIShariahISaraan = false;
-              this.IShariah = true;
-              setTimeout(() => {
-                this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
-              }, 200)
-            } else {
-              this.RegSaraanShariah = false;
-              this.Failed = true;
-              this.errorDesc = 'unsuccesfulSimpananShariah';
-            }
-          }
-          else{
-            appFunc.message = result.message;
-            this.route.navigate(['outofservice']);
+          this.isCallAPI = false;
+          if (result.body.content != '') {
+            this.xagreedTnc = true;
+            this.Contract = result.body.content;
+            this.RegSaraanShariah = false;
+            this.RegShariah = true; 
+            this.SelectIShariahISaraan = false;
+            this.IShariah = true;
+            setTimeout(() => {
+              this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+            }, 200)
+          } else {
+            this.RegSaraanShariah = false;
+            this.Failed = true;
+            this.errorDesc = 'unsuccesfulSimpananShariah';
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
@@ -129,52 +124,40 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   }
 
   ISaraanYes() {
-    if (this.selectedJobSector == undefined) {
-    } else {
-      if (appFunc.bypassAPI != true) {
-        this.isCallAPI = true;
-        const iSaraanBody = {
-          idNum: currentMyKadDetails.ICNo,
-          idType: currentMyKadDetails.CategoryType,
-          businessTypeCode: this.selectedJobSector.code,
-          remark: '',
-          sourceRegistrationChannel: 'IWS',
-          applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-          sourceCreationID: 'SFIWS',
-          sourceTerminalID: signalRConnection.kioskCode,
-          sourceBranchNo: '0',
-          sessionId: appFunc.sessionId
-        };
+    if (this.selectedJobSector != undefined) {
+      this.isCallAPI = true;
+      const iSaraanBody = {
+        idNum: currentMyKadDetails.ICNo,
+        idType: currentMyKadDetails.CategoryType,
+        businessTypeCode: this.selectedJobSector.code,
+        remark: '',
+        sourceRegistrationChannel: 'IWS',
+        applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        sourceCreationID: 'SFIWS',
+        sourceTerminalID: signalRConnection.kioskCode,
+        sourceBranchNo: '0',
+        sessionId: appFunc.sessionId
+      };
 
-        this._aldanService
-          .iSaraanRegistration(iSaraanBody)
-          .subscribe((result: any) => {
-            if(result.status == 200){
-              this.isCallAPI = false;
-              if (result.body.responseCode == '0') {
-                this.ISaraan = false;
-                this.ISaraanSuccess = true;
-                if(result.body.detail.businessTypeCode == "S910"){
-                  this.isSuri = true;
-                }
-              } else {
-                this.ISaraan = false;
-                this.Failed = true;
-                this.errorDesc = 'unsuccessfuliSaraan';
-              }
+      this._aldanService
+        .iSaraanRegistration(iSaraanBody)
+        .subscribe((result: any) => {
+          this.isCallAPI = false;
+          if (result.body.responseCode == '0') {
+            this.ISaraan = false;
+            this.ISaraanSuccess = true;
+            if(result.body.detail.businessTypeCode == "S910"){
+              this.isSuri = true;
             }
-            else{
-              appFunc.message = result.message;
-              this.route.navigate(['outofservice']);
-            }
-          },(err: HttpErrorResponse) => {
-            appFunc.message = "HttpError";
-            this.route.navigate(['outofservice']);
-          });
-      } else {
-        this.ISaraan = false;
-        this.ISaraanSuccess = true;
-      }
+          } else {
+            this.ISaraan = false;
+            this.Failed = true;
+            this.errorDesc = 'unsuccessfuliSaraan';
+          }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
+        });
     }
   }
 
@@ -186,51 +169,40 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   }
 
   IShariahYes() {
-    if (appFunc.bypassAPI != true) {
-      this.isCallAPI = true;
-      const iShariahBody = {
-        custNum: appFunc.currMemberDetail.cifNum, //this.KWSPCustomerNo,
-        accNum: appFunc.currMemberDetail.accNum, //this.KWSPMemberNo,
-        accType: 'S',
-        electChannel: 'SST',
-        electReceivedDate: '2019-10-11',//formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        electReceivedTime: formatDate(new Date(), 'hh.mm.ss', 'en'),
-        electReceivedBranch: '1',
-        electDate: '2019-10-11',
-        electBranch: '1',
-        electStatus: 'A',
-        reasonCode: '',
-        akadRefNum: '',
-        docRefNum: '',
-        sessionId: appFunc.sessionId
-      };
+    this.isCallAPI = true;
+    const iShariahBody = {
+      custNum: appFunc.currMemberDetail.cifNum, 
+      accNum: appFunc.currMemberDetail.accNum, 
+      accType: 'S',
+      electChannel: 'SST',
+      electReceivedDate: '2019-10-11',//formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+      electReceivedTime: formatDate(new Date(), 'hh.mm.ss', 'en'),
+      electReceivedBranch: '1',
+      electDate: '2019-10-11',
+      electBranch: '1',
+      electStatus: 'A',
+      reasonCode: '',
+      akadRefNum: '',
+      docRefNum: '',
+      sessionId: appFunc.sessionId
+    };
 
-      this._aldanService
-        .iShariahRegistration(iShariahBody)
-        .subscribe((result: any) => {
-          if(result.status == 200){
-            this.isCallAPI = false;
-            if (result.body.responseCode == '0') {
-              this.IShariah = false;
-              this.IShariahSuccess = true;
-            } else {
-              this.IShariah = false;
-              this.Failed = true;
-              this.errorDesc = result.body.error[0].description;
-            }
+    this._aldanService
+      .iShariahRegistration(iShariahBody)
+      .subscribe((result: any) => {
+          this.isCallAPI = false;
+          if (result.body.responseCode == '0') {
+            this.IShariah = false;
+            this.IShariahSuccess = true;
+          } else {
+            this.IShariah = false;
+            this.Failed = true;
+            this.errorDesc = result.body.error[0].description;
           }
-          else{
-            appFunc.message = result.message;
-            this.route.navigate(['outofservice']);
-          }
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
-          this.route.navigate(['outofservice']);
-        });
-    } else {
-      this.IShariah = false;
-      this.IShariahSuccess = true;
-    }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+      });
   }
 
   IShariahNo() {
@@ -252,3 +224,4 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     this.route.navigate(['mainMenu']);
   }
 }
+

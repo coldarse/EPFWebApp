@@ -191,7 +191,7 @@ export class IAkaunRegistrationComponent implements OnInit {
       validity: '',
       sessionId: appFunc.sessionId
     };
-    if (this.fullEmailAddress == '') this.fullEmailAddress = '@'';
+    if (this.fullEmailAddress == '') this.fullEmailAddress = '@';
     this._aldanService
       .iAkaunRegistration(
         appFunc.currMemberDetail.primaryIdNum, 

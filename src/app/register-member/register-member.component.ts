@@ -237,34 +237,6 @@ export class RegisterMemberComponent implements OnInit {
     loadKeyboard();
   }
 
-  hardcodedIC() {
-    let harcodedic = '111111007894';
-    currentMyKadDetails.Name = 'John Smith';
-    currentMyKadDetails.ICNo = harcodedic.toString().replace('*', '');
-    currentMyKadDetails.OldICNo = '';
-    currentMyKadDetails.DOB = new Date('1957-08-31');
-    currentMyKadDetails.POB = 'SELANGOR';
-    currentMyKadDetails.Gender = 'Male';
-    currentMyKadDetails.Citizenship = 'WARGANEGARA';
-    currentMyKadDetails.IssueDate = new Date('2020-01-01');
-    currentMyKadDetails.Race = 'CINA';
-    currentMyKadDetails.Religion = 'ISLAM';
-    currentMyKadDetails.Address1 = '6 Jln 14/70A';
-    currentMyKadDetails.Address2 = '';
-    currentMyKadDetails.Address3 = 'Sri Hartamas';
-    currentMyKadDetails.PostCode = '50480';
-    currentMyKadDetails.City = 'Kuala Lumpur';
-    currentMyKadDetails.State = 'W. PERSEKUTUAN(KL)';
-    currentMyKadDetails.Country = 'Malaysia';
-    currentMyKadDetails.Address = '';
-    currentMyKadDetails.RJ = '';
-    currentMyKadDetails.KT = '';
-    currentMyKadDetails.GreenCardNationality = '';
-    currentMyKadDetails.GreenCardExpiryDate = new Date('0000-00-00');
-    currentMyKadDetails.CardVersion = '';
-    currentMyKadDetails.OtherID = '';
-    currentMyKadDetails.CategoryType = 'W';
-  }
 
   onChange(event: any){
     if(event.target.value == 'custom'){
