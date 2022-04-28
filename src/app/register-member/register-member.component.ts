@@ -351,6 +351,7 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   InsertEmailNo() {
+    deleteKeyboard();
     this.InsertEmailPage = false;
     this.InsertPhonePage = true;
   }
