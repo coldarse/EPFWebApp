@@ -213,6 +213,7 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
 
   EnterEmailAddressNo() {
+    deleteKeyboard();
     this.EnterEmailAddress = false;
     this.EnterPhoneNumber = true;
   }
