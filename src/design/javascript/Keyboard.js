@@ -259,7 +259,6 @@ const Keyboard = {
         // else if (element.tagname.toLowerCase().includes('homeno')) { done
         //     max_chars = 15;
         // }
-     
         // else if (element.tagname.toLowerCase().includes('address_1')) { done
         //     max_chars = 41;
         // }
@@ -278,7 +277,6 @@ const Keyboard = {
         // else if (element.tagname.toLowerCase().includes('acctnum')) {done
         //     max_chars = 17;
         // }
-       
         // else if (element.tagname.toLowerCase().includes('securephrase')) { done
         //     max_chars = 11;
         // }
@@ -288,7 +286,7 @@ const Keyboard = {
     
       
         if (element.value.length >= max_chars) {
-            element.value = element.value.substr(0, max_chars - 1);
+            element.value = element.value.substr(0, max_chars);
         }
     },
 

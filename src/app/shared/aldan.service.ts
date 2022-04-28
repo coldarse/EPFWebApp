@@ -221,7 +221,7 @@ export class AldanService {
   //Member Registration
   MemberRegistration(body: any, language: string){
     return this.http.post(
-      this.url + 'Registration/MemberRegistration',
+      this.url + 'Registration/MemberRegistration?language=' + language,
       body,
       accessToken.httpOptions
     ).pipe(
@@ -270,9 +270,9 @@ export class AldanService {
   }
 
   //i-Akaun Registration
-  iAkaunRegistration(body: any){
+  iAkaunRegistration(icno: string, custName: string, mobilePhone: string, emailAdd: string, language: string, body: any){
     return this.http.post(
-      this.url + 'IAkaunRegistration/IAkaunReg',
+      this.url + `IAkaunRegistration/IAkaunReg?IdNum=${icno}&custName=${custName}&mobilePhone=${mobilePhone}&emailAdd=${emailAdd}&language=${language}`,
       body,
       accessToken.httpOptions
     ).pipe(

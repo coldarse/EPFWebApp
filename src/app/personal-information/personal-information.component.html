@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile numericOnly maxchar" maxChar="10" id="txtPostcode" name="txtPostcode" required target="needed" value="{{postcode}}" #post_code>
+                        <input type="text" class="use-keyboard-input txtProfile numericOnly maxchar" maxChar="9" id="txtPostcode" name="txtPostcode" required target="needed" value="{{postcode}}" #post_code>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter nosymbol"  id="txtCity" name="city_" required target="needed" value="{{city}}" #city_>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter nosymbol maxchar" maxChar="40"  id="txtCity" name="city_" required target="needed" value="{{city}}" #city_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter" id="txtState" name="state_" required target="needed" value="{{state}}" #state_>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter maxchar" maxChar="40" id="txtState" name="state_" required target="needed" value="{{state}}" #state_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter" id="txtCountry" name="country_" required target="needed" value="{{country}}" #country_>
+                        <input type="text" class="use-keyboard-input txtProfile allcapitalletter maxchar" maxChar="40" id="txtCountry" name="country_" required target="needed" value="{{country}}" #country_>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <input type="text" class="use-keyboard-input txtProfile maxchar" maxChar="60" id="txtEmailAddress" name="txtProfile" target="needed" value="{{email}}" #email_>
+                        <input type="text" class="use-keyboard-input txtProfile maxchar" maxChar="40" id="txtEmailAddress" name="txtProfile" target="needed" value="{{email}}" #email_>
                     </div>
                 </div>
                 <div class="col-1"></div>

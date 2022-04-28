@@ -188,7 +188,7 @@
                 <div class="row padTop3rem">
                     <div class="col-2"></div>
                     <div class="col-3">
-                        <input type="text" class="use-keyboard-input" id="txtEmail" name="txtEmail" value="{{emailAddress}}" #email>
+                        <input type="text" class="use-keyboard-input maxchar" maxChar="40" id="txtEmail" name="txtEmail" value="{{emailAddress}}" #email>
                     </div>
                     <div class="col-1 lblSymbol">@</div>
                     <div class="col-4">
@@ -459,7 +459,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="emptyID">{{"emptyId"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="emptyID">{{"emptyId"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
@@ -485,7 +485,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="emptyPassword">{{"emptyPassword"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="emptyPassword">{{"emptyPassword"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
@@ -505,20 +505,20 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="emptyConfirmPW">{{"emptyConfirmPW"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="emptyConfirmPW">{{"emptyConfirmPW"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
             <div class="row padTop2rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="accountMin">{{"accountMin"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="accountMax">{{"accountMax"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordMin">{{"passwordMin"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordMax">{{"passwordMax"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordAlpha">{{"passwordAlpha"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="accountMin">{{"accountMin"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="accountMax">{{"accountMax"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordMin">{{"passwordMin"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordMax">{{"passwordMax"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="passwordMatch">{{"passwordMatch"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div> -->
@@ -561,7 +561,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-7 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="imageSelect">{{"imageSelect"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="imageSelect">{{"imageSelect"| translate}}</h5>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -602,8 +602,8 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <h4 class="errorMsgEmpty" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h4>
-                    <h4 class="errorMsgEmpty" *ngIf="emptySecret">{{"emptySecret"| translate}}</h4>
+                    <h5 class="errorMsgEmpty" *ngIf="securePhraseMax">{{"securePhraseMax"| translate}}</h5>
+                    <h5 class="errorMsgEmpty" *ngIf="emptySecret">{{"emptySecret"| translate}}</h5>
                 </div>
                 <div class="col-4"></div>
             </div>
