@@ -11052,6 +11052,16 @@ textarea.form-control-lg {
     margin-left: 1rem;
 }
 
+.stateDDL {
+    min-height: 2.5rem;
+    border-width: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'filson-pro', sans-serif;
+    margin-bottom: 10px;
+    font-size: 22.5px;
+}
+
 #jobDDL {
     position: relative;
     border-width: thin;

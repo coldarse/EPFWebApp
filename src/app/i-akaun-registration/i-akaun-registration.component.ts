@@ -328,7 +328,7 @@ export class IAkaunRegistrationComponent implements OnInit {
             ActivateIAkaun(iAkaunActBody).
             subscribe((result: any) => {
               this.isCallAPI = false;
-              if(result.body.epfNum != ""){
+              if(result.body.epf_no != ""){
 
                 this.ActivateInformation = false;
                 this.SuccessActivation = true;

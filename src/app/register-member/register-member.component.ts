@@ -967,7 +967,7 @@ export class RegisterMemberComponent implements OnInit {
             .subscribe((result: any) => {
               if(result.status == 200){
                 this.isCallAPI = false;
-                if (result.body.epfNum != "") {
+                if (result.body.epf_no != "") {
                   this.ActivateiAkaunPage = false;
                   this.ActivateSuccessPage = true;
   
