@@ -18,12 +18,11 @@ export class UpdateTACComponent implements OnInit {
   PhoneNoConfirmation = false;
   Success = false;
   Failed = false;
-  phoneNo = "";
-  errorDesc = "";
-
   phoneError = false;
   isCallAPI = false;
 
+  phoneNo = '';
+  errorDesc = '';
 
   constructor(
     private route: Router,
@@ -51,46 +50,36 @@ export class UpdateTACComponent implements OnInit {
   }
 
   PhoneNoConfirmationYes(){
-    if(appFunc.bypassAPI != true){
-      this.isCallAPI = true;
-      const updateTACBody = {
-        "custNum": appFunc.currMemberDetail.cifNum,
-        "tacMobilePhoneCode": "TA",
-        "tacMobilePhone": this.phoneNo,
-        "amendmentChannel": "SST",
-        "status": "P",
-        "checkForDuplicate": "N",
-        "generateRequestNum": "N",
-        "requestNum": "",
-        "sessionId": appFunc.sessionId
-      }
+    this.isCallAPI = true;
+    const updateTACBody = {
+      "custNum": appFunc.currMemberDetail.cifNum,
+      "tacMobilePhoneCode": "TA",
+      "tacMobilePhone": this.phoneNo,
+      "amendmentChannel": "SST",
+      "status": "P",
+      "checkForDuplicate": "N",
+      "generateRequestNum": "N",
+      "requestNum": '',
+      "sessionId": appFunc.sessionId
+    }
 
-      this._aldanService.UpdateTAC(updateTACBody).subscribe((result: any) => {
-        if(result.status == 200){
-          this.isCallAPI = false;
-          if(result.body.responseCode == "0"){
-            this.PhoneNoConfirmation = false;
-            this.Success = true;
-          }
-          else{
-            this.PhoneNoConfirmation = false;
-            this.Failed = true;
-            this.errorDesc = 'unsuccessfulUpdateTAC';
-          }
+    this._aldanService.
+      UpdateTAC(updateTACBody).
+      subscribe((result: any) => {
+        this.isCallAPI = false;
+        if(result.body.responseCode == "0"){
+          this.PhoneNoConfirmation = false;
+          this.Success = true;
         }
         else{
-          appFunc.message = result.message;
-          this.route.navigate(['outofservice']);
+          this.PhoneNoConfirmation = false;
+          this.Failed = true;
+          this.errorDesc = 'unsuccessfulUpdateTAC';
         }
-      },(err: HttpErrorResponse) => {
-        appFunc.message = "HttpError";
-        this.route.navigate(['outofservice']);
-      });
-    }
-    else{
-      this.PhoneNoConfirmation = false;
-      this.Success = true;
-    }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
+    });
   }
 
   PhoneNoConfirmationNo(){
