@@ -197,7 +197,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           } else {
             this.IShariah = false;
             this.Failed = true;
-            this.errorDesc = result.body.error[0].description;
+            this.errorDesc = 'unsuccesfulSimpananShariah';
           }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";

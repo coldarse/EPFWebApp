@@ -8,6 +8,7 @@ import { AppConfiguration } from '../config/app-configuration';
 import { accessToken } from '../_models/token';
 import { signalRConnection } from '../_models/_signalRConnection';
 import { selectLang } from '../_models/language';
+import { appFunc } from '../_models/_appFunc';
 
 @Injectable({ 
   providedIn: 'root'
@@ -221,7 +222,7 @@ export class AldanService {
   //Member Registration
   MemberRegistration(body: any, language: string){
     return this.http.post(
-      this.url + 'Registration/MemberRegistration?language=' + language,
+      this.url + `Registration/MemberRegistration?language=${language}&SSTID=${signalRConnection.kioskCode}`,
       body,
       accessToken.httpOptions
     ).pipe(
@@ -272,7 +273,7 @@ export class AldanService {
   //i-Akaun Registration
   iAkaunRegistration(icno: string, custName: string, mobilePhone: string, emailAdd: string, language: string, body: any){
     return this.http.post(
-      this.url + `IAkaunRegistration/IAkaunReg?IdNum=${icno}&custName=${custName}&mobilePhone=${mobilePhone}&emailAdd=${emailAdd}&language=${language}`,
+      this.url + `IAkaunRegistration/IAkaunReg?IdNum=${icno}&custName=${custName}&mobilePhone=${mobilePhone}&emailAdd=${emailAdd}&language=${language}&SSTID=${signalRConnection.kioskCode}`,
       body,
       accessToken.httpOptions
     ).pipe(
@@ -308,7 +309,7 @@ export class AldanService {
   //Email for Member Statement
   EmailForMemberStatement(emailAdd: string, sessionid: number, body: any){
     return this.http.post(
-      this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&sessionID=${sessionid}`,
+      this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&sessionID=${sessionid}&SSTID=${signalRConnection.kioskCode}`,
       body,
       accessToken.httpOptions
     ).pipe(

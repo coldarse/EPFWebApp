@@ -33,6 +33,11 @@ export class appFunc {
     static updateTACPerMonth: number;
     static NumberOfYearsViewStatement: number;
 
+    static Reset(){
+        this.MemberDetail = {} as currentMemberDetails;
+        this.currMemberDetail = {} as currMemberDetails;
+    }
+
     
     // Check if current time is between Start and End time.
     // Returns true or false.

@@ -57,6 +57,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.RetryCountInstance = this.appConfig.RetryCounts;
     this.translate.use('bm');
     if (appFunc.endSession){

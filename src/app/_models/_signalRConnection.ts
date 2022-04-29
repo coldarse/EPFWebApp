@@ -12,7 +12,6 @@ export class signalRConnection {
     static logsaves: string[];
     static kioskCode: string;
     static adapter: adapter[];
-    // static kioskID: string;
     static trxno : string;
     static isHardcodedIC : boolean;
     static kioskType: string;

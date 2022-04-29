@@ -30,6 +30,8 @@ export class MainMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    
     this.translate.use(selectLang.selectedLang);
     this.name = appFunc.currMemberDetail.custName;
 

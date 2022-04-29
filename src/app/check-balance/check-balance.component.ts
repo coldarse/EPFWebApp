@@ -225,7 +225,7 @@ export class CheckBalanceComponent implements OnInit {
           let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
           details.transactionDate = formattedDate;
           details.contributionMth = formattedMonth;
-          this.transactionAmtForAcc1 += Number(details.transactionAmtForAcc1);
+          this.transactionAmtForAcc1 += Number(details.totalContribution);
           this.SelectYearPage = false;
           this.StatementPage = true;
         });
