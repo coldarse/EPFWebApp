@@ -681,26 +681,26 @@ export class RegisterMemberComponent implements OnInit {
                     iAkaunbody
                   )
                   .subscribe((result: any) => {
-                    if(result.body.responseCode == '0'){
-                      this.isiAkaunRegSuccessful = true;
-                      this._aldanService
+                    let iAkaunres = result;
+                    this._aldanService
                       .MemberProfileInfo(Profilebody)
                       .subscribe((result: any) => {
                         this.isCallAPI = false;
                         deleteKeyboard();
+                        if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
                         this.ValidateProfilePage = false;
                         this.RegisterSuccessPage = true;
-                        if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
+                        if(iAkaunres.body.responseCode == '0'){
+                          this.isiAkaunRegSuccessful = true;
+                        }
+                        else{ //failed register iAkaun
+                          this.isiAkaunRegModuleEnabled = false;
+                          this.failediAkaun = true;
+                        }
                       },(err: HttpErrorResponse) => {
                         appFunc.message = "HttpError";
                         this.route.navigate(['outofservice']);
                       });
-                    }
-                    else{ //failed register iAkaun
-                      this.failediAkaun = true;
-                      this.ValidateProfilePage = false;
-                      this.RegisterSuccessPage = true;
-                    }
                   },(err: HttpErrorResponse) => { //failed register iAkaun
                     appFunc.message = "HttpError";
                     this.route.navigate(['outofservice']);
@@ -752,26 +752,26 @@ export class RegisterMemberComponent implements OnInit {
                   iAkaunbody
                 )
                 .subscribe((result: any) => {
-                  if(result.body.responseCode == '0'){
-                    this.isiAkaunRegSuccessful = true;
-                    this._aldanService
+                  let iAkaunRes = result;
+                  this._aldanService
                     .MemberProfileInfo(Profilebody)
                     .subscribe((result: any) => {
                       this.isCallAPI = false;
                       deleteKeyboard();
-                      appFunc.currMemberDetail = result.body.detail;
+                      if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
                       this.ValidateProfilePage = false;
                       this.RegisterSuccessPage = true;
-                    }, (err: HttpErrorResponse) => {
+                      if(iAkaunRes.body.responseCode == '0'){
+                        this.isiAkaunRegSuccessful = true;
+                      }
+                      else{ //failed register iAkaun
+                        this.isiAkaunRegModuleEnabled = false;
+                        this.failediAkaun = true;
+                      }
+                    },(err: HttpErrorResponse) => {
                       appFunc.message = "HttpError";
                       this.route.navigate(['outofservice']);
                     });
-                  }
-                  else{ //failed register iAkaun
-                    this.failediAkaun = true;
-                    this.ValidateProfilePage = false;
-                    this.RegisterSuccessPage = true;
-                  }
                 },(err: HttpErrorResponse) => { //failed register iAkaun
                   appFunc.message = "HttpError";
                   this.route.navigate(['outofservice']);
@@ -804,6 +804,8 @@ export class RegisterMemberComponent implements OnInit {
 
   RegisterSuccessYes() {
     if(!this.isiAkaunRegSuccessful){
+      this.RegKWSP = false;
+      this.RegShariah = true;
       if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
         this.RegisterSuccessPage = false;
         this.PickShariahPage = true;
@@ -833,6 +835,7 @@ export class RegisterMemberComponent implements OnInit {
                   this.errorDesc = result.body.error[0].description;
                 }
               },(err: HttpErrorResponse) => {
+                this.isCallAPI = false;
                 this.RegisterSuccessPage = false;
                 this.Failed = true;
                 this.errorDesc = "HttpError";
@@ -945,8 +948,9 @@ export class RegisterMemberComponent implements OnInit {
                 this.errorDesc = result.body.error[0].description;
               }
             },(err: HttpErrorResponse) => {
-              appFunc.message = "HttpError";
-              this.route.navigate(['outofservice']);
+              this.ActivateiAkaunPage = false;
+              this.Failed = true;
+              this.errorDesc = "HttpError";
             });
         } else {
           this.isCallAPI = false;
@@ -1139,9 +1143,9 @@ export class RegisterMemberComponent implements OnInit {
       accType: 'S',
       electChannel: 'SST',
       electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-      electReceivedTime: formatDate(new Date(), 'h:mm:ss', 'en'),
+      electReceivedTime: formatDate(new Date(), 'hh.mm.ss', 'en'),
       electReceivedBranch: '1',
-      electDate: '2019-10-11',
+      electDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
       electBranch: '1',
       electStatus: 'A',
       reasonCode: '',
@@ -1153,20 +1157,14 @@ export class RegisterMemberComponent implements OnInit {
     this._aldanService
       .iShariahRegistration(iShariahBody)
       .subscribe((result: any) => {
-        if(result.status == 200){
-          this.isCallAPI = false;
-          if (result.body.responseCode == '0') {
-            this.ShariahTnCPage = false;
-            this.ShariahSuccessPage = true;
-          } else {
-            this.ShariahTnCPage = false;
-            this.Failed = true;
-            this.errorDesc = result.body.error[0].description;
-          }
-        }
-        else{
-          appFunc.message = result.message;
-          this.route.navigate(['outofservice']);
+        this.isCallAPI = false;
+        if (result.body.responseCode == '0') {
+          this.ShariahTnCPage = false;
+          this.ShariahSuccessPage = true;
+        } else {
+          this.ShariahTnCPage = false;
+          this.Failed = true;
+          this.errorDesc = result.body.error[0].description;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -1305,6 +1303,20 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   failedYes() {
-    this.route.navigate(['mainMenu']);
+    if(this.RegIAkaun){
+      this.Failed = false;
+      this.RegIAkaun = false;
+      this.RegShariah = true;
+      this.PickShariahPage = true;
+    }
+    else if(this.RegShariah){
+      this.Failed = false;
+      this.RegShariah = false;
+      this.RegisteriSaraanPage = true;
+      this.RegSaraan = true;
+    }
+    else{
+      this.route.navigate(['mainMenu']);
+    }
   }
 }
