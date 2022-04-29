@@ -49,6 +49,7 @@ export class PersonalInformationComponent implements OnInit {
   postcode = "";
   city = "";
   state = "";
+  stateCode = "";
   country = "";
   homeNo = "";
   officeNo = "";
@@ -121,6 +122,77 @@ export class PersonalInformationComponent implements OnInit {
     this.email = this.email_?.nativeElement.value
 
     let errorCount = 0;
+    let stateCode = '';
+    var stateName  = this.state;
+    
+    while(stateName != "")
+    {
+      if(stateName.includes("JOHOR"))
+      {
+        stateCode = "1";
+      }
+      if(stateName.includes("KEDAH"))
+      {
+        stateCode = "2";
+      }
+      if(stateName.includes("KELANTAN"))
+      {
+        stateCode = "3";
+      }
+      if(stateName.includes("MELAKA"))
+      {
+        stateCode = "4";
+      }
+      if(stateName.includes("NEGERI SEMBILAN"))
+      {
+        stateCode = "5";
+      }
+      if(stateName.includes("PAHANG"))
+      {
+        stateCode = "6";
+      }
+      if(stateName.includes("PINANG"))
+      {
+        stateCode = "7";
+      }
+      if(stateName.includes("PERAK"))
+      {
+        stateCode = "8";
+      }
+      if(stateName.includes("PERLIS"))
+      {
+        stateCode = "9";
+      }
+      if(stateName.includes("SELANGOR"))
+      {
+        stateCode = "10";
+      }
+      if(stateName.includes("TERENGGANU"))
+      {
+        stateCode = "11";
+      }
+      if(stateName.includes("SABAH"))
+      {
+        stateCode = "12";
+      }
+      if(stateName.includes("SARAWAK"))
+      {
+        stateCode = "13";
+      }
+      if(stateName.includes("KUALA LUMPUR") || stateName.includes("KL"))
+      {
+        stateCode = "14";
+      }
+      if(stateName.includes("LABUAN"))
+      {
+        stateCode = "15";
+      }
+      if(stateName.includes("PUTRAJAYA"))
+      {
+        stateCode = "16";
+      }
+    }
+   
     if(this.address1.length == 0){
       errorCount += 1;
     }
@@ -201,7 +273,7 @@ export class PersonalInformationComponent implements OnInit {
         "addLine5": '',
         "cityStateZip": '',
         "postalCode": this.postcode,
-        "stateCode": '',
+        "stateCode": this.stateCode,
         "countryCode": "MAL",
         "remark": '',
         "enforcementCOde": '',
