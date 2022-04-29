@@ -125,7 +125,7 @@ export class PersonalInformationComponent implements OnInit {
     let stateCode = '';
     var stateName  = this.state;
     
-    while(stateName != "")
+    if(stateName != "")
     {
       if(stateName.includes("JOHOR"))
       {
