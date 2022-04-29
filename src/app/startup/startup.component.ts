@@ -26,24 +26,23 @@ export class StartupComponent implements OnInit {
   SelectAdapter = false;
   AdminLogin = false;
   SuccessRegister = false;
-  seconds = 5;
-  dots = '.'
+  isSelectedAdapter = false;
+  isAdapterEmpty = false;
+
+  
   dotInterval: any;
   adapters: adapter[] = [];
   selectedAdapterValue = '';
   selectedAdapterValueEncrypted = '';
-  isSelectedAdapter = false;
-  isAdapterEmpty = false;
-
   UserName = '';
   Password = '';
   Secret = '';
-
+  seconds = 5;
+  dots = '.'
   format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 
   constructor(
-    // private spinner: NgxSpinnerService,
     private _signalR: SignalR,
     private _aldanService: AldanService,
     private route: Router,
@@ -57,7 +56,6 @@ export class StartupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.spinner.show();
   }
 
   login(password: string) {
@@ -66,10 +64,9 @@ export class StartupComponent implements OnInit {
       password = password.concat('=');
     }
 
-
-
-    this._aldanService.getToken(signalRConnection.kioskCode, password)
-      .subscribe((result: any) => {
+    this._aldanService.
+      getToken(signalRConnection.kioskCode, password).
+      subscribe((result: any) => {
         clearInterval(this.dotInterval);
         if (!isNaN(result)) { //Number
           // Say that Kiosk Is Not Found in KMS
@@ -84,7 +81,8 @@ export class StartupComponent implements OnInit {
           ),
           observe: 'response' as 'body'
         };
-        this._aldanService.verifyKiosk(signalRConnection.kioskCode)
+        this._aldanService
+          .verifyKiosk(signalRConnection.kioskCode)
           .toPromise().then((result: any) => {
             if (!isNaN(result.body)) {
               appFunc.message = result.body.toString();
@@ -110,13 +108,13 @@ export class StartupComponent implements OnInit {
                 }
               }
             }
-          })
-
+          });
       });
   }
 
   getToken(password: string) {
-    this._aldanService.getToken(signalRConnection.kioskCode, password)
+    this._aldanService
+      .getToken(signalRConnection.kioskCode, password)
       .subscribe((result: any) => {
         clearInterval(this.dotInterval);
         if (!isNaN(result)) { //Number
@@ -134,10 +132,8 @@ export class StartupComponent implements OnInit {
           observe: 'response' as 'body'
         };
         return true;
-
       });
   }
-
 
   startConnection(): void {
     this.dotInterval = setInterval(() => {
@@ -169,7 +165,6 @@ export class StartupComponent implements OnInit {
           }
         });
       }).catch((err: any) => {
-        // errorCodes.code = "0167";
         appFunc.message = 'Unauthorized';
         this.route.navigate(['outofservice']);
       });
@@ -192,25 +187,30 @@ export class StartupComponent implements OnInit {
   SelectAdapterNext() {
     this.adapters.forEach((element: adapter) => {
       if (element.adapterNameEncrypted == this.selectedAdapterValueEncrypted) this.selectedAdapterValue = element.adapterName;
-    })
+    });
+
     const kioskRegisterBody = {
       'MacAddress': this.selectedAdapterValue
     }
-    this._aldanService.registerKiosk(signalRConnection.kioskInformation.id.toString(), kioskRegisterBody)
+
+    this._aldanService
+      .registerKiosk(
+        signalRConnection.kioskInformation.id.toString(), 
+        kioskRegisterBody
+      )
       .toPromise().then((result: any) => {
         if (result.body) {
           signalRConnection.connection.invoke('UpdateAdapter', this.selectedAdapterValue).then((data: boolean) => {
             if (data) {
-
               if (!this.format.test(this.selectedAdapterValueEncrypted)) {
                 this.selectedAdapterValueEncrypted = this.selectedAdapterValueEncrypted.concat('=');
               }
-
               const changepasswordBody = {
                 'currentPassword': this.Secret,
                 'newPassword': this.selectedAdapterValueEncrypted
               }
-              this._aldanService.changePassword(changepasswordBody)
+              this._aldanService
+                .changePassword(changepasswordBody)
                 .subscribe((response: any) => {
                   if (response.status.toString() == '204') {
                     this.SelectAdapter = false;
