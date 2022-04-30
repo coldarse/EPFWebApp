@@ -215,20 +215,23 @@ export class CheckBalanceComponent implements OnInit {
       if (result.body.responseCode == '0') {
         this.isCallAPI = false;
         this.dataForEmail = result.body;
-        this.cDetails = result.body.detail.mainStatement;
-        this.cDetails.forEach((details: any) => {
-          details.transaction = 'Caruman-IWS';
-          let strin = details.transactionDate;
-          let splitted = strin.split("/", 3);
-          let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];  
-          let formattedDate = formatDate(new Date(newDateString), 'dd/MM/YYYY', 'en');
-          let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
-          details.transactionDate = formattedDate;
-          details.contributionMth = formattedMonth;
-          this.transactionAmtForAcc1 += Number(details.totalContribution);
-          this.SelectYearPage = false;
-          this.StatementPage = true;
+        result.body.detail.mainStatement.forEach((details: any) => {
+          if(details.transactionDesc.includes('Caruman')){
+            let strin = details.transactionDate;
+            let splitted = strin.split("/", 3);
+            let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];  
+            let formattedDate = formatDate(new Date(newDateString), 'dd/MM/YYYY', 'en');
+            let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
+            details.transactionDate = formattedDate;
+            details.contributionMth = formattedMonth;
+            this.transactionAmtForAcc1 += Number(details.totalContribution);
+            this.cDetails.push(details);
+          }
         });
+
+        console.log(this.cDetails);
+        this.SelectYearPage = false;
+        this.StatementPage = true;
       }
       else{
         this.isCallAPI = false;

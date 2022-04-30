@@ -134,7 +134,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         sourceRegistrationChannel: 'IWS',
         applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         sourceCreationID: 'SFIWS',
-        sourceTerminalID: signalRConnection.kioskCode,
+        sourceTerminalID: signalRConnection.kioskCode.substring(0,10),
         sourceBranchNo: '0',
         sessionId: appFunc.sessionId
       };

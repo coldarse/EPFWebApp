@@ -28,7 +28,7 @@ selectLang.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\TzePing\EPFWebApp\EPFWebApp\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! D:\Work\EPF\EPFWebApp\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -125,6 +125,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class appFunc {
+    static Reset() {
+        this.MemberDetail = {};
+        this.currMemberDetail = {};
+    }
     // Check if current time is between Start and End time.
     // Returns true or false.
     static isInBetween(startDateTime, stopDateTime, current) {
@@ -1192,59 +1196,55 @@ class PersonalInformationComponent {
         this.officeNo = (_j = this.office_no) === null || _j === void 0 ? void 0 : _j.nativeElement.value;
         this.phoneNo = (_k = this.phone_no) === null || _k === void 0 ? void 0 : _k.nativeElement.value;
         this.email = (_l = this.email_) === null || _l === void 0 ? void 0 : _l.nativeElement.value;
-        let errorCount = 0;
-        let stateCode = '';
-        var stateName = this.state;
-        while (stateName != "") {
-            if (stateName.includes("JOHOR")) {
-                stateCode = "1";
-            }
-            if (stateName.includes("KEDAH")) {
-                stateCode = "2";
-            }
-            if (stateName.includes("KELANTAN")) {
-                stateCode = "3";
-            }
-            if (stateName.includes("MELAKA")) {
-                stateCode = "4";
-            }
-            if (stateName.includes("NEGERI SEMBILAN")) {
-                stateCode = "5";
-            }
-            if (stateName.includes("PAHANG")) {
-                stateCode = "6";
-            }
-            if (stateName.includes("PINANG")) {
-                stateCode = "7";
-            }
-            if (stateName.includes("PERAK")) {
-                stateCode = "8";
-            }
-            if (stateName.includes("PERLIS")) {
-                stateCode = "9";
-            }
-            if (stateName.includes("SELANGOR")) {
-                stateCode = "10";
-            }
-            if (stateName.includes("TERENGGANU")) {
-                stateCode = "11";
-            }
-            if (stateName.includes("SABAH")) {
-                stateCode = "12";
-            }
-            if (stateName.includes("SARAWAK")) {
-                stateCode = "13";
-            }
-            if (stateName.includes("KUALA LUMPUR") || stateName.includes("KL")) {
-                stateCode = "14";
-            }
-            if (stateName.includes("LABUAN")) {
-                stateCode = "15";
-            }
-            if (stateName.includes("PUTRAJAYA")) {
-                stateCode = "16";
-            }
+        if (this.state.includes("JOHOR")) {
+            this.stateCode = "1";
         }
+        if (this.state.includes("KEDAH")) {
+            this.stateCode = "2";
+        }
+        if (this.state.includes("KELANTAN")) {
+            this.stateCode = "3";
+        }
+        if (this.state.includes("MELAKA")) {
+            this.stateCode = "4";
+        }
+        if (this.state.includes("NEGERI SEMBILAN")) {
+            this.stateCode = "5";
+        }
+        if (this.state.includes("PAHANG")) {
+            this.stateCode = "6";
+        }
+        if (this.state.includes("PINANG")) {
+            this.stateCode = "7";
+        }
+        if (this.state.includes("PERAK")) {
+            this.stateCode = "8";
+        }
+        if (this.state.includes("PERLIS")) {
+            this.stateCode = "9";
+        }
+        if (this.state.includes("SELANGOR")) {
+            this.stateCode = "10";
+        }
+        if (this.state.includes("TERENGGANU")) {
+            this.stateCode = "11";
+        }
+        if (this.state.includes("SABAH")) {
+            this.stateCode = "12";
+        }
+        if (this.state.includes("SARAWAK")) {
+            this.stateCode = "13";
+        }
+        if (this.state.includes("KUALA LUMPUR") || this.state.includes("KL")) {
+            this.stateCode = "14";
+        }
+        if (this.state.includes("LABUAN")) {
+            this.stateCode = "15";
+        }
+        if (this.state.includes("PUTRAJAYA")) {
+            this.stateCode = "16";
+        }
+        let errorCount = 0;
         if (this.address1.length == 0) {
             errorCount += 1;
         }
@@ -1254,9 +1254,9 @@ class PersonalInformationComponent {
         if (this.postcode.length == 0) {
             errorCount += 1;
         }
-        if (this.city.length == 0) {
-            errorCount += 1;
-        }
+        // if(this.city.length == 0){
+        //   errorCount += 1;
+        // }
         if (this.country.length == 0) {
             errorCount += 1;
         }
@@ -1314,7 +1314,7 @@ class PersonalInformationComponent {
                 "addLine3": this.address3,
                 "addLine4": '',
                 "addLine5": '',
-                "cityStateZip": '',
+                "cityStateZip": this.city,
                 "postalCode": this.postcode,
                 "stateCode": this.stateCode,
                 "countryCode": "MAL",
@@ -1433,7 +1433,7 @@ PersonalInformationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_3__[
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵloadQuery"]()) && (ctx.office_no = _t.first);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵloadQuery"]()) && (ctx.phone_no = _t.first);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵloadQuery"]()) && (ctx.email_ = _t.first);
-    } }, decls: 9, vars: 7, consts: [[1, "bg-img", 2, "background", "url('assets/images/BG.png')", "background-size", "1368px 850px"], [1, "header"], [1, "container-fluid"], ["class", "row padTop05rem content-container", 4, "ngIf"], ["class", "row padTop5rem content-container", 4, "ngIf"], [1, "row", "padTop05rem", "content-container"], [1, "row"], [1, "col-1"], [1, "col-4"], [1, "local"], ["type", "checkbox", "id", "chkLocal", 1, "form-check-input", 3, "change"], ["for", "chkLocal", 1, "form-check-label"], [1, "row", "padTop05rem"], [1, "col-3"], [1, "lblProfile", "padBottomProfile"], [1, "col-7"], ["type", "text", "maxChar", "41", "id", "txtAddress1", "name", "address_1", "maxlength", "40", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["address_1", ""], ["type", "text", "maxChar", "41", "id", "txtAddress2", "name", "address_2", "maxlength", "40", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["address_2", ""], ["type", "text", "maxChar", "41", "id", "txtAddress3", "name", "address_3", "maxlength", "40", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["address_3", ""], [1, "lblProfile"], ["type", "text", "maxChar", "9", "id", "txtPostcode", "name", "txtPostcode", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", "maxchar", 3, "value"], ["post_code", ""], ["type", "text", "maxChar", "40", "id", "txtCity", "name", "city_", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "nosymbol", "maxchar", 3, "value"], ["city_", ""], ["type", "text", "maxChar", "40", "id", "txtState", "name", "state_", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["state_", ""], ["type", "text", "maxChar", "40", "id", "txtCountry", "name", "country_", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["country_", ""], ["type", "tel", "maxChar", "15", "id", "txtHomeNo", "name", "homeno", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", 3, "value"], ["home_no", ""], ["type", "tel", "id", "txtOfficeNo", "name", "officeno", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", 3, "value"], ["office_no", ""], ["type", "tel", "maxChar", "16", "id", "txtPhoneNo", "name", "phoneno", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", "maxchar", 3, "value"], ["phone_no", ""], ["type", "text", "maxChar", "40", "id", "txtEmailAddress", "name", "txtProfile", "target", "needed", 1, "use-keyboard-input", "txtProfile", "maxchar", 3, "value"], ["email_", ""], [1, "col-2"], [1, "col-8", "text-center"], ["class", "errorMsg", "style", "display:inline", 4, "ngIf"], [1, "row", "text-center", "padTop05rem"], ["type", "button", 1, "btnNo", 3, "click"], ["type", "button", 1, "btnYes", 3, "click"], [1, "errorMsg", 2, "display", "inline"], [1, "row", "padTop5rem", "content-container"], [1, "text-center"], [1, "lblHeader"], [1, "row", "padTop5rem"], [1, "col-2", "left"], [1, "lblReg"], [1, "col-1", "lblSymbol", 2, "margin-top", "0.75rem"], [1, "col-6", "left"], [1, "lblInfo", 2, "padding-left", "2rem"], ["class", "row padTop15rem", 4, "ngIf"], [1, "row", "padTop15rem"], [1, "col-6"], ["role", "status", 1, "spinner-border", "text-primary", "spinning-addon"], [1, "lblStatus"], [1, "row", "padTop3rem"], ["src", "assets/images/Icon-Berjaya.svg", "width", "250", "height", "225"], [1, "statusMsg"], ["src", "assets/images/Icon-TidakBerjaya.svg", "width", "250", "height", "225"]], template: function PersonalInformationComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 9, vars: 7, consts: [[1, "bg-img", 2, "background", "url('assets/images/BG.png')", "background-size", "1368px 850px"], [1, "header"], [1, "container-fluid"], ["class", "row padTop05rem content-container", 4, "ngIf"], ["class", "row padTop5rem content-container", 4, "ngIf"], [1, "row", "padTop05rem", "content-container"], [1, "row"], [1, "col-1"], [1, "col-4"], [1, "local"], ["type", "checkbox", "id", "chkLocal", 1, "form-check-input", 3, "change"], ["for", "chkLocal", 1, "form-check-label"], [1, "row", "padTop05rem"], [1, "col-3"], [1, "lblProfile", "padBottomProfile"], [1, "col-7"], ["type", "text", "maxChar", "41", "id", "txtAddress1", "name", "address_1", "maxlength", "40", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["address_1", ""], ["type", "text", "maxChar", "41", "id", "txtAddress2", "name", "address_2", "maxlength", "40", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["address_2", ""], ["type", "text", "maxChar", "41", "id", "txtAddress3", "name", "address_3", "maxlength", "40", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["address_3", ""], [1, "lblProfile"], ["type", "text", "maxChar", "9", "id", "txtPostcode", "name", "txtPostcode", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", "maxchar", 3, "value"], ["post_code", ""], ["type", "text", "maxChar", "40", "id", "txtCity", "name", "city_", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "nosymbol", "maxchar", 3, "value"], ["city_", ""], ["type", "text", "maxChar", "40", "id", "txtState", "name", "state_", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["state_", ""], ["type", "text", "maxChar", "40", "id", "txtCountry", "name", "country_", "required", "", "target", "needed", 1, "use-keyboard-input", "txtProfile", "allcapitalletter", "maxchar", 3, "value"], ["country_", ""], ["type", "tel", "maxChar", "15", "id", "txtHomeNo", "name", "homeno", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", 3, "value"], ["home_no", ""], ["type", "tel", "id", "txtOfficeNo", "name", "officeno", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", 3, "value"], ["office_no", ""], ["type", "tel", "maxChar", "16", "id", "txtPhoneNo", "name", "phoneno", "target", "needed", 1, "use-keyboard-input", "txtProfile", "numericOnly", "maxchar", 3, "value"], ["phone_no", ""], ["type", "text", "maxChar", "40", "id", "txtEmailAddress", "name", "txtProfile", "target", "needed", 1, "use-keyboard-input", "txtProfile", "maxchar", 3, "value"], ["email_", ""], [1, "col-2"], [1, "col-8", "text-center"], ["class", "errorMsg", "style", "display:inline", 4, "ngIf"], [1, "row", "text-center", "padTop05rem"], ["type", "button", 1, "btnNo", 3, "click"], ["type", "button", 1, "btnYes", 3, "click"], [1, "errorMsg", 2, "display", "inline"], [1, "row", "padTop5rem", "content-container"], [1, "text-center"], [1, "lblHeader"], [1, "row", "padTop5rem"], [1, "col-2", "left"], [1, "lblReg"], [1, "col-1", "lblSymbol", 2, "margin-top", "0.75rem"], [1, "col-6", "left"], [1, "lblInfo", 2, "padding-left", "2rem"], ["class", "row padTop15rem", 4, "ngIf"], [1, "row", "padTop15rem"], [1, "col-6"], ["role", "status", 1, "spinner-border", "text-primary", "spinning-addon"], [1, "lblStatus"], [1, "row", "padTop3rem"], ["src", "assets/images/Icon-Berjaya.svg", "width", "250", "height", "225"], [1, "statusMsg"], ["src", "assets/images/Icon-TidakBerjaya.svg", "width", "250", "height", "225"]], template: function PersonalInformationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2);
@@ -2430,12 +2430,26 @@ function RegisterMemberComponent_div_10_div_16_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](5, 1, "AddTACFailed"), " ");
 } }
 function RegisterMemberComponent_div_10_div_17_Template(rf, ctx) { if (rf & 1) {
-    const _r62 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "div", 55);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](5, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](5, 1, "RegiAkaunFailed"), " ");
+} }
+function RegisterMemberComponent_div_10_div_18_Template(rf, ctx) { if (rf & 1) {
+    const _r63 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 33);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_10_div_17_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r62); const ctx_r61 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r61.RegisterSuccessYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_10_div_18_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r63); const ctx_r62 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r62.RegisterSuccessYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](5, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -2445,7 +2459,7 @@ function RegisterMemberComponent_div_10_div_17_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](5, 1, "continue"));
 } }
-function RegisterMemberComponent_div_10_div_18_Template(rf, ctx) { if (rf & 1) {
+function RegisterMemberComponent_div_10_div_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 12);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 15);
@@ -2476,18 +2490,19 @@ function RegisterMemberComponent_div_10_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](14, RegisterMemberComponent_div_10_div_14_Template, 6, 3, "div", 50);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](15, RegisterMemberComponent_div_10_div_15_Template, 6, 3, "div", 50);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](16, RegisterMemberComponent_div_10_div_16_Template, 6, 3, "div", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](17, RegisterMemberComponent_div_10_div_17_Template, 6, 3, "div", 50);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](18, RegisterMemberComponent_div_10_div_18_Template, 4, 0, "div", 50);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](17, RegisterMemberComponent_div_10_div_17_Template, 6, 3, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](18, RegisterMemberComponent_div_10_div_18_Template, 6, 3, "div", 50);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](19, RegisterMemberComponent_div_10_div_19_Template, 4, 0, "div", 50);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](4, 9, "KWSPNo"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](4, 10, "KWSPNo"), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", ctx_r8.KWSPMemberNo, " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](12, 11, "SuccessReg"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](12, 12, "SuccessReg"), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r8.isiAkaunRegModuleEnabled);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
@@ -2497,12 +2512,14 @@ function RegisterMemberComponent_div_10_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r8.failedTAC);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r8.failediAkaun);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", !ctx_r8.isCallAPI);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r8.isCallAPI);
 } }
 function RegisterMemberComponent_div_11_Template(rf, ctx) { if (rf & 1) {
-    const _r64 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r65 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 49);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 56);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "label", 10);
@@ -2528,7 +2545,7 @@ function RegisterMemberComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](17);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](18, "input", 64);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_11_Template_input_click_18_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r64); const ctx_r63 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r63.clickTNC1(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_11_Template_input_click_18_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r65); const ctx_r64 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r64.clickTNC1(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](19, "label", 65);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](20);
@@ -2543,14 +2560,14 @@ function RegisterMemberComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](25, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](26, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](27, "button", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_11_Template_button_click_27_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r64); const ctx_r65 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r65.TnCNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_11_Template_button_click_27_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r65); const ctx_r66 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r66.TnCNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](28);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](29, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](30, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](31, "button", 66);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_11_Template_button_click_31_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r64); const ctx_r66 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r66.TnCYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_11_Template_button_click_31_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r65); const ctx_r67 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r67.TnCYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](32);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](33, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -2666,19 +2683,19 @@ function RegisterMemberComponent_div_12_h5_94_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](2, 1, "passwordMatch"));
 } }
 function RegisterMemberComponent_div_12_div_97_Template(rf, ctx) { if (rf & 1) {
-    const _r83 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r84 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 82);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "button", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_12_div_97_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r83); const ctx_r82 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r82.SetIdPasswordNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_12_div_97_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r84); const ctx_r83 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r83.SetIdPasswordNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](5, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](7, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_12_div_97_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r83); const ctx_r84 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r84.SetIdPasswordYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_12_div_97_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r84); const ctx_r85 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r85.SetIdPasswordYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](9, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -2896,23 +2913,23 @@ function RegisterMemberComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r10.isCallAPI);
 } }
 function RegisterMemberComponent_div_13_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r94 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r95 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 90);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "input", 91);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "label", 92);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_13_div_10_Template_label_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r94); const ci_r92 = ctx.$implicit; const ctx_r93 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r93.clickImage(ci_r92.imgId); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_13_div_10_Template_label_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r95); const ci_r93 = ctx.$implicit; const ctx_r94 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r94.clickImage(ci_r93.imgId); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](3, "img", 93);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const ci_r92 = ctx.$implicit;
+    const ci_r93 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpropertyInterpolate"]("id", ci_r92.imgId);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("checked", ci_r92.checked)("hidden", true);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpropertyInterpolate"]("id", ci_r93.imgId);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("checked", ci_r93.checked)("hidden", true);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpropertyInterpolate"]("for", ci_r92.imgId);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpropertyInterpolate"]("for", ci_r93.imgId);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpropertyInterpolate"]("src", ci_r92.imgPath, _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵsanitizeUrl"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpropertyInterpolate"]("src", ci_r93.imgPath, _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵsanitizeUrl"]);
 } }
 function RegisterMemberComponent_div_13_h5_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "h5", 81);
@@ -2942,19 +2959,19 @@ function RegisterMemberComponent_div_13_h5_52_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](2, 1, "emptySecret"));
 } }
 function RegisterMemberComponent_div_13_div_54_Template(rf, ctx) { if (rf & 1) {
-    const _r96 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r97 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 82);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "button", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_13_div_54_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r96); const ctx_r95 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r95.ActivateInformationNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_13_div_54_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r97); const ctx_r96 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r96.ActivateInformationNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](5, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](7, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_13_div_54_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r96); const ctx_r97 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r97.ActivateInformationYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_13_div_54_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r97); const ctx_r98 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r98.ActivateInformationYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](9, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3083,7 +3100,7 @@ function RegisterMemberComponent_div_13_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r11.isCallAPI);
 } }
 function RegisterMemberComponent_div_14_Template(rf, ctx) { if (rf & 1) {
-    const _r99 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r100 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 49);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 13);
@@ -3118,7 +3135,7 @@ function RegisterMemberComponent_div_14_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](22, "div", 12);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](23, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](24, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_14_Template_button_click_24_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r99); const ctx_r98 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r98.ActivateSuccessYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_14_Template_button_click_24_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r100); const ctx_r99 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r99.ActivateSuccessYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](25);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](26, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3137,9 +3154,9 @@ function RegisterMemberComponent_div_14_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](26, 10, "next"));
 } }
 function RegisterMemberComponent_div_15_div_5_button_2_Template(rf, ctx) { if (rf & 1) {
-    const _r105 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r106 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 100);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_15_div_5_button_2_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r105); const ctx_r104 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](3); return ctx_r104.IShariahNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_15_div_5_button_2_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r106); const ctx_r105 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](3); return ctx_r105.IShariahNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](2, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3148,9 +3165,9 @@ function RegisterMemberComponent_div_15_div_5_button_2_Template(rf, ctx) { if (r
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](2, 1, "remain"));
 } }
 function RegisterMemberComponent_div_15_div_5_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r107 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r108 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 100);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_15_div_5_button_4_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r107); const ctx_r106 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](3); return ctx_r106.IShariahYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_15_div_5_button_4_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r108); const ctx_r107 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](3); return ctx_r107.IShariahYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](2, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3168,11 +3185,11 @@ function RegisterMemberComponent_div_15_div_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const ctx_r100 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2);
+    const ctx_r101 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r100.isiSaraanModuleEnabled);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r101.isiSaraanModuleEnabled);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r100.isiShariahModuleEnabled);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r101.isiShariahModuleEnabled);
 } }
 function RegisterMemberComponent_div_15_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 17);
@@ -3203,30 +3220,30 @@ function RegisterMemberComponent_div_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r13.isCallAPI);
 } }
 function RegisterMemberComponent_div_16_div_23_Template(rf, ctx) { if (rf & 1) {
-    const _r112 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r113 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "button", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_16_div_23_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r112); const ctx_r111 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r111.ShariahTnCNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_16_div_23_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r113); const ctx_r112 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r112.ShariahTnCNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](5, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](7, "button", 66);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_16_div_23_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r112); const ctx_r113 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r113.ShariahTnCYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_16_div_23_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r113); const ctx_r114 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r114.ShariahTnCYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](9, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const ctx_r109 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2);
+    const ctx_r110 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](5, 4, "back"));
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngClass", ctx_r109.xagreedTnc2 == false ? "btnYes" : "btnYesDisabled")("disabled", ctx_r109.xagreedTnc2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngClass", ctx_r110.xagreedTnc2 == false ? "btnYes" : "btnYesDisabled")("disabled", ctx_r110.xagreedTnc2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](9, 6, "agree"));
 } }
@@ -3239,7 +3256,7 @@ function RegisterMemberComponent_div_16_div_24_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } }
 function RegisterMemberComponent_div_16_Template(rf, ctx) { if (rf & 1) {
-    const _r115 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r116 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 49);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 56);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "label", 10);
@@ -3262,7 +3279,7 @@ function RegisterMemberComponent_div_16_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "div", 61);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](15, "div", 102, 103);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](17, "input", 104);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_16_Template_input_click_17_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r115); const ctx_r114 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r114.clickTNC2(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_16_Template_input_click_17_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r116); const ctx_r115 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r115.clickTNC2(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](18, "label", 105);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](19);
@@ -3291,7 +3308,7 @@ function RegisterMemberComponent_div_16_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r14.isCallAPI);
 } }
 function RegisterMemberComponent_div_17_Template(rf, ctx) { if (rf & 1) {
-    const _r117 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r118 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 107);
@@ -3311,7 +3328,7 @@ function RegisterMemberComponent_div_17_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](12, "div", 12);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_17_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r117); const ctx_r116 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r116.ShariahSuccessYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_17_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r118); const ctx_r117 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r117.ShariahSuccessYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](16, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3328,7 +3345,7 @@ function RegisterMemberComponent_div_17_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](16, 7, "yes"));
 } }
 function RegisterMemberComponent_div_18_Template(rf, ctx) { if (rf & 1) {
-    const _r119 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r120 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 10);
@@ -3338,14 +3355,14 @@ function RegisterMemberComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](5, "div", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](7, "button", 100);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_18_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r119); const ctx_r118 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r118.RegisteriSaraanNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_18_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r120); const ctx_r119 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r119.RegisteriSaraanNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](9, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](10, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](11, "button", 100);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_18_Template_button_click_11_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r119); const ctx_r120 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r120.RegisteriSaraanYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_18_Template_button_click_11_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r120); const ctx_r121 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r121.RegisteriSaraanYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](12);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](13, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3363,33 +3380,33 @@ function RegisterMemberComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](13, 7, "yes"));
 } }
 function RegisterMemberComponent_div_19_li_13_Template(rf, ctx) { if (rf & 1) {
-    const _r126 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r127 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "li");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "a", 116);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_19_li_13_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r126); const js_r124 = ctx.$implicit; const ctx_r125 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r125.selectJob(js_r124); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_19_li_13_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r127); const js_r125 = ctx.$implicit; const ctx_r126 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r126.selectJob(js_r125); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](3, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const js_r124 = ctx.$implicit;
+    const js_r125 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](3, 1, js_r124.code), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](3, 1, js_r125.code), " ");
 } }
 function RegisterMemberComponent_div_19_div_14_Template(rf, ctx) { if (rf & 1) {
-    const _r128 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r129 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 117);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "button", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_19_div_14_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r128); const ctx_r127 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r127.SelectJobNo(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_19_div_14_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r129); const ctx_r128 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r128.SelectJobNo(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](5, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](7, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_19_div_14_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r128); const ctx_r129 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r129.SelectJobYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_19_div_14_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r129); const ctx_r130 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2); return ctx_r130.SelectJobYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](9, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3448,7 +3465,7 @@ function RegisterMemberComponent_div_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r17.isCallAPI);
 } }
 function RegisterMemberComponent_div_20_Template(rf, ctx) { if (rf & 1) {
-    const _r131 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r132 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 107);
@@ -3468,7 +3485,7 @@ function RegisterMemberComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](12, "div", 12);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_20_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r131); const ctx_r130 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r130.SaraanSuccessYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_20_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r132); const ctx_r131 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r131.SaraanSuccessYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](16, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3485,7 +3502,7 @@ function RegisterMemberComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](16, 7, "yes"));
 } }
 function RegisterMemberComponent_div_21_Template(rf, ctx) { if (rf & 1) {
-    const _r133 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r134 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 107);
@@ -3505,7 +3522,7 @@ function RegisterMemberComponent_div_21_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](12, "div", 12);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_21_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r133); const ctx_r132 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r132.failedYes(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RegisterMemberComponent_div_21_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r134); const ctx_r133 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r133.failedYes(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](15);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](16, "translate");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -3547,46 +3564,17 @@ class RegisterMemberComponent {
         this.SelectJobPage = false;
         this.SaraanSuccessPage = false;
         this.Failed = false;
-        this.TnC = '';
-        this.content_version = '';
-        this.Contract = '';
-        this.failedTAC = false;
+        this.failedTAC = true;
+        this.failediAkaun = true;
         this.isiAkaunRegModuleEnabled = false;
         this.isiAkaunActModuleEnabled = false;
         this.isiShariahModuleEnabled = false;
         this.isiSaraanModuleEnabled = false;
         this.xagreedTnc1 = true;
         this.xagreedTnc2 = true;
-        this.jobSectors = [];
-        this.phoneNo = '';
-        this.emailAddress = '';
-        this.elist = 'gmail.com';
-        this.emailList = [
-            'gmail.com',
-            'hotmail.com',
-            'yahoo.com',
-            'custom'
-        ];
-        this.isCustom = false;
-        this.emailDDLTextValue = "";
-        this.fullEmailAddress = "";
-        this.name = 'MUHAMMAD WAHYU NIZAM BIN OMIR';
-        this.ic = '921130105537';
-        this.nationality = 'WARGANEGARA';
-        this.gender = 'LELAKI';
-        this.race = 'MALAY';
-        this.religion = 'ISLAM';
         this.phoneError = false;
         this.emailError = false;
-        this.KWSPMemberNo = '22131512';
-        this.KWSPCustomerNo = '';
-        this.acctNo = '';
-        this.password1 = '';
-        this.password2 = '';
-        this.securePhrase = '';
-        this.defaultDDL = "default";
-        this.selectedJobSector = undefined;
-        this.currentLang = 'bm';
+        this.isCustom = false;
         this.emptySecret = false;
         this.emptyID = false;
         this.emptyPassword = false;
@@ -3600,10 +3588,40 @@ class RegisterMemberComponent {
         this.imageSelect = false;
         this.securePhraseMax = false;
         this.passwordMatch = false;
-        this.checkboxImages = [];
         this.isCallAPI = false;
-        this.errorDesc = "";
         this.noEmail = false;
+        this.isiAkaunRegSuccessful = false;
+        this.jobSectors = [];
+        this.checkboxImages = [];
+        this.emailList = [
+            'gmail.com',
+            'hotmail.com',
+            'yahoo.com',
+            'custom'
+        ];
+        this.emailDDLTextValue = '';
+        this.fullEmailAddress = '';
+        this.name = '';
+        this.ic = '';
+        this.nationality = '';
+        this.gender = '';
+        this.race = '';
+        this.religion = '';
+        this.KWSPMemberNo = '';
+        this.KWSPCustomerNo = '';
+        this.errorDesc = '';
+        this.acctNo = '';
+        this.password1 = '';
+        this.password2 = '';
+        this.securePhrase = '';
+        this.TnC = '';
+        this.content_version = '';
+        this.Contract = '';
+        this.phoneNo = '';
+        this.emailAddress = '';
+        this.elist = 'gmail.com';
+        this.defaultDDL = "default";
+        this.currentLang = 'bm';
     }
     ngOnInit() {
         this.translate.use(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang);
@@ -3645,15 +3663,13 @@ class RegisterMemberComponent {
         this.nationality = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Citizenship;
         this.gender = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender;
         this.race = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race;
+        this.religion = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion;
         if (_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang == 'bm') {
             if (this.gender == 'Male') {
                 this.gender = 'LELAKI';
             }
             else if (this.gender == "Female") {
                 this.gender = 'PEREMPUAN';
-            }
-            if (this.nationality == 'WARGANEGARA') {
-                this.nationality = 'KEWARGANEGARAAN';
             }
         }
         else {
@@ -3676,12 +3692,6 @@ class RegisterMemberComponent {
                 this.race = "INDIAN";
             }
         }
-        // this.race = currentMyKadDetails.Race;
-        this.religion = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion;
-        // this.acctNo = this.ic;
-    }
-    ngAfterViewInit() {
-        loadKeyboard();
     }
     onChange(event) {
         if (event.target.value == 'custom') {
@@ -3723,7 +3733,7 @@ class RegisterMemberComponent {
         this.emailError = false;
         if (((_a = this.email) === null || _a === void 0 ? void 0 : _a.nativeElement.value) == '') {
             this.noEmail = true;
-            this.fullEmailAddress = "";
+            this.fullEmailAddress = '';
             this.InsertEmailPage = false;
             this.ValidateProfilePage = true;
             deleteKeyboard();
@@ -3750,10 +3760,6 @@ class RegisterMemberComponent {
         }
         deleteKeyboard();
     }
-    isEmail(search) {
-        const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        return regexp.test(search);
-    }
     InsertEmailNo() {
         deleteKeyboard();
         this.InsertEmailPage = false;
@@ -3761,498 +3767,516 @@ class RegisterMemberComponent {
     }
     ValidateProfileYes() {
         this.isCallAPI = true;
-        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
-            let residentStat = '';
-            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Citizenship) {
-                case 'WARGANEGARA': {
-                    residentStat = 'B';
+        let residentStat = '';
+        switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Citizenship) {
+            case 'WARGANEGARA': {
+                residentStat = 'B';
+                break;
+            }
+            case 'WARGANEGARA - AMJ': {
+                residentStat = 'C';
+                break;
+            }
+            case 'PEMASTAUTIN SEMENTARA': {
+                residentStat = 'H';
+                break;
+            }
+            case 'PEMASTAUTIN TETAP': {
+                residentStat = 'M';
+                break;
+            }
+            case 'PEMASTAUTIN TETAP - AMJ': {
+                residentStat = 'P';
+                break;
+            }
+            case 'BELUM DITENTUKAN': {
+                residentStat = 'Q';
+                break;
+            }
+            case 'BUKAN WARGANEGARA': {
+                residentStat = 'X';
+                break;
+            }
+            default: {
+                residentStat = '9';
+                break;
+            }
+        }
+        let gender = '';
+        switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender) {
+            case 'Male': {
+                gender = 'M';
+                break;
+            }
+            case 'Female': {
+                gender = 'F';
+                break;
+            }
+        }
+        let areaCode = '';
+        if (residentStat == 'X') {
+            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State.toUpperCase()) {
+                case 'SABAH': {
+                    areaCode = 'E';
                     break;
                 }
-                case 'WARGANEGARA - AMJ': {
-                    residentStat = 'C';
-                    break;
-                }
-                case 'PEMASTAUTIN SEMENTARA': {
-                    residentStat = 'H';
-                    break;
-                }
-                case 'PEMASTAUTIN TETAP': {
-                    residentStat = 'M';
-                    break;
-                }
-                case 'PEMASTAUTIN TETAP - AMJ': {
-                    residentStat = 'P';
-                    break;
-                }
-                case 'BELUM DITENTUKAN': {
-                    residentStat = 'Q';
-                    break;
-                }
-                case 'BUKAN WARGANEGARA': {
-                    residentStat = 'X';
+                case 'SARAWAK': {
+                    areaCode = 'F';
                     break;
                 }
                 default: {
-                    residentStat = '9';
+                    areaCode = 'D';
                     break;
                 }
             }
-            let gender = '';
-            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender) {
-                case 'Male': {
-                    gender = 'M';
-                    break;
-                }
-                case 'Female': {
-                    gender = 'F';
-                    break;
-                }
-            }
-            let areaCode = '';
-            if (residentStat == 'X') {
-                switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State.toUpperCase()) {
-                    case 'SABAH': {
-                        areaCode = 'E';
-                        break;
-                    }
-                    case 'SARAWAK': {
-                        areaCode = 'F';
-                        break;
-                    }
-                    default: {
-                        areaCode = 'D';
-                        break;
-                    }
-                }
-            }
-            else {
-                switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State.toUpperCase()) {
-                    case 'SABAH': {
-                        areaCode = 'B';
-                        break;
-                    }
-                    case 'SARAWAK': {
-                        areaCode = 'C';
-                        break;
-                    }
-                    default: {
-                        areaCode = 'A';
-                        break;
-                    }
-                }
-            }
-            let race = '';
-            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race.toUpperCase()) {
-                case 'MELAYU': {
-                    race = '0100';
-                    break;
-                }
-                case 'BUGIS': {
-                    race = '0101';
-                    break;
-                }
-                case 'BOYAN': {
-                    race = '0102';
-                    break;
-                }
-                case 'BANJAR': {
-                    race = '0103';
-                    break;
-                }
-                case 'JAWA': {
-                    race = '0104';
-                    break;
-                }
-                case 'JAWI PEKAN': {
-                    race = '0105';
-                    break;
-                }
-                case 'MINANGKABAU': {
-                    race = '0106';
-                    break;
-                }
-                case 'CINA': {
-                    race = '0200';
-                    break;
-                }
-                case 'CANTONESE': {
-                    race = '0201';
-                    break;
-                }
-                case 'FOOCHOW': {
-                    race = '0202';
-                    break;
-                }
-                case 'HAINANANESE': {
-                    race = '0203';
-                    break;
-                }
-            }
-            let stateCode = '';
-            var stateName = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State.toUpperCase();
-            if (stateName.includes("JOHOR")) {
-                stateCode = "1";
-            }
-            if (stateName.includes("KEDAH")) {
-                stateCode = "2";
-            }
-            if (stateName.includes("KELANTAN")) {
-                stateCode = "3";
-            }
-            if (stateName.includes("MELAKA")) {
-                stateCode = "4";
-            }
-            if (stateName.includes("NEGERI SEMBILAN")) {
-                stateCode = "5";
-            }
-            if (stateName.includes("PAHANG")) {
-                stateCode = "6";
-            }
-            if (stateName.includes("PINANG")) {
-                stateCode = "7";
-            }
-            if (stateName.includes("PERAK")) {
-                stateCode = "8";
-            }
-            if (stateName.includes("PERLIS")) {
-                stateCode = "9";
-            }
-            if (stateName.includes("SELANGOR")) {
-                stateCode = "10";
-            }
-            if (stateName.includes("TERENGGANU")) {
-                stateCode = "11";
-            }
-            if (stateName.includes("SABAH")) {
-                stateCode = "12";
-            }
-            if (stateName.includes("SARAWAK")) {
-                stateCode = "13";
-            }
-            if (stateName.includes("KUALA LUMPUR") || stateName.includes("KL")) {
-                stateCode = "14";
-            }
-            if (stateName.includes("LABUAN")) {
-                stateCode = "15";
-            }
-            if (stateName.includes("PUTRAJAYA")) {
-                stateCode = "16";
-            }
-            let religion = '';
-            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion.toUpperCase()) {
-                case 'ISLAM': {
-                    religion = '1';
-                    break;
-                }
-                case 'KRISTIAN': {
-                    religion = '2';
-                    break;
-                }
-                case 'BUDDHA': {
-                    religion = '3';
-                    break;
-                }
-                case 'HINDU': {
-                    religion = '4';
-                    break;
-                }
-                case 'SIKHISM': {
-                    religion = '5';
-                    break;
-                }
-                case 'TIADA AGAMA': {
-                    religion = '6';
-                    break;
-                }
-                case 'LAIN UGAMA': {
-                    religion = '7';
-                    break;
-                }
-                case 'MAKLUMAT TIADA': {
-                    religion = '8';
-                    break;
-                }
-                case 'TAO': {
-                    religion = '9';
-                    break;
-                }
-                case 'KONFUSIANISME': {
-                    religion = 'A';
-                    break;
-                }
-                case 'ISLAM': {
-                    religion = 'B';
-                    break;
-                }
-                case 'BAHAI': {
-                    religion = 'C';
-                    break;
-                }
-                case 'JUDAISM': {
-                    religion = 'D';
-                    break;
-                }
-                default: {
-                    religion = '8';
-                    break;
-                }
-            }
-            const body = {
-                cifNum: '',
-                regType: 'M',
-                accNum: '',
-                accType: '',
-                primaryIdTypeCode: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
-                primaryIdNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                custName: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name,
-                birthDate: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOB.toString().replace('T00:00:00', ''),
-                residentStatus: residentStat,
-                gender: gender,
-                citizenCountry: 'MAL',
-                race: race,
-                religion: religion,
-                matrimAsset: 'N',
-                handicapRemarks: '',
-                regChannel: 'SST',
-                regRcvdDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
-                prefComChannel: 'ML',
-                addLine1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1,
-                addLine2: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2,
-                addLine3: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3,
-                addLine4: '',
-                addLine5: '',
-                postalCode: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].PostCode,
-                cityStateZip: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State,
-                stateCode: stateCode,
-                countryCode: 'MAL',
-                addRemarks: 'Permenant Address',
-                addLine1A: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1,
-                addLine2A: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2,
-                addLine3A: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3,
-                addLine4A: '',
-                addLine5A: '',
-                postalCode1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].PostCode,
-                cityStateZip1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State,
-                stateCode1: stateCode,
-                countryCode1: 'MAL',
-                addRemarks1: 'Correspondance Address',
-                homePhone: '',
-                officePhone: '',
-                mobilePhone: this.phoneNo,
-                faxNum: '',
-                emailAdd: this.fullEmailAddress,
-                areaCode: areaCode,
-                creationDate: '0001-01-01',
-                creationTime: '',
-                creationUserID: '',
-                creationTerminalID: '',
-                creationBranchNo: '',
-                lastMaintDate: '0001-01-01',
-                lastMaintTime: '',
-                lastMaintUserID: '',
-                lastMaintTerminalID: '',
-                lastMaintBranchNo: '',
-                sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
-            };
-            const Profilebody = {
-                "regType": "M",
-                "accNum": "",
-                "accType": "S",
-                "searchType": "I",
-                "idNum": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                "idType": _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
-                "reqTypeCode": "",
-                "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
-            };
-            this._aldanService.MemberRegistration(body, _models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang).subscribe((result) => {
-                if (result.status == 200) {
-                    if (result.body.responseCode == '0') {
-                        this.KWSPMemberNo = result.body.detail.accNum;
-                        this.KWSPCustomerNo = result.body.detail.cifNum;
-                        const addMobileTACBody = {
-                            custNum: this.KWSPCustomerNo,
-                            tacMobilePhoneCode: 'TA',
-                            tacMobilePhone: this.phoneNo,
-                            registrationDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
-                            registrationChannel: 'SST',
-                            status: 'P',
-                            checkForDuplicate: 'N',
-                            generateRequestNum: 'N',
-                            requestNum: '',
-                            sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
-                        };
-                        this._aldanService
-                            .AddTAC(addMobileTACBody)
-                            .subscribe((result) => {
-                            if (result.status == 200) {
-                                if (result.body.responseCode == '0') {
-                                    if (this.isiAkaunRegModuleEnabled) {
-                                        const iAkaunbody = {
-                                            epfNum: this.KWSPMemberNo,
-                                            tacMobileNum: this.phoneNo,
-                                            branchCode: '',
-                                            migrationFlag: '',
-                                            clientChannel: 'SST',
-                                            source: '',
-                                            subSource: '',
-                                            ipAddress: '',
-                                            validity: '',
-                                            sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
-                                        };
-                                        if (this.fullEmailAddress == "")
-                                            this.fullEmailAddress = "@";
-                                        this._aldanService
-                                            .iAkaunRegistration(_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo, _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name, this.phoneNo, this.fullEmailAddress, _models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, iAkaunbody)
-                                            .subscribe((result) => {
-                                            if (result.status == 200) {
-                                                if (result.body.Response.epf_no == "") {
-                                                }
-                                                this._aldanService.MemberProfileInfo(Profilebody).subscribe((result) => {
-                                                    if (result.status == 200) {
-                                                        this.isCallAPI = false;
-                                                        deleteKeyboard();
-                                                        if (result.body.responseCode == '0') {
-                                                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail = result.body.detail;
-                                                            this.ValidateProfilePage = false;
-                                                            this.RegisterSuccessPage = true;
-                                                        }
-                                                        else {
-                                                            this.ValidateProfilePage = false;
-                                                            this.RegisterSuccessPage = true;
-                                                        }
-                                                    }
-                                                    else {
-                                                        _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                                                        this.route.navigate(['outofservice']);
-                                                    }
-                                                }, (err) => {
-                                                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                                                    this.route.navigate(['outofservice']);
-                                                });
-                                            }
-                                            else {
-                                                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                                                this.route.navigate(['outofservice']);
-                                            }
-                                        }, (err) => {
-                                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                                            this.route.navigate(['outofservice']);
-                                        });
-                                    }
-                                    else {
-                                        this._aldanService.MemberProfileInfo(Profilebody).subscribe((result) => {
-                                            if (result.status == 200) {
-                                                this.isCallAPI = false;
-                                                if (result.body.responseCode == '0') {
-                                                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail = result.body.detail;
-                                                    this.ValidateProfilePage = false;
-                                                    this.RegisterSuccessPage = true;
-                                                    deleteKeyboard();
-                                                }
-                                                else {
-                                                    this.isCallAPI = false;
-                                                    this.ValidateProfilePage = false;
-                                                    this.errorDesc = result.body.error[0].description;
-                                                    this.Failed = true;
-                                                }
-                                            }
-                                        });
-                                    }
-                                }
-                                else {
-                                    this.failedTAC = true;
-                                    const iAkaunbody = {
-                                        epfNum: this.KWSPMemberNo,
-                                        tacMobileNum: this.phoneNo,
-                                        branchCode: '',
-                                        migrationFlag: '',
-                                        clientChannel: 'SST',
-                                        source: '',
-                                        subSource: '',
-                                        ipAddress: '',
-                                        validity: '',
-                                        sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
-                                    };
-                                    if (this.fullEmailAddress == "")
-                                        this.fullEmailAddress = "@";
-                                    this._aldanService
-                                        .iAkaunRegistration(_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo, _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name, this.phoneNo, this.fullEmailAddress, _models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, iAkaunbody)
-                                        .subscribe((result) => {
-                                        if (result.status == 200) {
-                                            this._aldanService.MemberProfileInfo(Profilebody).subscribe((result) => {
-                                                if (result.status == 200) {
-                                                    this.isCallAPI = false;
-                                                    deleteKeyboard();
-                                                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail = result.body.detail;
-                                                    this.ValidateProfilePage = false;
-                                                    this.RegisterSuccessPage = true;
-                                                }
-                                                else {
-                                                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                                                    this.route.navigate(['outofservice']);
-                                                }
-                                            }, (err) => {
-                                                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                                                this.route.navigate(['outofservice']);
-                                            });
-                                        }
-                                        else {
-                                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                                            this.route.navigate(['outofservice']);
-                                        }
-                                    }, (err) => {
-                                        _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                                        this.route.navigate(['outofservice']);
-                                    });
-                                }
-                            }
-                            else {
-                                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                                this.route.navigate(['outofservice']);
-                            }
-                        }, (err) => {
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                            this.route.navigate(['outofservice']);
-                        });
-                    }
-                    else {
-                        _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = 'unsuccesfulRegistration';
-                        this.route.navigate(['outofservice']);
-                    }
-                }
-                else {
-                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                    this.route.navigate(['outofservice']);
-                }
-                //Call Register Member
-            }, (err) => {
-                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                this.route.navigate(['outofservice']);
-            });
         }
         else {
-            this.isCallAPI = false;
-            this.ValidateProfilePage = false;
-            this.RegisterSuccessPage = true;
+            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State.toUpperCase()) {
+                case 'SABAH': {
+                    areaCode = 'B';
+                    break;
+                }
+                case 'SARAWAK': {
+                    areaCode = 'C';
+                    break;
+                }
+                default: {
+                    areaCode = 'A';
+                    break;
+                }
+            }
         }
+        let race = '';
+        switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race.toUpperCase()) {
+            case 'MELAYU': {
+                race = '0100';
+                break;
+            }
+            case 'BUGIS': {
+                race = '0101';
+                break;
+            }
+            case 'BOYAN': {
+                race = '0102';
+                break;
+            }
+            case 'BANJAR': {
+                race = '0103';
+                break;
+            }
+            case 'JAWA': {
+                race = '0104';
+                break;
+            }
+            case 'JAWI PEKAN': {
+                race = '0105';
+                break;
+            }
+            case 'MINANGKABAU': {
+                race = '0106';
+                break;
+            }
+            case 'CINA': {
+                race = '0200';
+                break;
+            }
+            case 'CANTONESE': {
+                race = '0201';
+                break;
+            }
+            case 'FOOCHOW': {
+                race = '0202';
+                break;
+            }
+            case 'HAINANANESE': {
+                race = '0203';
+                break;
+            }
+        }
+        let stateCode = '';
+        var stateName = _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State.toUpperCase();
+        if (stateName.includes("JOHOR")) {
+            stateCode = "1";
+        }
+        if (stateName.includes("KEDAH")) {
+            stateCode = "2";
+        }
+        if (stateName.includes("KELANTAN")) {
+            stateCode = "3";
+        }
+        if (stateName.includes("MELAKA")) {
+            stateCode = "4";
+        }
+        if (stateName.includes("NEGERI SEMBILAN")) {
+            stateCode = "5";
+        }
+        if (stateName.includes("PAHANG")) {
+            stateCode = "6";
+        }
+        if (stateName.includes("PINANG")) {
+            stateCode = "7";
+        }
+        if (stateName.includes("PERAK")) {
+            stateCode = "8";
+        }
+        if (stateName.includes("PERLIS")) {
+            stateCode = "9";
+        }
+        if (stateName.includes("SELANGOR")) {
+            stateCode = "10";
+        }
+        if (stateName.includes("TERENGGANU")) {
+            stateCode = "11";
+        }
+        if (stateName.includes("SABAH")) {
+            stateCode = "12";
+        }
+        if (stateName.includes("SARAWAK")) {
+            stateCode = "13";
+        }
+        if (stateName.includes("KUALA LUMPUR") || stateName.includes("KL")) {
+            stateCode = "14";
+        }
+        if (stateName.includes("LABUAN")) {
+            stateCode = "15";
+        }
+        if (stateName.includes("PUTRAJAYA")) {
+            stateCode = "16";
+        }
+        let religion = '';
+        switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion.toUpperCase()) {
+            case 'ISLAM': {
+                religion = '1';
+                break;
+            }
+            case 'KRISTIAN': {
+                religion = '2';
+                break;
+            }
+            case 'BUDDHA': {
+                religion = '3';
+                break;
+            }
+            case 'HINDU': {
+                religion = '4';
+                break;
+            }
+            case 'SIKHISM': {
+                religion = '5';
+                break;
+            }
+            case 'TIADA AGAMA': {
+                religion = '6';
+                break;
+            }
+            case 'LAIN UGAMA': {
+                religion = '7';
+                break;
+            }
+            case 'MAKLUMAT TIADA': {
+                religion = '8';
+                break;
+            }
+            case 'TAO': {
+                religion = '9';
+                break;
+            }
+            case 'KONFUSIANISME': {
+                religion = 'A';
+                break;
+            }
+            case 'ISLAM': {
+                religion = 'B';
+                break;
+            }
+            case 'BAHAI': {
+                religion = 'C';
+                break;
+            }
+            case 'JUDAISM': {
+                religion = 'D';
+                break;
+            }
+            default: {
+                religion = '8';
+                break;
+            }
+        }
+        const body = {
+            cifNum: '',
+            regType: 'M',
+            accNum: '',
+            accType: '',
+            primaryIdTypeCode: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
+            primaryIdNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
+            custName: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name,
+            birthDate: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOB.toString().replace('T00:00:00', ''),
+            residentStatus: residentStat,
+            gender: gender,
+            citizenCountry: 'MAL',
+            race: race,
+            religion: religion,
+            matrimAsset: 'N',
+            handicapRemarks: '',
+            regChannel: 'SST',
+            regRcvdDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
+            prefComChannel: 'ML',
+            addLine1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1,
+            addLine2: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2,
+            addLine3: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3,
+            addLine4: '',
+            addLine5: '',
+            postalCode: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].PostCode,
+            cityStateZip: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].City,
+            stateCode: stateCode,
+            countryCode: 'MAL',
+            addRemarks: 'Permenant Address',
+            addLine1A: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1,
+            addLine2A: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2,
+            addLine3A: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3,
+            addLine4A: '',
+            addLine5A: '',
+            postalCode1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].PostCode,
+            cityStateZip1: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].City,
+            stateCode1: stateCode,
+            countryCode1: 'MAL',
+            addRemarks1: 'Correspondance Address',
+            homePhone: '',
+            officePhone: '',
+            mobilePhone: this.phoneNo,
+            faxNum: '',
+            emailAdd: this.fullEmailAddress,
+            areaCode: areaCode,
+            creationDate: '0001-01-01',
+            creationTime: '',
+            creationUserID: '',
+            creationTerminalID: '',
+            creationBranchNo: '',
+            lastMaintDate: '0001-01-01',
+            lastMaintTime: '',
+            lastMaintUserID: '',
+            lastMaintTerminalID: '',
+            lastMaintBranchNo: '',
+            sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
+        };
+        // const Profilebody = {
+        //   "regType": "M",
+        //   "accNum": '',
+        //   "accType": "S",
+        //   "searchType": "I",
+        //   "idNum": currentMyKadDetails.ICNo,
+        //   "idType": currentMyKadDetails.CategoryType,
+        //   "reqTypeCode": '',
+        //   "sessionId": appFunc.sessionId
+        // }
+        // this._aldanService
+        // .MemberRegistration(body, selectLang.selectedLang)
+        // .subscribe((result: any) => {
+        //   if (result.body.responseCode == '0') {
+        //     this.KWSPMemberNo = result.body.detail.accNum;
+        //     this.KWSPCustomerNo = result.body.detail.cifNum;
+        //     const addMobileTACBody = {
+        //       custNum: this.KWSPCustomerNo,
+        //       tacMobilePhoneCode: 'TA',
+        //       tacMobilePhone: this.phoneNo,
+        //       registrationDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        //       registrationChannel: 'SST',
+        //       status: 'P',
+        //       checkForDuplicate: 'N',
+        //       generateRequestNum: 'N',
+        //       requestNum: '',
+        //       sessionId: appFunc.sessionId,
+        //     };
+        //     this._aldanService
+        //       .AddTAC(addMobileTACBody)
+        //       .subscribe((result: any) => {
+        //         if (result.body.responseCode == '0') { // TAC Success
+        //           if (this.isiAkaunRegModuleEnabled) { // iAkaun is Enabled
+        //             const iAkaunbody = {
+        //               epfNum: this.KWSPMemberNo,
+        //               tacMobileNum: this.phoneNo,
+        //               branchCode: '',
+        //               migrationFlag: '',
+        //               clientChannel: 'SST',
+        //               source: '',
+        //               subSource: '',
+        //               ipAddress: '',
+        //               validity: '',
+        //               sessionId: appFunc.sessionId,
+        //             };
+        //             if (this.fullEmailAddress == '') this.fullEmailAddress = '@';
+        //             this._aldanService
+        //               .iAkaunRegistration(
+        //                 currentMyKadDetails.ICNo, 
+        //                 currentMyKadDetails.Name, 
+        //                 this.phoneNo, 
+        //                 this.fullEmailAddress, 
+        //                 selectLang.selectedLang, 
+        //                 iAkaunbody
+        //               )
+        //               .subscribe((result: any) => {
+        //                 let iAkaunres = result;
+        //                 this._aldanService
+        //                   .MemberProfileInfo(Profilebody)
+        //                   .subscribe((result: any) => {
+        //                     this.isCallAPI = false;
+        //                     deleteKeyboard();
+        //                     if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
+        //                     this.ValidateProfilePage = false;
+        //                     this.RegisterSuccessPage = true;
+        //                     if(iAkaunres.body.responseCode == '0'){
+        //                       this.isiAkaunRegSuccessful = true;
+        //                     }
+        //                     else{ //failed register iAkaun
+        //                       this.isiAkaunRegModuleEnabled = false;
+        //                       this.failediAkaun = true;
+        //                     }
+        //                   },(err: HttpErrorResponse) => {
+        //                     appFunc.message = "HttpError";
+        //                     this.route.navigate(['outofservice']);
+        //                   });
+        //               },(err: HttpErrorResponse) => { //failed register iAkaun
+        //                 appFunc.message = "HttpError";
+        //                 this.route.navigate(['outofservice']);
+        //               });
+        //           } 
+        //           else{ // iAkaun is disabled
+        //             this._aldanService
+        //               .MemberProfileInfo(Profilebody)
+        //               .subscribe((result: any) => {
+        //                 this.isCallAPI = false;
+        //                 if (result.body.responseCode == '0') {
+        //                   appFunc.currMemberDetail = result.body.detail;
+        //                   this.ValidateProfilePage = false;
+        //                   this.RegisterSuccessPage = true;
+        //                   deleteKeyboard();
+        //                 }
+        //                 else{
+        //                   this.isCallAPI = false;
+        //                   this.ValidateProfilePage = false;
+        //                   this.errorDesc = result.body.error[0].description;
+        //                   this.Failed = true;
+        //                 }
+        //             });
+        //           }
+        //         }
+        //         else { // Failed TAC
+        //           this.failedTAC = true;
+        //           const iAkaunbody = {
+        //             epfNum: this.KWSPMemberNo,
+        //             tacMobileNum: this.phoneNo,
+        //             branchCode: '',
+        //             migrationFlag: '',
+        //             clientChannel: 'SST',
+        //             source: '',
+        //             subSource: '',
+        //             ipAddress: '',
+        //             validity: '',
+        //             sessionId: appFunc.sessionId,
+        //           };
+        //           if (this.fullEmailAddress == '') this.fullEmailAddress = "@";
+        //           this._aldanService
+        //             .iAkaunRegistration(
+        //               currentMyKadDetails.ICNo, 
+        //               currentMyKadDetails.Name, 
+        //               this.phoneNo, 
+        //               this.fullEmailAddress, 
+        //               selectLang.selectedLang, 
+        //               iAkaunbody
+        //             )
+        //             .subscribe((result: any) => {
+        //               let iAkaunRes = result;
+        //               this._aldanService
+        //                 .MemberProfileInfo(Profilebody)
+        //                 .subscribe((result: any) => {
+        //                   this.isCallAPI = false;
+        //                   deleteKeyboard();
+        //                   if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
+        //                   this.ValidateProfilePage = false;
+        //                   this.RegisterSuccessPage = true;
+        //                   if(iAkaunRes.body.responseCode == '0'){
+        //                     this.isiAkaunRegSuccessful = true;
+        //                   }
+        //                   else{ //failed register iAkaun
+        //                     this.isiAkaunRegModuleEnabled = false;
+        //                     this.failediAkaun = true;
+        //                   }
+        //                 },(err: HttpErrorResponse) => {
+        //                   appFunc.message = "HttpError";
+        //                   this.route.navigate(['outofservice']);
+        //                 });
+        //             },(err: HttpErrorResponse) => { //failed register iAkaun
+        //               appFunc.message = "HttpError";
+        //               this.route.navigate(['outofservice']);
+        //             });
+        //         }
+        //       },(err: HttpErrorResponse) => {
+        //         appFunc.message = "HttpError";
+        //         this.route.navigate(['outofservice']);
+        //       });
+        //   } 
+        //   else {
+        //     appFunc.message = 'unsuccesfulRegistration';
+        //     this.route.navigate(['outofservice']);
+        //   }
+        // },(err: HttpErrorResponse) => {
+        //   appFunc.message = "HttpError";
+        //   this.route.navigate(['outofservice']);
+        // });
+        this._aldanService
+            .MemberRegistrationAIO(body, _models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang)
+            .subscribe((result) => {
+            if (result.body.isNewMemberRegisterSuccess) {
+                if (result.body.isAddTACSuccess)
+                    this.failedTAC = false;
+                if (result.body.isIAkaunRegisterSuccess) {
+                    this.failediAkaun = false;
+                    this.isiAkaunRegSuccessful = true;
+                }
+                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail = result.body.memberProfileResponse.detail;
+                this.KWSPMemberNo = _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.accNum;
+                this.KWSPCustomerNo = _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.cifNum;
+                this.isCallAPI = false;
+                this.ValidateProfilePage = false;
+                this.RegisterSuccessPage = true;
+            }
+            else {
+                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
+                this.route.navigate(['outofservice']);
+            }
+        }, (err) => {
+            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
+            this.route.navigate(['outofservice']);
+        });
     }
     ValidateProfileNo() {
         this.ValidateProfilePage = false;
         this.InsertEmailPage = true;
-        this.fullEmailAddress = "";
+        this.fullEmailAddress = '';
         setTimeout(() => {
             loadKeyboard();
         }, 500);
     }
     RegisterSuccessYes() {
-        if (this.isiAkaunRegModuleEnabled) {
-            if (this.isiAkaunActModuleEnabled) {
-                this.isCallAPI = true;
-                if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
-                    this._aldanService
-                        .GetTnC(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId)
-                        .subscribe((result) => {
-                        if (result.status == 200) {
+        if (!this.isiAkaunRegSuccessful) {
+            this.RegKWSP = false;
+            this.RegShariah = true;
+            if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
+                this.RegisterSuccessPage = false;
+                this.PickShariahPage = true;
+            }
+            else {
+                this.route.navigate(['mainMenu']);
+            }
+        }
+        else {
+            if (this.isiAkaunRegModuleEnabled) {
+                if (this.isiAkaunActModuleEnabled) {
+                    this.isCallAPI = true;
+                    if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
+                        this._aldanService
+                            .GetTnC(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId)
+                            .subscribe((result) => {
                             this.isCallAPI = false;
                             if (result.body.content != '') {
                                 this.TnC = result.body.content.toString();
@@ -4267,18 +4291,22 @@ class RegisterMemberComponent {
                                 this.Failed = true;
                                 this.errorDesc = result.body.error[0].description;
                             }
-                        }
-                        else {
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                            this.route.navigate(['outofservice']);
-                        }
-                    }, (err) => {
-                        // appFunc.message = "HttpError";
-                        // this.route.navigate(['outofservice']);
+                        }, (err) => {
+                            this.isCallAPI = false;
+                            this.RegisterSuccessPage = false;
+                            this.Failed = true;
+                            this.errorDesc = "HttpError";
+                        });
+                    }
+                }
+                else {
+                    if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
                         this.RegisterSuccessPage = false;
-                        this.Failed = true;
-                        this.errorDesc = "HttpError";
-                    });
+                        this.PickShariahPage = true;
+                    }
+                    else {
+                        this.route.navigate(['mainMenu']);
+                    }
                 }
             }
             else {
@@ -4289,15 +4317,6 @@ class RegisterMemberComponent {
                 else {
                     this.route.navigate(['mainMenu']);
                 }
-            }
-        }
-        else {
-            if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
-                this.RegisterSuccessPage = false;
-                this.PickShariahPage = true;
-            }
-            else {
-                this.route.navigate(['mainMenu']);
             }
         }
     }
@@ -4366,26 +4385,21 @@ class RegisterMemberComponent {
                     this._aldanService
                         .ActivateIAkaun(iAkaunActBody)
                         .subscribe((result) => {
-                        if (result.status == 200) {
-                            this.isCallAPI = false;
-                            if (result.body.epfNum != "") {
-                                this.ActivateiAkaunPage = false;
-                                this.ActivateSuccessPage = true;
-                                deleteKeyboard();
-                            }
-                            else {
-                                this.ActivateiAkaunPage = false;
-                                this.Failed = true;
-                                this.errorDesc = result.body.error[0].description;
-                            }
+                        this.isCallAPI = false;
+                        if (result.body.epf_no != "") {
+                            this.ActivateiAkaunPage = false;
+                            this.ActivateSuccessPage = true;
+                            deleteKeyboard();
                         }
                         else {
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                            this.route.navigate(['outofservice']);
+                            this.ActivateiAkaunPage = false;
+                            this.Failed = true;
+                            this.errorDesc = result.body.error[0].description;
                         }
                     }, (err) => {
-                        _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                        this.route.navigate(['outofservice']);
+                        this.ActivateiAkaunPage = false;
+                        this.Failed = true;
+                        this.errorDesc = "HttpError";
                     });
                 }
                 else {
@@ -4396,7 +4410,6 @@ class RegisterMemberComponent {
             }
             else {
                 this.isCallAPI = false;
-                //if error
             }
         }
     }
@@ -4493,32 +4506,26 @@ class RegisterMemberComponent {
                     this._aldanService
                         .GetSecureImage(_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId)
                         .subscribe((result) => {
-                        if (result.status == 200) {
-                            deleteKeyboard();
-                            this.isCallAPI = false;
-                            if (result.body.imgId != '') {
-                                result.body.forEach((element) => {
-                                    this.checkboxImages.push({
-                                        imgId: element.imgId,
-                                        imgPath: element.imgPath,
-                                        checked: false,
-                                    });
+                        deleteKeyboard();
+                        this.isCallAPI = false;
+                        if (result.body.imgId != '') {
+                            result.body.forEach((element) => {
+                                this.checkboxImages.push({
+                                    imgId: element.imgId,
+                                    imgPath: element.imgPath,
+                                    checked: false,
                                 });
-                                this.SetIdPassword = false;
-                                this.ActivateiAkaunPage = true;
-                                setTimeout(() => {
-                                    loadKeyboard();
-                                }, 500);
-                            }
-                            else {
-                                this.SetIdPassword = false;
-                                this.Failed = true;
-                                this.errorDesc = result.body.error[0].description;
-                            }
+                            });
+                            this.SetIdPassword = false;
+                            this.ActivateiAkaunPage = true;
+                            setTimeout(() => {
+                                loadKeyboard();
+                            }, 500);
                         }
                         else {
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                            this.route.navigate(['outofservice']);
+                            this.SetIdPassword = false;
+                            this.Failed = true;
+                            this.errorDesc = result.body.error[0].description;
                         }
                     }, (err) => {
                         _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
@@ -4549,28 +4556,22 @@ class RegisterMemberComponent {
             this._aldanService
                 .GetContract(_models_language__WEBPACK_IMPORTED_MODULE_1__["selectLang"].selectedLang, _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId)
                 .subscribe((result) => {
-                if (result.status == 200) {
-                    this.isCallAPI = false;
-                    if (result.body.content != '') {
-                        this.Contract = result.body.content;
-                        this.PickShariahPage = false;
-                        this.ShariahTnCPage = true;
-                        this.xagreedTnc2 = true;
-                        this.RegShariah = true;
-                        setTimeout(() => {
-                            var _a;
-                            (_a = this.contractHTML) === null || _a === void 0 ? void 0 : _a.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
-                        }, 200);
-                    }
-                    else {
-                        this.PickShariahPage = false;
-                        this.Failed = true;
-                        this.errorDesc = result.body.error[0].description;
-                    }
+                this.isCallAPI = false;
+                if (result.body.content != '') {
+                    this.Contract = result.body.content;
+                    this.PickShariahPage = false;
+                    this.ShariahTnCPage = true;
+                    this.xagreedTnc2 = true;
+                    this.RegShariah = true;
+                    setTimeout(() => {
+                        var _a;
+                        (_a = this.contractHTML) === null || _a === void 0 ? void 0 : _a.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+                    }, 200);
                 }
                 else {
-                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                    this.route.navigate(['outofservice']);
+                    this.PickShariahPage = false;
+                    this.Failed = true;
+                    this.errorDesc = result.body.error[0].description;
                 }
             }, (err) => {
                 _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
@@ -4579,53 +4580,40 @@ class RegisterMemberComponent {
         }
     }
     ShariahTnCYes() {
-        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
-            this.isCallAPI = true;
-            const iShariahBody = {
-                custNum: this.KWSPCustomerNo,
-                accNum: this.KWSPMemberNo,
-                accType: 'S',
-                electChannel: 'SST',
-                electReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
-                electReceivedTime: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'h:mm:ss', 'en'),
-                electReceivedBranch: '1',
-                electDate: '2019-10-11',
-                electBranch: '1',
-                electStatus: 'A',
-                reasonCode: '',
-                akadRefNum: '',
-                docRefNum: '',
-                sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
-            };
-            this._aldanService
-                .iShariahRegistration(iShariahBody)
-                .subscribe((result) => {
-                if (result.status == 200) {
-                    this.isCallAPI = false;
-                    if (result.body.responseCode == '0') {
-                        this.ShariahTnCPage = false;
-                        this.ShariahSuccessPage = true;
-                    }
-                    else {
-                        this.ShariahTnCPage = false;
-                        this.Failed = true;
-                        this.errorDesc = result.body.error[0].description;
-                    }
-                }
-                else {
-                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                    this.route.navigate(['outofservice']);
-                }
-            }, (err) => {
-                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
-                this.route.navigate(['outofservice']);
-            });
-        }
-        else {
+        this.isCallAPI = true;
+        const iShariahBody = {
+            custNum: this.KWSPCustomerNo,
+            accNum: this.KWSPMemberNo,
+            accType: 'S',
+            electChannel: 'SST',
+            electReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
+            electReceivedTime: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'hh.mm.ss', 'en'),
+            electReceivedBranch: '1',
+            electDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
+            electBranch: '1',
+            electStatus: 'A',
+            reasonCode: '',
+            akadRefNum: '',
+            docRefNum: '',
+            sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
+        };
+        this._aldanService
+            .iShariahRegistration(iShariahBody)
+            .subscribe((result) => {
             this.isCallAPI = false;
-            this.ShariahTnCPage = false;
-            this.ShariahSuccessPage = true;
-        }
+            if (result.body.responseCode == '0') {
+                this.ShariahTnCPage = false;
+                this.ShariahSuccessPage = true;
+            }
+            else {
+                this.ShariahTnCPage = false;
+                this.Failed = true;
+                this.errorDesc = result.body.error[0].description;
+            }
+        }, (err) => {
+            _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
+            this.route.navigate(['outofservice']);
+        });
     }
     ShariahTnCNo() {
         this.ShariahTnCPage = false;
@@ -4645,52 +4633,43 @@ class RegisterMemberComponent {
         this.route.navigate(['mainMenu']);
     }
     SelectJobYes() {
-        if (this.selectedJobSector == undefined) {
-        }
-        else {
-            if (_models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].bypassAPI != true) {
-                this.isCallAPI = true;
-                const iSaraanBody = {
-                    idNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                    idType: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
-                    businessTypeCode: this.selectedJobSector.code,
-                    remark: '',
-                    sourceRegistrationChannel: 'SST',
-                    applicationReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
-                    sourceCreationID: 'SST',
-                    sourceTerminalID: 'SST',
-                    sourceBranchNo: '0',
-                    sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
-                };
-                this._aldanService
-                    .iSaraanRegistration(iSaraanBody)
-                    .subscribe((result) => {
-                    if (result.status == 200) {
-                        this.isCallAPI = false;
-                        if (result.body.responseCode == '0') {
-                            this.SelectJobPage = false;
-                            this.SaraanSuccessPage = true;
-                        }
-                        else {
-                            this.SelectJobPage = false;
-                            this.Failed = true;
-                            this.errorDesc = result.body.error[0].description;
-                        }
+        if (this.selectedJobSector != undefined) {
+            this.isCallAPI = true;
+            const iSaraanBody = {
+                idNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
+                idType: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType,
+                businessTypeCode: this.selectedJobSector.code,
+                remark: '',
+                sourceRegistrationChannel: 'SST',
+                applicationReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
+                sourceCreationID: 'SST',
+                sourceTerminalID: 'SST',
+                sourceBranchNo: '0',
+                sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId,
+            };
+            this._aldanService
+                .iSaraanRegistration(iSaraanBody)
+                .subscribe((result) => {
+                if (result.status == 200) {
+                    this.isCallAPI = false;
+                    if (result.body.responseCode == '0') {
+                        this.SelectJobPage = false;
+                        this.SaraanSuccessPage = true;
                     }
                     else {
-                        _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
-                        this.route.navigate(['outofservice']);
+                        this.SelectJobPage = false;
+                        this.Failed = true;
+                        this.errorDesc = result.body.error[0].description;
                     }
-                }, (err) => {
-                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
+                }
+                else {
+                    _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = result.message;
                     this.route.navigate(['outofservice']);
-                });
-            }
-            else {
-                this.isCallAPI = false;
-                this.SaraanSuccessPage = true;
-                this.SelectJobPage = false;
-            }
+                }
+            }, (err) => {
+                _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
+                this.route.navigate(['outofservice']);
+            });
         }
     }
     SelectJobNo() {
@@ -4758,7 +4737,21 @@ class RegisterMemberComponent {
         this.selectedJobSector = jobSector;
     }
     failedYes() {
-        this.route.navigate(['mainMenu']);
+        if (this.RegIAkaun) {
+            this.Failed = false;
+            this.RegIAkaun = false;
+            this.RegShariah = true;
+            this.PickShariahPage = true;
+        }
+        else if (this.RegShariah) {
+            this.Failed = false;
+            this.RegShariah = false;
+            this.RegisteriSaraanPage = true;
+            this.RegSaraan = true;
+        }
+        else {
+            this.route.navigate(['mainMenu']);
+        }
     }
 }
 RegisterMemberComponent.ɵfac = function RegisterMemberComponent_Factory(t) { return new (t || RegisterMemberComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_shared_aldan_service__WEBPACK_IMPORTED_MODULE_7__["AldanService"])); };
@@ -4792,7 +4785,7 @@ RegisterMemberComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](7, RegisterMemberComponent_div_7_Template, 86, 20, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](8, RegisterMemberComponent_div_8_Template, 37, 17, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](9, RegisterMemberComponent_div_9_Template, 74, 41, "div", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](10, RegisterMemberComponent_div_10_Template, 19, 13, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](10, RegisterMemberComponent_div_10_Template, 20, 14, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](11, RegisterMemberComponent_div_11_Template, 34, 18, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](12, RegisterMemberComponent_div_12_Template, 99, 44, "div", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](13, RegisterMemberComponent_div_13_Template, 56, 25, "div", 5);
@@ -5386,7 +5379,7 @@ class ISaraanShariahSavingsRegistrationComponent {
                 sourceRegistrationChannel: 'IWS',
                 applicationReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
                 sourceCreationID: 'SFIWS',
-                sourceTerminalID: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode,
+                sourceTerminalID: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode.substring(0, 10),
                 sourceBranchNo: '0',
                 sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].sessionId
             };
@@ -5425,10 +5418,10 @@ class ISaraanShariahSavingsRegistrationComponent {
             accNum: _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].currMemberDetail.accNum,
             accType: 'S',
             electChannel: 'SST',
-            electReceivedDate: '2019-10-11',
+            electReceivedDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
             electReceivedTime: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'hh.mm.ss', 'en'),
             electReceivedBranch: '1',
-            electDate: '2019-10-11',
+            electDate: Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(), 'yyyy-MM-dd', 'en'),
             electBranch: '1',
             electStatus: 'A',
             reasonCode: '',
@@ -5447,7 +5440,7 @@ class ISaraanShariahSavingsRegistrationComponent {
             else {
                 this.IShariah = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error[0].description;
+                this.errorDesc = 'unsuccesfulSimpananShariah';
             }
         }, (err) => {
             _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
@@ -5772,7 +5765,6 @@ class VerifyMyKadComponent {
         this.translate = translate;
         this._aldanService = _aldanService;
         this.appConfig = appConfig;
-        this.Status = 'MyKad';
         this.insertCard = true;
         this.Language = false;
         this.Thumbprint = false;
@@ -5784,11 +5776,11 @@ class VerifyMyKadComponent {
         this.BeforeRead = true;
         this.AfterRead = false;
         this.insertedMyKad = false;
-        this.arrayList = [];
-        this.RetryCountInstance = 0;
         this.ErrorPop = false;
         this.xlastTry = true;
         this.isOutOfService = false;
+        this.arrayList = [];
+        this.RetryCountInstance = 0;
     }
     ngOnInit() {
         this.RetryCountInstance = this.appConfig.RetryCounts;
@@ -5827,7 +5819,6 @@ class VerifyMyKadComponent {
                     if (_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].modules.length != 0) {
                         const areDisabled = _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].checkNoOfDisabledModules(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].modules);
                         if (areDisabled == _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].modules.length) {
-                            // errorCodes.code = "0168";
                             _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Under Maintenance';
                             this.isOutOfService = true;
                             this.route.navigate(['outofservice']);
@@ -5836,7 +5827,6 @@ class VerifyMyKadComponent {
                             this.moduleIntervelId = setInterval(() => {
                                 const count = _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].checkModuleAvailability(_models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].modules);
                                 if (count == 0) {
-                                    // errorCodes.code = "0168";
                                     _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Under Maintenance';
                                     this.isOutOfService = true;
                                     this.route.navigate(['outofservice']);
@@ -5882,20 +5872,7 @@ class VerifyMyKadComponent {
     }
     verifyThumbprint() {
         if (this.RetryCountInstance != 0) {
-            _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].connection.invoke('VerifyThumbprint').then((isVerifySuccess) => {
-                // if (isVerifySuccess){
-                //   this.BeforeRead = false;
-                //   this.AfterRead = true;
-                //   this.bindMyKadData(this.myKadData);
-                // }
-                // else{
-                //   this.RetryCountInstance -= 1;
-                //   if (this.RetryCountInstance == 0) this.xlastTry = false;
-                //   this.BeforeRead = true;
-                //   this.AfterRead = false;
-                //   this.ErrorPop = true;
-                // }
-            });
+            _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].connection.invoke('VerifyThumbprint').then((isVerifySuccess) => { });
             this.checkThumbprintStatus();
         }
     }
@@ -5928,50 +5905,103 @@ class VerifyMyKadComponent {
         clearInterval(this.moduleIntervelId);
     }
     bindMyKadData(data) {
-        try {
-            const age = _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].calculateAge(new Date(data.DOB));
-            if (age > 18) {
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name = data.GMPCName;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo = data.ICNo.toString().replace('*', '');
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].OldICNo = data.OldICNo;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOB = data.DOB;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOBString = data.DOBString;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].POB = data.POB;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender = data.Gender;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Citizenship = data.Citizenship;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].IssueDate = data.IssueDate;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race = data.Race;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion = data.Religion;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1 = data.Address1;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2 = data.Address2;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3 = data.Address3;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].PostCode = data.PostCode;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].City = data.City;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State = data.State;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Country = data.Country;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address = data.Address;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1 = data.Address1;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2 = data.Address2;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3 = data.Address3;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].RJ = data.RJ;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].KT = data.KT;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].GreenCardNationality = data.GreenCardNationality;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].GreenCardExpiryDate = data.GreenCardExpiryDate;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CardVersion = data.CardVersion;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].OtherID = data.OtherID;
-                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType = data.CategoryType;
-                const sessionBody = {
-                    kioskId: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].kioskCode,
-                    client: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name,
-                    identification: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo
+        const age = _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].calculateAge(new Date(data.DOB));
+        if (age > 18) {
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name = data.GMPCName;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo = data.ICNo.toString().replace('*', '');
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].OldICNo = data.OldICNo;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOB = data.DOB;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].DOBString = data.DOBString;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].POB = data.POB;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Gender = data.Gender;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Citizenship = data.Citizenship;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].IssueDate = data.IssueDate;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Race = data.Race;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Religion = data.Religion;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1 = data.Address1;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2 = data.Address2;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3 = data.Address3;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].PostCode = data.PostCode;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].City = data.City;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].State = data.State;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Country = data.Country;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address = data.Address;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address1 = data.Address1;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address2 = data.Address2;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Address3 = data.Address3;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].RJ = data.RJ;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].KT = data.KT;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].GreenCardNationality = data.GreenCardNationality;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].GreenCardExpiryDate = data.GreenCardExpiryDate;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CardVersion = data.CardVersion;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].OtherID = data.OtherID;
+            _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType = data.CategoryType;
+            const sessionBody = {
+                kioskId: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].kioskCode,
+                client: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].Name,
+                identification: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo
+            };
+            this._aldanService.CreateSession(sessionBody).subscribe((result) => {
+                if (result.body.id != undefined) {
+                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId = result.body.id;
+                    this.getAccountInquiry();
+                }
+                else {
+                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result.body.error.message;
+                    this.route.navigate(['outofservice']);
+                }
+            }, (err) => {
+                _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'HttpError';
+                this.route.navigate(['outofservice']);
+            });
+        }
+        else {
+            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Binding MyKad Error';
+            this.route.navigate(['outofservice']);
+        }
+    }
+    getAccountInquiry() {
+        let catType = '';
+        switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType) {
+            case 'W':
+                catType = 'IN';
+                _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType = catType;
+                break;
+        }
+        const body = {
+            regType: 'M',
+            accNum: '',
+            accType: '',
+            searchType: 'I',
+            idNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
+            idType: catType,
+            reqTypeCode: '',
+            sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId
+        };
+        this._aldanService.
+            MemberCIFDetailsCheck(body).
+            subscribe((result) => {
+            if (result.body.responseCode == '0') {
+                const memberProfileBody = {
+                    regType: 'M',
+                    accNum: result.body.detail.accNum,
+                    accType: 'S',
+                    searchType: 'A',
+                    idNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
+                    idType: catType,
+                    reqTypeCode: '',
+                    sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId
                 };
-                this._aldanService.CreateSession(sessionBody).subscribe((result) => {
-                    if (result.body.id != undefined) {
-                        _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId = result.body.id;
-                        this.getAccountInquiry();
+                this._aldanService.
+                    MemberProfileInfo(memberProfileBody).
+                    subscribe((result1) => {
+                    if (result1.body.responseCode == '0') {
+                        _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].currMemberDetail = result1.body.detail;
+                        this.route.navigate(['mainMenu']);
                     }
                     else {
-                        _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result.body.error.message;
+                        // Error
+                        _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result1.body.error[0].description;
                         this.route.navigate(['outofservice']);
                     }
                 }, (err) => {
@@ -5980,101 +6010,22 @@ class VerifyMyKadComponent {
                 });
             }
             else {
-                // errorCodes.code = "0166";
-                _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Binding MyKad Error';
-                // Error
-                this.route.navigate(['outofservice']);
-            }
-        }
-        catch (e) {
-            // errorCodes.code = "0166";
-            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = e.toString();
-            // Error
-            this.route.navigate(['outofservice']);
-        }
-    }
-    getAccountInquiry() {
-        try {
-            let catType = '';
-            switch (_models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType) {
-                case 'W':
-                    catType = 'IN';
-                    _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].CategoryType = catType;
-                    break;
-            }
-            const body = {
-                regType: 'M',
-                accNum: '',
-                accType: '',
-                searchType: 'I',
-                idNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                idType: catType,
-                reqTypeCode: '',
-                sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId
-            };
-            this._aldanService.MemberCIFDetailsCheck(body).subscribe((result) => {
-                if (result.status == 200) {
-                    if (result.body.responseCode == '0') {
-                        const memberProfileBody = {
-                            regType: 'M',
-                            accNum: result.body.detail.accNum,
-                            accType: 'S',
-                            searchType: 'A',
-                            idNum: _models_currentMyKadDetails__WEBPACK_IMPORTED_MODULE_3__["currentMyKadDetails"].ICNo,
-                            idType: catType,
-                            reqTypeCode: '',
-                            sessionId: _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].sessionId
-                        };
-                        this._aldanService.MemberProfileInfo(memberProfileBody).subscribe((result1) => {
-                            if (result.status == 200) {
-                                if (result1.body.responseCode == '0') {
-                                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].currMemberDetail = result1.body.detail;
-                                    this.route.navigate(['mainMenu']);
-                                }
-                                else {
-                                    // Error
-                                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result1.body.error[0].description;
-                                    this.route.navigate(['outofservice']);
-                                }
-                            }
-                            else {
-                                _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result.message;
-                                this.route.navigate(['outofservice']);
-                            }
-                        }, (err) => {
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'HttpError';
-                            this.route.navigate(['outofservice']);
-                        });
-                    }
-                    else {
-                        if (result.body.error.length == 0) {
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Error Connecting to Server';
-                            this.route.navigate(['outofservice']);
-                        }
-                        if (result.body.error[0].code == 'MBM2001') {
-                            this.route.navigate(['registerMember']);
-                        }
-                        else {
-                            // Error
-                            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result.body.error[0].description;
-                            this.route.navigate(['outofservice']);
-                        }
-                    }
-                }
-                else {
-                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result.message;
+                if (result.body.error.length == 0) {
+                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'Error Connecting to Server';
                     this.route.navigate(['outofservice']);
                 }
-            }, (err) => {
-                _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'HttpError';
-                this.route.navigate(['outofservice']);
-            });
-        }
-        catch (e) {
-            // Error
-            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = e.toString();
+                if (result.body.error[0].code == 'MBM2001') {
+                    this.route.navigate(['registerMember']);
+                }
+                else {
+                    _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = result.body.error[0].description;
+                    this.route.navigate(['outofservice']);
+                }
+            }
+        }, (err) => {
+            _models_appFunc__WEBPACK_IMPORTED_MODULE_4__["appFunc"].message = 'HttpError';
             this.route.navigate(['outofservice']);
-        }
+        });
     }
     checkThumbprintStatus() {
         this.checkThumbprintStatusIntervalId = setInterval(() => {
@@ -6098,8 +6049,7 @@ class VerifyMyKadComponent {
         }, 1000);
     }
     cancelMyKadVerification() {
-        _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].connection.invoke('CancelThumbprint').then((data) => {
-        });
+        _models_signalRConnection__WEBPACK_IMPORTED_MODULE_2__["signalRConnection"].connection.invoke('CancelThumbprint').then((data) => { });
         clearInterval(this.readerIntervalId);
         clearInterval(this.checkThumbprintStatusIntervalId);
         this.route.navigate(['startup']);
@@ -6178,19 +6128,44 @@ currentMyKadDetails.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _models_appFunc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_models/_appFunc */ "59dj");
+/* harmony import */ var _models_signalRConnection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_models/_signalRConnection */ "mgtr");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _shared_aldan_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/aldan.service */ "pKnX");
+
+
+
 
 
 class AppComponent {
-    constructor() {
+    constructor(route, _aldanService) {
+        this.route = route;
+        this._aldanService = _aldanService;
         this.title = 'EPFWebApp';
     }
+    ngOnInit() {
+        this.readMyKadInterval = setInterval(() => {
+            if (this.route.url === '/outofservice' ||
+                this.route.url === '/startup' ||
+                this.route.url === '/verifyMyKad') {
+                //no need detect mykad
+            }
+            else {
+                _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].DetectMyKad();
+                if (!_models_signalRConnection__WEBPACK_IMPORTED_MODULE_1__["signalRConnection"].isCardInserted) {
+                    _models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].Reset();
+                    this._aldanService.EndSession(_models_appFunc__WEBPACK_IMPORTED_MODULE_0__["appFunc"].sessionId, { KioskId: _models_signalRConnection__WEBPACK_IMPORTED_MODULE_1__["signalRConnection"].kioskCode }).subscribe((result) => { });
+                    this.route.navigate(['/startup']);
+                }
+            }
+        }, 1000);
+    }
 }
-AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 1, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["@font-face {\r\n    font-family: 'filson-pro';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('FilsonProRegular.otf'); \r\n}\r\n\r\n@font-face {\r\n    font-family: 'Material Icons';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('MaterialIconsOutlined-Regular.otf'); \r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0lBQ3pCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsZ0NBQTZELEVBQUUscUJBQXFCO0FBQ3hGOztBQUVBO0lBQ0ksNkJBQTZCO0lBQzdCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsNkNBQWlGLEVBQUUsY0FBYztBQUNyRyIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkBmb250LWZhY2Uge1xyXG4gICAgZm9udC1mYW1pbHk6ICdmaWxzb24tcHJvJztcclxuICAgIGZvbnQtc3R5bGU6IG5vcm1hbDtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICBzcmM6IHVybCgnLi4vLi4vc3JjL2Fzc2V0cy9mb250L0ZpbHNvbi9GaWxzb25Qcm9SZWd1bGFyLm90ZicpOyAvKiBJRTkgQ29tcGF0IE1vZGVzICovXHJcbn1cclxuXHJcbkBmb250LWZhY2Uge1xyXG4gICAgZm9udC1mYW1pbHk6ICdNYXRlcmlhbCBJY29ucyc7XHJcbiAgICBmb250LXN0eWxlOiBub3JtYWw7XHJcbiAgICBmb250LXdlaWdodDogNDAwO1xyXG4gICAgc3JjOiB1cmwoJy4uLy4uL3NyYy9hc3NldHMvZm9udC9NYXRlcmlhbEljb25zL01hdGVyaWFsSWNvbnNPdXRsaW5lZC1SZWd1bGFyLm90ZicpOyAvKiBGb3IgSUU2LTggKi9cclxufVxyXG5cclxuIl19 */"] });
+AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_shared_aldan_service__WEBPACK_IMPORTED_MODULE_4__["AldanService"])); };
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 1, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](0, "router-outlet");
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterOutlet"]], styles: ["@font-face {\r\n    font-family: 'filson-pro';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('FilsonProRegular.otf'); \r\n}\r\n\r\n@font-face {\r\n    font-family: 'Material Icons';\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    src: url('MaterialIconsOutlined-Regular.otf'); \r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0lBQ3pCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsZ0NBQTZELEVBQUUscUJBQXFCO0FBQ3hGOztBQUVBO0lBQ0ksNkJBQTZCO0lBQzdCLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsNkNBQWlGLEVBQUUsY0FBYztBQUNyRyIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkBmb250LWZhY2Uge1xyXG4gICAgZm9udC1mYW1pbHk6ICdmaWxzb24tcHJvJztcclxuICAgIGZvbnQtc3R5bGU6IG5vcm1hbDtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICBzcmM6IHVybCgnLi4vLi4vc3JjL2Fzc2V0cy9mb250L0ZpbHNvbi9GaWxzb25Qcm9SZWd1bGFyLm90ZicpOyAvKiBJRTkgQ29tcGF0IE1vZGVzICovXHJcbn1cclxuXHJcbkBmb250LWZhY2Uge1xyXG4gICAgZm9udC1mYW1pbHk6ICdNYXRlcmlhbCBJY29ucyc7XHJcbiAgICBmb250LXN0eWxlOiBub3JtYWw7XHJcbiAgICBmb250LXdlaWdodDogNDAwO1xyXG4gICAgc3JjOiB1cmwoJy4uLy4uL3NyYy9hc3NldHMvZm9udC9NYXRlcmlhbEljb25zL01hdGVyaWFsSWNvbnNPdXRsaW5lZC1SZWd1bGFyLm90ZicpOyAvKiBGb3IgSUU2LTggKi9cclxufVxyXG5cclxuIl19 */"] });
 
 
 /***/ }),
@@ -7397,7 +7372,7 @@ function CheckBalanceComponent_div_7_tr_29_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](c_r21.contributionMth);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](c_r21.transaction);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](c_r21.transactionDesc);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](c_r21.transactionDate);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
@@ -7900,20 +7875,22 @@ class CheckBalanceComponent {
             if (result.body.responseCode == '0') {
                 this.isCallAPI = false;
                 this.dataForEmail = result.body;
-                this.cDetails = result.body.detail.mainStatement;
-                this.cDetails.forEach((details) => {
-                    details.transaction = 'Caruman-IWS';
-                    let strin = details.transactionDate;
-                    let splitted = strin.split("/", 3);
-                    let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];
-                    let formattedDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(newDateString), 'dd/MM/YYYY', 'en');
-                    let formattedMonth = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(newDateString), 'MMM-YY', 'en');
-                    details.transactionDate = formattedDate;
-                    details.contributionMth = formattedMonth;
-                    this.transactionAmtForAcc1 += Number(details.transactionAmtForAcc1);
-                    this.SelectYearPage = false;
-                    this.StatementPage = true;
+                result.body.detail.mainStatement.forEach((details) => {
+                    if (details.transactionDesc.includes('Caruman')) {
+                        let strin = details.transactionDate;
+                        let splitted = strin.split("/", 3);
+                        let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];
+                        let formattedDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(newDateString), 'dd/MM/YYYY', 'en');
+                        let formattedMonth = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(newDateString), 'MMM-YY', 'en');
+                        details.transactionDate = formattedDate;
+                        details.contributionMth = formattedMonth;
+                        this.transactionAmtForAcc1 += Number(details.totalContribution);
+                        this.cDetails.push(details);
+                    }
                 });
+                console.log(this.cDetails);
+                this.SelectYearPage = false;
+                this.StatementPage = true;
             }
             else {
                 this.isCallAPI = false;
@@ -9703,7 +9680,7 @@ class IAkaunRegistrationComponent {
                         ActivateIAkaun(iAkaunActBody).
                         subscribe((result) => {
                         this.isCallAPI = false;
-                        if (result.body.epfNum != "") {
+                        if (result.body.epf_no != "") {
                             this.ActivateInformation = false;
                             this.SuccessActivation = true;
                             deleteKeyboard();
@@ -10084,7 +10061,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class accessToken {
 }
-accessToken.token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjYwRUI3NTgyQkE2NkMzQjlBNkFGREM2RTM5RDYwNkYxIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2NDY2MjcyMDUsImV4cCI6MTY3ODE2MzIwNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMiLCJhdWQiOiJLTVMiLCJjbGllbnRfaWQiOiJLTVNfQXBwIiwic3ViIjoiNDQ2NzcyNGEtMDYxYS0wY2Y2LTE0ODEtM2EwMjM3NGM1NTQ2IiwiYXV0aF90aW1lIjoxNjQ2NjI3MjA1LCJpZHAiOiJsb2NhbCIsInJvbGUiOiJLaW9zayIsInBob25lX251bWJlcl92ZXJpZmllZCI6IkZhbHNlIiwiZW1haWwiOiJKT1JBTERBTkBFUEYuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJGYWxzZSIsIm5hbWUiOiJKT1JBTERBTiIsImlhdCI6MTY0NjYyNzIwNSwic2NvcGUiOlsiYWRkcmVzcyIsImVtYWlsIiwiS01TIiwib3BlbmlkIiwicGhvbmUiLCJwcm9maWxlIiwicm9sZSIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.GPo59MhX0Muu9b30vELz0lgVZZwYknlofnUinptGFfIguiNLkinDt88RED8haoOaLwRK0-VYySUds2aom5uRaa23L_ZmvTizdqIIgdNSFL-4aWtAQw7F3JbtBNElH_mOTZRuFbkMDwaGGSRhp7g7kTn3srbHt7hl9U9JpxVP0m8bXxGgag6lpvWsv1uJ-3WdIAGNIrKWbTf9w3skypPF-X3AEOfQOnShBSijvIwT3OE16VpbwjZRiag3_7nDkghVUe4rASK-8iMuOfEM_t9zRegdXhPB37KeZIRevkICU-ZKDkcujrN_zX-6fuAv_Q1U55m7A_6RW_qwhu94DM4ovQ';
 accessToken.ɵfac = function accessToken_Factory(t) { return new (t || accessToken)(); };
 accessToken.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: accessToken, factory: accessToken.ɵfac, providedIn: 'root' });
 
@@ -10229,9 +10205,7 @@ function StartupComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"]("Redirecting to Application in ", ctx_r4.seconds, " seconds...");
 } }
 class StartupComponent {
-    constructor(
-    // private spinner: NgxSpinnerService,
-    _signalR, _aldanService, route, appConfig) {
+    constructor(_signalR, _aldanService, route, appConfig) {
         this._signalR = _signalR;
         this._aldanService = _aldanService;
         this.route = route;
@@ -10241,16 +10215,16 @@ class StartupComponent {
         this.SelectAdapter = false;
         this.AdminLogin = false;
         this.SuccessRegister = false;
-        this.seconds = 5;
-        this.dots = '.';
+        this.isSelectedAdapter = false;
+        this.isAdapterEmpty = false;
         this.adapters = [];
         this.selectedAdapterValue = '';
         this.selectedAdapterValueEncrypted = '';
-        this.isSelectedAdapter = false;
-        this.isAdapterEmpty = false;
         this.UserName = '';
         this.Password = '';
         this.Secret = '';
+        this.seconds = 5;
+        this.dots = '.';
         this.format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
         this.UserName = appConfig.UserName.trim();
         this.Password = appConfig.Password.trim();
@@ -10258,14 +10232,14 @@ class StartupComponent {
         this.startConnection();
     }
     ngOnInit() {
-        // this.spinner.show();
     }
     login(password) {
         if (!this.format.test(password)) {
             password = password.concat('=');
         }
-        this._aldanService.getToken(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode, password)
-            .subscribe((result) => {
+        this._aldanService.
+            getToken(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode, password).
+            subscribe((result) => {
             clearInterval(this.dotInterval);
             if (!isNaN(result)) { //Number
                 // Say that Kiosk Is Not Found in KMS
@@ -10278,7 +10252,8 @@ class StartupComponent {
                 headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ Authorization: 'Bearer ' + _models_token__WEBPACK_IMPORTED_MODULE_2__["accessToken"].token }),
                 observe: 'response'
             };
-            this._aldanService.verifyKiosk(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode)
+            this._aldanService
+                .verifyKiosk(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode)
                 .toPromise().then((result) => {
                 if (!isNaN(result.body)) {
                     _models_appFunc__WEBPACK_IMPORTED_MODULE_3__["appFunc"].message = result.body.toString();
@@ -10308,7 +10283,8 @@ class StartupComponent {
         });
     }
     getToken(password) {
-        this._aldanService.getToken(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode, password)
+        this._aldanService
+            .getToken(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode, password)
             .subscribe((result) => {
             clearInterval(this.dotInterval);
             if (!isNaN(result)) { //Number
@@ -10354,7 +10330,6 @@ class StartupComponent {
                     }
                 });
             }).catch((err) => {
-                // errorCodes.code = "0167";
                 _models_appFunc__WEBPACK_IMPORTED_MODULE_3__["appFunc"].message = 'Unauthorized';
                 this.route.navigate(['outofservice']);
             });
@@ -10380,7 +10355,8 @@ class StartupComponent {
         const kioskRegisterBody = {
             'MacAddress': this.selectedAdapterValue
         };
-        this._aldanService.registerKiosk(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskInformation.id.toString(), kioskRegisterBody)
+        this._aldanService
+            .registerKiosk(_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskInformation.id.toString(), kioskRegisterBody)
             .toPromise().then((result) => {
             if (result.body) {
                 _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].connection.invoke('UpdateAdapter', this.selectedAdapterValue).then((data) => {
@@ -10392,7 +10368,8 @@ class StartupComponent {
                             'currentPassword': this.Secret,
                             'newPassword': this.selectedAdapterValueEncrypted
                         };
-                        this._aldanService.changePassword(changepasswordBody)
+                        this._aldanService
+                            .changePassword(changepasswordBody)
                             .subscribe((response) => {
                             if (response.status.toString() == '204') {
                                 this.SelectAdapter = false;
@@ -10499,9 +10476,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
 /* harmony import */ var _models_token__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../_models/token */ "jpJl");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _config_app_configuration__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../config/app-configuration */ "QwJw");
+/* harmony import */ var _models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_models/_signalRConnection */ "mgtr");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _config_app_configuration__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../config/app-configuration */ "QwJw");
+
 
 
 
@@ -10602,7 +10581,11 @@ class AldanService {
     }
     //Member Registration
     MemberRegistration(body, language) {
-        return this.http.post(this.url + 'Registration/MemberRegistration?language=' + language, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+        return this.http.post(this.url + `Registration/MemberRegistration?language=${language}&SSTID=${_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode}`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+    }
+    //Member Registration AIO
+    MemberRegistrationAIO(body, language) {
+        return this.http.post(this.url + `Registration/MemberRegistration/NewMemberRegistrationAIO?language=${language}&SSTID=${_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode}`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
     //Prepare PDF Report
     PreparePDF(body) {
@@ -10620,7 +10603,7 @@ class AldanService {
     }
     //i-Akaun Registration
     iAkaunRegistration(icno, custName, mobilePhone, emailAdd, language, body) {
-        return this.http.post(this.url + `IAkaunRegistration/IAkaunReg?IdNum=${icno}&custName=${custName}&mobilePhone=${mobilePhone}&emailAdd=${emailAdd}&language=${language}`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+        return this.http.post(this.url + `IAkaunRegistration/IAkaunReg?IdNum=${icno}&custName=${custName}&mobilePhone=${mobilePhone}&emailAdd=${emailAdd}&language=${language}&SSTID=${_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode}`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
     //Member Statement
     MemberStatement(body) {
@@ -10632,7 +10615,7 @@ class AldanService {
     }
     //Email for Member Statement
     EmailForMemberStatement(emailAdd, sessionid, body) {
-        return this.http.post(this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&sessionID=${sessionid}`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
+        return this.http.post(this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&sessionID=${sessionid}&SSTID=${_models_signalRConnection__WEBPACK_IMPORTED_MODULE_4__["signalRConnection"].kioskCode}`, body, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
     //Member Profile Info
     MemberProfileInfo(body) {
@@ -10702,8 +10685,8 @@ class AldanService {
         return this.http.get(this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=${sessionid}&locale=${locale}`, _models_token__WEBPACK_IMPORTED_MODULE_3__["accessToken"].httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError));
     }
 }
-AldanService.ɵfac = function AldanService_Factory(t) { return new (t || AldanService)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_config_app_configuration__WEBPACK_IMPORTED_MODULE_6__["AppConfiguration"])); };
-AldanService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjectable"]({ token: AldanService, factory: AldanService.ɵfac, providedIn: 'root' });
+AldanService.ɵfac = function AldanService_Factory(t) { return new (t || AldanService)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_config_app_configuration__WEBPACK_IMPORTED_MODULE_7__["AppConfiguration"])); };
+AldanService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: AldanService, factory: AldanService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),
@@ -11074,10 +11057,10 @@ class UpdateTACComponent {
         this.PhoneNoConfirmation = false;
         this.Success = false;
         this.Failed = false;
-        this.phoneNo = "";
-        this.errorDesc = "";
         this.phoneError = false;
         this.isCallAPI = false;
+        this.phoneNo = '';
+        this.errorDesc = '';
     }
     ngOnInit() {
         this.translate.use(_models_language__WEBPACK_IMPORTED_MODULE_0__["selectLang"].selectedLang);
@@ -11096,45 +11079,35 @@ class UpdateTACComponent {
         this.route.navigate(['mainMenu']);
     }
     PhoneNoConfirmationYes() {
-        if (_models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].bypassAPI != true) {
-            this.isCallAPI = true;
-            const updateTACBody = {
-                "custNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.cifNum,
-                "tacMobilePhoneCode": "TA",
-                "tacMobilePhone": this.phoneNo,
-                "amendmentChannel": "SST",
-                "status": "P",
-                "checkForDuplicate": "N",
-                "generateRequestNum": "N",
-                "requestNum": "",
-                "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].sessionId
-            };
-            this._aldanService.UpdateTAC(updateTACBody).subscribe((result) => {
-                if (result.status == 200) {
-                    this.isCallAPI = false;
-                    if (result.body.responseCode == "0") {
-                        this.PhoneNoConfirmation = false;
-                        this.Success = true;
-                    }
-                    else {
-                        this.PhoneNoConfirmation = false;
-                        this.Failed = true;
-                        this.errorDesc = 'unsuccessfulUpdateTAC';
-                    }
-                }
-                else {
-                    _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].message = result.message;
-                    this.route.navigate(['outofservice']);
-                }
-            }, (err) => {
-                _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].message = "HttpError";
-                this.route.navigate(['outofservice']);
-            });
-        }
-        else {
-            this.PhoneNoConfirmation = false;
-            this.Success = true;
-        }
+        this.isCallAPI = true;
+        const updateTACBody = {
+            "custNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.cifNum,
+            "tacMobilePhoneCode": "TA",
+            "tacMobilePhone": this.phoneNo,
+            "amendmentChannel": "SST",
+            "status": "P",
+            "checkForDuplicate": "N",
+            "generateRequestNum": "N",
+            "requestNum": '',
+            "sessionId": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].sessionId
+        };
+        this._aldanService.
+            UpdateTAC(updateTACBody).
+            subscribe((result) => {
+            this.isCallAPI = false;
+            if (result.body.responseCode == "0") {
+                this.PhoneNoConfirmation = false;
+                this.Success = true;
+            }
+            else {
+                this.PhoneNoConfirmation = false;
+                this.Failed = true;
+                this.errorDesc = 'unsuccessfulUpdateTAC';
+            }
+        }, (err) => {
+            _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].message = "HttpError";
+            this.route.navigate(['outofservice']);
+        });
     }
     PhoneNoConfirmationNo() {
         this.PhoneNoConfirmation = false;

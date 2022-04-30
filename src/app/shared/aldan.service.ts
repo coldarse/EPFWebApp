@@ -231,6 +231,18 @@ export class AldanService {
     )
   }
 
+  //Member Registration AIO
+  MemberRegistrationAIO(body: any, language: string){
+    return this.http.post(
+      this.url + `Registration/MemberRegistration/NewMemberRegistrationAIO?language=${language}&SSTID=${signalRConnection.kioskCode}`,
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
   //Prepare PDF Report
   PreparePDF(body: any){
     return this.http.post(

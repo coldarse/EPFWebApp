@@ -50,8 +50,8 @@ export class RegisterMemberComponent implements OnInit {
   SelectJobPage = false;
   SaraanSuccessPage = false;
   Failed = false;
-  failedTAC = false;
-  failediAkaun = false;
+  failedTAC = true;
+  failediAkaun = true;
   isiAkaunRegModuleEnabled = false;
   isiAkaunActModuleEnabled = false;
   isiShariahModuleEnabled = false;
@@ -619,177 +619,202 @@ export class RegisterMemberComponent implements OnInit {
       sessionId: appFunc.sessionId,
     };
 
-    const Profilebody = {
-      "regType": "M",
-      "accNum": '',
-      "accType": "S",
-      "searchType": "I",
-      "idNum": currentMyKadDetails.ICNo,
-      "idType": currentMyKadDetails.CategoryType,
-      "reqTypeCode": '',
-      "sessionId": appFunc.sessionId
-    }
+    // const Profilebody = {
+    //   "regType": "M",
+    //   "accNum": '',
+    //   "accType": "S",
+    //   "searchType": "I",
+    //   "idNum": currentMyKadDetails.ICNo,
+    //   "idType": currentMyKadDetails.CategoryType,
+    //   "reqTypeCode": '',
+    //   "sessionId": appFunc.sessionId
+    // }
+
+    // this._aldanService
+    // .MemberRegistration(body, selectLang.selectedLang)
+    // .subscribe((result: any) => {
+    //   if (result.body.responseCode == '0') {
+
+    //     this.KWSPMemberNo = result.body.detail.accNum;
+    //     this.KWSPCustomerNo = result.body.detail.cifNum;
+
+    //     const addMobileTACBody = {
+    //       custNum: this.KWSPCustomerNo,
+    //       tacMobilePhoneCode: 'TA',
+    //       tacMobilePhone: this.phoneNo,
+    //       registrationDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    //       registrationChannel: 'SST',
+    //       status: 'P',
+    //       checkForDuplicate: 'N',
+    //       generateRequestNum: 'N',
+    //       requestNum: '',
+    //       sessionId: appFunc.sessionId,
+    //     };
+
+    //     this._aldanService
+    //       .AddTAC(addMobileTACBody)
+    //       .subscribe((result: any) => {
+    //         if (result.body.responseCode == '0') { // TAC Success
+    //           if (this.isiAkaunRegModuleEnabled) { // iAkaun is Enabled
+
+    //             const iAkaunbody = {
+    //               epfNum: this.KWSPMemberNo,
+    //               tacMobileNum: this.phoneNo,
+    //               branchCode: '',
+    //               migrationFlag: '',
+    //               clientChannel: 'SST',
+    //               source: '',
+    //               subSource: '',
+    //               ipAddress: '',
+    //               validity: '',
+    //               sessionId: appFunc.sessionId,
+    //             };
+
+    //             if (this.fullEmailAddress == '') this.fullEmailAddress = '@';
+    //             this._aldanService
+    //               .iAkaunRegistration(
+    //                 currentMyKadDetails.ICNo, 
+    //                 currentMyKadDetails.Name, 
+    //                 this.phoneNo, 
+    //                 this.fullEmailAddress, 
+    //                 selectLang.selectedLang, 
+    //                 iAkaunbody
+    //               )
+    //               .subscribe((result: any) => {
+    //                 let iAkaunres = result;
+    //                 this._aldanService
+    //                   .MemberProfileInfo(Profilebody)
+    //                   .subscribe((result: any) => {
+    //                     this.isCallAPI = false;
+    //                     deleteKeyboard();
+    //                     if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
+    //                     this.ValidateProfilePage = false;
+    //                     this.RegisterSuccessPage = true;
+    //                     if(iAkaunres.body.responseCode == '0'){
+    //                       this.isiAkaunRegSuccessful = true;
+    //                     }
+    //                     else{ //failed register iAkaun
+    //                       this.isiAkaunRegModuleEnabled = false;
+    //                       this.failediAkaun = true;
+    //                     }
+    //                   },(err: HttpErrorResponse) => {
+    //                     appFunc.message = "HttpError";
+    //                     this.route.navigate(['outofservice']);
+    //                   });
+    //               },(err: HttpErrorResponse) => { //failed register iAkaun
+    //                 appFunc.message = "HttpError";
+    //                 this.route.navigate(['outofservice']);
+    //               });
+    //           } 
+    //           else{ // iAkaun is disabled
+    //             this._aldanService
+    //               .MemberProfileInfo(Profilebody)
+    //               .subscribe((result: any) => {
+    //                 this.isCallAPI = false;
+    //                 if (result.body.responseCode == '0') {
+    //                   appFunc.currMemberDetail = result.body.detail;
+    //                   this.ValidateProfilePage = false;
+    //                   this.RegisterSuccessPage = true;
+    //                   deleteKeyboard();
+    //                 }
+    //                 else{
+    //                   this.isCallAPI = false;
+    //                   this.ValidateProfilePage = false;
+    //                   this.errorDesc = result.body.error[0].description;
+    //                   this.Failed = true;
+    //                 }
+    //             });
+    //           }
+    //         }
+    //         else { // Failed TAC
+    //           this.failedTAC = true;
+    //           const iAkaunbody = {
+    //             epfNum: this.KWSPMemberNo,
+    //             tacMobileNum: this.phoneNo,
+    //             branchCode: '',
+    //             migrationFlag: '',
+    //             clientChannel: 'SST',
+    //             source: '',
+    //             subSource: '',
+    //             ipAddress: '',
+    //             validity: '',
+    //             sessionId: appFunc.sessionId,
+    //           };
+
+    //           if (this.fullEmailAddress == '') this.fullEmailAddress = "@";
+    //           this._aldanService
+    //             .iAkaunRegistration(
+    //               currentMyKadDetails.ICNo, 
+    //               currentMyKadDetails.Name, 
+    //               this.phoneNo, 
+    //               this.fullEmailAddress, 
+    //               selectLang.selectedLang, 
+    //               iAkaunbody
+    //             )
+    //             .subscribe((result: any) => {
+    //               let iAkaunRes = result;
+    //               this._aldanService
+    //                 .MemberProfileInfo(Profilebody)
+    //                 .subscribe((result: any) => {
+    //                   this.isCallAPI = false;
+    //                   deleteKeyboard();
+    //                   if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
+    //                   this.ValidateProfilePage = false;
+    //                   this.RegisterSuccessPage = true;
+    //                   if(iAkaunRes.body.responseCode == '0'){
+    //                     this.isiAkaunRegSuccessful = true;
+    //                   }
+    //                   else{ //failed register iAkaun
+    //                     this.isiAkaunRegModuleEnabled = false;
+    //                     this.failediAkaun = true;
+    //                   }
+    //                 },(err: HttpErrorResponse) => {
+    //                   appFunc.message = "HttpError";
+    //                   this.route.navigate(['outofservice']);
+    //                 });
+    //             },(err: HttpErrorResponse) => { //failed register iAkaun
+    //               appFunc.message = "HttpError";
+    //               this.route.navigate(['outofservice']);
+    //             });
+    //         }
+    //       },(err: HttpErrorResponse) => {
+    //         appFunc.message = "HttpError";
+    //         this.route.navigate(['outofservice']);
+    //       });
+    //   } 
+    //   else {
+    //     appFunc.message = 'unsuccesfulRegistration';
+    //     this.route.navigate(['outofservice']);
+    //   }
+    // },(err: HttpErrorResponse) => {
+    //   appFunc.message = "HttpError";
+    //   this.route.navigate(['outofservice']);
+    // });
 
     this._aldanService
-    .MemberRegistration(body, selectLang.selectedLang)
-    .subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-
-        this.KWSPMemberNo = result.body.detail.accNum;
-        this.KWSPCustomerNo = result.body.detail.cifNum;
-
-        const addMobileTACBody = {
-          custNum: this.KWSPCustomerNo,
-          tacMobilePhoneCode: 'TA',
-          tacMobilePhone: this.phoneNo,
-          registrationDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-          registrationChannel: 'SST',
-          status: 'P',
-          checkForDuplicate: 'N',
-          generateRequestNum: 'N',
-          requestNum: '',
-          sessionId: appFunc.sessionId,
-        };
-
-        this._aldanService
-          .AddTAC(addMobileTACBody)
-          .subscribe((result: any) => {
-            if (result.body.responseCode == '0') { // TAC Success
-              if (this.isiAkaunRegModuleEnabled) { // iAkaun is Enabled
-
-                const iAkaunbody = {
-                  epfNum: this.KWSPMemberNo,
-                  tacMobileNum: this.phoneNo,
-                  branchCode: '',
-                  migrationFlag: '',
-                  clientChannel: 'SST',
-                  source: '',
-                  subSource: '',
-                  ipAddress: '',
-                  validity: '',
-                  sessionId: appFunc.sessionId,
-                };
-
-                if (this.fullEmailAddress == '') this.fullEmailAddress = '@';
-                this._aldanService
-                  .iAkaunRegistration(
-                    currentMyKadDetails.ICNo, 
-                    currentMyKadDetails.Name, 
-                    this.phoneNo, 
-                    this.fullEmailAddress, 
-                    selectLang.selectedLang, 
-                    iAkaunbody
-                  )
-                  .subscribe((result: any) => {
-                    let iAkaunres = result;
-                    this._aldanService
-                      .MemberProfileInfo(Profilebody)
-                      .subscribe((result: any) => {
-                        this.isCallAPI = false;
-                        deleteKeyboard();
-                        if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
-                        this.ValidateProfilePage = false;
-                        this.RegisterSuccessPage = true;
-                        if(iAkaunres.body.responseCode == '0'){
-                          this.isiAkaunRegSuccessful = true;
-                        }
-                        else{ //failed register iAkaun
-                          this.isiAkaunRegModuleEnabled = false;
-                          this.failediAkaun = true;
-                        }
-                      },(err: HttpErrorResponse) => {
-                        appFunc.message = "HttpError";
-                        this.route.navigate(['outofservice']);
-                      });
-                  },(err: HttpErrorResponse) => { //failed register iAkaun
-                    appFunc.message = "HttpError";
-                    this.route.navigate(['outofservice']);
-                  });
-              } 
-              else{ // iAkaun is disabled
-                this._aldanService
-                  .MemberProfileInfo(Profilebody)
-                  .subscribe((result: any) => {
-                    this.isCallAPI = false;
-                    if (result.body.responseCode == '0') {
-                      appFunc.currMemberDetail = result.body.detail;
-                      this.ValidateProfilePage = false;
-                      this.RegisterSuccessPage = true;
-                      deleteKeyboard();
-                    }
-                    else{
-                      this.isCallAPI = false;
-                      this.ValidateProfilePage = false;
-                      this.errorDesc = result.body.error[0].description;
-                      this.Failed = true;
-                    }
-                });
-              }
-            }
-            else { // Failed TAC
-              this.failedTAC = true;
-              const iAkaunbody = {
-                epfNum: this.KWSPMemberNo,
-                tacMobileNum: this.phoneNo,
-                branchCode: '',
-                migrationFlag: '',
-                clientChannel: 'SST',
-                source: '',
-                subSource: '',
-                ipAddress: '',
-                validity: '',
-                sessionId: appFunc.sessionId,
-              };
-
-              if (this.fullEmailAddress == '') this.fullEmailAddress = "@";
-              this._aldanService
-                .iAkaunRegistration(
-                  currentMyKadDetails.ICNo, 
-                  currentMyKadDetails.Name, 
-                  this.phoneNo, 
-                  this.fullEmailAddress, 
-                  selectLang.selectedLang, 
-                  iAkaunbody
-                )
-                .subscribe((result: any) => {
-                  let iAkaunRes = result;
-                  this._aldanService
-                    .MemberProfileInfo(Profilebody)
-                    .subscribe((result: any) => {
-                      this.isCallAPI = false;
-                      deleteKeyboard();
-                      if (result.body.responseCode == '0') appFunc.currMemberDetail = result.body.detail;
-                      this.ValidateProfilePage = false;
-                      this.RegisterSuccessPage = true;
-                      if(iAkaunRes.body.responseCode == '0'){
-                        this.isiAkaunRegSuccessful = true;
-                      }
-                      else{ //failed register iAkaun
-                        this.isiAkaunRegModuleEnabled = false;
-                        this.failediAkaun = true;
-                      }
-                    },(err: HttpErrorResponse) => {
-                      appFunc.message = "HttpError";
-                      this.route.navigate(['outofservice']);
-                    });
-                },(err: HttpErrorResponse) => { //failed register iAkaun
-                  appFunc.message = "HttpError";
-                  this.route.navigate(['outofservice']);
-                });
-            }
-          },(err: HttpErrorResponse) => {
-            appFunc.message = "HttpError";
-            this.route.navigate(['outofservice']);
-          });
-      } 
-      else {
-        appFunc.message = 'unsuccesfulRegistration';
+      .MemberRegistrationAIO(body, selectLang.selectedLang)
+      .subscribe((result: any) => {
+        if(result.body.isNewMemberRegisterSuccess){
+          if(result.body.isAddTACSuccess) this.failedTAC = false;
+          if(result.body.isIAkaunRegisterSuccess){
+            this.failediAkaun = false;
+            this.isiAkaunRegSuccessful = true;
+          }
+          appFunc.currMemberDetail = result.body.memberProfileResponse.detail;
+          this.KWSPMemberNo = appFunc.currMemberDetail.accNum;
+          this.KWSPCustomerNo = appFunc.currMemberDetail.cifNum;
+          this.isCallAPI = false;
+          this.ValidateProfilePage = false;
+          this.RegisterSuccessPage = true;
+        }
+        else{
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
+        }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
-      }
-    },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
-    });
+      });
   }
 
   ValidateProfileNo() {
