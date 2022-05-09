@@ -45,6 +45,8 @@ export class CheckBalanceComponent implements OnInit {
   
   dataForEmail: any;
 
+  summaryDetails: any;
+
   constructor(
     private route: Router,
     private translate: TranslateService,
@@ -83,6 +85,7 @@ export class CheckBalanceComponent implements OnInit {
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
           this.totalSavingsForEmail = result.body.detail.totalSavings;
+          this.summaryDetails = result.body.detail;
           this.sDetails = result.body.detail.summaryStatement;
           this.sDetails.forEach((details: any) => {
             this.grandTotal += Number(details.subAccBalance);
@@ -135,7 +138,13 @@ export class CheckBalanceComponent implements OnInit {
     Object.assign(this.dataForEmail, {
       "totalSavings": this.totalSavingsForEmail,
       "summaryStatement": this.sDetails,
-      "memberInfo": tempDetail
+      "memberInfo": tempDetail,
+      "accEmasFlag": this.summaryDetails.accEmasFlag,
+      "dividendAcc55": this.summaryDetails.dividendAcc55,
+      "dividendAcc55Line": this.summaryDetails.dividendAcc55Line,
+      "monthlyHseLoanIndicator": this.summaryDetails.monthlyHseLoanIndicator,
+      "monthlyHseLoanDividend": this.summaryDetails.monthlyHseLoanDividend,
+      "dividendRateForTheYear": this.summaryDetails.dividendRateForTheYear,
     });
     this.dataForEmail.detail = undefined;
     this.dataForEmail.memberInfo.mainStatement = this.cDetails;
