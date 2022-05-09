@@ -138,6 +138,7 @@ export class CheckBalanceComponent implements OnInit {
       "memberInfo": tempDetail
     });
     this.dataForEmail.detail = undefined;
+    this.dataForEmail.memberInfo.mainStatement = this.cDetails;
 
     this._aldanService.
       EmailForMemberStatement(
@@ -229,7 +230,6 @@ export class CheckBalanceComponent implements OnInit {
           }
         });
 
-        console.log(this.cDetails);
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
