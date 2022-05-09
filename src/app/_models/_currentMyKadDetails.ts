@@ -31,4 +31,5 @@ export class currentMyKadDetails {
     static CardVersion : string;
     static OtherID : string;
     static CategoryType : string;
+    static EncryptedICNumber : string;
 }

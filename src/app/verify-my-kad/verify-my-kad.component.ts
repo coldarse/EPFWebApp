@@ -228,6 +228,7 @@ export class VerifyMyKadComponent implements OnInit {
       currentMyKadDetails.CardVersion = data.CardVersion;
       currentMyKadDetails.OtherID = data.OtherID;
       currentMyKadDetails.CategoryType = data.CategoryType;
+      currentMyKadDetails.EncryptedICNumber = data.EncryptedICNumber;
 
       const sessionBody = {
         kioskId: signalRConnection.kioskCode,
@@ -270,7 +271,7 @@ export class VerifyMyKadComponent implements OnInit {
       accNum: '',
       accType: '',
       searchType: 'I',
-      idNum: currentMyKadDetails.ICNo,
+      idNum: currentMyKadDetails.EncryptedICNumber,
       idType: catType,
       reqTypeCode: '',
       sessionId: appFunc.sessionId

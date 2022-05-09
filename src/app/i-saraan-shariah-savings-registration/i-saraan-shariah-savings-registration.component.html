@@ -87,6 +87,11 @@
                 </div>
                 <div class="row padTop2rem">
                     <div class="statusMsg">{{"iSuriNotes"|translate}}</div>
+                <div class="row padTop3rem" *ngIf="!isSuri">
+                    <div class="statusMsg">{{"successSaraan"|translate}}</div>
+                </div>
+                <div class="row padTop3rem" *ngIf="isSuri">
+                    <div class="statusMsg">{{"successSuri"|translate}}</div>
                 </div>
                 <div class="row padTop3rem">
                     <div class="col-3"></div>
