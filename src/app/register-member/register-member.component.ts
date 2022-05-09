@@ -77,6 +77,7 @@ export class RegisterMemberComponent implements OnInit {
   isCallAPI = false;
   noEmail = false;
   isiAkaunRegSuccessful = false;
+  isSuri = false;
 
   jobSectors: businessTypes[] = [];
   checkboxImages: any[] = [];
@@ -1242,10 +1243,13 @@ export class RegisterMemberComponent implements OnInit {
             if (result.body.responseCode == '0') {
               this.SelectJobPage = false;
               this.SaraanSuccessPage = true;
+              if(result.body.detail.businessTypeCode == "S910"){
+                this.isSuri = true;
+              }
             } else {
               this.SelectJobPage = false;
               this.Failed = true;
-              this.errorDesc = result.body.error[0].description;
+              this.errorDesc = 'unsuccessfuliSaraan';
             }
           }
           else{

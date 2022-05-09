@@ -82,18 +82,16 @@
                 <div class="row padTop05rem">
                     <img src="assets/images/Icon-Berjaya.svg" width="250" height="225">
                 </div>
-                <div class="row padTop2rem">
+                <div class="row padTop1rem" *ngIf="isSuri">
                     <div class="lblMsg">{{"iSuriSuccess"|translate}}</div>
                 </div>
-                <div class="row padTop2rem">
+                <div class="row padTop1rem" *ngIf="isSuri">
                     <div class="statusMsg">{{"iSuriNotes"|translate}}</div>
-                <div class="row padTop3rem" *ngIf="!isSuri">
+                </div>
+                <div class="row padTop7rem" *ngIf="!isSuri">
                     <div class="statusMsg">{{"successSaraan"|translate}}</div>
                 </div>
-                <div class="row padTop3rem" *ngIf="isSuri">
-                    <div class="statusMsg">{{"successSuri"|translate}}</div>
-                </div>
-                <div class="row padTop3rem">
+                <div class="row padTop5rem">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnYes" (click)="ISaraanSuccessYes()">{{"menu"|translate}}</button>
