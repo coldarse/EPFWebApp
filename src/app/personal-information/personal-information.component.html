@@ -73,6 +73,14 @@
                 <div class="col-7">
                     <div class="row">
                         <input type="text" class="use-keyboard-input txtProfile allcapitalletter maxchar" maxChar="40" id="txtState" name="state_" required target="needed" value="{{state}}" #state_>
+                        <!-- <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let slist of stateList">
+                                {{slist}}
+                            </mat-option>
+                          </mat-autocomplete> -->
+                        <!-- <datalist id="dynamicStateList">
+                            <option *ngFor="let slist of stateList" [value]="slist">{{slist}}</option>
+                        </datalist> -->
                     </div>
                         <!-- <div class ="row" style="overflow:auto;">
                         <select [(ngModel)]="slist" class="stateDDL">
