@@ -34,7 +34,6 @@ export class IAkaunRegistrationComponent implements OnInit {
   IAkaunTNC = false;
   ActivateInformation = false;
   SuccessActivation = false;
-  PromptRegisterISaraan = false;
   SetIdPassword = false;
   Failed = false;
   isCallAPI = false;
@@ -490,13 +489,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   SuccessActivationYes() {
-    this.SuccessActivation = false;
-    this.PromptRegisterISaraan = true;
-  }
-
-  SuccessActivationNo() {
-    this.SuccessActivation = false;
-    this.ActivateInformation = true;
+    this.route.navigate(['mainMenu']);
   }
 
   click1() {
