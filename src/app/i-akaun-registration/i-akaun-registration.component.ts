@@ -499,14 +499,6 @@ export class IAkaunRegistrationComponent implements OnInit {
     this.ActivateInformation = true;
   }
 
-  PromptRegisterISaraanYes() {
-    this.route.navigate(['iSaraanShariahSavingsRegistration']);
-  }
-
-  PromptRegisterISaraanNo() {
-    this.route.navigate(['mainMenu']);
-  }
-
   click1() {
     if (this.phoneNo.length < 10) this.phoneNo += '1';
   }

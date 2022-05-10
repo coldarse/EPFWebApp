@@ -524,33 +524,11 @@
                 <div class="row padTop2rem">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <button type="button" class="btnYes" (click)="SuccessActivationYes()">{{"continue"|translate}}</button>
+                        <button type="button" class="btnYes" (click)="SuccessActivationYes()">{{"menu"|translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row padTop5rem content-container" *ngIf="PromptRegisterISaraan">
-            <div class="text-center">
-                <div class="row padTop5rem">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <div class="ThumbprintMsg">
-                            {{"saraanMsg"| translate}}
-                        </div>
-                    </div>
-                </div>
-                <div class="row padTop15rem">
-                    <div class="col-2"></div>
-                    <div class="col-4">
-                        <button type="button" class="btnNo" (click)="PromptRegisterISaraanNo()">{{"no"| translate}}</button>
-                    </div>
-                    <div class="col-4">
-                        <button type="button" class="btnYes" (click)="PromptRegisterISaraanYes()">{{"yes"| translate}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row padTop5rem content-container" *ngIf="Failed">
             <div class="text-center">
                 <div class="lblStatus">
