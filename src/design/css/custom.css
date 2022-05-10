@@ -645,13 +645,11 @@
 }
 
 .lblMsg {
-    font-size: 30px;
+    font-size: 26px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
-    width: 47.5rem;
-    margin: auto;
 }
 
 .btnShariah {
