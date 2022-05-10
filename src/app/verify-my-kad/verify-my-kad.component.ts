@@ -86,6 +86,9 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.minCharForPassword = Number(res[2].body.value);
           appFunc.updateTACPerMonth = Number(res[3].body.value);
           appFunc.NumberOfYearsViewStatement = Number(res[4].body.value);
+          let range = res[5].body.value.split(',');
+          appFunc.AgeRangeLow = Number(range[0]);
+          appFunc.AgeRangeHigh = Number(range[1]);
           this.RetryCountInstance = appFunc.thumbprintRetry;
 
         }, (err: HttpErrorResponse) => {
@@ -198,7 +201,7 @@ export class VerifyMyKadComponent implements OnInit {
   bindMyKadData(data: any): void{
     const age = appFunc.calculateAge(new Date(data.DOB));
 
-    if (age > 18){
+    if (age >= appFunc.AgeRangeLow && age <= appFunc.AgeRangeHigh){
       currentMyKadDetails.Name = data.GMPCName;
       currentMyKadDetails.ICNo = data.ICNo.toString().replace('*', '');
       currentMyKadDetails.OldICNo = data.OldICNo;

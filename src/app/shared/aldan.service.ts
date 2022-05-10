@@ -430,6 +430,7 @@ export class AldanService {
     const response3 = this.http.get(this.url + 'app/client-settings/9', accessToken.httpOptions); //Get min chars for password
     const response4 = this.http.get(this.url + 'app/client-settings/24', accessToken.httpOptions); //Get number of Update TAC per month
     const response5 = this.http.get(this.url + 'app/client-settings/57', accessToken.httpOptions); //Get number of years for statements
+    const response6 = this.http.get(this.url + 'app/client-settings/23', accessToken.httpOptions); //Get age range
 
     return forkJoin([
       response1.pipe(retry(1), catchError(this.handleError)),
@@ -437,6 +438,7 @@ export class AldanService {
       response3.pipe(delay(3000),retry(1), catchError(this.handleError)),
       response4.pipe(delay(3000),retry(1), catchError(this.handleError)),
       response5.pipe(delay(3000),retry(1), catchError(this.handleError)),
+      response6.pipe(delay(3000),retry(1), catchError(this.handleError)),
     ])
   }
 
