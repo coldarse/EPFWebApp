@@ -887,6 +887,10 @@ export class RegisterMemberComponent implements OnInit {
     
   }
 
+  RegisterSuccessNo() {
+    this.route.navigate(['mainMenu']);
+  }
+
   clickTNC1() {
     this.xagreedTnc1 = !this.xagreedTnc1;
   }

@@ -68,6 +68,15 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         }
       }
     }
+
+    if(appFunc.currMemberDetail.indicator4 = "Y")
+    {
+      this.iSaraanEnabled = false;
+    }
+    else
+    {
+      this.iSaraanEnabled = true;
+    }
   
   }
 

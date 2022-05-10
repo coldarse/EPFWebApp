@@ -320,13 +320,13 @@
                 </div>
                 <div class="row padTop5rem">
                     <div class="col-2"></div>
-                    <div class="col-8 lblHeader">
+                    <div class="col-8 lblHeader text-center">
                         {{"SuccessReg"|translate}}
                     </div>
                 </div>
                 <div class="row" *ngIf="isiAkaunRegModuleEnabled">
                     <div class="col-2"></div>
-                    <div class="col-8">
+                    <div class="col-8 text-center">
                         <label class="lblMsg">
                             {{"DirectMsg"|translate}}
                         </label>
@@ -366,8 +366,11 @@
                 </div>
                 <div class="row padTop5rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
-                    <div class="col-8">
-                        <button type="button" class="btnYes" (click)="RegisterSuccessYes()">{{"continue"|translate}}</button>
+                    <div class="col-4">
+                        <button type="button" class="btnNo" (click)="RegisterSuccessNo()">{{"menu"| translate}}</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btnYes" (click)="RegisterSuccessYes()">{{"continue"| translate}}</button>
                     </div>
                 </div>
                 <div class="row padTop5rem" *ngIf="isCallAPI">
@@ -517,7 +520,7 @@
                 </div>
                 <div class="col-4"></div>
             </div>
-            <div class="row padTop2rem">
+            <div class="row padTop05rem">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
                     <h5 class="errorMsgEmpty" *ngIf="accountAlpha">{{"accountAlpha"| translate}}</h5>
@@ -530,7 +533,7 @@
                 </div>
                 <div class="col-4"></div>
             </div> -->
-            <div class="row padTop1rem text-center" *ngIf="!isCallAPI">
+            <div class="row padTop3rem text-center" *ngIf="!isCallAPI">
                 <div class="col-2"></div>
                 <div class="col-4">
                     <button type="button" class="btnNo" (click)="SetIdPasswordNo()">{{"back"| translate}}</button>
@@ -539,9 +542,9 @@
                     <button type="button" class="btnYes" (click)="SetIdPasswordYes()">{{"continue"| translate}}</button>
                 </div>
             </div>
-            <div class="row padTop1rem" *ngIf="isCallAPI">
-                <div class="col-3"></div>
-                <div class="col-6">
+            <div class="row padTop1rem text-center" *ngIf="isCallAPI">
+                <div class="col-4"></div>
+                <div class="col-4">
                     <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                 </div>
             </div>
