@@ -32,6 +32,8 @@ export class appFunc {
     static minCharForPassword: number;
     static updateTACPerMonth: number;
     static NumberOfYearsViewStatement: number;
+    static AgeRangeLow: number;
+    static AgeRangeHigh: number;
 
     static Reset(){
         this.MemberDetail = {} as currentMemberDetails;
