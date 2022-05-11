@@ -254,7 +254,7 @@ export class VerifyMyKadComponent implements OnInit {
       });
     }
     else{
-      appFunc.message = 'Binding MyKad Error';
+      appFunc.message = 'notInAgeRange';
       this.route.navigate(['outofservice']);
     }
   }
