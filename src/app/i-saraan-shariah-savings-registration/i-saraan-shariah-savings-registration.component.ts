@@ -159,9 +159,14 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
               this.isSuri = true;
             }
           } else {
+            if(result.body.error[0].code == 'MBM5223'){
+              this.errorDesc = 'unsuccessfuliSaraanMoreThan60';
+            }
+            else{
+              this.errorDesc = 'unsuccessfuliSaraan';
+            }
             this.ISaraan = false;
             this.Failed = true;
-            this.errorDesc = 'unsuccessfuliSaraan';
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
