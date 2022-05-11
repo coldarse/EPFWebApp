@@ -28,7 +28,7 @@ selectLang.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Project\KMS\EPFWebApp\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\TzePing\EPFWebApp\EPFWebApp\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -1226,31 +1226,31 @@ class PersonalInformationComponent {
         this.phoneNo = (_k = this.phone_no) === null || _k === void 0 ? void 0 : _k.nativeElement.value;
         this.email = (_l = this.email_) === null || _l === void 0 ? void 0 : _l.nativeElement.value;
         if (this.state.includes("JOHOR")) {
-            this.stateCode = "1";
+            this.stateCode = "01";
         }
         if (this.state.includes("KEDAH")) {
-            this.stateCode = "2";
+            this.stateCode = "02";
         }
         if (this.state.includes("KELANTAN")) {
-            this.stateCode = "3";
+            this.stateCode = "03";
         }
         if (this.state.includes("MELAKA")) {
-            this.stateCode = "4";
+            this.stateCode = "04";
         }
         if (this.state.includes("NEGERI SEMBILAN")) {
-            this.stateCode = "5";
+            this.stateCode = "05";
         }
         if (this.state.includes("PAHANG")) {
-            this.stateCode = "6";
+            this.stateCode = "06";
         }
         if (this.state.includes("PINANG")) {
-            this.stateCode = "7";
+            this.stateCode = "07";
         }
         if (this.state.includes("PERAK")) {
-            this.stateCode = "8";
+            this.stateCode = "08";
         }
         if (this.state.includes("PERLIS")) {
-            this.stateCode = "9";
+            this.stateCode = "09";
         }
         if (this.state.includes("SELANGOR")) {
             this.stateCode = "10";
