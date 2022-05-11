@@ -155,65 +155,58 @@ export class PersonalInformationComponent implements OnInit {
     this.phoneNo = this.phone_no?.nativeElement.value
     this.email = this.email_?.nativeElement.value
 
-    if(this.state != "")
-    {
-      if (this.state.includes("JOHOR")) {
-        this.stateCode = "01";
-      }
-      if (this.state.includes("KEDAH")) {
-        this.stateCode = "02";
-      }
-      if (this.state.includes("KELANTAN")) {
-        this.stateCode = "03";
-      }
-      if (this.state.includes("MELAKA")) {
-        this.stateCode = "04";
-      }
-      if (this.state.includes("NEGERI SEMBILAN")) {
-        this.stateCode = "05";
-      }
-      if (this.state.includes("PAHANG")) {
-        this.stateCode = "06";
-      }
-      if (this.state.includes("PINANG")) {
-        this.stateCode = "07";
-      }
-      if (this.state.includes("PERAK")) {
-        this.stateCode = "08";
-      }
-      if (this.state.includes("PERLIS")) {
-        this.stateCode = "09";
-      }
-      if (this.state.includes("SELANGOR")) {
-        this.stateCode = "10";
-      }
-      if (this.state.includes("TERENGGANU")) {
-        this.stateCode = "11";
-      }
-      if (this.state.includes("SABAH")) {
-        this.stateCode = "12";
-      }
-      if (this.state.includes("SARAWAK")) {
-        this.stateCode = "13";
-      }
-      if (this.state.includes("KUALA LUMPUR") || this.state.includes("KL")) {
-        this.stateCode = "14";
-      }
-      if (this.state.includes("LABUAN")) {
-        this.stateCode = "15";
-      }
-      if (this.state.includes("PUTRAJAYA")) {
-        this.stateCode = "16";
-      }
-      else
-      {
-        this.invalidState = true;
-      }
+    if (this.state.includes("JOHOR")) {
+      this.stateCode = "01";
     }
-    else
-    {
-      this.stateCode = "";
+    if (this.state.includes("KEDAH")) {
+      this.stateCode = "02";
     }
+    if (this.state.includes("KELANTAN")) {
+      this.stateCode = "03";
+    }
+    if (this.state.includes("MELAKA")) {
+      this.stateCode = "04";
+    }
+    if (this.state.includes("NEGERI SEMBILAN")) {
+      this.stateCode = "05";
+    }
+    if (this.state.includes("PAHANG")) {
+      this.stateCode = "06";
+    }
+    if (this.state.includes("PINANG")) {
+      this.stateCode = "07";
+    }
+    if (this.state.includes("PERAK")) {
+      this.stateCode = "08";
+    }
+    if (this.state.includes("PERLIS")) {
+      this.stateCode = "09";
+    }
+    if (this.state.includes("SELANGOR")) {
+      this.stateCode = "10";
+    }
+    if (this.state.includes("TERENGGANU")) {
+      this.stateCode = "11";
+    }
+    if (this.state.includes("SABAH")) {
+      this.stateCode = "12";
+    }
+    if (this.state.includes("SARAWAK")) {
+      this.stateCode = "13";
+    }
+    if (this.state.includes("KUALA LUMPUR") || this.state.includes("KL")) {
+      this.stateCode = "14";
+    }
+    if (this.state.includes("LABUAN")) {
+      this.stateCode = "15";
+    }
+    if (this.state.includes("PUTRAJAYA")) {
+      this.stateCode = "16";
+    }
+    else {
+      this.invalidState = true;
+    }
+
 
     let errorCount = 0;
     if(this.address1.length == 0){
@@ -238,7 +231,7 @@ export class PersonalInformationComponent implements OnInit {
     {
       this.invalidEmail = true
     }
-    if(errorCount == 0 && this.invalidEmail == false){
+    if(errorCount == 0 && this.invalidEmail == false && this.invalidState == false){
       this.UpdateProfilePage = false;
       this.SaveProfilePage = true;
   
