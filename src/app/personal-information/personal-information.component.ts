@@ -155,31 +155,31 @@ export class PersonalInformationComponent implements OnInit {
     this.email = this.email_?.nativeElement.value
 
     if (this.state.includes("JOHOR")) {
-      this.stateCode = "1";
+      this.stateCode = "01";
     }
     if (this.state.includes("KEDAH")) {
-      this.stateCode = "2";
+      this.stateCode = "02";
     }
     if (this.state.includes("KELANTAN")) {
-      this.stateCode = "3";
+      this.stateCode = "03";
     }
     if (this.state.includes("MELAKA")) {
-      this.stateCode = "4";
+      this.stateCode = "04";
     }
     if (this.state.includes("NEGERI SEMBILAN")) {
-      this.stateCode = "5";
+      this.stateCode = "05";
     }
     if (this.state.includes("PAHANG")) {
-      this.stateCode = "6";
+      this.stateCode = "06";
     }
     if (this.state.includes("PINANG")) {
-      this.stateCode = "7";
+      this.stateCode = "07";
     }
     if (this.state.includes("PERAK")) {
-      this.stateCode = "8";
+      this.stateCode = "08";
     }
     if (this.state.includes("PERLIS")) {
-      this.stateCode = "9";
+      this.stateCode = "09";
     }
     if (this.state.includes("SELANGOR")) {
       this.stateCode = "10";
