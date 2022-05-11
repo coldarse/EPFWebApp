@@ -135,16 +135,18 @@ export class CheckBalanceComponent implements OnInit {
     this.isCallAPI = true;
     let tempDetail = this.dataForEmail.detail;
 
+    let isSummaryNotExist = this.summaryDetails == undefined ? true : false;
+
     Object.assign(this.dataForEmail, {
       "totalSavings": this.totalSavingsForEmail,
       "summaryStatement": this.sDetails,
       "memberInfo": tempDetail,
-      "accEmasFlag": this.summaryDetails.accEmasFlag,
-      "dividendAcc55": this.summaryDetails.dividendAcc55,
-      "dividendAcc55Line": this.summaryDetails.dividendAcc55Line,
-      "monthlyHseLoanIndicator": this.summaryDetails.monthlyHseLoanIndicator,
-      "monthlyHseLoanDividend": this.summaryDetails.monthlyHseLoanDividend,
-      "dividendRateForTheYear": this.summaryDetails.dividendRateForTheYear,
+      "accEmasFlag": isSummaryNotExist ? "" : this.summaryDetails.accEmasFlag,
+      "dividendAcc55": isSummaryNotExist ? "" : this.summaryDetails.dividendAcc55,
+      "dividendAcc55Line": isSummaryNotExist ? "" : this.summaryDetails.dividendAcc55Line,
+      "monthlyHseLoanIndicator": isSummaryNotExist ? "" : this.summaryDetails.monthlyHseLoanIndicator,
+      "monthlyHseLoanDividend": isSummaryNotExist ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
+      "dividendRateForTheYear": isSummaryNotExist ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
     });
     this.dataForEmail.detail = undefined;
     this.dataForEmail.memberInfo.mainStatement = this.cDetails;
