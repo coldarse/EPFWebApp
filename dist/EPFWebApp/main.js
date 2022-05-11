@@ -1296,9 +1296,6 @@ class PersonalInformationComponent {
                 this.invalidState = true;
             }
         }
-        else {
-            this.stateCode = "";
-        }
         let errorCount = 0;
         if (this.address1.length == 0) {
             errorCount += 1;
@@ -1321,7 +1318,7 @@ class PersonalInformationComponent {
         if (this.email.length != 0 && _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].isEmail(this.email) == false) {
             this.invalidEmail = true;
         }
-        if (errorCount == 0 && this.invalidEmail == false) {
+        if (errorCount == 0 && this.invalidEmail == false && this.invalidState == false) {
             this.UpdateProfilePage = false;
             this.SaveProfilePage = true;
             deleteKeyboard();
