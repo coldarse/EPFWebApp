@@ -5519,9 +5519,14 @@ class ISaraanShariahSavingsRegistrationComponent {
                     }
                 }
                 else {
+                    if (result.body.error[0].code == 'MBM5223') {
+                        this.errorDesc = 'unsuccessfuliSaraanMoreThan60';
+                    }
+                    else {
+                        this.errorDesc = 'unsuccessfuliSaraan';
+                    }
                     this.ISaraan = false;
                     this.Failed = true;
-                    this.errorDesc = 'unsuccessfuliSaraan';
                 }
             }, (err) => {
                 _models_appFunc__WEBPACK_IMPORTED_MODULE_2__["appFunc"].message = "HttpError";
