@@ -77,6 +77,15 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     {
       this.iSaraanEnabled = true;
     }
+
+    if(appFunc.currMemberDetail.effectiveDate != "")
+    {
+      this.iShariahEnabled = false;
+    }
+    else
+    {
+      this.iShariahEnabled = true;
+    }
   
   }
 

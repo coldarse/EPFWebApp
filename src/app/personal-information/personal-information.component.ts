@@ -213,9 +213,9 @@ export class PersonalInformationComponent implements OnInit {
     if(this.address1.length == 0){
       errorCount += 1;
     }
-    if(this.address2.length == 0){
-      errorCount += 1;
-    }
+    // if(this.address2.length == 0){
+    //   errorCount += 1;
+    // }
     if(this.postcode.length == 0){
       errorCount += 1;
     }
