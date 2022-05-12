@@ -36,6 +36,7 @@ export class CheckBalanceComponent implements OnInit {
   sDetails: any[] = [];
   cDetails: any[] = [];
   arrYears: any[] = [];
+  pDetails: any[] = [];
 
   totalSavingsForEmail = "0.00";
   transaction = "";
@@ -147,6 +148,7 @@ export class CheckBalanceComponent implements OnInit {
       "monthlyHseLoanIndicator": isSummaryNotExist ? "" : this.summaryDetails.monthlyHseLoanIndicator,
       "monthlyHseLoanDividend": isSummaryNotExist ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
       "dividendRateForTheYear": isSummaryNotExist ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
+      "withdrawalStatement": this.pDetails
     });
     this.dataForEmail.detail = undefined;
     this.dataForEmail.memberInfo.mainStatement = this.cDetails;
@@ -239,7 +241,22 @@ export class CheckBalanceComponent implements OnInit {
             this.transactionAmtForAcc1 += Number(details.totalContribution);
             this.cDetails.push(details);
           }
+          else if(details.transactionDesc.includes('Pglrn')){
+            let strin = details.transactionDate;
+            let splitted = strin.split("/", 3);
+            let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];  
+            let formattedDate = formatDate(new Date(newDateString), 'dd/MM/YYYY', 'en');
+            let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
+            details.transactionDate = formattedDate;
+            details.contributionMth = formattedMonth;
+            this.pDetails.push({
+              "withdrawalDate": details.transactionDate,
+              "withdrawalTransaction": details.transactionDesc,
+              "withdrawalAmt": details.totalContribution
+            });
+          }
         });
+
 
         this.SelectYearPage = false;
         this.StatementPage = true;
