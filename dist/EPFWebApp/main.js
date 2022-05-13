@@ -7889,6 +7889,7 @@ class CheckBalanceComponent {
         this.sDetails = [];
         this.cDetails = [];
         this.arrYears = [];
+        this.pDetails = [];
         this.totalSavingsForEmail = "0.00";
         this.transaction = "";
         this.errorDesc = "";
@@ -7979,6 +7980,7 @@ class CheckBalanceComponent {
             "monthlyHseLoanIndicator": isSummaryNotExist ? "" : this.summaryDetails.monthlyHseLoanIndicator,
             "monthlyHseLoanDividend": isSummaryNotExist ? "0.00" : this.summaryDetails.monthlyHseLoanDividend,
             "dividendRateForTheYear": isSummaryNotExist ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
+            "withdrawalStatement": this.pDetails
         });
         this.dataForEmail.detail = undefined;
         this.dataForEmail.memberInfo.mainStatement = this.cDetails;
@@ -8057,6 +8059,20 @@ class CheckBalanceComponent {
                         details.contributionMth = formattedMonth;
                         this.transactionAmtForAcc1 += Number(details.totalContribution);
                         this.cDetails.push(details);
+                    }
+                    else if (details.transactionDesc.includes('Pglrn')) {
+                        let strin = details.transactionDate;
+                        let splitted = strin.split("/", 3);
+                        let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];
+                        let formattedDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(newDateString), 'dd/MM/YYYY', 'en');
+                        let formattedMonth = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["formatDate"])(new Date(newDateString), 'MMM-YY', 'en');
+                        details.transactionDate = formattedDate;
+                        details.contributionMth = formattedMonth;
+                        this.pDetails.push({
+                            "withdrawalDate": details.transactionDate,
+                            "withdrawalTransaction": details.transactionDesc,
+                            "withdrawalAmt": details.totalContribution
+                        });
                     }
                 });
                 this.SelectYearPage = false;

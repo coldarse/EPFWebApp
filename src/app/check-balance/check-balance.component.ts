@@ -216,6 +216,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   DisplaySelectedYearStatement(year: number) {
+    this.cDetails = [];
     this.isCallAPI = true;
     const mainBody = {
       "accNum": appFunc.currMemberDetail.accNum,
