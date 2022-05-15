@@ -1161,6 +1161,7 @@ class PersonalInformationComponent {
         this.email = "";
         this.spacer = " ";
         this.comma = ", ";
+        this.fullAddress = "";
         // lastkeydown1: number = 0;
         // subscription: any;
         // userData: any[] = [];
@@ -1321,6 +1322,15 @@ class PersonalInformationComponent {
         if (errorCount == 0 && this.invalidEmail == false && this.invalidState == false) {
             this.UpdateProfilePage = false;
             this.SaveProfilePage = true;
+            // var addressArray = new Array(this.address1, this.address2, this.address3, this.postcode, this.city, this.country);
+            // var result: []
+            // addressArray.forEach(element => {
+            //   if(element != ''){
+            //     result.push(element);
+            //   }
+            // });
+            // this.fullAddress = addressArray.join();
+            // this.fullAddress = this.address1 + this.comma + this.address2 + this.comma + this.address3 + this.comma + this.postcode + this.comma + this.city + this.comma + this.country;
             deleteKeyboard();
         }
         else if (errorCount != 0) {
@@ -8035,6 +8045,7 @@ class CheckBalanceComponent {
         return this.arrYears;
     }
     DisplaySelectedYearStatement(year) {
+        this.cDetails = [];
         this.isCallAPI = true;
         const mainBody = {
             "accNum": _models_appFunc__WEBPACK_IMPORTED_MODULE_1__["appFunc"].currMemberDetail.accNum,

@@ -237,16 +237,9 @@ export class PersonalInformationComponent implements OnInit {
       this.UpdateProfilePage = false;
       this.SaveProfilePage = true;
 
-      // var addressArray = new Array(this.address1, this.address2, this.address3, this.postcode, this.city, this.country);
-      // var result: []
-      // addressArray.forEach(element => {
-      //   if(element != ''){
-      //     result.push(element);
-      //   }
-      // });
-      // this.fullAddress = addressArray.join();
-
-      // this.fullAddress = this.address1 + this.comma + this.address2 + this.comma + this.address3 + this.comma + this.postcode + this.comma + this.city + this.comma + this.country;
+        var addressArray = [this.address1, this.address2, this.address3, this.postcode, this.city, this.country];
+        var fullAddressArr = addressArray.filter(x => x!="");
+        this.fullAddress = fullAddressArr.join(', ');
   
       deleteKeyboard();
     }
