@@ -318,6 +318,18 @@ export class AldanService {
     )
   }
 
+  //Member Detail Statement
+  MemberDetailStatement(body: any){
+    return this.http.post(
+      this.url + 'MemberAccount/MemberDetailStatement',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
   //Email for Member Statement
   EmailForMemberStatement(emailAdd: string, sessionid: number, body: any){
     return this.http.post(

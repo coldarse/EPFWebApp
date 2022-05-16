@@ -148,7 +148,8 @@ export class CheckBalanceComponent implements OnInit {
       "monthlyHseLoanIndicator": isSummaryNotExist ? "" : this.summaryDetails.monthlyHseLoanIndicator,
       "monthlyHseLoanDividend": isSummaryNotExist ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
       "dividendRateForTheYear": isSummaryNotExist ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
-      "withdrawalStatement": this.pDetails
+      "withdrawalStatement": this.pDetails,
+      "contributionTotal":this.transactionAmtForAcc1.toString(),
     });
     this.dataForEmail.detail = undefined;
     this.dataForEmail.memberInfo.mainStatement = this.cDetails;
@@ -224,6 +225,25 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
+    const detailBody = {
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": 'S',
+      "stmtYear": year.toString(),
+      "categoryCode": "C",
+      "paginationKey": "",
+      "moreRecordIndicator": "N",
+      "sessionId": appFunc.sessionId
+    };
+    this._aldanService.
+    MemberDetailStatement(detailBody).
+    subscribe((result: any) => {
+      if(result.body.responseCode == "0"){
+        this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+      }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
+    });
     this._aldanService.
     MemberStatement(mainBody).
     subscribe((result: any) => {
@@ -239,7 +259,7 @@ export class CheckBalanceComponent implements OnInit {
             let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
             details.transactionDate = formattedDate;
             details.contributionMth = formattedMonth;
-            this.transactionAmtForAcc1 += Number(details.totalContribution);
+            //this.transactionAmtForAcc1 += Number(details.totalContribution);
             this.cDetails.push(details);
           }
           else if(details.transactionDesc.includes('Pglrn')){
