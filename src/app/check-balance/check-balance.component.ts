@@ -136,18 +136,17 @@ export class CheckBalanceComponent implements OnInit {
     this.isCallAPI = true;
     let tempDetail = this.dataForEmail.detail;
 
-    let isSummaryNotExist = this.summaryDetails == undefined ? true : false;
 
     Object.assign(this.dataForEmail, {
       "totalSavings": this.totalSavingsForEmail,
       "summaryStatement": this.sDetails,
       "memberInfo": tempDetail,
-      "accEmasFlag": isSummaryNotExist ? "" : this.summaryDetails.accEmasFlag,
-      "dividendAcc55": isSummaryNotExist ? "" : this.summaryDetails.dividendAcc55,
-      "dividendAcc55Line": isSummaryNotExist ? "" : this.summaryDetails.dividendAcc55Line,
-      "monthlyHseLoanIndicator": isSummaryNotExist ? "" : this.summaryDetails.monthlyHseLoanIndicator,
-      "monthlyHseLoanDividend": isSummaryNotExist ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
-      "dividendRateForTheYear": isSummaryNotExist ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
+      "accEmasFlag": this.summaryDetails.accEmasFlag,
+      "dividendAcc55": this.summaryDetails.dividendAcc55 == "" ? "0.00" : this.summaryDetails.dividendAcc55,
+      "dividendAcc55Line": this.summaryDetails.dividendAcc55Line,
+      "monthlyHseLoanIndicator": this.summaryDetails.monthlyHseLoanIndicator,
+      "monthlyHseLoanDividend": this.summaryDetails.monthlyHseLoanDividend == "" ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
+      "dividendRateForTheYear": this.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
       "withdrawalStatement": this.pDetails,
       "contributionTotal":this.transactionAmtForAcc1.toString(),
     });
@@ -234,6 +233,26 @@ export class CheckBalanceComponent implements OnInit {
       "moreRecordIndicator": "N",
       "sessionId": appFunc.sessionId
     };
+    const summaryBody = {
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": 'S',
+      "stmtYear": year.toString(),
+      "sessionId": appFunc.sessionId
+    };
+    this._aldanService
+      .MemberSummaryStatement(summaryBody)
+      .subscribe((result: any) => {
+        if (result.body.responseCode == '0') {
+          this.sDetails = result.body.detail.summaryStatement;
+        }
+        else{
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
+        }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+    });
     this._aldanService.
     MemberDetailStatement(detailBody).
     subscribe((result: any) => {
@@ -259,7 +278,6 @@ export class CheckBalanceComponent implements OnInit {
             let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
             details.transactionDate = formattedDate;
             details.contributionMth = formattedMonth;
-            //this.transactionAmtForAcc1 += Number(details.totalContribution);
             this.cDetails.push(details);
           }
           else if(details.transactionDesc.includes('Pglrn')){
