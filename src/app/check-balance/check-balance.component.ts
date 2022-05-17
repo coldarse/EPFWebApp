@@ -156,6 +156,7 @@ export class CheckBalanceComponent implements OnInit {
     this._aldanService.
       EmailForMemberStatement(
         appFunc.currMemberDetail.emailAdd, 
+        selectLang.selectedLang,
         appFunc.sessionId, 
         this.dataForEmail)
         .subscribe((res: any) => {

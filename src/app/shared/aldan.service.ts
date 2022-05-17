@@ -331,9 +331,9 @@ export class AldanService {
   }
 
   //Email for Member Statement
-  EmailForMemberStatement(emailAdd: string, sessionid: number, body: any){
+  EmailForMemberStatement(emailAdd: string, language: string,sessionid: number, body: any){
     return this.http.post(
-      this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&sessionID=${sessionid}&SSTID=${signalRConnection.kioskCode}`,
+      this.url + `MemberAccount/MemberStatement/EmailForMemberStatement?emailAdd=${emailAdd}&language=${language}&sessionID=${sessionid}&SSTID=${signalRConnection.kioskCode}`,
       body,
       accessToken.httpOptions
     ).pipe(
