@@ -291,7 +291,7 @@ export class CheckBalanceComponent implements OnInit {
             this.pDetails.push({
               "withdrawalDate": details.transactionDate,
               "withdrawalTransaction": details.transactionDesc,
-              "withdrawalAmt": details.totalContribution
+              "withdrawalAmt": details.totalContribution,
             });
           }
         });
