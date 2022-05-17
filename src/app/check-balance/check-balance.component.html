@@ -34,7 +34,7 @@
                         <th></th>
                         <th></th>
                         <th class="right">{{"total"|translate}}</th>
-                        <th class="right" style="font-weight: 700;">{{grandTotal | number : '1.2-2'}}</th>
+                        <th class="right" style="font-weight: 700;">{{totalSavings | number : '1.2-2'}}</th>
                     </tr>
                 </table>
                 <div class="row padTop5rem">
@@ -94,12 +94,12 @@
                         <th class="right">{{"total"|translate}}</th>
                     </tr>
                     <tr *ngFor="let c of cDetails">
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.contributionMth}}</td>
-                        <td class="right">{{c.transactionDesc}}</td>
-                        <td class="right">{{c.transactionDate}}</td>
+                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.contribMonth}}</td>
+                        <td class="right">{{c.transDesc}}</td>
+                        <td class="right">{{c.transDate}}</td>
                         <td class="right">{{c.employerShare | number : '1.2-2'}}</td>
                         <td class="right">{{c.memberShare | number : '1.2-2'}}</td>
-                        <td class="right" style="font-weight: 700;">{{c.totalContribution | number : '1.2-2'}}</td>
+                        <td class="right" style="font-weight: 700;">{{c.totalContribAmt | number : '1.2-2'}}</td>
                     </tr>
                     <tr>
                         <th></th>

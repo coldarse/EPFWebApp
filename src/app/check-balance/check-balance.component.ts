@@ -29,14 +29,14 @@ export class CheckBalanceComponent implements OnInit {
   Failed = false;
 
   totalSavings = 0;
-  grandTotal = 0;
   transactionAmtForAcc1 = 0;
   selectedYear = 0;
   
   sDetails: any[] = [];
   cDetails: any[] = [];
   arrYears: any[] = [];
-  pDetails: any[] = [];
+  wDetails: any[] = [];
+  oDetails: any[] = [];
 
   totalSavingsForEmail = "0.00";
   transaction = "";
@@ -85,13 +85,9 @@ export class CheckBalanceComponent implements OnInit {
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
-          this.totalSavingsForEmail = result.body.detail.totalSavings;
           this.summaryDetails = result.body.detail;
           this.sDetails = result.body.detail.summaryStatement;
-          this.sDetails.forEach((details: any) => {
-            this.grandTotal += Number(details.subAccBalance);
-            this.totalSavings = this.grandTotal;
-          });
+          this.totalSavings = result.body.detail.totalSavings;
         }
         else{
           this.SummaryStatementPage = false;
@@ -134,8 +130,8 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
+    this.dataForEmail.detail.mainStatement = this.cDetails;
     let tempDetail = this.dataForEmail.detail;
-
 
     Object.assign(this.dataForEmail, {
       "totalSavings": this.totalSavingsForEmail,
@@ -147,7 +143,8 @@ export class CheckBalanceComponent implements OnInit {
       "monthlyHseLoanIndicator": this.summaryDetails.monthlyHseLoanIndicator,
       "monthlyHseLoanDividend": this.summaryDetails.monthlyHseLoanDividend == "" ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
       "dividendRateForTheYear": this.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
-      "withdrawalStatement": this.pDetails,
+      "withdrawalStatement": this.wDetails,
+      "detailStatement": this.oDetails,
       "contributionTotal":this.transactionAmtForAcc1.toString(),
     });
     this.dataForEmail.detail = undefined;
@@ -225,11 +222,29 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
-    const detailBody = {
+    const detailBodyForContribution = {
       "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
       "stmtYear": year.toString(),
       "categoryCode": "C",
+      "paginationKey": "",
+      "moreRecordIndicator": "N",
+      "sessionId": appFunc.sessionId
+    };
+    const detailBodyForWithdrawal = {
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": 'S',
+      "stmtYear": year.toString(),
+      "categoryCode": "W",
+      "paginationKey": "",
+      "moreRecordIndicator": "N",
+      "sessionId": appFunc.sessionId
+    };
+    const detailBodyForOthers = {
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": 'S',
+      "stmtYear": year.toString(),
+      "categoryCode": "O",
       "paginationKey": "",
       "moreRecordIndicator": "N",
       "sessionId": appFunc.sessionId
@@ -240,64 +255,63 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
+    // Get Selected Year Summary Statement
     this._aldanService
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
+          this.totalSavingsForEmail = result.body.detail.totalSavings;
           this.sDetails = result.body.detail.summaryStatement;
-        }
-        else{
-          appFunc.message = "HttpError";
-          this.route.navigate(['outofservice']);
+          this.summaryDetails = result.body.detail;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
     });
+    // Get Contribution for Seleted Year
     this._aldanService.
-    MemberDetailStatement(detailBody).
+    MemberDetailStatement(detailBodyForContribution).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
+        this.cDetails = result.body.detail.detailStatement;
         this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+      }
+      else if(result.body.error[0].code == "MBM2001"){
+
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
     });
+    // Get Withdrawal for Selected Year
+    this._aldanService.
+    MemberDetailStatement(detailBodyForWithdrawal).
+    subscribe((result: any) => {
+      if(result.body.responseCode == "0"){
+        this.wDetails = result.body.detail.detailStatement;
+      }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
+    });
+    // Get Others for Selected Year
+    this._aldanService.
+    MemberDetailStatement(detailBodyForOthers).
+    subscribe((result: any) => {
+      if(result.body.responseCode == "0"){
+        this.oDetails = result.body.detail.detailStatement;
+      }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
+    });
+    // Get Member Statement
     this._aldanService.
     MemberStatement(mainBody).
     subscribe((result: any) => {
       if (result.body.responseCode == '0') {
         this.isCallAPI = false;
         this.dataForEmail = result.body;
-        result.body.detail.mainStatement.forEach((details: any) => {
-          if(details.transactionDesc.includes('Caruman')){
-            let strin = details.transactionDate;
-            let splitted = strin.split("/", 3);
-            let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];  
-            let formattedDate = formatDate(new Date(newDateString), 'dd/MM/YYYY', 'en');
-            let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
-            details.transactionDate = formattedDate;
-            details.contributionMth = formattedMonth;
-            this.cDetails.push(details);
-          }
-          else if(details.transactionDesc.includes('Pglrn')){
-            let strin = details.transactionDate;
-            let splitted = strin.split("/", 3);
-            let newDateString = splitted[2] + "-" + splitted[1] + "-" + splitted[0];  
-            let formattedDate = formatDate(new Date(newDateString), 'dd/MM/YYYY', 'en');
-            let formattedMonth = formatDate(new Date(newDateString), 'MMM-YY', 'en');
-            details.transactionDate = formattedDate;
-            details.contributionMth = formattedMonth;
-            this.pDetails.push({
-              "withdrawalDate": details.transactionDate,
-              "withdrawalTransaction": details.transactionDesc,
-              "withdrawalAmt": details.totalContribution,
-            });
-          }
-        });
-
-
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
