@@ -120,16 +120,16 @@ export class appFunc {
     // Returns translated month.
     static translateMonthToBM(month: string) : string{
         if(month.includes("May")){
-            return "Mei";
+            return month.replace("May", "Mei");
         }
         else if(month.includes("Aug")){
-            return "Ogs";
+            return month.replace("Aug", "Ogs");
         }
         else if(month.includes("Oct")){
-            return "Okt";
+            return month.replace("Oct", "Okt");
         }
         else if(month.includes("Dec")){
-            return "Dis";
+            return month.replace("Dec", "Dis");
         }
         else{
             return month;
