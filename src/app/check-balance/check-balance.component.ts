@@ -130,6 +130,7 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
+    let details = this.dataForEmail.detail.mainStatement;
     this.dataForEmail.detail.mainStatement = this.cDetails;
     let tempDetail = this.dataForEmail.detail;
 
@@ -145,6 +146,7 @@ export class CheckBalanceComponent implements OnInit {
       "dividendRateForTheYear": this.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
       "withdrawalStatement": this.wDetails,
       "detailStatement": this.oDetails,
+      "oldStatement": this.details,
       "contributionTotal":this.transactionAmtForAcc1.toString(),
     });
     this.dataForEmail.detail = undefined;
@@ -275,6 +277,11 @@ export class CheckBalanceComponent implements OnInit {
       if(result.body.responseCode == "0"){
         this.cDetails = result.body.detail.detailStatement;
         this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+        if(selectLang.selectedLang == 'bm'){
+          this.cDetails.forEach((contribution: any) => {
+            contribution.contribMonth = appFunc.translateMonthToBM(contribMonth);
+          });
+        }
       }
       else if(result.body.error[0].code == "MBM2001"){
 

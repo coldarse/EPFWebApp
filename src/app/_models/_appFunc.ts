@@ -111,8 +111,28 @@ export class appFunc {
         return age;
     }
 
-    static isEmail(search:string):boolean{
+    static isEmail(search:string) : boolean{
         const regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         return regexp.test(search);
+    }
+
+    // Translates month to malay month.
+    // Returns translated month.
+    static translateMonthToBM(month: string) : string{
+        if(month.includes("May")){
+            return "Mei";
+        }
+        else if(month.includes("Aug")){
+            return "Ogs";
+        }
+        else if(month.includes("Oct")){
+            return "Okt";
+        }
+        else if(month.includes("Dec")){
+            return "Dis";
+        }
+        else{
+            return month;
+        }
     }
 }
