@@ -35,6 +35,8 @@ export class appFunc {
     static AgeRangeLow: number;
     static AgeRangeHigh: number;
 
+    static isFromStartupGetToken = true;
+
     static Reset(){
         this.MemberDetail = {} as currentMemberDetails;
         this.currMemberDetail = {} as currMemberDetails;

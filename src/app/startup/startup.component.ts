@@ -1,10 +1,9 @@
 import { formatDate } from '@angular/common';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignalR, SignalRConnection } from 'ng2-signalr';
 import { AppConfiguration } from '../config/app-configuration';
-// import { NgxSpinnerService } from "ngx-spinner";
 import { AldanService } from '../shared/aldan.service';
 import { adapter, businessTypes, eModules } from '../_models/modelClass';
 import { accessToken } from '../_models/token';
@@ -109,6 +108,9 @@ export class StartupComponent implements OnInit {
               }
             }
           });
+      },(err: HttpErrorResponse) => {
+        appFunc.message = 'HttpError';
+        this.route.navigate(['outofservice']);
       });
   }
 
@@ -116,6 +118,7 @@ export class StartupComponent implements OnInit {
     this._aldanService
       .getToken(signalRConnection.kioskCode, password)
       .subscribe((result: any) => {
+        appFunc.isFromStartupGetToken = false;
         clearInterval(this.dotInterval);
         if (!isNaN(result)) { //Number
           // Say that Kiosk Is Not Found in KMS
@@ -132,6 +135,9 @@ export class StartupComponent implements OnInit {
           observe: 'response' as 'body'
         };
         return true;
+      },(err: HttpErrorResponse) => {
+        appFunc.message = 'HttpError';
+        this.route.navigate(['outofservice']);
       });
   }
 

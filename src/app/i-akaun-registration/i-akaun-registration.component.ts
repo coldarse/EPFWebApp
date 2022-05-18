@@ -214,7 +214,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         } else {
           this.PhoneEmailConfirmation = false;
           this.Failed = true;
-          this.errorDesc = result.body.error.description;
+          this.errorDesc = "RegiAkaunFailed";
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
