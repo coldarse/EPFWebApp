@@ -36,6 +36,18 @@ export class appFunc {
     static AgeRangeHigh: number;
 
     static isFromStartupGetToken = true;
+    static dataForEmail: any;
+    static totalSavingsForEmail: any;
+    static openingBalanceTotal: any;
+    static dividendTotal: any;
+    static sDetails: any[];
+    static cDetails: any[];
+    static wDetails: any[];
+    static oDetails: any[];
+    static summaryDetails: any;
+    static transactionAmtForAcc1: any;
+    
+
 
     static Reset(){
         this.MemberDetail = {} as currentMemberDetails;

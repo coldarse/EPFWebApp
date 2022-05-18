@@ -32,21 +32,15 @@ export class CheckBalanceComponent implements OnInit {
   transactionAmtForAcc1 = 0;
   selectedYear = 0;
   
+  arrYears: any[] = [];
   sDetails: any[] = [];
   cDetails: any[] = [];
-  arrYears: any[] = [];
-  wDetails: any[] = [];
-  oDetails: any[] = [];
 
-  totalSavingsForEmail = "0.00";
   transaction = "";
   errorDesc = "";
   errorCode = "";
   email = "";
   
-  dataForEmail: any;
-
-  summaryDetails: any;
 
   constructor(
     private route: Router,
@@ -85,8 +79,9 @@ export class CheckBalanceComponent implements OnInit {
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
-          this.summaryDetails = result.body.detail;
-          this.sDetails = result.body.detail.summaryStatement;
+          appFunc.summaryDetails = result.body.detail;
+          appFunc.sDetails = result.body.detail.summaryStatement;
+          this.sDetails = appFunc.sDetails;
           this.totalSavings = result.body.detail.totalSavings;
         }
         else{
@@ -130,34 +125,36 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
-    let details = this.dataForEmail.detail.mainStatement;
-    this.dataForEmail.detail.mainStatement = this.cDetails;
-    let tempDetail = this.dataForEmail.detail;
+    let details = appFunc.dataForEmail.detail.mainStatement;
+    appFunc.dataForEmail.detail.mainStatement = this.cDetails;
+    let tempDetail = appFunc.dataForEmail.detail;
 
-    Object.assign(this.dataForEmail, {
-      "totalSavings": this.totalSavingsForEmail,
-      "summaryStatement": this.sDetails,
+    Object.assign(appFunc.dataForEmail, {
+      "totalSavings": appFunc.totalSavingsForEmail,
+      "summaryStatement": appFunc.sDetails,
       "memberInfo": tempDetail,
-      "accEmasFlag": this.summaryDetails.accEmasFlag,
-      "dividendAcc55": this.summaryDetails.dividendAcc55 == "" ? "0.00" : this.summaryDetails.dividendAcc55,
-      "dividendAcc55Line": this.summaryDetails.dividendAcc55Line,
-      "monthlyHseLoanIndicator": this.summaryDetails.monthlyHseLoanIndicator,
-      "monthlyHseLoanDividend": this.summaryDetails.monthlyHseLoanDividend == "" ? "0.00" : this.summaryDetails.monthlyHseLoanDividend, 
-      "dividendRateForTheYear": this.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : this.summaryDetails.dividendRateForTheYear,
-      "withdrawalStatement": this.wDetails,
-      "detailStatement": this.oDetails,
+      "accEmasFlag": appFunc.summaryDetails.accEmasFlag,
+      "dividendAcc55": appFunc.summaryDetails.dividendAcc55 == "" ? "0.00" : appFunc.summaryDetails.dividendAcc55,
+      "dividendAcc55Line": appFunc.summaryDetails.dividendAcc55Line,
+      "monthlyHseLoanIndicator": appFunc.summaryDetails.monthlyHseLoanIndicator,
+      "monthlyHseLoanDividend": appFunc.summaryDetails.monthlyHseLoanDividend == "" ? "0.00" : appFunc.summaryDetails.monthlyHseLoanDividend, 
+      "dividendRateForTheYear": appFunc.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : appFunc.summaryDetails.dividendRateForTheYear,
+      "withdrawalStatement": appFunc.wDetails,
+      "detailStatement": appFunc.oDetails,
       "oldStatement": details,
-      "contributionTotal":this.transactionAmtForAcc1.toString(),
+      "contributionTotal":appFunc.transactionAmtForAcc1.toString(),
+      "openingBalanceTotal": appFunc.openingBalanceTotal,
+      "dividendTotal" : appFunc.dividendTotal,
     });
-    this.dataForEmail.detail = undefined;
-    this.dataForEmail.memberInfo.mainStatement = this.cDetails;
+    appFunc.dataForEmail.detail = undefined;
+    appFunc.dataForEmail.memberInfo.mainStatement = appFunc.cDetails;
 
     this._aldanService.
       EmailForMemberStatement(
         appFunc.currMemberDetail.emailAdd, 
         selectLang.selectedLang,
         appFunc.sessionId, 
-        this.dataForEmail)
+        appFunc.dataForEmail)
         .subscribe((res: any) => {
           if(res.body.attachmentPath != ""){
             this.ConfirmEmailPage = false;
@@ -262,9 +259,11 @@ export class CheckBalanceComponent implements OnInit {
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
-          this.totalSavingsForEmail = result.body.detail.totalSavings;
-          this.sDetails = result.body.detail.summaryStatement;
-          this.summaryDetails = result.body.detail;
+          appFunc.totalSavingsForEmail = result.body.detail.totalSavings;
+          appFunc.openingBalanceTotal = result.body.detail.openingBalanceTotal;
+          appFunc.dividendTotal = result.body.detail.dividendTotal;
+          appFunc.sDetails = result.body.detail.summaryStatement;
+          appFunc.summaryDetails = result.body.detail;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -276,12 +275,13 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
         this.cDetails = result.body.detail.detailStatement;
-        this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+        appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         if(selectLang.selectedLang == 'bm'){
           this.cDetails.forEach((contribution: any) => {
             contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
           });
         }
+        appFunc.cDetails = this.cDetails;
       }
       else if(result.body.error[0].code == "MBM2001"){
 
@@ -295,7 +295,7 @@ export class CheckBalanceComponent implements OnInit {
     MemberDetailStatement(detailBodyForWithdrawal).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
-        this.wDetails = result.body.detail.detailStatement;
+        appFunc.wDetails = result.body.detail.detailStatement;
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -306,7 +306,7 @@ export class CheckBalanceComponent implements OnInit {
     MemberDetailStatement(detailBodyForOthers).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
-        this.oDetails = result.body.detail.detailStatement;
+        appFunc.oDetails = result.body.detail.detailStatement;
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -318,7 +318,7 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if (result.body.responseCode == '0') {
         this.isCallAPI = false;
-        this.dataForEmail = result.body;
+        appFunc.dataForEmail = result.body;
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
