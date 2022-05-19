@@ -64,37 +64,39 @@ export class CheckBalanceComponent implements OnInit {
       this.EmailFailPage = false;
       this.Failed = false;
     }
-
-    const d = new Date();
-    let stmtYear = d.getFullYear();
-    const summaryBody = {
-      "accNum": appFunc.currMemberDetail.accNum,
-      "accType": 'S',
-      "stmtYear": stmtYear.toString(),
-      "sessionId": appFunc.sessionId
-    };
-
-    //Call Memeber Summary Statement API
-    this._aldanService
-      .MemberSummaryStatement(summaryBody)
-      .subscribe((result: any) => {
-        if (result.body.responseCode == '0') {
-          appFunc.summaryDetails = result.body.detail;
-          appFunc.sDetails = result.body.detail.summaryStatement;
-          this.sDetails = appFunc.sDetails;
-          this.totalSavings = result.body.detail.totalSavings;
-        }
-        else{
-          this.SummaryStatementPage = false;
-          this.errorCode = result.body.error[0].code;
-          if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
-          else this.errorDesc = 'cannotRetrieveAccountBalance';
-          this.Failed = true;
-        }
-      },(err: HttpErrorResponse) => {
-        appFunc.message = "HttpError";
-        this.route.navigate(['outofservice']);
-      });
+    else
+    {
+      const d = new Date();
+      let stmtYear = d.getFullYear();
+      const summaryBody = {
+        "accNum": appFunc.currMemberDetail.accNum,
+        "accType": 'S',
+        "stmtYear": stmtYear.toString(),
+        "sessionId": appFunc.sessionId
+      };
+  
+      //Call Memeber Summary Statement API
+      this._aldanService
+        .MemberSummaryStatement(summaryBody)
+        .subscribe((result: any) => {
+          if (result.body.responseCode == '0') {
+            appFunc.summaryDetails = result.body.detail;
+            appFunc.sDetails = result.body.detail.summaryStatement;
+            this.sDetails = appFunc.sDetails;
+            this.totalSavings = result.body.detail.totalSavings;
+          }
+          else{
+            this.SummaryStatementPage = false;
+            this.errorCode = result.body.error[0].code;
+            if(this.errorCode == 'MBM2001') this.errorDesc = 'noOpeningBalance';
+            else this.errorDesc = 'cannotRetrieveAccountBalance';
+            this.Failed = true;
+          }
+        },(err: HttpErrorResponse) => {
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
+        });
+    }
   }
 
   SummaryStatementYes() {
@@ -111,6 +113,7 @@ export class CheckBalanceComponent implements OnInit {
     this.transactionAmtForAcc1 = 0;
     this.StatementPage = false;
     this.SelectYearPage = true;
+    this.CalculateYears();
   }
 
   StatementYes() {
@@ -121,6 +124,8 @@ export class CheckBalanceComponent implements OnInit {
   ConfirmEmailNo() {
     this.ConfirmEmailPage = false;
     this.StatementPage = true;
+    this.cDetails = appFunc.cDetails;
+    this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
   }
 
   ConfirmEmailYes() {
@@ -180,6 +185,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   EmailSuccessYes() {
+    appFunc.cDetails = [];
     this.route.navigate(['mainMenu']);
   }
 
@@ -337,7 +343,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   failedYes(){
-    if(this.errorCode == 'MBM2015'){
+    if(this.errorCode == 'MBM2001'){
       this.CalculateYears();
       if(this.arrYears.length == 0){
         this.route.navigate(['mainMenu']);
@@ -354,7 +360,7 @@ export class CheckBalanceComponent implements OnInit {
 
   BackFromSelectYearPage(){
     this.isCallAPI = false;
-    if(this.errorCode == 'MBM2015'){
+    if(this.errorCode == 'MBM2001'){
       this.route.navigate(['mainMenu']);
     }
     else{
