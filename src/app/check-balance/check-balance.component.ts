@@ -276,6 +276,7 @@ export class CheckBalanceComponent implements OnInit {
       if(result.body.responseCode == "0"){
         this.cDetails = result.body.detail.detailStatement;
         appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+        this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
         if(selectLang.selectedLang == 'bm'){
           this.cDetails.forEach((contribution: any) => {
             contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
