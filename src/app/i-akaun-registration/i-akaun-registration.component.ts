@@ -56,6 +56,7 @@ export class IAkaunRegistrationComponent implements OnInit {
   isCustom = false;
   emailError = false;
 
+  errorCode = "";
   phoneNo = '';
   emailAddress = '';
   TnC = '';
@@ -335,9 +336,17 @@ export class IAkaunRegistrationComponent implements OnInit {
                 deleteKeyboard()
               }
               else{
+                this.errorCode = result.body.error[0].code;
                 this.ActivateInformation = false;
                 this.Failed = true;
-                this.errorDesc = 'unsuccesfuliAkaunActivation';
+                if(this.errorCode == '461')
+                {
+                  this.errorDesc = result.body.error[0].description;
+                }
+                else
+                {
+                  this.errorDesc = 'unsuccesfuliAkaunActivation';
+                }
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
@@ -547,6 +556,13 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   failedYes() {
-    this.route.navigate(['mainMenu']);
+    if(this.errorCode == "461")
+    {
+      this.SetIdPassword = true;
+      this.Failed = false;
+    }
+    else{
+      this.route.navigate(['mainMenu']);
+    }
   }
 }

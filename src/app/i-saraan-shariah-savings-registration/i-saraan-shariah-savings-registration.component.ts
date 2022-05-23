@@ -68,6 +68,25 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         }
       }
     }
+    const body = {
+      "regType": "M",
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": "S",
+      "searchType": "A",
+      "idNum": currentMyKadDetails.ICNo,
+      "idType": currentMyKadDetails.CategoryType,
+      "reqTypeCode": "",
+      "sessionId": appFunc.sessionId
+    }
+
+    this._aldanService.
+      MemberProfileInfo(body).
+      subscribe((result: any) => {
+        this.isCallAPI = false;
+        if(result.body.responseCode == "0"){
+          appFunc.currMemberDetail = result.body.detail;
+        }
+      });
 
     if(appFunc.currMemberDetail.indicator4 == "Y")
     {

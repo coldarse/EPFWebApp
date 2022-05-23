@@ -114,6 +114,7 @@ export class RegisterMemberComponent implements OnInit {
   elist = 'gmail.com';
   defaultDDL = "default";
   currentLang = 'bm';
+  errorCode = "";
 
   constructor(
     private route: Router,
@@ -972,7 +973,9 @@ export class RegisterMemberComponent implements OnInit {
                 this.ActivateSuccessPage = true;
 
                 deleteKeyboard();
-              } else {
+              }
+              else {
+                this.errorCode = result.body.error[0].code;
                 this.ActivateiAkaunPage = false;
                 this.Failed = true;
                 this.errorDesc = result.body.error[0].description;
@@ -1347,6 +1350,11 @@ export class RegisterMemberComponent implements OnInit {
       this.RegShariah = false;
       this.RegisteriSaraanPage = true;
       this.RegSaraan = true;
+    }
+    else if(this.errorCode == "461")
+    {
+      this.SetIdPassword = true;
+      this.Failed = false;
     }
     else{
       this.route.navigate(['mainMenu']);
