@@ -17,8 +17,8 @@ import { signalRConnection } from '../_models/_signalRConnection';
 })
 export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
-  @ViewChild('contract') contractHTML : ElementRef | undefined;
-  
+  @ViewChild('contract') contractHTML: ElementRef | undefined;
+
   RegSaraanShariah = true;
   RegShariah = false;
   RegSaraan = false;
@@ -46,23 +46,23 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     private route: Router,
     private translate: TranslateService,
     private _aldanService: AldanService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
     this.jobSectors = appFunc.businessTypes;
 
-    for (var val of appFunc.modules){
-      if(val.moduleID == 5){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+    for (var val of appFunc.modules) {
+      if (val.moduleID == 5) {
+        if (val.enabled == true) {
+          if (appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))) {
             this.iSaraanEnabled = true;
           }
         }
       }
-      else if(val.moduleID == 6){
-        if(val.enabled == true){
-          if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+      else if (val.moduleID == 6) {
+        if (val.enabled == true) {
+          if (appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))) {
             this.iShariahEnabled = true;
           }
         }
@@ -83,29 +83,23 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       MemberProfileInfo(body).
       subscribe((result: any) => {
         this.isCallAPI = false;
-        if(result.body.responseCode == "0"){
+        if (result.body.responseCode == "0") {
           appFunc.currMemberDetail = result.body.detail;
+          if (appFunc.currMemberDetail.indicator4 == "Y") {
+            this.iSaraanEnabled = false;
+          }
+          else {
+            this.iSaraanEnabled = true;
+          }
+
+          if (appFunc.currMemberDetail.effectiveDate != "") {
+            this.iShariahEnabled = false;
+          }
+          else {
+            this.iShariahEnabled = true;
+          }
         }
       });
-
-    if(appFunc.currMemberDetail.indicator4 == "Y")
-    {
-      this.iSaraanEnabled = false;
-    }
-    else
-    {
-      this.iSaraanEnabled = true;
-    }
-
-    if(appFunc.currMemberDetail.effectiveDate != "")
-    {
-      this.iShariahEnabled = false;
-    }
-    else
-    {
-      this.iShariahEnabled = true;
-    }
-  
   }
 
   selectJob(jobSector: any) {
@@ -129,7 +123,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this.isCallAPI = true;
       this._aldanService
         .GetContract(
-          selectLang.selectedLang, 
+          selectLang.selectedLang,
           appFunc.sessionId
         )
         .subscribe((result: any) => {
@@ -138,7 +132,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             this.xagreedTnc = true;
             this.Contract = result.body.content;
             this.RegSaraanShariah = false;
-            this.RegShariah = true; 
+            this.RegShariah = true;
             this.SelectIShariahISaraan = false;
             this.IShariah = true;
             setTimeout(() => {
@@ -149,7 +143,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             this.Failed = true;
             this.errorDesc = 'unsuccesfulSimpananShariah';
           }
-        },(err: HttpErrorResponse) => {
+        }, (err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
           this.route.navigate(['outofservice']);
         });
@@ -171,7 +165,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         sourceRegistrationChannel: 'IWS',
         applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         sourceCreationID: 'SFIWS',
-        sourceTerminalID: signalRConnection.kioskCode.substring(0,10),
+        sourceTerminalID: signalRConnection.kioskCode.substring(0, 10),
         sourceBranchNo: '0',
         sessionId: appFunc.sessionId
       };
@@ -183,20 +177,20 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           if (result.body.responseCode == '0') {
             this.ISaraan = false;
             this.ISaraanSuccess = true;
-            if(result.body.detail.businessTypeCode == "S910"){
+            if (result.body.detail.businessTypeCode == "S910") {
               this.isSuri = true;
             }
           } else {
-            if(result.body.error[0].code == 'MBM5223'){
+            if (result.body.error[0].code == 'MBM5223') {
               this.errorDesc = 'unsuccessfuliSaraanMoreThan60';
             }
-            else{
+            else {
               this.errorDesc = 'unsuccessfuliSaraan';
             }
             this.ISaraan = false;
             this.Failed = true;
           }
-        },(err: HttpErrorResponse) => {
+        }, (err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
           this.route.navigate(['outofservice']);
         });
@@ -213,8 +207,8 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   IShariahYes() {
     this.isCallAPI = true;
     const iShariahBody = {
-      custNum: appFunc.currMemberDetail.cifNum, 
-      accNum: appFunc.currMemberDetail.accNum, 
+      custNum: appFunc.currMemberDetail.cifNum,
+      accNum: appFunc.currMemberDetail.accNum,
       accType: 'S',
       electChannel: 'SST',
       electReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
@@ -232,16 +226,16 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
     this._aldanService
       .iShariahRegistration(iShariahBody)
       .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.responseCode == '0') {
-            this.IShariah = false;
-            this.IShariahSuccess = true;
-          } else {
-            this.IShariah = false;
-            this.Failed = true;
-            this.errorDesc = 'unsuccesfulSimpananShariah';
-          }
-      },(err: HttpErrorResponse) => {
+        this.isCallAPI = false;
+        if (result.body.responseCode == '0') {
+          this.IShariah = false;
+          this.IShariahSuccess = true;
+        } else {
+          this.IShariah = false;
+          this.Failed = true;
+          this.errorDesc = 'unsuccesfulSimpananShariah';
+        }
+      }, (err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
       });

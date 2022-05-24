@@ -336,17 +336,18 @@ export class IAkaunRegistrationComponent implements OnInit {
                 deleteKeyboard()
               }
               else{
-                this.errorCode = result.body.error[0].code;
+                this.errorCode = result.body.error.code;
                 this.ActivateInformation = false;
                 this.Failed = true;
                 if(this.errorCode == '461')
                 {
-                  this.errorDesc = result.body.error[0].description;
+                  this.errorDesc = result.body.error.description;
                 }
                 else
                 {
                   this.errorDesc = 'unsuccesfuliAkaunActivation';
                 }
+                deleteKeyboard();
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
@@ -560,6 +561,9 @@ export class IAkaunRegistrationComponent implements OnInit {
     {
       this.SetIdPassword = true;
       this.Failed = false;
+      setTimeout(() => {
+        loadKeyboard();
+      }, 500);
     }
     else{
       this.route.navigate(['mainMenu']);

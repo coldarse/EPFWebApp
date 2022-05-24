@@ -975,10 +975,11 @@ export class RegisterMemberComponent implements OnInit {
                 deleteKeyboard();
               }
               else {
-                this.errorCode = result.body.error[0].code;
+                this.errorCode = result.body.error.code;
                 this.ActivateiAkaunPage = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error[0].description;
+                this.errorDesc = result.body.error.description;
+                deleteKeyboard();
               }
             },(err: HttpErrorResponse) => {
               this.ActivateiAkaunPage = false;
@@ -1087,6 +1088,7 @@ export class RegisterMemberComponent implements OnInit {
       }
 
       if (errorCount == 0) {
+        this.checkboxImages = [];
         if (appFunc.bypassAPI != true) {
           this.isCallAPI = true;
           this._aldanService
@@ -1339,7 +1341,15 @@ export class RegisterMemberComponent implements OnInit {
   }
 
   failedYes() {
-    if(this.RegIAkaun){
+    if(this.errorCode == "461")
+    {
+      this.SetIdPassword = true;
+      this.Failed = false;
+      setTimeout(() => {
+        loadKeyboard();
+      }, 500);
+    }
+    else if(this.RegIAkaun){
       this.Failed = false;
       this.RegIAkaun = false;
       this.RegShariah = true;
@@ -1351,13 +1361,9 @@ export class RegisterMemberComponent implements OnInit {
       this.RegisteriSaraanPage = true;
       this.RegSaraan = true;
     }
-    else if(this.errorCode == "461")
-    {
-      this.SetIdPassword = true;
-      this.Failed = false;
-    }
     else{
       this.route.navigate(['mainMenu']);
     }
+   
   }
 }
