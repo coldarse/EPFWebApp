@@ -21,7 +21,8 @@
                         <th class="right">{{"total"|translate}}</th>
                     </tr>
                     <tr *ngFor="let s of sDetails">
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun {{s.subAccSeqNum}}</td>
+                        <!-- <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">Akaun {{s.subAccSeqNum}}</td> -->
+                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{s.subAccSeqNumDesc}}</td>
                         <td class="right">{{s.openingBalance | number : '1.2-2'}}</td>
                         <td class="right">{{s.subAccCreditTotal | number : '1.2-2'}}</td>
                         <td class="right">{{s.subAccDebitTotal | number : '1.2-2'}}</td>

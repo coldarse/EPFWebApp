@@ -82,7 +82,18 @@ export class CheckBalanceComponent implements OnInit {
           if (result.body.responseCode == '0') {
             appFunc.summaryDetails = result.body.detail;
             appFunc.sDetails = result.body.detail.summaryStatement;
-            this.sDetails = appFunc.sDetails;
+            let tempDetails = appFunc.sDetails;
+            tempDetails.forEach((element: any) => {
+              this.sDetails.push({
+                subAccSeqNum: element.subAccSeqNum,
+                openingBalance: element.openingBalance,
+                subAccCreditTotal: element.subAccCreditTotal,
+                subAccDebitTotal: element.subAccDebitTotal,
+                subAccDividend: element.subAccDividend,
+                subAccBalance: element.subAccBalance,
+                subAccSeqNumDesc: getSeqDesc(element.subAccSeqNum, result.body.detail.accEmasFlag)
+              })
+            });
             this.totalSavings = result.body.detail.totalSavings;
           }
           else{
@@ -97,6 +108,56 @@ export class CheckBalanceComponent implements OnInit {
           appFunc.message = "HttpError";
           this.route.navigate(['outofservice']);
         });
+    }
+  }
+
+  getSeqDesc(seqNum: string, accEmasFlag: string): string{
+    switch (seqNum)
+    {
+      case '1':
+          return 'Akaun 1';
+          break;
+      case '2':
+          return 'Akaun 2';
+          break;
+
+      case '6':
+          return 'Akaun Pemindahan Tuntutan Harta Perkahwinan';
+          break;
+
+      case '5':
+          return 'Akaun Pengeluaran Bayaran Berkala';
+          break;
+
+      case '9':
+          return 'Akaun Pengeluaran Umur 55 Tahun - Kombinasi';
+          break;
+
+      case '4':
+          return 'Akaun Pengeluaran Bayaran Bulanan';
+          break;
+
+      case '12':
+          return 'Akaun Pengeluaran Ansuran Bulanan Pinjaman Perumahan';
+          break;
+
+      case '11':
+          return 'Akaun Pengeluaran Perumahan Fleksibel';
+          break;
+
+      case '13':
+          return 'Akaun 55';
+          break;
+
+      case '14':
+          return 'Akaun Syer Kerajaan';
+          break;
+      case '':
+          if (accEmasFlag != '' && accEmasFlag.ToUpper() == 'Y')
+          {
+              return 'Akaun Emas';
+          }
+          break;
     }
   }
 
