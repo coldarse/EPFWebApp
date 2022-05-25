@@ -270,11 +270,13 @@ export class CheckBalanceComponent implements OnInit {
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
+          this.isCallAPI = false;
           appFunc.totalSavingsForEmail = result.body.detail.totalSavings;
           appFunc.openingBalanceTotal = result.body.detail.openingBalanceTotal;
           appFunc.dividendTotal = result.body.detail.dividendTotal;
           appFunc.sDetails = result.body.detail.summaryStatement;
           appFunc.summaryDetails = result.body.detail;
+          this.totalSavings = result.body.detail.totalSavings;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -297,6 +299,7 @@ export class CheckBalanceComponent implements OnInit {
     MemberDetailStatement(detailBodyForOthers).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
+        this.isCallAPI = false;
         appFunc.oDetails = result.body.detail.detailStatement;
       }
     },(err: HttpErrorResponse) => {
@@ -326,6 +329,7 @@ export class CheckBalanceComponent implements OnInit {
     MemberDetailStatement(detailBodyForContribution).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
+        this.isCallAPI = false;
         this.cDetails = result.body.detail.detailStatement;
         this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
@@ -340,6 +344,7 @@ export class CheckBalanceComponent implements OnInit {
         this.StatementPage = true;
       }
       else if(result.body.error[0].code == "MBM2001"){
+        this.isCallAPI = false;
         this.errorDesc = 'noRecordsFound'
         this.SelectYearPage = false;
         this.Failed = true;
