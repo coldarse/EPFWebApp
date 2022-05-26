@@ -116,52 +116,38 @@ export class CheckBalanceComponent implements OnInit {
     switch (seqNum)
     {
       case '1':
-          seqNumDesc = 'Akaun 1';
-          break;
+        seqNumDesc = 'Akaun 1';
+        break;
       case '2':
-          seqNumDesc = 'Akaun 2';
-          break;
-
+        seqNumDesc = 'Akaun 2';
+        break;
       case '6':
-          seqNumDesc = 'Akaun Pemindahan Tuntutan Harta Perkahwinan';
-          break;
-
+        seqNumDesc = 'Akaun Pemindahan Tuntutan Harta Perkahwinan';
+        break;
       case '5':
-          seqNumDesc = 'Akaun Pengeluaran Bayaran Berkala';
-          break;
-
+        seqNumDesc = 'Akaun Pengeluaran Bayaran Berkala';
+        break;
       case '9':
-          seqNumDesc = 'Akaun Pengeluaran Umur 55 Tahun - Kombinasi';
-          break;
-
+        seqNumDesc = 'Akaun Pengeluaran Umur 55 Tahun - Kombinasi';
+        break;
       case '4':
-          seqNumDesc = 'Akaun Pengeluaran Bayaran Bulanan';
-          break;
-
+        seqNumDesc = 'Akaun Pengeluaran Bayaran Bulanan';
+        break;
       case '12':
-          seqNumDesc = 'Akaun Pengeluaran Ansuran Bulanan Pinjaman Perumahan';
-          break;
-
+        seqNumDesc = 'Akaun Pengeluaran Ansuran Bulanan Pinjaman Perumahan';
+        break;
       case '11':
-          seqNumDesc = 'Akaun Pengeluaran Perumahan Fleksibel';
-          break;
-
+        seqNumDesc = 'Akaun Pengeluaran Perumahan Fleksibel';
+        break;
       case '13':
-          seqNumDesc = 'Akaun 55';
-          break;
-
+        seqNumDesc = 'Akaun 55';
+        break;
       case '14':
-          seqNumDesc = 'Akaun Syer Kerajaan';
-          break;
-      case '':
-          if (accEmasFlag != '' && accEmasFlag.toUpperCase() == 'Y')
-          {
-              seqNumDesc = 'Akaun Emas';
-          }
-          else{
-            seqNumDesc = 'Akaun' + '';
-          }
-          break;
+        seqNumDesc = 'Akaun Syer Kerajaan';
+        break;
+      case '0':
+        seqNumDesc = 'Akaun Emas';
+        break;
     }
     return seqNumDesc;
   }
