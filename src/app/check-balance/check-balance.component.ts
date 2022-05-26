@@ -409,10 +409,14 @@ export class CheckBalanceComponent implements OnInit {
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
-      else if(result.body.error[0].code == "MBM2001"){
+      else
+      {
         this.isCallAPI = false;
-        this.errorDesc = 'noRecordsFound'
         this.SelectYearPage = false;
+        this.errorCode = result.body.error[0].code;
+        if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
+        //else if(this.errorCode = "MBM2001") this.errorDesc = 'noRecordsFound'
+        else this.errorDesc = 'cannotRetrieveAccountBalance';
         this.Failed = true;
       }
     },(err: HttpErrorResponse) => {
