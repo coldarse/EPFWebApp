@@ -322,7 +322,6 @@ export class CheckBalanceComponent implements OnInit {
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
-          this.isCallAPI = false;
           appFunc.totalSavingsForEmail = result.body.detail.totalSavings;
           appFunc.openingBalanceTotal = result.body.detail.openingBalanceTotal;
           appFunc.dividendTotal = result.body.detail.dividendTotal;
@@ -351,7 +350,6 @@ export class CheckBalanceComponent implements OnInit {
     MemberDetailStatement(detailBodyForOthers).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
-        this.isCallAPI = false;
         appFunc.oDetails = result.body.detail.detailStatement;
       }
     },(err: HttpErrorResponse) => {
@@ -363,25 +361,24 @@ export class CheckBalanceComponent implements OnInit {
     MemberStatement(mainBody).
     subscribe((result: any) => {
       if (result.body.responseCode == '0') {
-        this.isCallAPI = false;
         appFunc.dataForEmail = result.body;
       }
-      else{
-        this.isCallAPI = false;
-        this.SummaryStatementPage = false;
-        this.errorDesc = 'cannotRetrieveAccountBalance';
-        this.Failed = true;
-      }
+      // else{
+      //   this.isCallAPI = false;
+      //   this.SummaryStatementPage = false;
+      //   this.errorDesc = 'cannotRetrieveAccountBalance';
+      //   this.Failed = true;
+      // }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
     });
-    // Get Contribution for Seleted Year
+    // Get Contribution for Selected Year
     this._aldanService.
     MemberDetailStatement(detailBodyForContribution).
     subscribe((result: any) => {
+      this.isCallAPI = false;
       if(result.body.responseCode == "0"){
-        this.isCallAPI = false;
         this.cDetails = result.body.detail.detailStatement;
         this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
@@ -395,16 +392,22 @@ export class CheckBalanceComponent implements OnInit {
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
-      else
-      {
-        this.isCallAPI = false;
+      else{
+        appFunc.transactionAmtForAcc1 = Number('0.00');
+        appFunc.cDetails = [];
         this.SelectYearPage = false;
-        this.errorCode = result.body.error[0].code;
-        if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
-        //else if(this.errorCode = "MBM2001") this.errorDesc = 'noRecordsFound'
-        else this.errorDesc = 'cannotRetrieveAccountBalance';
-        this.Failed = true;
+        this.StatementPage = true;
       }
+      // else
+      // {
+      //   this.isCallAPI = false;
+      //   this.SelectYearPage = false;
+      //   this.errorCode = result.body.error[0].code;
+      //   if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
+      //   //else if(this.errorCode = "MBM2001") this.errorDesc = 'noRecordsFound'
+      //   else this.errorDesc = 'cannotRetrieveAccountBalance';
+      //   this.Failed = true;
+      // }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
