@@ -91,7 +91,7 @@ export class CheckBalanceComponent implements OnInit {
                 subAccDebitTotal: element.subAccDebitTotal,
                 subAccDividend: element.subAccDividend,
                 subAccBalance: element.subAccBalance,
-                subAccSeqNumDesc: getSeqDesc(element.subAccSeqNum, result.body.detail.accEmasFlag)
+                subAccSeqNumDesc: this.getSeqDesc(element.subAccSeqNum, result.body.detail.accEmasFlag)
               })
             });
             this.totalSavings = result.body.detail.totalSavings;
@@ -100,7 +100,7 @@ export class CheckBalanceComponent implements OnInit {
             this.SummaryStatementPage = false;
             this.errorCode = result.body.error[0].code;
             if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
-            else if(this.errorCode = "MBM2001") this.errorDesc = 'noRecordsFound'
+            //else if(this.errorCode = "MBM2001") this.errorDesc = 'noRecordsFound'
             else this.errorDesc = 'cannotRetrieveAccountBalance';
             this.Failed = true;
           }
@@ -112,53 +112,58 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   getSeqDesc(seqNum: string, accEmasFlag: string): string{
+    let seqNumDesc = '';
     switch (seqNum)
     {
       case '1':
-          return 'Akaun 1';
+          seqNumDesc = 'Akaun 1';
           break;
       case '2':
-          return 'Akaun 2';
+          seqNumDesc = 'Akaun 2';
           break;
 
       case '6':
-          return 'Akaun Pemindahan Tuntutan Harta Perkahwinan';
+          seqNumDesc = 'Akaun Pemindahan Tuntutan Harta Perkahwinan';
           break;
 
       case '5':
-          return 'Akaun Pengeluaran Bayaran Berkala';
+          seqNumDesc = 'Akaun Pengeluaran Bayaran Berkala';
           break;
 
       case '9':
-          return 'Akaun Pengeluaran Umur 55 Tahun - Kombinasi';
+          seqNumDesc = 'Akaun Pengeluaran Umur 55 Tahun - Kombinasi';
           break;
 
       case '4':
-          return 'Akaun Pengeluaran Bayaran Bulanan';
+          seqNumDesc = 'Akaun Pengeluaran Bayaran Bulanan';
           break;
 
       case '12':
-          return 'Akaun Pengeluaran Ansuran Bulanan Pinjaman Perumahan';
+          seqNumDesc = 'Akaun Pengeluaran Ansuran Bulanan Pinjaman Perumahan';
           break;
 
       case '11':
-          return 'Akaun Pengeluaran Perumahan Fleksibel';
+          seqNumDesc = 'Akaun Pengeluaran Perumahan Fleksibel';
           break;
 
       case '13':
-          return 'Akaun 55';
+          seqNumDesc = 'Akaun 55';
           break;
 
       case '14':
-          return 'Akaun Syer Kerajaan';
+          seqNumDesc = 'Akaun Syer Kerajaan';
           break;
       case '':
-          if (accEmasFlag != '' && accEmasFlag.ToUpper() == 'Y')
+          if (accEmasFlag != '' && accEmasFlag.toUpperCase() == 'Y')
           {
-              return 'Akaun Emas';
+              seqNumDesc = 'Akaun Emas';
+          }
+          else{
+            seqNumDesc = 'Akaun' + '';
           }
           break;
     }
+    return seqNumDesc;
   }
 
   SummaryStatementYes() {
