@@ -46,6 +46,7 @@ export class VerifyMyKadComponent implements OnInit {
   myKadData: any;
 
   RetryCountInstance = 0;
+  format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   
   constructor(
     private route: Router,
@@ -140,8 +141,14 @@ export class VerifyMyKadComponent implements OnInit {
             this.InsertMyKad = false;
             this.Language = true;
             this.SelectLanguage = true;
+            let password = signalRConnection.adapter[0].adapterNameEncrypted;
+
+            if (!this.format.test(password)) {
+              password = password.concat('=');
+            }
+
             this._aldanService.
-            getToken(signalRConnection.kioskCode, signalRConnection.adapter[0].adapterNameEncrypted).
+            getToken(signalRConnection.kioskCode, password).
             subscribe((result: any) => {
               //Not Number
               accessToken.token = result.access_token;
