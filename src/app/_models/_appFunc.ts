@@ -46,6 +46,7 @@ export class appFunc {
     static oDetails: any[];
     static summaryDetails: any;
     static transactionAmtForAcc1: any;
+    static CurrYears = new Date().getFullYear();
     
 
 

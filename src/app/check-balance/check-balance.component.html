@@ -4,7 +4,7 @@
         <div class="row padTop2rem content-container" *ngIf="SummaryStatementPage">
             <div class="text-center">
                 <div class="lblHeader">
-                    {{"carum"| translate}}
+                    {{"balance"| translate}} {{CurrentYear}}
                 </div>
                 <div class="row">
                     <label class="lblKWSP">
@@ -66,7 +66,7 @@
                         <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
-                <div class="row topBottom1rem">
+                <div class="row topBottom1rem" *ngIf="!isCallAPI">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnNo" (click)="BackFromSelectYearPage()">{{"back"| translate}}</button>
@@ -85,35 +85,41 @@
                         RM{{totalSavings | number : '1.2-2'}}
                     </label>
                 </div>
-                <table style="width:100%">
-                    <tr>
-                        <th class="left">{{"carumMonth"|translate}}</th>
-                        <th class="right">{{"transaction"|translate}}</th>
-                        <th class="right">{{"date"|translate}}</th>
-                        <th class="right">{{"majikan"|translate}}</th>
-                        <th class="right">{{"carumMember"|translate}}</th>
-                        <th class="right">{{"total"|translate}}</th>
-                    </tr>
-                    <tr *ngFor="let c of cDetails">
-                        <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.contribMonth}}</td>
-                        <td class="right">{{c.transDesc}}</td>
-                        <td class="right">{{c.transDate}}</td>
-                        <td class="right">{{c.employerShare | number : '1.2-2'}}</td>
-                        <td class="right">{{c.memberShare | number : '1.2-2'}}</td>
-                        <td class="right" style="font-weight: 700;">{{c.totalContribAmt | number : '1.2-2'}}</td>
-                    </tr>
-                    <tr *ngIf="cDetails.length == 0">
-                            <td class="left" colspan="6">{{"noTransaction"|translate}}</td>
-                    </tr>
-                    <tr *ngIf="cDetails.length != 0">
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th class="right">{{"total"|translate}}</th>
-                        <th class="right" style="font-weight: 700;">{{transactionAmtForAcc1 | number : '1.2-2'}}</th>
-                    </tr>
-                </table>
+                <div class="scrollbox">
+                    <div class="tablescroll">
+                        <table style="width:100%">
+                            <tr>
+                                <th class="left" style="position:sticky;  top:-5px;">{{"carumMonth"|translate}}</th>
+                                <th class="left" style="position:sticky;  top:-5px;">{{"transaction"|translate}}</th>
+                                <th class="left" style="position:sticky;  top:-5px;">{{"date"|translate}}</th>
+                                <th class="right" style="position:sticky; top:-5px;">{{"majikan"|translate}}</th>
+                                <th class="right" style="position:sticky; top:-5px;">{{"carumMember"|translate}}</th>
+                                <th class="right" style="position:sticky; top:-5px;">{{"total"|translate}}</th>
+                            </tr>
+                            <tr *ngFor="let c of cDetails">
+                                <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.contribMonth}}</td>
+                                <td class="left">{{c.transDesc}}</td>
+                                <td class="left">{{c.transDate}}</td>
+                                <td class="right">{{c.employerShare | number : '1.2-2'}}</td>
+                                <td class="right">{{c.memberShare | number : '1.2-2'}}</td>
+                                <td class="right" style="font-weight: 700;">{{c.totalContribAmt | number : '1.2-2'}}</td>
+                            </tr>
+                            <tr *ngIf="cDetails.length == 0">
+                                <td class="left" colspan="6">{{"noTransaction"|translate}}</td>
+                            </tr>
+                            <tr *ngIf="cDetails.length != 0">
+                                <th style="position:sticky; bottom:-5px;"></th>
+                                <th style="position:sticky; bottom:-5px;"></th>
+                                <th style="position:sticky; bottom:-5px;"></th>
+                                <th style="position:sticky; bottom:-5px;"></th>
+                                <th class="right" style="position:sticky; bottom:-5px;">{{"total"|translate}}</th>
+                                <th class="right" style="font-weight: 700; position:sticky; bottom:-5px;">{{transactionAmtForAcc1 | number : '1.2-2'}}</th>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+              
                 <div class="row topBottom1rem">
                     <div class="col-2"></div>
                     <div class="col-4">

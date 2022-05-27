@@ -40,7 +40,9 @@ export class CheckBalanceComponent implements OnInit {
   errorDesc = "";
   errorCode = "";
   email = "";
-  moreRecords = ""
+  moreRecordIndicator = "";
+  paginationKey = "";
+  CurrentYear = appFunc.CurrYears;
   
 
   constructor(
@@ -278,6 +280,8 @@ export class CheckBalanceComponent implements OnInit {
 
   DisplaySelectedYearStatement(year: number) {
     this.cDetails = [];
+    this.moreRecordIndicator = '';
+    this.paginationKey = '';
     this.isCallAPI = true;
     const mainBody = {
       "accNum": appFunc.currMemberDetail.accNum,
@@ -329,8 +333,6 @@ export class CheckBalanceComponent implements OnInit {
           appFunc.sDetails = result.body.detail.summaryStatement;
           appFunc.summaryDetails = result.body.detail;
           this.totalSavings = result.body.detail.totalSavings;
-          this.SelectYearPage = false;
-          this.StatementPage = true;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -365,8 +367,8 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if (result.body.responseCode == '0') {
         appFunc.dataForEmail = result.body;
-        this.SelectYearPage = false;
-        this.StatementPage = true;
+        // this.SelectYearPage = false;
+        // this.StatementPage = true;
       }
       // else{
       //   this.isCallAPI = false;
@@ -379,16 +381,21 @@ export class CheckBalanceComponent implements OnInit {
       this.route.navigate(['outofservice']);
     });
     // Get Contribution for Selected Year
+    this._aldanService.
+    MemberDetailStatement(detailBodyForContribution).
+    subscribe((result: any) => {
+      if(result.body.responseCode == "0"){
+        this.cDetails = result.body.detail.detailStatement;
+        this.moreRecordIndicator = result.body.moreRecordIndicator;
+        this.paginationKey = result.body.paginationKey;
+        appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+        this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
 
-    While(this.moreRecords = 'Y')
-    {
-      this._aldanService.
-      MemberDetailStatement(detailBodyForContribution).
-      subscribe((result: any) => {
-        this.isCallAPI = false;
-        if(result.body.responseCode == "0"){
-          this.cDetails = result.body.detail.detailStatement;
-          this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+        if(this.moreRecordIndicator == 'Y'){
+          this.LoopMoreRecord(year)
+        }
+        else{
+          this.isCallAPI = false;
           appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
           this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
           if(selectLang.selectedLang == 'bm'){
@@ -400,32 +407,10 @@ export class CheckBalanceComponent implements OnInit {
           this.SelectYearPage = false;
           this.StatementPage = true;
         }
-        else{
-          appFunc.transactionAmtForAcc1 = Number('0.00');
-          appFunc.cDetails = [];
-          this.SelectYearPage = false;
-          this.StatementPage = true;
-        }
-      }
-    }
-    this._aldanService.
-    MemberDetailStatement(detailBodyForContribution).
-    subscribe((result: any) => {
-      this.isCallAPI = false;
-      if(result.body.responseCode == "0"){
-        this.cDetails = result.body.detail.detailStatement;
-        appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
-        this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
-        if(selectLang.selectedLang == 'bm'){
-          this.cDetails.forEach((contribution: any) => {
-            contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
-          });
-        }
-        appFunc.cDetails = this.cDetails;
-        this.SelectYearPage = false;
-        this.StatementPage = true;
+        
       }
       else{
+        this.isCallAPI = false;
         appFunc.transactionAmtForAcc1 = Number('0.00');
         appFunc.cDetails = [];
         this.SelectYearPage = false;
@@ -445,6 +430,8 @@ export class CheckBalanceComponent implements OnInit {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
     });
+
+    
   }
 
   failedYes(){
@@ -472,6 +459,60 @@ export class CheckBalanceComponent implements OnInit {
       this.SelectYearPage = false;
       this.SummaryStatementPage = true;
     }
+  }
+
+  LoopMoreRecord(year: number){
+    const detailBodyForContribution = {
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": 'S',
+      "stmtYear": year.toString(),
+      "categoryCode": "C",
+      "paginationKey": this.paginationKey,
+      "moreRecordIndicator": this.moreRecordIndicator,
+      "sessionId": appFunc.sessionId
+    };
+
+    this._aldanService.
+    MemberDetailStatement(detailBodyForContribution).
+    subscribe((result: any) => {
+      if(result.body.responseCode == "0"){
+        result.body.detail.detailStatement.forEach((element: any) => {
+          this.cDetails.push(element)
+        });
+        this.moreRecordIndicator = result.body.moreRecordIndicator;
+        this.paginationKey = result.body.paginationKey;
+
+        if(this.moreRecordIndicator != 'Y'){
+          this.isCallAPI = false;
+          if(selectLang.selectedLang == 'bm'){
+            this.cDetails.forEach((contribution: any) => {
+              contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
+            });
+          }
+          appFunc.cDetails = this.cDetails;
+          this.SelectYearPage = false;
+          this.StatementPage = true;
+        }
+        else{
+          this.LoopMoreRecord(year)
+        }
+      }
+      else{
+        // appFunc.transactionAmtForAcc1 = Number('0.00');
+        // appFunc.cDetails = [];
+        // this.SelectYearPage = false;
+        // this.StatementPage = true;
+        this.isCallAPI = false;
+        if(selectLang.selectedLang == 'bm'){
+          this.cDetails.forEach((contribution: any) => {
+            contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
+          });
+        }
+        appFunc.cDetails = this.cDetails;
+        this.SelectYearPage = false;
+        this.StatementPage = true;
+      }
+    });
   }
 }
 
