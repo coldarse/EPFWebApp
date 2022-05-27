@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -140,6 +140,21 @@ export class VerifyMyKadComponent implements OnInit {
             this.InsertMyKad = false;
             this.Language = true;
             this.SelectLanguage = true;
+            this._aldanService.
+            getToken(signalRConnection.kioskCode, signalRConnection.adapter[0].adapterNameEncrypted).
+            subscribe((result: any) => {
+              //Not Number
+              accessToken.token = result.access_token;
+              accessToken.httpOptions = {
+                headers: new HttpHeaders(
+                  { Authorization: 'Bearer ' + accessToken.token }
+                ),
+                observe: 'response' as 'body'
+              };
+            },(err: HttpErrorResponse) => {
+              appFunc.message = 'HttpError';
+              this.route.navigate(['outofservice']);
+            });
           }
         }
       }
@@ -298,7 +313,15 @@ export class VerifyMyKadComponent implements OnInit {
           subscribe((result1: any) => {
             if (result1.body.responseCode == '0'){
               appFunc.currMemberDetail = result1.body.detail;
-              this.route.navigate(['mainMenu']);
+              if(appFunc.currMemberDetail.iAkaunStatus != "A"){
+                this.route.navigate(['iAkaunRegistration']);
+              }
+              else if(appFunc.currMemberDetail.iAkaunStatus == "A" && appFunc.currMemberDetail.tacMobilePhone.length == 0){
+                this.route.navigate(['updateTAC']);
+              }
+              else{
+                this.route.navigate(['mainMenu']);
+              }
             }
             else{
               // Error

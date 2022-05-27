@@ -162,6 +162,10 @@
     padding-bottom: 2rem;
 }
 
+.padBottom3rem{
+    padding-bottom: 3rem;
+}
+
 .padBottom5rem {
     padding-bottom: 5rem;
 }
@@ -734,6 +738,11 @@ td {
 }
 
 .left {
+    text-align: left;
+    padding-left: 0.5rem;
+}
+
+.noTransleft {
     text-align: left;
     padding-left: 0.5rem;
 }

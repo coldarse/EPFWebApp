@@ -7,6 +7,7 @@ import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { HttpErrorResponse } from '@angular/common/http';
 import { templateJitUrl } from '@angular/compiler';
+import { formatDate } from '@angular/common';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -192,35 +193,133 @@ export class IAkaunRegistrationComponent implements OnInit {
       sessionId: appFunc.sessionId
     };
     if (this.fullEmailAddress == '') this.fullEmailAddress = '@';
-    this._aldanService
-      .iAkaunRegistration(
-        appFunc.currMemberDetail.primaryIdNum, 
-        appFunc.currMemberDetail.custName, 
-        this.phoneNo, 
-        this.fullEmailAddress, 
-        selectLang.selectedLang, 
-        iAkaunbody
-      )
-      .subscribe((result: any) => {
-        this.isCallAPI = false;
-        if (result.body.responseCode == '0') {
-          if(this.isiAkaunActModuleEnabled){
-            this.AskActivate = true;
+
+    if(appFunc.currMemberDetail.tacMobilePhone.length == 0){
+      const addMobileTACBody = {
+        custNum: appFunc.currMemberDetail.cifNum,
+        tacMobilePhoneCode: 'TA',
+        tacMobilePhone: this.phoneNo,
+        registrationDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        registrationChannel: 'SST',
+        status: 'P',
+        checkForDuplicate: 'N',
+        generateRequestNum: 'N',
+        requestNum: '',
+        sessionId: appFunc.sessionId,
+      }
+
+      this._aldanService.
+      AddTAC(addMobileTACBody).
+      subscribe((result: any) => {
+        if(result.body.responseCode == "0"){
+          const body = {
+            "regType": "M",
+            "accNum": appFunc.currMemberDetail.accNum,
+            "accType": "S",
+            "searchType": "A",
+            "idNum": currentMyKadDetails.ICNo,
+            "idType": currentMyKadDetails.CategoryType,
+            "reqTypeCode": "",
+            "sessionId": appFunc.sessionId
           }
-          else{
-            this.SuccessActivation = true;
-          }
-          this.PhoneEmailConfirmation = false;
-          deleteKeyboard();
-        } else {
-          this.PhoneEmailConfirmation = false;
-          this.Failed = true;
-          this.errorDesc = "RegiAkaunFailed";
+          this._aldanService.
+            MemberProfileInfo(body).
+            subscribe((result: any) => {
+              if(result.body.responseCode == "0"){
+                appFunc.currMemberDetail = result.body.detail;
+                this.registeriAkaun(iAkaunbody);
+              }
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
+              this.route.navigate(['outofservice']);
+            });
+          
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
       });
+    }
+    else{
+      const updateTACBody = {
+        custNum: appFunc.currMemberDetail.cifNum,
+        tacMobilePhoneCode: "TA",
+        tacMobilePhone: this.phoneNo,
+        amendmentChannel: "SST",
+        status: "P",
+        checkForDuplicate: "N",
+        generateRequestNum: "N",
+        requestNum: '',
+        sessionId: appFunc.sessionId
+      }
+
+      this._aldanService.
+      UpdateTAC(updateTACBody).
+      subscribe((result: any) => {
+        if(result.body.responseCode == "0"){
+          const body = {
+            "regType": "M",
+            "accNum": appFunc.currMemberDetail.accNum,
+            "accType": "S",
+            "searchType": "A",
+            "idNum": currentMyKadDetails.ICNo,
+            "idType": currentMyKadDetails.CategoryType,
+            "reqTypeCode": "",
+            "sessionId": appFunc.sessionId
+          }
+
+          this._aldanService.
+            MemberProfileInfo(body).
+            subscribe((result: any) => {
+              if(result.body.responseCode == "0"){
+                appFunc.currMemberDetail = result.body.detail;
+                this.registeriAkaun(iAkaunbody);
+              }
+            },(err: HttpErrorResponse) => {
+              appFunc.message = "HttpError";
+              this.route.navigate(['outofservice']);
+            });
+        }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+      });
+    }
+    
+    
+    
+  }
+
+  registeriAkaun(iAkaunbody:any){
+    this._aldanService
+    .iAkaunRegistration(
+      appFunc.currMemberDetail.primaryIdNum, 
+      appFunc.currMemberDetail.custName, 
+      this.phoneNo, 
+      this.fullEmailAddress, 
+      selectLang.selectedLang, 
+      iAkaunbody
+    )
+    .subscribe((result: any) => {
+      this.isCallAPI = false;
+      if (result.body.responseCode == '0') {
+        if(this.isiAkaunActModuleEnabled){
+          this.AskActivate = true;
+        }
+        else{
+          this.SuccessActivation = true;
+        }
+        this.PhoneEmailConfirmation = false;
+        deleteKeyboard();
+      } else {
+        this.PhoneEmailConfirmation = false;
+        this.Failed = true;
+        this.errorDesc = "RegiAkaunFailed";
+      }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
+    });
   }
 
   PhoneEmailConfirmationNo() {

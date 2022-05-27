@@ -328,6 +328,8 @@ export class CheckBalanceComponent implements OnInit {
           appFunc.sDetails = result.body.detail.summaryStatement;
           appFunc.summaryDetails = result.body.detail;
           this.totalSavings = result.body.detail.totalSavings;
+          this.SelectYearPage = false;
+          this.StatementPage = true;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -362,6 +364,8 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if (result.body.responseCode == '0') {
         appFunc.dataForEmail = result.body;
+        this.SelectYearPage = false;
+        this.StatementPage = true;
       }
       // else{
       //   this.isCallAPI = false;
@@ -380,7 +384,6 @@ export class CheckBalanceComponent implements OnInit {
       this.isCallAPI = false;
       if(result.body.responseCode == "0"){
         this.cDetails = result.body.detail.detailStatement;
-        this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
         if(selectLang.selectedLang == 'bm'){
