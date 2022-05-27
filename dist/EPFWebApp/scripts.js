@@ -11,7 +11,7 @@
 ;/* jquery.signalR.core.js */
 /*global window:false */
 /*!
- * ASP.NET SignalR JavaScript Library 2.4.2
+ * ASP.NET SignalR JavaScript Library 2.4.3
  * http://signalr.net/
  *
  * Copyright (c) .NET Foundation. All rights reserved.
@@ -264,7 +264,7 @@
 
     // .on() was added in version 1.7.0, .load() was removed in version 3.0.0 so we fallback to .load() if .on() does
     // not exist to not break existing applications
-    if (typeof _pageWindow.on == "function") {
+    if (typeof _pageWindow.on === "function") {
         _pageWindow.on("load", function () { _pageLoaded = true; });
     }
     else {
@@ -1553,7 +1553,8 @@
                 window.fetch(url, {
                     method: "POST",
                     keepalive: true,
-                    headers: requestHeaders
+                    headers: requestHeaders,
+                    credentials: connection.withCredentials === true ? "include" : "same-origin"
                 });
             }
             else { 
@@ -3179,7 +3180,7 @@
 /// <reference path="jquery.signalR.core.js" />
 (function ($, undefined) {
     // This will be modified by the build script
-    $.signalR.version = "2.4.2";
+    $.signalR.version = "2.4.3";
 }(window.jQuery));
 
 ;

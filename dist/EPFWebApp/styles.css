@@ -2041,7 +2041,6 @@ progress {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2243,7 +2242,6 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2302,7 +2300,6 @@ textarea.form-control-lg {
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   -webkit-print-color-adjust: exact;
   color-adjust: exact;
@@ -2387,7 +2384,6 @@ textarea.form-control-lg {
   padding: 0;
   background-color: transparent;
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 .form-range:focus {
@@ -2440,7 +2436,6 @@ textarea.form-control-lg {
   border-radius: 1rem;
   -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -moz-appearance: none;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -5071,7 +5066,6 @@ textarea.form-control-lg {
   display: none;
 }
 .toast-container {
-  width: -webkit-max-content;
   width: max-content;
   max-width: 100%;
   pointer-events: none;
@@ -10826,7 +10820,6 @@ textarea.form-control-lg {
     font-style: normal;
     font-weight: 700;
     color: rgb(49, 39, 131);
-    width: -webkit-max-content;
     width: max-content;
     /* margin-left: -6rem; */
 }
@@ -13723,7 +13716,6 @@ progress {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -13925,7 +13917,6 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -13984,7 +13975,6 @@ textarea.form-control-lg {
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   -webkit-print-color-adjust: exact;
   color-adjust: exact;
@@ -14069,7 +14059,6 @@ textarea.form-control-lg {
   padding: 0;
   background-color: transparent;
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 .form-range:focus {
@@ -14122,7 +14111,6 @@ textarea.form-control-lg {
   border-radius: 1rem;
   -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -moz-appearance: none;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -16753,7 +16741,6 @@ textarea.form-control-lg {
   display: none;
 }
 .toast-container {
-  width: -webkit-max-content;
   width: max-content;
   max-width: 100%;
   pointer-events: none;
@@ -22504,6 +22491,12 @@ textarea.form-control-lg {
 .mi-add-comment::before {
   content: "\e266";
 }
+.mi-add-home::before {
+  content: "\f8eb";
+}
+.mi-add-home-work::before {
+  content: "\f8ed";
+}
 .mi-add-ic-call::before {
   content: "\e97c";
 }
@@ -22771,6 +22764,9 @@ textarea.form-control-lg {
 .mi-arrow-left::before {
   content: "\e5de";
 }
+.mi-arrow-outward::before {
+  content: "\f8ce";
+}
 .mi-arrow-right::before {
   content: "\e5df";
 }
@@ -22809,6 +22805,9 @@ textarea.form-control-lg {
 }
 .mi-assignment-turned-in::before {
   content: "\e862";
+}
+.mi-assist-walker::before {
+  content: "\f8d5";
 }
 .mi-assistant::before {
   content: "\e39f";
@@ -23046,6 +23045,9 @@ textarea.form-control-lg {
 }
 .mi-blender::before {
   content: "\efe3";
+}
+.mi-blind::before {
+  content: "\f8d6";
 }
 .mi-blinds::before {
   content: "\e286";
@@ -23623,6 +23625,9 @@ textarea.form-control-lg {
 .mi-construction::before {
   content: "\ea3c";
 }
+.mi-contact-emergency::before {
+  content: "\f8d1";
+}
 .mi-contact-mail::before {
   content: "\e0d0";
 }
@@ -23830,6 +23835,12 @@ textarea.form-control-lg {
 .mi-data-usage::before {
   content: "\e1af";
 }
+.mi-dataset::before {
+  content: "\f8ee";
+}
+.mi-dataset-linked::before {
+  content: "\f8ef";
+}
 .mi-date-range::before {
   content: "\e916";
 }
@@ -24015,6 +24026,15 @@ textarea.form-control-lg {
 }
 .mi-display-settings::before {
   content: "\eb97";
+}
+.mi-diversity-1::before {
+  content: "\f8d7";
+}
+.mi-diversity-2::before {
+  content: "\f8d8";
+}
+.mi-diversity-3::before {
+  content: "\f8d9";
 }
 .mi-dnd-forwardslash::before {
   content: "\e611";
@@ -24406,6 +24426,21 @@ textarea.form-control-lg {
 .mi-face::before {
   content: "\e87c";
 }
+.mi-face-2::before {
+  content: "\f8da";
+}
+.mi-face-3::before {
+  content: "\f8db";
+}
+.mi-face-4::before {
+  content: "\f8dc";
+}
+.mi-face-5::before {
+  content: "\f8dd";
+}
+.mi-face-6::before {
+  content: "\f8de";
+}
 .mi-face-retouching-natural::before {
   content: "\ef4e";
 }
@@ -24591,6 +24626,12 @@ textarea.form-control-lg {
 }
 .mi-fire-hydrant::before {
   content: "\f1a3";
+}
+.mi-fire-hydrant-alt::before {
+  content: "\f8f1";
+}
+.mi-fire-truck::before {
+  content: "\f8f2";
 }
 .mi-fireplace::before {
   content: "\ea43";
@@ -24966,6 +25007,12 @@ textarea.form-control-lg {
 }
 .mi-groups::before {
   content: "\f233";
+}
+.mi-groups-2::before {
+  content: "\f8df";
+}
+.mi-groups-3::before {
+  content: "\f8e0";
 }
 .mi-h-mobiledata::before {
   content: "\f018";
@@ -25750,6 +25797,9 @@ textarea.form-control-lg {
 .mi-lyrics::before {
   content: "\ec0b";
 }
+.mi-macro-off::before {
+  content: "\f8d2";
+}
 .mi-mail::before {
   content: "\e158";
 }
@@ -25764,6 +25814,15 @@ textarea.form-control-lg {
 }
 .mi-man::before {
   content: "\e4eb";
+}
+.mi-man-2::before {
+  content: "\f8e1";
+}
+.mi-man-3::before {
+  content: "\f8e2";
+}
+.mi-man-4::before {
+  content: "\f8e3";
 }
 .mi-manage-accounts::before {
   content: "\f02e";
@@ -26506,6 +26565,15 @@ textarea.form-control-lg {
 .mi-person::before {
   content: "\e7fd";
 }
+.mi-person-2::before {
+  content: "\f8e4";
+}
+.mi-person-3::before {
+  content: "\f8e5";
+}
+.mi-person-4::before {
+  content: "\f8e6";
+}
 .mi-person-add::before {
   content: "\e7fe";
 }
@@ -26830,6 +26898,9 @@ textarea.form-control-lg {
 .mi-psychology::before {
   content: "\ea4a";
 }
+.mi-psychology-alt::before {
+  content: "\f8ea";
+}
 .mi-public::before {
   content: "\e80b";
 }
@@ -27009,6 +27080,9 @@ textarea.form-control-lg {
 }
 .mi-reorder::before {
   content: "\e8fe";
+}
+.mi-repartition::before {
+  content: "\f8e8";
 }
 .mi-repeat::before {
   content: "\e040";
@@ -27420,6 +27494,9 @@ textarea.form-control-lg {
 }
 .mi-severe-cold::before {
   content: "\ebd3";
+}
+.mi-shape-line::before {
+  content: "\f8d3";
 }
 .mi-share::before {
   content: "\e80d";
@@ -28342,6 +28419,9 @@ textarea.form-control-lg {
 .mi-tram::before {
   content: "\e571";
 }
+.mi-transcribe::before {
+  content: "\f8ec";
+}
 .mi-transfer-within-a-station::before {
   content: "\e572";
 }
@@ -28426,6 +28506,9 @@ textarea.form-control-lg {
 .mi-two-wheeler::before {
   content: "\e9f9";
 }
+.mi-type-specimen::before {
+  content: "\f8f0";
+}
 .mi-u-turn-left::before {
   content: "\eba1";
 }
@@ -28444,8 +28527,14 @@ textarea.form-control-lg {
 .mi-unfold-less::before {
   content: "\e5d6";
 }
+.mi-unfold-less-double::before {
+  content: "\f8cf";
+}
 .mi-unfold-more::before {
   content: "\e5d7";
+}
+.mi-unfold-more-double::before {
+  content: "\f8d0";
 }
 .mi-unpublished::before {
   content: "\f236";
@@ -28863,6 +28952,9 @@ textarea.form-control-lg {
 }
 .mi-woman::before {
   content: "\e13e";
+}
+.mi-woman-2::before {
+  content: "\f8e7";
 }
 .mi-woo-commerce::before {
   content: "\ea6d";
