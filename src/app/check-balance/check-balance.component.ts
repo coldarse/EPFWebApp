@@ -40,6 +40,7 @@ export class CheckBalanceComponent implements OnInit {
   errorDesc = "";
   errorCode = "";
   email = "";
+  moreRecords = ""
   
 
   constructor(
@@ -374,6 +375,35 @@ export class CheckBalanceComponent implements OnInit {
       this.route.navigate(['outofservice']);
     });
     // Get Contribution for Selected Year
+
+    While(this.moreRecords = 'Y')
+    {
+      this._aldanService.
+      MemberDetailStatement(detailBodyForContribution).
+      subscribe((result: any) => {
+        this.isCallAPI = false;
+        if(result.body.responseCode == "0"){
+          this.cDetails = result.body.detail.detailStatement;
+          this.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+          appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+          this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
+          if(selectLang.selectedLang == 'bm'){
+            this.cDetails.forEach((contribution: any) => {
+              contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
+            });
+          }
+          appFunc.cDetails = this.cDetails;
+          this.SelectYearPage = false;
+          this.StatementPage = true;
+        }
+        else{
+          appFunc.transactionAmtForAcc1 = Number('0.00');
+          appFunc.cDetails = [];
+          this.SelectYearPage = false;
+          this.StatementPage = true;
+        }
+      }
+    }
     this._aldanService.
     MemberDetailStatement(detailBodyForContribution).
     subscribe((result: any) => {
