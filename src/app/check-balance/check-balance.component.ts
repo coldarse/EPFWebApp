@@ -482,13 +482,12 @@ export class CheckBalanceComponent implements OnInit {
             appFunc.wDetails.push(element)
           });
         }
-        if(categoryCode == 'O')
+        else if(categoryCode == 'O')
         {
           result.body.detail.detailStatement.forEach((element: any) => {
             appFunc.oDetails.push(element)
           });
         }
-   
         this.moreRecordIndicator = result.body.moreRecordIndicator;
         this.paginationKey = result.body.paginationKey;
 
