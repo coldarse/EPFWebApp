@@ -405,7 +405,7 @@ export class CheckBalanceComponent implements OnInit {
           this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
           if(selectLang.selectedLang == 'bm'){
             this.cDetails.forEach((contribution: any) => {
-              contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
+              contribution.contribMonth = appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'));
             });
           }
           appFunc.cDetails = this.cDetails;
@@ -495,7 +495,7 @@ export class CheckBalanceComponent implements OnInit {
           this.isCallAPI = false;
           if(selectLang.selectedLang == 'bm'){
             this.cDetails.forEach((contribution: any) => {
-              contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
+              contribution.contribMonth = appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'));
             });
           }
           appFunc.cDetails = this.cDetails;
@@ -510,7 +510,7 @@ export class CheckBalanceComponent implements OnInit {
         this.isCallAPI = false;
         if(selectLang.selectedLang == 'bm'){
           this.cDetails.forEach((contribution: any) => {
-            contribution.contribMonth = appFunc.translateMonthToBM(contribution.contribMonth);
+            contribution.contribMonth = appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'));
           });
         }
         appFunc.cDetails = this.cDetails;
