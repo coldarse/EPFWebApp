@@ -281,6 +281,8 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   DisplaySelectedYearStatement(year: number) {
+    appFunc.wDetails = [];
+    appFunc.oDetails = [];
     this.cDetails = [];
     this.moreRecordIndicator = '';
     this.paginationKey = '';
@@ -347,6 +349,11 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
         appFunc.wDetails = result.body.detail.detailStatement;
+        this.moreRecordIndicator = result.body.moreRecordIndicator;
+        this.paginationKey = result.body.paginationKey;
+        if(this.moreRecordIndicator == 'Y'){
+          this.LoopMoreRecord(year, 'W')
+        }
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -358,6 +365,11 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
         appFunc.oDetails = result.body.detail.detailStatement;
+        this.moreRecordIndicator = result.body.moreRecordIndicator;
+        this.paginationKey = result.body.paginationKey;
+        if(this.moreRecordIndicator == 'Y'){
+          this.LoopMoreRecord(year, 'O')
+        }
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -385,7 +397,7 @@ export class CheckBalanceComponent implements OnInit {
         appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
         if(this.moreRecordIndicator == 'Y'){
-          this.LoopMoreRecord(year)
+          this.LoopMoreRecord(year, 'C')
         }
         else{
           this.isCallAPI = false;
@@ -443,24 +455,40 @@ export class CheckBalanceComponent implements OnInit {
     }
   }
 
-  LoopMoreRecord(year: number){
-    const detailBodyForContribution = {
+  LoopMoreRecord(year: number, categoryCode: string){
+    const detailBodyForAllCategory = {
       "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
       "stmtYear": year.toString(),
-      "categoryCode": "C",
+      "categoryCode": categoryCode,
       "paginationKey": this.paginationKey,
       "moreRecordIndicator": this.moreRecordIndicator,
       "sessionId": appFunc.sessionId
     };
 
     this._aldanService.
-    MemberDetailStatement(detailBodyForContribution).
+    MemberDetailStatement(detailBodyForAllCategory).
     subscribe((result: any) => {
       if(result.body.responseCode == "0"){
-        result.body.detail.detailStatement.forEach((element: any) => {
-          this.cDetails.push(element)
-        });
+        if(categoryCode == 'C')
+        {
+          result.body.detail.detailStatement.forEach((element: any) => {
+            this.cDetails.push(element)
+          });
+        }
+        else if(categoryCode == 'W')
+        {
+          result.body.detail.detailStatement.forEach((element: any) => {
+            appFunc.wDetails.push(element)
+          });
+        }
+        if(categoryCode == 'O')
+        {
+          result.body.detail.detailStatement.forEach((element: any) => {
+            appFunc.oDetails.push(element)
+          });
+        }
+   
         this.moreRecordIndicator = result.body.moreRecordIndicator;
         this.paginationKey = result.body.paginationKey;
 
@@ -476,7 +504,7 @@ export class CheckBalanceComponent implements OnInit {
           this.StatementPage = true;
         }
         else{
-          this.LoopMoreRecord(year)
+          this.LoopMoreRecord(year, categoryCode)
         }
       }
       else{
