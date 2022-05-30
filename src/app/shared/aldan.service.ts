@@ -31,9 +31,9 @@ export class AldanService {
     private appConfig: AppConfiguration
     ) {
         this.url = appConfig.AldanAPIURL;
-        this.clientid = appConfig.Client_Id;
-        this.clientsecret = appConfig.Client_Secret;
-        this.granttype = appConfig.Grant_Type;
+        this.clientid = 'Kiosk_Client'; //appConfig.Client_Id;
+        this.clientsecret = '1q2w3E*';
+        this.granttype = 'password';
     }
 
   private handleError(error: HttpErrorResponse) {

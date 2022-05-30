@@ -69,6 +69,7 @@ export class CheckBalanceComponent implements OnInit {
     }
     else
     {
+      this.isCallAPI = true;
       const d = new Date();
       let stmtYear = d.getFullYear();
       const summaryBody = {
@@ -82,6 +83,7 @@ export class CheckBalanceComponent implements OnInit {
       this._aldanService
         .MemberSummaryStatement(summaryBody)
         .subscribe((result: any) => {
+          this.isCallAPI = false;
           if (result.body.responseCode == '0') {
             appFunc.summaryDetails = result.body.detail;
             appFunc.sDetails = result.body.detail.summaryStatement;
@@ -367,15 +369,7 @@ export class CheckBalanceComponent implements OnInit {
     subscribe((result: any) => {
       if (result.body.responseCode == '0') {
         appFunc.dataForEmail = result.body;
-        // this.SelectYearPage = false;
-        // this.StatementPage = true;
       }
-      // else{
-      //   this.isCallAPI = false;
-      //   this.SummaryStatementPage = false;
-      //   this.errorDesc = 'cannotRetrieveAccountBalance';
-      //   this.Failed = true;
-      // }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
@@ -390,7 +384,6 @@ export class CheckBalanceComponent implements OnInit {
         this.paginationKey = result.body.paginationKey;
         appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
         this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
-
         if(this.moreRecordIndicator == 'Y'){
           this.LoopMoreRecord(year)
         }
@@ -407,7 +400,6 @@ export class CheckBalanceComponent implements OnInit {
           this.SelectYearPage = false;
           this.StatementPage = true;
         }
-        
       }
       else{
         this.isCallAPI = false;
@@ -416,16 +408,6 @@ export class CheckBalanceComponent implements OnInit {
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
-      // else
-      // {
-      //   this.isCallAPI = false;
-      //   this.SelectYearPage = false;
-      //   this.errorCode = result.body.error[0].code;
-      //   if(this.errorCode == 'MBM2015') this.errorDesc = 'noOpeningBalance';
-      //   //else if(this.errorCode = "MBM2001") this.errorDesc = 'noRecordsFound'
-      //   else this.errorDesc = 'cannotRetrieveAccountBalance';
-      //   this.Failed = true;
-      // }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
@@ -498,10 +480,6 @@ export class CheckBalanceComponent implements OnInit {
         }
       }
       else{
-        // appFunc.transactionAmtForAcc1 = Number('0.00');
-        // appFunc.cDetails = [];
-        // this.SelectYearPage = false;
-        // this.StatementPage = true;
         this.isCallAPI = false;
         if(selectLang.selectedLang == 'bm'){
           this.cDetails.forEach((contribution: any) => {

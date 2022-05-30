@@ -20,12 +20,6 @@ export class JsonAppConfigService extends AppConfiguration {
         this.AESCrpytKey = data.AESCrpytKey;
         this.idletime = Number(data.idletime);
         this.popuptime = Number(data.popuptime);
-        this.Client_Id = data.Client_Id;
-        this.Client_Secret = data.Client_Secret;
-        this.Grant_Type = data.Grant_Type;
-        this.UserName = data.UserName;
-        this.Password = data.Password;
-        this.RetryCounts = Number(data.RetryCounts);
       })
       .catch(() => {
         console.error('Could not load configuration');
