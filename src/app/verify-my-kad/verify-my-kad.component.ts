@@ -320,7 +320,7 @@ export class VerifyMyKadComponent implements OnInit {
           subscribe((result1: any) => {
             if (result1.body.responseCode == '0'){
               appFunc.currMemberDetail = result1.body.detail;
-              if(appFunc.currMemberDetail.iAkaunStatus != "A"){
+              if(appFunc.currMemberDetail.iAkaunStatus == "N" || appFunc.currMemberDetail.iAkaunStatus == "E" || appFunc.currMemberDetail.iAkaunStatus == ""){
                 this.route.navigate(['iAkaunRegistration']);
               }
               else if(appFunc.currMemberDetail.iAkaunStatus == "A" && appFunc.currMemberDetail.tacMobilePhone.length == 0){

@@ -66,6 +66,7 @@ export class StartupComponent implements OnInit {
     this._aldanService.
       getToken(signalRConnection.kioskCode, password).
       subscribe((result: any) => {
+        appFunc.isFromStartupGetToken = false;
         clearInterval(this.dotInterval);
         if (!isNaN(result)) { //Number
           // Say that Kiosk Is Not Found in KMS
