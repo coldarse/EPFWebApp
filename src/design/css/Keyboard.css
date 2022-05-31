@@ -37,6 +37,7 @@
     padding: 0;
     -webkit-tap-highlight-color: transparent;
     position: relative;
+    font-family: 'filson-pro', sans-serif;
 }
 
 .keyboard__key:active {
