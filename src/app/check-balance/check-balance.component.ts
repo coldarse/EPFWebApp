@@ -45,6 +45,7 @@ export class CheckBalanceComponent implements OnInit {
   paginationKey = "";
   CurrentYear = appFunc.CurrYears;
   
+  
 
   constructor(
     private route: Router,
@@ -342,6 +343,18 @@ export class CheckBalanceComponent implements OnInit {
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
         this.route.navigate(['outofservice']);
+    });
+
+    // Get Member Statement
+    this._aldanService.
+    MemberStatement(mainBody).
+    subscribe((result: any) => {
+      if (result.body.responseCode == '0') {
+        appFunc.dataForEmail = result.body;
+      }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      this.route.navigate(['outofservice']);
     });
   
     // // Get Withdrawal for Selected Year
