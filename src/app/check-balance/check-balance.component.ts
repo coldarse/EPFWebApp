@@ -30,6 +30,7 @@ export class CheckBalanceComponent implements OnInit {
   Failed = false;
 
   totalSavings = 0;
+  SelectedYeartotalSavings = 0;
   transactionAmtForAcc1 = 0;
   selectedYear = 0;
   
@@ -254,8 +255,16 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   selectYear(year: number) {
+    if(year != this.selectedYear)
+    {
+      this.DisplaySelectedYearStatement(year);
+    }
+    else
+    {
+      this.SelectYearPage = false;
+      this.StatementPage = true;
+    }
     this.selectedYear = year;
-    this.DisplaySelectedYearStatement(year);
   }
 
   CalculateYears(): number[] {
@@ -338,7 +347,7 @@ export class CheckBalanceComponent implements OnInit {
           appFunc.dividendTotal = result.body.detail.dividendTotal;
           appFunc.sDetails = result.body.detail.summaryStatement;
           appFunc.summaryDetails = result.body.detail;
-          this.totalSavings = result.body.detail.totalSavings;
+          this.SelectedYeartotalSavings = result.body.detail.totalSavings;
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
