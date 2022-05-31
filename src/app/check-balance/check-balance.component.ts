@@ -10,6 +10,7 @@ import { currentMemberAddress, currMemberAddress } from '../_models/_currentMemb
 import { Subscription } from 'rxjs/internal/Subscription';
 import { selectLang } from '../_models/language';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-check-balance',
@@ -293,33 +294,33 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
-    const detailBodyForContribution = {
-      "accNum": appFunc.currMemberDetail.accNum,
-      "accType": 'S',
-      "stmtYear": year.toString(),
-      "categoryCode": "C",
-      "paginationKey": "",
-      "moreRecordIndicator": "N",
-      "sessionId": appFunc.sessionId
-    };
-    const detailBodyForWithdrawal = {
-      "accNum": appFunc.currMemberDetail.accNum,
-      "accType": 'S',
-      "stmtYear": year.toString(),
-      "categoryCode": "W",
-      "paginationKey": "",
-      "moreRecordIndicator": "N",
-      "sessionId": appFunc.sessionId
-    };
-    const detailBodyForOthers = {
-      "accNum": appFunc.currMemberDetail.accNum,
-      "accType": 'S',
-      "stmtYear": year.toString(),
-      "categoryCode": "O",
-      "paginationKey": "",
-      "moreRecordIndicator": "N",
-      "sessionId": appFunc.sessionId
-    };
+    // const detailBodyForContribution = {
+    //   "accNum": appFunc.currMemberDetail.accNum,
+    //   "accType": 'S',
+    //   "stmtYear": year.toString(),
+    //   "categoryCode": "C",
+    //   "paginationKey": "",
+    //   "moreRecordIndicator": "N",
+    //   "sessionId": appFunc.sessionId
+    // };
+    // const detailBodyForWithdrawal = {
+    //   "accNum": appFunc.currMemberDetail.accNum,
+    //   "accType": 'S',
+    //   "stmtYear": year.toString(),
+    //   "categoryCode": "W",
+    //   "paginationKey": "",
+    //   "moreRecordIndicator": "N",
+    //   "sessionId": appFunc.sessionId
+    // };
+    // const detailBodyForOthers = {
+    //   "accNum": appFunc.currMemberDetail.accNum,
+    //   "accType": 'S',
+    //   "stmtYear": year.toString(),
+    //   "categoryCode": "O",
+    //   "paginationKey": "",
+    //   "moreRecordIndicator": "N",
+    //   "sessionId": appFunc.sessionId
+    // };
     const summaryBody = {
       "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
@@ -343,38 +344,38 @@ export class CheckBalanceComponent implements OnInit {
         this.route.navigate(['outofservice']);
     });
   
-    // Get Withdrawal for Selected Year
-    this._aldanService.
-    MemberDetailStatement(detailBodyForWithdrawal).
-    subscribe((result: any) => {
-      if(result.body.responseCode == "0"){
-        appFunc.wDetails = result.body.detail.detailStatement;
-        this.moreRecordIndicator = result.body.moreRecordIndicator;
-        this.paginationKey = result.body.paginationKey;
-        if(this.moreRecordIndicator == 'Y'){
-          this.LoopMoreRecord(year, 'W')
-        }
-      }
-    },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
-    });
-    // Get Others for Selected Year
-    this._aldanService.
-    MemberDetailStatement(detailBodyForOthers).
-    subscribe((result: any) => {
-      if(result.body.responseCode == "0"){
-        appFunc.oDetails = result.body.detail.detailStatement;
-        this.moreRecordIndicator = result.body.moreRecordIndicator;
-        this.paginationKey = result.body.paginationKey;
-        if(this.moreRecordIndicator == 'Y'){
-          this.LoopMoreRecord(year, 'O')
-        }
-      }
-    },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
-    });
+    // // Get Withdrawal for Selected Year
+    // this._aldanService.
+    // MemberDetailStatement(detailBodyForWithdrawal).
+    // subscribe((result: any) => {
+    //   if(result.body.responseCode == "0"){
+    //     appFunc.wDetails = result.body.detail.detailStatement;
+    //     this.moreRecordIndicator = result.body.moreRecordIndicator;
+    //     this.paginationKey = result.body.paginationKey;
+    //     if(this.moreRecordIndicator == 'Y'){
+    //       this.LoopMoreRecord(year, 'W')
+    //     }
+    //   }
+    // },(err: HttpErrorResponse) => {
+    //   appFunc.message = "HttpError";
+    //   this.route.navigate(['outofservice']);
+    // });
+    // // Get Others for Selected Year
+    // this._aldanService.
+    // MemberDetailStatement(detailBodyForOthers).
+    // subscribe((result: any) => {
+    //   if(result.body.responseCode == "0"){
+    //     appFunc.oDetails = result.body.detail.detailStatement;
+    //     this.moreRecordIndicator = result.body.moreRecordIndicator;
+    //     this.paginationKey = result.body.paginationKey;
+    //     if(this.moreRecordIndicator == 'Y'){
+    //       this.LoopMoreRecord(year, 'O')
+    //     }
+    //   }
+    // },(err: HttpErrorResponse) => {
+    //   appFunc.message = "HttpError";
+    //   this.route.navigate(['outofservice']);
+    // });
     // Get Member Statement
     this._aldanService.
     MemberStatement(mainBody).
@@ -386,48 +387,83 @@ export class CheckBalanceComponent implements OnInit {
       appFunc.message = "HttpError";
       this.route.navigate(['outofservice']);
     });
-    // Get Contribution for Selected Year
+    // // Get Contribution for Selected Year
+    // this._aldanService.
+    // MemberDetailStatement(detailBodyForContribution).
+    // subscribe((result: any) => {
+    //   if(result.body.responseCode == "0"){
+    //     this.cDetails = result.body.detail.detailStatement;
+    //     this.moreRecordIndicator = result.body.moreRecordIndicator;
+    //     this.paginationKey = result.body.paginationKey;
+    //     appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+    //     this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
+    //     if(this.moreRecordIndicator == 'Y'){
+    //       this.LoopMoreRecord(year, 'C')
+    //     }
+    //     else{
+    //       this.isCallAPI = false;
+    //       appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
+    //       this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
+    //       if(selectLang.selectedLang == 'bm'){
+    //         this.cDetails.forEach((contribution: any) => {
+    //           Object.assign(contribution, {
+    //             "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'))
+    //           });
+    //         });
+    //       }
+    //       else{
+    //         this.cDetails.forEach((contribution: any) => {
+    //           Object.assign(contribution, {
+    //             "contribMonthForDisplay": formatDate((contribution.contribMonth), 'MMM-yy', 'en')
+    //           });
+    //         });
+    //       }
+    //       appFunc.cDetails = this.cDetails;
+    //       this.SelectYearPage = false;
+    //       this.StatementPage = true;
+    //     }
+    //   }
+    //   else{
+    //     this.isCallAPI = false;
+    //     appFunc.transactionAmtForAcc1 = Number('0.00');
+    //     appFunc.cDetails = [];
+    //     this.SelectYearPage = false;
+    //     this.StatementPage = true;
+    //   }
+    // },(err: HttpErrorResponse) => {
+    //   appFunc.message = "HttpError";
+    //   this.route.navigate(['outofservice']);
+    // });
+    const allCategoryBody = {
+      "accNum": appFunc.currMemberDetail.accNum,
+      "accType": 'S',
+      "stmtYear": year.toString(),
+      "categoryCode": "",
+      "paginationKey":"",
+      "moreRecordIndicator":"",
+      "sessionId": appFunc.sessionId
+
+    };
+    //Get All Category Detail Statement
     this._aldanService.
-    MemberDetailStatement(detailBodyForContribution).
+    MemberGetAllCategoryDetailStatement(allCategoryBody).
     subscribe((result: any) => {
-      if(result.body.responseCode == "0"){
-        this.cDetails = result.body.detail.detailStatement;
-        this.moreRecordIndicator = result.body.moreRecordIndicator;
-        this.paginationKey = result.body.paginationKey;
-        appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
-        this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
-        if(this.moreRecordIndicator == 'Y'){
-          this.LoopMoreRecord(year, 'C')
-        }
-        else{
-          this.isCallAPI = false;
-          appFunc.transactionAmtForAcc1 = Number(result.body.detail.contribTotal);
-          this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
+      if (result.body.responseCode == '0') {
+        this.cDetails =  result.contributionDS.detail.detailStatement;
+        appFunc.oDetails =  result.othersDS.detail.detailStatement;
+        appFunc.wDetails =  result.withdrawalDS.detail.detailStatement;
+        result.contributionDS.detail.detailStatement.forEach((element: any) => {
           if(selectLang.selectedLang == 'bm'){
-            this.cDetails.forEach((contribution: any) => {
-              Object.assign(contribution, {
-                "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'))
-              });
+            Object.assign(element, {
+              "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
             });
           }
           else{
-            this.cDetails.forEach((contribution: any) => {
-              Object.assign(contribution, {
-                "contribMonthForDisplay": formatDate((contribution.contribMonth), 'MMM-yy', 'en')
-              });
+            Object.assign(element, {
+              "contribMonthForDisplay": formatDate((element.contribMonth), 'MMM-yy', 'en')
             });
           }
-          appFunc.cDetails = this.cDetails;
-          this.SelectYearPage = false;
-          this.StatementPage = true;
-        }
-      }
-      else{
-        this.isCallAPI = false;
-        appFunc.transactionAmtForAcc1 = Number('0.00');
-        appFunc.cDetails = [];
-        this.SelectYearPage = false;
-        this.StatementPage = true;
+        });
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
