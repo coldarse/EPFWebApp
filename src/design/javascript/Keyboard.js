@@ -68,11 +68,11 @@ const Keyboard = {
     _createKeys() {
         const fragment = document.createDocumentFragment();
         const keyLayout = [
-            "&", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
-            "%", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "*",
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace", "done",
+            "%", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "&",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
             "!", "_", "z", "x", "c", "v", "b", "n", "m", ",", ".", "@",
-            "done", "clear", "/", "space", "tab", "-", "$"
+            "clear", "/", "space", "tab", "-", "$"
         ];
 
         // Creates HTML for an icon
@@ -82,7 +82,7 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "*", "enter", "@"].indexOf(key) !== -1;
+            const insertLineBreak = ["done", "&", "enter", "@"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -165,7 +165,7 @@ const Keyboard = {
 
                 case "clear":
                     keyElement.classList.add("keyboard__key--wide");
-                    keyElement.innerHTML = createIconHTML("clear_all");
+                    keyElement.innerHTML = createIconHTML("clear");
                     keyElement.addEventListener("click", () => {
                         this.properties.value = "";
                         this._triggerEvent("oninput");

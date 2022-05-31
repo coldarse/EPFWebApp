@@ -45,7 +45,7 @@ export class CheckBalanceComponent implements OnInit {
   moreRecordIndicator = "";
   paginationKey = "";
   CurrentYear = appFunc.CurrYears;
-  
+  disableMemberStatementOutOfServiceRedirect = false;
   
 
   constructor(
@@ -55,7 +55,7 @@ export class CheckBalanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    appFunc.dataForEmail = undefined;
     this.translate.use(selectLang.selectedLang);
     this.email = appFunc.currMemberDetail.emailAdd;
 
@@ -171,6 +171,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   StatementNo() {
+    this.disableMemberStatementOutOfServiceRedirect = true;
     this.transactionAmtForAcc1 = 0;
     this.StatementPage = false;
     this.SelectYearPage = true;
@@ -178,6 +179,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   StatementYes() {
+    this.disableMemberStatementOutOfServiceRedirect = true;
     this.StatementPage = false;
     this.ConfirmEmailPage = true;
   }
@@ -191,14 +193,63 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
-    let details = appFunc.dataForEmail.detail.mainStatement;
-    appFunc.dataForEmail.detail.mainStatement = this.cDetails;
-    let tempDetail = appFunc.dataForEmail.detail;
+    let details = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail.mainStatement;
+    let tempDetail = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail;
 
+    if(appFunc.dataForEmail == undefined){
+      appFunc.dataForEmail = {}
+      Object.assign(appFunc.dataForEmail, {
+        "requestTimeStamp": formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en'),
+        "responseTimeStamp": formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en'),
+        "responseCode": "0",
+        "responseMessage": "Success",
+        "error": []
+      });
+    }
     Object.assign(appFunc.dataForEmail, {
       "totalSavings": appFunc.totalSavingsForEmail,
       "summaryStatement": appFunc.sDetails,
-      "memberInfo": tempDetail,
+      "memberInfo": tempDetail == undefined ? {
+        "accNum": appFunc.currMemberDetail.accNum,
+        "accType": "",
+        "stmtYear": this.selectedYear.toString(),
+        "accName1": appFunc.currMemberDetail.custName,
+        "accName2": "",
+        "idNum": appFunc.currMemberDetail.primaryIdNum,
+        "idType": appFunc.currMemberDetail.primaryIdType,
+        "address1": appFunc.currMemberDetail.addresses[1].addLine1.toUpperCase(),
+        "address2": appFunc.currMemberDetail.addresses[1].addLine2.toUpperCase(),
+        "address3": appFunc.currMemberDetail.addresses[1].addLine3.toUpperCase(),
+        "address4": appFunc.currMemberDetail.addresses[1].addLine4.toUpperCase(),
+        "address5": appFunc.currMemberDetail.addresses[1].addLine5.toUpperCase(),
+        "postalCode": appFunc.currMemberDetail.addresses[1].postalCode,
+        "countryCode": appFunc.currMemberDetail.addresses[1].countryCode.toUpperCase(),
+        "stateCode": appFunc.currMemberDetail.addresses[1].stateCode.toUpperCase(),
+        "latestRelatedAccNum": "",
+        "latestRelatedAccNumFormatted": "",
+        "latestRelatedAccType": "",
+        "lastStmtOpeningBalance": "0.00",
+        "lastStmtOpeningBalanceAcc1": "0.00",
+        "lastStmtOpeningBalanceAcc2": "0.00",
+        "lastStmtOpeningBalanceAcc3": "0.00",
+        "totalDividendPaidAcc1": "0.00",
+        "totalDividendPaidAcc2": "0.00",
+        "totalDividendPaidAcc3": "0.00",
+        "totalDividendPaid": "0.00",
+        "dividendRateForTheYear": "0.00",
+        "dividendToAcc1": "0.00",
+        "dividendToAcc2": "0.00",
+        "dividendToAcc3": "0.00",
+        "totalDividendToAcc": "0.00",
+        "accBalance1": "0.00",
+        "accBalance2": "0.00",
+        "accBalance3": "0.00",
+        "totalAccBalance": "0.00",
+        "lastNominationDate": "0001-01-01",
+        "accClassification": "",
+        "effectiveDate": "0001-01-01",
+        "acc55": "",
+      }: tempDetail,
       "accEmasFlag": appFunc.summaryDetails.accEmasFlag,
       "dividendAcc55": appFunc.summaryDetails.dividendAcc55 == "" ? "0.00" : appFunc.summaryDetails.dividendAcc55,
       "dividendAcc55Line": appFunc.summaryDetails.dividendAcc55Line,
@@ -207,7 +258,7 @@ export class CheckBalanceComponent implements OnInit {
       "dividendRateForTheYear": appFunc.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : appFunc.summaryDetails.dividendRateForTheYear,
       "withdrawalStatement": appFunc.wDetails,
       "detailStatement": appFunc.oDetails,
-      "oldStatement": details,
+      "oldStatement": details == undefined ? [] : details,
       "contributionTotal":appFunc.transactionAmtForAcc1.toString(),
       "openingBalanceTotal": appFunc.openingBalanceTotal,
       "dividendTotal" : appFunc.dividendTotal,
@@ -292,6 +343,7 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   DisplaySelectedYearStatement(year: number) {
+    this.disableMemberStatementOutOfServiceRedirect = false;
     appFunc.wDetails = [];
     appFunc.oDetails = [];
     this.cDetails = [];
@@ -347,8 +399,10 @@ export class CheckBalanceComponent implements OnInit {
         appFunc.dataForEmail = result.body;
       }
     },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
+      if(!this.disableMemberStatementOutOfServiceRedirect){
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+      }
     });
     
     //Get All Category Detail Statement
@@ -418,7 +472,6 @@ export class CheckBalanceComponent implements OnInit {
     }
   }
 
- 
 }
 
 
