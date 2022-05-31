@@ -389,17 +389,7 @@ export class CheckBalanceComponent implements OnInit {
     //   appFunc.message = "HttpError";
     //   this.route.navigate(['outofservice']);
     // });
-    // Get Member Statement
-    this._aldanService.
-    MemberStatement(mainBody).
-    subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-        appFunc.dataForEmail = result.body;
-      }
-    },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
-    });
+    
     // // Get Contribution for Selected Year
     // this._aldanService.
     // MemberDetailStatement(detailBodyForContribution).
@@ -461,11 +451,12 @@ export class CheckBalanceComponent implements OnInit {
     this._aldanService.
     MemberGetAllCategoryDetailStatement(allCategoryBody).
     subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-        this.cDetails =  result.contributionDS.detail.detailStatement;
-        appFunc.oDetails =  result.othersDS.detail.detailStatement;
-        appFunc.wDetails =  result.withdrawalDS.detail.detailStatement;
-        result.contributionDS.detail.detailStatement.forEach((element: any) => {
+      if (result.body.contributionDS.length != '0') {
+        this.isCallAPI = false;
+        this.cDetails =  result.body.contributionDS.detail.detailStatement;
+        appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
+        appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
+        this.cDetails.forEach((element: any) => {
           if(selectLang.selectedLang == 'bm'){
             Object.assign(element, {
               "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
@@ -477,6 +468,16 @@ export class CheckBalanceComponent implements OnInit {
             });
           }
         });
+        appFunc.cDetails = this.cDetails;
+        this.SelectYearPage = false;
+        this.StatementPage = true;
+      }
+      else{
+        this.isCallAPI = false;
+        //appFunc.transactionAmtForAcc1 = Number('0.00');
+        appFunc.cDetails = [];
+        this.SelectYearPage = false;
+        this.StatementPage = true;
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
