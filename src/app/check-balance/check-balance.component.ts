@@ -454,6 +454,7 @@ export class CheckBalanceComponent implements OnInit {
       if (result.body.contributionDS.responseCode == '0')  {
         this.isCallAPI = false;
         this.cDetails =  result.body.contributionDS.detail.detailStatement;
+        appFunc.transactionAmtForAcc1 = Number(result.body.contributionDS.detail.contribTotal);
         appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
         appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
         this.cDetails.forEach((element: any) => {
@@ -474,7 +475,7 @@ export class CheckBalanceComponent implements OnInit {
       }
       else{
         this.isCallAPI = false;
-        //appFunc.transactionAmtForAcc1 = Number('0.00');
+        appFunc.transactionAmtForAcc1 = Number('0.00');
         appFunc.cDetails = [];
         this.SelectYearPage = false;
         this.StatementPage = true;
