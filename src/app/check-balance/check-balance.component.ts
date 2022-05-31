@@ -455,6 +455,7 @@ export class CheckBalanceComponent implements OnInit {
         this.isCallAPI = false;
         this.cDetails =  result.body.contributionDS.detail.detailStatement;
         appFunc.transactionAmtForAcc1 = Number(result.body.contributionDS.detail.contribTotal);
+        this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
         appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
         appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
         this.cDetails.forEach((element: any) => {
