@@ -405,12 +405,16 @@ export class CheckBalanceComponent implements OnInit {
           this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
           if(selectLang.selectedLang == 'bm'){
             this.cDetails.forEach((contribution: any) => {
-              contribution.contribMonth = appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'));
+              Object.assign(contribution, {
+                "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'))
+              });
             });
           }
           else{
             this.cDetails.forEach((contribution: any) => {
-              contribution.contribMonth = formatDate((contribution.contribMonth), 'MMM-yy', 'en');
+              Object.assign(contribution, {
+                "contribMonthForDisplay": formatDate((contribution.contribMonth), 'MMM-yy', 'en')
+              });
             });
           }
           appFunc.cDetails = this.cDetails;
@@ -478,6 +482,16 @@ export class CheckBalanceComponent implements OnInit {
         if(categoryCode == 'C')
         {
           result.body.detail.detailStatement.forEach((element: any) => {
+            if(selectLang.selectedLang == 'bm'){
+              Object.assign(element, {
+                "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
+              });
+            }
+            else{
+              Object.assign(element, {
+                "contribMonthForDisplay": formatDate((element.contribMonth), 'MMM-yy', 'en')
+              });
+            }
             this.cDetails.push(element)
           });
         }
@@ -498,16 +512,6 @@ export class CheckBalanceComponent implements OnInit {
 
         if(this.moreRecordIndicator != 'Y'){
           this.isCallAPI = false;
-          if(selectLang.selectedLang == 'bm'){
-            this.cDetails.forEach((contribution: any) => {
-              contribution.contribMonth = appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'));
-            });
-          }
-          else{
-            this.cDetails.forEach((contribution: any) => {
-              contribution.contribMonth = formatDate((contribution.contribMonth), 'MMM-yy', 'en');
-            });
-          }
           appFunc.cDetails = this.cDetails;
           this.SelectYearPage = false;
           this.StatementPage = true;
@@ -520,12 +524,16 @@ export class CheckBalanceComponent implements OnInit {
         this.isCallAPI = false;
         if(selectLang.selectedLang == 'bm'){
           this.cDetails.forEach((contribution: any) => {
-            contribution.contribMonth = appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'));
+            Object.assign(contribution, {
+              "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'))
+            });
           });
         }
         else{
           this.cDetails.forEach((contribution: any) => {
-            contribution.contribMonth = formatDate((contribution.contribMonth), 'MMM-yy', 'en');
+            Object.assign(contribution, {
+              "contribMonthForDisplay": formatDate((contribution.contribMonth), 'MMM-yy', 'en')
+            });
           });
         }
         appFunc.cDetails = this.cDetails;

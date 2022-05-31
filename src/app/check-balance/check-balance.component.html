@@ -103,7 +103,7 @@
                                 <th class="right" style="position:sticky; top:-5px;">{{"total"|translate}}</th>
                             </tr>
                             <tr *ngFor="let c of cDetails">
-                                <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.contribMonth}}</td>
+                                <td class="left" style="color:rgb(49, 39, 131); font-weight: 700;">{{c.contribMonthForDisplay}}</td>
                                 <td class="left">{{c.transDesc}}</td>
                                 <td class="left">{{c.transDate}}</td>
                                 <td class="right">{{c.employerShare | number : '1.2-2'}}</td>
