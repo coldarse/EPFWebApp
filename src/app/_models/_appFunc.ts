@@ -53,6 +53,9 @@ export class appFunc {
     static Reset(){
         this.MemberDetail = {} as currentMemberDetails;
         this.currMemberDetail = {} as currMemberDetails;
+        this.isVerifyMyKad = false;
+        this.sessionId = 0;
+        
     }
 
     

@@ -131,11 +131,13 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }
 
+    
     this.readerIntervalId = setInterval(() => {
       appFunc.DetectMyKad();
       if (signalRConnection.isCardInserted) {
         if (this.insertedMyKad == false){
           if (!appFunc.endSession){
+            appFunc.Reset();
             this.insertedMyKad = true;
             this.insertCard = false;
             this.InsertMyKad = false;
