@@ -389,17 +389,7 @@ export class CheckBalanceComponent implements OnInit {
     //   appFunc.message = "HttpError";
     //   this.route.navigate(['outofservice']);
     // });
-    // Get Member Statement
-    this._aldanService.
-    MemberStatement(mainBody).
-    subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-        appFunc.dataForEmail = result.body;
-      }
-    },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
-    });
+    
     // // Get Contribution for Selected Year
     // this._aldanService.
     // MemberDetailStatement(detailBodyForContribution).
@@ -461,7 +451,8 @@ export class CheckBalanceComponent implements OnInit {
     this._aldanService.
     MemberGetAllCategoryDetailStatement(allCategoryBody).
     subscribe((result: any) => {
-      if (result.body.contributionDS.responseCode == '0') {
+      if (result.body.contributionDS.responseCode == '0')  {
+        this.isCallAPI = false;
         this.cDetails =  result.body.contributionDS.detail.detailStatement;
         appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
         appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
@@ -477,7 +468,14 @@ export class CheckBalanceComponent implements OnInit {
             });
           }
         });
+        appFunc.cDetails = this.cDetails;
+        this.SelectYearPage = false;
+        this.StatementPage = true;
+      }
+      else{
         this.isCallAPI = false;
+        //appFunc.transactionAmtForAcc1 = Number('0.00');
+        appFunc.cDetails = [];
         this.SelectYearPage = false;
         this.StatementPage = true;
       }
