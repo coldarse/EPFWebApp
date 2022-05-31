@@ -56,6 +56,10 @@ const Keyboard = {
                 this.elements.startpos = currElem.selectionStart;
                 this.elements.endpos = currElem.selectionEnd;
                 this.elements.currElemLength = currElem.value.length;
+                currElem.scrollIntoView(true);
+                currElem.scrollIntoView({
+                block: 'center',
+                });
                 //console.log(currElem);
             }
         }
