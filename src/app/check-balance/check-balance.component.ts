@@ -461,11 +461,11 @@ export class CheckBalanceComponent implements OnInit {
     this._aldanService.
     MemberGetAllCategoryDetailStatement(allCategoryBody).
     subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-        this.cDetails =  result.contributionDS.detail.detailStatement;
-        appFunc.oDetails =  result.othersDS.detail.detailStatement;
-        appFunc.wDetails =  result.withdrawalDS.detail.detailStatement;
-        result.contributionDS.detail.detailStatement.forEach((element: any) => {
+      if (result.body.contributionDS.responseCode == '0') {
+        this.cDetails =  result.body.contributionDS.detail.detailStatement;
+        appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
+        appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
+        this.cDetails.forEach((element: any) => {
           if(selectLang.selectedLang == 'bm'){
             Object.assign(element, {
               "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
@@ -477,6 +477,9 @@ export class CheckBalanceComponent implements OnInit {
             });
           }
         });
+        this.isCallAPI = false;
+        this.SelectYearPage = false;
+        this.StatementPage = true;
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -513,84 +516,84 @@ export class CheckBalanceComponent implements OnInit {
     }
   }
 
-  LoopMoreRecord(year: number, categoryCode: string){
-    const detailBodyForAllCategory = {
-      "accNum": appFunc.currMemberDetail.accNum,
-      "accType": 'S',
-      "stmtYear": year.toString(),
-      "categoryCode": categoryCode,
-      "paginationKey": this.paginationKey,
-      "moreRecordIndicator": this.moreRecordIndicator,
-      "sessionId": appFunc.sessionId
-    };
+  // LoopMoreRecord(year: number, categoryCode: string){
+  //   const detailBodyForAllCategory = {
+  //     "accNum": appFunc.currMemberDetail.accNum,
+  //     "accType": 'S',
+  //     "stmtYear": year.toString(),
+  //     "categoryCode": categoryCode,
+  //     "paginationKey": this.paginationKey,
+  //     "moreRecordIndicator": this.moreRecordIndicator,
+  //     "sessionId": appFunc.sessionId
+  //   };
 
-    this._aldanService.
-    MemberDetailStatement(detailBodyForAllCategory).
-    subscribe((result: any) => {
-      if(result.body.responseCode == "0"){
-        if(categoryCode == 'C')
-        {
-          result.body.detail.detailStatement.forEach((element: any) => {
-            if(selectLang.selectedLang == 'bm'){
-              Object.assign(element, {
-                "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
-              });
-            }
-            else{
-              Object.assign(element, {
-                "contribMonthForDisplay": formatDate((element.contribMonth), 'MMM-yy', 'en')
-              });
-            }
-            this.cDetails.push(element)
-          });
-        }
-        else if(categoryCode == 'W')
-        {
-          result.body.detail.detailStatement.forEach((element: any) => {
-            appFunc.wDetails.push(element)
-          });
-        }
-        else if(categoryCode == 'O')
-        {
-          result.body.detail.detailStatement.forEach((element: any) => {
-            appFunc.oDetails.push(element)
-          });
-        }
-        this.moreRecordIndicator = result.body.moreRecordIndicator;
-        this.paginationKey = result.body.paginationKey;
+  //   this._aldanService.
+  //   MemberDetailStatement(detailBodyForAllCategory).
+  //   subscribe((result: any) => {
+  //     if(result.body.responseCode == "0"){
+  //       if(categoryCode == 'C')
+  //       {
+  //         result.body.detail.detailStatement.forEach((element: any) => {
+  //           if(selectLang.selectedLang == 'bm'){
+  //             Object.assign(element, {
+  //               "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
+  //             });
+  //           }
+  //           else{
+  //             Object.assign(element, {
+  //               "contribMonthForDisplay": formatDate((element.contribMonth), 'MMM-yy', 'en')
+  //             });
+  //           }
+  //           this.cDetails.push(element)
+  //         });
+  //       }
+  //       else if(categoryCode == 'W')
+  //       {
+  //         result.body.detail.detailStatement.forEach((element: any) => {
+  //           appFunc.wDetails.push(element)
+  //         });
+  //       }
+  //       else if(categoryCode == 'O')
+  //       {
+  //         result.body.detail.detailStatement.forEach((element: any) => {
+  //           appFunc.oDetails.push(element)
+  //         });
+  //       }
+  //       this.moreRecordIndicator = result.body.moreRecordIndicator;
+  //       this.paginationKey = result.body.paginationKey;
 
-        if(this.moreRecordIndicator != 'Y'){
-          this.isCallAPI = false;
-          appFunc.cDetails = this.cDetails;
-          this.SelectYearPage = false;
-          this.StatementPage = true;
-        }
-        else{
-          this.LoopMoreRecord(year, categoryCode)
-        }
-      }
-      else{
-        this.isCallAPI = false;
-        if(selectLang.selectedLang == 'bm'){
-          this.cDetails.forEach((contribution: any) => {
-            Object.assign(contribution, {
-              "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'))
-            });
-          });
-        }
-        else{
-          this.cDetails.forEach((contribution: any) => {
-            Object.assign(contribution, {
-              "contribMonthForDisplay": formatDate((contribution.contribMonth), 'MMM-yy', 'en')
-            });
-          });
-        }
-        appFunc.cDetails = this.cDetails;
-        this.SelectYearPage = false;
-        this.StatementPage = true;
-      }
-    });
-  }
+  //       if(this.moreRecordIndicator != 'Y'){
+  //         this.isCallAPI = false;
+  //         appFunc.cDetails = this.cDetails;
+  //         this.SelectYearPage = false;
+  //         this.StatementPage = true;
+  //       }
+  //       else{
+  //         this.LoopMoreRecord(year, categoryCode)
+  //       }
+  //     }
+  //     else{
+  //       this.isCallAPI = false;
+  //       if(selectLang.selectedLang == 'bm'){
+  //         this.cDetails.forEach((contribution: any) => {
+  //           Object.assign(contribution, {
+  //             "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((contribution.contribMonth), 'MMM-yy', 'en'))
+  //           });
+  //         });
+  //       }
+  //       else{
+  //         this.cDetails.forEach((contribution: any) => {
+  //           Object.assign(contribution, {
+  //             "contribMonthForDisplay": formatDate((contribution.contribMonth), 'MMM-yy', 'en')
+  //           });
+  //         });
+  //       }
+  //       appFunc.cDetails = this.cDetails;
+  //       this.SelectYearPage = false;
+  //       this.StatementPage = true;
+  //     }
+  //   });
+  // }
 }
 
 
