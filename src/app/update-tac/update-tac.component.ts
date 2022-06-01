@@ -75,9 +75,9 @@ export class UpdateTACComponent implements OnInit {
         if(result.body.responseCode == "0"){
           const body = {
             "regType": "M",
-            "accNum": appFunc.currMemberDetail.accNum,
-            "accType": "S",
-            "searchType": "A",
+            "accNum": "",
+            "accType": "",
+            "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
             "idType": currentMyKadDetails.CategoryType,
             "reqTypeCode": "",
@@ -133,10 +133,10 @@ export class UpdateTACComponent implements OnInit {
       subscribe((result: any) => {
         if(result.body.responseCode == "0"){
           const body = {
-            "regType": "M",
-            "accNum": appFunc.currMemberDetail.accNum,
-            "accType": "S",
-            "searchType": "A",
+            "regType": "",
+            "accNum": "",
+            "accType": "",
+            "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
             "idType": currentMyKadDetails.CategoryType,
             "reqTypeCode": "",

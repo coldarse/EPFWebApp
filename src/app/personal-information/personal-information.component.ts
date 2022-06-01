@@ -313,9 +313,9 @@ export class PersonalInformationComponent implements OnInit {
         
           const body = {
             "regType": "M",
-            "accNum": appFunc.currMemberDetail.accNum,
-            "accType": "S",
-            "searchType": "A",
+            "accNum": "",
+            "accType": "",
+            "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
             "idType": currentMyKadDetails.CategoryType,
             "reqTypeCode": "",

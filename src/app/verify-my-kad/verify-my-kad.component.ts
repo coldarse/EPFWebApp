@@ -309,9 +309,9 @@ export class VerifyMyKadComponent implements OnInit {
       if (result.body.responseCode == '0'){
         const memberProfileBody = {
           regType: 'M',
-          accNum: result.body.detail.accNum,
-          accType: 'S',
-          searchType: 'A',
+          accNum: '',
+          accType: '',
+          searchType: 'I',
           idNum: currentMyKadDetails.ICNo,
           idType: catType,
           reqTypeCode: '',

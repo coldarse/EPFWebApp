@@ -214,9 +214,9 @@ export class IAkaunRegistrationComponent implements OnInit {
         if(result.body.responseCode == "0"){
           const body = {
             "regType": "M",
-            "accNum": appFunc.currMemberDetail.accNum,
-            "accType": "S",
-            "searchType": "A",
+            "accNum": "",
+            "accType": "",
+            "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
             "idType": currentMyKadDetails.CategoryType,
             "reqTypeCode": "",
@@ -259,9 +259,9 @@ export class IAkaunRegistrationComponent implements OnInit {
         if(result.body.responseCode == "0"){
           const body = {
             "regType": "M",
-            "accNum": appFunc.currMemberDetail.accNum,
-            "accType": "S",
-            "searchType": "A",
+            "accNum": "",
+            "accType": "",
+            "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
             "idType": currentMyKadDetails.CategoryType,
             "reqTypeCode": "",
