@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AldanService } from '../shared/aldan.service';
 import { selectLang } from '../_models/language';
 import { appFunc } from '../_models/_appFunc';
 import { signalRConnection } from '../_models/_signalRConnection';
@@ -20,7 +21,8 @@ export class OutOfServiceComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _aldanService: AldanService
     ) { }
 
   ngOnInit(): void {
@@ -35,7 +37,9 @@ export class OutOfServiceComponent implements OnInit {
       this.readerIntervalId = setInterval(() => {
         appFunc.DetectMyKad();
         if(!signalRConnection.isCardInserted) {
-          this.route.navigate(['verifyMyKad']);
+          appFunc.Reset();
+          this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {});
+          this.route.navigate(['/startup']);
         }
       }, 1000);
     }

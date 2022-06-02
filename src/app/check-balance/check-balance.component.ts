@@ -193,80 +193,112 @@ export class CheckBalanceComponent implements OnInit {
 
   ConfirmEmailYes() {
     this.isCallAPI = true;
-    let details = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail.mainStatement;
-    let tempDetail = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail;
 
-    if(appFunc.dataForEmail == undefined){
-      appFunc.dataForEmail = {}
+    if(this.selectedYear <= 2018){
+      let details = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail.mainStatement;
+      let tempDetail = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail;
+  
+      if(appFunc.dataForEmail == undefined){
+        appFunc.dataForEmail = {}
+        Object.assign(appFunc.dataForEmail, {
+          "requestTimeStamp": formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en'),
+          "responseTimeStamp": formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en'),
+          "responseCode": "0",
+          "responseMessage": "Success",
+          "error": []
+        });
+      }
       Object.assign(appFunc.dataForEmail, {
-        "requestTimeStamp": formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en'),
-        "responseTimeStamp": formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en'),
-        "responseCode": "0",
-        "responseMessage": "Success",
-        "error": []
+        "totalSavings": appFunc.totalSavingsForEmail,
+        "summaryStatement": appFunc.sDetails,
+        "memberInfo": tempDetail == undefined ? {
+          "accNum": appFunc.summaryDetails.accNum,
+          "accType": appFunc.summaryDetails.accType,
+          "stmtYear": appFunc.summaryDetails.stmtYear,
+          "accName1": appFunc.summaryDetails.accName1,
+          "accName2": appFunc.summaryDetails.accName2,
+          "idNum": appFunc.summaryDetails.idNum,
+          "idType": appFunc.summaryDetails.idType,
+          "address1": appFunc.summaryDetails.address1,
+          "address2": appFunc.summaryDetails.address2,
+          "address3": appFunc.summaryDetails.address3,
+          "address4": appFunc.summaryDetails.address4,
+          "address5": appFunc.summaryDetails.address5,
+          "postalCode": appFunc.summaryDetails.postalCode,
+          "countryCode": appFunc.summaryDetails.countryCode,
+          "stateCode": appFunc.summaryDetails.stateCode,
+          "latestRelatedAccNum": "",
+          "latestRelatedAccNumFormatted": "",
+          "latestRelatedAccType": "",
+          "lastStmtOpeningBalance": "0.00",
+          "lastStmtOpeningBalanceAcc1": "0.00",
+          "lastStmtOpeningBalanceAcc2": "0.00",
+          "lastStmtOpeningBalanceAcc3": "0.00",
+          "totalDividendPaidAcc1": "0.00",
+          "totalDividendPaidAcc2": "0.00",
+          "totalDividendPaidAcc3": "0.00",
+          "totalDividendPaid": "0.00",
+          "dividendRateForTheYear": "0.00",
+          "dividendToAcc1": "0.00",
+          "dividendToAcc2": "0.00",
+          "dividendToAcc3": "0.00",
+          "totalDividendToAcc": "0.00",
+          "accBalance1": "0.00",
+          "accBalance2": "0.00",
+          "accBalance3": "0.00",
+          "totalAccBalance": "0.00",
+          "lastNominationDate": "0001-01-01",
+          "accClassification": "",
+          "effectiveDate": "0001-01-01",
+          "acc55": "",
+        }: tempDetail,
+        "accEmasFlag": appFunc.summaryDetails.accEmasFlag,
+        "dividendAcc55": appFunc.summaryDetails.dividendAcc55 == "" ? "0.00" : appFunc.summaryDetails.dividendAcc55,
+        "dividendAcc55Line": appFunc.summaryDetails.dividendAcc55Line,
+        "monthlyHseLoanIndicator": appFunc.summaryDetails.monthlyHseLoanIndicator,
+        "monthlyHseLoanDividend": appFunc.summaryDetails.monthlyHseLoanDividend == "" ? "0.00" : appFunc.summaryDetails.monthlyHseLoanDividend, 
+        "dividendRateForTheYear": appFunc.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : appFunc.summaryDetails.dividendRateForTheYear,
+        "withdrawalStatement": appFunc.wDetails,
+        "detailStatement": appFunc.oDetails,
+        "oldStatement": details == undefined ? [] : details,
+        "contributionTotal":appFunc.transactionAmtForAcc1.toString(),
+        "openingBalanceTotal": appFunc.openingBalanceTotal,
+        "dividendTotal" : appFunc.dividendTotal,
+      });
+      appFunc.dataForEmail.detail = undefined;
+      appFunc.dataForEmail.memberInfo.mainStatement = appFunc.cDetails;
+
+      this._aldanService.
+      EmailForOldMemberStatement(
+        appFunc.currMemberDetail.emailAdd, 
+        selectLang.selectedLang,
+        appFunc.sessionId, 
+        appFunc.dataForEmail)
+        .subscribe((res: any) => {
+          if(res.body.attachmentPath != ""){
+            this.ConfirmEmailPage = false;
+            this.EmailSuccessPage = true;
+            this.isCallAPI = false;
+          }
+          else{
+            this.isCallAPI = false;
+            this.SummaryStatementPage = false;
+            this.errorDesc = res.body.error[0].description;
+            this.Failed = true;
+          }
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
       });
     }
-    Object.assign(appFunc.dataForEmail, {
-      "totalSavings": appFunc.totalSavingsForEmail,
-      "summaryStatement": appFunc.sDetails,
-      "memberInfo": tempDetail == undefined ? {
-        "accNum": appFunc.currMemberDetail.accNum,
-        "accType": "",
-        "stmtYear": this.selectedYear.toString(),
-        "accName1": appFunc.currMemberDetail.custName,
-        "accName2": "",
-        "idNum": appFunc.currMemberDetail.primaryIdNum,
-        "idType": appFunc.currMemberDetail.primaryIdType,
-        "address1": appFunc.currMemberDetail.addresses[1].addLine1.toUpperCase(),
-        "address2": appFunc.currMemberDetail.addresses[1].addLine2.toUpperCase(),
-        "address3": appFunc.currMemberDetail.addresses[1].addLine3.toUpperCase(),
-        "address4": appFunc.currMemberDetail.addresses[1].addLine4.toUpperCase(),
-        "address5": appFunc.currMemberDetail.addresses[1].addLine5.toUpperCase(),
-        "postalCode": appFunc.currMemberDetail.addresses[1].postalCode,
-        "countryCode": appFunc.currMemberDetail.addresses[1].countryCode.toUpperCase(),
-        "stateCode": appFunc.currMemberDetail.addresses[1].stateCode.toUpperCase(),
-        "latestRelatedAccNum": "",
-        "latestRelatedAccNumFormatted": "",
-        "latestRelatedAccType": "",
-        "lastStmtOpeningBalance": "0.00",
-        "lastStmtOpeningBalanceAcc1": "0.00",
-        "lastStmtOpeningBalanceAcc2": "0.00",
-        "lastStmtOpeningBalanceAcc3": "0.00",
-        "totalDividendPaidAcc1": "0.00",
-        "totalDividendPaidAcc2": "0.00",
-        "totalDividendPaidAcc3": "0.00",
-        "totalDividendPaid": "0.00",
-        "dividendRateForTheYear": "0.00",
-        "dividendToAcc1": "0.00",
-        "dividendToAcc2": "0.00",
-        "dividendToAcc3": "0.00",
-        "totalDividendToAcc": "0.00",
-        "accBalance1": "0.00",
-        "accBalance2": "0.00",
-        "accBalance3": "0.00",
-        "totalAccBalance": "0.00",
-        "lastNominationDate": "0001-01-01",
-        "accClassification": "",
-        "effectiveDate": "0001-01-01",
-        "acc55": "",
-      }: tempDetail,
-      "accEmasFlag": appFunc.summaryDetails.accEmasFlag,
-      "dividendAcc55": appFunc.summaryDetails.dividendAcc55 == "" ? "0.00" : appFunc.summaryDetails.dividendAcc55,
-      "dividendAcc55Line": appFunc.summaryDetails.dividendAcc55Line,
-      "monthlyHseLoanIndicator": appFunc.summaryDetails.monthlyHseLoanIndicator,
-      "monthlyHseLoanDividend": appFunc.summaryDetails.monthlyHseLoanDividend == "" ? "0.00" : appFunc.summaryDetails.monthlyHseLoanDividend, 
-      "dividendRateForTheYear": appFunc.summaryDetails.dividendRateForTheYear == "" ? "0.000000000" : appFunc.summaryDetails.dividendRateForTheYear,
-      "withdrawalStatement": appFunc.wDetails,
-      "detailStatement": appFunc.oDetails,
-      "oldStatement": details == undefined ? [] : details,
-      "contributionTotal":appFunc.transactionAmtForAcc1.toString(),
-      "openingBalanceTotal": appFunc.openingBalanceTotal,
-      "dividendTotal" : appFunc.dividendTotal,
-    });
-    appFunc.dataForEmail.detail = undefined;
-    appFunc.dataForEmail.memberInfo.mainStatement = appFunc.cDetails;
+    else{
+      appFunc.dataForEmail = {};
+      Object.assign(appFunc.dataForEmail, {
+        COWRecords: appFunc.COWDetails,
+        SummaryDetail: appFunc.summaryDetails
+      });
 
-    this._aldanService.
+      this._aldanService.
       EmailForMemberStatement(
         appFunc.currMemberDetail.emailAdd, 
         selectLang.selectedLang,
@@ -284,10 +316,13 @@ export class CheckBalanceComponent implements OnInit {
             this.errorDesc = res.body.error[0].description;
             this.Failed = true;
           }
-    },(err: HttpErrorResponse) => {
-      appFunc.message = "HttpError";
-      this.route.navigate(['outofservice']);
-    });
+      },(err: HttpErrorResponse) => {
+        appFunc.message = "HttpError";
+        this.route.navigate(['outofservice']);
+      });
+    }
+    
+    
     
   }
 
@@ -357,6 +392,7 @@ export class CheckBalanceComponent implements OnInit {
       "stmtYear": year.toString(),
       "sessionId": appFunc.sessionId
     };
+
     const summaryBody = {
       "accNum": appFunc.currMemberDetail.accNum,
       "accType": 'S',
@@ -378,12 +414,16 @@ export class CheckBalanceComponent implements OnInit {
       .MemberSummaryStatement(summaryBody)
       .subscribe((result: any) => {
         if (result.body.responseCode == '0') {
-          appFunc.totalSavingsForEmail = result.body.detail.totalSavings;
-          appFunc.openingBalanceTotal = result.body.detail.openingBalanceTotal;
-          appFunc.summaryDetails = result.body.detail;
-          appFunc.dividendTotal = result.body.detail.dividendTotal;
-          appFunc.sDetails = result.body.detail.summaryStatement;
-          appFunc.summaryDetails = result.body.detail;
+          if(year <= 2018){
+            appFunc.totalSavingsForEmail = result.body.detail.totalSavings;
+            appFunc.openingBalanceTotal = result.body.detail.openingBalanceTotal;
+            appFunc.summaryDetails = result.body.detail;
+            appFunc.dividendTotal = result.body.detail.dividendTotal;
+            appFunc.sDetails = result.body.detail.summaryStatement;
+          }
+          
+
+          appFunc.summaryDetails = result.body;
           this.SelectedYeartotalSavings = result.body.detail.totalSavings;
         }
       },(err: HttpErrorResponse) => {
@@ -392,39 +432,43 @@ export class CheckBalanceComponent implements OnInit {
     });
 
     // Get Member Statement
-    this._aldanService.
-    MemberStatement(mainBody).
-    subscribe((result: any) => {
-      if (result.body.responseCode == '0') {
-        appFunc.dataForEmail = result.body;
-      }
-    },(err: HttpErrorResponse) => {
-      if(!this.disableMemberStatementOutOfServiceRedirect){
-        appFunc.message = "HttpError";
-        this.route.navigate(['outofservice']);
-      }
-    });
+    if(year <= 2018){
+      this._aldanService.
+      MemberStatement(mainBody).
+      subscribe((result: any) => {
+        if (result.body.responseCode == '0') {
+          appFunc.dataForEmail = result.body;
+        }
+      },(err: HttpErrorResponse) => {
+        if(!this.disableMemberStatementOutOfServiceRedirect){
+          appFunc.message = "HttpError";
+          this.route.navigate(['outofservice']);
+        }
+      });
+    }
+    
     
     //Get All Category Detail Statement
     this._aldanService.
     MemberGetAllCategoryDetailStatement(allCategoryBody).
     subscribe((result: any) => {
-      if (result.body.contributionDS.responseCode == '0')  {
+      if (result.body != undefined)  {
         this.isCallAPI = false;
+        appFunc.COWDetails = result.body;
+        appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
+        appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
         this.cDetails =  result.body.contributionDS.detail.detailStatement;
         appFunc.transactionAmtForAcc1 = Number(result.body.contributionDS.detail.contribTotal);
         this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
-        appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
-        appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
         this.cDetails.forEach((element: any) => {
           if(selectLang.selectedLang == 'bm'){
             Object.assign(element, {
-              "contribMonthForDisplay": appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
+              "contribMonthForDisplay": element.contribMonthBm//appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
             });
           }
           else{
             Object.assign(element, {
-              "contribMonthForDisplay": formatDate((element.contribMonth), 'MMM-yy', 'en')
+              "contribMonthForDisplay": element.contribMonthEn//formatDate((element.contribMonth), 'MMM-yy', 'en')
             });
           }
         });

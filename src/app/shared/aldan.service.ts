@@ -355,6 +355,19 @@ export class AldanService {
     )
   }
 
+  //Email for Old Member Statement
+  EmailForOldMemberStatement(emailAdd: string, language: string,sessionid: number, body: any){
+    return this.http.post(
+      this.url + `MemberAccount/MemberStatement/EmailForOldMemberStatement?emailAdd=${emailAdd}&language=${language}&sessionID=${sessionid}&SSTID=${signalRConnection.kioskCode}`,
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
+
   //Member Profile Info
   MemberProfileInfo(body: any){
     return this.http.post(

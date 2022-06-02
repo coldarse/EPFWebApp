@@ -113,7 +113,7 @@ export class IAkaunRegistrationComponent implements OnInit {
 
   EnterPhoneNumberYes() {
     this.phoneError = false;
-    if (this.phoneNo.length < 10) {
+    if (this.phoneNo.length < 11) {
       this.phoneError = true;
     } 
     else {
@@ -602,43 +602,43 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   click1() {
-    if (this.phoneNo.length < 10) this.phoneNo += '1';
+    if (this.phoneNo.length < 11) this.phoneNo += '1';
   }
 
   click2() {
-    if (this.phoneNo.length < 10) this.phoneNo += '2';
+    if (this.phoneNo.length < 11) this.phoneNo += '2';
   }
 
   click3() {
-    if (this.phoneNo.length < 10) this.phoneNo += '3';
+    if (this.phoneNo.length < 11) this.phoneNo += '3';
   }
 
   click4() {
-    if (this.phoneNo.length < 10) this.phoneNo += '4';
+    if (this.phoneNo.length < 11) this.phoneNo += '4';
   }
 
   click5() {
-    if (this.phoneNo.length < 10) this.phoneNo += '5';
+    if (this.phoneNo.length < 11) this.phoneNo += '5';
   }
 
   click6() {
-    if (this.phoneNo.length < 10) this.phoneNo += '6';
+    if (this.phoneNo.length < 11) this.phoneNo += '6';
   }
 
   click7() {
-    if (this.phoneNo.length < 10) this.phoneNo += '7';
+    if (this.phoneNo.length < 11) this.phoneNo += '7';
   }
 
   click8() {
-    if (this.phoneNo.length < 10) this.phoneNo += '8';
+    if (this.phoneNo.length < 11) this.phoneNo += '8';
   }
 
   click9() {
-    if (this.phoneNo.length < 10) this.phoneNo += '9';
+    if (this.phoneNo.length < 11) this.phoneNo += '9';
   }
 
   click0() {
-    if (this.phoneNo.length < 10) this.phoneNo += '0';
+    if (this.phoneNo.length < 11) this.phoneNo += '0';
   }
 
   clickDel() {

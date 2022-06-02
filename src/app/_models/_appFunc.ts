@@ -47,6 +47,7 @@ export class appFunc {
     static summaryDetails: any;
     static transactionAmtForAcc1: any;
     static CurrYears = new Date().getFullYear();
+    static COWDetails: any;
     
 
 
@@ -55,7 +56,17 @@ export class appFunc {
         this.currMemberDetail = {} as currMemberDetails;
         this.isVerifyMyKad = false;
         this.sessionId = 0;
-        
+        this.stateCode = "";
+        this.dataForEmail = undefined;
+        this.totalSavingsForEmail = undefined;
+        this.openingBalanceTotal = undefined;
+        this.dividendTotal = undefined;
+        this.sDetails = [];
+        this.cDetails = [];
+        this.wDetails = [];
+        this.oDetails = [];
+        this.summaryDetails = undefined;
+        this.transactionAmtForAcc1 = undefined;
     }
 
     
