@@ -137,6 +137,9 @@ export class appFunc {
     // Translates month to malay month.
     // Returns translated month.
     static translateMonthToBM(month: string) : string{
+        if(month.includes("Mar")){
+            return month.replace("Mar", "Mac");
+        }
         if(month.includes("May")){
             return month.replace("May", "Mei");
         }
