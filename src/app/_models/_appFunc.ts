@@ -140,7 +140,7 @@ export class appFunc {
         if(month.includes("Mar")){
             return month.replace("Mar", "Mac");
         }
-        if(month.includes("May")){
+        else if(month.includes("May")){
             return month.replace("May", "Mei");
         }
         else if(month.includes("Aug")){
