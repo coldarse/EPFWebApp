@@ -9,6 +9,7 @@ import { selectLang } from '../_models/language';
 import { businessTypes } from '../_models/modelClass';
 import { appFunc } from '../_models/_appFunc';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
+import { signalRConnection } from '../_models/_signalRConnection';
 
 declare const loadKeyboard: any;
 declare const deleteKeyboard: any;
@@ -1239,7 +1240,7 @@ export class RegisterMemberComponent implements OnInit {
         sourceRegistrationChannel: 'SST',
         applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
         sourceCreationID: 'SST',
-        sourceTerminalID: 'SST',
+        sourceTerminalID: signalRConnection.kioskCode.substring(0, 10),
         sourceBranchNo: '0',
         sessionId: appFunc.sessionId,
       };

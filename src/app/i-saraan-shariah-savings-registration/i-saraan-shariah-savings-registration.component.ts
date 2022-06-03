@@ -162,9 +162,9 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         idType: currentMyKadDetails.CategoryType,
         businessTypeCode: this.selectedJobSector.code,
         remark: '',
-        sourceRegistrationChannel: 'IWS',
+        sourceRegistrationChannel: 'SST',
         applicationReceivedDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        sourceCreationID: 'SFIWS',
+        sourceCreationID: 'SST',
         sourceTerminalID: signalRConnection.kioskCode.substring(0, 10),
         sourceBranchNo: '0',
         sessionId: appFunc.sessionId
