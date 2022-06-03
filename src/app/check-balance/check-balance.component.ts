@@ -194,7 +194,7 @@ export class CheckBalanceComponent implements OnInit {
   ConfirmEmailYes() {
     this.isCallAPI = true;
 
-    if(this.selectedYear <= 2018){
+    if(appFunc.selectedYear <= 2018){
       let details = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail.mainStatement;
       let tempDetail = appFunc.dataForEmail == undefined ? undefined : appFunc.dataForEmail.detail;
   
@@ -294,8 +294,10 @@ export class CheckBalanceComponent implements OnInit {
     else{
       appFunc.dataForEmail = {};
       Object.assign(appFunc.dataForEmail, {
-        COWRecords: appFunc.COWDetails,
-        SummaryDetail: appFunc.summaryDetails
+        CRecords: appFunc.CDetails,
+        SummaryDetail: appFunc.summaryDetails,
+        requestForOW: appFunc.allCategoryBody,
+        OWRecords: undefined
       });
 
       this._aldanService.
@@ -351,6 +353,7 @@ export class CheckBalanceComponent implements OnInit {
       this.StatementPage = true;
     }
     this.selectedYear = year;
+    appFunc.selectedYear = year;
   }
 
   CalculateYears(): number[] {
@@ -379,8 +382,8 @@ export class CheckBalanceComponent implements OnInit {
 
   DisplaySelectedYearStatement(year: number) {
     this.disableMemberStatementOutOfServiceRedirect = false;
-    appFunc.wDetails = [];
-    appFunc.oDetails = [];
+    // appFunc.wDetails = [];
+    // appFunc.oDetails = [];
     this.cDetails = [];
     this.moreRecordIndicator = '';
     this.paginationKey = '';
@@ -450,13 +453,14 @@ export class CheckBalanceComponent implements OnInit {
     
     //Get All Category Detail Statement
     this._aldanService.
-    MemberGetAllCategoryDetailStatement(allCategoryBody).
+    MemberGetContributionDetailStatement(allCategoryBody).
     subscribe((result: any) => {
       if (result.body != undefined)  {
         this.isCallAPI = false;
-        appFunc.COWDetails = result.body;
-        appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
-        appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
+        appFunc.CDetails = result.body;
+        appFunc.allCategoryBody = allCategoryBody;
+        // appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
+        // appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
         this.cDetails =  result.body.contributionDS.detail.detailStatement;
         appFunc.transactionAmtForAcc1 = Number(result.body.contributionDS.detail.contribTotal);
         this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;

@@ -343,6 +343,18 @@ export class AldanService {
     )
   }
 
+  //Member Contribution Detail Statement
+  MemberGetContributionDetailStatement(body: any){
+    return this.http.post(
+      this.url + 'MemberAccount/MemberDetailStatement/GetCStatement',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(1),
+      catchError(this.handleError),
+    )
+  }
+
   //Email for Member Statement
   EmailForMemberStatement(emailAdd: string, language: string,sessionid: number, body: any){
     return this.http.post(

@@ -48,6 +48,9 @@ export class appFunc {
     static transactionAmtForAcc1: any;
     static CurrYears = new Date().getFullYear();
     static COWDetails: any;
+    static CDetails: any;
+    static allCategoryBody: any;
+    static selectedYear: number;
     
 
 
