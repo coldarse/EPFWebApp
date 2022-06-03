@@ -388,6 +388,15 @@ export class PersonalInformationComponent implements OnInit {
       this.state = currentMyKadDetails.State.toUpperCase();
       this.country = currentMyKadDetails.Country.toUpperCase();
     }
+    else{
+      this.address1 = appFunc.currMemberDetail.addresses[1].addLine1.toUpperCase();
+      this.address2 = appFunc.currMemberDetail.addresses[1].addLine2.toUpperCase();
+      this.address3 = appFunc.currMemberDetail.addresses[1].addLine3.toUpperCase();
+      this.postcode = appFunc.currMemberDetail.addresses[1].postalCode;
+      this.country = appFunc.currMemberDetail.addresses[1].countryDesc.toUpperCase();
+      this.state = appFunc.currMemberDetail.addresses[1].stateDesc.toUpperCase();
+      this.city = appFunc.currMemberDetail.addresses[1].cityStateZip.toUpperCase();
+    }
   }
 
   failedYes(){

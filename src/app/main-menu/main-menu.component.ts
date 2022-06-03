@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { selectLang } from '../_models/language';
@@ -14,8 +14,12 @@ import { signalRConnection } from '../_models/_signalRConnection';
 })
 export class MainMenuComponent implements OnInit {
 
+  @ViewChild('bm') bm: ElementRef | undefined;
+  @ViewChild('en') en: ElementRef | undefined;
+
   date : any;
   name = '';
+  accountNum = "";
 
   checkBalanceEnabled = false;
   personalInformationEnabled = false;
@@ -33,7 +37,9 @@ export class MainMenuComponent implements OnInit {
 
     
     this.translate.use(selectLang.selectedLang);
+
     this.name = appFunc.currMemberDetail.custName;
+    this.accountNum = appFunc.currMemberDetail.accNum;
 
     setInterval(() => {
       this.date = formatDate(new Date(), 'h:mm a d/M/yyyy', 'en');
@@ -124,6 +130,18 @@ export class MainMenuComponent implements OnInit {
 
     if(appFunc.currMemberDetail.iAkaunStatus == "A") this.iAkaunEnabled = false;
     
+  }
+
+  ngAfterViewInit(): void{
+
+    this.date = formatDate(new Date(), 'h:mm a d/M/yyyy', 'en');
+    
+    if(selectLang.selectedLang == 'bm'){
+      this.bm?.nativeElement.focus();
+    }
+    else{
+      this.en?.nativeElement.focus();
+    }
   }
 
   selectBM(){

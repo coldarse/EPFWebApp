@@ -4,8 +4,8 @@
       <div class="header">{{ "menu" | translate }}</div>
     </div>
     <div class="col-3">
-      <button type="button" class="btnHeader" (click)="selectBM()">{{"bm"|translate}}</button>
-      <button type="button" class="btnHeader" (click)="selectEN()">{{"en"|translate}}</button>
+      <button type="button" class="btnHeader" (click)="selectBM()" #bm>{{"bm"|translate}}</button>
+      <button type="button" class="btnHeader" (click)="selectEN()" #en>{{"en"|translate}}</button>
     </div>
   </div>
   <div class="container-fluid">
@@ -13,9 +13,10 @@
       <div class="text-center">
         <div class="lblHeader">
           {{"greetings" | translate}} {{name}},<br>
+          {{accountNum}} <br>
           {{"pleaseChoose"|translate}}: 
         </div>
-        <div class="row padTop4rem">
+        <div class="row padTop3rem">
           <div class="col-6">
             <button [ngClass]="checkBalanceEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="checkBalance()" [disabled]="!checkBalanceEnabled">
               <div class="row">
@@ -124,7 +125,7 @@
             </button>
           </div>
         </div>
-        <div class="row padTop5rem">
+        <div class="row padTop3rem">
           <!-- <div class="col-1"></div> -->
           <div class="col-6 mainMenuLeft">
             <label style="color: white;">_______</label>
