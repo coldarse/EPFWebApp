@@ -246,7 +246,7 @@ export class RegisterMemberComponent implements OnInit {
 
   InsertPhoneYes() {
     this.phoneError = false;
-    if (this.phoneNo.length < 40) {
+    if (this.phoneNo.length < 10) {
       this.phoneError = true;
     } else {
       this.InsertPhonePage = false;

@@ -39,7 +39,7 @@ export class UpdateTACComponent implements OnInit {
 
   EnterPhoneNoYes(){
     this.phoneError = false;
-    if(this.phoneNo.length < 40){
+    if(this.phoneNo.length < 10){
       this.phoneError = true;
     }
     else{
