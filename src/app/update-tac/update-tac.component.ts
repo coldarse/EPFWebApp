@@ -133,7 +133,7 @@ export class UpdateTACComponent implements OnInit {
       subscribe((result: any) => {
         if(result.body.responseCode == "0"){
           const body = {
-            "regType": "",
+            "regType": "M",
             "accNum": "",
             "accType": "",
             "searchType": "I",
