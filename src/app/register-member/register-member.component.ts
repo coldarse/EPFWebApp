@@ -979,7 +979,14 @@ export class RegisterMemberComponent implements OnInit {
                 this.errorCode = result.body.error.code;
                 this.ActivateiAkaunPage = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error.description;
+                if(this.errorCode == '461')
+                {
+                  this.errorDesc = 'notUniqueID';
+                }
+                else
+                {
+                  this.errorDesc = 'unsuccesfuliAkaunActivation';
+                }
                 deleteKeyboard();
               }
             },(err: HttpErrorResponse) => {

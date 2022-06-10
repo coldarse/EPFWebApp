@@ -440,7 +440,7 @@ export class IAkaunRegistrationComponent implements OnInit {
                 this.Failed = true;
                 if(this.errorCode == '461')
                 {
-                  this.errorDesc = result.body.error.description;
+                  this.errorDesc = 'notUniqueID';
                 }
                 else
                 {
