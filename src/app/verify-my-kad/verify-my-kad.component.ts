@@ -47,6 +47,7 @@ export class VerifyMyKadComponent implements OnInit {
 
   RetryCountInstance = 0;
   format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  thumbprintError = true;
   
   constructor(
     private route: Router,
@@ -57,8 +58,6 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.RetryCountInstance = 3;
     this.translate.use('bm');
     if (appFunc.endSession){
@@ -137,33 +136,8 @@ export class VerifyMyKadComponent implements OnInit {
       if (signalRConnection.isCardInserted) {
         if (this.insertedMyKad == false){
           if (!appFunc.endSession){
-            appFunc.Reset();
-            this.insertedMyKad = true;
-            this.insertCard = false;
-            this.InsertMyKad = false;
-            this.Language = true;
-            this.SelectLanguage = true;
-            let password = signalRConnection.adapter[0].adapterNameEncrypted;
-
-            if (!this.format.test(password)) {
-              password = password.concat('=');
-            }
-
-            this._aldanService.
-            getToken(signalRConnection.kioskCode, password).
-            subscribe((result: any) => {
-              //Not Number
-              accessToken.token = result.access_token;
-              accessToken.httpOptions = {
-                headers: new HttpHeaders(
-                  { Authorization: 'Bearer ' + accessToken.token }
-                ),
-                observe: 'response' as 'body'
-              };
-            },(err: HttpErrorResponse) => {
-              appFunc.message = 'HttpError';
-              this.route.navigate(['outofservice']);
-            });
+            this.ErrorPop = true;
+            this.thumbprintError = false;
           }
         }
       }
@@ -176,6 +150,49 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }, 1000);
   }
+
+  disagreeProceed(){
+    this.ErrorPop = false;
+    this.thumbprintError = true;
+
+    appFunc.endSession = true;
+    this.ngOnDestroy();
+    this.ngOnInit();
+  }
+
+  agreeProceed(){
+    this.ErrorPop = false;
+    this.thumbprintError = true;
+
+    appFunc.Reset();
+    this.insertedMyKad = true;
+    this.insertCard = false;
+    this.InsertMyKad = false;
+    this.Language = true;
+    this.SelectLanguage = true;
+    let password = signalRConnection.adapter[0].adapterNameEncrypted;
+
+    if (!this.format.test(password)) {
+      password = password.concat('=');
+    }
+
+    this._aldanService.
+    getToken(signalRConnection.kioskCode, password).
+    subscribe((result: any) => {
+      //Not Number
+      accessToken.token = result.access_token;
+      accessToken.httpOptions = {
+        headers: new HttpHeaders(
+          { Authorization: 'Bearer ' + accessToken.token }
+        ),
+        observe: 'response' as 'body'
+      };
+    },(err: HttpErrorResponse) => {
+      appFunc.message = 'HttpError';
+      this.route.navigate(['outofservice']);
+    });
+  }
+
 
   useMainPage(){
     this.route.navigate(['startup']);

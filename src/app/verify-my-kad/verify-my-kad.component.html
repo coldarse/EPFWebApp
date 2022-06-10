@@ -9,10 +9,14 @@
             <div class="text-center">
                 <div class="lblHeader">
                     Sila masukkan MyKad anda<br>
-                    Please insert your MyKad
+                    Please insert your MyKad<br>
                 </div>
-                <div class="row padTop3rem">
+                <div class="row">
                     <img src="assets/images/insert-mykad.svg" width="400px" height="400px">
+                </div>
+                <div class="lblHeader padTop3rem">
+                    <h5 style="color:red;">Mesin ini tidak mempunyai fungsi cetakan penyata.</h5>
+                    <h5 style="color:red;">This machine does not print statements.</h5>
                 </div>
             </div>
         </div>
@@ -78,7 +82,7 @@
         </div>
 
         <div class="bg-popup" *ngIf="ErrorPop">
-            <div class="pop-up shadow p-3 mb-5 bg-white rounded-2rem" align="center">
+            <div class="pop-up shadow p-3 mb-5 bg-white rounded-2rem" align="center" *ngIf="thumbprintError">
                 <h2 class="padTop15rem">{{'VerifyFailedMessage' | translate }}</h2>
                 <h2 *ngIf="xlastTry">{{'RetryMessage' | translate }}</h2>
                 <footer class="padTop12rem footer">
@@ -88,6 +92,25 @@
                         </button>
                         <button type="button" class="btnYes" (click)="TryAgain()" *ngIf="xlastTry">
                             {{'TryAgain' | translate }}
+                        </button>
+                    </div>
+                </footer>
+            </div>
+
+            <div class="pop-up shadow p-3 mb-5 bg-white rounded-2rem" align="center" *ngIf="!thumbprintError">
+                <img style="margin-top: 2rem;" src="assets/images/noPrinting.jpeg" width="150" height="150">
+                <h3  class="padTop5rem">Mesin ini tidak mempunyai fungsi cetakan penyata.</h3>
+                <h3>Adakah anda ingin meneruskan?</h3>
+                <br>
+                <h3>This machine does not print statements.</h3>
+                <h3>Would you like to proceed/continue?</h3>
+                <footer class="padTop5rem footer">
+                    <div class="col-12">
+                        <button type="button" class="btnNo" (click)="disagreeProceed()">
+                            Tidak / No
+                        </button>
+                        <button type="button" class="btnYes" (click)="agreeProceed()">
+                            Ya / Yes
                         </button>
                     </div>
                 </footer>

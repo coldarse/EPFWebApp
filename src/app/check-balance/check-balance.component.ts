@@ -357,10 +357,10 @@ export class CheckBalanceComponent implements OnInit {
   }
 
   CalculateYears(): number[] {
-    let RegDate = appFunc.currMemberDetail.epfRegDate;
-    let RegYear = Number(RegDate.substring(0, 4));
-    let CurrYears = new Date().getFullYear();
-    let TotalYears = CurrYears - RegYear;
+    let RegDate = appFunc.currMemberDetail.epfRegDate; 
+    let RegYear = Number(RegDate.substring(0, 4)) - 1; 
+    let CurrYears = new Date().getFullYear(); 
+    let TotalYears = CurrYears - RegYear; 
 
     if(this.sDetails.length == 0){
       CurrYears -= 1;
