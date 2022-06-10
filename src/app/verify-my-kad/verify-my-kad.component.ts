@@ -67,8 +67,14 @@ export class VerifyMyKadComponent implements OnInit {
       this.removeCard = true;
       this.RemoveMyKad = true;
       this.insertedMyKad = true;
-      this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {
-      });
+      if(!appFunc.isInfoPopUp){
+        this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {
+        });
+      }
+      else{
+        appFunc.isInfoPopUp = false;
+      }
+      
     }
     else{
       if (accessToken.httpOptions != undefined){
@@ -138,6 +144,7 @@ export class VerifyMyKadComponent implements OnInit {
           if (!appFunc.endSession){
             this.ErrorPop = true;
             this.thumbprintError = false;
+            this.insertedMyKad = true;
           }
         }
       }
@@ -154,6 +161,7 @@ export class VerifyMyKadComponent implements OnInit {
   disagreeProceed(){
     this.ErrorPop = false;
     this.thumbprintError = true;
+    appFunc.isInfoPopUp = true;
 
     appFunc.endSession = true;
     this.ngOnDestroy();
@@ -165,7 +173,6 @@ export class VerifyMyKadComponent implements OnInit {
     this.thumbprintError = true;
 
     appFunc.Reset();
-    this.insertedMyKad = true;
     this.insertCard = false;
     this.InsertMyKad = false;
     this.Language = true;

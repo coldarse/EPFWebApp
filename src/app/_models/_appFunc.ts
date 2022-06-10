@@ -51,6 +51,8 @@ export class appFunc {
     static CDetails: any;
     static allCategoryBody: any;
     static selectedYear: number;
+
+    static isInfoPopUp = false;
     
 
 
