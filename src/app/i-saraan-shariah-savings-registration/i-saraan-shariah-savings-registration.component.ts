@@ -145,6 +145,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           }
         }, (err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -192,6 +193,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           }
         }, (err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -237,6 +239,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         }
       }, (err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
   }

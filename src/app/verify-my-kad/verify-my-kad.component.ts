@@ -82,6 +82,7 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
+          appFunc.code = "SSDM Error. Failed to get Business Types from KMS.";
           this.route.navigate(['outofservice']);
         });
 
@@ -99,6 +100,7 @@ export class VerifyMyKadComponent implements OnInit {
 
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
+          appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
           this.route.navigate(['outofservice']);
         });
 
@@ -131,6 +133,7 @@ export class VerifyMyKadComponent implements OnInit {
           }
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
+          appFunc.code = "SSDM Error. Failed to get Service Operation.";
           this.route.navigate(['outofservice']);
         });
       }
@@ -196,6 +199,7 @@ export class VerifyMyKadComponent implements OnInit {
       };
     },(err: HttpErrorResponse) => {
       appFunc.message = 'HttpError';
+      appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support.";
       this.route.navigate(['outofservice']);
     });
   }
@@ -294,15 +298,18 @@ export class VerifyMyKadComponent implements OnInit {
         }
         else{
           appFunc.message = result.body.error.message;
+          appFunc.code = "SSDM Error";
           this.route.navigate(['outofservice']);
         }
       }, (err: HttpErrorResponse) => {
         appFunc.message = 'HttpError';
+        appFunc.code = "SSDM Error. Failed to create Session for this transaction.";
         this.route.navigate(['outofservice']);
       });
     }
     else{
       appFunc.message = 'notInAgeRange';
+      appFunc.code = "Error";
       this.route.navigate(['outofservice']);
     }
   }
@@ -359,16 +366,18 @@ export class VerifyMyKadComponent implements OnInit {
             else{
               // Error
               appFunc.message = result1.body.error[0].description;
+              appFunc.code = "ESB Error";
               this.route.navigate(['outofservice']);
             }
           }, (err: HttpErrorResponse) => {
             appFunc.message = 'HttpError';
+            appFunc.code = "ESB Error";
             this.route.navigate(['outofservice']);
           });
       }
       else{
         if (result.body.error.length == 0){
-          appFunc.message = 'Error Connecting to Server';
+          appFunc.message = 'Error Connecting to Server.';
           this.route.navigate(['outofservice']);
         }
         if (result.body.error[0].code == 'MBM2001'){
@@ -381,6 +390,7 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }, (err: HttpErrorResponse) => {
       appFunc.message = 'HttpError';
+      appFunc.code = "ESB Error";
       this.route.navigate(['outofservice']);
     });
   }

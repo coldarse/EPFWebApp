@@ -812,10 +812,12 @@ export class RegisterMemberComponent implements OnInit {
         }
         else{
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
@@ -1124,6 +1126,7 @@ export class RegisterMemberComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
+              appFunc.code = "ESB Error";
               this.route.navigate(['outofservice']);
             });
         }
@@ -1173,6 +1176,7 @@ export class RegisterMemberComponent implements OnInit {
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -1211,6 +1215,7 @@ export class RegisterMemberComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
@@ -1271,10 +1276,12 @@ export class RegisterMemberComponent implements OnInit {
           }
           else{
             appFunc.message = result.message;
+            appFunc.code = "ESB Error";
             this.route.navigate(['outofservice']);
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
