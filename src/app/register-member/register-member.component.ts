@@ -812,10 +812,12 @@ export class RegisterMemberComponent implements OnInit {
         }
         else{
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
@@ -979,7 +981,14 @@ export class RegisterMemberComponent implements OnInit {
                 this.errorCode = result.body.error.code;
                 this.ActivateiAkaunPage = false;
                 this.Failed = true;
-                this.errorDesc = result.body.error.description;
+                if(this.errorCode == '461')
+                {
+                  this.errorDesc = 'notUniqueID';
+                }
+                else
+                {
+                  this.errorDesc = 'unsuccesfuliAkaunActivation';
+                }
                 deleteKeyboard();
               }
             },(err: HttpErrorResponse) => {
@@ -1117,6 +1126,7 @@ export class RegisterMemberComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
+              appFunc.code = "ESB Error";
               this.route.navigate(['outofservice']);
             });
         }
@@ -1166,6 +1176,7 @@ export class RegisterMemberComponent implements OnInit {
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -1204,6 +1215,7 @@ export class RegisterMemberComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
@@ -1264,10 +1276,12 @@ export class RegisterMemberComponent implements OnInit {
           }
           else{
             appFunc.message = result.message;
+            appFunc.code = "ESB Error";
             this.route.navigate(['outofservice']);
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }

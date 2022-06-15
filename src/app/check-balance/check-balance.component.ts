@@ -114,6 +114,7 @@ export class CheckBalanceComponent implements OnInit {
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -288,6 +289,7 @@ export class CheckBalanceComponent implements OnInit {
           }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -320,6 +322,7 @@ export class CheckBalanceComponent implements OnInit {
           }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -431,6 +434,7 @@ export class CheckBalanceComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
+        appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
     });
 
@@ -445,6 +449,7 @@ export class CheckBalanceComponent implements OnInit {
       },(err: HttpErrorResponse) => {
         if(!this.disableMemberStatementOutOfServiceRedirect){
           appFunc.message = "HttpError";
+          appFunc.code = "ESB Error";
           this.route.navigate(['outofservice']);
         }
       });
@@ -489,6 +494,7 @@ export class CheckBalanceComponent implements OnInit {
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
+      appFunc.code = "ESB Error";
       this.route.navigate(['outofservice']);
     });
   }

@@ -29,8 +29,6 @@ export class OutOfServiceComponent implements OnInit {
 
     this.translate.use(selectLang.selectedLang);
     this.XXX1 = appFunc.code;
-    this.XXX2 = appFunc.code;
-
     this.EM1 = appFunc.message;
 
     if(!appFunc.isFromStartupGetToken){

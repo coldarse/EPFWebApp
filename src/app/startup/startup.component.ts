@@ -86,6 +86,7 @@ export class StartupComponent implements OnInit {
           .toPromise().then((result: any) => {
             if (!isNaN(result.body)) {
               appFunc.message = result.body.toString();
+              appFunc.code = "SSDM Error";
               this.route.navigate(['outofservice']);
             }
             else { //Not Number
@@ -104,6 +105,7 @@ export class StartupComponent implements OnInit {
                 //Mac Address Doesn't Match
                 else {
                   appFunc.message = 'Unauthorized';
+                  appFunc.code = "This Kiosk is registered under a different Serial. Please contact Support.";
                   this.route.navigate(['outofservice']);
                 }
               }
@@ -111,6 +113,7 @@ export class StartupComponent implements OnInit {
           });
       },(err: HttpErrorResponse) => {
         appFunc.message = 'HttpError';
+        appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support";
         this.route.navigate(['outofservice']);
       });
   }
@@ -173,6 +176,7 @@ export class StartupComponent implements OnInit {
         });
       }).catch((err: any) => {
         appFunc.message = 'Unauthorized';
+        appFunc.code = "SignalR Server has not started. Please contact Support.";
         this.route.navigate(['outofservice']);
       });
     }
@@ -232,13 +236,13 @@ export class StartupComponent implements OnInit {
                     }, 1000);
                   }
                   else {
-                    appFunc.message = 'Failed Change Password for Kiosk';
+                    appFunc.message = 'Failed Change Password for Kiosk.';
                     this.route.navigate(['outofservice']);
                   }
                 });
             }
             else {
-              appFunc.message = 'Failed Update Adapter';
+              appFunc.message = 'Failed Update Adapter.';
               this.route.navigate(['outofservice']);
             }
           });
