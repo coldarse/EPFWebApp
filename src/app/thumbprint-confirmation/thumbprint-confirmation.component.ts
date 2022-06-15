@@ -17,7 +17,8 @@ export class ThumbprintConfirmationComponent implements OnInit {
   popup = false;
   popupAnsuran = false;
   popup50Tahun = false;
-  popupMissing = true;
+  popupMissing = false;
+  popupPerakuan = true;
 
   checkedAnsuran = false;
   checkedBina = false;
@@ -25,6 +26,8 @@ export class ThumbprintConfirmationComponent implements OnInit {
   checked55yo = false;
   checkedEducation = false;
   checked1mil = false;
+
+  xagreedTnc = true;
 
   constructor(
     private route: Router,
@@ -111,6 +114,18 @@ export class ThumbprintConfirmationComponent implements OnInit {
   skip(){
     this.ThumbprintVerification = false;
     this.Selected = true;
+  }
+
+  clickTNC() {
+    this.xagreedTnc = !this.xagreedTnc;
+  }
+
+  popupPerakuanYes(){
+
+  }
+
+  popupPerakuanNo(){
+    
   }
 
 }

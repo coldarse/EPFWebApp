@@ -121,7 +121,7 @@ export class AldanService {
       body,
       Options
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -131,7 +131,7 @@ export class AldanService {
       this.url + `app/kiosks/Verify/${kioskCode}`,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -142,7 +142,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -178,7 +178,7 @@ export class AldanService {
       this.url + 'app/application-translations?FilterText=%20&Key=%20&Translation1=%20&Translation2=%20&Sorting=%20&SkipCount=0&MaxResultCount=1000',
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -190,7 +190,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -202,7 +202,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -214,7 +214,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -226,7 +226,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -238,7 +238,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -250,7 +250,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -262,7 +262,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -274,7 +274,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       map(data => {
         return data
       }),
@@ -289,7 +289,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -301,7 +301,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -313,7 +313,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -325,7 +325,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -338,7 +338,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -350,7 +350,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -362,7 +362,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -374,7 +374,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -387,7 +387,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -399,7 +399,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -411,7 +411,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -423,7 +423,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -435,7 +435,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -446,7 +446,7 @@ export class AldanService {
       this.url + `app/operation-settings/GetOperation?KioskCode=${kioskCode}`,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -457,7 +457,7 @@ export class AldanService {
       this.url + `app/services/GetServiceOperation?KioskCode=${kioskCode}`,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -468,7 +468,7 @@ export class AldanService {
       this.url + 'app/business-types/GetAllList',
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -483,12 +483,12 @@ export class AldanService {
     const response6 = this.http.get(this.url + 'app/client-settings/23', accessToken.httpOptions); //Get age range
 
     return forkJoin([
-      response1.pipe(retry(1), catchError(this.handleError)),
-      response2.pipe(delay(3000),retry(1), catchError(this.handleError)),
-      response3.pipe(delay(3000),retry(1), catchError(this.handleError)),
-      response4.pipe(delay(3000),retry(1), catchError(this.handleError)),
-      response5.pipe(delay(3000),retry(1), catchError(this.handleError)),
-      response6.pipe(delay(3000),retry(1), catchError(this.handleError)),
+      response1.pipe(retry(0), catchError(this.handleError)),
+      response2.pipe(delay(3000),retry(0), catchError(this.handleError)),
+      response3.pipe(delay(3000),retry(0), catchError(this.handleError)),
+      response4.pipe(delay(3000),retry(0), catchError(this.handleError)),
+      response5.pipe(delay(3000),retry(0), catchError(this.handleError)),
+      response6.pipe(delay(3000),retry(0), catchError(this.handleError)),
     ])
   }
 
@@ -497,8 +497,8 @@ export class AldanService {
     const response2 = this.http.post(this.url + 'MemberProfile/MemberProfileAddressMaintenance', body2, accessToken.httpOptions);
 
     return forkJoin([
-      response1.pipe(retry(1), catchError(this.handleError)),
-      response2.pipe(delay(3000),retry(1), catchError(this.handleError)),
+      response1.pipe(retry(0), catchError(this.handleError)),
+      response2.pipe(delay(3000),retry(0), catchError(this.handleError)),
     ]);
   }
 
@@ -507,7 +507,7 @@ export class AldanService {
       this.url + `IAkaunActivation/iAkaunAct/GetSecureImage?SessionId=${sessionid}`,
       accessToken.httpOptions
       ).pipe(
-        retry(1),
+        retry(0),
         catchError(this.handleError),
       )
   }
@@ -517,7 +517,7 @@ export class AldanService {
       this.url + `IAkaunActivation/iAkaunAct/GetTnC?SessionId=${sessionid}&locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
-        retry(1),
+        retry(0),
         catchError(this.handleError),
       )
   }
@@ -528,7 +528,7 @@ export class AldanService {
       body,
       accessToken.httpOptions
     ).pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError),
     )
   }
@@ -538,7 +538,7 @@ export class AldanService {
       this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=${sessionid}&locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
-        retry(1),
+        retry(0),
         catchError(this.handleError),
       )
   }

@@ -841,6 +841,34 @@ td {
     color: white;
 }
 
+.tnc-checkbox {
+    width: 1.5em;
+    height: 1.5em;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid rgb(49, 39, 131);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px -7.5px 5px -6px rgba(0, 0, 0, 0.05);
+    padding: 0.5px;
+    border-radius: 0.5em;
+    vertical-align: middle;
+}
+
+.tnc-checkbox:active,
+.tnc-checkbox:checked:active {
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px 0.5px 1.5px rgba(0, 0, 0, 0.1);
+}
+
+.tnc-checkbox:checked {
+    border: 0.5px solid #adb8c0;
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05), inset 0px -7.5px 5px -6px rgba(0, 0, 0, 0.05), inset 7.5px 5px -6px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+.tnc-checkbox:checked:after {
+    content: '\2714';
+    color: black;
+}
+
 .green-checkbox {
     width: 2rem;
     height: 2rem;
@@ -1188,4 +1216,11 @@ ul.dropdown-menu a.dropdown-item:hover {
 .topBottom1rem{
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.highlightTitle{
+    background-color: rgb(49, 39, 131);
+    color: #fafafa;
+    font-size: 24px;
+    font-family: 'filson-pro', sans-serif;
 }
