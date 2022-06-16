@@ -82,6 +82,7 @@ export class VerifyMyKadComponent implements OnInit {
           appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
+          appFunc.isFromStartupGetToken = true;
           appFunc.code = "SSDM Error. Failed to get Business Types from KMS.";
           this.route.navigate(['outofservice']);
         });
@@ -100,6 +101,7 @@ export class VerifyMyKadComponent implements OnInit {
 
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
+          appFunc.isFromStartupGetToken = true;
           appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
           this.route.navigate(['outofservice']);
         });
@@ -111,6 +113,7 @@ export class VerifyMyKadComponent implements OnInit {
             const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
             if (areDisabled == appFunc.modules.length){
               appFunc.message = 'Under Maintenance';
+              appFunc.isFromStartupGetToken = true;
               this.isOutOfService = true;
               this.route.navigate(['outofservice']);
             }
@@ -120,6 +123,7 @@ export class VerifyMyKadComponent implements OnInit {
                 const count = appFunc.checkModuleAvailability(appFunc.modules);
                 if (count == 0){
                   appFunc.message = 'Under Maintenance';
+                  appFunc.isFromStartupGetToken = true;
                   this.isOutOfService = true;
                   this.route.navigate(['outofservice']);
                 }
@@ -133,6 +137,7 @@ export class VerifyMyKadComponent implements OnInit {
           }
         }, (err: HttpErrorResponse) => {
           appFunc.message = 'HttpError';
+          appFunc.isFromStartupGetToken = true;
           appFunc.code = "SSDM Error. Failed to get Service Operation.";
           this.route.navigate(['outofservice']);
         });
@@ -180,28 +185,27 @@ export class VerifyMyKadComponent implements OnInit {
     this.InsertMyKad = false;
     this.Language = true;
     this.SelectLanguage = true;
-    let password = signalRConnection.adapter[0].adapterNameEncrypted;
 
-    if (!this.format.test(password)) {
-      password = password.concat('=');
-    }
-
-    this._aldanService.
-    getToken(signalRConnection.kioskCode, password).
-    subscribe((result: any) => {
-      //Not Number
-      accessToken.token = result.access_token;
-      accessToken.httpOptions = {
-        headers: new HttpHeaders(
-          { Authorization: 'Bearer ' + accessToken.token }
-        ),
-        observe: 'response' as 'body'
-      };
-    },(err: HttpErrorResponse) => {
-      appFunc.message = 'HttpError';
-      appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support.";
-      this.route.navigate(['outofservice']);
-    });
+    //let password = signalRConnection.adapter[0].adapterNameEncrypted;
+    // if (!this.format.test(password)) {
+    //   password = password.concat('=');
+    // }
+    // this._aldanService.
+    // getToken(signalRConnection.kioskCode, password).
+    // subscribe((result: any) => {
+    //   //Not Number
+    //   accessToken.token = result.access_token;
+    //   accessToken.httpOptions = {
+    //     headers: new HttpHeaders(
+    //       { Authorization: 'Bearer ' + accessToken.token }
+    //     ),
+    //     observe: 'response' as 'body'
+    //   };
+    // },(err: HttpErrorResponse) => {
+    //   appFunc.message = 'HttpError';
+    //   appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support.";
+    //   this.route.navigate(['outofservice']);
+    // });
   }
 
 
@@ -251,67 +255,67 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   bindMyKadData(data: any): void{
-    const age = appFunc.calculateAge(new Date(data.DOB));
+    //const age = appFunc.calculateAge(new Date(data.DOB));
 
-    if (age >= appFunc.AgeRangeLow && age <= appFunc.AgeRangeHigh){
-      currentMyKadDetails.Name = data.GMPCName;
-      currentMyKadDetails.ICNo = data.ICNo.toString().replace('*', '');
-      currentMyKadDetails.OldICNo = data.OldICNo;
-      currentMyKadDetails.DOB = data.DOB;
-      currentMyKadDetails.DOBString = data.DOBString;
-      currentMyKadDetails.POB =  data.POB;
-      currentMyKadDetails.Gender = data.Gender;
-      currentMyKadDetails.Citizenship = data.Citizenship;
-      currentMyKadDetails.IssueDate = data.IssueDate;
-      currentMyKadDetails.Race = data.Race;
-      currentMyKadDetails.Religion = data.Religion;
-      currentMyKadDetails.Address1 = data.Address1;
-      currentMyKadDetails.Address2 = data.Address2;
-      currentMyKadDetails.Address3 = data.Address3;
-      currentMyKadDetails.PostCode = data.PostCode;
-      currentMyKadDetails.City = data.City;
-      currentMyKadDetails.State = data.State;
-      currentMyKadDetails.Country = data.Country;
-      currentMyKadDetails.Address = data.Address;
-      currentMyKadDetails.Address1 = data.Address1;
-      currentMyKadDetails.Address2 = data.Address2;
-      currentMyKadDetails.Address3 = data.Address3;
-      currentMyKadDetails.RJ = data.RJ;
-      currentMyKadDetails.KT = data.KT;
-      currentMyKadDetails.GreenCardNationality = data.GreenCardNationality;
-      currentMyKadDetails.GreenCardExpiryDate = data.GreenCardExpiryDate;
-      currentMyKadDetails.CardVersion = data.CardVersion;
-      currentMyKadDetails.OtherID = data.OtherID;
-      currentMyKadDetails.CategoryType = data.CategoryType;
-      currentMyKadDetails.EncryptedICNumber = data.EncryptedICNumber;
+    //if (age >= appFunc.AgeRangeLow && age <= appFunc.AgeRangeHigh){
+    currentMyKadDetails.Name = data.GMPCName;
+    currentMyKadDetails.ICNo = data.ICNo.toString().replace('*', '');
+    currentMyKadDetails.OldICNo = data.OldICNo;
+    currentMyKadDetails.DOB = data.DOB;
+    currentMyKadDetails.DOBString = data.DOBString;
+    currentMyKadDetails.POB =  data.POB;
+    currentMyKadDetails.Gender = data.Gender;
+    currentMyKadDetails.Citizenship = data.Citizenship;
+    currentMyKadDetails.IssueDate = data.IssueDate;
+    currentMyKadDetails.Race = data.Race;
+    currentMyKadDetails.Religion = data.Religion;
+    currentMyKadDetails.Address1 = data.Address1;
+    currentMyKadDetails.Address2 = data.Address2;
+    currentMyKadDetails.Address3 = data.Address3;
+    currentMyKadDetails.PostCode = data.PostCode;
+    currentMyKadDetails.City = data.City;
+    currentMyKadDetails.State = data.State;
+    currentMyKadDetails.Country = data.Country;
+    currentMyKadDetails.Address = data.Address;
+    currentMyKadDetails.Address1 = data.Address1;
+    currentMyKadDetails.Address2 = data.Address2;
+    currentMyKadDetails.Address3 = data.Address3;
+    currentMyKadDetails.RJ = data.RJ;
+    currentMyKadDetails.KT = data.KT;
+    currentMyKadDetails.GreenCardNationality = data.GreenCardNationality;
+    currentMyKadDetails.GreenCardExpiryDate = data.GreenCardExpiryDate;
+    currentMyKadDetails.CardVersion = data.CardVersion;
+    currentMyKadDetails.OtherID = data.OtherID;
+    currentMyKadDetails.CategoryType = data.CategoryType;
+    currentMyKadDetails.EncryptedICNumber = data.EncryptedICNumber;
 
-      const sessionBody = {
-        kioskId: signalRConnection.kioskCode,
-        client: currentMyKadDetails.Name,
-        identification: currentMyKadDetails.ICNo
+    const sessionBody = {
+      kioskId: signalRConnection.kioskCode,
+      client: currentMyKadDetails.Name,
+      identification: currentMyKadDetails.ICNo
+    }
+
+    this._aldanService.CreateSession(sessionBody).subscribe((result: any) => {
+      if (result.body.id != undefined){
+        appFunc.sessionId = result.body.id;
+        this.getAccountInquiry();
       }
-
-      this._aldanService.CreateSession(sessionBody).subscribe((result: any) => {
-        if (result.body.id != undefined){
-          appFunc.sessionId = result.body.id;
-          this.getAccountInquiry();
-        }
-        else{
-          appFunc.message = result.body.error.message;
-          appFunc.code = "SSDM Error";
-          this.route.navigate(['outofservice']);
-        }
-      }, (err: HttpErrorResponse) => {
-        appFunc.message = 'HttpError';
-        appFunc.code = "SSDM Error. Failed to create Session for this transaction.";
+      else{
+        appFunc.message = result.body.error.message;
+        appFunc.code = "SSDM Error";
         this.route.navigate(['outofservice']);
-      });
-    }
-    else{
-      appFunc.message = 'notInAgeRange';
-      appFunc.code = "Error";
+      }
+    }, (err: HttpErrorResponse) => {
+      appFunc.message = 'HttpError';
+      appFunc.code = "SSDM Error. Failed to create Session for this transaction.";
       this.route.navigate(['outofservice']);
-    }
+    });
+    // }
+    // else{
+    //   appFunc.message = 'notInAgeRange';
+    //   appFunc.code = "Error";
+    //   this.route.navigate(['outofservice']);
+    // }
   }
 
   getAccountInquiry(): void{
@@ -320,6 +324,14 @@ export class VerifyMyKadComponent implements OnInit {
     switch (currentMyKadDetails.CategoryType){
       case 'W':
         catType = 'IN'
+        currentMyKadDetails.CategoryType = catType;
+        break;
+      case 'PO':
+        catType = 'IP'
+        currentMyKadDetails.CategoryType = catType;
+        break;
+      case 'A':
+        catType = 'IT'
         currentMyKadDetails.CategoryType = catType;
         break;
     }
@@ -381,7 +393,17 @@ export class VerifyMyKadComponent implements OnInit {
           this.route.navigate(['outofservice']);
         }
         if (result.body.error[0].code == 'MBM2001'){
-          this.route.navigate(['registerMember']);
+          const age = appFunc.calculateAge(new Date(currentMyKadDetails.DOB));
+
+          if (age >= appFunc.AgeRangeLow && age <= appFunc.AgeRangeHigh){
+            this.route.navigate(['registerMember']);
+          }
+          else{
+            appFunc.message = 'notInAgeRange';
+            appFunc.code = "Error";
+            this.route.navigate(['outofservice']);
+          }
+          
         }
         else{
           appFunc.message = result.body.error[0].description;

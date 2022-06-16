@@ -112,7 +112,7 @@ export class StartupComponent implements OnInit {
             }
           });
       },(err: HttpErrorResponse) => {
-        appFunc.message = 'HttpError';
+        appFunc.message = 'Unauthorized';
         appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support";
         this.route.navigate(['outofservice']);
       });

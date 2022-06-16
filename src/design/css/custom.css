@@ -695,6 +695,12 @@
     font-weight: 500;
 }
 
+.errMsgSSDM{
+    font-family: 'filson-pro', sans-serif;
+    color: black;
+    font-size: 9px;
+}
+
 table,
 th {
     border: 0.5px solid rgb(49, 39, 131);

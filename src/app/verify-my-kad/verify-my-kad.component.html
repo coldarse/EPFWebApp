@@ -87,10 +87,10 @@
                 <h2 *ngIf="xlastTry">{{'RetryMessage' | translate }}</h2>
                 <footer class="padTop12rem footer">
                     <div class="col-12">
-                        <button type="button" class="btnNo" (click)="cancelMyKadVerification()">
+                        <button type="button" class="btnNo" style="margin-right: 1rem;" (click)="cancelMyKadVerification()">
                             {{'End' | translate }}
                         </button>
-                        <button type="button" class="btnYes" (click)="TryAgain()" *ngIf="xlastTry">
+                        <button type="button" class="btnYes" style="margin-left: 1rem;" (click)="TryAgain()" *ngIf="xlastTry">
                             {{'TryAgain' | translate }}
                         </button>
                     </div>
@@ -106,10 +106,10 @@
                 <h3>Would you like to proceed/continue?</h3>
                 <footer class="padTop5rem footer">
                     <div class="col-12">
-                        <button type="button" class="btnNo" (click)="disagreeProceed()">
+                        <button type="button" class="btnNo" style="margin-right: 1rem;" (click)="disagreeProceed()">
                             Tidak / No
                         </button>
-                        <button type="button" class="btnYes" (click)="agreeProceed()">
+                        <button type="button" class="btnYes" style="margin-left: 1rem;" (click)="agreeProceed()">
                             Ya / Yes
                         </button>
                     </div>
