@@ -42,7 +42,6 @@ export class PersonalInformationComponent implements OnInit {
   invalidState = false;
   invalidEmail = false;
   isCallAPI = false;
-
   errorDesc = "";
   address1 = "";
   address2 = "";
@@ -59,10 +58,6 @@ export class PersonalInformationComponent implements OnInit {
   spacer = " ";
   comma = ", ";
   fullAddress = "";
-
-  // lastkeydown1: number = 0;
-  // subscription: any;
-  // userData: any[] = [];
   slist: string = '';
   stateList: string[] = [
     'JOHOR',
@@ -87,37 +82,7 @@ export class PersonalInformationComponent implements OnInit {
     private route: Router,
     private translate: TranslateService,
     private _aldanService : AldanService
-  ) { 
-      // //Get the user data from users.json
-      // this.userService.getStateList().subscribe(
-      //   data => {
-      //     Object.assign(this.userData, data);
-      //   },
-      //   error => {
-      //     console.log("Something wrong here");
-      //   });    
-  }
-
-  // getStateList($event) {
-  //   let userId = (<HTMLInputElement>document.getElementById('txtState')).value;
-  //   this.stateList = [];
-
-  //   if (userId.length > 2) {
-  //     if ($event.timeStamp - this.lastkeydown1 > 200) {
-  //       this.stateList = this.searchFromArray(this.userData, userId);
-  //     }
-  //   }
-  // }
-
-  // searchFromArray(arr, regex) {
-  //   let matches = [], i;
-  //   for (i = 0; i < arr.length; i++) {
-  //     if (arr[i].match(regex)) {
-  //       matches.push(arr[i]);
-  //     }
-  //   }
-  //   return matches;
-  // };
+  ) {}
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
@@ -247,7 +212,6 @@ export class PersonalInformationComponent implements OnInit {
       this.emptyFields = true;
     }
   }
-
 
   UpdateProfileNo(){
     deleteKeyboard();

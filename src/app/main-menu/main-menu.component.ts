@@ -20,7 +20,6 @@ export class MainMenuComponent implements OnInit {
   date : any;
   name = '';
   accountNum = "";
-
   checkBalanceEnabled = false;
   personalInformationEnabled = false;
   updateTACEnabled = false;
@@ -31,11 +30,10 @@ export class MainMenuComponent implements OnInit {
   constructor(
     private route: Router,
     private translate: TranslateService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
 
-    
     this.translate.use(selectLang.selectedLang);
 
     this.name = appFunc.currMemberDetail.custName;
@@ -127,7 +125,6 @@ export class MainMenuComponent implements OnInit {
     
     if(iakauncount > 0) this.iAkaunEnabled = true;
     if(isaraanishariahcount > 0) this.iShariahiSaraanEnabled = true;
-
     if(appFunc.currMemberDetail.iAkaunStatus == "A") this.iAkaunEnabled = false;
     
   }

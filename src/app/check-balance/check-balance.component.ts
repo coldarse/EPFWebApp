@@ -18,6 +18,7 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
   styleUrls: ['./check-balance.component.css'],
 })
 export class CheckBalanceComponent implements OnInit {
+
   SummaryStatementPage = true;
   SelectYearPage = false;
   StatementPage = false;
@@ -28,16 +29,13 @@ export class CheckBalanceComponent implements OnInit {
   emptyFields = false;
   isCallAPI = false;
   Failed = false;
-
   totalSavings = 0;
   SelectedYeartotalSavings = 0;
   transactionAmtForAcc1 = 0;
   selectedYear = 0;
-  
   arrYears: any[] = [];
   sDetails: any[] = [];
   cDetails: any[] = [];
-
   transaction = "";
   errorDesc = "";
   errorCode = "";
@@ -82,7 +80,7 @@ export class CheckBalanceComponent implements OnInit {
         "sessionId": appFunc.sessionId
       };
   
-      //Call Memeber Summary Statement API
+      //Call Member Summary Statement API
       this._aldanService
         .MemberSummaryStatement(summaryBody)
         .subscribe((result: any) => {
@@ -295,6 +293,7 @@ export class CheckBalanceComponent implements OnInit {
     }
     else{
       appFunc.dataForEmail = {};
+
       Object.assign(appFunc.dataForEmail, {
         CRecords: appFunc.CDetails,
         SummaryDetail: appFunc.summaryDetails,
@@ -326,9 +325,6 @@ export class CheckBalanceComponent implements OnInit {
         this.route.navigate(['outofservice']);
       });
     }
-    
-    
-    
   }
 
   NavProfile() {
@@ -385,8 +381,6 @@ export class CheckBalanceComponent implements OnInit {
 
   DisplaySelectedYearStatement(year: number) {
     this.disableMemberStatementOutOfServiceRedirect = false;
-    // appFunc.wDetails = [];
-    // appFunc.oDetails = [];
     this.cDetails = [];
     this.moreRecordIndicator = '';
     this.paginationKey = '';
@@ -464,20 +458,18 @@ export class CheckBalanceComponent implements OnInit {
         this.isCallAPI = false;
         appFunc.CDetails = result.body;
         appFunc.allCategoryBody = allCategoryBody;
-        // appFunc.oDetails =  result.body.othersDS.detail.detailStatement;
-        // appFunc.wDetails =  result.body.withdrawalDS.detail.detailStatement;
         this.cDetails =  result.body.contributionDS.detail.detailStatement;
         appFunc.transactionAmtForAcc1 = Number(result.body.contributionDS.detail.contribTotal);
         this.transactionAmtForAcc1 = appFunc.transactionAmtForAcc1;
         this.cDetails.forEach((element: any) => {
           if(selectLang.selectedLang == 'bm'){
             Object.assign(element, {
-              "contribMonthForDisplay": element.contribMonthBm//appFunc.translateMonthToBM(formatDate((element.contribMonth), 'MMM-yy', 'en'))
+              "contribMonthForDisplay": element.contribMonthBm
             });
           }
           else{
             Object.assign(element, {
-              "contribMonthForDisplay": element.contribMonthEn//formatDate((element.contribMonth), 'MMM-yy', 'en')
+              "contribMonthForDisplay": element.contribMonthEn
             });
           }
         });

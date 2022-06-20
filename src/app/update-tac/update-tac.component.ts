@@ -22,7 +22,6 @@ export class UpdateTACComponent implements OnInit {
   Failed = false;
   phoneError = false;
   isCallAPI = false;
-
   phoneNo = '';
   errorDesc = '';
   successMessage = '';
@@ -177,11 +176,6 @@ export class UpdateTACComponent implements OnInit {
         this.route.navigate(['outofservice']);
       });
     }
-    
-
-    
-
-    
   }
 
   PhoneNoConfirmationNo(){

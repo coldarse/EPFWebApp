@@ -33,20 +33,17 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
   iShariahEnabled = false;
   xagreedTnc = true;
   isCallAPI = false;
-
   Contract = '';
   errorDesc = '';
   defaultDDL = 'default';
-
   selectedJobSector: any;
-
   jobSectors: businessTypes[] = [];
 
   constructor(
     private route: Router,
     private translate: TranslateService,
     private _aldanService: AldanService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
@@ -68,6 +65,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         }
       }
     }
+    
     const body = {
       "regType": "M",
       "accNum": "",

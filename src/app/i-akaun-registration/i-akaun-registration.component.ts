@@ -56,7 +56,6 @@ export class IAkaunRegistrationComponent implements OnInit {
   isiAkaunActModuleEnabled = false;
   isCustom = false;
   emailError = false;
-
   errorCode = "";
   phoneNo = '';
   emailAddress = '';
@@ -72,7 +71,6 @@ export class IAkaunRegistrationComponent implements OnInit {
   emailDDLTextValue = '';
   fullEmailAddress = '';
   elist = 'gmail.com';
-
   checkboxImages: any[] = [];
   emailList: string[] = [
     'gmail.com',
@@ -171,7 +169,6 @@ export class IAkaunRegistrationComponent implements OnInit {
     }
   }
 
-  
   EnterEmailAddressNo() {
     deleteKeyboard();
     this.EnterEmailAddress = false;
@@ -289,9 +286,6 @@ export class IAkaunRegistrationComponent implements OnInit {
         this.route.navigate(['outofservice']);
       });
     }
-    
-    
-    
   }
 
   registeriAkaun(iAkaunbody:any){

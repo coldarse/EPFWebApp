@@ -37,14 +37,11 @@ export class VerifyMyKadComponent implements OnInit {
   ErrorPop = false;
   xlastTry = true;
   isOutOfService = false;
-
   arrayList: string[] = [];
-
   readerIntervalId: any;
   moduleIntervelId: any;
   checkThumbprintStatusIntervalId: any;
   myKadData: any;
-
   RetryCountInstance = 0;
   format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   thumbprintError = true;
@@ -54,8 +51,7 @@ export class VerifyMyKadComponent implements OnInit {
     private translate: TranslateService,
     private _aldanService: AldanService,
     private appConfig: AppConfiguration
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.RetryCountInstance = 3;
@@ -255,9 +251,7 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   bindMyKadData(data: any): void{
-    //const age = appFunc.calculateAge(new Date(data.DOB));
 
-    //if (age >= appFunc.AgeRangeLow && age <= appFunc.AgeRangeHigh){
     currentMyKadDetails.Name = data.GMPCName;
     currentMyKadDetails.ICNo = data.ICNo.toString().replace('*', '');
     currentMyKadDetails.OldICNo = data.OldICNo;
@@ -310,12 +304,6 @@ export class VerifyMyKadComponent implements OnInit {
       appFunc.code = "SSDM Error. Failed to create Session for this transaction.";
       this.route.navigate(['outofservice']);
     });
-    // }
-    // else{
-    //   appFunc.message = 'notInAgeRange';
-    //   appFunc.code = "Error";
-    //   this.route.navigate(['outofservice']);
-    // }
   }
 
   getAccountInquiry(): void{

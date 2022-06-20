@@ -27,8 +27,6 @@ export class StartupComponent implements OnInit {
   SuccessRegister = false;
   isSelectedAdapter = false;
   isAdapterEmpty = false;
-
-  
   dotInterval: any;
   adapters: adapter[] = [];
   selectedAdapterValue = '';
@@ -50,7 +48,6 @@ export class StartupComponent implements OnInit {
     this.UserName = 'admin';
     this.Password = 'abcd1234';
     this.Secret = '1q2w3E*';
-
     this.startConnection();
   }
 
@@ -114,33 +111,6 @@ export class StartupComponent implements OnInit {
       },(err: HttpErrorResponse) => {
         appFunc.message = 'Unauthorized';
         appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support";
-        this.route.navigate(['outofservice']);
-      });
-  }
-
-  getToken(password: string) {
-    this._aldanService
-      .getToken(signalRConnection.kioskCode, password)
-      .subscribe((result: any) => {
-        appFunc.isFromStartupGetToken = false;
-        clearInterval(this.dotInterval);
-        if (!isNaN(result)) { //Number
-          // Say that Kiosk Is Not Found in KMS
-          this.CheckKioskCredentials = false;
-          this.KioskNotFound = true;
-          return false;
-        }
-        //Not Number
-        accessToken.token = result.access_token;
-        accessToken.httpOptions = {
-          headers: new HttpHeaders(
-            { Authorization: 'Bearer ' + accessToken.token }
-          ),
-          observe: 'response' as 'body'
-        };
-        return true;
-      },(err: HttpErrorResponse) => {
-        appFunc.message = 'HttpError';
         this.route.navigate(['outofservice']);
       });
   }
