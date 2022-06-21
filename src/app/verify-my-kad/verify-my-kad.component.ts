@@ -353,6 +353,22 @@ export class VerifyMyKadComponent implements OnInit {
           subscribe((result1: any) => {
             if (result1.body.responseCode == '0'){
               appFunc.currMemberDetail = result1.body.detail;
+              if(appFunc.currMemberDetail.accNum == '0'){
+                appFunc.resubmission = 'Y';
+                appFunc.resubmissionNo = appFunc.currMemberDetail.cifNum;
+                
+                const age = appFunc.calculateAge(new Date(currentMyKadDetails.DOB));
+
+                if (age >= appFunc.AgeRangeLow && age <= appFunc.AgeRangeHigh){
+                  this.route.navigate(['registerMember']);
+                }
+                else{
+                  appFunc.message = 'notInAgeRange';
+                  appFunc.code = "Error";
+                  this.route.navigate(['outofservice']);
+                }
+              }
+
               if(appFunc.currMemberDetail.iAkaunStatus == "N" || appFunc.currMemberDetail.iAkaunStatus == "E" || appFunc.currMemberDetail.iAkaunStatus == ""){
                 this.route.navigate(['iAkaunRegistration']);
               }
