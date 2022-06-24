@@ -17,7 +17,7 @@ export class MainMenuComponent implements OnInit {
   @ViewChild('bm') bm: ElementRef | undefined;
   @ViewChild('en') en: ElementRef | undefined;
 
-  date : any;
+  date = formatDate(new Date(), 'h:mm a d/M/yyyy', 'en');
   name = '';
   accountNum = "";
   checkBalanceEnabled = false;
