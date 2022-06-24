@@ -53,6 +53,9 @@ export class appFunc {
     static selectedYear: number;
 
     static isInfoPopUp = false;
+
+    static resubmission = 'N';
+    static resubmissionNo = '';
     
 
 
@@ -72,6 +75,8 @@ export class appFunc {
         this.oDetails = [];
         this.summaryDetails = undefined;
         this.transactionAmtForAcc1 = undefined;
+        this.resubmission = 'N';
+        this.resubmissionNo = '';
     }
 
     

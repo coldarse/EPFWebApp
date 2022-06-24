@@ -564,8 +564,13 @@ export class RegisterMemberComponent implements OnInit {
       }
     }
 
+    let cifNo = '';
+    if(appFunc.resubmission == 'Y'){
+      cifNo = appFunc.resubmissionNo;
+    }
+
     const body = {
-      cifNum: '',
+      cifNum: cifNo,
       regType: 'M',
       accNum: '',
       accType: '',
@@ -619,6 +624,7 @@ export class RegisterMemberComponent implements OnInit {
       lastMaintUserID: '',
       lastMaintTerminalID: '',
       lastMaintBranchNo: '',
+      resubmission: appFunc.resubmission,
       sessionId: appFunc.sessionId,
     };
 
