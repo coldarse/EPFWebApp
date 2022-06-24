@@ -42,7 +42,7 @@ export class VerifyMyKadComponent implements OnInit {
   moduleIntervelId: any;
   checkThumbprintStatusIntervalId: any;
   myKadData: any;
-  RetryCountInstance = 0;
+  RetryCountInstance = 3;
   format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   thumbprintError = true;
   
@@ -54,7 +54,7 @@ export class VerifyMyKadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.RetryCountInstance = 3;
+    this.RetryCountInstance = appFunc.thumbprintRetry;
     this.translate.use('bm');
     if (appFunc.endSession){
       this.translate.use(selectLang.selectedLang);
@@ -73,74 +73,34 @@ export class VerifyMyKadComponent implements OnInit {
       
     }
     else{
-      if (accessToken.httpOptions != undefined){
-        this._aldanService.GetBusinessTypes().subscribe((res: any) => {
-          appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
-        }, (err: HttpErrorResponse) => {
-          appFunc.message = 'HttpError';
+      if (appFunc.modules.length != 0){
+        const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+        if (areDisabled == appFunc.modules.length){
+          appFunc.message = 'Out of Operation Hours';
           appFunc.isFromStartupGetToken = true;
-          appFunc.code = "SSDM Error. Failed to get Business Types from KMS.";
+          this.isOutOfService = true;
           this.route.navigate(['outofservice']);
-        });
+        }
 
-        this._aldanService.GetClientSettings().subscribe((res: any) => {
-          
-          appFunc.thumbprintRetry = Number(res[0].body.value);
-          appFunc.iAkaunActivationPerDay = Number(res[1].body.value);
-          appFunc.minCharForPassword = Number(res[2].body.value);
-          appFunc.updateTACPerMonth = Number(res[3].body.value);
-          appFunc.NumberOfYearsViewStatement = Number(res[4].body.value);
-          let range = res[5].body.value.split(',');
-          appFunc.AgeRangeLow = Number(range[0]);
-          appFunc.AgeRangeHigh = Number(range[1]);
-          this.RetryCountInstance = appFunc.thumbprintRetry;
-
-        }, (err: HttpErrorResponse) => {
-          appFunc.message = 'HttpError';
-          appFunc.isFromStartupGetToken = true;
-          appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
-          this.route.navigate(['outofservice']);
-        });
-
-        this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
-          appFunc.modules = res.body.map((em: any) => new eModules(em));
-
-          if (appFunc.modules.length != 0){
-            const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-            if (areDisabled == appFunc.modules.length){
-              appFunc.message = 'Under Maintenance';
+        setTimeout(() => {
+          this.moduleIntervelId = setInterval(() => {
+            const count = appFunc.checkModuleAvailability(appFunc.modules);
+            if (count == 0){
+              appFunc.message = 'Out of Operation Hours';
               appFunc.isFromStartupGetToken = true;
               this.isOutOfService = true;
               this.route.navigate(['outofservice']);
             }
+          }, 1000);
+        } , 60000);
 
-            setTimeout(() => {
-              this.moduleIntervelId = setInterval(() => {
-                const count = appFunc.checkModuleAvailability(appFunc.modules);
-                if (count == 0){
-                  appFunc.message = 'Under Maintenance';
-                  appFunc.isFromStartupGetToken = true;
-                  this.isOutOfService = true;
-                  this.route.navigate(['outofservice']);
-                }
-              }, 1000);
-            } , 60000);
-
-          }
-          else{
-            appFunc.message = 'Under Maintenance';
-            this.route.navigate(['outofservice']);
-          }
-        }, (err: HttpErrorResponse) => {
-          appFunc.message = 'HttpError';
-          appFunc.isFromStartupGetToken = true;
-          appFunc.code = "SSDM Error. Failed to get Service Operation.";
-          this.route.navigate(['outofservice']);
-        });
+      }
+      else{
+        appFunc.message = 'Out of Operation Hours';
+        this.route.navigate(['outofservice']);
       }
     }
 
-    
     this.readerIntervalId = setInterval(() => {
       appFunc.DetectMyKad();
       if (signalRConnection.isCardInserted) {
@@ -182,26 +142,6 @@ export class VerifyMyKadComponent implements OnInit {
     this.Language = true;
     this.SelectLanguage = true;
 
-    //let password = signalRConnection.adapter[0].adapterNameEncrypted;
-    // if (!this.format.test(password)) {
-    //   password = password.concat('=');
-    // }
-    // this._aldanService.
-    // getToken(signalRConnection.kioskCode, password).
-    // subscribe((result: any) => {
-    //   //Not Number
-    //   accessToken.token = result.access_token;
-    //   accessToken.httpOptions = {
-    //     headers: new HttpHeaders(
-    //       { Authorization: 'Bearer ' + accessToken.token }
-    //     ),
-    //     observe: 'response' as 'body'
-    //   };
-    // },(err: HttpErrorResponse) => {
-    //   appFunc.message = 'HttpError';
-    //   appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support.";
-    //   this.route.navigate(['outofservice']);
-    // });
   }
 
 
@@ -368,8 +308,7 @@ export class VerifyMyKadComponent implements OnInit {
                   this.route.navigate(['outofservice']);
                 }
               }
-
-              if(appFunc.currMemberDetail.iAkaunStatus == "N" || appFunc.currMemberDetail.iAkaunStatus == "E" || appFunc.currMemberDetail.iAkaunStatus == ""){
+              else if(appFunc.currMemberDetail.iAkaunStatus == "N" || appFunc.currMemberDetail.iAkaunStatus == "E" || appFunc.currMemberDetail.iAkaunStatus == ""){
                 this.route.navigate(['iAkaunRegistration']);
               }
               else if(appFunc.currMemberDetail.iAkaunStatus == "A" && appFunc.currMemberDetail.tacMobilePhone.length == 0){

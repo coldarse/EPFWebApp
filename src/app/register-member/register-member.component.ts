@@ -565,7 +565,7 @@ export class RegisterMemberComponent implements OnInit {
     }
 
     let cifNo = '';
-    if(appFunc.resubmission = 'Y'){
+    if(appFunc.resubmission == 'Y'){
       cifNo = appFunc.resubmissionNo;
     }
 

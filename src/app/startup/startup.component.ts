@@ -97,7 +97,52 @@ export class StartupComponent implements OnInit {
               // Registered
               else {
                 if (signalRConnection.kioskInformation.macAddress == signalRConnection.adapter[0].adapterName) {
-                  this.route.navigate(['verifyMyKad']);
+                  let count = 0;
+                  //Get Business Types for iSaraan
+                  this._aldanService.GetBusinessTypes().subscribe((res: any) => {
+                    appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
+                    count += 1;
+                  }, (err: HttpErrorResponse) => {
+                    appFunc.message = 'HttpError';
+                    appFunc.isFromStartupGetToken = true;
+                    appFunc.code = "SSDM Error. Failed to get Business Types from KMS.";
+                    this.route.navigate(['outofservice']);
+                  });
+                  //Get Module Operations
+                  this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
+                    appFunc.modules = res.body.map((em: any) => new eModules(em));
+                    count += 1;
+                  }, (err: HttpErrorResponse) => {
+                    appFunc.message = 'HttpError';
+                    appFunc.isFromStartupGetToken = true;
+                    appFunc.code = "SSDM Error. Failed to get Service Operation.";
+                    this.route.navigate(['outofservice']);
+                  });
+                  //Get Client Settings for Kiosk Functionality
+                  this._aldanService.GetClientSettings().subscribe((res: any) => {
+                    appFunc.thumbprintRetry = Number(res[0].body.value);
+                    appFunc.iAkaunActivationPerDay = Number(res[1].body.value);
+                    appFunc.minCharForPassword = Number(res[2].body.value);
+                    appFunc.updateTACPerMonth = Number(res[3].body.value);
+                    appFunc.NumberOfYearsViewStatement = Number(res[4].body.value);
+                    let range = res[5].body.value.split(',');
+                    appFunc.AgeRangeLow = Number(range[0]);
+                    appFunc.AgeRangeHigh = Number(range[1]);
+                    count += 1;
+                  }, (err: HttpErrorResponse) => {
+                    appFunc.message = 'HttpError';
+                    appFunc.isFromStartupGetToken = true;
+                    appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
+                    this.route.navigate(['outofservice']);
+                  });
+
+                  let checkCount = setInterval(() => {
+                    if(count == 3){
+                      clearInterval(checkCount);
+                      this.route.navigate(['verifyMyKad']);
+                    }
+                  }, 1000);
+                  
                 }
                 //Mac Address Doesn't Match
                 else {
