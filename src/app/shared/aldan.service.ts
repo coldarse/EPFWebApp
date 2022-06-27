@@ -512,9 +512,9 @@ export class AldanService {
       )
   }
 
-  GetTnC(locale: string, sessionid: number){
+  GetTnC(locale: string){
     return this.http.get(
-      this.url + `IAkaunActivation/iAkaunAct/GetTnC?SessionId=${sessionid}&locale=${locale}`,
+      this.url + `IAkaunActivation/iAkaunAct/GetTnC?locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
         retry(0),
@@ -533,9 +533,9 @@ export class AldanService {
     )
   }
 
-  GetContract(locale: string, sessionid: number){
+  GetContract(locale: string){
     return this.http.get(
-      this.url + `IShariahRegistration/iShariahReg/GetContract?SessionId=${sessionid}&locale=${locale}`,
+      this.url + `IShariahRegistration/iShariahReg/GetContract?locale=${locale}`,
       accessToken.httpOptions
       ).pipe(
         retry(0),

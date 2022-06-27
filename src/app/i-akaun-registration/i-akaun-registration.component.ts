@@ -332,15 +332,28 @@ export class IAkaunRegistrationComponent implements OnInit {
   }
 
   AskActivateYes() {
-    this.isCallAPI = true;
-    this._aldanService
+    if(selectLang.selectedLang == 'bm' ? (appFunc.iAkaunActTNCBM != undefined) : (appFunc.iAkaunActTNCEN != undefined)){
+      this.xagreedTnc = true;
+      this.TnC = selectLang.selectedLang == 'bm' ? appFunc.iAkaunActTNCBM.content.toString() : appFunc.iAkaunActTNCEN.content.toString();
+      this.content_version = selectLang.selectedLang == 'bm' ? appFunc.iAkaunActTNCBM.contentVersion : appFunc.iAkaunActTNCEN.contentVersion;
+      this.AskActivate = false;
+      this.IAkaunTNC = true;
+    }
+    else{
+      this.isCallAPI = true;
+      this._aldanService
       .GetTnC(
-        selectLang.selectedLang, 
-        appFunc.sessionId
+        selectLang.selectedLang
       )
       .subscribe((result: any) => {
         this.isCallAPI = false;
         if (result.body.content != '') {
+          if(selectLang.selectedLang == 'bm'){
+            appFunc.iAkaunActTNCBM = result.body;
+          }
+          else{
+            appFunc.iAkaunActTNCEN = result.body;
+          }
           this.xagreedTnc = true;
           this.TnC = result.body.content.toString();
           this.content_version = result.body.contentVersion;
@@ -356,6 +369,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         appFunc.code = "ESB Error";
         this.route.navigate(['outofservice']);
       });
+    }
   }
 
   AskActivateNo() {

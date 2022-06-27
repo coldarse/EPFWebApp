@@ -135,9 +135,66 @@ export class StartupComponent implements OnInit {
                     appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
                     this.route.navigate(['outofservice']);
                   });
+                  //Get iAkaun Activation TNC BM
+                  this._aldanService.GetTnC(
+                    'bm'
+                  )
+                  .subscribe((result: any) => {
+                    count += 1;
+                    if (result.body.content != '') {
+                      appFunc.iAkaunActTNCBM = result.body;
+                    }
+                  },(err: HttpErrorResponse) => {
+                    appFunc.message = "HttpError";
+                    appFunc.isFromStartupGetToken = true;
+                    appFunc.code = "ESB Error, Failed to get iAkaun Activation TnC.";
+                    this.route.navigate(['outofservice']);
+                  });
+                  //Get iAkaun Activation TNC EN
+                  this._aldanService.GetTnC(
+                    'en'
+                  )
+                  .subscribe((result: any) => {
+                    count += 1;
+                    if (result.body.content != '') {
+                      appFunc.iAkaunActTNCEN = result.body;
+                    }
+                  },(err: HttpErrorResponse) => {
+                    appFunc.message = "HttpError";
+                    appFunc.code = "ESB Error, Failed to get iAkaun Activation TnC.";
+                    this.route.navigate(['outofservice']);
+                  });
+                  //Get iShariah Contract BM
+                  this._aldanService.GetContract(
+                    'bm'
+                  )
+                  .subscribe((result: any) => {
+                    count += 1;
+                    if (result.body.content != '') {
+                      appFunc.iShariahTNCBM = result.body;
+                    }
+                  }, (err: HttpErrorResponse) => {
+                    appFunc.message = "HttpError";
+                    appFunc.code = "ESB Error, Failed to get iShariah Contract.";
+                    this.route.navigate(['outofservice']);
+                  });
+                  //Get iShariah Contract
+                  this._aldanService.GetContract(
+                    'en'
+                  )
+                  .subscribe((result: any) => {
+                    count += 1;
+                    if (result.body.content != '') {
+                      appFunc.iShariahTNCEN = result.body;
+                    }
+                  }, (err: HttpErrorResponse) => {
+                    appFunc.message = "HttpError";
+                    appFunc.code = "ESB Error, Failed to get iShariah Contract.";
+                    this.route.navigate(['outofservice']);
+                  });
 
                   let checkCount = setInterval(() => {
-                    if(count == 3){
+                    if(count == 7){
                       clearInterval(checkCount);
                       this.route.navigate(['verifyMyKad']);
                     }

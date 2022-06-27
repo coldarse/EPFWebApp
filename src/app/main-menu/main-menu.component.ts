@@ -131,7 +131,6 @@ export class MainMenuComponent implements OnInit {
 
   ngAfterViewInit(): void{
 
-    this.date = formatDate(new Date(), 'h:mm a d/M/yyyy', 'en');
     
     if(selectLang.selectedLang == 'bm'){
       this.bm?.nativeElement.focus();
