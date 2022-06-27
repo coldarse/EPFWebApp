@@ -36,6 +36,7 @@ export class appFunc {
     static AgeRangeHigh: number;
 
     static isFromStartupGetToken = true;
+    static isFromOperationHour = false;
     static dataForEmail: any;
     static totalSavingsForEmail: any;
     static openingBalanceTotal: any;
@@ -56,6 +57,11 @@ export class appFunc {
 
     static resubmission = 'N';
     static resubmissionNo = '';
+
+    static iAkaunActTNCBM: any;
+    static iAkaunActTNCEN: any;
+    static iShariahTNCBM: any;
+    static iShariahTNCEN: any;
     
 
 

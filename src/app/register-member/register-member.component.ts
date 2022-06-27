@@ -680,31 +680,48 @@ export class RegisterMemberComponent implements OnInit {
     else{
       if (this.isiAkaunRegModuleEnabled) {
         if (this.isiAkaunActModuleEnabled) {
-          this.isCallAPI = true;
-          if (appFunc.bypassAPI != true) {
-            this._aldanService
-              .GetTnC(selectLang.selectedLang, appFunc.sessionId)
-              .subscribe((result: any) => {
-                this.isCallAPI = false;
-                if (result.body.content != '') {
-                  this.TnC = result.body.content.toString();
-                  this.content_version = result.body.contentVersion;
-                  this.RegisterSuccessPage = false;
-                  this.TnCPage = true;
-                  this.RegKWSP = false;
-                  this.RegIAkaun = true;
-                } else {
+          if(selectLang.selectedLang == 'bm' ? (appFunc.iAkaunActTNCBM != undefined) : (appFunc.iAkaunActTNCEN != undefined)){
+            this.TnC = selectLang.selectedLang == 'bm' ? appFunc.iAkaunActTNCBM.content.toString() : appFunc.iAkaunActTNCEN.content.toString();
+            this.content_version = selectLang.selectedLang == 'bm' ? appFunc.iAkaunActTNCBM.contentVersion : appFunc.iAkaunActTNCEN.contentVersion;
+            this.RegisterSuccessPage = false;
+            this.TnCPage = true;
+            this.RegKWSP = false;
+            this.RegIAkaun = true;
+          }
+          else{
+            this.isCallAPI = true;
+            if (appFunc.bypassAPI != true) {
+              this._aldanService
+                .GetTnC(selectLang.selectedLang)
+                .subscribe((result: any) => {
+                  this.isCallAPI = false;
+                  if (result.body.content != '') {
+                    if(selectLang.selectedLang == 'bm'){
+                      appFunc.iAkaunActTNCBM = result.body;
+                    }
+                    else{
+                      appFunc.iAkaunActTNCEN = result.body;
+                    }
+                    this.TnC = result.body.content.toString();
+                    this.content_version = result.body.contentVersion;
+                    this.RegisterSuccessPage = false;
+                    this.TnCPage = true;
+                    this.RegKWSP = false;
+                    this.RegIAkaun = true;
+                  } else {
+                    this.RegisterSuccessPage = false;
+                    this.Failed = true;
+                    this.errorDesc = result.body.error[0].description;
+                  }
+                },(err: HttpErrorResponse) => {
+                  this.isCallAPI = false;
                   this.RegisterSuccessPage = false;
                   this.Failed = true;
-                  this.errorDesc = result.body.error[0].description;
-                }
-              },(err: HttpErrorResponse) => {
-                this.isCallAPI = false;
-                this.RegisterSuccessPage = false;
-                this.Failed = true;
-                this.errorDesc = "HttpError";
-              });
+                  this.errorDesc = "HttpError";
+                });
+            }
           }
+          
         } else {
           if (this.isiSaraanModuleEnabled || this.isiShariahModuleEnabled) {
             this.RegisterSuccessPage = false;
@@ -989,30 +1006,48 @@ export class RegisterMemberComponent implements OnInit {
 
   IShariahYes() {
     if (appFunc.bypassAPI != true) {
-      this.isCallAPI = true;
-      this._aldanService
-        .GetContract(selectLang.selectedLang, appFunc.sessionId)
-        .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.content != '') {
-            this.Contract = result.body.content;
-            this.PickShariahPage = false;
-            this.ShariahTnCPage = true;
-            this.xagreedTnc2 = true;
-            this.RegShariah = true;
-            setTimeout(() => {
-              this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
-            }, 200)
-          } else {
-            this.PickShariahPage = false;
-            this.Failed = true;
-            this.errorDesc = result.body.error[0].description;
-          }
-        },(err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
-          this.route.navigate(['outofservice']);
-        });
+      if(selectLang.selectedLang == 'bm' ? (appFunc.iShariahTNCBM != undefined) : (appFunc.iShariahTNCEN != undefined)){
+        this.Contract = selectLang.selectedLang == 'bm' ? appFunc.iShariahTNCBM.content : appFunc.iShariahTNCEN.content;
+        this.PickShariahPage = false;
+        this.ShariahTnCPage = true;
+        this.xagreedTnc2 = true;
+        this.RegShariah = true;
+        setTimeout(() => {
+          this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+        }, 200);
+      }
+      else{
+        this.isCallAPI = true;
+        this._aldanService
+          .GetContract(selectLang.selectedLang)
+          .subscribe((result: any) => {
+            this.isCallAPI = false;
+            if (result.body.content != '') {
+              if(selectLang.selectedLang == 'bm'){
+                appFunc.iShariahTNCBM = result.body;
+              }
+              else{
+                appFunc.iShariahTNCEN = result.body;
+              }
+              this.Contract = result.body.content;
+              this.PickShariahPage = false;
+              this.ShariahTnCPage = true;
+              this.xagreedTnc2 = true;
+              this.RegShariah = true;
+              setTimeout(() => {
+                this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+              }, 200);
+            } else {
+              this.PickShariahPage = false;
+              this.Failed = true;
+              this.errorDesc = result.body.error[0].description;
+            }
+          },(err: HttpErrorResponse) => {
+            appFunc.message = "HttpError";
+            appFunc.code = "ESB Error";
+            this.route.navigate(['outofservice']);
+          });
+      }
     }
   }
 

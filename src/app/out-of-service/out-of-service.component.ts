@@ -41,6 +41,17 @@ export class OutOfServiceComponent implements OnInit {
         }
       }, 1000);
     }
+
+    if(appFunc.isFromOperationHour){
+      let moduleIntervelId = setInterval(() => {
+        const count = appFunc.checkModuleAvailability(appFunc.modules);
+        if (count != 0){
+          appFunc.isFromStartupGetToken = false;
+          appFunc.isFromOperationHour = false;
+          this.route.navigate(['/startup']);
+        }
+      }, 1000);
+    }
   }
 
   ngOnDestroy(): void {

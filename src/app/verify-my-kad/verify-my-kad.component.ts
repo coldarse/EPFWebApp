@@ -78,22 +78,21 @@ export class VerifyMyKadComponent implements OnInit {
         if (areDisabled == appFunc.modules.length){
           appFunc.message = 'Out of Operation Hours';
           appFunc.isFromStartupGetToken = true;
+          appFunc.isFromOperationHour = true;
           this.isOutOfService = true;
           this.route.navigate(['outofservice']);
         }
 
-        setTimeout(() => {
-          this.moduleIntervelId = setInterval(() => {
-            const count = appFunc.checkModuleAvailability(appFunc.modules);
-            if (count == 0){
-              appFunc.message = 'Out of Operation Hours';
-              appFunc.isFromStartupGetToken = true;
-              this.isOutOfService = true;
-              this.route.navigate(['outofservice']);
-            }
-          }, 1000);
-        } , 60000);
-
+        this.moduleIntervelId = setInterval(() => {
+          const count = appFunc.checkModuleAvailability(appFunc.modules);
+          if (count == 0){
+            appFunc.message = 'Out of Operation Hours';
+            appFunc.isFromStartupGetToken = true;
+            appFunc.isFromOperationHour = true;
+            this.isOutOfService = true;
+            this.route.navigate(['outofservice']);
+          }
+        }, 1000);
       }
       else{
         appFunc.message = 'Out of Operation Hours';

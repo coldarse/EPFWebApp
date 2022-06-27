@@ -118,34 +118,52 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
 
   clickShariah() {
     if (appFunc.bypassAPI != true) {
-      this.isCallAPI = true;
-      this._aldanService
-        .GetContract(
-          selectLang.selectedLang,
-          appFunc.sessionId
-        )
-        .subscribe((result: any) => {
-          this.isCallAPI = false;
-          if (result.body.content != '') {
-            this.xagreedTnc = true;
-            this.Contract = result.body.content;
-            this.RegSaraanShariah = false;
-            this.RegShariah = true;
-            this.SelectIShariahISaraan = false;
-            this.IShariah = true;
-            setTimeout(() => {
-              this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
-            }, 200)
-          } else {
-            this.RegSaraanShariah = false;
-            this.Failed = true;
-            this.errorDesc = 'unsuccesfulSimpananShariah';
-          }
-        }, (err: HttpErrorResponse) => {
-          appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
-          this.route.navigate(['outofservice']);
-        });
+      if(selectLang.selectedLang == 'bm' ? (appFunc.iShariahTNCBM != undefined) : (appFunc.iShariahTNCEN != undefined)){
+        this.xagreedTnc = true;
+        this.Contract = selectLang.selectedLang == 'bm' ? appFunc.iShariahTNCBM.content : appFunc.iShariahTNCEN.content;
+        this.RegSaraanShariah = false;
+        this.RegShariah = true;
+        this.SelectIShariahISaraan = false;
+        this.IShariah = true;
+        setTimeout(() => {
+          this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+        }, 200);
+      }
+      else{
+        this.isCallAPI = true;
+        this._aldanService
+          .GetContract(
+            selectLang.selectedLang
+          )
+          .subscribe((result: any) => {
+            this.isCallAPI = false;
+            if (result.body.content != '') {
+              if(selectLang.selectedLang == 'bm'){
+                appFunc.iShariahTNCBM = result.body;
+              }
+              else{
+                appFunc.iShariahTNCEN = result.body;
+              }
+              this.xagreedTnc = true;
+              this.Contract = result.body.content;
+              this.RegSaraanShariah = false;
+              this.RegShariah = true;
+              this.SelectIShariahISaraan = false;
+              this.IShariah = true;
+              setTimeout(() => {
+                this.contractHTML?.nativeElement.insertAdjacentHTML('afterbegin', this.Contract);
+              }, 200);
+            } else {
+              this.RegSaraanShariah = false;
+              this.Failed = true;
+              this.errorDesc = 'unsuccesfulSimpananShariah';
+            }
+          }, (err: HttpErrorResponse) => {
+            appFunc.message = "HttpError";
+            appFunc.code = "ESB Error";
+            this.route.navigate(['outofservice']);
+          });
+      }
     }
   }
 
