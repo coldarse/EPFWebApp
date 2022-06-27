@@ -537,6 +537,22 @@
                     </div>
                 </div>
             </div>
+            <div class="pop-up" *ngIf="popupError">
+                <div class="row text-center padTop5rem">
+                    <div class="col-12">
+                        <img src="assets/images/Icon-Attention.svg" width="200" height="175">
+                    </div>
+                </div>
+                <div>
+                    <label></label>
+                </div>
+                <div class="row text-center padTop2rem padBottom2rem">
+                    <div class="col-12">
+                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"|
+                            translate}}</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
