@@ -97,109 +97,31 @@ export class StartupComponent implements OnInit {
               // Registered
               else {
                 if (signalRConnection.kioskInformation.macAddress == signalRConnection.adapter[0].adapterName) {
-                  let count = 0;
-                  //Get Business Types for iSaraan
-                  this._aldanService.GetBusinessTypes().subscribe((res: any) => {
-                    appFunc.businessTypes = res.body.map((bt: any) => new businessTypes(bt));
-                    count += 1;
-                  }, (err: HttpErrorResponse) => {
-                    appFunc.message = 'HttpError';
-                    appFunc.isFromStartupGetToken = true;
-                    appFunc.code = "SSDM Error. Failed to get Business Types from KMS.";
-                    this.route.navigate(['outofservice']);
-                  });
-                  //Get Module Operations
-                  this._aldanService.GetServiceOperation(signalRConnection.kioskCode).subscribe((res: any) => {
-                    appFunc.modules = res.body.map((em: any) => new eModules(em));
-                    count += 1;
-                  }, (err: HttpErrorResponse) => {
-                    appFunc.message = 'HttpError';
-                    appFunc.isFromStartupGetToken = true;
-                    appFunc.code = "SSDM Error. Failed to get Service Operation.";
-                    this.route.navigate(['outofservice']);
-                  });
-                  //Get Client Settings for Kiosk Functionality
-                  this._aldanService.GetClientSettings().subscribe((res: any) => {
-                    appFunc.thumbprintRetry = Number(res[0].body.value);
-                    appFunc.iAkaunActivationPerDay = Number(res[1].body.value);
-                    appFunc.minCharForPassword = Number(res[2].body.value);
-                    appFunc.updateTACPerMonth = Number(res[3].body.value);
-                    appFunc.NumberOfYearsViewStatement = Number(res[4].body.value);
-                    let range = res[5].body.value.split(',');
+                  this._aldanService.GetAllRequirements(signalRConnection.kioskCode)
+                  .toPromise().then((res: any) => {
+                    appFunc.businessTypes = res[0].body.map((bt: any) => new businessTypes(bt));
+                    appFunc.modules = res[1].body.map((em: any) => new eModules(em));
+                    appFunc.iAkaunActTNCBM = res[2].body.content != '' ? res[2].body.content : undefined;
+                    appFunc.iAkaunActTNCEN = res[3].body.content != '' ? res[2].body.content : undefined;
+                    appFunc.iShariahTNCBM = res[4].body.content != '' ? res[2].body.content : undefined;
+                    appFunc.iShariahTNCEN = res[5].body.content != '' ? res[2].body.content : undefined;
+                    appFunc.thumbprintRetry = Number(res[6].body.value);
+                    appFunc.iAkaunActivationPerDay = Number(res[7].body.value);
+                    appFunc.minCharForPassword = Number(res[8].body.value);
+                    appFunc.updateTACPerMonth = Number(res[9].body.value);
+                    appFunc.NumberOfYearsViewStatement = Number(res[10].body.value);
+                    let range = res[11].body.value.split(',');
                     appFunc.AgeRangeLow = Number(range[0]);
                     appFunc.AgeRangeHigh = Number(range[1]);
-                    count += 1;
+
+                    this.route.navigate(['verifyMyKad']);
+
                   }, (err: HttpErrorResponse) => {
                     appFunc.message = 'HttpError';
                     appFunc.isFromStartupGetToken = true;
                     appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
                     this.route.navigate(['outofservice']);
                   });
-                  //Get iAkaun Activation TNC BM
-                  this._aldanService.GetTnC(
-                    'bm'
-                  )
-                  .subscribe((result: any) => {
-                    count += 1;
-                    if (result.body.content != '') {
-                      appFunc.iAkaunActTNCBM = result.body;
-                    }
-                  },(err: HttpErrorResponse) => {
-                    appFunc.message = "HttpError";
-                    appFunc.isFromStartupGetToken = true;
-                    appFunc.code = "ESB Error, Failed to get iAkaun Activation TnC.";
-                    this.route.navigate(['outofservice']);
-                  });
-                  //Get iAkaun Activation TNC EN
-                  this._aldanService.GetTnC(
-                    'en'
-                  )
-                  .subscribe((result: any) => {
-                    count += 1;
-                    if (result.body.content != '') {
-                      appFunc.iAkaunActTNCEN = result.body;
-                    }
-                  },(err: HttpErrorResponse) => {
-                    appFunc.message = "HttpError";
-                    appFunc.code = "ESB Error, Failed to get iAkaun Activation TnC.";
-                    this.route.navigate(['outofservice']);
-                  });
-                  //Get iShariah Contract BM
-                  this._aldanService.GetContract(
-                    'bm'
-                  )
-                  .subscribe((result: any) => {
-                    count += 1;
-                    if (result.body.content != '') {
-                      appFunc.iShariahTNCBM = result.body;
-                    }
-                  }, (err: HttpErrorResponse) => {
-                    appFunc.message = "HttpError";
-                    appFunc.code = "ESB Error, Failed to get iShariah Contract.";
-                    this.route.navigate(['outofservice']);
-                  });
-                  //Get iShariah Contract
-                  this._aldanService.GetContract(
-                    'en'
-                  )
-                  .subscribe((result: any) => {
-                    count += 1;
-                    if (result.body.content != '') {
-                      appFunc.iShariahTNCEN = result.body;
-                    }
-                  }, (err: HttpErrorResponse) => {
-                    appFunc.message = "HttpError";
-                    appFunc.code = "ESB Error, Failed to get iShariah Contract.";
-                    this.route.navigate(['outofservice']);
-                  });
-
-                  let checkCount = setInterval(() => {
-                    if(count == 7){
-                      clearInterval(checkCount);
-                      this.route.navigate(['verifyMyKad']);
-                    }
-                  }, 1000);
-                  
                 }
                 //Mac Address Doesn't Match
                 else {

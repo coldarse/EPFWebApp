@@ -492,6 +492,37 @@ export class AldanService {
     ])
   }
 
+  //Get Client Requirements (Business Types, Module Operation, TnC, Contract and Settings)
+  GetAllRequirements(kioskCode: string){
+    const res1 = this.http.get(this.url + 'app/business-types/GetAllList', accessToken.httpOptions);
+    const res2 = this.http.get(this.url + `app/services/GetServiceOperation?KioskCode=${kioskCode}`, accessToken.httpOptions);
+    const res3 = this.http.get(this.url + `IAkaunActivation/iAkaunAct/GetTnC?locale=bm`, accessToken.httpOptions);
+    const res4 = this.http.get(this.url + `IAkaunActivation/iAkaunAct/GetTnC?locale=en`, accessToken.httpOptions);
+    const res5 = this.http.get(this.url + `IShariahRegistration/iShariahReg/GetContract?locale=bm`, accessToken.httpOptions);
+    const res6 = this.http.get(this.url + `IShariahRegistration/iShariahReg/GetContract?locale=en`, accessToken.httpOptions);
+    const res7 = this.http.get(this.url + 'app/client-settings/1', accessToken.httpOptions); //Get Thumbprint Retry
+    const res8 = this.http.get(this.url + 'app/client-settings/2', accessToken.httpOptions); //Get number of IAkaun Activation Per Day
+    const res9 = this.http.get(this.url + 'app/client-settings/9', accessToken.httpOptions); //Get min chars for password
+    const res10 = this.http.get(this.url + 'app/client-settings/24', accessToken.httpOptions); //Get number of Update TAC per month
+    const res11 = this.http.get(this.url + 'app/client-settings/57', accessToken.httpOptions); //Get number of years for statements
+    const res12 = this.http.get(this.url + 'app/client-settings/23', accessToken.httpOptions); //Get age range
+
+    return forkJoin([
+      res1.pipe(retry(0), catchError(this.handleError)),
+      res2.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res3.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res4.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res5.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res6.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res7.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res8.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res9.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res10.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res11.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      res12.pipe(delay(1000),retry(0), catchError(this.handleError)),
+    ]);
+  }
+
   UpdateFullProfile(body1: any, body2: any){
     const response1 = this.http.post(this.url + 'MemberProfile/MemberProfileContactMaintenance', body1, accessToken.httpOptions);
     const response2 = this.http.post(this.url + 'MemberProfile/MemberProfileAddressMaintenance', body2, accessToken.httpOptions);
