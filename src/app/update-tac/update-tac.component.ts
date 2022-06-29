@@ -100,7 +100,7 @@ export class UpdateTACComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": Failed to Get Member Profile";
               this.route.navigate(['outofservice']);
             });
           
@@ -112,7 +112,7 @@ export class UpdateTACComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -161,7 +161,7 @@ export class UpdateTACComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": Failed to Get Member Profile";
               this.route.navigate(['outofservice']);
             });
         }
@@ -172,7 +172,7 @@ export class UpdateTACComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
     }

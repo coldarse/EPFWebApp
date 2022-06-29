@@ -62,6 +62,8 @@ export class appFunc {
     static iAkaunActTNCEN: any;
     static iShariahTNCBM: any;
     static iShariahTNCEN: any;
+
+    static operationHour: any;
     
 
 
@@ -111,6 +113,16 @@ export class appFunc {
 
         var time = hours + ":" + mins + ":" + secs;
         return time;
+    }
+
+    static checkIfWithinOperationHours(): boolean{
+        if(this.isInBetween(new Date("0001-01-01T" + appFunc.operationHour[0].operationStart + ":00"), new Date("0001-01-01T" + appFunc.operationHour[0].operationEnd + ":00"), new Date("0001-01-01T" + this.getCurrentTime()))){
+            //Is within Operation Hour
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     // Loop through all modules to they are available.

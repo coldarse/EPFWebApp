@@ -228,14 +228,14 @@ export class IAkaunRegistrationComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": ESB Error";
               this.route.navigate(['outofservice']);
             });
           
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -276,13 +276,13 @@ export class IAkaunRegistrationComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": ESB Error";
               this.route.navigate(['outofservice']);
             });
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -316,7 +316,7 @@ export class IAkaunRegistrationComponent implements OnInit {
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
-      appFunc.code = "ESB Error";
+      appFunc.code = "E" + err.status.toString() + ": ESB Error";
       this.route.navigate(['outofservice']);
     });
   }
@@ -366,7 +366,7 @@ export class IAkaunRegistrationComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -464,7 +464,7 @@ export class IAkaunRegistrationComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": ESB Error";
               this.route.navigate(['outofservice']);
             });
         }
@@ -598,7 +598,7 @@ export class IAkaunRegistrationComponent implements OnInit {
               deleteKeyboard();
           },(err: HttpErrorResponse) => {
             appFunc.message = "HttpError";
-            appFunc.code = "ESB Error";
+            appFunc.code = "E" + err.status.toString() + ": ESB Error";
             this.route.navigate(['outofservice']);
           });
         }

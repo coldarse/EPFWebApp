@@ -73,31 +73,43 @@ export class VerifyMyKadComponent implements OnInit {
       
     }
     else{
-      if (appFunc.modules.length != 0){
-        const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-        if (areDisabled == appFunc.modules.length){
-          appFunc.message = 'Out of Operation Hours';
-          appFunc.isFromStartupGetToken = true;
-          appFunc.isFromOperationHour = true;
-          this.isOutOfService = true;
-          this.route.navigate(['outofservice']);
-        }
-
-        this.moduleIntervelId = setInterval(() => {
-          const count = appFunc.checkModuleAvailability(appFunc.modules);
-          if (count == 0){
+      let isWithinOperationHour = appFunc.checkIfWithinOperationHours();
+      if(isWithinOperationHour){
+        if (appFunc.modules.length != 0){
+          const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+          if (areDisabled == appFunc.modules.length){
             appFunc.message = 'Out of Operation Hours';
             appFunc.isFromStartupGetToken = true;
             appFunc.isFromOperationHour = true;
             this.isOutOfService = true;
             this.route.navigate(['outofservice']);
           }
-        }, 1000);
+  
+          this.moduleIntervelId = setInterval(() => {
+            const count = appFunc.checkModuleAvailability(appFunc.modules);
+            if (count == 0){
+              appFunc.message = 'Out of Operation Hours';
+              appFunc.isFromStartupGetToken = true;
+              appFunc.isFromOperationHour = true;
+              this.isOutOfService = true;
+              this.route.navigate(['outofservice']);
+            }
+          }, 1000);
+        }
+        else{
+          appFunc.isFromStartupGetToken = true;
+          appFunc.isFromOperationHour = true;
+          appFunc.message = 'Out of Operation Hours';
+          this.route.navigate(['outofservice']);
+        }
       }
       else{
+        appFunc.isFromStartupGetToken = true;
         appFunc.message = 'Out of Operation Hours';
         this.route.navigate(['outofservice']);
       }
+
+      
     }
 
     this.readerIntervalId = setInterval(() => {
@@ -240,7 +252,7 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }, (err: HttpErrorResponse) => {
       appFunc.message = 'HttpError';
-      appFunc.code = "SSDM Error. Failed to create Session for this transaction.";
+      appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to create Session for this transaction.";
       this.route.navigate(['outofservice']);
     });
   }
@@ -325,7 +337,7 @@ export class VerifyMyKadComponent implements OnInit {
             }
           }, (err: HttpErrorResponse) => {
             appFunc.message = 'HttpError';
-            appFunc.code = "ESB Error";
+            appFunc.code = "E" + err.status.toString() + ": ESB Error";
             this.route.navigate(['outofservice']);
           });
       }
@@ -354,7 +366,7 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }, (err: HttpErrorResponse) => {
       appFunc.message = 'HttpError';
-      appFunc.code = "ESB Error";
+      appFunc.code = "E" + err.status.toString() + ": ESB Error";
       this.route.navigate(['outofservice']);
     });
   }

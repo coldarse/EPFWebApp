@@ -160,7 +160,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             }
           }, (err: HttpErrorResponse) => {
             appFunc.message = "HttpError";
-            appFunc.code = "ESB Error";
+            appFunc.code = "E" + err.status.toString() + ": Get Contract Error";
             this.route.navigate(['outofservice']);
           });
       }
@@ -209,7 +209,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           }
         }, (err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
+          appFunc.code = "E" + err.status.toString() + ": ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -255,7 +255,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         }
       }, (err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
