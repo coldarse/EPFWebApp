@@ -73,41 +73,41 @@ export class VerifyMyKadComponent implements OnInit {
       
     }
     else{
-      let isWithinOperationHour = appFunc.checkIfWithinOperationHours();
-      if(isWithinOperationHour){
-        if (appFunc.modules.length != 0){
-          const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
-          if (areDisabled == appFunc.modules.length){
+      // let isWithinOperationHour = appFunc.checkIfWithinOperationHours();
+      // if(isWithinOperationHour){
+      if (appFunc.modules.length != 0){
+        const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
+        if (areDisabled == appFunc.modules.length){
+          appFunc.message = 'Out of Operation Hours';
+          appFunc.isFromStartupGetToken = true;
+          appFunc.isFromOperationHour = true;
+          this.isOutOfService = true;
+          this.route.navigate(['outofservice']);
+        }
+
+        this.moduleIntervelId = setInterval(() => {
+          const count = appFunc.checkModuleAvailability(appFunc.modules);
+          if (count == 0){
             appFunc.message = 'Out of Operation Hours';
             appFunc.isFromStartupGetToken = true;
             appFunc.isFromOperationHour = true;
             this.isOutOfService = true;
             this.route.navigate(['outofservice']);
           }
-  
-          this.moduleIntervelId = setInterval(() => {
-            const count = appFunc.checkModuleAvailability(appFunc.modules);
-            if (count == 0){
-              appFunc.message = 'Out of Operation Hours';
-              appFunc.isFromStartupGetToken = true;
-              appFunc.isFromOperationHour = true;
-              this.isOutOfService = true;
-              this.route.navigate(['outofservice']);
-            }
-          }, 1000);
-        }
-        else{
-          appFunc.isFromStartupGetToken = true;
-          appFunc.isFromOperationHour = true;
-          appFunc.message = 'Out of Operation Hours';
-          this.route.navigate(['outofservice']);
-        }
+        }, 1000);
       }
       else{
         appFunc.isFromStartupGetToken = true;
+        appFunc.isFromOperationHour = true;
         appFunc.message = 'Out of Operation Hours';
         this.route.navigate(['outofservice']);
       }
+      // }
+      // else{
+      //   appFunc.isFromStartupGetToken = true;
+      //   appFunc.message = 'Out of Operation Hours';
+      //   this.route.navigate(['outofservice']);
+      // }
 
       
     }
