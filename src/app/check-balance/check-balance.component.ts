@@ -112,7 +112,7 @@ export class CheckBalanceComponent implements OnInit {
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
+          appFunc.code = "C" + err.status.toString() + ": ESB Error";
           this.route.navigate(['outofservice']);
         });
     }

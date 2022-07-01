@@ -261,7 +261,7 @@
                 <div class="col-10 scrollBox">
                     <div class="scroll">
                         <p style="white-space: pre;">{{TnC}}</p>
-                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC()">
+                        <input class="regular-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC()" [checked]="xagreedTnc == false"/>
                         <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
                 </div>

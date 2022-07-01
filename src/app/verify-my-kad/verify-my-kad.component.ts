@@ -258,22 +258,22 @@ export class VerifyMyKadComponent implements OnInit {
   }
 
   getAccountInquiry(): void{
-    let catType = '';
+    let catType = 'IN';
 
-    switch (currentMyKadDetails.CategoryType){
-      case 'W':
-        catType = 'IN'
-        currentMyKadDetails.CategoryType = catType;
-        break;
-      case 'PO':
-        catType = 'IP'
-        currentMyKadDetails.CategoryType = catType;
-        break;
-      case 'A':
-        catType = 'IT'
-        currentMyKadDetails.CategoryType = catType;
-        break;
-    }
+    // switch (currentMyKadDetails.CategoryType){
+    //   case 'W':
+    //     catType = 'IN'
+    //     currentMyKadDetails.CategoryType = catType;
+    //     break;
+    //   case 'PO':
+    //     catType = 'IP'
+    //     currentMyKadDetails.CategoryType = catType;
+    //     break;
+    //   case 'A':
+    //     catType = 'IT'
+    //     currentMyKadDetails.CategoryType = catType;
+    //     break;
+    // }
 
     const body = {
       regType: 'M',

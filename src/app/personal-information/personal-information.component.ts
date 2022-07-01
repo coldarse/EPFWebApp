@@ -281,7 +281,7 @@ export class PersonalInformationComponent implements OnInit {
             "accType": "",
             "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
-            "idType": currentMyKadDetails.CategoryType,
+            "idType": "IN",
             "reqTypeCode": "",
             "sessionId": appFunc.sessionId
           }
