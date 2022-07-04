@@ -35,14 +35,13 @@ export class OutOfServiceComponent implements OnInit {
       this.readerIntervalId = setInterval(() => {
         appFunc.DetectMyKad();
         if(!signalRConnection.isCardInserted) {
-          appFunc.Reset();
           this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {});
+          appFunc.Reset();
           this.route.navigate(['/startup']);
         }
       }, 1000);
     }
-
-    if(appFunc.isFromOperationHour){
+    else if(appFunc.isFromOperationHour){
       let moduleIntervelId = setInterval(() => {
         const count = appFunc.checkModuleAvailability(appFunc.modules);
         if (count != 0){
@@ -51,6 +50,14 @@ export class OutOfServiceComponent implements OnInit {
           this.route.navigate(['/startup']);
         }
       }, 1000);
+    }
+    else{
+      setTimeout(() => {
+        this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {});
+        appFunc.Reset();
+        signalRConnection.connection = undefined;
+        this.route.navigate(['/startup']);
+      }, 300000)
     }
   }
 

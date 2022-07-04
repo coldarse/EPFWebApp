@@ -176,7 +176,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this.isCallAPI = true;
       const iSaraanBody = {
         idNum: currentMyKadDetails.ICNo,
-        idType: currentMyKadDetails.CategoryType,
+        idType: "IN",
         businessTypeCode: this.selectedJobSector.code,
         remark: '',
         sourceRegistrationChannel: 'SST',
