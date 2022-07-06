@@ -574,6 +574,54 @@ export class AldanService {
       )
   }
 
+//e-Withdrawal Application
+  eWithdrawalApplication(body: any){
+    return this.http.post(
+      this.url + 'ThumbprintVerification/eWithdrawals/eWithdrawalApplication',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(0),
+      catchError(this.handleError),
+    )
+  }
+
+  //e-Withdrawal Details
+  eWithdrawalDetails(body: any){
+    return this.http.post(
+      this.url + 'ThumbprintVerification/eWithdrawals/eWithdrawalDetails',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(0),
+      catchError(this.handleError),
+    )
+  }
+
+  //e-Withdrawal Details
+  eWithdrawalStatus(body: any){
+    return this.http.post(
+      this.url + 'ThumbprintVerification/eWithdrawals/eWithdrawalStatus',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(0),
+      catchError(this.handleError),
+    )
+  }
+
+  //Thumbprint Verification
+  thumbprintVerify(body:any){
+    return this.http.post(
+      this.url + 'ThumbprintVerification/VerifyThumbprint',
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(0),
+      catchError(this.handleError),
+    )
+  }
+
 
   //--------------* API FUNCTIONS END *--------------//
 }

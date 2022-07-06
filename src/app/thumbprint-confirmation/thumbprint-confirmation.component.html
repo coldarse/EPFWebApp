@@ -35,17 +35,18 @@
                 <div class="row padTop2rem">
                     <div class="col-1"></div>
                     <div class="col-5">
-                        <button type="button" class="btnThumbprint">
+                        <button type="button" class="btnThumbprint" *ngFor="let withdrawal of withdrawalApplList">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-2"></div> 
+                                <div class="col-7">
                                     <div class="row">
-                                        {{"ansuran"| translate}}
+                                        {{withdrawal.schemeDescription}}
                                     </div>
                                     <div class="row">
-                                        <label class="lblDate">08 Jan 2022</label>
+                                        <label class="lblDate">Tarikh Luput: {{expiryDate}}</label>
                                     </div>
                                 </div>
-                                <div class="col-2"></div>
+                                <div class="col-1"></div>
                                 <div class="col-2">
                                     <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox"
                                         value="" (click)="checkAnsuran()">
@@ -53,7 +54,7 @@
                             </div>
                         </button>
                     </div>
-                    <div class="col-5">
+                    <!-- <div class="col-5">
                         <button type="button" class="btnThumbprint">
                             <div class="row">
                                 <div class="col-8">
@@ -71,9 +72,9 @@
                                 </div>
                             </div>
                         </button>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="row padTopHalfrem">
+                <!-- <div class="row padTopHalfrem">
                     <div class="col-1"></div>
                     <div class="col-5">
                         <button type="button" class="btnThumbprint">
@@ -154,7 +155,7 @@
                             </div>
                         </button>
                     </div>
-                </div>
+                </div> -->
                 <div class="row padTop2rem">
                     <div class="col-1"></div>
                     <div class="col-10">
@@ -207,7 +208,7 @@
                                     <label>{{"ansuran"| translate}}</label>
                                 </div>
                                 <div class="col-3">
-                                    <input class="green-checkbox big-checkbox marginTop1rem" type="checkbox" value="">
+                                    <input class="green-checkbox big-checkbox marginTop1rem" type="checkbox" value="" id="verified" name="verified" [checked]="isVerified" >
                                 </div>
                             </div>
                         </button>
@@ -241,7 +242,7 @@
             </div>
         </div>
 
-        <div class="bg-popup">
+        <div class="bg-popup" *ngIf="openPopup">
             <div class="pop-up" *ngIf="popup">
                 <div class="row text-center padTop5rem">
                     <div class="col-12">
@@ -271,20 +272,20 @@
                     </div>
                 </div>
             </div>
-            <div class="pop-up" *ngIf="popupAnsuran">
+            <div class="pop-up" *ngIf="popupAnsuran"  >
                 <div class="frame padtop10rem">
                     <div>
                         <label class="lblPopupBlack">KWSP 9P(AHL)</label>
-                        <label class="lblPopupBlack" style="float:right">No.KWSP Ahli: 22232909</label>
+                        <label class="lblPopupBlack" style="float:right">{{"akaunNo" | translate}}: {{eWithdrawalDetail.accNum}}</label>
                     </div>
                     <br />
                     <div class="row">
-                        <label class="lblPopupBlack">Hi Muhammad Wahyu Nizam Bin Omir</label>
+                        <label class="lblPopupBlack">Hi {{name}}</label>
                     </div>
                     <br />
                     <div class="row">
                         <label class="lblPopupBlack">Anda telah memohon pengeluaran Ansuaran Bulanan Pinjaman Perumahan
-                            melalui i-Akaun(Ahli) pada 01/12/2021 dengan Nombor Rujukan 001100200001234</label>
+                            melalui i-Akaun(Ahli) pada 01/12/2021 dengan Nombor Rujukan {{eWithdrawalDetail.applReferenceNo}}</label>
                     </div>
                     <br />
                     <div class="row">
@@ -301,7 +302,7 @@
                                 <li class="lblList">Amaun Dimohon</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">RM24,000.00</label>
+                                <label class="lblList">RM{{eWithdrawalDetail.totalRecurringAmt}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -309,15 +310,15 @@
                                 <li class="lblList">Cara Bayaran</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">Cek Jurubank</label>
+                                <label class="lblList">{{eWithdrawalDetail.paymentMode}}</label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
                                 <li class="lblList">Amaun Bayaran Setiap Bulan</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">RM1,000.00</label>
+                                <label class="lblList">RM{{eWithdrawalDetail.monthlyInstalmentAmt}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -325,7 +326,7 @@
                                 <li class="lblList">Institusi Pemberi Pinjaman</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">xxxxx</label>
+                                <label class="lblList">{{eWithdrawalDetail.bankName}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -333,31 +334,31 @@
                                 <li class="lblList">No. Akaun Pinjaman Perumahan</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">xxxxxxx1401</label>
+                                <label class="lblList">{{eWithdrawalDetail.bankAccNo}}</label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
                                 <li class="lblList">Bilangan Bulan</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">24 Bulan</label>
+                                <label class="lblList">{{eWithdrawalDetail.paymentFrequency}}</label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
                                 <li class="lblList">Bulan Mula</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">01/2022</label>
+                                <label class="lblList">{{eWithdrawalDetail.recurringStartDate}}</label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
                                 <li class="lblList">Bulan Akhir</li>
                             </div>
                             <div class="col-7">
-                                <label class="lblList">01/2024</label>
+                                <label class="lblList">{{eWithdrawalDetail.recurringEndDate}}</label>
                             </div>
                         </div>
                     </ul>

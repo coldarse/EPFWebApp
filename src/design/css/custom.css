@@ -402,7 +402,7 @@
 
 
 .lblDate {
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'filson-pro', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -774,7 +774,6 @@ td {
     text-align: left;
     height: 7.5rem;
     width: 100%;
-    padding-left: 2.5rem;
 }
 
 /* .btnThumbprint:focus {

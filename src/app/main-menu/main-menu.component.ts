@@ -120,6 +120,19 @@ export class MainMenuComponent implements OnInit {
             }
           }
         }
+        else if(val.moduleID == 12){
+          if(val.enabled == true){
+            if(appFunc.isInBetween(new Date("0001-01-01T" + val.operationStart + ":00"), new Date("0001-01-01T" + val.operationEnd + ":00"), new Date("0001-01-01T" + appFunc.getCurrentTime()))){
+              this.thumbprintVerificationEnabled = true;
+            }
+            else{
+              this.thumbprintVerificationEnabled = false;
+            }
+          }
+          else{
+            this.thumbprintVerificationEnabled = false;
+          }
+        }
       }
     }
     
