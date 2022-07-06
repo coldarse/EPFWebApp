@@ -73,6 +73,8 @@ export class VerifyMyKadComponent implements OnInit {
       
     }
     else{
+      // let isWithinOperationHour = appFunc.checkIfWithinOperationHours();
+      // if(isWithinOperationHour){
       if (appFunc.modules.length != 0){
         const areDisabled = appFunc.checkNoOfDisabledModules(appFunc.modules);
         if (areDisabled == appFunc.modules.length){
@@ -95,9 +97,19 @@ export class VerifyMyKadComponent implements OnInit {
         }, 1000);
       }
       else{
+        appFunc.isFromStartupGetToken = true;
+        appFunc.isFromOperationHour = true;
         appFunc.message = 'Out of Operation Hours';
         this.route.navigate(['outofservice']);
       }
+      // }
+      // else{
+      //   appFunc.isFromStartupGetToken = true;
+      //   appFunc.message = 'Out of Operation Hours';
+      //   this.route.navigate(['outofservice']);
+      // }
+
+      
     }
 
     this.readerIntervalId = setInterval(() => {
@@ -240,28 +252,28 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }, (err: HttpErrorResponse) => {
       appFunc.message = 'HttpError';
-      appFunc.code = "SSDM Error. Failed to create Session for this transaction.";
+      appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to create Session for this transaction.";
       this.route.navigate(['outofservice']);
     });
   }
 
   getAccountInquiry(): void{
-    let catType = '';
+    let catType = 'IN';
 
-    switch (currentMyKadDetails.CategoryType){
-      case 'W':
-        catType = 'IN'
-        currentMyKadDetails.CategoryType = catType;
-        break;
-      case 'PO':
-        catType = 'IP'
-        currentMyKadDetails.CategoryType = catType;
-        break;
-      case 'A':
-        catType = 'IT'
-        currentMyKadDetails.CategoryType = catType;
-        break;
-    }
+    // switch (currentMyKadDetails.CategoryType){
+    //   case 'W':
+    //     catType = 'IN'
+    //     currentMyKadDetails.CategoryType = catType;
+    //     break;
+    //   case 'PO':
+    //     catType = 'IP'
+    //     currentMyKadDetails.CategoryType = catType;
+    //     break;
+    //   case 'A':
+    //     catType = 'IT'
+    //     currentMyKadDetails.CategoryType = catType;
+    //     break;
+    // }
 
     const body = {
       regType: 'M',
@@ -325,7 +337,7 @@ export class VerifyMyKadComponent implements OnInit {
             }
           }, (err: HttpErrorResponse) => {
             appFunc.message = 'HttpError';
-            appFunc.code = "ESB Error";
+            appFunc.code = "E" + err.status.toString() + ": ESB Error";
             this.route.navigate(['outofservice']);
           });
       }
@@ -354,7 +366,7 @@ export class VerifyMyKadComponent implements OnInit {
       }
     }, (err: HttpErrorResponse) => {
       appFunc.message = 'HttpError';
-      appFunc.code = "ESB Error";
+      appFunc.code = "E" + err.status.toString() + ": ESB Error";
       this.route.navigate(['outofservice']);
     });
   }

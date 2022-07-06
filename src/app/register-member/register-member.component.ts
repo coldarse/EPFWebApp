@@ -574,7 +574,7 @@ export class RegisterMemberComponent implements OnInit {
       regType: 'M',
       accNum: '',
       accType: '',
-      primaryIdTypeCode: currentMyKadDetails.CategoryType,
+      primaryIdTypeCode: "IN",
       primaryIdNum: currentMyKadDetails.ICNo,
       custName: currentMyKadDetails.Name,
       birthDate: currentMyKadDetails.DOB.toString().replace('T00:00:00', ''),
@@ -651,7 +651,7 @@ export class RegisterMemberComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
@@ -977,7 +977,7 @@ export class RegisterMemberComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": ESB Error";
               this.route.navigate(['outofservice']);
             });
         }
@@ -1044,7 +1044,7 @@ export class RegisterMemberComponent implements OnInit {
             }
           },(err: HttpErrorResponse) => {
             appFunc.message = "HttpError";
-            appFunc.code = "ESB Error";
+            appFunc.code = "E" + err.status.toString() + ": ESB Error";
             this.route.navigate(['outofservice']);
           });
       }
@@ -1084,7 +1084,7 @@ export class RegisterMemberComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
   }
@@ -1115,7 +1115,7 @@ export class RegisterMemberComponent implements OnInit {
       this.isCallAPI = true;
       const iSaraanBody = {
         idNum: currentMyKadDetails.ICNo,
-        idType: currentMyKadDetails.CategoryType,
+        idType: 'IN',
         businessTypeCode: this.selectedJobSector.code,
         remark: '',
         sourceRegistrationChannel: 'SST',
@@ -1150,7 +1150,7 @@ export class RegisterMemberComponent implements OnInit {
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
+          appFunc.code = "E" + err.status.toString() + ": ESB Error";
           this.route.navigate(['outofservice']);
         });
     }

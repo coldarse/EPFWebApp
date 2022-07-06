@@ -281,7 +281,7 @@ export class PersonalInformationComponent implements OnInit {
             "accType": "",
             "searchType": "I",
             "idNum": currentMyKadDetails.ICNo,
-            "idType": currentMyKadDetails.CategoryType,
+            "idType": "IN",
             "reqTypeCode": "",
             "sessionId": appFunc.sessionId
           }
@@ -302,7 +302,7 @@ export class PersonalInformationComponent implements OnInit {
               }
             },(err: HttpErrorResponse) => {
               appFunc.message = "HttpError";
-              appFunc.code = "ESB Error";
+              appFunc.code = "E" + err.status.toString() + ": ESB Error";
               this.route.navigate(['outofservice']);
             });
         }
@@ -314,7 +314,7 @@ export class PersonalInformationComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
     }

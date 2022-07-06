@@ -72,7 +72,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       "accType": "",
       "searchType": "I",
       "idNum": currentMyKadDetails.ICNo,
-      "idType": currentMyKadDetails.CategoryType,
+      "idType": "IN",
       "reqTypeCode": "",
       "sessionId": appFunc.sessionId
     }
@@ -160,7 +160,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
             }
           }, (err: HttpErrorResponse) => {
             appFunc.message = "HttpError";
-            appFunc.code = "ESB Error";
+            appFunc.code = "E" + err.status.toString() + ": Get Contract Error";
             this.route.navigate(['outofservice']);
           });
       }
@@ -176,7 +176,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
       this.isCallAPI = true;
       const iSaraanBody = {
         idNum: currentMyKadDetails.ICNo,
-        idType: currentMyKadDetails.CategoryType,
+        idType: "IN",
         businessTypeCode: this.selectedJobSector.code,
         remark: '',
         sourceRegistrationChannel: 'SST',
@@ -209,7 +209,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
           }
         }, (err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
+          appFunc.code = "E" + err.status.toString() + ": ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -255,7 +255,7 @@ export class ISaraanShariahSavingsRegistrationComponent implements OnInit {
         }
       }, (err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
       });
   }

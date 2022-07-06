@@ -101,10 +101,10 @@ export class StartupComponent implements OnInit {
                   .toPromise().then((res: any) => {
                     appFunc.businessTypes = res[0].body.map((bt: any) => new businessTypes(bt));
                     appFunc.modules = res[1].body.map((em: any) => new eModules(em));
-                    appFunc.iAkaunActTNCBM = res[2].body.content != '' ? res[2].body.content : undefined;
-                    appFunc.iAkaunActTNCEN = res[3].body.content != '' ? res[2].body.content : undefined;
-                    appFunc.iShariahTNCBM = res[4].body.content != '' ? res[2].body.content : undefined;
-                    appFunc.iShariahTNCEN = res[5].body.content != '' ? res[2].body.content : undefined;
+                    appFunc.iAkaunActTNCBM = res[2].body.content != '' ? res[2].body : undefined;
+                    appFunc.iAkaunActTNCEN = res[3].body.content != '' ? res[3].body : undefined;
+                    appFunc.iShariahTNCBM = res[4].body.content != '' ? res[4].body : undefined;
+                    appFunc.iShariahTNCEN = res[5].body.content != '' ? res[5].body : undefined;
                     appFunc.thumbprintRetry = Number(res[6].body.value);
                     appFunc.iAkaunActivationPerDay = Number(res[7].body.value);
                     appFunc.minCharForPassword = Number(res[8].body.value);
@@ -113,13 +113,12 @@ export class StartupComponent implements OnInit {
                     let range = res[11].body.value.split(',');
                     appFunc.AgeRangeLow = Number(range[0]);
                     appFunc.AgeRangeHigh = Number(range[1]);
-
+                    // appFunc.operationHour = res[12].body;
                     this.route.navigate(['verifyMyKad']);
-
                   }, (err: HttpErrorResponse) => {
                     appFunc.message = 'HttpError';
                     appFunc.isFromStartupGetToken = true;
-                    appFunc.code = "SSDM Error. Failed to retrieve Client Settings from KMS.";
+                    appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to retrieve Client Settings from KMS.";
                     this.route.navigate(['outofservice']);
                   });
                 }
@@ -134,7 +133,7 @@ export class StartupComponent implements OnInit {
           });
       },(err: HttpErrorResponse) => {
         appFunc.message = 'Unauthorized';
-        appFunc.code = "Kiosk Failed to get token from SSDM. Please contact Support";
+        appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to get token from SSDM. Please contact Support";
         this.route.navigate(['outofservice']);
       });
   }

@@ -112,7 +112,7 @@ export class CheckBalanceComponent implements OnInit {
           }
         },(err: HttpErrorResponse) => {
           appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
+          appFunc.code = "C" + err.status.toString() + ": ESB Error";
           this.route.navigate(['outofservice']);
         });
     }
@@ -287,7 +287,7 @@ export class CheckBalanceComponent implements OnInit {
           }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "C" + err.status.toString() + ": Send Old Statement Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -321,7 +321,7 @@ export class CheckBalanceComponent implements OnInit {
           }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "C" + err.status.toString() + ": Send New Statement Error";
         this.route.navigate(['outofservice']);
       });
     }
@@ -428,7 +428,7 @@ export class CheckBalanceComponent implements OnInit {
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
-        appFunc.code = "ESB Error";
+        appFunc.code = "E" + err.status.toString() + ": ESB Error";
         this.route.navigate(['outofservice']);
     });
 
@@ -443,7 +443,7 @@ export class CheckBalanceComponent implements OnInit {
       },(err: HttpErrorResponse) => {
         if(!this.disableMemberStatementOutOfServiceRedirect){
           appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
+          appFunc.code = "E" + err.status.toString() + ": ESB Error";
           this.route.navigate(['outofservice']);
         }
       });
@@ -486,7 +486,7 @@ export class CheckBalanceComponent implements OnInit {
       }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
-      appFunc.code = "ESB Error";
+      appFunc.code = "E" + err.status.toString() + ":ESB Error";
       this.route.navigate(['outofservice']);
     });
   }

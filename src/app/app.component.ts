@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
       else{
         appFunc.DetectMyKad();
         if (!signalRConnection.isCardInserted){
-          appFunc.Reset();
           this._aldanService.EndSession(appFunc.sessionId, {KioskId: signalRConnection.kioskCode}).subscribe((result: any) => {});
+          appFunc.Reset();
           this.route.navigate(['/startup']);
         }
       }
