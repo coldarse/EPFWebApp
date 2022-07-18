@@ -35,3 +35,24 @@ export class eWithdrawalDetails {
         this.paymentFrequencyCode = eWDetails.paymentFrequencyCode;
     }
 }
+export class eWithdrawalLists {
+    accNum : string;
+    withdrawalApplList: withdrawalApplLists[];
+
+   constructor(eWLists: any){
+       this.accNum = eWLists.accNum;
+       this.withdrawalApplList = eWLists.withdrawalApplList.map((ewAppl: any) => new withdrawalApplLists(ewAppl));
+   }
+}
+
+export class withdrawalApplLists{
+    applReferenceNo: string;
+    schemeDescription: string;
+    expiry_date: string;
+
+    constructor(wApplList: any){
+        this.applReferenceNo = wApplList.applReferenceNo;
+        this.schemeDescription = wApplList.schemeDescription;
+        this.expiry_date = wApplList.expiry_date;
+    }
+}

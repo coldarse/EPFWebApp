@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { businessTypes, eModules } from './modelClass';
 import { currentMemberDetails, currMemberDetails } from './_currentMemberDetails';
-import { eWithdrawalDetails } from './_eWithdrawalDetails';
+import { eWithdrawalDetails, eWithdrawalLists, withdrawalApplLists } from './_eWithdrawalDetails';
 import { signalRConnection } from './_signalRConnection';
 
 @Injectable({
@@ -14,6 +14,8 @@ export class appFunc {
     static MemberDetail: currentMemberDetails;
     static currMemberDetail: currMemberDetails;
     static eWithdrawalDetail: eWithdrawalDetails;
+    static eWithdrawalList: eWithdrawalLists;
+    static withdrawalApplList: withdrawalApplLists[];
     static isVerifyMyKad = false;
     static screenSaver: string;
     static screenSaverList: string[];
@@ -73,6 +75,7 @@ export class appFunc {
         this.MemberDetail = {} as currentMemberDetails;
         this.currMemberDetail = {} as currMemberDetails;
         this.eWithdrawalDetail = {} as eWithdrawalDetails;
+        this.withdrawalApplList = [];
         this.isVerifyMyKad = false;
         this.sessionId = 0;
         this.stateCode = "";

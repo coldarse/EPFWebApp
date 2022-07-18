@@ -6,6 +6,7 @@ import { selectLang } from '../_models/language';
 import { appFunc } from '../_models/_appFunc';
 import { currentMyKadDetails } from '../_models/_currentMyKadDetails';
 import { signalRConnection } from '../_models/_signalRConnection';
+import { AldanService } from '../shared/aldan.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -26,10 +27,14 @@ export class MainMenuComponent implements OnInit {
   iShariahiSaraanEnabled = false;
   thumbprintVerificationEnabled = false;
   iAkaunEnabled = false;
+  popupUnsettled = false;
+  withdrawalApplList: any[] = [];
+  main = true;
 
   constructor(
     private route: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _aldanService: AldanService
   ) {}
 
   ngOnInit(): void {
@@ -139,7 +144,30 @@ export class MainMenuComponent implements OnInit {
     if(iakauncount > 0) this.iAkaunEnabled = true;
     if(isaraanishariahcount > 0) this.iShariahiSaraanEnabled = true;
     if(appFunc.currMemberDetail.iAkaunStatus == "A") this.iAkaunEnabled = false;
+
+    this.GetWithdrawalAppl();
     
+  }
+
+  GetWithdrawalAppl(){
+    const eWithdrawalBody = {
+      accNum: "19140510",//this.accountNum,
+      sessionId: appFunc.sessionId
+    }
+
+    this._aldanService.eWithdrawalApplication(eWithdrawalBody).subscribe((result: any) => {
+      if (result.body.responseCode == "0") {
+        this.withdrawalApplList = result.body.detail.withdrawalApplList;
+        this.withdrawalApplList.forEach((element: any) => {
+          Object.assign(element, {
+            expiryDate: formatDate(element.expiry_date, 'dd MMM YYYY', 'en'),
+            isChecked: false
+          });
+        });
+        appFunc.withdrawalApplList = result.body.detail.withdrawalApplList;
+        this.popupUnsettled = true;
+      }
+    });
   }
 
   ngAfterViewInit(): void{
@@ -192,5 +220,12 @@ export class MainMenuComponent implements OnInit {
     this.route.navigate(['verifyMyKad']);
   }
 
+  UnsettledNo(){
+    this.popupUnsettled = false;
+  }
+
+  UnsettledYes(){
+    this.route.navigate(['thumbprintConfirmation']);
+  }
 
 }

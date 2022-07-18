@@ -1,144 +1,192 @@
 <div class="bg-img" style="background: url('assets/images/BG.png'); background-size: 1368px 850px;">
-  <div class="row container-fluid">
-    <div class="col-8">
-      <div class="header">{{ "menu" | translate }}</div>
+  <div *ngIf="main">
+    <div class="row container-fluid">
+      <div class="col-8">
+        <div class="header">{{ "menu" | translate }}</div>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btnHeader" (click)="selectBM()" #bm>{{"bm"|translate}}</button>
+        <button type="button" class="btnHeader" (click)="selectEN()" #en>{{"en"|translate}}</button>
+      </div>
     </div>
-    <div class="col-3">
-      <button type="button" class="btnHeader" (click)="selectBM()" #bm>{{"bm"|translate}}</button>
-      <button type="button" class="btnHeader" (click)="selectEN()" #en>{{"en"|translate}}</button>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row padTop2rem content-container">
-      <div class="text-center">
-        <div class="lblHeader">
-          {{"greetings" | translate}} {{name}},<br>
-          {{"akaunNo" | translate}} : {{accountNum}} <br>
-          {{"pleaseChoose"|translate}}: 
-        </div>
-        <div class="row padTop3rem">
-          <div class="col-6">
-            <button [ngClass]="checkBalanceEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="checkBalance()" [disabled]="!checkBalanceEnabled">
-              <div class="row">
-                <div class="col-3 menuItemBorder">
-                  <div class="centerItem">
-                    <img src="assets/images/Icon-Semak-Baki-Simpanan.svg" width="55px" height="55px">
-                  </div>
-                </div>
-                <div class="col-8 menuItemBorder">
-                  <div class="centerItem">
-                    {{"checkBalance"|translate}}
-                  </div>
-                </div>
-                <div class="col-1 menuItemBorder"></div>
-              </div>
-            </button>
+    <div class="container-fluid">
+      <div class="row padTop2rem content-container">
+        <div class="text-center">
+          <div class="lblHeader">
+            {{"greetings" | translate}} {{name}},<br>
+            {{"akaunNo" | translate}} : {{accountNum}} <br>
+            {{"pleaseChoose"|translate}}:
           </div>
-          <div class="col-6">
-            <button [ngClass]="personalInformationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="personalInformation()" [disabled]="!personalInformationEnabled">
-              <div class="row">
-                <div class="col-1 menuItemBorder"></div>
-                <div class="col-8 menuItemBorder">
-                  <div class="centerItem">
-                    {{"personalInfo"|translate}}
+          <div class="row padTop3rem">
+            <div class="col-6">
+              <button [ngClass]="checkBalanceEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
+                (click)="checkBalance()" [disabled]="!checkBalanceEnabled">
+                <div class="row">
+                  <div class="col-3 menuItemBorder">
+                    <div class="centerItem">
+                      <img src="assets/images/Icon-Semak-Baki-Simpanan.svg" width="55px" height="55px">
+                    </div>
+                  </div>
+                  <div class="col-8 menuItemBorder">
+                    <div class="centerItem">
+                      {{"checkBalance"|translate}}
+                    </div>
+                  </div>
+                  <div class="col-1 menuItemBorder"></div>
+                </div>
+              </button>
+            </div>
+            <div class="col-6">
+              <button [ngClass]="personalInformationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
+                (click)="personalInformation()" [disabled]="!personalInformationEnabled">
+                <div class="row">
+                  <div class="col-1 menuItemBorder"></div>
+                  <div class="col-8 menuItemBorder">
+                    <div class="centerItem">
+                      {{"personalInfo"|translate}}
+                    </div>
+                  </div>
+                  <div class="col-3 menuItemBorder">
+                    <div class="centerItem">
+                      <img src="assets/images/Icon-Maklumat-Peribadi.svg" width="55px" height="55px">
+                    </div>
                   </div>
                 </div>
-                <div class="col-3 menuItemBorder">
-                  <div class="centerItem">
-                    <img src="assets/images/Icon-Maklumat-Peribadi.svg" width="55px" height="55px">
-                  </div>
-                </div>
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="row padTop3rem">
-          <div class="col-6">
-            <button [ngClass]="updateTACEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="updateTAC()" [disabled]="!updateTACEnabled">
-              <div class="row">
-                <div class="col-3 menuItemBorder">
-                  <div class="centerItem">
-                    <img src="assets/images/Icon-Kemaskinian-Mobile-TAC.svg" width="55px" height="55px">
+          <div class="row padTop3rem">
+            <div class="col-6">
+              <button [ngClass]="updateTACEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="updateTAC()"
+                [disabled]="!updateTACEnabled">
+                <div class="row">
+                  <div class="col-3 menuItemBorder">
+                    <div class="centerItem">
+                      <img src="assets/images/Icon-Kemaskinian-Mobile-TAC.svg" width="55px" height="55px">
+                    </div>
+                  </div>
+                  <div class="col-8 menuItemBorder">
+                    <div class="centerItem">
+                      {{"UpdateTAC"|translate}}
+                    </div>
+                  </div>
+                  <div class="col-1 menuItemBorder"></div>
+                </div>
+              </button>
+            </div>
+            <div class="col-6">
+              <button [ngClass]="iShariahiSaraanEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
+                (click)="iSaraanRegistrationShariahSavings()" [disabled]="!iShariahiSaraanEnabled">
+                <div class="row">
+                  <div class="col-1 menuItemBorder"></div>
+                  <div class="col-8 menuItemBorder">
+                    <div class="centerItem">
+                      {{"sariah"|translate}}
+                    </div>
+                  </div>
+                  <div class="col-3 menuItemBorder">
+                    <div class="centerItem">
+                      <img src="assets/images/Icon-Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="55px" height="55px">
+                    </div>
                   </div>
                 </div>
-                <div class="col-8 menuItemBorder">
-                  <div class="centerItem">
-                    {{"UpdateTAC"|translate}}
-                  </div>
-                </div>
-                <div class="col-1 menuItemBorder"></div>
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
-          <div class="col-6">
-            <button [ngClass]="iShariahiSaraanEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iSaraanRegistrationShariahSavings()" [disabled]="!iShariahiSaraanEnabled">
-              <div class="row">
-                <div class="col-1 menuItemBorder"></div>
-                <div class="col-8 menuItemBorder">
-                  <div class="centerItem">
-                    {{"sariah"|translate}}
+          <div class="row padTop3rem">
+            <div class="col-6">
+              <button [ngClass]="thumbprintVerificationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
+                (click)="thumbprintConfirmation()" [disabled]="!thumbprintVerificationEnabled">
+                <div class="row">
+                  <div class="col-3 menuItemBorder">
+                    <div class="centerItem">
+                      <img src="assets/images/Icon-Pengesahan-Cap-Ibu-Jari.svg" width="55px" height="55px">
+                    </div>
+                  </div>
+                  <div class="col-8 menuItemBorder">
+                    <div class="centerItem">
+                      {{"thumbprint"|translate}}
+                    </div>
+                  </div>
+                  <div class="col-1 menuItemBorder"></div>
+                </div>
+              </button>
+            </div>
+            <div class="col-6">
+              <!-- (click)="iAkaunRegistration()" -->
+              <button [ngClass]="iAkaunEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
+                (click)="iAkaunRegistration()" [disabled]="!iAkaunEnabled">
+                <div class="row">
+                  <div class="col-1 menuItemBorder"></div>
+                  <div class="col-8 menuItemBorder">
+                    <div class="centerItem">
+                      {{"i-Akaun"|translate}}
+                    </div>
+                  </div>
+                  <div class="col-3 menuItemBorder">
+                    <div class="centerItem">
+                      <img src="assets/images/Icon-Pendaftaran-IAkaun.svg" width="55px" height="55px">
+                    </div>
                   </div>
                 </div>
-                <div class="col-3 menuItemBorder">
-                  <div class="centerItem">
-                    <img src="assets/images/Icon-Pendaftaran-ISaraan-Simpanan-Shariah.svg" width="55px" height="55px">
-                  </div>
-                </div>
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="row padTop3rem">
-          <div class="col-6">
-            <button [ngClass]="thumbprintVerificationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="thumbprintConfirmation()" [disabled]="!thumbprintVerificationEnabled">
-              <div class="row">
-                <div class="col-3 menuItemBorder">
-                  <div class="centerItem">
-                    <img src="assets/images/Icon-Pengesahan-Cap-Ibu-Jari.svg" width="55px" height="55px">
-                  </div>
-                </div>
-                <div class="col-8 menuItemBorder">
-                  <div class="centerItem">
-                    {{"thumbprint"|translate}}
-                  </div>
-                </div>
-                <div class="col-1 menuItemBorder"></div>
-              </div>
-            </button>
-          </div>
-          <div class="col-6">
-            <!-- (click)="iAkaunRegistration()" -->
-            <button [ngClass]="iAkaunEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'" (click)="iAkaunRegistration()" [disabled]="!iAkaunEnabled"> 
-              <div class="row">
-                <div class="col-1 menuItemBorder"></div>
-                <div class="col-8 menuItemBorder">
-                  <div class="centerItem">
-                    {{"i-Akaun"|translate}}
-                  </div>
-                </div>
-                <div class="col-3 menuItemBorder">
-                  <div class="centerItem">
-                    <img src="assets/images/Icon-Pendaftaran-IAkaun.svg" width="55px" height="55px">
-                  </div>
-                </div>
-              </div>
-            </button>
-          </div>
-        </div>
-        <div class="row padTop3rem">
-          <!-- <div class="col-1"></div> -->
-          <div class="col-6 mainMenuLeft">
-            <label style="color: white;">_______</label>
-            <img src="assets/images/Icon-Date-Time.svg" width="35px" height="35px">
-            <label class="lblDate2">{{date}}</label>
-          </div>
-          <div class="col-6 mainMenuRight" >
-            <label class="lblLogout" (click)="logOut()">{{"logout"|translate}}</label>
-            <img src="assets/images/Icon-Logout.svg" width="40px" height="40px" (click)="logOut()">
-            <label style="color: white;">_______</label>
+          <div class="row padTop3rem">
+            <!-- <div class="col-1"></div> -->
+            <div class="col-6 mainMenuLeft">
+              <label style="color: white;">_______</label>
+              <img src="assets/images/Icon-Date-Time.svg" width="35px" height="35px">
+              <label class="lblDate2">{{date}}</label>
+            </div>
+            <div class="col-6 mainMenuRight">
+              <label class="lblLogout" (click)="logOut()">{{"logout"|translate}}</label>
+              <img src="assets/images/Icon-Logout.svg" width="40px" height="40px" (click)="logOut()">
+              <label style="color: white;">_______</label>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="bg-popup" *ngIf="popupUnsettled">
+    <div class="pop-up shadow p-3 mb-5 bg-white rounded-2rem">
+        <div class="text-center">
+          <div class="lblHeader">
+            {{"pendingTask" | translate}}
+          </div>
+          <div class="row padTop2rem">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <button type="button" class="btnThumbprint" *ngFor="let withdrawal of withdrawalApplList">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-7">
+                    <div class="row">
+                      {{withdrawal.schemeDescription}}
+                    </div>
+                    <div class="row">
+                      <label class="lblDate">{{"expiryDate" | translate}}: {{withdrawal.expiryDate}}</label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label class="lblRed">{{"pending" | translate}}</label>
+                    <img class="imgX" src="assets/images/Icon-x.svg" width="40px" height="40px">
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="row padTop10rem">
+            <div class="col-2"></div>
+            <div class="col-4">
+              <button type="button" class="btnNo" (click)="UnsettledNo()">{{"close"| translate}}</button>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btnYes" (click)="UnsettledYes()">{{"thumbprint"| translate}}</button>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>

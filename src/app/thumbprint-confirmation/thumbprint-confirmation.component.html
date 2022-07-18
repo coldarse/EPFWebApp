@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padTop15rem">
+                <div class="row padTop15rem" *ngIf="!isCallAPI">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button type="button" class="btnNo" (click)="ThumbprintAgreeDisagreeNo()">{{"disagree"|
@@ -22,6 +22,12 @@
                     <div class="col-4">
                         <button type="button" class="btnYes" (click)="ThumbprintAgreeDisagreeYes()">{{"agree"|
                             translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop15rem" *ngIf="isCallAPI">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -36,20 +42,20 @@
                     <div class="col-1"></div>
                     <div class="col-5">
                         <button type="button" class="btnThumbprint" *ngFor="let withdrawal of withdrawalApplList">
-                            <div class="row">
-                                <div class="col-2"></div> 
+                            <div class="row" (click)="openWithdrawalDetails(withdrawal)">
+                                <div class="col-2"></div>
                                 <div class="col-7">
                                     <div class="row">
                                         {{withdrawal.schemeDescription}}
                                     </div>
                                     <div class="row">
-                                        <label class="lblDate">Tarikh Luput: {{expiryDate}}</label>
+                                        <label class="lblDate">Tarikh Luput: {{withdrawal.expiryDate}}</label>
                                     </div>
                                 </div>
                                 <div class="col-1"></div>
                                 <div class="col-2">
-                                    <input class="regular-checkbox big-checkbox marginTopOneHalfrem" type="checkbox"
-                                        value="" (click)="checkAnsuran()">
+                                    <input class="regular-checkbox big-checkbox marginTopBottom1rem" type="checkbox"
+                                        value="" [checked]="withdrawal.isChecked">
                                 </div>
                             </div>
                         </button>
@@ -182,13 +188,19 @@
                     {{"placeThumbprint"|translate}}
                 </div>
                 <div class="row padTopHalfrem">
-                    <img src="assets/images/thumbprint.svg" width="400px" height="400px" (click)="skip()">
+                    <img src="assets/images/thumbprint.svg" width="400px" height="400px">
                 </div>
-                <div class="row padTopHalfrem">
+                <div class="row padTopHalfrem" *ngIf="BeforeRead">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <button type="button" class="btnNo"
-                            (click)="ThumbprintVerificationNo()">{{"cancel"|translate}}</button>
+                            (click)="cancelMyKadVerification()">{{"cancel"|translate}}</button>
+                    </div>
+                </div>
+                <div class="row padTop5rem" *ngIf="AfterRead">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="spinner-border text-primary spinning-addon" role="status"> </div>
                     </div>
                 </div>
             </div>
@@ -197,37 +209,30 @@
         <div class="row padTop5rem" *ngIf="Selected">
             <div class="text-center">
                 <div class="lblHeader">
-                    {{"success"| translate}}
+                    Hi {{name}} <br>
+                    {{"akaunNo" | translate}} : {{eWithdrawalDetail.accNum}}
                 </div>
                 <div class="row padTop2rem">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <button type="button" class="btnThumbprint">
+                        <button type="button" class="btnThumbprint" *ngFor="let withdrawal of withdrawalApplList">
                             <div class="row">
+                                <div class="col-1"></div>
                                 <div class="col-9">
-                                    <label>{{"ansuran"| translate}}</label>
+                                    <label>{{withdrawal.schemeDescription}}</label>
                                 </div>
-                                <div class="col-3">
-                                    <input class="green-checkbox big-checkbox marginTop1rem" type="checkbox" value="" id="verified" name="verified" [checked]="isVerified" >
+                                <div class="col-2">
+                                    <input class="green-checkbox big-checkbox marginTop1rem" type="checkbox" value=""
+                                        id="verified" name="verified" [checked]="withdrawal.isChecked"
+                                        disabled="isDisabled">
                                 </div>
                             </div>
                         </button>
                     </div>
                 </div>
-                <div class="row padTopHalfrem">
-                    <div class="col-4"></div>
-                    <div class="col-4">
-                        <button type="button" class="btnThumbprint">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label>{{"bina"| translate}}</label>
-                                </div>
-                                <div class="col-3">
-                                    <input class="green-checkbox big-checkbox" type="checkbox" value="">
-                                </div>
-                            </div>
-                        </button>
-                    </div>
+                <div class="row padTop3rem">
+                    <label class="lblList">{{"thumbprintSuccessMsg" | translate}}</label>
+                    <label class="lblList">{{"thumbprintSuccessMsg2" | translate}}</label>
                 </div>
                 <div class="row padTop7rem">
                     <div class="col-2"></div>
@@ -243,7 +248,7 @@
         </div>
 
         <div class="bg-popup" *ngIf="openPopup">
-            <div class="pop-up" *ngIf="popup">
+            <!-- <div class="pop-up" *ngIf="popup">
                 <div class="row text-center padTop5rem">
                     <div class="col-12">
                         <img src="assets/images/Icon-Attention.svg" width="200" height="175">
@@ -271,12 +276,13 @@
                             translate}}</button>
                     </div>
                 </div>
-            </div>
-            <div class="pop-up" *ngIf="popupAnsuran"  >
+            </div> -->
+            <div class="pop-up" *ngIf="popupWithdrawal">
                 <div class="frame padtop10rem">
                     <div>
                         <label class="lblPopupBlack">KWSP 9P(AHL)</label>
-                        <label class="lblPopupBlack" style="float:right">{{"akaunNo" | translate}}: {{eWithdrawalDetail.accNum}}</label>
+                        <label class="lblPopupBlack" style="float:right">{{"akaunNo" | translate}}:
+                            {{eWithdrawalDetail.accNum}}</label>
                     </div>
                     <br />
                     <div class="row">
@@ -284,22 +290,22 @@
                     </div>
                     <br />
                     <div class="row">
-                        <label class="lblPopupBlack">Anda telah memohon pengeluaran Ansuaran Bulanan Pinjaman Perumahan
-                            melalui i-Akaun(Ahli) pada 01/12/2021 dengan Nombor Rujukan {{eWithdrawalDetail.applReferenceNo}}</label>
+                        <label class="lblPopupBlack">{{"withdrawalNote1"| translate}} {{eWithdrawalDetail.schemeDescription}}
+                            {{"withdrawalNote2"| translate}} {{expiryAgreement}} {{"withdrawalNote3"| translate}} 
+                            {{eWithdrawalDetail.applReferenceNo}}</label>
                     </div>
                     <br />
                     <div class="row">
-                        <label class="lblPopupBlack">Maklumat bayaran pengeluaran pilihan anda adalah seperti
-                            berikut:</label>
+                        <label class="lblPopupBlack">{{"withdrawalNotes"| translate}}:</label>
                     </div>
                     <br />
                     <div class="row">
-                        <label class="lblPopupBlack">Bayaran kepada Institusi</label>
+                        <label class="lblPopupBlack">{{"payMember" | translate}}</label>
                     </div>
                     <ul>
                         <div class="row">
                             <div class="col-5">
-                                <li class="lblList">Amaun Dimohon</li>
+                                <li class="lblList">{{"amountReq" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">RM{{eWithdrawalDetail.totalRecurringAmt}}</label>
@@ -307,7 +313,7 @@
                         </div>
                         <div class="row">
                             <div class="col-5">
-                                <li class="lblList">Cara Bayaran</li>
+                                <li class="lblList">{{"paymentMethod" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">{{eWithdrawalDetail.paymentMode}}</label>
@@ -315,7 +321,7 @@
                         </div>
                         <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
-                                <li class="lblList">Amaun Bayaran Setiap Bulan</li>
+                                <li class="lblList">{{"mthInstallment" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">RM{{eWithdrawalDetail.monthlyInstalmentAmt}}</label>
@@ -323,7 +329,7 @@
                         </div>
                         <div class="row">
                             <div class="col-5">
-                                <li class="lblList">Institusi Pemberi Pinjaman</li>
+                                <li class="lblList">{{"bank" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">{{eWithdrawalDetail.bankName}}</label>
@@ -331,7 +337,7 @@
                         </div>
                         <div class="row">
                             <div class="col-5">
-                                <li class="lblList">No. Akaun Pinjaman Perumahan</li>
+                                <li class="lblList">{{"bankAcc" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">{{eWithdrawalDetail.bankAccNo}}</label>
@@ -339,7 +345,7 @@
                         </div>
                         <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
-                                <li class="lblList">Bilangan Bulan</li>
+                                <li class="lblList">{{"noMths" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">{{eWithdrawalDetail.paymentFrequency}}</label>
@@ -347,7 +353,7 @@
                         </div>
                         <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
-                                <li class="lblList">Bulan Mula</li>
+                                <li class="lblList">{{"recurringStart" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">{{eWithdrawalDetail.recurringStartDate}}</label>
@@ -355,7 +361,7 @@
                         </div>
                         <div class="row" *ngIf="isRecurring">
                             <div class="col-5">
-                                <li class="lblList">Bulan Akhir</li>
+                                <li class="lblList">{{"recurringEnd" | translate}}</li>
                             </div>
                             <div class="col-7">
                                 <label class="lblList">{{eWithdrawalDetail.recurringEndDate}}</label>
@@ -363,18 +369,17 @@
                         </div>
                     </ul>
                     <div class="row">
-                        <label class="lblPopupBlack">Saya bersetuju dengan maklumat di atas dan ingin meneruskan
-                            pengesahan Cap Ibu Jari bagi pemohonan pengeluaran ini.</label>
+                        <label class="lblPopupBlack">{{"agreeVerifyMsg" | translate}}</label>
                     </div>
                 </div>
                 <div class="row text-center padTop05rem padBottom2rem">
                     <div class="col-12">
-                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"|
+                        <button type="button" class="btnPopUp text-center" (click)="popupWithdrawalYes()">{{"yes"|
                             translate}}</button>
                     </div>
                 </div>
             </div>
-            <div class="pop-up" *ngIf="popup50Tahun">
+            <!-- <div class="pop-up" *ngIf="popup50Tahun">
                 <div class="frame padtop10rem">
                     <div>
                         <label class="lblPopupBlack">KWSP 9P(AHL)</label>
@@ -443,7 +448,7 @@
                             translate}}</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="pop-up" *ngIf="popupMissing">
                 <div class="row text-center padTop5rem">
                     <div class="col-12">
@@ -451,26 +456,26 @@
                     </div>
                 </div>
                 <div class="row text-center padTop2rem">
-                    <label class="lblPopup">Anda tidak memilih untuk membuat pengesahan permohonan pengeluaran seperti berikut:</label>
+                    <label class="lblPopup">{{"noSelectHeader" | translate}}:</label>
                 </div>
                 <div class="padTop2rem">
                     <table class="tblMissing">
                         <tr>
-                            <th class="thMissing">Pengeluaran</th>
-                            <th class="thMissing">Tarikh luput pengesahan cap ibu jari</th>
+                            <th class="thMissing">{{"withdrawal" | translate}}</th>
+                            <th class="thMissing">{{"expiryDate" | translate}}</th>
                         </tr>
-                        <tr>
-                            <td class="left tdBorder">1.Pendidikan</td>
-                            <td class="text-center tdBorder">31 Disember 2021</td>
+                        <tr *ngFor="let m of withdrawalApplList">
+                            <td class="left tdBorder" *ngIf="m.isChecked == false">{{m.schemeDescription}}</td>
+                            <td class="text-center tdBorder" *ngIf="m.isChecked == false">{{m.expiryDate}}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="row text-center padTop2rem">
-                    <label class="lblPopup">Bagi mengelakkan permohonan pengeluaran anda dibatalkan, sila buat pengesahan melalui Self Service Terminal atau Cawangan KWSP berhampiran sebelum tarikh luput pengesahan Cap Ibu Jari.</label>
+                    <label class="lblPopup">{{"noSelectMsg" | translate}}</label>
                 </div>
                 <div class="row text-center padTop2rem padBottom2rem">
                     <div class="col-12">
-                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"|
+                        <button type="button" class="btnPopUp text-center" (click)="popupMissingYes()">{{"yes"|
                             translate}}</button>
                     </div>
                 </div>
@@ -488,7 +493,8 @@
                             <label class="lblList">1.</label>
                         </div>
                         <div class="col-11">
-                            <label class="lblList">Saya mengesahkan semua maklumat dan dokumen (jika berkenaan) yang diberikan bagi permohonan ini adalah benar dan betul.</label>
+                            <label class="lblList">Saya mengesahkan semua maklumat dan dokumen (jika berkenaan) yang
+                                diberikan bagi permohonan ini adalah benar dan betul.</label>
                         </div>
                     </div>
                     <div class="row padTop2rem">
@@ -496,7 +502,10 @@
                             <label class="lblList">2.</label>
                         </div>
                         <div class="col-11">
-                            <label class="lblList">Saya memahami sekiranya saya membuat apa-apa kenyataan yang tidak benar atau tidak betul atau mengemukakan atau memberikan apa-apa dokumen palsu, ia merupakan suatu kesalahan dan boleh menyebabkan saya didenda atau dipenjara atau kedua-duanya.</label>
+                            <label class="lblList">Saya memahami sekiranya saya membuat apa-apa kenyataan yang tidak
+                                benar atau tidak betul atau mengemukakan atau memberikan apa-apa dokumen palsu, ia
+                                merupakan suatu kesalahan dan boleh menyebabkan saya didenda atau dipenjara atau
+                                kedua-duanya.</label>
                         </div>
                     </div>
                     <div class="row padTop2rem">
@@ -504,7 +513,8 @@
                             <label class="lblList">3.</label>
                         </div>
                         <div class="col-11">
-                            <label class="lblList">Saya memahami bahawa amaun yang akan diterima daripada KWSP adalah tertakluk kepada amaun kelayakan saya.</label>
+                            <label class="lblList">Saya memahami bahawa amaun yang akan diterima daripada KWSP adalah
+                                tertakluk kepada amaun kelayakan saya.</label>
                         </div>
                     </div>
                     <div class="row padTop2rem">
@@ -512,7 +522,8 @@
                             <label class="lblList">4.</label>
                         </div>
                         <div class="col-11">
-                            <label class="lblList">Saya memberi kebenaran untuk pihak institusi mendaftarkan permohonan ini (sekiranya berkaitan).</label>
+                            <label class="lblList">Saya memberi kebenaran untuk pihak institusi mendaftarkan permohonan
+                                ini (sekiranya berkaitan).</label>
                         </div>
                     </div>
                     <div class="row padTop2rem">
@@ -520,11 +531,14 @@
                             <label class="lblList">5.</label>
                         </div>
                         <div class="col-11">
-                            <label class="lblList">Saya dengan ini: <br> i. Memberi kebenaran kepada pihak KWSP memperolehi apa-apa maklumat berkaitan dengan saya bagi maksub pengeluaran ini daripada mana-mana pihak yang berkenaan.</label>
+                            <label class="lblList">Saya dengan ini: <br> i. Memberi kebenaran kepada pihak KWSP
+                                memperolehi apa-apa maklumat berkaitan dengan saya bagi maksub pengeluaran ini daripada
+                                mana-mana pihak yang berkenaan.</label>
                         </div>
                     </div>
                     <div class="padTop2rem">
-                        <input class="tnc-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox" (click)="clickTNC()">
+                        <input class="tnc-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox"
+                            (click)="clickTNC()" [checked]="xagreedPerakuan == false">
                         <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
                     </div>
                 </div>
@@ -534,7 +548,8 @@
                         <button type="button" class="btnNo" (click)="popupPerakuanNo()">{{"back"| translate}}</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btnYes" (click)="popupPerakuanYes()">{{"proceed"| translate}}</button>
+                        <button type="button" [ngClass]="xagreedPerakuan == false ? 'btnYes' : 'btnYesDisabled'"
+                            (click)="popupPerakuanYes()" [disabled]="xagreedPerakuan">{{"proceed"| translate}}</button>
                     </div>
                 </div>
             </div>
@@ -544,13 +559,23 @@
                         <img src="assets/images/Icon-Attention.svg" width="200" height="175">
                     </div>
                 </div>
-                <div>
-                    <label></label>
+                <div class="row text-center padTop5rem">
+                    <h2 class="lblPopup">{{"fingerprintNotDetected" | translate}}</h2><br>
+                    <h2 class="lblPopup" *ngIf="failedthrice">{{"maxTry" | translate}}</h2><br>
+                    <h2 class="lblPopup" *ngIf="failedthrice">{{"askHelp" | translate}}</h2>
                 </div>
                 <div class="row text-center padTop2rem padBottom2rem">
                     <div class="col-12">
-                        <button type="button" class="btnPopUp text-center" (click)="popupYes()">{{"yes"|
-                            translate}}</button>
+                        <button type="button" class="btnPopUp text-center" (click)="TryAgain()" *ngIf="xlastTry">
+                            {{"TryAgain"| translate}}
+                        </button>
+                    </div>
+                </div>
+                <div class="row text-center padTop2rem padBottom2rem">
+                    <div class="col-12">
+                        <button type="button" class="btnPopUp text-center" (click)="FailYes()" *ngIf="failedthrice">
+                            {{"yes"| translate}}
+                        </button>
                     </div>
                 </div>
             </div>

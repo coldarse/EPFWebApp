@@ -221,6 +221,10 @@
     margin-top: 1.5rem;
 }
 
+.marginTopBottom1rem{
+    margin: 1rem 0;
+}
+
 .marginTop2rem {
     margin-top: 2rem;
 }
@@ -841,7 +845,7 @@ td {
     content: '\2714';
     font-size: 25px;
     position: absolute;
-    top: 0px;
+    top: -5px;
     left: 5px;
     color: white;
 }
@@ -1228,4 +1232,18 @@ ul.dropdown-menu a.dropdown-item:hover {
     color: #fafafa;
     font-size: 24px;
     font-family: 'filson-pro', sans-serif;
+}
+
+.lblRed{
+    border: 1px solid grey;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 5rem;
+}
+
+.imgX{
+    width: 40px;
+    height: 40px;
+    margin-left: 1rem;
 }
