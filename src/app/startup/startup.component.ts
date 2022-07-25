@@ -189,12 +189,14 @@ export class StartupComponent implements OnInit {
   }
 
   SelectAdapterNext() {
+
     this.adapters.forEach((element: adapter) => {
       if (element.adapterNameEncrypted == this.selectedAdapterValueEncrypted) this.selectedAdapterValue = element.adapterName;
+      
     });
 
     const kioskRegisterBody = {
-      'MacAddress': this.selectedAdapterValue
+      'macAddress': this.selectedAdapterValue
     }
 
     this._aldanService
@@ -251,6 +253,8 @@ export class StartupComponent implements OnInit {
     if (this.username?.nativeElement.value == this.UserName && this.password?.nativeElement.value == this.Password) {
       this.AdminLogin = false;
       this.SelectAdapter = true;
+      this.selectedAdapterValueEncrypted = this.adapters[0].adapterNameEncrypted;
+
     }
   }
 
