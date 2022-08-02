@@ -49,6 +49,7 @@ export class appFunc {
     static cDetails: any[];
     static wDetails: any[];
     static oDetails: any[];
+    static allPerakuanList: any;
     static summaryDetails: any;
     static transactionAmtForAcc1: any;
     static CurrYears = new Date().getFullYear();

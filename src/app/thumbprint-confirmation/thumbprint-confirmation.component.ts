@@ -74,6 +74,8 @@ export class ThumbprintConfirmationComponent implements OnInit {
   popupUnsettled = false;
   RemoveMyKad = false;
   NoticeCount = 1;
+  allPerakuanList: any[] = [];
+  selectedTerms: any[] = [];
 
   constructor(
     private route: Router,
@@ -85,6 +87,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.translate.use('bm');
     this.name = appFunc.currMemberDetail.custName;
     this.withdrawalApplList = appFunc.withdrawalApplList;
+    this.allPerakuanList = appFunc.allPerakuanList;
   }
 
   openWithdrawalDetails(SelectedWithdrawal: any) {
@@ -395,5 +398,13 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.openPopup = false;
     this.popupError = false;
     this.readMinutiae();
+  }
+
+  getSelectedPerakuan(SelectedWithdrawal: any) {
+    this.allPerakuanList.forEach(element => {
+      if (element.schemeCode == SelectedWithdrawal.schemeCode) {
+        this.selectedTerms = element.terms;
+      }
+    });
   }
 }

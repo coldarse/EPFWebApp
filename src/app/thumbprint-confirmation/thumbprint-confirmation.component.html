@@ -483,12 +483,19 @@
             <div class="pop-up" *ngIf="popupPerakuan">
                 <div class="frame padtop10rem">
                     <div class="row text-center">
-                        <label class="lblHeader">PERAKUAN DAN PENGESAHAN</label>
+                        <label class="lblHeader">{{"perakuanHeader" | translate}}</label>
                     </div>
                     <div class="row padTop1rem">
-                        <label class="highlightTitle">PENGESAHAN PEMOHON</label>
+                        <label class="highlightTitle">{{"perakuanTitle" | translate}}</label>
                     </div>
                     <div class="row padTop05rem">
+                        <ol>
+                            <li *ngFor="let t of selectedTerms" style="margin: 10px 0;">
+                              {{t.terms}}
+                            </li>
+                        </ol>
+                    </div>
+                    <!-- <div class="row padTop05rem">
                         <div class="col-1">
                             <label class="lblList">1.</label>
                         </div>
@@ -535,7 +542,7 @@
                                 memperolehi apa-apa maklumat berkaitan dengan saya bagi maksub pengeluaran ini daripada
                                 mana-mana pihak yang berkenaan.</label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="padTop2rem">
                         <input class="tnc-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox"
                             (click)="clickTNC()" [checked]="xagreedPerakuan == false">
