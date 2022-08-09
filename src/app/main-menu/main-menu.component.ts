@@ -151,7 +151,7 @@ export class MainMenuComponent implements OnInit {
 
   GetWithdrawalAppl(){
     const eWithdrawalBody = {
-      accNum: this.accountNum,//this.accountNum,
+      accNum: this.accountNum,
       sessionId: appFunc.sessionId
     }
 

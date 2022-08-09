@@ -204,7 +204,7 @@ export class VerifyMyKadComponent implements OnInit {
   bindMyKadData(data: any): void{
 
     currentMyKadDetails.Name = data.GMPCName;
-    currentMyKadDetails.ICNo = data.ICNo.toString().replace('*', '');
+    currentMyKadDetails.ICNo = data.ICNo.toString().replace(/\D/g, '');
     currentMyKadDetails.OldICNo = data.OldICNo;
     currentMyKadDetails.DOB = data.DOB;
     currentMyKadDetails.DOBString = data.DOBString;

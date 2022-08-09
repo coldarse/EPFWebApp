@@ -118,7 +118,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
                   monthlyInstalmentAmt: this.eWithdrawalDetail.monthlyInstalmentAmt,
                   lastMonthDifferenceAmt: this.eWithdrawalDetail.lastMonthDifferenceAmt,
                   totalRecurringAmt: this.eWithdrawalDetail.totalRecurringAmt,
-                  paymentFrequencyCode: this.eWithdrawalDetail.paymentFrequencyCode
+                  paymentFrequencyCode: this.eWithdrawalDetail.paymentFrequencyCode,
                 });
               }
             });
@@ -234,7 +234,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
       }
       else{
         this.getSelectedPerakuan(element1);
-        this.SendNotice(element1);
         selectCount += 1;
         // this.withdrawalApplList.forEach(element2 => {
         //   if (element2.applReferenceNo == this.eWithdrawalDetail.applReferenceNo) {
@@ -419,7 +418,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
   updateStatus(selectedDetails: any) {
     const statusBody = {
       applReferenceNo: selectedDetails[0].applReferenceNo,
-      accNum: selectedDetails[0].accNum,
+      accNum: this.accNum,
       schemeCode: selectedDetails[0].schemeCode,
       applStatus: selectedDetails[0].applStatus,
       cijVerificationStatus: "Y",
@@ -482,7 +481,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
     Object.assign(appFunc.dataForNotice, {
       MemberProfile: appFunc.currMemberDetail,
       WithdrawalDetail: selectedDetails,
-      //PerakuanList: selectedDetails.terms
     });
 
     this._aldanService.
