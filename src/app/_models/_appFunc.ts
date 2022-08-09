@@ -96,6 +96,9 @@ export class appFunc {
         this.resubmissionNo = '';
     }
 
+
+    
+
     
     // Check if current time is between Start and End time.
     // Returns true or false.

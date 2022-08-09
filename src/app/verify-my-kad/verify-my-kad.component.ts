@@ -251,9 +251,41 @@ export class VerifyMyKadComponent implements OnInit {
         this.route.navigate(['outofservice']);
       }
     }, (err: HttpErrorResponse) => {
-      appFunc.message = 'HttpError';
-      appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to create Session for this transaction.";
-      this.route.navigate(['outofservice']);
+      if(err.status == 401){
+        this._aldanService.
+          getToken(signalRConnection.kioskCode, signalRConnection.adapter[0].adapterNameEncrypted).
+          subscribe((result: any) => {
+            if (isNaN(result)) { //Number
+              accessToken.token = result.access_token;
+              accessToken.httpOptions = {
+                headers: new HttpHeaders(
+                  { Authorization: 'Bearer ' + accessToken.token }
+                ),
+                observe: 'response' as 'body'
+              };
+              this._aldanService.CreateSession(sessionBody).subscribe((result: any) => {
+                if (result.body.id != undefined){
+                  appFunc.sessionId = result.body.id;
+                  this.getAccountInquiry();
+                }
+                else{
+                  appFunc.message = result.body.error.message;
+                  appFunc.code = "SSDM Error";
+                  this.route.navigate(['outofservice']);
+                }
+              }, (err: HttpErrorResponse) => {
+                appFunc.message = 'HttpError';
+                appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to create Session for this transaction.";
+                this.route.navigate(['outofservice']);
+              });
+            }
+          });
+      }
+      else{
+        appFunc.message = 'HttpError';
+        appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to create Session for this transaction.";
+        this.route.navigate(['outofservice']);
+      }
     });
   }
 
