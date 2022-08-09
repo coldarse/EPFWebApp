@@ -226,6 +226,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
 
   SelectionsYes() {
     let count = 0;
+    let selectCount = 0;
     
     this.withdrawalApplList.forEach(element1 => {
       if (element1.isChecked == false) {
@@ -233,6 +234,8 @@ export class ThumbprintConfirmationComponent implements OnInit {
       }
       else{
         this.getSelectedPerakuan(element1);
+        this.SendNotice(element1);
+        selectCount += 1;
         // this.withdrawalApplList.forEach(element2 => {
         //   if (element2.applReferenceNo == this.eWithdrawalDetail.applReferenceNo) {
         //     this.getSelectedPerakuan(element2, this.eWithdrawalDetail.schemeCode);
@@ -242,7 +245,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
     });
 
     if (count > 0) {
-      if(this.NoticeCount == 0)
+      if(this.NoticeCount == 0 && selectCount > 0)
       {
         this.openPopup = true;
         this.popupPerakuan = true;
@@ -298,11 +301,11 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.openPopup = false;
     this.Selections = true;
     this.xagreedVerify = false;
-    // this.checkedAnsuran = !this.checkedAnsuran;
   }
 
   popupMissingYes() {
     this.Selections = true;
+    this.openPopup = false;
     this.popupMissing = false;
     this.NoticeCount -= 1
   }
@@ -335,7 +338,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
   }
 
   readMinutiae() {
-    this.checkThumbprintMinutiaeIntervalId = setInterval(() => {
+   // this.checkThumbprintMinutiaeIntervalId = setInterval(() => {
       if (this.RetryCountInstance != 0) {
         signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
           this.minutiae = data;
@@ -359,7 +362,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
         this.openPopup = true;
         this.popupError = true;
       }
-    }, 1000);
+   // }, 1000);
     // signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
     //   this.minutiae = data;
     //   if (this.minutiae != "") {
@@ -447,8 +450,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
       appFunc.code = "E" + err.status.toString() + ": ESB Error";
       this.route.navigate(['outofservice']);
     });
-
-    this.SendNotice(selectedDetails);
   }
 
   TryAgain() {
@@ -465,7 +466,10 @@ export class ThumbprintConfirmationComponent implements OnInit {
     let AllSelected: any[] = [];
     this.allPerakuanList.forEach(element => {
       if (element.schemeCode == SelectedWithdrawal.schemeCode) {
-        AllSelected.push(element.terms)
+        AllSelected.push(element.terms);
+        Object.assign(SelectedWithdrawal, {
+          terms: element.terms
+        });
       }
     });
     this.selectedTerms = AllSelected;
@@ -476,9 +480,9 @@ export class ThumbprintConfirmationComponent implements OnInit {
     appFunc.dataForNotice = {};
 
     Object.assign(appFunc.dataForNotice, {
-      memberProfile: appFunc.currMemberDetail,
-      withdrawalDetail: selectedDetails,
-      perakuanList: selectedDetails.terms
+      MemberProfile: appFunc.currMemberDetail,
+      WithdrawalDetail: selectedDetails,
+      //PerakuanList: selectedDetails.terms
     });
 
     this._aldanService.
