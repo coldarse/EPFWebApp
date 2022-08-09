@@ -52,14 +52,14 @@ export class ThumbprintConfirmationComponent implements OnInit {
   expiryDate = '';
   accNum = '';
   name = '';
-  totalRecurringAmt = '';
-  paymentMode = '';
-  monthlyInstalmentAmt = '';
-  bankName = '';
-  bankAccNo = '';
-  paymentFrequency = '';
-  recurringStartDate = '';
-  recurringEndDate = '';
+  // totalRecurringAmt = '';
+  // paymentMode = '';
+  // monthlyInstalmentAmt = '';
+  // bankName = '';
+  // bankAccNo = '';
+  // paymentFrequency = '';
+  // recurringStartDate = '';
+  // recurringEndDate = '';
   isRecurring = true;
   myKadData: any;
   minutiae = '';
@@ -84,7 +84,8 @@ export class ThumbprintConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translate.use('bm');
+    this.translate.use(selectLang.selectedLang);
+    this.accNum = appFunc.currMemberDetail.accNum;
     this.name = appFunc.currMemberDetail.custName;
     this.withdrawalApplList = appFunc.withdrawalApplList;
     this.allPerakuanList = appFunc.allPerakuanList;
@@ -101,6 +102,26 @@ export class ThumbprintConfirmationComponent implements OnInit {
         this._aldanService.eWithdrawalDetails(eWithdrawalDetailsBody).subscribe((result: any) => {
           if (result.body.responseCode == "0") {
             this.eWithdrawalDetail = result.body.detail;
+            this.withdrawalApplList.forEach((element: any) => {
+              if(element.applReferenceNo == result.body.detail.applReferenceNo)
+              {
+                Object.assign(element, {
+                  schemeCode: this.eWithdrawalDetail.schemeCode,
+                  paymentMode: this.eWithdrawalDetail.paymentMode,
+                  bankAccNo: this.eWithdrawalDetail.bankAccNo,
+                  bankName: this.eWithdrawalDetail.bankName,
+                  dividenYear: this.eWithdrawalDetail.dividenYear,
+                  recurringStartDate: this.eWithdrawalDetail.recurringStartDate,
+                  recurringEndDate: this.eWithdrawalDetail.recurringEndDate,
+                  applStatus: this.eWithdrawalDetail.applStatus,
+                  paymentFrequency: this.eWithdrawalDetail.paymentFrequency,
+                  monthlyInstalmentAmt: this.eWithdrawalDetail.monthlyInstalmentAmt,
+                  lastMonthDifferenceAmt: this.eWithdrawalDetail.lastMonthDifferenceAmt,
+                  totalRecurringAmt: this.eWithdrawalDetail.totalRecurringAmt,
+                  paymentFrequencyCode: this.eWithdrawalDetail.paymentFrequencyCode
+                });
+              }
+            });
             this.expiryAgreement = formatDate(SelectedWithdrawal.expiry_date, 'dd/MM/YYYY', 'en');
             if (this.eWithdrawalDetail.recurringStartDate == '0001-01-01') {
               this.isRecurring = false;
@@ -154,7 +175,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.isCallAPI = true;
 
     const eWithdrawalBody = {
-      accNum: "19140510",
+      accNum: this.accNum,
       sessionId: appFunc.sessionId
     }
 
@@ -167,7 +188,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
           this.withdrawalApplList.forEach((element: any) => {
             Object.assign(element, {
               expiryDate: formatDate(element.expiry_date, 'dd MMM YYYY', 'en'),
-              isChecked: false
+              isChecked: false,
             });
           });
           // const applReferenceNo = this.withdrawalApplList.map((obj) => obj.applReferenceNo)
@@ -205,9 +226,18 @@ export class ThumbprintConfirmationComponent implements OnInit {
 
   SelectionsYes() {
     let count = 0;
-    this.withdrawalApplList.forEach(element => {
-      if (element.isChecked == false) {
+    
+    this.withdrawalApplList.forEach(element1 => {
+      if (element1.isChecked == false) {
         count += 1;
+      }
+      else{
+        this.getSelectedPerakuan(element1);
+        // this.withdrawalApplList.forEach(element2 => {
+        //   if (element2.applReferenceNo == this.eWithdrawalDetail.applReferenceNo) {
+        //     this.getSelectedPerakuan(element2, this.eWithdrawalDetail.schemeCode);
+        //   }
+        // });
       }
     });
 
@@ -224,6 +254,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
       this.openPopup = true;
       this.popupPerakuan = true;
     }
+    
     // let x = 0;
 
     // if(this.xcheckedWithdrawal == true) x++
@@ -240,13 +271,13 @@ export class ThumbprintConfirmationComponent implements OnInit {
     //   this.Selections = false;
     //   this.ThumbprintVerification = true;
     // }
-
   }
 
   cancelMyKadVerification() {
     signalRConnection.connection.invoke('CancelThumbprint').then((data: boolean) => { });
     this.ThumbprintVerification = false;
     this.Selections = true;
+    clearInterval(this.checkThumbprintMinutiaeIntervalId);
   }
 
   SelectedNo() {
@@ -271,7 +302,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
   }
 
   popupMissingYes() {
-    this.popupPerakuan = true;
+    this.Selections = true;
     this.popupMissing = false;
     this.NoticeCount -= 1
   }
@@ -304,36 +335,60 @@ export class ThumbprintConfirmationComponent implements OnInit {
   }
 
   readMinutiae() {
-    // this.checkThumbprintMinutiaeIntervalId = setInterval(() => {
-    signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
-      this.minutiae = data;
-      if (this.minutiae != "") {
-        this.BeforeRead = false;
-        this.AfterRead = true;
-        this.verifyMinutiae();
-        clearInterval(this.checkThumbprintMinutiaeIntervalId);
+    this.checkThumbprintMinutiaeIntervalId = setInterval(() => {
+      if (this.RetryCountInstance != 0) {
+        signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
+          this.minutiae = data;
+          if (this.minutiae != "") {
+            this.BeforeRead = false;
+            this.AfterRead = true;
+            this.verifyMinutiae();
+            clearInterval(this.checkThumbprintMinutiaeIntervalId);
+          }
+          else {
+            this.openPopup = true;
+            this.popupError = true;
+            clearInterval(this.checkThumbprintMinutiaeIntervalId);
+          }
+        });
       }
       else {
-        this.RetryCountInstance -= 1;
-        if (this.RetryCountInstance == 0) 
-        {
-          this.xlastTry = false;
-          this.failedthrice= true;
-        }
-        // this.BeforeRead = true;
-        // this.AfterRead = false;
+        this.ThumbprintVerification = false;
+        this.xlastTry = false;
+        this.failedthrice = true;
         this.openPopup = true;
         this.popupError = true;
-        clearInterval(this.checkThumbprintMinutiaeIntervalId);
       }
-    });
+    }, 1000);
+    // signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
+    //   this.minutiae = data;
+    //   if (this.minutiae != "") {
+    //     this.BeforeRead = false;
+    //     this.AfterRead = true;
+    //     this.verifyMinutiae();
+    //     clearInterval(this.checkThumbprintMinutiaeIntervalId);
+    //   }
+    //   else {
+    //     //this.RetryCountInstance -= 1;
+    //     if (this.RetryCountInstance == 0) 
+    //     {
+    //       this.xlastTry = false;
+    //       this.failedthrice= true;
+    //     }
+    //     // this.BeforeRead = true;
+    //     // this.AfterRead = false;
+    //     this.openPopup = true;
+    //     this.popupError = true;
+    //     clearInterval(this.checkThumbprintMinutiaeIntervalId);
+    //   }
+    // });
     // }, 1000);
   }
 
   verifyMinutiae() {
     const thumbprintBody = {
-      cifNum: "27001018179",//appFunc.currMemberDetail.cifNum,
-      minutiae: "AAAAAAAAAAAAAAAAAAAAAC8Agn5jWv8FmFQAAAEAAAT//////////////wD//////////////////////////zywOmo8pESTPLhGZzwwTHc8pFKpPLBUfjyoWZI4LF2YAKhiogCwZ48AKGmZAMRzawA0fXoAyH5lACSItwDIiW8AtIqDACyLhgAci7IApJKUAOCUUQC8m34A2J1JAJyjmwDop2IAYKdnAAynsgCwqIMApKmTAPStUQDwrW8AlK2eAKyukwAMuHQAeLxsABi8fAAIvWwAKL2JAITApwAEwVUAnMGaAJzDngCIxHQALMaDAKjGhwD0xrcBpMeTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",//this.minutiae,
+      cifNum: appFunc.currMemberDetail.cifNum,
+      minutiae: this.minutiae,
       sessionId: appFunc.sessionId
     }
 
@@ -341,7 +396,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
       if (result.body.responseCode == "0") {
         this.withdrawalApplList.forEach((element: any) => {
           if (element.isChecked == true) {
-            this.updateStatus(this.eWithdrawalDetail);
+            this.updateStatus(this.withdrawalApplList);
           }
         });
       }
@@ -360,18 +415,18 @@ export class ThumbprintConfirmationComponent implements OnInit {
 
   updateStatus(selectedDetails: any) {
     const statusBody = {
-      applReferenceNo: selectedDetails.applReferenceNo,
-      accNum: selectedDetails.accNum,
-      schemeCode: selectedDetails.schemeCode,
-      applStatus: selectedDetails.applStatus,
+      applReferenceNo: selectedDetails[0].applReferenceNo,
+      accNum: selectedDetails[0].accNum,
+      schemeCode: selectedDetails[0].schemeCode,
+      applStatus: selectedDetails[0].applStatus,
       cijVerificationStatus: "Y",
       cijVerificationDate: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss.SSS', 'en'),
-      numOfPayment: selectedDetails.paymentFrequency,
-      paymentFrequencyCode: selectedDetails.paymentFrequencyCode,
-      paymentAmt: selectedDetails.totalRecurringAmt,
-      finalPaymentDifferenceAmt: selectedDetails.lastMonthDifferenceAmt,
-      firstPaymentDate: selectedDetails.recurringStartDate,
-      expiryDate: selectedDetails.recurringEndDate,
+      numOfPayment: selectedDetails[0].paymentFrequency,
+      paymentFrequencyCode: selectedDetails[0].paymentFrequencyCode,
+      paymentAmt: selectedDetails[0].totalRecurringAmt,
+      finalPaymentDifferenceAmt: selectedDetails[0].lastMonthDifferenceAmt,
+      firstPaymentDate: selectedDetails[0].recurringStartDate,
+      expiryDate: selectedDetails[0].recurringEndDate,
       terminalID: "SST",
       userID: "SST",
       sessionId: appFunc.sessionId
@@ -392,19 +447,59 @@ export class ThumbprintConfirmationComponent implements OnInit {
       appFunc.code = "E" + err.status.toString() + ": ESB Error";
       this.route.navigate(['outofservice']);
     });
+
+    this.SendNotice(selectedDetails);
   }
 
   TryAgain() {
+    this.RetryCountInstance -= 1;
+    this.ThumbprintVerification = true;
+    this.BeforeRead = true;
+    this.AfterRead = false;
     this.openPopup = false;
     this.popupError = false;
     this.readMinutiae();
   }
 
   getSelectedPerakuan(SelectedWithdrawal: any) {
+    let AllSelected: any[] = [];
     this.allPerakuanList.forEach(element => {
       if (element.schemeCode == SelectedWithdrawal.schemeCode) {
-        this.selectedTerms = element.terms;
+        AllSelected.push(element.terms)
       }
+    });
+    this.selectedTerms = AllSelected;
+  }
+
+  SendNotice(selectedDetails: any)
+  {
+    appFunc.dataForNotice = {};
+
+    Object.assign(appFunc.dataForNotice, {
+      memberProfile: appFunc.currMemberDetail,
+      withdrawalDetail: selectedDetails,
+      perakuanList: selectedDetails.terms
+    });
+
+    this._aldanService.
+    EmailForMemberWithdrawalNotice(
+      appFunc.currMemberDetail.emailAdd, 
+      selectLang.selectedLang,
+      appFunc.sessionId, 
+      appFunc.dataForNotice)
+      .subscribe((res: any) => {
+        if(res.body.attachmentPath != ""){
+          this.ThumbprintVerification = false;
+          this.Selected = true;
+        }
+        else{
+          this.errorDesc = res.body.error[0].description;
+          this.Failed = true;
+        }
+    },(err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      appFunc.code = "C" + err.status.toString() + ": Send Member Notice Error";
+      this.route.navigate(['outofservice']);
     });
   }
 }

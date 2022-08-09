@@ -42,6 +42,7 @@ export class appFunc {
     static isFromStartupGetToken = true;
     static isFromOperationHour = false;
     static dataForEmail: any;
+    static dataForNotice: any;
     static totalSavingsForEmail: any;
     static openingBalanceTotal: any;
     static dividendTotal: any;
@@ -81,6 +82,7 @@ export class appFunc {
         this.sessionId = 0;
         this.stateCode = "";
         this.dataForEmail = undefined;
+        this.dataForNotice = undefined;
         this.totalSavingsForEmail = undefined;
         this.openingBalanceTotal = undefined;
         this.dividendTotal = undefined;

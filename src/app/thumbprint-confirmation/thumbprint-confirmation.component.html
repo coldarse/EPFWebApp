@@ -489,8 +489,8 @@
                         <label class="highlightTitle">{{"perakuanTitle" | translate}}</label>
                     </div>
                     <div class="row padTop05rem">
-                        <ol>
-                            <li *ngFor="let t of selectedTerms" style="margin: 10px 0;">
+                        <ol class="tablescroll" style="margin-left: 5px;">
+                            <li *ngFor="let t of selectedTerms[0]" style="margin: 10px 10px;">
                               {{t.terms}}
                             </li>
                         </ol>

@@ -379,6 +379,16 @@ export class AldanService {
     )
   }
 
+  EmailForMemberWithdrawalNotice(emailAdd: string, language: string,sessionid: number, body: any){
+    return this.http.post(
+      this.url + `ThumbprintVerification/eWithdrawals/EmailForMemberWithdrawalNotice?emailAdd=${emailAdd}&language=${language}&sessionID=${sessionid}&SSTID=${signalRConnection.kioskCode}`,
+      body,
+      accessToken.httpOptions
+    ).pipe(
+      retry(0),
+      catchError(this.handleError),
+    )
+  }
 
   //Member Profile Info
   MemberProfileInfo(body: any){

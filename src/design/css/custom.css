@@ -963,6 +963,24 @@ td {
     word-wrap: break-word;
 }
 
+.Perakuanscroll {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-family: 'filson-pro', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    width: 1100px;
+    height: 400px;
+    overflow-x: auto;
+    overflow-y: auto;
+    text-align: left;
+    color: black;
+    padding-left: 0.5rem;
+    word-wrap: break-word;
+}
+
 .lblTNC {
     font-size: 1.25rem;
     font-family: 'filson-pro', sans-serif;
