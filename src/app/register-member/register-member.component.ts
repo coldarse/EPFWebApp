@@ -1,6 +1,7 @@
 import { state } from '@angular/animations';
 import { formatDate } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -79,6 +80,7 @@ export class RegisterMemberComponent implements OnInit {
   noEmail = false;
   isiAkaunRegSuccessful = false;
   isSuri = false;
+  isAIO = false;
 
   jobSectors: businessTypes[] = [];
   checkboxImages: any[] = [];
@@ -522,7 +524,7 @@ export class RegisterMemberComponent implements OnInit {
         religion = '4';
         break;
       }
-      case 'SIKHISM': {
+      case 'SIKH': { //SIKHISM
         religion = '5';
         break;
       }
@@ -535,18 +537,14 @@ export class RegisterMemberComponent implements OnInit {
         break;
       }
       case 'MAKLUMAT TIADA': {
-        religion = '8';
-        break;
-      }
-      case 'TAO': {
         religion = '9';
         break;
       }
-      case 'KONFUSIANISME': {
+      case 'TAO': {
         religion = 'A';
         break;
       }
-      case 'ISLAM': {
+      case 'KONFUSIANISME': {
         religion = 'B';
         break;
       }
@@ -559,7 +557,7 @@ export class RegisterMemberComponent implements OnInit {
         break;
       }
       default: {
-        religion = '8';
+        religion = '9';
         break;
       }
     }
@@ -645,9 +643,14 @@ export class RegisterMemberComponent implements OnInit {
           this.RegisterSuccessPage = true;
         }
         else{
-          appFunc.message = "HttpError";
-          appFunc.code = "ESB Error";
-          this.route.navigate(['outofservice']);
+          //Failed AIO
+          this.ValidateProfilePage = false;
+          this.Failed = true;
+          this.isAIO = true;
+          this.errorDesc = result.body.error[0].description;
+          // appFunc.message = "HttpError";
+          // appFunc.code = "ESB Error";
+          // this.route.navigate(['outofservice']);
         }
       },(err: HttpErrorResponse) => {
         appFunc.message = "HttpError";
@@ -1245,9 +1248,11 @@ export class RegisterMemberComponent implements OnInit {
       this.RegisteriSaraanPage = true;
       this.RegSaraan = true;
     }
+    else if(this.isAIO){
+      this.route.navigate(['startup']);
+    }
     else{
       this.route.navigate(['mainMenu']);
     }
-   
   }
 }

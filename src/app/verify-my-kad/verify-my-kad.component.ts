@@ -251,11 +251,15 @@ export class VerifyMyKadComponent implements OnInit {
         this.route.navigate(['outofservice']);
       }
     }, (err: HttpErrorResponse) => {
-      if(err.status == 401){
+      if(err.status.toString().includes("401")){
         this._aldanService.
-          getToken(signalRConnection.kioskCode, signalRConnection.adapter[0].adapterNameEncrypted).
-          subscribe((result: any) => {
-            if (isNaN(result)) { //Number
+          getToken(signalRConnection.kioskCode, signalRConnection.adapter[0].adapterNameEncrypted).subscribe((result: any) => {
+            if (!isNaN(result)) { //Not Number
+              appFunc.message = result.body.toString();
+              appFunc.code = "SSDM Error";
+              this.route.navigate(['outofservice']);
+            }
+            else{
               accessToken.token = result.access_token;
               accessToken.httpOptions = {
                 headers: new HttpHeaders(
@@ -273,9 +277,9 @@ export class VerifyMyKadComponent implements OnInit {
                   appFunc.code = "SSDM Error";
                   this.route.navigate(['outofservice']);
                 }
-              }, (err: HttpErrorResponse) => {
+              }, (err1: HttpErrorResponse) => {
                 appFunc.message = 'HttpError';
-                appFunc.code = "C" + err.status.toString() + ": This Kiosk Failed to create Session for this transaction.";
+                appFunc.code = "C" + err1.status.toString() + ": This Kiosk Failed to create Session for this transaction(2).";
                 this.route.navigate(['outofservice']);
               });
             }

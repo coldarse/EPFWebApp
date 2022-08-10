@@ -145,7 +145,7 @@ export class MainMenuComponent implements OnInit {
     if(isaraanishariahcount > 0) this.iShariahiSaraanEnabled = true;
     if(appFunc.currMemberDetail.iAkaunStatus == "A") this.iAkaunEnabled = false;
 
-    this.GetWithdrawalAppl();
+    if(this.thumbprintVerificationEnabled == true) this.GetWithdrawalAppl();
     
   }
 
@@ -171,8 +171,6 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngAfterViewInit(): void{
-
-    
     if(selectLang.selectedLang == 'bm'){
       this.bm?.nativeElement.focus();
     }
