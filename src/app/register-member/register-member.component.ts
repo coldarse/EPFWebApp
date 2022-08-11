@@ -353,37 +353,37 @@ export class RegisterMemberComponent implements OnInit {
     }
 
     let areaCode = '';
-    if (residentStat == 'X') {
-      switch (currentMyKadDetails.State.toUpperCase()) {
-        case 'SABAH': {
-          areaCode = 'E';
-          break;
-        }
-        case 'SARAWAK': {
-          areaCode = 'F';
-          break;
-        }
-        default: {
-          areaCode = 'D';
-          break;
-        }
-      }
-    } else {
-      switch (currentMyKadDetails.State.toUpperCase()) {
-        case 'SABAH': {
-          areaCode = 'B';
-          break;
-        }
-        case 'SARAWAK': {
-          areaCode = 'C';
-          break;
-        }
-        default: {
-          areaCode = 'A';
-          break;
-        }
-      }
-    }
+    // if (residentStat == 'X') {
+    //   switch (currentMyKadDetails.State.toUpperCase()) {
+    //     case 'SABAH': {
+    //       areaCode = 'E';
+    //       break;
+    //     }
+    //     case 'SARAWAK': {
+    //       areaCode = 'F';
+    //       break;
+    //     }
+    //     default: {
+    //       areaCode = 'D';
+    //       break;
+    //     }
+    //   }
+    // } else {
+    //   switch (currentMyKadDetails.State.toUpperCase()) {
+    //     case 'SABAH': {
+    //       areaCode = 'B';
+    //       break;
+    //     }
+    //     case 'SARAWAK': {
+    //       areaCode = 'C';
+    //       break;
+    //     }
+    //     default: {
+    //       areaCode = 'A';
+    //       break;
+    //     }
+    //   }
+    // }
     let race = '';
     switch (currentMyKadDetails.Race.toUpperCase()) {
       case 'MELAYU': {
