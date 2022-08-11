@@ -67,7 +67,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
   AfterRead = false;
   isDisabled = true;
   checkThumbprintMinutiaeIntervalId: any;
-  RetryCountInstance = 3;
+  RetryCountInstance = 2;
   xlastTry = true;
   thumbprintError = true;
   failedthrice = false;
@@ -399,20 +399,34 @@ export class ThumbprintConfirmationComponent implements OnInit {
         this.withdrawalApplList.forEach((element: any) => {
           if (element.isChecked == true) {
             this.updateStatus(this.withdrawalApplList);
+            this.SendNotice(this.withdrawalApplList);
           }
         });
+        this.ThumbprintVerification = false;
+        this.Selected = true;
       }
       else {
-        this.ThumbprintVerification = false;
-        this.openPopup = true;
-        this.popupError = true;
+        if(this.RetryCountInstance == 0)
+        {
+          this.ThumbprintVerification = false;
+          this.openPopup = true;
+          this.popupError = true;
+          this.xlastTry = false;
+          this.failedthrice = true;
+        }
+        else
+        {
+          this.ThumbprintVerification = false;
+          this.openPopup = true;
+          this.popupError = true;
+        }
       }
     }
-      , (err: HttpErrorResponse) => {
-        appFunc.message = "HttpError";
-        appFunc.code = "E" + err.status.toString() + ": ESB Error";
-        this.route.navigate(['outofservice']);
-      });
+    , (err: HttpErrorResponse) => {
+      appFunc.message = "HttpError";
+      appFunc.code = "E" + err.status.toString() + ": ESB Error";
+      this.route.navigate(['outofservice']);
+    });
   }
 
   updateStatus(selectedDetails: any) {
@@ -440,9 +454,11 @@ export class ThumbprintConfirmationComponent implements OnInit {
         this.Selected = true;
       }
       else {
-        this.ThumbprintVerification = false;
-        this.openPopup = true;
-        this.popupError = true;
+        this.errorDesc = result.body.error[0].description;
+        this.Selected = true;
+        // this.ThumbprintVerification = false;
+        // this.openPopup = true;
+        // this.popupError = true;
       }
     }, (err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -452,13 +468,13 @@ export class ThumbprintConfirmationComponent implements OnInit {
   }
 
   TryAgain() {
-    this.RetryCountInstance -= 1;
     this.ThumbprintVerification = true;
     this.BeforeRead = true;
     this.AfterRead = false;
     this.openPopup = false;
     this.popupError = false;
     this.readMinutiae();
+    this.RetryCountInstance -= 1;
   }
 
   getSelectedPerakuan(SelectedWithdrawal: any) {
@@ -496,7 +512,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
         }
         else{
           this.errorDesc = res.body.error[0].description;
-          this.Failed = true;
+          this.Selected = true;
         }
     },(err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
