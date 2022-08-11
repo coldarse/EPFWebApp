@@ -115,7 +115,6 @@ export class AldanService {
 
     let authUrl = this.url.replace("api/", "");
     
-
     return this.http.post(
       authUrl + 'connect/token', 
       body,
