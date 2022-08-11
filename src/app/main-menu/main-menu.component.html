@@ -95,9 +95,9 @@
           </div>
           <div class="row padTop3rem">
             <div class="col-6">
-              <button class="mainMenuBtnDisabled" [disabled]="true">
-              <!-- <button [ngClass]="thumbprintVerificationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
-                (click)="thumbprintConfirmation()" [disabled]="!thumbprintVerificationEnabled"> -->
+              <!-- <button class="mainMenuBtnDisabled" [disabled]="true"> -->
+              <button [ngClass]="thumbprintVerificationEnabled == true ? 'mainMenuBtn' : 'mainMenuBtnDisabled'"
+                (click)="thumbprintConfirmation()" [disabled]="!thumbprintVerificationEnabled">
                 <div class="row">
                   <div class="col-3 menuItemBorder">
                     <div class="centerItem">
