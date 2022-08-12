@@ -76,6 +76,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
   NoticeCount = 1;
   allPerakuanList: any[] = [];
   selectedTerms: any[] = [];
+  SelectedLang = '';
 
   constructor(
     private route: Router,
@@ -85,6 +86,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(selectLang.selectedLang);
+    this.SelectedLang = selectLang.selectedLang;
     this.accNum = appFunc.currMemberDetail.accNum;
     this.name = appFunc.currMemberDetail.custName;
     this.withdrawalApplList = appFunc.withdrawalApplList;
@@ -149,26 +151,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
     else {
       SelectedWithdrawal.isChecked = false;
     }
-  }
-
-  checkBina() {
-    this.checkedBina = !this.checkedBina;
-  }
-
-  check50yo() {
-    this.checked50yo = !this.checked50yo;
-  }
-
-  checkEducation() {
-    this.checkedEducation = !this.checkedEducation;
-  }
-
-  check1mil() {
-    this.checked1mil = !this.checked1mil;
-  }
-
-  check55yo() {
-    this.checked55yo = !this.checked55yo;
   }
 
   ThumbprintAgreeDisagreeYes() {
@@ -309,10 +291,6 @@ export class ThumbprintConfirmationComponent implements OnInit {
     this.NoticeCount -= 1
   }
 
-  popupYes() {
-
-  }
-
   skip() {
     this.ThumbprintVerification = false;
     this.Selected = true;
@@ -337,9 +315,9 @@ export class ThumbprintConfirmationComponent implements OnInit {
   }
 
   readMinutiae() {
-   // this.checkThumbprintMinutiaeIntervalId = setInterval(() => {
+    //this.checkThumbprintMinutiaeIntervalId = setInterval(() => {
       if (this.RetryCountInstance != 0) {
-        signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
+        signalRConnection.connection.invoke('ReadMinutiae').then((data: string) => {
           this.minutiae = data;
           if (this.minutiae != "") {
             this.BeforeRead = false;
@@ -361,7 +339,7 @@ export class ThumbprintConfirmationComponent implements OnInit {
         this.openPopup = true;
         this.popupError = true;
       }
-   // }, 1000);
+    //}, 1000);
     // signalRConnection.connection.invoke('ReadMinutiae').then((data: any) => {
     //   this.minutiae = data;
     //   if (this.minutiae != "") {
@@ -395,32 +373,32 @@ export class ThumbprintConfirmationComponent implements OnInit {
     }
 
     this._aldanService.thumbprintVerify(thumbprintBody).subscribe((result: any) => {
-      if (result.body.responseCode == "0") {
+      //if (result.body.responseCode == "0") {
         this.withdrawalApplList.forEach((element: any) => {
           if (element.isChecked == true) {
-            this.updateStatus(this.withdrawalApplList);
-            this.SendNotice(this.withdrawalApplList);
+            this.updateStatus(element);
+            this.SendNotice(element);
           }
         });
         this.ThumbprintVerification = false;
         this.Selected = true;
-      }
-      else {
-        if(this.RetryCountInstance == 0)
-        {
-          this.ThumbprintVerification = false;
-          this.openPopup = true;
-          this.popupError = true;
-          this.xlastTry = false;
-          this.failedthrice = true;
-        }
-        else
-        {
-          this.ThumbprintVerification = false;
-          this.openPopup = true;
-          this.popupError = true;
-        }
-      }
+      //}
+      // else {
+      //   if(this.RetryCountInstance == 0)
+      //   {
+      //     this.ThumbprintVerification = false;
+      //     this.openPopup = true;
+      //     this.popupError = true;
+      //     this.xlastTry = false;
+      //     this.failedthrice = true;
+      //   }
+      //   else
+      //   {
+      //     this.ThumbprintVerification = false;
+      //     this.openPopup = true;
+      //     this.popupError = true;
+      //   }
+      // }
     }
     , (err: HttpErrorResponse) => {
       appFunc.message = "HttpError";
@@ -431,18 +409,18 @@ export class ThumbprintConfirmationComponent implements OnInit {
 
   updateStatus(selectedDetails: any) {
     const statusBody = {
-      applReferenceNo: selectedDetails[0].applReferenceNo,
+      applReferenceNo: selectedDetails.applReferenceNo,
       accNum: this.accNum,
-      schemeCode: selectedDetails[0].schemeCode,
-      applStatus: selectedDetails[0].applStatus,
+      schemeCode: selectedDetails.schemeCode,
+      applStatus: selectedDetails.applStatus,
       cijVerificationStatus: "Y",
       cijVerificationDate: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss.SSS', 'en'),
-      numOfPayment: selectedDetails[0].paymentFrequency,
-      paymentFrequencyCode: selectedDetails[0].paymentFrequencyCode,
-      paymentAmt: selectedDetails[0].totalRecurringAmt,
-      finalPaymentDifferenceAmt: selectedDetails[0].lastMonthDifferenceAmt,
-      firstPaymentDate: selectedDetails[0].recurringStartDate,
-      expiryDate: selectedDetails[0].recurringEndDate,
+      numOfPayment: selectedDetails.paymentFrequency,
+      paymentFrequencyCode: selectedDetails.paymentFrequencyCode,
+      paymentAmt: selectedDetails.totalRecurringAmt,
+      finalPaymentDifferenceAmt: selectedDetails.lastMonthDifferenceAmt,
+      firstPaymentDate: selectedDetails.recurringStartDate,
+      expiryDate: selectedDetails.recurringEndDate,
       terminalID: "SST",
       userID: "SST",
       sessionId: appFunc.sessionId

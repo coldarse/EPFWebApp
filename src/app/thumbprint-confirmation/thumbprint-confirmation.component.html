@@ -394,8 +394,13 @@
                     <div class="row padTop05rem">
                         <ol class="tablescroll" style="margin-left: 5px;">
                             <li *ngFor="let t of selectedTerms[0]" style="margin: 10px 10px;">
-                              {{t.terms}}
+                              {{SelectedLang == 'bm'? t.terms : t.termsEN}}
                             </li>
+                            <div class="padTop2rem">
+                                <input class="tnc-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox"
+                                    (click)="clickTNC()" [checked]="xagreedPerakuan == false">
+                                <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
+                            </div>
                         </ol>
                     </div>
                     <!-- <div class="row padTop05rem">
@@ -446,11 +451,11 @@
                                 mana-mana pihak yang berkenaan.</label>
                         </div>
                     </div> -->
-                    <div class="padTop2rem">
+                    <!-- <div class="padTop2rem">
                         <input class="tnc-checkbox big-checkbox padTop3rem" id="tnc" name="tnc" type="checkbox"
                             (click)="clickTNC()" [checked]="xagreedPerakuan == false">
                         <label class="lblTNC" for="tnc">{{"TNC"| translate}}</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row padBottom2rem">
                     <div class="col-2"></div>
