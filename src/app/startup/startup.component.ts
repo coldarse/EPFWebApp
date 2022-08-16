@@ -111,7 +111,7 @@ export class StartupComponent implements OnInit {
                     appFunc.updateTACPerMonth = Number(res[9].body.value);
                     appFunc.NumberOfYearsViewStatement = Number(res[10].body.value);
                     let range = res[11].body.value.split(',');
-                    appFunc.allPerakuanList = res[12].body.items;
+                    //appFunc.allPerakuanList = res[12].body.items;
                     appFunc.AgeRangeLow = Number(range[0]);
                     appFunc.AgeRangeHigh = Number(range[1]);
                     // appFunc.operationHour = res[12].body;

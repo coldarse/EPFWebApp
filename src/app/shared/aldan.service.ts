@@ -515,7 +515,7 @@ export class AldanService {
     const res10 = this.http.get(this.url + 'app/client-settings/24', accessToken.httpOptions); //Get number of Update TAC per month
     const res11 = this.http.get(this.url + 'app/client-settings/57', accessToken.httpOptions); //Get number of years for statements
     const res12 = this.http.get(this.url + 'app/client-settings/23', accessToken.httpOptions); //Get age range
-    const res13 = this.http.get(this.url + 'app/withdrawal-TNC-assignments', accessToken.httpOptions); 
+    //const res13 = this.http.get(this.url + 'app/withdrawal-TNC-assignments', accessToken.httpOptions); 
     // const res13 = this.http.get(this.url + `app/operation-settings/GetOperation?KioskCode=${kioskCode}`, accessToken.httpOptions);
     
 
@@ -532,7 +532,7 @@ export class AldanService {
       res10.pipe(delay(1000),retry(0), catchError(this.handleError)),
       res11.pipe(delay(1000),retry(0), catchError(this.handleError)),
       res12.pipe(delay(1000),retry(0), catchError(this.handleError)),
-      res13.pipe(delay(1000),retry(0), catchError(this.handleError)),
+      //res13.pipe(delay(1000),retry(0), catchError(this.handleError)),
       // res13.pipe(delay(1000),retry(0), catchError(this.handleError))
     ]);
   }
